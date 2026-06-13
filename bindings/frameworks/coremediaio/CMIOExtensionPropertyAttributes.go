@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensionpropertyattributes
-type CMIOExtensionPropertyAttributes[ObjectType pureobjc.AnyObject] struct {
+type CMIOExtensionPropertyAttributes[ObjectType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -26,13 +26,13 @@ var (
 	_cMIOExtensionPropertyAttributesSelIsReadOnly = objc.RegisterName("isReadOnly")
 )
 
-func CMIOExtensionPropertyAttributesFromID[ObjectType pureobjc.AnyObject](id objc.ID) *CMIOExtensionPropertyAttributes[ObjectType] {
+func CMIOExtensionPropertyAttributesFromID[ObjectType purego.AnyObject](id objc.ID) *CMIOExtensionPropertyAttributes[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &CMIOExtensionPropertyAttributes[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

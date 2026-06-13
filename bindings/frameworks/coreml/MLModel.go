@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodel
@@ -47,7 +47,7 @@ func MLModelFromID(id objc.ID) *MLModel {
 	}
 	o := &MLModel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -57,7 +57,7 @@ func MLModelModelWithContentsOfURLError(url *foundation.NSURL) (*MLModel, error)
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModel), _mLModelSelModelWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLModelFromID(_ret), nil
 }
@@ -68,7 +68,7 @@ func MLModelModelWithContentsOfURLConfigurationError(url *foundation.NSURL, conf
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModel), _mLModelSelModelWithContentsOfURLConfigurationError, url.Ptr(), configuration.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLModelFromID(_ret), nil
 }
@@ -93,7 +93,7 @@ func (o *MLModel) PredictionFromFeaturesError(input MLFeatureProvider) (MLFeatur
 	var _nsErr uintptr
 	_ret := objc.Send[MLFeatureProvider](o.Ptr(), _mLModelSelPredictionFromFeaturesError, input, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -103,7 +103,7 @@ func (o *MLModel) PredictionFromFeaturesOptionsError(input MLFeatureProvider, op
 	var _nsErr uintptr
 	_ret := objc.Send[MLFeatureProvider](o.Ptr(), _mLModelSelPredictionFromFeaturesOptionsError, input, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -137,7 +137,7 @@ func (o *MLModel) PredictionsFromBatchError(inputBatch MLBatchProvider) (MLBatch
 	var _nsErr uintptr
 	_ret := objc.Send[MLBatchProvider](o.Ptr(), _mLModelSelPredictionsFromBatchError, inputBatch, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -147,7 +147,7 @@ func (o *MLModel) PredictionsFromBatchOptionsError(inputBatch MLBatchProvider, o
 	var _nsErr uintptr
 	_ret := objc.Send[MLBatchProvider](o.Ptr(), _mLModelSelPredictionsFromBatchOptionsError, inputBatch, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -157,7 +157,7 @@ func (o *MLModel) ParameterValueForKeyError(key *MLParameterKey) (objc.ID, error
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelSelParameterValueForKeyError, key.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -197,7 +197,7 @@ func MLModelCompileModelAtURLError(modelURL *foundation.NSURL) (*foundation.NSUR
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModel), _mLModelSelCompileModelAtURLError, modelURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSURLFromID(_ret), nil
 }
@@ -233,7 +233,7 @@ func (o *MLModel) PredictionFromFeaturesUsingStateError(inputFeatures MLFeatureP
 	var _nsErr uintptr
 	_ret := objc.Send[MLFeatureProvider](o.Ptr(), _mLModelSelPredictionFromFeaturesUsingStateError, inputFeatures, state.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -243,7 +243,7 @@ func (o *MLModel) PredictionFromFeaturesUsingStateOptionsError(inputFeatures MLF
 	var _nsErr uintptr
 	_ret := objc.Send[MLFeatureProvider](o.Ptr(), _mLModelSelPredictionFromFeaturesUsingStateOptionsError, inputFeatures, state.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

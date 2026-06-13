@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/screentime/stwebhistory
@@ -35,7 +35,7 @@ func STWebHistoryFromID(id objc.ID) *STWebHistory {
 	}
 	o := &STWebHistory{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -45,7 +45,7 @@ func (o *STWebHistory) InitWithBundleIdentifierProfileIdentifierError(bundleIden
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebHistorySelInitWithBundleIdentifierProfileIdentifierError, bundleIdentifier.Ptr(), profileIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return STWebHistoryFromID(_ret), nil
 }
@@ -63,7 +63,7 @@ func (o *STWebHistory) InitWithBundleIdentifierError(bundleIdentifier *foundatio
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebHistorySelInitWithBundleIdentifierError, bundleIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return STWebHistoryFromID(_ret), nil
 }

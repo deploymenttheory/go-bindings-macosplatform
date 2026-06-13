@@ -6,7 +6,7 @@ package gameplaykit
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A deterministic pseudo-random source that generates random numbers based on a linear congruential algorithm. This is a deterministic random source suitable for creating reliable gameplay mechanics. It is slightly faster than an Arc4 source, but less random. In particular the lower bits of the generated values are less random than the higher bits. While deterministic, this is not a cryptographic random source. It is also not suitable for obfuscation of gameplay data.
@@ -30,7 +30,7 @@ func GKLinearCongruentialRandomSourceFromID(id objc.ID) *GKLinearCongruentialRan
 	}
 	o := &GKLinearCongruentialRandomSource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

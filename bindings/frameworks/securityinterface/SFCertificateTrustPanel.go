@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class SFCertificateTrustPanel @abstract SFCertificateTrustPanel is a panel and sheet interface that allows a user to make trust decisions when one or more certificates involved in an operation are invalid or cannot be verified. It should be used whenever confirmation is required before proceeding with a certificate-related operation. It can also be displayed as an informative alert without requiring a decision to be made (if the operation or transaction has already occurred.)
@@ -35,7 +35,7 @@ func SFCertificateTrustPanelFromID(id objc.ID) *SFCertificateTrustPanel {
 	}
 	o := &SFCertificateTrustPanel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

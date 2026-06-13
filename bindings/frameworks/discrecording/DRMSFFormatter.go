@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class		DRMSFFormatter @abstract	NSFormatter subclass @discussion Instances of DRMSFFormatter format the textual representation of cells that contain MSF objects and convert textual representations of msf values into MSF objects. DRMSFFormatters are typically instantiated in IB using the DiscRecording Interface builder palette.
@@ -30,7 +30,7 @@ func DRMSFFormatterFromID(id objc.ID) *DRMSFFormatter {
 	}
 	o := &DRMSFFormatter{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

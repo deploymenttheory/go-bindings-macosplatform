@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput
@@ -52,7 +52,7 @@ func AVCaptureDeviceInputFromID(id objc.ID) *AVCaptureDeviceInput {
 	}
 	o := &AVCaptureDeviceInput{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -62,7 +62,7 @@ func AVCaptureDeviceInputDeviceInputWithDeviceError(device *AVCaptureDevice) (*A
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDeviceInput), _aVCaptureDeviceInputSelDeviceInputWithDeviceError, device.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVCaptureDeviceInputFromID(_ret), nil
 }
@@ -73,7 +73,7 @@ func (o *AVCaptureDeviceInput) InitWithDeviceError(device *AVCaptureDevice) (*AV
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceInputSelInitWithDeviceError, device.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVCaptureDeviceInputFromID(_ret), nil
 }

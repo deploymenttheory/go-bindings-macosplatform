@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration
@@ -67,7 +67,7 @@ func VZVirtualMachineConfigurationFromID(id objc.ID) *VZVirtualMachineConfigurat
 	}
 	o := &VZVirtualMachineConfiguration{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -261,7 +261,7 @@ func (o *VZVirtualMachineConfiguration) ValidateWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vZVirtualMachineConfigurationSelValidateWithError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -271,7 +271,7 @@ func (o *VZVirtualMachineConfiguration) ValidateSaveRestoreSupportWithError() (b
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vZVirtualMachineConfigurationSelValidateSaveRestoreSupportWithError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

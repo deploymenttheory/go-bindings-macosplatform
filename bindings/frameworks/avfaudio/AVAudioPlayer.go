@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioplayer
@@ -66,7 +66,7 @@ func AVAudioPlayerFromID(id objc.ID) *AVAudioPlayer {
 	}
 	o := &AVAudioPlayer{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -75,7 +75,7 @@ func (o *AVAudioPlayer) InitWithContentsOfURLError(url *foundation.NSURL) (*AVAu
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAudioPlayerFromID(_ret), nil
 }
@@ -85,7 +85,7 @@ func (o *AVAudioPlayer) InitWithDataError(data *foundation.NSData) (*AVAudioPlay
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAudioPlayerFromID(_ret), nil
 }
@@ -95,7 +95,7 @@ func (o *AVAudioPlayer) InitWithContentsOfURLFileTypeHintError(url *foundation.N
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithContentsOfURLFileTypeHintError, url.Ptr(), utiString.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAudioPlayerFromID(_ret), nil
 }
@@ -105,7 +105,7 @@ func (o *AVAudioPlayer) InitWithDataFileTypeHintError(data *foundation.NSData, u
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithDataFileTypeHintError, data.Ptr(), utiString.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAudioPlayerFromID(_ret), nil
 }

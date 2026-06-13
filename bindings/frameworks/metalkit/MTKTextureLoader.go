@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/metalkit/mtktextureloader
@@ -48,7 +48,7 @@ func MTKTextureLoaderFromID(id objc.ID) *MTKTextureLoader {
 	}
 	o := &MTKTextureLoader{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -151,7 +151,7 @@ func (o *MTKTextureLoader) NewTextureWithContentsOfURLOptionsError(uRL *foundati
 	var _nsErr uintptr
 	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -161,7 +161,7 @@ func (o *MTKTextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs *found
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[metal.MTLTexture]](o.Ptr(), _mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsError, uRLs, options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -171,7 +171,7 @@ func (o *MTKTextureLoader) NewTextureWithDataOptionsError(data *foundation.NSDat
 	var _nsErr uintptr
 	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -181,7 +181,7 @@ func (o *MTKTextureLoader) NewTextureWithCGImageOptionsError(cgImage unsafe.Poin
 	var _nsErr uintptr
 	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithCGImageOptionsError, cgImage, options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -191,7 +191,7 @@ func (o *MTKTextureLoader) NewTextureWithMDLTextureOptionsError(texture *modelio
 	var _nsErr uintptr
 	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithMDLTextureOptionsError, texture.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -201,7 +201,7 @@ func (o *MTKTextureLoader) NewTextureWithNameScaleFactorBundleOptionsError(name 
 	var _nsErr uintptr
 	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithNameScaleFactorBundleOptionsError, name.Ptr(), scaleFactor, bundle.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -211,7 +211,7 @@ func (o *MTKTextureLoader) NewTextureWithNameScaleFactorDisplayGamutBundleOption
 	var _nsErr uintptr
 	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithNameScaleFactorDisplayGamutBundleOptionsError, name.Ptr(), scaleFactor, displayGamut, bundle.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

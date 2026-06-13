@@ -7,7 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -32,7 +32,7 @@ func NewXMLDocumentWithXMLStringOptionsError(string_ string, mask raw.NSXMLNodeO
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXMLString:options:error:"), foundation.NSStringStringWithUTF8String(string_).Ptr(), mask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}, nil
 }
@@ -43,7 +43,7 @@ func NewXMLDocumentWithContentsOfURLOptionsError(url string, mask raw.NSXMLNodeO
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), mask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}, nil
 }
@@ -54,7 +54,7 @@ func NewXMLDocumentWithDataOptionsError(data *raw.NSData, mask raw.NSXMLNodeOpti
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:error:"), data.Ptr(), mask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}, nil
 }

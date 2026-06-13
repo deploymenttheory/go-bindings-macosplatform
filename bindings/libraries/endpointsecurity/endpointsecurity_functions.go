@@ -9,9 +9,9 @@ import "C"
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/blocks"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/objc"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/tel"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
 	"unsafe"
 )
 
@@ -126,7 +126,7 @@ func Es_exec_arg(ctx context.Context, event *Es_event_exec_t, index uint32) Es_s
 		return Es_string_token_t{}
 	}
 	_result := *(*Es_string_token_t)(unsafe.Pointer(_ptr))
-	objc.FreePtr(_ptr)
+	cgo.FreePtr(_ptr)
 	return _result
 }
 
@@ -143,7 +143,7 @@ func Es_exec_env(ctx context.Context, event *Es_event_exec_t, index uint32) Es_s
 		return Es_string_token_t{}
 	}
 	_result := *(*Es_string_token_t)(unsafe.Pointer(_ptr))
-	objc.FreePtr(_ptr)
+	cgo.FreePtr(_ptr)
 	return _result
 }
 

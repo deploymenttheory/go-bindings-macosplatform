@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A 3D specialization of an agent that moves on a 3-axis logical coordinate system.
@@ -35,7 +35,7 @@ func GKAgent3DFromID(id objc.ID) *GKAgent3D {
 	}
 	o := &GKAgent3D{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/naturallanguage/nlgazetteer
@@ -35,7 +35,7 @@ func NLGazetteerFromID(id objc.ID) *NLGazetteer {
 	}
 	o := &NLGazetteer{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -44,7 +44,7 @@ func NLGazetteerGazetteerWithContentsOfURLError(url *foundation.NSURL) (*NLGazet
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLGazetteer), _nLGazetteerSelGazetteerWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NLGazetteerFromID(_ret), nil
 }
@@ -54,7 +54,7 @@ func (o *NLGazetteer) InitWithContentsOfURLError(url *foundation.NSURL) (*NLGaze
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelInitWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NLGazetteerFromID(_ret), nil
 }
@@ -64,7 +64,7 @@ func (o *NLGazetteer) InitWithDataError(data *foundation.NSData) (*NLGazetteer, 
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NLGazetteerFromID(_ret), nil
 }
@@ -74,7 +74,7 @@ func (o *NLGazetteer) InitWithDictionaryLanguageError(dictionary *foundation.NSD
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelInitWithDictionaryLanguageError, dictionary, language.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NLGazetteerFromID(_ret), nil
 }
@@ -89,7 +89,7 @@ func NLGazetteerWriteGazetteerForDictionaryLanguageToURLError(dictionary *founda
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNLGazetteer), _nLGazetteerSelWriteGazetteerForDictionaryLanguageToURLError, dictionary, language.Ptr(), url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

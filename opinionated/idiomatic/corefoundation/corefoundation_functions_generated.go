@@ -7,7 +7,7 @@ package corefoundation
 import (
 	"fmt"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc/objcerrors"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego/objcerrors"
 	"unsafe"
 )
 

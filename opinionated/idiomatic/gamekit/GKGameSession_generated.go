@@ -8,7 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -32,7 +32,7 @@ func (x *GameSession) SetConnectionState(ctx context.Context, state raw.GKConnec
 	_ch := make(chan error, 1)
 	x.inner.SetConnectionStateCompletionHandler(state, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -50,7 +50,7 @@ func (x *GameSession) SendDataWithTransportType(ctx context.Context, data *found
 	_ch := make(chan error, 1)
 	x.inner.SendDataWithTransportTypeCompletionHandler(data, transport, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -68,7 +68,7 @@ func (x *GameSession) SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBad
 	_ch := make(chan error, 1)
 	x.inner.SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayersCompletionHandler(foundation.NSStringStringWithUTF8String(key), arguments, data, players, badgePlayers, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -86,7 +86,7 @@ func (x *GameSession) ClearBadgeForPlayers(ctx context.Context, players *foundat
 	_ch := make(chan error, 1)
 	x.inner.ClearBadgeForPlayersCompletionHandler(players, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetreader
@@ -40,7 +40,7 @@ func AVAssetReaderFromID(id objc.ID) *AVAssetReader {
 	}
 	o := &AVAssetReader{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -50,7 +50,7 @@ func AVAssetReaderAssetReaderWithAssetError(asset *AVAsset) (*AVAssetReader, err
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReader), _aVAssetReaderSelAssetReaderWithAssetError, asset.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAssetReaderFromID(_ret), nil
 }
@@ -61,7 +61,7 @@ func (o *AVAssetReader) InitWithAssetError(asset *AVAsset) (*AVAssetReader, erro
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderSelInitWithAssetError, asset.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAssetReaderFromID(_ret), nil
 }

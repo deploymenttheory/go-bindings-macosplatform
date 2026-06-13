@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Node representing a @ref MPSNNLossGradient kernel
@@ -44,7 +44,7 @@ func MPSNNLossGradientNodeFromID(id objc.ID) *MPSNNLossGradientNode {
 	}
 	o := &MPSNNLossGradientNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

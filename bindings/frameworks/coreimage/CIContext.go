@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cicontext
@@ -85,7 +85,7 @@ func CIContextFromID(id objc.ID) *CIContext {
 	}
 	o := &CIContext{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -298,7 +298,7 @@ func (o *CIContext) HEIF10RepresentationOfImageColorSpaceOptionsError(image *CII
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelHEIF10RepresentationOfImageColorSpaceOptionsError, image.Ptr(), colorSpace, options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDataFromID(_ret), nil
 }
@@ -314,7 +314,7 @@ func (o *CIContext) OpenEXRRepresentationOfImageOptionsError(image *CIImage, opt
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelOpenEXRRepresentationOfImageOptionsError, image.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDataFromID(_ret), nil
 }
@@ -323,7 +323,7 @@ func (o *CIContext) WriteTIFFRepresentationOfImageToURLFormatColorSpaceOptionsEr
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteTIFFRepresentationOfImageToURLFormatColorSpaceOptionsError, image.Ptr(), url.Ptr(), format, colorSpace, options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -332,7 +332,7 @@ func (o *CIContext) WritePNGRepresentationOfImageToURLFormatColorSpaceOptionsErr
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWritePNGRepresentationOfImageToURLFormatColorSpaceOptionsError, image.Ptr(), url.Ptr(), format, colorSpace, options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -341,7 +341,7 @@ func (o *CIContext) WriteJPEGRepresentationOfImageToURLColorSpaceOptionsError(im
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteJPEGRepresentationOfImageToURLColorSpaceOptionsError, image.Ptr(), url.Ptr(), colorSpace, options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -350,7 +350,7 @@ func (o *CIContext) WriteHEIFRepresentationOfImageToURLFormatColorSpaceOptionsEr
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteHEIFRepresentationOfImageToURLFormatColorSpaceOptionsError, image.Ptr(), url.Ptr(), format, colorSpace, options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -359,7 +359,7 @@ func (o *CIContext) WriteHEIF10RepresentationOfImageToURLColorSpaceOptionsError(
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteHEIF10RepresentationOfImageToURLColorSpaceOptionsError, image.Ptr(), url.Ptr(), colorSpace, options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -368,7 +368,7 @@ func (o *CIContext) WriteOpenEXRRepresentationOfImageToURLOptionsError(image *CI
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteOpenEXRRepresentationOfImageToURLOptionsError, image.Ptr(), url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -408,7 +408,7 @@ func (o *CIContext) StartTaskToRenderFromRectToDestinationAtPointError(image *CI
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelStartTaskToRenderFromRectToDestinationAtPointError, image.Ptr(), fromRect, destination.Ptr(), atPoint, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CIRenderTaskFromID(_ret), nil
 }
@@ -418,7 +418,7 @@ func (o *CIContext) StartTaskToRenderToDestinationError(image *CIImage, destinat
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelStartTaskToRenderToDestinationError, image.Ptr(), destination.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CIRenderTaskFromID(_ret), nil
 }
@@ -427,7 +427,7 @@ func (o *CIContext) PrepareRenderFromRectToDestinationAtPointError(image *CIImag
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cIContextSelPrepareRenderFromRectToDestinationAtPointError, image.Ptr(), fromRect, destination.Ptr(), atPoint, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -437,7 +437,7 @@ func (o *CIContext) StartTaskToClearError(destination *CIRenderDestination) (*CI
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelStartTaskToClearError, destination.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CIRenderTaskFromID(_ret), nil
 }

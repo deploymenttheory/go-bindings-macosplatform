@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext
@@ -88,7 +88,7 @@ func NSManagedObjectContextFromID(id objc.ID) *NSManagedObjectContext {
 	}
 	o := &NSManagedObjectContext{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -150,7 +150,7 @@ func (o *NSManagedObjectContext) ExistingObjectWithIDError(objectID *NSManagedOb
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelExistingObjectWithIDError, objectID.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSManagedObjectFromID(_ret), nil
 }
@@ -159,7 +159,7 @@ func (o *NSManagedObjectContext) ExecuteFetchRequestError(request *NSFetchReques
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSManagedObjectContextSelExecuteFetchRequestError, request, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -168,7 +168,7 @@ func (o *NSManagedObjectContext) CountForFetchRequestError(request *NSFetchReque
 	var _nsErr uintptr
 	_ret := objc.Send[uint](o.Ptr(), _nSManagedObjectContextSelCountForFetchRequestError, request, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -178,7 +178,7 @@ func (o *NSManagedObjectContext) ExecuteRequestError(request *NSPersistentStoreR
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelExecuteRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSPersistentStoreResultFromID(_ret), nil
 }
@@ -227,7 +227,7 @@ func (o *NSManagedObjectContext) Save() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectContextSelSave, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -261,7 +261,7 @@ func (o *NSManagedObjectContext) ObtainPermanentIDsForObjectsError(objects *foun
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectContextSelObtainPermanentIDsForObjectsError, objects.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -278,7 +278,7 @@ func (o *NSManagedObjectContext) SetQueryGenerationFromTokenError(generation *NS
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectContextSelSetQueryGenerationFromTokenError, generation.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

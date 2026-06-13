@@ -6,7 +6,7 @@ package gameplaykit
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Produces 3D cylindrical noise with an infinite number of cylinders-within-cyliners of constantly-increasing radius.
@@ -30,7 +30,7 @@ func GKCylindersNoiseSourceFromID(id objc.ID) *GKCylindersNoiseSource {
 	}
 	o := &GKCylindersNoiseSource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

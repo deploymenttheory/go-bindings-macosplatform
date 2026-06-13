@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/securityinterface/sfauthorizationview
@@ -42,7 +42,7 @@ func SFAuthorizationViewFromID(id objc.ID) *SFAuthorizationView {
 	}
 	o := &SFAuthorizationView{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

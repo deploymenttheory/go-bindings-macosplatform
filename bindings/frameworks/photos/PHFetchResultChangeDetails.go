@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/photos/phfetchresultchangedetails
-type PHFetchResultChangeDetails[ObjectType pureobjc.AnyObject] struct {
+type PHFetchResultChangeDetails[ObjectType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -31,13 +31,13 @@ var (
 	_pHFetchResultChangeDetailsSelHasMoves = objc.RegisterName("hasMoves")
 )
 
-func PHFetchResultChangeDetailsFromID[ObjectType pureobjc.AnyObject](id objc.ID) *PHFetchResultChangeDetails[ObjectType] {
+func PHFetchResultChangeDetailsFromID[ObjectType purego.AnyObject](id objc.ID) *PHFetchResultChangeDetails[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &PHFetchResultChangeDetails[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/oslog/oslogstore
@@ -36,7 +36,7 @@ func OSLogStoreFromID(id objc.ID) *OSLogStore {
 	}
 	o := &OSLogStore{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -46,7 +46,7 @@ func OSLogStoreLocalStoreAndReturnError() (*OSLogStore, error) {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSLogStore), _oSLogStoreSelLocalStoreAndReturnError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return OSLogStoreFromID(_ret), nil
 }
@@ -57,7 +57,7 @@ func OSLogStoreStoreWithScopeError(scope OSLogStoreScope) (*OSLogStore, error) {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSLogStore), _oSLogStoreSelStoreWithScopeError, scope, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return OSLogStoreFromID(_ret), nil
 }
@@ -68,7 +68,7 @@ func OSLogStoreStoreWithURLError(url *foundation.NSURL) (*OSLogStore, error) {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSLogStore), _oSLogStoreSelStoreWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return OSLogStoreFromID(_ret), nil
 }
@@ -86,7 +86,7 @@ func (o *OSLogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options 
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelEntriesEnumeratorWithOptionsPositionPredicateError, options, position.Ptr(), predicate.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return OSLogEnumeratorFromID(_ret), nil
 }
@@ -97,7 +97,7 @@ func (o *OSLogStore) EntriesEnumeratorAndReturnError() (*OSLogEnumerator, error)
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelEntriesEnumeratorAndReturnError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return OSLogEnumeratorFromID(_ret), nil
 }

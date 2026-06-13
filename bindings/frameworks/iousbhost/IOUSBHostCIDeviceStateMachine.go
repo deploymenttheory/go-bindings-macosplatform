@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class   IOUSBHostCIDeviceStateMachine @brief   The object representing the state of a user-mode USB host controller device @details This class assists with tracking internal state transitions of a user-mode USB host controller device, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIDeviceStateMachine in response to an IOUSBHostCIMessageTypeDeviceCreate command, and then use the provided interfaces to identify and process commands for the device.  The IOUSBHostCIDeviceStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeDeviceDestroy command. IOUSBHostCIDeviceStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
@@ -37,7 +37,7 @@ func IOUSBHostCIDeviceStateMachineFromID(id objc.ID) *IOUSBHostCIDeviceStateMach
 	}
 	o := &IOUSBHostCIDeviceStateMachine{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -47,7 +47,7 @@ func (o *IOUSBHostCIDeviceStateMachine) InitWithInterfaceCommandError(interface_
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostCIDeviceStateMachineSelInitWithInterfaceCommandError, interface_.Ptr(), command, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return IOUSBHostCIDeviceStateMachineFromID(_ret), nil
 }
@@ -57,7 +57,7 @@ func (o *IOUSBHostCIDeviceStateMachine) InspectCommandError(command *IOUSBHostCI
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostCIDeviceStateMachineSelInspectCommandError, command, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -67,7 +67,7 @@ func (o *IOUSBHostCIDeviceStateMachine) RespondToCommandStatusError(command *IOU
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostCIDeviceStateMachineSelRespondToCommandStatusError, command, status, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -76,7 +76,7 @@ func (o *IOUSBHostCIDeviceStateMachine) RespondToCommandStatusDeviceAddressError
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostCIDeviceStateMachineSelRespondToCommandStatusDeviceAddressError, command, status, deviceAddress, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

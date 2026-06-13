@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxaverage
-type MXAverage[UnitType pureobjc.AnyObject] struct {
+type MXAverage[UnitType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -22,13 +22,13 @@ var (
 	_mXAverageSelStandardDeviation = objc.RegisterName("standardDeviation")
 )
 
-func MXAverageFromID[UnitType pureobjc.AnyObject](id objc.ID) *MXAverage[UnitType] {
+func MXAverageFromID[UnitType purego.AnyObject](id objc.ID) *MXAverage[UnitType] {
 	if id == 0 {
 		return nil
 	}
 	o := &MXAverage[UnitType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

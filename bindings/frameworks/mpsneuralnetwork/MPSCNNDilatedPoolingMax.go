@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/mpsneuralnetwork/mpscnndilatedpoolingmax
@@ -28,7 +28,7 @@ func MPSCNNDilatedPoolingMaxFromID(id objc.ID) *MPSCNNDilatedPoolingMax {
 	}
 	o := &MPSCNNDilatedPoolingMax{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

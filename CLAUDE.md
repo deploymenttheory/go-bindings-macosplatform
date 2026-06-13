@@ -12,7 +12,7 @@ go build ./cmd/generate/
 go test ./internal/...
 
 # Run a single test
-go test ./internal/codegen/emit/ -run TestWriteClass
+go test ./internal/codegen/libraries/emit/raw/ -run TestWriteClass
 
 # Run acceptance tests (requires metadata/ directory)
 go test ./acceptance/
@@ -21,7 +21,7 @@ go test ./acceptance/
 go test ./acceptance/ -short
 
 # Run with verbose output
-go test -v ./internal/codegen/pipeline/ -run TestLoadAll
+go test -v ./internal/codegen/libraries/pipeline/ -run TestLoadAll
 
 # Lint (golangci-lint v2 required)
 golangci-lint run
@@ -97,7 +97,11 @@ All source files under `internal/scanner/` and `cmd/generate/` carry `//go:build
 
 ## Architecture
 
-This project is a **code generator** that reads macOS SDK headers via Clang and emits idiomatic Go packages with CGo bridges. It produces the `frameworks/` and `libraries/` trees in the same repository.
+This project is a **code generator** that reads macOS SDK headers via Clang and emits idiomatic Go packages. It produces the `bindings/frameworks/`, `bindings/libraries/`, and `opinionated/` trees in the same repository.
+
+There are **two generator pipelines**, sharing the scanner and the scanned-metadata model but otherwise independent:
+- **`internal/codegen/frameworks/`** — emits the purego ObjC framework packages (`bindings/frameworks/`) and the idiomatic layer (`opinionated/idiomatic/`). Pure Go, no CGo.
+- **`internal/codegen/libraries/`** — emits the CGo Apple C-library packages (`bindings/libraries/`), with `.h`/`.m` bridge files. The three-phase description below traces this CGo pipeline; the frameworks pipeline mirrors it with a purego emitter.
 
 ### Three-phase pipeline
 
@@ -105,60 +109,61 @@ This project is a **code generator** that reads macOS SDK headers via Clang and 
 Clang AST dump → .gometa.json (metadata cache) → Go source files
 ```
 
-**Phase 1 — Scan** (`internal/scanner/`): Invokes `xcrun clang -x objective-c -Xclang -ast-dump=json` on each framework's umbrella header. `ast.go` defines the Clang JSON AST structs. `extract.go` walks the AST and populates `meta.FrameworkMeta`. `filter.go` restricts extraction to declarations from the named framework's own headers (not re-exported ones). Results are written as `<framework>-<arch>-<sdk>.gometa.json` via `internal/meta/io.go`. The scanner also supports Apple C libraries that live under `{SDK}/usr/include/` rather than `System/Library/Frameworks/` (e.g. EndpointSecurity); these are registered in `knownCLibraries` in `clang.go` and produce a `LinkLib`-tagged metadata file.
+**Phase 1 — Scan** (`internal/scanner/`): Invokes `xcrun clang -x objective-c -Xclang -ast-dump=json` on each framework's umbrella header. `ast.go` defines the Clang JSON AST structs. `extract.go` walks the AST and populates `macosplatformmetadata.FrameworkMeta`. `filter.go` restricts extraction to declarations from the named framework's own headers (not re-exported ones). Results are written as `<framework>-<arch>-<sdk>.gometa.json` via `internal/macosplatformmetadata/io.go`. The scanner also supports Apple C libraries that live under `{SDK}/usr/include/` rather than `System/Library/Frameworks/` (e.g. EndpointSecurity); these are registered in `knownCLibraries` in `clang.go` and produce a `LinkLib`-tagged metadata file.
 
-**Phase 2 — Load** (`internal/codegen/pipeline/loader.go`): `LoadAll` reads every `.gometa.json` in the metadata directory into a `Registry`. The registry resolves cross-framework ownership ("which package does `NSString` live in?") using the "fewest non-zero methods wins" heuristic: the framework with the most minimal definition of a class is its canonical owner. The committed `metadata/` directory means `go run ./cmd/generate/ bindings` works without Xcode.
+**Phase 2 — Load** (`internal/codegen/libraries/pipeline/loader.go`): `LoadAll` reads every `.gometa.json` in the metadata directory into a `Registry`. The registry resolves cross-framework ownership ("which package does `NSString` live in?") using the "fewest non-zero methods wins" heuristic: the framework with the most minimal definition of a class is its canonical owner. The committed `metadata/` directory means `go run ./cmd/generate/ bindings` works without Xcode. (The frameworks pipeline has a parallel loader under `internal/codegen/frameworks/pipeline/`.)
 
-**Phase 3 — Emit** (`internal/codegen/pipeline/generator.go` + `internal/codegen/emit/`): `GenerateBindings` topologically sorts frameworks by superclass dependency, then calls per-construct emitters for each framework. Before writing, it removes stale `.go` and bridge files from the output directory. Import cycles are detected via DFS; cycle-breaking edges substitute `unsafe.Pointer` for the typed cross-framework reference.
+**Phase 3 — Emit** (`internal/codegen/libraries/pipeline/generator.go` + `internal/codegen/libraries/emit/`): `GenerateBindings` topologically sorts frameworks by superclass dependency, then calls per-construct emitters for each framework. Before writing, it removes stale `.go` and bridge files from the output directory. Import cycles are detected via DFS; cycle-breaking edges substitute `unsafe.Pointer` for the typed cross-framework reference.
 
-### Key data model (`internal/meta/model.go`)
+### Key data model (`internal/macosplatformmetadata/model.go`)
 
 `FrameworkMeta` is the serialised/deserialised unit. It holds maps of `Class`, `Protocol`, `Enum`, `Struct`, and slices of `Function`, `Extern`, `BlockType`. `Availability` carries `API_AVAILABLE`/`API_DEPRECATED` attributes. `ForeignExtensions` captures ObjC categories that extend a class owned by a different framework (emitted as package-level functions, not methods, because Go prohibits adding methods to foreign types). `LinkLib` (optional) overrides the default `-framework <Name>` linker flag with `-l<LinkLib>` — set for C libraries that ship as plain dylibs rather than `.framework` bundles (e.g. EndpointSecurity).
 
-### Emitters (`internal/codegen/emit/`)
+### Emitters (`internal/codegen/libraries/emit/`)
 
 One file per construct type:
 - `classes.go` — one `.go` file per ObjC class; superclass chain resolved into struct embedding
-- `bridge.go` — C bridge `.h`/`.m` files compiled with `-fno-objc-arc`; returned ObjC objects are `+1` retained so that `objc.Track` can register a Go finalizer that releases them
+- `bridge.go` — C bridge `.h`/`.m` files compiled with `-fno-objc-arc`; returned ObjC objects are `+1` retained so that `cgo.Track` can register a Go finalizer that releases them
 - `interfaces.go` — one `<ClassName>able` Go interface per ObjC class, enabling duck-typed acceptance and mock implementations
-- `block_trampolines.go` — generates the runtime block trampoline files written to `internal/blocks/`: `blocks_generated.go` (Go-side `//export goCallBlock_*` functions and `MakeBlock_*` factories), `block_trampolines_generated.h`, and `block_trampolines_generated.m`
+- `block_trampolines.go` — generates the runtime block trampoline files written to `bindings/runtime/blocks/`: `blocks_generated.go` (Go-side `//export goCallBlock_*` functions and `MakeBlock_*` factories), `block_trampolines_generated.h`, and `block_trampolines_generated.m`
 - `variadic_wrappers.go` — generates Foundation collection convenience constructors (`NSArrayOf[T]`, `NSMutableArrayOf[T]`, `NSSetOf[T]`, `NSMutableSetOf[T]`) that wrap the nil-terminated ObjC variadic pattern
 - `enums.go`, `structs.go`, `externs.go`, `functions.go`, `protocols.go`, `blocks.go` — flat per-framework files
 - `foreign_extensions.go` — package-level functions for categories that extend foreign classes
 - `helpers.go` — shared helpers used across emitters
 
-### Type mapping (`internal/codegen/typemap/mapper.go`)
+### Type mapping (`internal/codegen/libraries/typemap/mapper.go`)
 
 `Mapper.GoType` converts ObjC `qualType` strings (e.g. `NSArray<NSString *> *`) to Go type strings (e.g. `*foundation.NSArray[*foundation.NSString]`). It is context-sensitive: it knows the current class (for `instancetype`), which classes use Go generics, and which cross-framework imports are blocked (cycle prevention). Resolved cross-framework types are collected into the caller's `UsedImports` map as a side effect.
 
-### Naming (`internal/codegen/naming/naming.go`)
+### Naming (`internal/codegen/libraries/naming/naming.go`)
 
 - `MethodName` converts ObjC selectors to exported Go method names (`objectAtIndex:` → `ObjectAtIndex`; `UsingBlock` suffix → `Using`)
 - `BridgeFuncName` produces the C bridge symbol (`foundation_NSString_stringWithCString`)
 - `ArgName` lowercases and escapes Go reserved words
 - `PackageName` lowercases the framework name
 
-### Runtime (`internal/objc/` and `internal/tel/`)
+### Runtime (`bindings/runtime/`)
 
-Two packages form the runtime layer imported by all generated packages.
+The runtime layer lives under `bindings/runtime/` — **public** packages imported both by the generated code and by external consumers (so consuming projects only ever import `bindings/…`). There are two runtimes, matching the two pipelines:
 
-`internal/objc/` is a darwin-only CGo package (compiled with `-fno-objc-arc`) that provides:
-- `Retain`/`Release`/`Track` — explicit ObjC retain/release; `Track` registers a Go finalizer so the GC automatically releases `+1`-retained objects
-- `KeepAlive(v)` — wraps `runtime.KeepAlive`; emitted as `defer runtime.KeepAlive(o)` in every generated instance method to prevent the GC from finalizing the receiver before the CGo call completes
-- `FreePtr(ptr)` — frees a `malloc`-allocated C buffer; used by generated code after copying a value-type struct return into Go memory
-- `RunOnMainThread` — executes a closure on the main GCD queue via `dispatch_sync_f`; required for all AppKit/UIKit calls
-- String conversion between `NSString *` and Go `string`
-- `ClassNameOf(ptr)` — returns the ObjC runtime class name via `object_getClass` + `class_getName`; use this to verify the concrete type before a downcast
-- `ExceptionReason` — extracts the reason string from a caught ObjC exception pointer
+- **`bindings/runtime/purego`** (package `purego`) — the runtime for every generated framework package (`bindings/frameworks/`). Pure-Go (over `github.com/ebitengine/purego`): `Track`/`Retain`/`Release`, `GoString`/`NSString`, `NSErrorToError` (structured `objcerrors.ObjCError`), `GoCString`. It also re-exports the ObjC dynamic-dispatch surface (`ID`, `SEL`, `Send`, `RegisterName`, `RegisterClass`, `NewBlock`, …) so consumers never import `ebitengine/purego` directly. The `objcerrors` subpackage holds the structured error type.
+- **`bindings/runtime/cgo`** (package `cgo`) — the darwin-only CGo runtime for the C-library packages (`bindings/libraries/`, compiled with `-fno-objc-arc`):
+  - `Retain`/`Release`/`Track` — explicit ObjC retain/release; `Track` registers a Go finalizer so the GC automatically releases `+1`-retained objects
+  - `KeepAlive(v)` — wraps `runtime.KeepAlive`; emitted as `defer runtime.KeepAlive(o)` in every generated instance method to prevent the GC from finalizing the receiver before the CGo call completes
+  - `FreePtr(ptr)` — frees a `malloc`-allocated C buffer; used by generated code after copying a value-type struct return into Go memory
+  - `RunOnMainThread` — executes a closure on the main GCD queue via `dispatch_sync_f`; required for all AppKit/UIKit calls
+  - String conversion between `NSString *` and Go `string`
+  - `ClassNameOf(ptr)` — returns the ObjC runtime class name via `object_getClass` + `class_getName`; use this to verify the concrete type before a downcast
+  - `ExceptionReason` — extracts the reason string from a caught ObjC exception pointer
 
-`internal/tel/` wraps `go.opentelemetry.io/otel` and is imported by every generated method:
+`bindings/runtime/tel/` wraps `go.opentelemetry.io/otel` and is imported by every generated CGo library method:
 - `Call(ctx, recv, spanName)` — opens an OTel span for each ObjC method invocation and keeps the receiver alive across the CGo boundary
 - `RaiseIfException(ctx, exc)` — records the exception on the active span then panics
 - `NSErrorToError(ctx, ptr)` — converts an ObjC `NSError *` to a Go `error` and records it on the span
 
-This means any app that wires up an OTel exporter automatically gets a full distributed trace of every macOS framework call, correlated with the application's own spans. If no provider is configured, `otel.Tracer()` returns a no-op tracer and the overhead is negligible.
+This means any app that wires up an OTel exporter automatically gets a full distributed trace of every C-library call, correlated with the application's own spans. If no provider is configured, `otel.Tracer()` returns a no-op tracer and the overhead is negligible. (The purego framework packages do not use `tel` — their dispatch is zero-overhead and uninstrumented.)
 
-### Block trampoline runtime (`internal/blocks/`)
+### Block trampoline runtime (`bindings/runtime/blocks/`)
 
 ObjC blocks passed to Go are managed through a closure registry in this package. `BlockRegister(fn)` stores a Go closure in a `sync.Map` and returns a `uint64` handle. The generated C trampoline receives this handle and calls back into Go via an `//export goCallBlock_*` function, which looks up and invokes the closure. `FreeBlock` and the `//export goBlockUnregister`/`goBlockRetain` functions manage the block's lifetime when ObjC copies or disposes it. The `.go`, `.h`, and `.m` files in this package that end in `_generated` are written by the `block_trampolines.go` emitter — do not edit them by hand.
 
@@ -215,20 +220,20 @@ opinionated/library/
 └── <other frameworks>/  # generated *_generated.go only (async wrappers, typed slices, spec types)
 ```
 
-**`opinionated/ergonomic/`** — fully generated ergonomic layer, split by type:
+**`opinionated/idiomatic/`** — fully generated fluent layer (one package per framework), emitted by the frameworks pipeline (`go run ./cmd/generate/ idiomatic`). This replaced the former `opinionated/ergonomic/` layer, which has been removed.
 
 ```
-opinionated/ergonomic/
-├── frameworks/<name>/   # ergonomic helpers for ObjC frameworks
-└── libraries/<name>/    # ergonomic helpers for C libraries
+opinionated/idiomatic/<name>/   # Go-friendly wrappers for each framework
 ```
+
+`opinionated/custom/` holds additional hand-crafted packages.
 
 Rules for the opinionated layers:
-- All hand-crafted files use `//go:build darwin` and import raw frameworks as `raw "…/frameworks/<name>"`.
+- All hand-crafted files use `//go:build darwin` and import raw frameworks as `raw "…/bindings/frameworks/<name>"`.
 - Cross-package imports inside `opinionated/library/` always use the full module path `github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/<name>`.
 - The generator **never deletes** hand-crafted files in `opinionated/library/`; only `*_generated.go` files are regenerated.
-- All files under `opinionated/ergonomic/` are generated — do not hand-edit them.
-- **Never modify `frameworks/` or `libraries/` as part of opinionated work.** Raw generated code must remain untouched.
+- All files under `opinionated/idiomatic/` are generated — do not hand-edit them.
+- **Never modify `bindings/frameworks/` or `bindings/libraries/` as part of opinionated work.** Raw generated code must remain untouched.
 
 ### Metadata cache (`metadata/`)
 
@@ -281,6 +286,6 @@ non-negotiable — violations block PRs.
 
 - **ARC disabled**: all bridge `.m` files use `-fno-objc-arc`. Do not mix ARC code with the bridges.
 - **Main thread**: AppKit and any UI-framework calls must be dispatched via `objc.RunOnMainThread`. The generated bindings do not do this automatically — the caller is responsible.
-- **Single permitted external dependency**: `go.opentelemetry.io/otel` (and its stable transitive deps) is an intentional, foundational dependency. Every generated method imports `internal/tel`, which uses OTel to trace ObjC method calls and record exceptions on the active span. Do not add further external dependencies without a compelling reason reviewed by a maintainer.
+- **Single permitted external dependency**: `go.opentelemetry.io/otel` (and its stable transitive deps) is an intentional, foundational dependency. Every generated CGo C-library method imports `bindings/runtime/tel`, which uses OTel to trace calls and record exceptions on the active span. Do not add further external dependencies without a compelling reason reviewed by a maintainer.
 - **darwin-only**: scanner and generator are gated on `//go:build darwin`. Unit tests in `internal/` that don't call Clang run on any platform.
 - **Modifying the generator**: when changing `internal/` or `cmd/generate/`, re-run `go run ./cmd/generate/ bindings` and include updated `frameworks/` in the same PR. If a scanner-side change requires re-scanning a framework, run `go run ./cmd/generate/ scan --framework <Name>` so the new `.gometa.json` lands in the committed `metadata/` tree.

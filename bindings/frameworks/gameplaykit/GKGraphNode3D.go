@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // GKGraphNode coupled with a 3D position
@@ -32,7 +32,7 @@ func GKGraphNode3DFromID(id objc.ID) *GKGraphNode3D {
 	}
 	o := &GKGraphNode3D{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

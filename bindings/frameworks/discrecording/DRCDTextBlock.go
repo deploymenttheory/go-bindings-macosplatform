@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class		DRCDTextBlock @abstract	Defines a CD-Text block, which holds the CD-Text strings for the entire disc in one language.
@@ -39,7 +39,7 @@ func DRCDTextBlockFromID(id objc.ID) *DRCDTextBlock {
 	}
 	o := &DRCDTextBlock{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

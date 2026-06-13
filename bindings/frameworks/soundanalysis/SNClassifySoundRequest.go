@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest
@@ -37,7 +37,7 @@ func SNClassifySoundRequestFromID(id objc.ID) *SNClassifySoundRequest {
 	}
 	o := &SNClassifySoundRequest{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -47,7 +47,7 @@ func (o *SNClassifySoundRequest) InitWithMLModelError(mlModel *coreml.MLModel) (
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassifySoundRequestSelInitWithMLModelError, mlModel.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return SNClassifySoundRequestFromID(_ret), nil
 }
@@ -58,7 +58,7 @@ func (o *SNClassifySoundRequest) InitWithClassifierIdentifierError(classifierIde
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassifySoundRequestSelInitWithClassifierIdentifierError, classifierIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return SNClassifySoundRequestFromID(_ret), nil
 }

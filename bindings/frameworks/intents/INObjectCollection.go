@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/intents/inobjectcollection
-type INObjectCollection[ObjectType pureobjc.AnyObject] struct {
+type INObjectCollection[ObjectType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -25,13 +25,13 @@ var (
 	_iNObjectCollectionSelSetUsesIndexedCollation = objc.RegisterName("setUsesIndexedCollation:")
 )
 
-func INObjectCollectionFromID[ObjectType pureobjc.AnyObject](id objc.ID) *INObjectCollection[ObjectType] {
+func INObjectCollectionFromID[ObjectType purego.AnyObject](id objc.ID) *INObjectCollection[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &INObjectCollection[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

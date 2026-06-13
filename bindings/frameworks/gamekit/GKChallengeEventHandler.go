@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A singleton object responsible for dispatching challenge-related events to its delegate
@@ -31,7 +31,7 @@ func GKChallengeEventHandlerFromID(id objc.ID) *GKChallengeEventHandler {
 	}
 	o := &GKChallengeEventHandler{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

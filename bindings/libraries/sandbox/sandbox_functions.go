@@ -9,7 +9,7 @@ import "C"
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/tel"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
 	"unsafe"
 )
 

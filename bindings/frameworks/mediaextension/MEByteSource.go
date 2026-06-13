@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/mebytesource
@@ -37,7 +37,7 @@ func MEByteSourceFromID(id objc.ID) *MEByteSource {
 	}
 	o := &MEByteSource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -73,7 +73,7 @@ func (o *MEByteSource) ReadDataOfLengthFromOffsetToDestinationBytesReadError(len
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mEByteSourceSelReadDataOfLengthFromOffsetToDestinationBytesReadError, length, offset, dest, bytesReadOut, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -90,7 +90,7 @@ func (o *MEByteSource) ByteSourceForRelatedFileNameError(fileName *foundation.NS
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEByteSourceSelByteSourceForRelatedFileNameError, fileName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MEByteSourceFromID(_ret), nil
 }

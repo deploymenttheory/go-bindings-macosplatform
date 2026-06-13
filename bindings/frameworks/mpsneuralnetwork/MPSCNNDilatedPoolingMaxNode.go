@@ -6,7 +6,7 @@ package mpsneuralnetwork
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @abstract  A node for a MPSCNNDilatedPooling kernel @discussion This class corresponds to the MPSCNNDilatedPooling class.
@@ -33,7 +33,7 @@ func MPSCNNDilatedPoolingMaxNodeFromID(id objc.ID) *MPSCNNDilatedPoolingMaxNode 
 	}
 	o := &MPSCNNDilatedPoolingMaxNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

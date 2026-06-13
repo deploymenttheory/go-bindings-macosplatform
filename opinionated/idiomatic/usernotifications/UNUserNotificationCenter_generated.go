@@ -7,7 +7,7 @@ package usernotifications
 import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -37,7 +37,7 @@ func (x *UserNotificationCenter) AddNotificationRequest(ctx context.Context, req
 	_ch := make(chan error, 1)
 	x.inner.AddNotificationRequestWithCompletionHandler(request, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -55,7 +55,7 @@ func (x *UserNotificationCenter) SetBadgeCount(ctx context.Context, newBadgeCoun
 	_ch := make(chan error, 1)
 	x.inner.SetBadgeCountWithCompletionHandler(newBadgeCount, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

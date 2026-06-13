@@ -7,7 +7,7 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,7 +26,7 @@ func NewSoundEventWithEngineAssetIdentifierMixerParametersError(engine *raw.PHAS
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:assetIdentifier:mixerParameters:error:"), engine.Ptr(), foundation.NSStringStringWithUTF8String(assetIdentifier).Ptr(), mixerParameters.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &SoundEvent{inner: raw.PHASESoundEventFromID(_id)}, nil
 }
@@ -37,7 +37,7 @@ func NewSoundEventWithEngineAssetIdentifierError(engine *raw.PHASEEngine, assetI
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:assetIdentifier:error:"), engine.Ptr(), foundation.NSStringStringWithUTF8String(assetIdentifier).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &SoundEvent{inner: raw.PHASESoundEventFromID(_id)}, nil
 }

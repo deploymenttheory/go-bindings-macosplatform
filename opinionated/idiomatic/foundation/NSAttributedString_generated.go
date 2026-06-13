@@ -7,7 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,7 +47,7 @@ func NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURLError(markd
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfMarkdownFileAtURL:options:baseURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(markdownFile)).Ptr(), options.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}, nil
 }
@@ -58,7 +58,7 @@ func NewAttributedStringWithMarkdownOptionsBaseURLError(markdown *raw.NSData, op
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkdown:options:baseURL:error:"), markdown.Ptr(), options.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}, nil
 }
@@ -69,7 +69,7 @@ func NewAttributedStringWithMarkdownStringOptionsBaseURLError(markdownString str
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkdownString:options:baseURL:error:"), foundation.NSStringStringWithUTF8String(markdownString).Ptr(), options.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}, nil
 }

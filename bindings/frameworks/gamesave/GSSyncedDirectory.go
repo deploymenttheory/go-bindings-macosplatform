@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A cloud-synced directory for game-save data. To get an instance of the directory, call ``openDirectoryForContainerIdentifier:``, which returns the directory for the iCloud container associated with the specified identifier. Calling this method starts syncing the directory in the background on the specified container. When the game needs to access the contents of the directory, show a UI while the directory fully syncs using the ``finishSyncing:completionHandler:`` method. If you're showing your own UI, call the ``finishSyncingWithCompletionHandler:`` method to wait for the directory to finish syncing. After the directory is ready to use, syncing pauses until you close the directory object or the object is deallocated. To resume syncing during the game, close and re-open the directory by calling ``close`` and then ``openDirectoryForContainerIdentifier:``.
@@ -35,7 +35,7 @@ func GSSyncedDirectoryFromID(id objc.ID) *GSSyncedDirectory {
 	}
 	o := &GSSyncedDirectory{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

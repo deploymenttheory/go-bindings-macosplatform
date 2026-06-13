@@ -6,7 +6,7 @@ package gameplaykit
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A deterministic pseudo-random source that generates random numbers based on a mersenne twister algorithm. This is a deterministic random source suitable for creating reliable gameplay mechanics. It is slightly slower than an Arc4 source, but more random, in that it has a longer period until repeating sequences. While deterministic, this is not a cryptographic random source. It is however suitable for obfuscation of gameplay data.
@@ -30,7 +30,7 @@ func GKMersenneTwisterRandomSourceFromID(id objc.ID) *GKMersenneTwisterRandomSou
 	}
 	o := &GKMersenneTwisterRandomSource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

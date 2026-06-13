@@ -7,7 +7,7 @@ package ituneslibrary
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,7 +26,7 @@ func NewLibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error)
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIVersion:error:"), foundation.NSStringStringWithUTF8String(requestedAPIVersion).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Library{inner: raw.ITLibraryFromID(_id)}, nil
 }
@@ -37,7 +37,7 @@ func NewLibraryWithAPIVersionOptionsError(requestedAPIVersion string, options ra
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIVersion:options:error:"), foundation.NSStringStringWithUTF8String(requestedAPIVersion).Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Library{inner: raw.ITLibraryFromID(_id)}, nil
 }

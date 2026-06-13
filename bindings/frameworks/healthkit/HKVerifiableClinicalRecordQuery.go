@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkverifiableclinicalrecordquery
@@ -31,7 +31,7 @@ func HKVerifiableClinicalRecordQueryFromID(id objc.ID) *HKVerifiableClinicalReco
 	}
 	o := &HKVerifiableClinicalRecordQuery{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

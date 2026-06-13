@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/scriptingbridge/sbelementarray
-type SBElementArray[ObjectType pureobjc.AnyObject] struct {
+type SBElementArray[ObjectType purego.AnyObject] struct {
 	foundation.NSMutableArray[ObjectType]
 }
 
@@ -25,13 +25,13 @@ var (
 	_sBElementArraySelGet = objc.RegisterName("get")
 )
 
-func SBElementArrayFromID[ObjectType pureobjc.AnyObject](id objc.ID) *SBElementArray[ObjectType] {
+func SBElementArrayFromID[ObjectType purego.AnyObject](id objc.ID) *SBElementArray[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &SBElementArray[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

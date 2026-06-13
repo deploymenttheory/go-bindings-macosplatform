@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsobject
@@ -171,7 +171,7 @@ func NSObjectFromID(id objc.ID) *NSObject {
 	}
 	o := &NSObject{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -409,7 +409,7 @@ func (o *NSObject) ValidateValueForKeyError(ioValue **ObjcObject, inKey *NSStrin
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSObjectSelValidateValueForKeyError, ioValue, inKey.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -442,7 +442,7 @@ func (o *NSObject) ValidateValueForKeyPathError(ioValue **ObjcObject, inKeyPath 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSObjectSelValidateValueForKeyPathError, ioValue, inKeyPath.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

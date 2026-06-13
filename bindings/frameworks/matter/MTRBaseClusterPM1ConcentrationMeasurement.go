@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrbaseclusterpm1concentrationmeasurement
@@ -76,7 +76,7 @@ func MTRBaseClusterPM1ConcentrationMeasurementFromID(id objc.ID) *MTRBaseCluster
 	}
 	o := &MTRBaseClusterPM1ConcentrationMeasurement{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

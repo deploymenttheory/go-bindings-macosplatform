@@ -6,7 +6,7 @@ package gamecontroller
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gccontrollerdirectionpad
@@ -33,7 +33,7 @@ func GCControllerDirectionPadFromID(id objc.ID) *GCControllerDirectionPad {
 	}
 	o := &GCControllerDirectionPad{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

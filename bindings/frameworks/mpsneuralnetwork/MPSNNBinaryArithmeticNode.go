@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @abstract virtual base class for basic arithmetic nodes
@@ -54,7 +54,7 @@ func MPSNNBinaryArithmeticNodeFromID(id objc.ID) *MPSNNBinaryArithmeticNode {
 	}
 	o := &MPSNNBinaryArithmeticNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

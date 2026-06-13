@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/mpsneuralnetwork/mpscnnupsamplingbilinear
@@ -27,7 +27,7 @@ func MPSCNNUpsamplingBilinearFromID(id objc.ID) *MPSCNNUpsamplingBilinear {
 	}
 	o := &MPSCNNUpsamplingBilinear{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

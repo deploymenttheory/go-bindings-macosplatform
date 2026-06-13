@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/osakit/osascript
@@ -54,7 +54,7 @@ func OSAScriptFromID(id objc.ID) *OSAScript {
 	}
 	o := &OSAScript{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -98,7 +98,7 @@ func (o *OSAScript) InitWithContentsOfURLLanguageInstanceUsingStorageOptionsErro
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithContentsOfURLLanguageInstanceUsingStorageOptionsError, url.Ptr(), instance.Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return OSAScriptFromID(_ret), nil
 }
@@ -113,7 +113,7 @@ func (o *OSAScript) InitWithCompiledDataFromURLUsingStorageOptionsError(data *fo
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithCompiledDataFromURLUsingStorageOptionsError, data.Ptr(), url.Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return OSAScriptFromID(_ret), nil
 }
@@ -123,7 +123,7 @@ func (o *OSAScript) InitWithScriptDataDescriptorFromURLLanguageInstanceUsingStor
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptionsError, data.Ptr(), url.Ptr(), instance.Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return OSAScriptFromID(_ret), nil
 }

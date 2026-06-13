@@ -6,7 +6,7 @@ package mpsneuralnetwork
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class         MPSNNInitialGradientNode @abstract      A node for a MPSNNInitialGradient kernel @discussion    This node can be used to generate a starting point for an arbitrary gradient computation. Simply add this node after the node for which you want to compute gradients and then call the function @ref trainingGraphWithSourceGradient: of this node to automatically generate the nodes needed for gradient computations or add the desired nodes manually. This is generally used with MPSNNLossGradientNode and MPSNNForwardLossNode
@@ -28,7 +28,7 @@ func MPSNNInitialGradientNodeFromID(id objc.ID) *MPSNNInitialGradientNode {
 	}
 	o := &MPSNNInitialGradientNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

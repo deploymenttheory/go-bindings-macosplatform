@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/vision/vncoremlmodel
@@ -33,7 +33,7 @@ func VNCoreMLModelFromID(id objc.ID) *VNCoreMLModel {
 	}
 	o := &VNCoreMLModel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -42,7 +42,7 @@ func VNCoreMLModelModelForMLModelError(model *coreml.MLModel) (*VNCoreMLModel, e
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNCoreMLModel), _vNCoreMLModelSelModelForMLModelError, model.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return VNCoreMLModelFromID(_ret), nil
 }

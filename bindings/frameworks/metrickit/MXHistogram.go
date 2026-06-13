@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxhistogram
-type MXHistogram[UnitType pureobjc.AnyObject] struct {
+type MXHistogram[UnitType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -21,13 +21,13 @@ var (
 	_mXHistogramSelBucketEnumerator = objc.RegisterName("bucketEnumerator")
 )
 
-func MXHistogramFromID[UnitType pureobjc.AnyObject](id objc.ID) *MXHistogram[UnitType] {
+func MXHistogramFromID[UnitType purego.AnyObject](id objc.ID) *MXHistogram[UnitType] {
 	if id == 0 {
 		return nil
 	}
 	o := &MXHistogram[UnitType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/iousbhost/iousbhostcontrollerinterface
@@ -43,7 +43,7 @@ func IOUSBHostControllerInterfaceFromID(id objc.ID) *IOUSBHostControllerInterfac
 	}
 	o := &IOUSBHostControllerInterface{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -74,7 +74,7 @@ func (o *IOUSBHostControllerInterface) EnqueueInterruptError(interrupt *IOUSBHos
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostControllerInterfaceSelEnqueueInterruptError, interrupt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -84,7 +84,7 @@ func (o *IOUSBHostControllerInterface) EnqueueInterruptExpediteError(interrupt *
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostControllerInterfaceSelEnqueueInterruptExpediteError, interrupt, expedite, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -94,7 +94,7 @@ func (o *IOUSBHostControllerInterface) EnqueueInterruptsCountError(interrupts *I
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostControllerInterfaceSelEnqueueInterruptsCountError, interrupts, count, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -104,7 +104,7 @@ func (o *IOUSBHostControllerInterface) EnqueueInterruptsCountExpediteError(inter
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostControllerInterfaceSelEnqueueInterruptsCountExpediteError, interrupts, count, expedite, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -120,7 +120,7 @@ func (o *IOUSBHostControllerInterface) GetPortStateMachineForCommandError(comman
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostControllerInterfaceSelGetPortStateMachineForCommandError, command, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return IOUSBHostCIPortStateMachineFromID(_ret), nil
 }
@@ -130,7 +130,7 @@ func (o *IOUSBHostControllerInterface) GetPortStateMachineForPortError(port uint
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostControllerInterfaceSelGetPortStateMachineForPortError, port, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return IOUSBHostCIPortStateMachineFromID(_ret), nil
 }

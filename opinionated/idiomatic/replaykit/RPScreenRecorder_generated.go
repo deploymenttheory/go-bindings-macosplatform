@@ -8,7 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -56,7 +56,7 @@ func (x *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StartRecordingWithHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -74,7 +74,7 @@ func (x *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url str
 	_ch := make(chan error, 1)
 	x.inner.StopRecordingWithOutputURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -106,7 +106,7 @@ func (x *ScreenRecorder) StartCaptureWithHandler(ctx context.Context, captureHan
 	_ch := make(chan error, 1)
 	x.inner.StartCaptureWithHandlerCompletionHandler(captureHandler, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -124,7 +124,7 @@ func (x *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StopCaptureWithHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -142,7 +142,7 @@ func (x *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StartClipBufferingWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -160,7 +160,7 @@ func (x *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StopClipBufferingWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -178,7 +178,7 @@ func (x *ScreenRecorder) ExportClipToURLDuration(ctx context.Context, url string
 	_ch := make(chan error, 1)
 	x.inner.ExportClipToURLDurationCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), duration, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class   IOUSBHostCIEndpointStateMachine @brief   The object representing the state of a user-mode USB host controller endpoint @details This class assists with tracking internal state transitions of a user-mode USB host controller endpoint, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIEndpointStateMachine in response to an IOUSBHostCIMessageTypeEndpointCreate command, and then use the provided interfaces to identify and process commands, doorbells, and transfer structures for the endpoint.  The IOUSBHostCIEndpointStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeEndpointDestroy command. Endpoint state is controlled by IOUSBHostCIMessage structures representing commands and transfer completions, and IOUSBHostCIDoorbell messages. Only an endpoint in the IOUSBHostCIEndpointStateActive state may inspect transfer structures, read or modify IO buffers, and generate transfer completions. IOUSBHostCIEndpointStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
@@ -39,7 +39,7 @@ func IOUSBHostCIEndpointStateMachineFromID(id objc.ID) *IOUSBHostCIEndpointState
 	}
 	o := &IOUSBHostCIEndpointStateMachine{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -49,7 +49,7 @@ func (o *IOUSBHostCIEndpointStateMachine) InitWithInterfaceCommandError(interfac
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostCIEndpointStateMachineSelInitWithInterfaceCommandError, interface_.Ptr(), command, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return IOUSBHostCIEndpointStateMachineFromID(_ret), nil
 }
@@ -59,7 +59,7 @@ func (o *IOUSBHostCIEndpointStateMachine) InspectCommandError(command *IOUSBHost
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostCIEndpointStateMachineSelInspectCommandError, command, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -69,7 +69,7 @@ func (o *IOUSBHostCIEndpointStateMachine) RespondToCommandStatusError(command *I
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostCIEndpointStateMachineSelRespondToCommandStatusError, command, status, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -79,7 +79,7 @@ func (o *IOUSBHostCIEndpointStateMachine) ProcessDoorbellError(doorbell uint32) 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostCIEndpointStateMachineSelProcessDoorbellError, doorbell, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -89,7 +89,7 @@ func (o *IOUSBHostCIEndpointStateMachine) EnqueueTransferCompletionForMessageSta
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostCIEndpointStateMachineSelEnqueueTransferCompletionForMessageStatusTransferLengthError, message, status, transferLength, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

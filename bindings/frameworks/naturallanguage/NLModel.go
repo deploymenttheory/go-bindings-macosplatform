@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/naturallanguage/nlmodel
@@ -35,7 +35,7 @@ func NLModelFromID(id objc.ID) *NLModel {
 	}
 	o := &NLModel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -44,7 +44,7 @@ func NLModelModelWithContentsOfURLError(url *foundation.NSURL) (*NLModel, error)
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLModel), _nLModelSelModelWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NLModelFromID(_ret), nil
 }
@@ -54,7 +54,7 @@ func NLModelModelWithMLModelError(mlModel *coreml.MLModel) (*NLModel, error) {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLModel), _nLModelSelModelWithMLModelError, mlModel.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NLModelFromID(_ret), nil
 }

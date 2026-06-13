@@ -7,7 +7,7 @@ package screentime
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screentime"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,7 +26,7 @@ func NewWebHistoryWithBundleIdentifierProfileIdentifierError(bundleIdentifier st
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:profileIdentifier:error:"), foundation.NSStringStringWithUTF8String(bundleIdentifier).Ptr(), profileIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &WebHistory{inner: raw.STWebHistoryFromID(_id)}, nil
 }
@@ -44,7 +44,7 @@ func NewWebHistoryWithBundleIdentifierError(bundleIdentifier string) (*WebHistor
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:error:"), foundation.NSStringStringWithUTF8String(bundleIdentifier).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &WebHistory{inner: raw.STWebHistoryFromID(_id)}, nil
 }

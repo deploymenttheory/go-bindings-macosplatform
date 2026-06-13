@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizedpoints3dobservation
@@ -31,7 +31,7 @@ func VNRecognizedPoints3DObservationFromID(id objc.ID) *VNRecognizedPoints3DObse
 	}
 	o := &VNRecognizedPoints3DObservation{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -41,7 +41,7 @@ func (o *VNRecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey *f
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPoints3DObservationSelRecognizedPointForKeyError, pointKey.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return VNRecognizedPoint3DFromID(_ret), nil
 }
@@ -51,7 +51,7 @@ func (o *VNRecognizedPoints3DObservation) RecognizedPointsForGroupKeyError(group
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *VNRecognizedPoint3D]](o.Ptr(), _vNRecognizedPoints3DObservationSelRecognizedPointsForGroupKeyError, groupKey.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

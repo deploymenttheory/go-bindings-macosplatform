@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentrequestcouponcodeupdate
@@ -30,7 +30,7 @@ func PKPaymentRequestCouponCodeUpdateFromID(id objc.ID) *PKPaymentRequestCouponC
 	}
 	o := &PKPaymentRequestCouponCodeUpdate{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -49,7 +49,7 @@ func (o *PKPaymentRequestCouponCodeUpdate) SetErrors() error {
 	var _nsErr uintptr
 	o.Ptr().Send(_pKPaymentRequestCouponCodeUpdateSelSetErrors, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return nil
 }

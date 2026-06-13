@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class NSXMLDocument @abstract An XML Document @discussion Note: if the application of a method would result in more than one element in the children array, an exception is thrown. Trying to add a document, namespace, attribute, or node with a parent also throws an exception. To add a node with a parent first detach or create a copy of it.
@@ -58,7 +58,7 @@ func NSXMLDocumentFromID(id objc.ID) *NSXMLDocument {
 	}
 	o := &NSXMLDocument{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -74,7 +74,7 @@ func (o *NSXMLDocument) InitWithXMLStringOptionsError(string_ *NSString, mask NS
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithXMLStringOptionsError, string_.Ptr(), mask, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSXMLDocumentFromID(_ret), nil
 }
@@ -85,7 +85,7 @@ func (o *NSXMLDocument) InitWithContentsOfURLOptionsError(url *NSURL, mask NSXML
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithContentsOfURLOptionsError, url.Ptr(), mask, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSXMLDocumentFromID(_ret), nil
 }
@@ -96,7 +96,7 @@ func (o *NSXMLDocument) InitWithDataOptionsError(data *NSData, mask NSXMLNodeOpt
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithDataOptionsError, data.Ptr(), mask, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSXMLDocumentFromID(_ret), nil
 }
@@ -167,7 +167,7 @@ func (o *NSXMLDocument) ObjectByApplyingXSLTArgumentsError(xslt *NSData, argumen
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelObjectByApplyingXSLTArgumentsError, xslt.Ptr(), arguments.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -177,7 +177,7 @@ func (o *NSXMLDocument) ObjectByApplyingXSLTStringArgumentsError(xslt *NSString,
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelObjectByApplyingXSLTStringArgumentsError, xslt.Ptr(), arguments.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -187,7 +187,7 @@ func (o *NSXMLDocument) ObjectByApplyingXSLTAtURLArgumentsError(xsltURL *NSURL, 
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelObjectByApplyingXSLTAtURLArgumentsError, xsltURL.Ptr(), argument.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -196,7 +196,7 @@ func (o *NSXMLDocument) ValidateAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSXMLDocumentSelValidateAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

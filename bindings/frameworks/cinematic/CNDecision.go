@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Represents a decision to focus on a specific detectionID or detectionGroupID; optionally strong. A strong decision keeps focus for as long as possible.
@@ -36,7 +36,7 @@ func CNDecisionFromID(id objc.ID) *CNDecision {
 	}
 	o := &CNDecision{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class IOBluetoothDeviceSelectorController @abstract A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices. @discussion Implementation of a window controller to return a NSArray of selected bluetooth devices.  This class will handle connecting to the Bluetooth Daemon for the purposes of searches, and displaying the results.  This controller will return a NSArray of IOBluetoothDevice objects to the user.
@@ -52,7 +52,7 @@ func IOBluetoothDeviceSelectorControllerFromID(id objc.ID) *IOBluetoothDeviceSel
 	}
 	o := &IOBluetoothDeviceSelectorController{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

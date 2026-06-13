@@ -26,7 +26,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vmnet"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/xpc"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // TestCurated_BlockAdapter_CompletionHandler proves the generated block
@@ -151,5 +151,5 @@ func derefCStringVar(addr uintptr) string {
 	if addr == 0 {
 		return ""
 	}
-	return pureobjc.GoCString(*(*uintptr)(unsafe.Pointer(addr))) //nolint:govet // dlsym-provided address of a global
+	return purego.GoCString(*(*uintptr)(unsafe.Pointer(addr))) //nolint:govet // dlsym-provided address of a global
 }

@@ -6,7 +6,7 @@ package foundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class NSXMLDTD @abstract Defines the order, repetition, and allowable values for a document
@@ -42,7 +42,7 @@ func NSXMLDTDFromID(id objc.ID) *NSXMLDTD {
 	}
 	o := &NSXMLDTD{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -7,7 +7,7 @@ package servicemanagement
 import (
 	"fmt"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/servicemanagement"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc/objcerrors"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego/objcerrors"
 	"unsafe"
 )
 

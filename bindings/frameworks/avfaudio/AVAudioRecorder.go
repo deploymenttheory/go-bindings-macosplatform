@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiorecorder
@@ -50,7 +50,7 @@ func AVAudioRecorderFromID(id objc.ID) *AVAudioRecorder {
 	}
 	o := &AVAudioRecorder{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -60,7 +60,7 @@ func (o *AVAudioRecorder) InitWithURLSettingsError(url *foundation.NSURL, settin
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioRecorderSelInitWithURLSettingsError, url.Ptr(), settings, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAudioRecorderFromID(_ret), nil
 }
@@ -71,7 +71,7 @@ func (o *AVAudioRecorder) InitWithURLFormatError(url *foundation.NSURL, format *
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioRecorderSelInitWithURLFormatError, url.Ptr(), format.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAudioRecorderFromID(_ret), nil
 }

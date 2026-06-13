@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsworkspace
@@ -110,7 +110,7 @@ func NSWorkspaceFromID(id objc.ID) *NSWorkspace {
 	}
 	o := &NSWorkspace{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -229,7 +229,7 @@ func (o *NSWorkspace) UnmountAndEjectDeviceAtURLError(url *foundation.NSURL) (bo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelUnmountAndEjectDeviceAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -359,7 +359,7 @@ func (o *NSWorkspace) SetDesktopImageURLForScreenOptionsError(url *foundation.NS
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelSetDesktopImageURLForScreenOptionsError, url.Ptr(), screen.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -419,7 +419,7 @@ func (o *NSWorkspace) LaunchApplicationAtURLOptionsConfigurationError(url *found
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelLaunchApplicationAtURLOptionsConfigurationError, url.Ptr(), options, configuration, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSRunningApplicationFromID(_ret), nil
 }
@@ -430,7 +430,7 @@ func (o *NSWorkspace) OpenURLOptionsConfigurationError(url *foundation.NSURL, op
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelOpenURLOptionsConfigurationError, url.Ptr(), options, configuration, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSRunningApplicationFromID(_ret), nil
 }
@@ -441,7 +441,7 @@ func (o *NSWorkspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelOpenURLsWithApplicationAtURLOptionsConfigurationError, urls, applicationURL.Ptr(), options, configuration, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSRunningApplicationFromID(_ret), nil
 }
@@ -582,7 +582,7 @@ func (o *NSWorkspace) TypeOfFileError(absoluteFilePath *foundation.NSString) (*f
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelTypeOfFileError, absoluteFilePath.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSStringFromID(_ret), nil
 }

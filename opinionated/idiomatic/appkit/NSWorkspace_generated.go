@@ -9,7 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -33,7 +33,7 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx c
 	_ch := make(chan error, 1)
 	x.inner.SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -51,7 +51,7 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.C
 	_ch := make(chan error, 1)
 	x.inner.SetDefaultApplicationAtURLToOpenURLsWithSchemeCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), foundation.NSStringStringWithUTF8String(urlScheme), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -69,7 +69,7 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Contex
 	_ch := make(chan error, 1)
 	x.inner.SetDefaultApplicationAtURLToOpenFileAtURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -87,7 +87,7 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Cont
 	_ch := make(chan error, 1)
 	x.inner.SetDefaultApplicationAtURLToOpenContentTypeCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), contentType, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

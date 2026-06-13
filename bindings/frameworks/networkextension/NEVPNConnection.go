@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nevpnconnection
@@ -34,7 +34,7 @@ func NEVPNConnectionFromID(id objc.ID) *NEVPNConnection {
 	}
 	o := &NEVPNConnection{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -43,7 +43,7 @@ func (o *NEVPNConnection) StartVPNTunnelAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nEVPNConnectionSelStartVPNTunnelAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -53,7 +53,7 @@ func (o *NEVPNConnection) StartVPNTunnelWithOptionsAndReturnError(options *found
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nEVPNConnectionSelStartVPNTunnelWithOptionsAndReturnError, options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

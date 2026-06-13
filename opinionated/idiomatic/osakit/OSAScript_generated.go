@@ -7,7 +7,7 @@ package osakit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -61,7 +61,7 @@ func NewScriptWithContentsOfURLLanguageInstanceUsingStorageOptionsError(url stri
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:languageInstance:usingStorageOptions:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), instance.Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Script{inner: raw.OSAScriptFromID(_id)}, nil
 }
@@ -79,7 +79,7 @@ func NewScriptWithCompiledDataFromURLUsingStorageOptionsError(data *foundation.N
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompiledData:fromURL:usingStorageOptions:error:"), data.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Script{inner: raw.OSAScriptFromID(_id)}, nil
 }
@@ -90,7 +90,7 @@ func NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptions
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScriptDataDescriptor:fromURL:languageInstance:usingStorageOptions:error:"), data.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), instance.Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Script{inner: raw.OSAScriptFromID(_id)}, nil
 }

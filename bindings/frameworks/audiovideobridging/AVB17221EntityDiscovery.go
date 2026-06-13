@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/audiovideobridging/avb17221entitydiscovery
@@ -39,7 +39,7 @@ func AVB17221EntityDiscoveryFromID(id objc.ID) *AVB17221EntityDiscovery {
 	}
 	o := &AVB17221EntityDiscovery{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -72,7 +72,7 @@ func (o *AVB17221EntityDiscovery) AddLocalEntityError(anEntity *AVB17221Entity) 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVB17221EntityDiscoverySelAddLocalEntityError, anEntity.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -82,7 +82,7 @@ func (o *AVB17221EntityDiscovery) RemoveLocalEntityError(guid uint64) (bool, err
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVB17221EntityDiscoverySelRemoveLocalEntityError, guid, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -92,7 +92,7 @@ func (o *AVB17221EntityDiscovery) ChangeEntityWithEntityIDToNewGPTPGrandmasterID
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVB17221EntityDiscoverySelChangeEntityWithEntityIDToNewGPTPGrandmasterIDError, entityID, gPTPGrandmasterID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

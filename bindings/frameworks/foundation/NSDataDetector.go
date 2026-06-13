@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdatadetector
@@ -29,7 +29,7 @@ func NSDataDetectorFromID(id objc.ID) *NSDataDetector {
 	}
 	o := &NSDataDetector{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -38,7 +38,7 @@ func NSDataDetectorDataDetectorWithTypesError(checkingTypes uint64) (*NSDataDete
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDataDetector), _nSDataDetectorSelDataDetectorWithTypesError, checkingTypes, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataDetectorFromID(_ret), nil
 }
@@ -48,7 +48,7 @@ func (o *NSDataDetector) InitWithTypesError(checkingTypes uint64) (*NSDataDetect
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataDetectorSelInitWithTypesError, checkingTypes, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataDetectorFromID(_ret), nil
 }

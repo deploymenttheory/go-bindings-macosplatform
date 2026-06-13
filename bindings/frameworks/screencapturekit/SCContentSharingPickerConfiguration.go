@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickerconfiguration
-type SCContentSharingPickerConfiguration[NSCopying pureobjc.AnyObject] struct {
+type SCContentSharingPickerConfiguration[NSCopying purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -27,13 +27,13 @@ var (
 	_sCContentSharingPickerConfigurationSelSetAllowsChangingSelectedContent = objc.RegisterName("setAllowsChangingSelectedContent:")
 )
 
-func SCContentSharingPickerConfigurationFromID[NSCopying pureobjc.AnyObject](id objc.ID) *SCContentSharingPickerConfiguration[NSCopying] {
+func SCContentSharingPickerConfigurationFromID[NSCopying purego.AnyObject](id objc.ID) *SCContentSharingPickerConfiguration[NSCopying] {
 	if id == 0 {
 		return nil
 	}
 	o := &SCContentSharingPickerConfiguration[NSCopying]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

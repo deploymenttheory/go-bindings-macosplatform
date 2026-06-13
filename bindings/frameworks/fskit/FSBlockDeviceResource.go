@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsblockdeviceresource
@@ -43,7 +43,7 @@ func FSBlockDeviceResourceFromID(id objc.ID) *FSBlockDeviceResource {
 	}
 	o := &FSBlockDeviceResource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -64,7 +64,7 @@ func (o *FSBlockDeviceResource) ReadIntoStartingAtLengthError(buffer unsafe.Poin
 	var _nsErr uintptr
 	_ret := objc.Send[uint](o.Ptr(), _fSBlockDeviceResourceSelReadIntoStartingAtLengthError, buffer, offset, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -86,7 +86,7 @@ func (o *FSBlockDeviceResource) WriteFromStartingAtLengthError(buffer unsafe.Poi
 	var _nsErr uintptr
 	_ret := objc.Send[uint](o.Ptr(), _fSBlockDeviceResourceSelWriteFromStartingAtLengthError, buffer, offset, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -96,7 +96,7 @@ func (o *FSBlockDeviceResource) MetadataReadIntoStartingAtLengthError(buffer uns
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _fSBlockDeviceResourceSelMetadataReadIntoStartingAtLengthError, buffer, offset, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -106,7 +106,7 @@ func (o *FSBlockDeviceResource) MetadataWriteFromStartingAtLengthError(buffer un
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _fSBlockDeviceResourceSelMetadataWriteFromStartingAtLengthError, buffer, offset, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -116,7 +116,7 @@ func (o *FSBlockDeviceResource) DelayedMetadataWriteFromStartingAtLengthError(bu
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _fSBlockDeviceResourceSelDelayedMetadataWriteFromStartingAtLengthError, buffer, offset, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -126,7 +126,7 @@ func (o *FSBlockDeviceResource) MetadataFlushWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _fSBlockDeviceResourceSelMetadataFlushWithError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -136,7 +136,7 @@ func (o *FSBlockDeviceResource) AsynchronousMetadataFlushWithError() (bool, erro
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _fSBlockDeviceResourceSelAsynchronousMetadataFlushWithError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -146,7 +146,7 @@ func (o *FSBlockDeviceResource) MetadataClearWithDelayedWritesError(rangesToClea
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _fSBlockDeviceResourceSelMetadataClearWithDelayedWritesError, rangesToClear.Ptr(), withDelayedWrites, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -156,7 +156,7 @@ func (o *FSBlockDeviceResource) MetadataPurgeError(rangesToPurge *foundation.NSA
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _fSBlockDeviceResourceSelMetadataPurgeError, rangesToPurge.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

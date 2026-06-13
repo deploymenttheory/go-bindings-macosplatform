@@ -6,7 +6,7 @@ package spritekit
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A SpriteKit node that masks child nodes using another node's alpha component
@@ -28,7 +28,7 @@ func SKCropNodeFromID(id objc.ID) *SKCropNode {
 	}
 	o := &SKCropNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

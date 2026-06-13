@@ -6,11 +6,11 @@ package coredata
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsasynchronousfetchrequest
-type NSAsynchronousFetchRequest[ResultType pureobjc.AnyObject] struct {
+type NSAsynchronousFetchRequest[ResultType purego.AnyObject] struct {
 	NSPersistentStoreRequest
 }
 
@@ -23,13 +23,13 @@ var (
 	_nSAsynchronousFetchRequestSelSetEstimatedResultCount = objc.RegisterName("setEstimatedResultCount:")
 )
 
-func NSAsynchronousFetchRequestFromID[ResultType pureobjc.AnyObject](id objc.ID) *NSAsynchronousFetchRequest[ResultType] {
+func NSAsynchronousFetchRequestFromID[ResultType purego.AnyObject](id objc.ID) *NSAsynchronousFetchRequest[ResultType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSAsynchronousFetchRequest[ResultType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

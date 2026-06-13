@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // The Minmax Strategist is a generic AI that selects a game model update for a given player that maximises potential gain, while minimising potential loss. It does this by examining all of the updates available to the player in question, extrapolating the potential moves opposing players may take, projecting out maxLookAheadDepth number of turns. The selected update will result in the greatest potential gain, balanced against the potential gain of other players.
@@ -31,7 +31,7 @@ func GKMinmaxStrategistFromID(id objc.ID) *GKMinmaxStrategist {
 	}
 	o := &GKMinmaxStrategist{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

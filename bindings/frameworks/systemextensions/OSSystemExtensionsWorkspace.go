@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/systemextensions/ossystemextensionsworkspace
@@ -30,7 +30,7 @@ func OSSystemExtensionsWorkspaceFromID(id objc.ID) *OSSystemExtensionsWorkspace 
 	}
 	o := &OSSystemExtensionsWorkspace{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -39,7 +39,7 @@ func (o *OSSystemExtensionsWorkspace) AddObserverError(observer OSSystemExtensio
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oSSystemExtensionsWorkspaceSelAddObserverError, observer, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

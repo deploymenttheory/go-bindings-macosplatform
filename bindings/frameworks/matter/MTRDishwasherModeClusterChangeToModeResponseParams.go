@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrdishwashermodeclusterchangetomoderesponseparams
@@ -32,7 +32,7 @@ func MTRDishwasherModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRDi
 	}
 	o := &MTRDishwasherModeClusterChangeToModeResponseParams{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -42,7 +42,7 @@ func (o *MTRDishwasherModeClusterChangeToModeResponseParams) InitWithResponseVal
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherModeClusterChangeToModeResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTRDishwasherModeClusterChangeToModeResponseParamsFromID(_ret), nil
 }

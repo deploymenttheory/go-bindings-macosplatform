@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Node representing a @ref MPSNNGramMatrixCalculation kernel
@@ -34,7 +34,7 @@ func MPSNNGramMatrixCalculationNodeFromID(id objc.ID) *MPSNNGramMatrixCalculatio
 	}
 	o := &MPSNNGramMatrixCalculationNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

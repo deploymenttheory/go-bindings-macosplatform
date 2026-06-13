@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsentitymigrationpolicy
@@ -34,7 +34,7 @@ func NSEntityMigrationPolicyFromID(id objc.ID) *NSEntityMigrationPolicy {
 	}
 	o := &NSEntityMigrationPolicy{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -42,7 +42,7 @@ func (o *NSEntityMigrationPolicy) BeginEntityMappingManagerError(mapping *NSEnti
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelBeginEntityMappingManagerError, mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -51,7 +51,7 @@ func (o *NSEntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEnt
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelCreateDestinationInstancesForSourceInstanceEntityMappingManagerError, sInstance.Ptr(), mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -60,7 +60,7 @@ func (o *NSEntityMigrationPolicy) EndInstanceCreationForEntityMappingManagerErro
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelEndInstanceCreationForEntityMappingManagerError, mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -69,7 +69,7 @@ func (o *NSEntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntit
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelCreateRelationshipsForDestinationInstanceEntityMappingManagerError, dInstance.Ptr(), mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -78,7 +78,7 @@ func (o *NSEntityMigrationPolicy) EndRelationshipCreationForEntityMappingManager
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelEndRelationshipCreationForEntityMappingManagerError, mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -87,7 +87,7 @@ func (o *NSEntityMigrationPolicy) PerformCustomValidationForEntityMappingManager
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelPerformCustomValidationForEntityMappingManagerError, mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -96,7 +96,7 @@ func (o *NSEntityMigrationPolicy) EndEntityMappingManagerError(mapping *NSEntity
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelEndEntityMappingManagerError, mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

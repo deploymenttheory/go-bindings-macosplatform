@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration
@@ -125,7 +125,7 @@ func ASAuthorizationProviderExtensionLoginConfigurationFromID(id objc.ID) *ASAut
 	}
 	o := &ASAuthorizationProviderExtensionLoginConfiguration{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -156,7 +156,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionR
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomAssertionRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -166,7 +166,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionR
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomAssertionRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -176,7 +176,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomLoginReque
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -186,7 +186,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomLoginReque
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -196,7 +196,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshReq
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -206,7 +206,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshReq
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -216,7 +216,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchang
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -226,7 +226,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchang
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -236,7 +236,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequest
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -246,7 +246,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequest
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

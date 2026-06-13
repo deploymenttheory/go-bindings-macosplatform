@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiosequencer
@@ -54,7 +54,7 @@ func AVAudioSequencerFromID(id objc.ID) *AVAudioSequencer {
 	}
 	o := &AVAudioSequencer{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -77,7 +77,7 @@ func (o *AVAudioSequencer) LoadFromURLOptionsError(fileURL *foundation.NSURL, op
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioSequencerSelLoadFromURLOptionsError, fileURL.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -87,7 +87,7 @@ func (o *AVAudioSequencer) LoadFromDataOptionsError(data *foundation.NSData, opt
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioSequencerSelLoadFromDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -97,7 +97,7 @@ func (o *AVAudioSequencer) WriteToURLSMPTEResolutionReplaceExistingError(fileURL
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioSequencerSelWriteToURLSMPTEResolutionReplaceExistingError, fileURL.Ptr(), resolution, replace, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -108,7 +108,7 @@ func (o *AVAudioSequencer) DataWithSMPTEResolutionError(sMPTEResolution int) (*f
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelDataWithSMPTEResolutionError, sMPTEResolution, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDataFromID(_ret), nil
 }
@@ -186,7 +186,7 @@ func (o *AVAudioSequencer) HostTimeForBeatsError(inBeats float64) (uint64, error
 	var _nsErr uintptr
 	_ret := objc.Send[uint64](o.Ptr(), _aVAudioSequencerSelHostTimeForBeatsError, inBeats, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -196,7 +196,7 @@ func (o *AVAudioSequencer) BeatsForHostTimeError(inHostTime uint64) (float64, er
 	var _nsErr uintptr
 	_ret := objc.Send[float64](o.Ptr(), _aVAudioSequencerSelBeatsForHostTimeError, inHostTime, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -211,7 +211,7 @@ func (o *AVAudioSequencer) StartAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioSequencerSelStartAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

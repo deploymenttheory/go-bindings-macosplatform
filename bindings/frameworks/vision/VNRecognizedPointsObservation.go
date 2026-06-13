@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizedpointsobservation
@@ -33,7 +33,7 @@ func VNRecognizedPointsObservationFromID(id objc.ID) *VNRecognizedPointsObservat
 	}
 	o := &VNRecognizedPointsObservation{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -43,7 +43,7 @@ func (o *VNRecognizedPointsObservation) RecognizedPointForKeyError(pointKey *fou
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPointsObservationSelRecognizedPointForKeyError, pointKey.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return VNRecognizedPointFromID(_ret), nil
 }
@@ -53,7 +53,7 @@ func (o *VNRecognizedPointsObservation) RecognizedPointsForGroupKeyError(groupKe
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *VNRecognizedPoint]](o.Ptr(), _vNRecognizedPointsObservationSelRecognizedPointsForGroupKeyError, groupKey.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -64,7 +64,7 @@ func (o *VNRecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (*co
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPointsObservationSelKeypointsMultiArrayAndReturnError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return coreml.MLMultiArrayFromID(_ret), nil
 }

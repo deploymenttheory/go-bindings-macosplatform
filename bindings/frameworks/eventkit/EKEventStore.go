@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekeventstore
@@ -65,7 +65,7 @@ func EKEventStoreFromID(id objc.ID) *EKEventStore {
 	}
 	o := &EKEventStore{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -172,7 +172,7 @@ func (o *EKEventStore) SaveCalendarCommitError(calendar *EKCalendar, commit bool
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelSaveCalendarCommitError, calendar.Ptr(), commit, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -182,7 +182,7 @@ func (o *EKEventStore) RemoveCalendarCommitError(calendar *EKCalendar, commit bo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelRemoveCalendarCommitError, calendar.Ptr(), commit, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -206,7 +206,7 @@ func (o *EKEventStore) SaveEventSpanError(event *EKEvent, span EKSpan) (bool, er
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelSaveEventSpanError, event.Ptr(), span, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -216,7 +216,7 @@ func (o *EKEventStore) RemoveEventSpanError(event *EKEvent, span EKSpan) (bool, 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelRemoveEventSpanError, event.Ptr(), span, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -225,7 +225,7 @@ func (o *EKEventStore) SaveEventSpanCommitError(event *EKEvent, span EKSpan, com
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelSaveEventSpanCommitError, event.Ptr(), span, commit, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -234,7 +234,7 @@ func (o *EKEventStore) RemoveEventSpanCommitError(event *EKEvent, span EKSpan, c
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelRemoveEventSpanCommitError, event.Ptr(), span, commit, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -280,7 +280,7 @@ func (o *EKEventStore) SaveReminderCommitError(reminder *EKReminder, commit bool
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelSaveReminderCommitError, reminder.Ptr(), commit, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -290,7 +290,7 @@ func (o *EKEventStore) RemoveReminderCommitError(reminder *EKReminder, commit bo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelRemoveReminderCommitError, reminder.Ptr(), commit, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -342,7 +342,7 @@ func (o *EKEventStore) Commit() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelCommit, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

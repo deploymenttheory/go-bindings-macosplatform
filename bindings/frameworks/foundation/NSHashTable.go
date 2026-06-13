@@ -6,11 +6,11 @@ package foundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nshashtable
-type NSHashTable[ObjectType pureobjc.AnyObject] struct {
+type NSHashTable[ObjectType purego.AnyObject] struct {
 	NSObject
 }
 
@@ -40,13 +40,13 @@ var (
 	_nSHashTableSelSetRepresentation = objc.RegisterName("setRepresentation")
 )
 
-func NSHashTableFromID[ObjectType pureobjc.AnyObject](id objc.ID) *NSHashTable[ObjectType] {
+func NSHashTableFromID[ObjectType purego.AnyObject](id objc.ID) *NSHashTable[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSHashTable[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -6,7 +6,7 @@ package metalperformanceshadersgraph
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphconvolution2dopdescriptor
@@ -51,7 +51,7 @@ func MPSGraphConvolution2DOpDescriptorFromID(id objc.ID) *MPSGraphConvolution2DO
 	}
 	o := &MPSGraphConvolution2DOpDescriptor{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

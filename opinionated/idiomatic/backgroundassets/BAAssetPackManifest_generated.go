@@ -7,7 +7,7 @@ package backgroundassets
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,7 +26,7 @@ func NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError(uRL st
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:applicationGroupIdentifier:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), foundation.NSStringStringWithUTF8String(applicationGroupIdentifier).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(_id)}, nil
 }
@@ -37,7 +37,7 @@ func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data *foundatio
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFromData:applicationGroupIdentifier:error:"), data.Ptr(), foundation.NSStringStringWithUTF8String(applicationGroupIdentifier).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(_id)}, nil
 }

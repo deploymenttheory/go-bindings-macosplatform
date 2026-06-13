@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class MPSCNNLossNode @discussion  This node calculates loss information during training typically immediately after the inference portion of network evaluation is performed. The result image of the loss operations is typically the first gradient image to be comsumed by the gradient passes that work their way back up the graph. In addition, the node will update the loss image in the MPSNNLabels with the desired estimate of correctness.
@@ -30,7 +30,7 @@ func MPSCNNLossNodeFromID(id objc.ID) *MPSCNNLossNode {
 	}
 	o := &MPSCNNLossNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -7,7 +7,7 @@ package screencapturekit
 import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -32,7 +32,7 @@ func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *raw.SCC
 	_ch := make(chan error, 1)
 	x.inner.UpdateContentFilterCompletionHandler(contentFilter, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -50,7 +50,7 @@ func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *raw.SCSt
 	_ch := make(chan error, 1)
 	x.inner.UpdateConfigurationCompletionHandler(streamConfig, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -68,7 +68,7 @@ func (x *Stream) StartCapture(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StartCaptureWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -86,7 +86,7 @@ func (x *Stream) StopCapture(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StopCaptureWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

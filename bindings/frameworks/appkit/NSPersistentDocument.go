@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspersistentdocument
@@ -34,7 +34,7 @@ func NSPersistentDocumentFromID(id objc.ID) *NSPersistentDocument {
 	}
 	o := &NSPersistentDocument{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -42,7 +42,7 @@ func (o *NSPersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeMo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError, url.Ptr(), fileType.Ptr(), configuration.Ptr(), storeOptions, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -74,7 +74,7 @@ func (o *NSPersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeEr
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeError, url.Ptr(), fileType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

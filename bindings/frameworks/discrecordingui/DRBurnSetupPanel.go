@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class		DRBurnSetupPanel @abstract 	Manages a panel that allows users to specify the parameters of an burn. @discussion	This class supports choosing the the device to use, whether or not to verify the burned data and how to handle the burned disc when it completes.
@@ -39,7 +39,7 @@ func DRBurnSetupPanelFromID(id objc.ID) *DRBurnSetupPanel {
 	}
 	o := &DRBurnSetupPanel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

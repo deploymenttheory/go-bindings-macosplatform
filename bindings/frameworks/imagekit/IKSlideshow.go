@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class IKSlideshow @abstract IKSlideshow handles a slideshow with images, PDFs & more.
@@ -37,7 +37,7 @@ func IKSlideshowFromID(id objc.ID) *IKSlideshow {
 	}
 	o := &IKSlideshow{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfilemanager
@@ -101,7 +101,7 @@ func NSFileManagerFromID(id objc.ID) *NSFileManager {
 	}
 	o := &NSFileManager{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -127,7 +127,7 @@ func (o *NSFileManager) ContentsOfDirectoryAtURLIncludingPropertiesForKeysOption
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError, url.Ptr(), keys.Ptr(), mask, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSArrayFromID[*NSURL](_ret), nil
 }
@@ -143,7 +143,7 @@ func (o *NSFileManager) URLForDirectoryInDomainAppropriateForURLCreateError(dire
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelURLForDirectoryInDomainAppropriateForURLCreateError, directory, domain, url.Ptr(), shouldCreate, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSURLFromID(_ret), nil
 }
@@ -152,7 +152,7 @@ func (o *NSFileManager) GetRelationshipOfDirectoryAtURLToItemAtURLError(outRelat
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelGetRelationshipOfDirectoryAtURLToItemAtURLError, outRelationship, directoryURL.Ptr(), otherURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -161,7 +161,7 @@ func (o *NSFileManager) GetRelationshipOfDirectoryInDomainToItemAtURLError(outRe
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelGetRelationshipOfDirectoryInDomainToItemAtURLError, outRelationship, directory, domainMask, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -170,7 +170,7 @@ func (o *NSFileManager) CreateDirectoryAtURLWithIntermediateDirectoriesAttribute
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtURLWithIntermediateDirectoriesAttributesError, url.Ptr(), createIntermediates, attributes, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -179,7 +179,7 @@ func (o *NSFileManager) CreateSymbolicLinkAtURLWithDestinationURLError(url *NSUR
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateSymbolicLinkAtURLWithDestinationURLError, url.Ptr(), destURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -188,7 +188,7 @@ func (o *NSFileManager) SetAttributesOfItemAtPathError(attributes *NSDictionary[
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelSetAttributesOfItemAtPathError, attributes, path.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -197,7 +197,7 @@ func (o *NSFileManager) CreateDirectoryAtPathWithIntermediateDirectoriesAttribut
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtPathWithIntermediateDirectoriesAttributesError, path.Ptr(), createIntermediates, attributes, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -207,7 +207,7 @@ func (o *NSFileManager) ContentsOfDirectoryAtPathError(path *NSString) (*NSArray
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelContentsOfDirectoryAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSArrayFromID[*NSString](_ret), nil
 }
@@ -217,7 +217,7 @@ func (o *NSFileManager) SubpathsOfDirectoryAtPathError(path *NSString) (*NSArray
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelSubpathsOfDirectoryAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSArrayFromID[*NSString](_ret), nil
 }
@@ -226,7 +226,7 @@ func (o *NSFileManager) AttributesOfItemAtPathError(path *NSString) (*NSDictiona
 	var _nsErr uintptr
 	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSFileManagerSelAttributesOfItemAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -235,7 +235,7 @@ func (o *NSFileManager) AttributesOfFileSystemForPathError(path *NSString) (*NSD
 	var _nsErr uintptr
 	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSFileManagerSelAttributesOfFileSystemForPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -244,7 +244,7 @@ func (o *NSFileManager) CreateSymbolicLinkAtPathWithDestinationPathError(path *N
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateSymbolicLinkAtPathWithDestinationPathError, path.Ptr(), destPath.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -254,7 +254,7 @@ func (o *NSFileManager) DestinationOfSymbolicLinkAtPathError(path *NSString) (*N
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelDestinationOfSymbolicLinkAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -263,7 +263,7 @@ func (o *NSFileManager) CopyItemAtPathToPathError(srcPath *NSString, dstPath *NS
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCopyItemAtPathToPathError, srcPath.Ptr(), dstPath.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -272,7 +272,7 @@ func (o *NSFileManager) MoveItemAtPathToPathError(srcPath *NSString, dstPath *NS
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelMoveItemAtPathToPathError, srcPath.Ptr(), dstPath.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -281,7 +281,7 @@ func (o *NSFileManager) LinkItemAtPathToPathError(srcPath *NSString, dstPath *NS
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelLinkItemAtPathToPathError, srcPath.Ptr(), dstPath.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -290,7 +290,7 @@ func (o *NSFileManager) RemoveItemAtPathError(path *NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelRemoveItemAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -299,7 +299,7 @@ func (o *NSFileManager) CopyItemAtURLToURLError(srcURL *NSURL, dstURL *NSURL) (b
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCopyItemAtURLToURLError, srcURL.Ptr(), dstURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -308,7 +308,7 @@ func (o *NSFileManager) MoveItemAtURLToURLError(srcURL *NSURL, dstURL *NSURL) (b
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelMoveItemAtURLToURLError, srcURL.Ptr(), dstURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -317,7 +317,7 @@ func (o *NSFileManager) LinkItemAtURLToURLError(srcURL *NSURL, dstURL *NSURL) (b
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelLinkItemAtURLToURLError, srcURL.Ptr(), dstURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -326,7 +326,7 @@ func (o *NSFileManager) RemoveItemAtURLError(uRL *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelRemoveItemAtURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -335,7 +335,7 @@ func (o *NSFileManager) TrashItemAtURLResultingItemURLError(url *NSURL, outResul
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelTrashItemAtURLResultingItemURLError, url.Ptr(), outResultingURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -500,7 +500,7 @@ func (o *NSFileManager) CreateFileAtPathContentsAttributes(path *NSString, data 
 
 func (o *NSFileManager) FileSystemRepresentationWithPath(path *NSString) string {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelFileSystemRepresentationWithPath, path.Ptr())
-	return pureobjc.GoString(_ret)
+	return purego.GoString(_ret)
 }
 
 func (o *NSFileManager) StringWithFileSystemRepresentationLength(str string, len_ uint) *NSString {
@@ -513,7 +513,7 @@ func (o *NSFileManager) ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResult
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError, originalItemURL.Ptr(), newItemURL.Ptr(), backupItemName.Ptr(), options, resultingURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -522,7 +522,7 @@ func (o *NSFileManager) SetUbiquitousItemAtURLDestinationURLError(flag bool, url
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelSetUbiquitousItemAtURLDestinationURLError, flag, url.Ptr(), destinationURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -536,7 +536,7 @@ func (o *NSFileManager) StartDownloadingUbiquitousItemAtURLError(url *NSURL) (bo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelStartDownloadingUbiquitousItemAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -545,7 +545,7 @@ func (o *NSFileManager) EvictUbiquitousItemAtURLError(url *NSURL) (bool, error) 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelEvictUbiquitousItemAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -561,7 +561,7 @@ func (o *NSFileManager) URLForPublishingUbiquitousItemAtURLExpirationDateError(u
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelURLForPublishingUbiquitousItemAtURLExpirationDateError, url.Ptr(), outDate.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSURLFromID(_ret), nil
 }

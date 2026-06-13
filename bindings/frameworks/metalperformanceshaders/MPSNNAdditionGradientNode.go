@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @abstract returns gradient for either primary or secondary source image from the inference pass. Use the isSecondarySourceFilter property to indicate whether this filter is computing the gradient for the primary or secondary source image from the inference pass.
@@ -25,7 +25,7 @@ func MPSNNAdditionGradientNodeFromID(id objc.ID) *MPSNNAdditionGradientNode {
 	}
 	o := &MPSNNAdditionGradientNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // An abstract class that defines the interface for subclassers to interact with the screen saver infrastructure. ``ScreenSaverView`` provides the interface for your screen saver, including the content you animate onscreen and an optional configuration sheet. Create your own custom subclass and add it to your screen saver bundle. Use your subclass to create the animations that you want to appear onscreen, and to specify additional animation details. - Note: When someone previews your screen saver in System Preferences, the system instantiates your ``ScreenSaverView`` subclass. You can draw from your view’s ``ScreenSaverView/drawRect:`` method, or you can draw directly from the ``ScreenSaverView/animateOneFrame`` method. If you prefer to use the ``ScreenSaverView/drawRect:`` method, use the ``ScreenSaverView/animateOneFrame`` method to call the <doc://com.apple.documentation/documentation/appkit/nsview/1483475-setneedsdisplayinrect> method and specify the portions of your view that require updates.
@@ -40,7 +40,7 @@ func ScreenSaverViewFromID(id objc.ID) *ScreenSaverView {
 	}
 	o := &ScreenSaverView{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/photos/phobjectchangedetails
-type PHObjectChangeDetails[ObjectType pureobjc.AnyObject] struct {
+type PHObjectChangeDetails[ObjectType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -23,13 +23,13 @@ var (
 	_pHObjectChangeDetailsSelObjectWasDeleted = objc.RegisterName("objectWasDeleted")
 )
 
-func PHObjectChangeDetailsFromID[ObjectType pureobjc.AnyObject](id objc.ID) *PHObjectChangeDetails[ObjectType] {
+func PHObjectChangeDetailsFromID[ObjectType purego.AnyObject](id objc.ID) *PHObjectChangeDetails[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &PHObjectChangeDetails[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

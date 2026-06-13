@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsstring
@@ -191,7 +191,7 @@ func NSStringFromID(id objc.ID) *NSString {
 	}
 	o := &NSString{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -450,7 +450,7 @@ func (o *NSString) CanBeConvertedToEncoding(encoding uint) bool {
 
 func (o *NSString) CStringUsingEncoding(encoding uint) string {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelCStringUsingEncoding, encoding)
-	return pureobjc.GoString(_ret)
+	return purego.GoString(_ret)
 }
 
 func (o *NSString) GetCStringMaxLengthEncoding(buffer string, maxBufferCount uint, encoding uint) bool {
@@ -537,7 +537,7 @@ func (o *NSString) WriteToURLAtomicallyEncodingError(url *NSURL, useAuxiliaryFil
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelWriteToURLAtomicallyEncodingError, url.Ptr(), useAuxiliaryFile, enc, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -546,7 +546,7 @@ func (o *NSString) WriteToFileAtomicallyEncodingError(path *NSString, useAuxilia
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelWriteToFileAtomicallyEncodingError, path.Ptr(), useAuxiliaryFile, enc, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -617,7 +617,7 @@ func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersError(format *NSS
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithValidatedFormatValidFormatSpecifiersError, format.Ptr(), validFormatSpecifiers.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -627,7 +627,7 @@ func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersLocaleError(forma
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithValidatedFormatValidFormatSpecifiersLocaleError, format.Ptr(), validFormatSpecifiers.Ptr(), locale, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -637,7 +637,7 @@ func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersArgumentsError(fo
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithValidatedFormatValidFormatSpecifiersArgumentsError, format.Ptr(), validFormatSpecifiers.Ptr(), argList, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -647,7 +647,7 @@ func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersLocaleArgumentsEr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError, format.Ptr(), validFormatSpecifiers.Ptr(), locale, argList, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -724,7 +724,7 @@ func NSStringStringWithValidatedFormatValidFormatSpecifiersError(format *NSStrin
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithValidatedFormatValidFormatSpecifiersError, format.Ptr(), validFormatSpecifiers.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -734,7 +734,7 @@ func NSStringLocalizedStringWithValidatedFormatValidFormatSpecifiersError(format
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelLocalizedStringWithValidatedFormatValidFormatSpecifiersError, format.Ptr(), validFormatSpecifiers.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -756,7 +756,7 @@ func (o *NSString) InitWithContentsOfURLEncodingError(url *NSURL, enc uint) (*NS
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfURLEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -766,7 +766,7 @@ func (o *NSString) InitWithContentsOfFileEncodingError(path *NSString, enc uint)
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfFileEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -776,7 +776,7 @@ func NSStringStringWithContentsOfURLEncodingError(url *NSURL, enc uint) (*NSStri
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfURLEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -786,7 +786,7 @@ func NSStringStringWithContentsOfFileEncodingError(path *NSString, enc uint) (*N
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfFileEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -796,7 +796,7 @@ func (o *NSString) InitWithContentsOfURLUsedEncodingError(url *NSURL, enc *uint)
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfURLUsedEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -806,7 +806,7 @@ func (o *NSString) InitWithContentsOfFileUsedEncodingError(path *NSString, enc *
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfFileUsedEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -816,7 +816,7 @@ func NSStringStringWithContentsOfURLUsedEncodingError(url *NSURL, enc *uint) (*N
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfURLUsedEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -826,7 +826,7 @@ func NSStringStringWithContentsOfFileUsedEncodingError(path *NSString, enc *uint
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfFileUsedEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSStringFromID(_ret), nil
 }
@@ -964,13 +964,13 @@ func (o *NSString) PropertyListFromStringsFileFormat() *NSDictionary[objc.ID, ob
 // Deprecated: Use -cStringUsingEncoding: instead
 func (o *NSString) CString() string {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelCString)
-	return pureobjc.GoString(_ret)
+	return purego.GoString(_ret)
 }
 
 // Deprecated: Use -cStringUsingEncoding: instead
 func (o *NSString) LossyCString() string {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLossyCString)
-	return pureobjc.GoString(_ret)
+	return purego.GoString(_ret)
 }
 
 // Deprecated: Use -lengthOfBytesUsingEncoding: instead

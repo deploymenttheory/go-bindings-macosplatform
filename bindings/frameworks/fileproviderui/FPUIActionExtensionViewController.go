@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // The custom user interface used to perform a selected action. Subclass this view controller to provide the user interface for your actions. No matter how many actions you define, your File Provider UI extension has only one ``FPUIActionExtensionViewController`` subclass. When the user selects one of your actions, the system instantiates a copy of your subclass, calls its ``FPUIActionExtensionViewController/prepareForActionWithIdentifier:itemIdentifiers:`` method, and presents it to the user. Your subclass must do the following: - Override the ``FPUIActionExtensionViewController/prepareForActionWithIdentifier:itemIdentifiers:`` method to check the action identifiers and present an appropriate user interface for the selected actions. - Provide some sort of feedback, even if the action doesn't require interaction with the user. For example, present a view that quickly fades out and automatically completes the action. - Call the ``FPUIActionExtensionViewController/extensionContext`` object's ``FPUIActionExtensionContext/cancelRequestWithError:`` or ``FPUIActionExtensionContext/completeRequest`` method when the action is finished to complete the action.
@@ -32,7 +32,7 @@ func FPUIActionExtensionViewControllerFromID(id objc.ID) *FPUIActionExtensionVie
 	}
 	o := &FPUIActionExtensionViewController{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

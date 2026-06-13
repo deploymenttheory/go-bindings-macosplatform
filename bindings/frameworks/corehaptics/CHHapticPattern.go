@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/corehaptics/chhapticpattern
@@ -33,7 +33,7 @@ func CHHapticPatternFromID(id objc.ID) *CHHapticPattern {
 	}
 	o := &CHHapticPattern{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -43,7 +43,7 @@ func (o *CHHapticPattern) InitWithEventsParametersError(events *foundation.NSArr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithEventsParametersError, events.Ptr(), parameters.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CHHapticPatternFromID(_ret), nil
 }
@@ -54,7 +54,7 @@ func (o *CHHapticPattern) InitWithEventsParameterCurvesError(events *foundation.
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithEventsParameterCurvesError, events.Ptr(), parameterCurves.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CHHapticPatternFromID(_ret), nil
 }
@@ -65,7 +65,7 @@ func (o *CHHapticPattern) InitWithDictionaryError(patternDict *foundation.NSDict
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithDictionaryError, patternDict, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CHHapticPatternFromID(_ret), nil
 }
@@ -76,7 +76,7 @@ func (o *CHHapticPattern) InitWithContentsOfURLError(ahapURL *foundation.NSURL) 
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithContentsOfURLError, ahapURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CHHapticPatternFromID(_ret), nil
 }
@@ -86,7 +86,7 @@ func (o *CHHapticPattern) ExportDictionaryAndReturnError() (*foundation.NSDictio
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cHHapticPatternSelExportDictionaryAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

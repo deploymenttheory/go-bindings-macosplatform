@@ -123,8 +123,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	intobjc "github.com/deploymenttheory/go-bindings-macosplatform/internal/objc"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -175,7 +175,7 @@ func TestRuntimeRead_OSVersionString(t *testing.T) {
 		t.Fatal("OperatingSystemVersionString() returned nil NSString")
 	}
 
-	ver := pureobjc.GoString(nsver.Ptr())
+	ver := purego.GoString(nsver.Ptr())
 	runtime.KeepAlive(nsver)
 	if ver == "" {
 		t.Errorf("OperatingSystemVersionString() converted to empty Go string")
@@ -196,7 +196,7 @@ func TestRuntimeRead_LocalTimeZone(t *testing.T) {
 	}
 
 	tzNameNS := tz.Name()
-	name := pureobjc.GoString(tzNameNS.Ptr())
+	name := purego.GoString(tzNameNS.Ptr())
 	runtime.KeepAlive(tzNameNS)
 	if name == "" {
 		t.Errorf("NSTimeZone.Name() is empty")
@@ -204,7 +204,7 @@ func TestRuntimeRead_LocalTimeZone(t *testing.T) {
 	t.Logf("TimeZone name = %q", name)
 
 	tzAbbrevNS := tz.Abbreviation()
-	abbrev := pureobjc.GoString(tzAbbrevNS.Ptr())
+	abbrev := purego.GoString(tzAbbrevNS.Ptr())
 	runtime.KeepAlive(tzAbbrevNS)
 	if abbrev == "" {
 		t.Errorf("NSTimeZone.Abbreviation() is empty")
@@ -231,7 +231,7 @@ func TestRuntimeRead_HostInfo(t *testing.T) {
 	}
 
 	hostLocalNameNS := host.LocalizedName()
-	locName := pureobjc.GoString(hostLocalNameNS.Ptr())
+	locName := purego.GoString(hostLocalNameNS.Ptr())
 	runtime.KeepAlive(hostLocalNameNS)
 	if locName == "" {
 		t.Errorf("NSHost.LocalizedName() is empty")
@@ -239,7 +239,7 @@ func TestRuntimeRead_HostInfo(t *testing.T) {
 	t.Logf("Host localizedName = %q", locName)
 
 	hostAddrNS := host.Address()
-	addr := pureobjc.GoString(hostAddrNS.Ptr())
+	addr := purego.GoString(hostAddrNS.Ptr())
 	runtime.KeepAlive(hostAddrNS)
 	if addr == "" {
 		t.Errorf("NSHost.Address() is empty")
@@ -247,7 +247,7 @@ func TestRuntimeRead_HostInfo(t *testing.T) {
 	t.Logf("Host address = %q", addr)
 
 	if n := host.Name(); n != nil {
-		s := pureobjc.GoString(n.Ptr())
+		s := purego.GoString(n.Ptr())
 		runtime.KeepAlive(n)
 		t.Logf("Host name = %q", s)
 	} else {
@@ -264,7 +264,7 @@ func TestRuntimeRead_CurrentLocale(t *testing.T) {
 	}
 
 	localeIdNS := loc.LocaleIdentifier()
-	id := pureobjc.GoString(localeIdNS.Ptr())
+	id := purego.GoString(localeIdNS.Ptr())
 	runtime.KeepAlive(localeIdNS)
 	if id == "" {
 		t.Errorf("NSLocale.LocaleIdentifier() is empty")
@@ -272,7 +272,7 @@ func TestRuntimeRead_CurrentLocale(t *testing.T) {
 	t.Logf("Locale identifier = %q", id)
 
 	langNS := loc.LanguageCode()
-	lang := pureobjc.GoString(langNS.Ptr())
+	lang := purego.GoString(langNS.Ptr())
 	runtime.KeepAlive(langNS)
 	if lang == "" {
 		t.Errorf("NSLocale.LanguageCode() is empty")
@@ -313,7 +313,7 @@ func TestRuntimeRead_FileManagerPaths(t *testing.T) {
 	if cwdNS == nil {
 		t.Fatal("CurrentDirectoryPath() returned nil NSString")
 	}
-	cwd := pureobjc.GoString(cwdNS.Ptr())
+	cwd := purego.GoString(cwdNS.Ptr())
 	runtime.KeepAlive(cwdNS)
 	if cwd == "" {
 		t.Errorf("CurrentDirectoryPath() converted to empty Go string")
@@ -326,7 +326,7 @@ func TestRuntimeRead_FileManagerPaths(t *testing.T) {
 	}
 
 	homePathNS := homeURL.Path()
-	homePath := pureobjc.GoString(homePathNS.Ptr())
+	homePath := purego.GoString(homePathNS.Ptr())
 	runtime.KeepAlive(homePathNS)
 	if homePath == "" {
 		t.Errorf("home NSURL.Path() converted to empty Go string")
@@ -349,7 +349,7 @@ func TestRuntimeRead_MainBundle(t *testing.T) {
 	}
 
 	if bp := bundle.BundlePath(); bp != nil {
-		s := pureobjc.GoString(bp.Ptr())
+		s := purego.GoString(bp.Ptr())
 		runtime.KeepAlive(bp)
 		t.Logf("BundlePath = %q", s)
 	} else {
@@ -360,7 +360,7 @@ func TestRuntimeRead_MainBundle(t *testing.T) {
 	if exePath == nil {
 		t.Fatal("ExecutablePath() returned nil")
 	}
-	exe := pureobjc.GoString(exePath.Ptr())
+	exe := purego.GoString(exePath.Ptr())
 	runtime.KeepAlive(exePath)
 	if exe == "" {
 		t.Errorf("ExecutablePath() converted to empty Go string")
@@ -476,7 +476,7 @@ func TestRuntimeRead_ProcessIdentity(t *testing.T) {
 	if nameNS == nil {
 		t.Fatal("ProcessName() returned nil NSString")
 	}
-	name := pureobjc.GoString(nameNS.Ptr())
+	name := purego.GoString(nameNS.Ptr())
 	runtime.KeepAlive(nameNS)
 	if name == "" {
 		t.Errorf("ProcessName() converted to empty Go string")
@@ -527,7 +527,7 @@ func TestRuntimeRead_OperationQueueMain(t *testing.T) {
 	if nameNS == nil {
 		t.Fatal("NSOperationQueue.Name() returned nil")
 	}
-	name := pureobjc.GoString(nameNS.Ptr())
+	name := purego.GoString(nameNS.Ptr())
 	runtime.KeepAlive(nameNS)
 	t.Logf("NSOperationQueue(main).Name = %q", name)
 
@@ -563,7 +563,7 @@ func TestRuntimeRead_TemporaryDirectory(t *testing.T) {
 	if pathNS == nil {
 		t.Fatal("TemporaryDirectory().Path() returned nil NSString")
 	}
-	path := pureobjc.GoString(pathNS.Ptr())
+	path := purego.GoString(pathNS.Ptr())
 	runtime.KeepAlive(pathNS)
 	if path == "" {
 		t.Errorf("TemporaryDirectory path converted to empty Go string")
@@ -596,7 +596,7 @@ func TestRuntimeRead_NSUUID(t *testing.T) {
 	if uuidStrNS == nil {
 		t.Fatal("NSUUID.UUIDString() returned nil")
 	}
-	s := pureobjc.GoString(uuidStrNS.Ptr())
+	s := purego.GoString(uuidStrNS.Ptr())
 	runtime.KeepAlive(uuidStrNS)
 
 	if len(s) != 36 {
@@ -612,7 +612,7 @@ func TestRuntimeRead_NSUUID(t *testing.T) {
 // ─── 19. NSURL (file): fileURLWithPath("/tmp") ────────────────────────────────
 
 func TestRuntimeRead_FileURL(t *testing.T) {
-	pathNS := foundation.NSStringFromID(pureobjc.NSString("/tmp"))
+	pathNS := foundation.NSStringFromID(purego.NSString("/tmp"))
 	url := foundation.NSURLFileURLWithPath(pathNS)
 	if url == nil {
 		t.Fatal("NSURLFileURLWithPath(\"/tmp\") returned nil")
@@ -626,7 +626,7 @@ func TestRuntimeRead_FileURL(t *testing.T) {
 	if pathOutNS == nil {
 		t.Fatal("NSURL.Path() returned nil")
 	}
-	p := pureobjc.GoString(pathOutNS.Ptr())
+	p := purego.GoString(pathOutNS.Ptr())
 	runtime.KeepAlive(pathOutNS)
 	// /tmp is often a symlink to /private/tmp on macOS; either is acceptable.
 	if p != "/tmp" && p != "/private/tmp" {
@@ -638,7 +638,7 @@ func TestRuntimeRead_FileURL(t *testing.T) {
 	if absNS == nil {
 		t.Fatal("AbsoluteString() returned nil")
 	}
-	abs := pureobjc.GoString(absNS.Ptr())
+	abs := purego.GoString(absNS.Ptr())
 	runtime.KeepAlive(absNS)
 	if !strings.HasPrefix(abs, "file://") {
 		t.Errorf("AbsoluteString() = %q, expected \"file://\" prefix", abs)
@@ -649,7 +649,7 @@ func TestRuntimeRead_FileURL(t *testing.T) {
 // ─── 20. NSURL (string): parse https URL, check scheme ───────────────────────
 
 func TestRuntimeRead_NSURL_String(t *testing.T) {
-	strNS := foundation.NSStringFromID(pureobjc.NSString("https://example.com"))
+	strNS := foundation.NSStringFromID(purego.NSString("https://example.com"))
 	url := foundation.NSURLURLWithString(strNS)
 	if url == nil {
 		t.Fatal("NSURLURLWithString(\"https://example.com\") returned nil")
@@ -659,7 +659,7 @@ func TestRuntimeRead_NSURL_String(t *testing.T) {
 	if schemeNS == nil {
 		t.Fatal("NSURL.Scheme() returned nil")
 	}
-	scheme := pureobjc.GoString(schemeNS.Ptr())
+	scheme := purego.GoString(schemeNS.Ptr())
 	runtime.KeepAlive(schemeNS)
 	if scheme != "https" {
 		t.Errorf("Scheme() = %q, expected \"https\"", scheme)
@@ -670,7 +670,7 @@ func TestRuntimeRead_NSURL_String(t *testing.T) {
 	if hostNS == nil {
 		t.Fatal("NSURL.Host() returned nil")
 	}
-	host := pureobjc.GoString(hostNS.Ptr())
+	host := purego.GoString(hostNS.Ptr())
 	runtime.KeepAlive(hostNS)
 	if host != "example.com" {
 		t.Errorf("Host() = %q, expected \"example.com\"", host)
@@ -681,7 +681,7 @@ func TestRuntimeRead_NSURL_String(t *testing.T) {
 	if absNS == nil {
 		t.Fatal("AbsoluteString() returned nil")
 	}
-	abs := pureobjc.GoString(absNS.Ptr())
+	abs := purego.GoString(absNS.Ptr())
 	runtime.KeepAlive(absNS)
 	if abs == "" {
 		t.Errorf("AbsoluteString() is empty")
@@ -692,7 +692,7 @@ func TestRuntimeRead_NSURL_String(t *testing.T) {
 // ─── 21. NSURLComponents: parse URL into components ──────────────────────────
 
 func TestRuntimeRead_URLComponents(t *testing.T) {
-	strNS := foundation.NSStringFromID(pureobjc.NSString("https://example.com/path?q=1"))
+	strNS := foundation.NSStringFromID(purego.NSString("https://example.com/path?q=1"))
 	comps := foundation.NSURLComponentsComponentsWithString(strNS)
 	if comps == nil {
 		t.Fatal("NSURLComponentsComponentsWithString(...) returned nil")
@@ -702,7 +702,7 @@ func TestRuntimeRead_URLComponents(t *testing.T) {
 	if schemeNS == nil {
 		t.Fatal("NSURLComponents.Scheme() returned nil")
 	}
-	scheme := pureobjc.GoString(schemeNS.Ptr())
+	scheme := purego.GoString(schemeNS.Ptr())
 	runtime.KeepAlive(schemeNS)
 	if scheme != "https" {
 		t.Errorf("Scheme() = %q, expected \"https\"", scheme)
@@ -713,7 +713,7 @@ func TestRuntimeRead_URLComponents(t *testing.T) {
 	if hostNS == nil {
 		t.Fatal("NSURLComponents.Host() returned nil")
 	}
-	host := pureobjc.GoString(hostNS.Ptr())
+	host := purego.GoString(hostNS.Ptr())
 	runtime.KeepAlive(hostNS)
 	if host != "example.com" {
 		t.Errorf("Host() = %q, expected \"example.com\"", host)
@@ -724,7 +724,7 @@ func TestRuntimeRead_URLComponents(t *testing.T) {
 	if pathNS == nil {
 		t.Fatal("NSURLComponents.Path() returned nil")
 	}
-	path := pureobjc.GoString(pathNS.Ptr())
+	path := purego.GoString(pathNS.Ptr())
 	runtime.KeepAlive(pathNS)
 	if path != "/path" {
 		t.Errorf("Path() = %q, expected \"/path\"", path)
@@ -776,7 +776,7 @@ func TestRuntimeRead_NumberFormatter(t *testing.T) {
 	if strNS == nil {
 		t.Fatal("NSNumberFormatterLocalizedStringFromNumberNumberStyle returned nil")
 	}
-	s := pureobjc.GoString(strNS.Ptr())
+	s := purego.GoString(strNS.Ptr())
 	runtime.KeepAlive(strNS)
 	if s == "" {
 		t.Errorf("localised number string is empty")
@@ -800,7 +800,7 @@ func TestRuntimeRead_DateFormatter(t *testing.T) {
 	if strNS == nil {
 		t.Fatal("NSDateFormatterLocalizedStringFromDateDateStyleTimeStyle returned nil")
 	}
-	s := pureobjc.GoString(strNS.Ptr())
+	s := purego.GoString(strNS.Ptr())
 	runtime.KeepAlive(strNS)
 	if s == "" {
 		t.Errorf("localised date string is empty")
@@ -882,7 +882,7 @@ func TestRuntimeRead_ByteCountFormatter(t *testing.T) {
 	if strNS == nil {
 		t.Fatal("NSByteCountFormatterStringFromByteCountCountStyle returned nil")
 	}
-	s := pureobjc.GoString(strNS.Ptr())
+	s := purego.GoString(strNS.Ptr())
 	runtime.KeepAlive(strNS)
 	if s == "" {
 		t.Errorf("byte count string is empty")
@@ -893,7 +893,7 @@ func TestRuntimeRead_ByteCountFormatter(t *testing.T) {
 // ─── 30. NSData: read /etc/hosts, verify length > 0 ──────────────────────────
 
 func TestRuntimeRead_NSData(t *testing.T) {
-	pathNS := foundation.NSStringFromID(pureobjc.NSString("/etc/hosts"))
+	pathNS := foundation.NSStringFromID(purego.NSString("/etc/hosts"))
 	data := foundation.NSDataDataWithContentsOfFile(pathNS)
 	if data == nil {
 		t.Skip("NSDataDataWithContentsOfFile(\"/etc/hosts\") returned nil — file absent or unreadable")
@@ -927,7 +927,7 @@ func TestRuntimeRead_FileSystemAttributes(t *testing.T) {
 		t.Fatal("NSFileManagerDefaultManager() returned nil")
 	}
 
-	pathNS := foundation.NSStringFromID(pureobjc.NSString("/"))
+	pathNS := foundation.NSStringFromID(purego.NSString("/"))
 	dict, err := fm.AttributesOfFileSystemForPathError(pathNS)
 	if err != nil {
 		t.Fatalf("AttributesOfFileSystemForPathError(\"/\"): %v", err)
@@ -1114,7 +1114,7 @@ func TestRuntimeRead_NSPredicate(t *testing.T) {
 // ─── 43. NSRegularExpression: capture group count ────────────────────────────
 
 func TestRuntimeRead_NSRegularExpression(t *testing.T) {
-	patternNS := foundation.NSStringFromID(pureobjc.NSString(`([0-9]+)`))
+	patternNS := foundation.NSStringFromID(purego.NSString(`([0-9]+)`))
 	re, err := foundation.NSRegularExpressionRegularExpressionWithPatternOptionsError(
 		patternNS,
 		foundation.NSRegularExpressionOptions(0),
@@ -1135,7 +1135,7 @@ func TestRuntimeRead_NSRegularExpression(t *testing.T) {
 // ─── 44. NSScanner: isAtEnd ──────────────────────────────────────────────────
 
 func TestRuntimeRead_NSScanner(t *testing.T) {
-	helloNS := foundation.NSStringFromID(pureobjc.NSString("hello"))
+	helloNS := foundation.NSStringFromID(purego.NSString("hello"))
 	scannerFull := foundation.NSScannerScannerWithString(helloNS)
 	if scannerFull == nil {
 		t.Fatal("NSScannerScannerWithString(\"hello\") returned nil")
@@ -1145,7 +1145,7 @@ func TestRuntimeRead_NSScanner(t *testing.T) {
 	}
 	t.Log("NSScanner(\"hello\").IsAtEnd() = false")
 
-	emptyNS := foundation.NSStringFromID(pureobjc.NSString(""))
+	emptyNS := foundation.NSStringFromID(purego.NSString(""))
 	scannerEmpty := foundation.NSScannerScannerWithString(emptyNS)
 	if scannerEmpty == nil {
 		t.Fatal("NSScannerScannerWithString(\"\") returned nil")
@@ -1234,7 +1234,7 @@ func TestRuntimeRead_NSTimeZoneGMT(t *testing.T) {
 	if abbrevNS == nil {
 		t.Fatal("Abbreviation() returned nil")
 	}
-	abbrev := pureobjc.GoString(abbrevNS.Ptr())
+	abbrev := purego.GoString(abbrevNS.Ptr())
 	runtime.KeepAlive(abbrevNS)
 	if abbrev != "GMT" && abbrev != "UTC" {
 		t.Errorf("Abbreviation() = %q, expected \"GMT\" or \"UTC\"", abbrev)
@@ -1249,7 +1249,7 @@ func TestRuntimeRead_NSTimeZoneDataVersion(t *testing.T) {
 	if versionNS == nil {
 		t.Fatal("NSTimeZoneTimeZoneDataVersion() returned nil")
 	}
-	version := pureobjc.GoString(versionNS.Ptr())
+	version := purego.GoString(versionNS.Ptr())
 	runtime.KeepAlive(versionNS)
 	if version == "" {
 		t.Errorf("TimeZoneDataVersion is empty")
@@ -1351,7 +1351,7 @@ func TestRuntimeRead_MainScreen(t *testing.T) {
 		screenNil   bool
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		screen := appkit.NSScreenMainScreen()
 		if screen == nil {
 			screenNil = true
@@ -1359,7 +1359,7 @@ func TestRuntimeRead_MainScreen(t *testing.T) {
 		}
 		nsName := screen.LocalizedName()
 		if nsName != nil {
-			screenName = pureobjc.GoString(nsName.Ptr())
+			screenName = purego.GoString(nsName.Ptr())
 			runtime.KeepAlive(nsName)
 		}
 		scaleFactor = screen.BackingScaleFactor()
@@ -1386,7 +1386,7 @@ func TestRuntimeRead_CurrentApplication(t *testing.T) {
 	}
 
 	if bid := app.BundleIdentifier(); bid != nil {
-		s := pureobjc.GoString(bid.Ptr())
+		s := purego.GoString(bid.Ptr())
 		runtime.KeepAlive(bid)
 		t.Logf("BundleIdentifier = %q", s)
 	} else {
@@ -1394,7 +1394,7 @@ func TestRuntimeRead_CurrentApplication(t *testing.T) {
 	}
 
 	if name := app.LocalizedName(); name != nil {
-		s := pureobjc.GoString(name.Ptr())
+		s := purego.GoString(name.Ptr())
 		runtime.KeepAlive(name)
 		t.Logf("LocalizedName = %q", s)
 	} else {
@@ -1417,7 +1417,7 @@ func TestRuntimeRead_FrontmostApplication(t *testing.T) {
 	var appName string
 	var wsNil, appNil bool
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		ws := appkit.NSWorkspaceSharedWorkspace()
 		if ws == nil {
 			wsNil = true
@@ -1429,7 +1429,7 @@ func TestRuntimeRead_FrontmostApplication(t *testing.T) {
 			return
 		}
 		if name := app.LocalizedName(); name != nil {
-			appName = pureobjc.GoString(name.Ptr())
+			appName = purego.GoString(name.Ptr())
 			runtime.KeepAlive(name)
 		}
 	})
@@ -1455,7 +1455,7 @@ func TestRuntimeRead_SharedApplication(t *testing.T) {
 		activationPolicy int64
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		app := appkit.NSApplicationSharedApplication()
 		if app == nil {
 			appNil = true
@@ -1484,7 +1484,7 @@ func TestRuntimeRead_SystemFont(t *testing.T) {
 		familyName string
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		font := appkit.NSFontSystemFontOfSize(14.0)
 		if font == nil {
 			fontNil = true
@@ -1492,11 +1492,11 @@ func TestRuntimeRead_SystemFont(t *testing.T) {
 		}
 		pointSize = font.PointSize()
 		if fn := font.FontName(); fn != nil {
-			fontName = pureobjc.GoString(fn.Ptr())
+			fontName = purego.GoString(fn.Ptr())
 			runtime.KeepAlive(fn)
 		}
 		if fam := font.FamilyName(); fam != nil {
-			familyName = pureobjc.GoString(fam.Ptr())
+			familyName = purego.GoString(fam.Ptr())
 			runtime.KeepAlive(fam)
 		}
 	})
@@ -1529,7 +1529,7 @@ func TestRuntimeRead_SemanticColors(t *testing.T) {
 		labelNil, blueNil, accentNil bool
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		labelNil = appkit.NSColorLabelColor() == nil
 		blueNil = appkit.NSColorSystemBlueColor() == nil
 		accentNil = appkit.NSColorControlAccentColor() == nil
@@ -1560,7 +1560,7 @@ func TestRuntimeRead_AllScreens(t *testing.T) {
 		count      uint
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		screens := appkit.NSScreenScreens()
 		if screens == nil {
 			screensNil = true
@@ -1588,7 +1588,7 @@ func TestRuntimeRead_RunningApplications(t *testing.T) {
 		count  uint
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		ws := appkit.NSWorkspaceSharedWorkspace()
 		if ws == nil {
 			wsNil = true
@@ -1623,7 +1623,7 @@ func TestRuntimeRead_Pasteboard(t *testing.T) {
 		changeCount int
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		pb := appkit.NSPasteboardGeneralPasteboard()
 		if pb == nil {
 			pbNil = true
@@ -1646,7 +1646,7 @@ func TestRuntimeRead_Pasteboard(t *testing.T) {
 func TestRuntimeRead_Cursor(t *testing.T) {
 	var arrowNil, iBeamNil bool
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		_ = appkit.NSApplicationSharedApplication()
 		arrowNil = appkit.NSCursorArrowCursor() == nil
 		iBeamNil = appkit.NSCursorIBeamCursor() == nil
@@ -1673,7 +1673,7 @@ func TestRuntimeRead_ColorSpace(t *testing.T) {
 		nameS string
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		cs := appkit.NSColorSpaceSRGBColorSpace()
 		if cs == nil {
 			csNil = true
@@ -1681,7 +1681,7 @@ func TestRuntimeRead_ColorSpace(t *testing.T) {
 		}
 		model = cs.ColorSpaceModel()
 		if n := cs.LocalizedName(); n != nil {
-			nameS = pureobjc.GoString(n.Ptr())
+			nameS = purego.GoString(n.Ptr())
 			runtime.KeepAlive(n)
 		}
 	})
@@ -1711,7 +1711,7 @@ func TestRuntimeRead_PrintInfo(t *testing.T) {
 		topMargin   float64
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		pi := appkit.NSPrintInfoSharedPrintInfo()
 		if pi == nil {
 			piNil = true
@@ -1744,7 +1744,7 @@ func TestRuntimeRead_BezierPath(t *testing.T) {
 		miterLimit float64
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		bp := appkit.NSBezierPathBezierPath()
 		if bp == nil {
 			pathNil = true
@@ -1777,7 +1777,7 @@ func TestRuntimeRead_StatusBar(t *testing.T) {
 		thickness float64
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		sb := appkit.NSStatusBarSystemStatusBar()
 		if sb == nil {
 			sbNil = true
@@ -1803,7 +1803,7 @@ func TestRuntimeRead_FontManager(t *testing.T) {
 		familyCount uint
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		fm := appkit.NSFontManagerSharedFontManager()
 		if fm == nil {
 			fmNil = true
@@ -1832,7 +1832,7 @@ func TestRuntimeRead_NSMenuItem(t *testing.T) {
 		isSeparator bool
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		item := appkit.NSMenuItemSeparatorItem()
 		if item == nil {
 			itemNil = true
@@ -1855,7 +1855,7 @@ func TestRuntimeRead_NSMenuItem(t *testing.T) {
 func TestRuntimeRead_NSAppearance(t *testing.T) {
 	var appearanceNil bool
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		_ = appkit.NSApplicationSharedApplication()
 		a := appkit.NSAppearanceCurrentDrawingAppearance()
 		appearanceNil = (a == nil)
@@ -1875,7 +1875,7 @@ func TestRuntimeRead_NSDocumentController(t *testing.T) {
 		docsNil bool
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		dc := appkit.NSDocumentControllerSharedDocumentController()
 		if dc == nil {
 			dcNil = true
@@ -1902,7 +1902,7 @@ func TestRuntimeRead_NSColorLists(t *testing.T) {
 		count   uint
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		lists := appkit.NSColorListAvailableColorLists()
 		if lists == nil {
 			listNil = true
@@ -1928,7 +1928,7 @@ func TestRuntimeRead_NSImageRepClasses(t *testing.T) {
 		count      uint
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		classes := appkit.NSImageRepRegisteredImageRepClasses()
 		if classes == nil {
 			classesNil = true
@@ -1951,7 +1951,7 @@ func TestRuntimeRead_NSImageRepClasses(t *testing.T) {
 func TestRuntimeRead_KeyRepeatDelay(t *testing.T) {
 	var delay float64
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		delay = appkit.NSEventKeyRepeatDelay()
 	})
 
@@ -1966,7 +1966,7 @@ func TestRuntimeRead_KeyRepeatDelay(t *testing.T) {
 func TestRuntimeRead_MonospacedFont(t *testing.T) {
 	var fontNil bool
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		font := appkit.NSFontMonospacedDigitSystemFontOfSizeWeight(14.0, 0.0)
 		fontNil = (font == nil)
 	})
@@ -1985,7 +1985,7 @@ func TestRuntimeRead_LabelFont(t *testing.T) {
 		pointSize float64
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		font := appkit.NSFontLabelFontOfSize(12.0)
 		if font == nil {
 			fontNil = true
@@ -2008,7 +2008,7 @@ func TestRuntimeRead_LabelFont(t *testing.T) {
 func TestRuntimeRead_SystemColors(t *testing.T) {
 	var redNil, orangeNil, greenNil bool
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		redNil = appkit.NSColorSystemRedColor() == nil
 		orangeNil = appkit.NSColorSystemOrangeColor() == nil
 		greenNil = appkit.NSColorSystemGreenColor() == nil
@@ -2039,7 +2039,7 @@ func TestRuntimeRead_WorkspaceNotificationCenter(t *testing.T) {
 		ncNil bool
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		ws := appkit.NSWorkspaceSharedWorkspace()
 		if ws == nil {
 			wsNil = true
@@ -2075,7 +2075,7 @@ func TestRuntimeRead_ApplicationRunning(t *testing.T) {
 		isActive  bool
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		app := appkit.NSApplicationSharedApplication()
 		if app == nil {
 			appNil = true
@@ -2098,7 +2098,7 @@ func TestRuntimeRead_ApplicationRunning(t *testing.T) {
 func TestRuntimeRead_GenericRGBColorSpace(t *testing.T) {
 	var csNil bool
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		cs := appkit.NSColorSpaceGenericRGBColorSpace()
 		csNil = (cs == nil)
 	})
@@ -2114,7 +2114,7 @@ func TestRuntimeRead_GenericRGBColorSpace(t *testing.T) {
 func TestRuntimeRead_DisplayP3ColorSpace(t *testing.T) {
 	var csNil bool
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		cs := appkit.NSColorSpaceDisplayP3ColorSpace()
 		csNil = (cs == nil)
 	})
@@ -2133,7 +2133,7 @@ func TestRuntimeRead_AvailableFonts(t *testing.T) {
 		fontCount uint
 	)
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		fm := appkit.NSFontManagerSharedFontManager()
 		if fm == nil {
 			fmNil = true
@@ -2159,7 +2159,7 @@ func TestRuntimeRead_AvailableFonts(t *testing.T) {
 func TestRuntimeRead_DoubleClickInterval(t *testing.T) {
 	var interval float64
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		interval = appkit.NSEventDoubleClickInterval()
 	})
 
@@ -2174,7 +2174,7 @@ func TestRuntimeRead_DoubleClickInterval(t *testing.T) {
 func TestRuntimeRead_KeyRepeatInterval(t *testing.T) {
 	var interval float64
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		interval = appkit.NSEventKeyRepeatInterval()
 	})
 
@@ -2189,7 +2189,7 @@ func TestRuntimeRead_KeyRepeatInterval(t *testing.T) {
 func TestRuntimeRead_LabelFontSize(t *testing.T) {
 	var size float64
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		size = appkit.NSFontLabelFontSize()
 	})
 
@@ -2204,7 +2204,7 @@ func TestRuntimeRead_LabelFontSize(t *testing.T) {
 func TestRuntimeRead_MouseCoalescing(t *testing.T) {
 	var enabled bool
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		enabled = appkit.NSEventIsMouseCoalescingEnabled()
 	})
 
@@ -2216,7 +2216,7 @@ func TestRuntimeRead_MouseCoalescing(t *testing.T) {
 func TestRuntimeRead_GenericGrayColorSpace(t *testing.T) {
 	var csNil bool
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		cs := appkit.NSColorSpaceGenericGrayColorSpace()
 		csNil = (cs == nil)
 	})
@@ -2232,7 +2232,7 @@ func TestRuntimeRead_GenericGrayColorSpace(t *testing.T) {
 func TestRuntimeRead_GenericGamma22GrayColorSpace(t *testing.T) {
 	var csNil bool
 
-	intobjc.RunOnMainThread(func() {
+	cgo.RunOnMainThread(func() {
 		cs := appkit.NSColorSpaceGenericGamma22GrayColorSpace()
 		csNil = (cs == nil)
 	})

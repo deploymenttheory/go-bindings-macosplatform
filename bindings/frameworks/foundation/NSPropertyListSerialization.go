@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspropertylistserialization
@@ -33,7 +33,7 @@ func NSPropertyListSerializationFromID(id objc.ID) *NSPropertyListSerialization 
 	}
 	o := &NSPropertyListSerialization{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -47,7 +47,7 @@ func NSPropertyListSerializationDataWithPropertyListFormatOptionsError(plist obj
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelDataWithPropertyListFormatOptionsError, plist, format, opt, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -56,7 +56,7 @@ func NSPropertyListSerializationWritePropertyListToStreamFormatOptionsError(plis
 	var _nsErr uintptr
 	_ret := objc.Send[int](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelWritePropertyListToStreamFormatOptionsError, plist, stream.Ptr(), format, opt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -65,7 +65,7 @@ func NSPropertyListSerializationPropertyListWithDataOptionsFormatError(data *NSD
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelPropertyListWithDataOptionsFormatError, data.Ptr(), opt, format, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -74,7 +74,7 @@ func NSPropertyListSerializationPropertyListWithStreamOptionsFormatError(stream 
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelPropertyListWithStreamOptionsFormatError, stream.Ptr(), opt, format, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

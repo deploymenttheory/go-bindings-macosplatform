@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/compositorservices/cp_object_cp_layer_renderer
@@ -23,7 +23,7 @@ func CP_OBJECT_cp_layer_rendererFromID(id objc.ID) *CP_OBJECT_cp_layer_renderer 
 	}
 	o := &CP_OBJECT_cp_layer_renderer{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

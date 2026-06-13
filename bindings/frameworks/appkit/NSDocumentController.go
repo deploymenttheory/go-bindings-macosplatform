@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdocumentcontroller
@@ -86,7 +86,7 @@ func NSDocumentControllerFromID(id objc.ID) *NSDocumentController {
 	}
 	o := &NSDocumentController{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -131,7 +131,7 @@ func (o *NSDocumentController) OpenUntitledDocumentAndDisplayError(displayDocume
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelOpenUntitledDocumentAndDisplayError, displayDocument, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDocumentFromID(_ret), nil
 }
@@ -141,7 +141,7 @@ func (o *NSDocumentController) MakeUntitledDocumentOfTypeError(typeName *foundat
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelMakeUntitledDocumentOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDocumentFromID(_ret), nil
 }
@@ -194,7 +194,7 @@ func (o *NSDocumentController) MakeDocumentWithContentsOfURLOfTypeError(url *fou
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelMakeDocumentWithContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDocumentFromID(_ret), nil
 }
@@ -218,7 +218,7 @@ func (o *NSDocumentController) MakeDocumentForURLWithContentsOfURLOfTypeError(ur
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelMakeDocumentForURLWithContentsOfURLOfTypeError, urlOrNil.Ptr(), contentsURL.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDocumentFromID(_ret), nil
 }
@@ -240,7 +240,7 @@ func (o *NSDocumentController) DuplicateDocumentWithContentsOfURLCopyingDisplayN
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelDuplicateDocumentWithContentsOfURLCopyingDisplayNameError, url.Ptr(), duplicateByCopying, displayNameOrNil.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDocumentFromID(_ret), nil
 }
@@ -282,7 +282,7 @@ func (o *NSDocumentController) TypeForContentsOfURLError(url *foundation.NSURL) 
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelTypeForContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSStringFromID(_ret), nil
 }
@@ -372,7 +372,7 @@ func (o *NSDocumentController) OpenDocumentWithContentsOfURLDisplayError(url *fo
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentControllerSelOpenDocumentWithContentsOfURLDisplayError, url.Ptr(), displayDocument, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -382,7 +382,7 @@ func (o *NSDocumentController) ReopenDocumentForURLWithContentsOfURLError(url *f
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentControllerSelReopenDocumentForURLWithContentsOfURLError, url.Ptr(), contentsURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

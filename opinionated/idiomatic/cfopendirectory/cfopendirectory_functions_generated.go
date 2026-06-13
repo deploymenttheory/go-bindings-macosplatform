@@ -8,7 +8,7 @@ import (
 	"fmt"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cfopendirectory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc/objcerrors"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego/objcerrors"
 	"unsafe"
 )
 

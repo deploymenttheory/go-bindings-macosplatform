@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlfeaturevalue
@@ -54,7 +54,7 @@ func MLFeatureValueFromID(id objc.ID) *MLFeatureValue {
 	}
 	o := &MLFeatureValue{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -108,7 +108,7 @@ func MLFeatureValueFeatureValueWithDictionaryError(value *foundation.NSDictionar
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithDictionaryError, value, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLFeatureValueFromID(_ret), nil
 }
@@ -182,7 +182,7 @@ func MLFeatureValueFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatType
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError, url.Ptr(), pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLFeatureValueFromID(_ret), nil
 }
@@ -193,7 +193,7 @@ func MLFeatureValueFeatureValueWithImageAtURLConstraintOptionsError(url *foundat
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLConstraintOptionsError, url.Ptr(), constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLFeatureValueFromID(_ret), nil
 }
@@ -204,7 +204,7 @@ func MLFeatureValueFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOpt
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError, cgImage, pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLFeatureValueFromID(_ret), nil
 }
@@ -215,7 +215,7 @@ func MLFeatureValueFeatureValueWithCGImageConstraintOptionsError(cgImage unsafe.
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageConstraintOptionsError, cgImage, constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLFeatureValueFromID(_ret), nil
 }
@@ -226,7 +226,7 @@ func MLFeatureValueFeatureValueWithImageAtURLOrientationPixelsWidePixelsHighPixe
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError, url.Ptr(), orientation, pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLFeatureValueFromID(_ret), nil
 }
@@ -237,7 +237,7 @@ func MLFeatureValueFeatureValueWithImageAtURLOrientationConstraintOptionsError(u
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLOrientationConstraintOptionsError, url.Ptr(), orientation, constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLFeatureValueFromID(_ret), nil
 }
@@ -248,7 +248,7 @@ func MLFeatureValueFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFo
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError, cgImage, orientation, pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLFeatureValueFromID(_ret), nil
 }
@@ -259,7 +259,7 @@ func MLFeatureValueFeatureValueWithCGImageOrientationConstraintOptionsError(cgIm
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageOrientationConstraintOptionsError, cgImage, orientation, constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLFeatureValueFromID(_ret), nil
 }

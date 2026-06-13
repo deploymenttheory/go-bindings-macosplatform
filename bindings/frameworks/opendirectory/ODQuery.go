@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class       ODQuery @abstract    Class used for querying OpenDirectory. @discussion  OpenDirectory queries may be used to search for different types of records, e.g. users, groups.
@@ -39,7 +39,7 @@ func ODQueryFromID(id objc.ID) *ODQuery {
 	}
 	o := &ODQuery{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -49,7 +49,7 @@ func ODQueryQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttrib
 	_ret := objc.Send[objc.ID](objc.ID(_clsODQuery), _oDQuerySelQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError, inNode.Ptr(), inRecordTypeOrList, inAttribute.Ptr(), inMatchType, inQueryValueOrList, inReturnAttributeOrList, inMaximumResults, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ODQueryFromID(_ret), nil
 }
@@ -60,7 +60,7 @@ func (o *ODQuery) InitWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnA
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDQuerySelInitWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError, inNode.Ptr(), inRecordTypeOrList, inAttribute.Ptr(), inMatchType, inQueryValueOrList, inReturnAttributeOrList, inMaximumResults, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ODQueryFromID(_ret), nil
 }
@@ -70,7 +70,7 @@ func (o *ODQuery) ResultsAllowingPartialError(inAllowPartialResults bool) (*foun
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDQuerySelResultsAllowingPartialError, inAllowPartialResults, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

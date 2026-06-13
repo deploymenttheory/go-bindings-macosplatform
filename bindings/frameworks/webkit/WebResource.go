@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class WebResource @discussion A WebResource represents a fully downloaded URL. It includes the data of the resource as well as the metadata associated with the resource.
@@ -33,7 +33,7 @@ func WebResourceFromID(id objc.ID) *WebResource {
 	}
 	o := &WebResource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

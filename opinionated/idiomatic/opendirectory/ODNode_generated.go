@@ -7,7 +7,7 @@ package opendirectory
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,7 +26,7 @@ func NewNodeWithSessionTypeError(inSession *raw.ODSession, inType uint32) (*Node
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSession:type:error:"), inSession.Ptr(), inType, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Node{inner: raw.ODNodeFromID(_id)}, nil
 }
@@ -37,7 +37,7 @@ func NewNodeWithSessionNameError(inSession *raw.ODSession, inName string) (*Node
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSession:name:error:"), inSession.Ptr(), foundation.NSStringStringWithUTF8String(inName).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Node{inner: raw.ODNodeFromID(_id)}, nil
 }

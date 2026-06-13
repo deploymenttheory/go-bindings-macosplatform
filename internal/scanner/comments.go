@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/meta"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 )
 
 // entitlementRe matches quoted com.apple.developer.* and com.apple.security.*
@@ -21,7 +21,7 @@ var entitlementRe = regexp.MustCompile(`"(com\.apple\.(?:developer|security|vm)\
 // fileInfo holds the per-file parsed data extracted from a single header scan.
 type fileInfo struct {
 	docs         map[int]string            // 1-indexed line → doc comment text
-	avails       map[int]meta.Availability // 1-indexed line → availability annotation on that line
+	avails       map[int]macosplatformmetadata.Availability // 1-indexed line → availability annotation on that line
 	entitlements map[int][]string          // 1-indexed line → entitlement keys found in preceding doc block
 	optionalAt   map[int]bool              // 1-indexed line → true when inside an @optional protocol section
 	mainThreadAt map[int]bool              // 1-indexed line → true when NS_SWIFT_UI_ACTOR appears on that line
@@ -42,7 +42,7 @@ func loadFile(absFile string) *fileInfo {
 	if err != nil {
 		fi = &fileInfo{
 			docs:         map[int]string{},
-			avails:       map[int]meta.Availability{},
+			avails:       map[int]macosplatformmetadata.Availability{},
 			entitlements: map[int][]string{},
 			optionalAt:   map[int]bool{},
 			mainThreadAt: map[int]bool{},
@@ -98,9 +98,9 @@ func isMainThreadAt(absFile string, lineNo int) bool {
 // at (absFile, lineNo). It searches a small window around lineNo to handle annotations
 // placed on a preceding line (API_AVAILABLE prefix style) or trailing lines
 // (multi-line declarations).
-func lineAvailability(absFile string, lineNo int) meta.Availability {
+func lineAvailability(absFile string, lineNo int) macosplatformmetadata.Availability {
 	if absFile == "" || lineNo == 0 {
-		return meta.Availability{}
+		return macosplatformmetadata.Availability{}
 	}
 	fi := loadFile(absFile)
 	// Check the declaration line and the lines preceding it.
@@ -115,7 +115,7 @@ func lineAvailability(absFile string, lineNo int) meta.Availability {
 			}
 		}
 	}
-	return meta.Availability{}
+	return macosplatformmetadata.Availability{}
 }
 
 // parseHeaderFile reads the SDK header at path and extracts:
@@ -242,7 +242,7 @@ func parseHeaderFile(path string) (*fileInfo, error) {
 	}
 
 	// Parse availability annotations on each line.
-	avails := make(map[int]meta.Availability)
+	avails := make(map[int]macosplatformmetadata.Availability)
 	for i, raw := range rawLines {
 		av := parseAvailAnnotation(raw)
 		if av.MacOSIntroduced != "" || av.MacOSDeprecated != "" || av.IsUnavailable {
@@ -328,8 +328,8 @@ func parseHeaderFile(path string) (*fileInfo, error) {
 
 // parseAvailAnnotation extracts macOS availability from a single raw source line.
 // It recognises the most common Apple annotation macros.
-func parseAvailAnnotation(line string) meta.Availability {
-	var av meta.Availability
+func parseAvailAnnotation(line string) macosplatformmetadata.Availability {
+	var av macosplatformmetadata.Availability
 
 	// Pre-scan ALL *_UNAVAILABLE(macos...) occurrences on the line. This covers
 	// API_UNAVAILABLE, IC_UNAVAILABLE, CB_UNAVAILABLE, and any other framework-

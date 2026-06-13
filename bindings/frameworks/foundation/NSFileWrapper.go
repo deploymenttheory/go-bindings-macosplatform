@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfilewrapper
@@ -60,7 +60,7 @@ func NSFileWrapperFromID(id objc.ID) *NSFileWrapper {
 	}
 	o := &NSFileWrapper{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -69,7 +69,7 @@ func (o *NSFileWrapper) InitWithURLOptionsError(url *NSURL, options NSFileWrappe
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelInitWithURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSFileWrapperFromID(_ret), nil
 }
@@ -113,7 +113,7 @@ func (o *NSFileWrapper) ReadFromURLOptionsError(url *NSURL, options NSFileWrappe
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileWrapperSelReadFromURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -122,7 +122,7 @@ func (o *NSFileWrapper) WriteToURLOptionsOriginalContentsURLError(url *NSURL, op
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileWrapperSelWriteToURLOptionsOriginalContentsURLError, url.Ptr(), options, originalContentsURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

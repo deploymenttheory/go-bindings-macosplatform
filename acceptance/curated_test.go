@@ -13,7 +13,7 @@ import (
 	"testing"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // --- NSProcessInfo -----------------------------------------------------------
@@ -54,7 +54,7 @@ func TestCurated_NSString_RoundTrip(t *testing.T) {
 		if nsStr == nil {
 			t.Fatal("NSString.stringWithUTF8String returned nil")
 		}
-		got := pureobjc.GoString(nsStr.Ptr())
+		got := purego.GoString(nsStr.Ptr())
 		if got != input {
 			t.Errorf("round-trip: got %q, want %q", got, input)
 		}
@@ -124,7 +124,7 @@ func TestCurated_NSURL_PathRoundTrip(t *testing.T) {
 		if urlPath == nil {
 			t.Fatal("NSURL.path returned nil")
 		}
-		got := pureobjc.GoString(urlPath.Ptr())
+		got := purego.GoString(urlPath.Ptr())
 		if got != dir {
 			t.Errorf("NSURL.path round-trip: got %q, want %q", got, dir)
 		}
@@ -152,7 +152,7 @@ func TestCurated_NSBundle_MainBundle_BundlePathNonEmpty(t *testing.T) {
 		if pathNS == nil {
 			t.Fatal("NSBundle.bundlePath returned nil")
 		}
-		path := pureobjc.GoString(pathNS.Ptr())
+		path := purego.GoString(pathNS.Ptr())
 		if path == "" {
 			t.Error("NSBundle.bundlePath returned empty string")
 		}

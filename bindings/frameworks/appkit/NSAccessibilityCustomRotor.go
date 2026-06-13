@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @brief NSAccessibilityCustomRotors allow assistive technologies, like VoiceOver, to search applications for content related to the given label.
@@ -37,7 +37,7 @@ func NSAccessibilityCustomRotorFromID(id objc.ID) *NSAccessibilityCustomRotor {
 	}
 	o := &NSAccessibilityCustomRotor{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -6,7 +6,7 @@ package gameplaykit
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Ridged noise is similar to Perlin noise, with sharply-defined, relatively thin peaks.
@@ -28,7 +28,7 @@ func GKRidgedNoiseSourceFromID(id objc.ID) *GKRidgedNoiseSource {
 	}
 	o := &GKRidgedNoiseSource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

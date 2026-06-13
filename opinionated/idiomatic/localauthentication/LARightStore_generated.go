@@ -8,7 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -32,7 +32,7 @@ func (x *RightStore) RemoveRightCompletion(ctx context.Context, right *raw.LAPer
 	_ch := make(chan error, 1)
 	x.inner.RemoveRightCompletion(right, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -50,7 +50,7 @@ func (x *RightStore) RemoveRightForIdentifierCompletion(ctx context.Context, ide
 	_ch := make(chan error, 1)
 	x.inner.RemoveRightForIdentifierCompletion(foundation.NSStringStringWithUTF8String(identifier), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -68,7 +68,7 @@ func (x *RightStore) RemoveAllRightsWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.RemoveAllRightsWithCompletion(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

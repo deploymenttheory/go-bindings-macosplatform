@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmultiarray
@@ -45,7 +45,7 @@ func MLMultiArrayFromID(id objc.ID) *MLMultiArray {
 	}
 	o := &MLMultiArray{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -93,7 +93,7 @@ func (o *MLMultiArray) InitWithShapeDataTypeError(shape *foundation.NSArray[*fou
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelInitWithShapeDataTypeError, shape, dataType, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLMultiArrayFromID(_ret), nil
 }
@@ -118,7 +118,7 @@ func (o *MLMultiArray) InitWithDataPointerShapeDataTypeStridesDeallocatorError(d
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelInitWithDataPointerShapeDataTypeStridesDeallocatorError, dataPointer, shape, dataType, strides, __block_deallocator, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLMultiArrayFromID(_ret), nil
 }

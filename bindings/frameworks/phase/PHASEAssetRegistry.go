@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseassetregistry
@@ -35,7 +35,7 @@ func PHASEAssetRegistryFromID(id objc.ID) *PHASEAssetRegistry {
 	}
 	o := &PHASEAssetRegistry{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -45,7 +45,7 @@ func (o *PHASEAssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefin
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterGlobalMetaParameterError, metaParameterDefinition.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return PHASEGlobalMetaParameterAssetFromID(_ret), nil
 }
@@ -56,7 +56,7 @@ func (o *PHASEAssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterSoundEventAssetWithRootNodeIdentifierError, rootNode.Ptr(), identifier.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return PHASESoundEventNodeAssetFromID(_ret), nil
 }
@@ -67,7 +67,7 @@ func (o *PHASEAssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLa
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError, url.Ptr(), identifier.Ptr(), assetType, channelLayout.Ptr(), normalizationMode, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return PHASESoundAssetFromID(_ret), nil
 }
@@ -78,7 +78,7 @@ func (o *PHASEAssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormaliza
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterSoundAssetWithDataIdentifierFormatNormalizationModeError, data.Ptr(), identifier.Ptr(), format.Ptr(), normalizationMode, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return PHASESoundAssetFromID(_ret), nil
 }

@@ -9,7 +9,7 @@
 //
 // Override files live next to the metadata they correct
 // (metadata/frameworks/<name>/overrides.json) and are applied by the pipeline
-// loaders after meta.Read — the committed .gometa.json stays pure observed
+// loaders after macosplatformmetadata.Read — the committed .gometa.json stays pure observed
 // Clang output, with corrections as a visible, separate layer. Entries that
 // no longer match anything (stale after an SDK re-scan) produce warnings.
 //
@@ -25,7 +25,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/meta"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 )
 
 // FileName is the override file name expected next to a framework's
@@ -100,7 +100,7 @@ func LoadAdjacent(metaPath string) (file *File, found bool, err error) {
 // ApplyAdjacent looks for an override file next to metaPath and applies it to
 // framework. A missing file is not an error. Returned warnings list override
 // entries that matched nothing — stale after an SDK re-scan.
-func ApplyAdjacent(metaPath string, framework *meta.FrameworkMeta) ([]string, error) {
+func ApplyAdjacent(metaPath string, framework *macosplatformmetadata.FrameworkMeta) ([]string, error) {
 	file, found, err := LoadAdjacent(metaPath)
 	if err != nil || !found {
 		return nil, err
@@ -110,7 +110,7 @@ func ApplyAdjacent(metaPath string, framework *meta.FrameworkMeta) ([]string, er
 
 // Apply mutates framework according to file and returns a warning for every
 // override entry that matched no declaration.
-func Apply(file *File, framework *meta.FrameworkMeta) []string {
+func Apply(file *File, framework *macosplatformmetadata.FrameworkMeta) []string {
 	var warnings []string
 	stale := func(format string, args ...any) {
 		warnings = append(
@@ -219,7 +219,7 @@ func describeRemap(remap TypeRemap) string {
 }
 
 // applyRemap rewrites one param/return ObjC type. Reports whether anything matched.
-func applyRemap(remap TypeRemap, framework *meta.FrameworkMeta) bool {
+func applyRemap(remap TypeRemap, framework *macosplatformmetadata.FrameworkMeta) bool {
 	if remap.Function != "" {
 		matched := false
 		for i := range framework.Functions {
@@ -253,7 +253,7 @@ func applyRemap(remap TypeRemap, framework *meta.FrameworkMeta) bool {
 	return matched
 }
 
-func remapParams(remap TypeRemap, params []meta.Param, retType *meta.ReturnType) bool {
+func remapParams(remap TypeRemap, params []macosplatformmetadata.Param, retType *macosplatformmetadata.ReturnType) bool {
 	if remap.Param == "return" {
 		retType.ObjCType = remap.ObjCType
 		return true
@@ -267,8 +267,8 @@ func remapParams(remap TypeRemap, params []meta.Param, retType *meta.ReturnType)
 	return false
 }
 
-func applyAvailabilityFix(fix AvailabilityFix, framework *meta.FrameworkMeta) bool {
-	patch := func(avail *meta.Availability) {
+func applyAvailabilityFix(fix AvailabilityFix, framework *macosplatformmetadata.FrameworkMeta) bool {
+	patch := func(avail *macosplatformmetadata.Availability) {
 		if fix.MacOSIntroduced != "" {
 			avail.MacOSIntroduced = fix.MacOSIntroduced
 		}

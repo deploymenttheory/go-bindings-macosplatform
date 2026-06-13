@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/ituneslibrary/itlibrary
@@ -43,7 +43,7 @@ func ITLibraryFromID(id objc.ID) *ITLibrary {
 	}
 	o := &ITLibrary{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -53,7 +53,7 @@ func ITLibraryLibraryWithAPIVersionError(requestedAPIVersion *foundation.NSStrin
 	_ret := objc.Send[objc.ID](objc.ID(_clsITLibrary), _iTLibrarySelLibraryWithAPIVersionError, requestedAPIVersion.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ITLibraryFromID(_ret), nil
 }
@@ -64,7 +64,7 @@ func ITLibraryLibraryWithAPIVersionOptionsError(requestedAPIVersion *foundation.
 	_ret := objc.Send[objc.ID](objc.ID(_clsITLibrary), _iTLibrarySelLibraryWithAPIVersionOptionsError, requestedAPIVersion.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ITLibraryFromID(_ret), nil
 }
@@ -75,7 +75,7 @@ func (o *ITLibrary) InitWithAPIVersionError(requestedAPIVersion *foundation.NSSt
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelInitWithAPIVersionError, requestedAPIVersion.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ITLibraryFromID(_ret), nil
 }
@@ -86,7 +86,7 @@ func (o *ITLibrary) InitWithAPIVersionOptionsError(requestedAPIVersion *foundati
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelInitWithAPIVersionOptionsError, requestedAPIVersion.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ITLibraryFromID(_ret), nil
 }

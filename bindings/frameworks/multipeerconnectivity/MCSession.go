@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcsession
@@ -42,7 +42,7 @@ func MCSessionFromID(id objc.ID) *MCSession {
 	}
 	o := &MCSession{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -62,7 +62,7 @@ func (o *MCSession) SendDataToPeersWithModeError(data *foundation.NSData, peerID
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mCSessionSelSendDataToPeersWithModeError, data.Ptr(), peerIDs.Ptr(), mode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -89,7 +89,7 @@ func (o *MCSession) StartStreamWithNameToPeerError(streamName *foundation.NSStri
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelStartStreamWithNameToPeerError, streamName.Ptr(), peerID.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSOutputStreamFromID(_ret), nil
 }

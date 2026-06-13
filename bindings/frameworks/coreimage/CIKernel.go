@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cikernel
@@ -37,7 +37,7 @@ func CIKernelFromID(id objc.ID) *CIKernel {
 	}
 	o := &CIKernel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -52,7 +52,7 @@ func CIKernelKernelsWithMetalStringError(source *foundation.NSString) (*foundati
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelsWithMetalStringError, source.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*CIKernel](_ret), nil
 }
@@ -68,7 +68,7 @@ func CIKernelKernelWithFunctionNameFromMetalLibraryDataError(name *foundation.NS
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelWithFunctionNameFromMetalLibraryDataError, name.Ptr(), data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CIKernelFromID(_ret), nil
 }
@@ -78,7 +78,7 @@ func CIKernelKernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError(na
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError, name.Ptr(), data.Ptr(), format, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CIKernelFromID(_ret), nil
 }

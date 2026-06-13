@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutablecompositiontrack
@@ -45,7 +45,7 @@ func AVMutableCompositionTrackFromID(id objc.ID) *AVMutableCompositionTrack {
 	}
 	o := &AVMutableCompositionTrack{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -54,7 +54,7 @@ func (o *AVMutableCompositionTrack) InsertTimeRangeOfTrackAtTimeError(timeRange 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVMutableCompositionTrackSelInsertTimeRangeOfTrackAtTimeError, timeRange, track.Ptr(), startTime, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -64,7 +64,7 @@ func (o *AVMutableCompositionTrack) InsertTimeRangesOfTracksAtTimeError(timeRang
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVMutableCompositionTrackSelInsertTimeRangesOfTracksAtTimeError, timeRanges, tracks.Ptr(), startTime, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -89,7 +89,7 @@ func (o *AVMutableCompositionTrack) ValidateTrackSegmentsError(trackSegments *fo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVMutableCompositionTrackSelValidateTrackSegmentsError, trackSegments.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

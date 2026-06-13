@@ -11,7 +11,7 @@ import (
 	"os"
 	"sort"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/meta"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 )
 
 func main() {
@@ -24,7 +24,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	framework, err := meta.Read(path)
+	framework, err := macosplatformmetadata.Read(path)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "read: %v\n", err)
 		os.Exit(1)
@@ -38,7 +38,7 @@ func main() {
 	printSummary(framework)
 }
 
-func printSummary(framework *meta.FrameworkMeta) {
+func printSummary(framework *macosplatformmetadata.FrameworkMeta) {
 	fmt.Printf("Framework:  %s\n", framework.Framework)
 	fmt.Printf("SDK:        %s\n", framework.SDKVersion)
 	fmt.Printf("Arch:       %s\n", framework.Arch)
@@ -73,7 +73,7 @@ func printSummary(framework *meta.FrameworkMeta) {
 	}
 }
 
-func printClass(framework *meta.FrameworkMeta, name string) {
+func printClass(framework *macosplatformmetadata.FrameworkMeta, name string) {
 	cls, ok := framework.Classes[name]
 	if !ok {
 		fmt.Fprintf(os.Stderr, "class %q not found in %s metadata\n", name, framework.Framework)

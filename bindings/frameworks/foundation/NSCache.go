@@ -6,11 +6,11 @@ package foundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscache
-type NSCache[KeyType pureobjc.AnyObject, ObjectType pureobjc.AnyObject] struct {
+type NSCache[KeyType purego.AnyObject, ObjectType purego.AnyObject] struct {
 	NSObject
 }
 
@@ -33,13 +33,13 @@ var (
 	_nSCacheSelSetEvictsObjectsWithDiscardedContent = objc.RegisterName("setEvictsObjectsWithDiscardedContent:")
 )
 
-func NSCacheFromID[KeyType pureobjc.AnyObject, ObjectType pureobjc.AnyObject](id objc.ID) *NSCache[KeyType, ObjectType] {
+func NSCacheFromID[KeyType purego.AnyObject, ObjectType purego.AnyObject](id objc.ID) *NSCache[KeyType, ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSCache[KeyType, ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

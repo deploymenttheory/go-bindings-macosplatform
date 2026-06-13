@@ -6,7 +6,7 @@ package mpsneuralnetwork
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class MPSNNConcatenationGradientNode @abstract  A MPSNNSlice filter that operates as the conjugate computation for concatentation operators during training @discussion As concatenation is formally just a copy and not a computation, there isn't a lot of arithmetic for the slice operator to do, but we still need to extract out the relevant portion of the gradient of the input signal that went into the corresponding concatenation destination image.
@@ -28,7 +28,7 @@ func MPSNNConcatenationGradientNodeFromID(id objc.ID) *MPSNNConcatenationGradien
 	}
 	o := &MPSNNConcatenationGradientNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

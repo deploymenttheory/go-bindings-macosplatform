@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // \brief A class representing a type in a type hierarchy. Types may represent files on disk, abstract data types with no on-disk representation, or even entirely unrelated hierarchical classification systems such as hardware. Older API that does not use \c UTType typically uses an untyped \c NSString or \c CFStringRef to refer to a type by its identifier. To get the identifier of a type for use with these APIs, use the \c identifier property of this class. \sa https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/understanding_utis/
@@ -51,7 +51,7 @@ func UTTypeFromID(id objc.ID) *UTType {
 	}
 	o := &UTType{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

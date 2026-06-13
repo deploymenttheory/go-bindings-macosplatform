@@ -8,11 +8,11 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkgridgraph
-type GKGridGraph[NodeType pureobjc.AnyObject] struct {
+type GKGridGraph[NodeType purego.AnyObject] struct {
 	GKGraph
 }
 
@@ -31,13 +31,13 @@ var (
 	_gKGridGraphSelDiagonalsAllowed = objc.RegisterName("diagonalsAllowed")
 )
 
-func GKGridGraphFromID[NodeType pureobjc.AnyObject](id objc.ID) *GKGridGraph[NodeType] {
+func GKGridGraphFromID[NodeType purego.AnyObject](id objc.ID) *GKGridGraph[NodeType] {
 	if id == 0 {
 		return nil
 	}
 	o := &GKGridGraph[NodeType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

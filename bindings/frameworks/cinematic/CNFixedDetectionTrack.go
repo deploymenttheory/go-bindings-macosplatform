@@ -6,7 +6,7 @@ package cinematic
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A continuous detection track representing focus at a fixed disparity.
@@ -30,7 +30,7 @@ func CNFixedDetectionTrackFromID(id objc.ID) *CNFixedDetectionTrack {
 	}
 	o := &CNFixedDetectionTrack{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

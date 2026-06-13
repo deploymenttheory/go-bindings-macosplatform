@@ -6,11 +6,11 @@ package foundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutableset
-type NSMutableSet[ObjectType pureobjc.AnyObject] struct {
+type NSMutableSet[ObjectType purego.AnyObject] struct {
 	NSSet[ObjectType]
 }
 
@@ -31,13 +31,13 @@ var (
 	_nSMutableSetSelFilterUsingPredicate = objc.RegisterName("filterUsingPredicate:")
 )
 
-func NSMutableSetFromID[ObjectType pureobjc.AnyObject](id objc.ID) *NSMutableSet[ObjectType] {
+func NSMutableSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSMutableSet[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSMutableSet[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetwriter
@@ -77,7 +77,7 @@ func AVAssetWriterFromID(id objc.ID) *AVAssetWriter {
 	}
 	o := &AVAssetWriter{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -87,7 +87,7 @@ func AVAssetWriterAssetWriterWithURLFileTypeError(outputURL *foundation.NSURL, o
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetWriter), _aVAssetWriterSelAssetWriterWithURLFileTypeError, outputURL.Ptr(), outputFileType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAssetWriterFromID(_ret), nil
 }
@@ -98,7 +98,7 @@ func (o *AVAssetWriter) InitWithURLFileTypeError(outputURL *foundation.NSURL, ou
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelInitWithURLFileTypeError, outputURL.Ptr(), outputFileType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAssetWriterFromID(_ret), nil
 }

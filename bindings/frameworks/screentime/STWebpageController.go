@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/screentime/stwebpagecontroller
@@ -40,7 +40,7 @@ func STWebpageControllerFromID(id objc.ID) *STWebpageController {
 	}
 	o := &STWebpageController{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -49,7 +49,7 @@ func (o *STWebpageController) SetBundleIdentifierError(bundleIdentifier *foundat
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelSetBundleIdentifierError, bundleIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

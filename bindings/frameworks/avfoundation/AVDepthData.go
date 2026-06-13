@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avdepthdata
@@ -40,7 +40,7 @@ func AVDepthDataFromID(id objc.ID) *AVDepthData {
 	}
 	o := &AVDepthData{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -50,7 +50,7 @@ func AVDepthDataDepthDataFromDictionaryRepresentationError(imageSourceAuxDataInf
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVDepthData), _aVDepthDataSelDepthDataFromDictionaryRepresentationError, imageSourceAuxDataInfoDictionary, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVDepthDataFromID(_ret), nil
 }
@@ -75,7 +75,7 @@ func (o *AVDepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixel
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDepthDataSelDepthDataByReplacingDepthDataMapWithPixelBufferError, pixelBuffer, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVDepthDataFromID(_ret), nil
 }

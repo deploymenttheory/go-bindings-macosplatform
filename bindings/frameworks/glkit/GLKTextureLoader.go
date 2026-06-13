@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/glkit/glktextureloader
@@ -45,7 +45,7 @@ func GLKTextureLoaderFromID(id objc.ID) *GLKTextureLoader {
 	}
 	o := &GLKTextureLoader{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -54,7 +54,7 @@ func GLKTextureLoaderTextureWithContentsOfFileOptionsError(path *foundation.NSSt
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfFileOptionsError, path.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return GLKTextureInfoFromID(_ret), nil
 }
@@ -64,7 +64,7 @@ func GLKTextureLoaderTextureWithContentsOfURLOptionsError(url *foundation.NSURL,
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return GLKTextureInfoFromID(_ret), nil
 }
@@ -74,7 +74,7 @@ func GLKTextureLoaderTextureWithNameScaleFactorBundleOptionsError(name *foundati
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithNameScaleFactorBundleOptionsError, name.Ptr(), scaleFactor, bundle.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return GLKTextureInfoFromID(_ret), nil
 }
@@ -84,7 +84,7 @@ func GLKTextureLoaderTextureWithContentsOfDataOptionsError(data *foundation.NSDa
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return GLKTextureInfoFromID(_ret), nil
 }
@@ -94,7 +94,7 @@ func GLKTextureLoaderTextureWithCGImageOptionsError(cgImage unsafe.Pointer, opti
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithCGImageOptionsError, cgImage, options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return GLKTextureInfoFromID(_ret), nil
 }
@@ -104,7 +104,7 @@ func GLKTextureLoaderCubeMapWithContentsOfFilesOptionsError(paths *foundation.NS
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfFilesOptionsError, paths, options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return GLKTextureInfoFromID(_ret), nil
 }
@@ -114,7 +114,7 @@ func GLKTextureLoaderCubeMapWithContentsOfFileOptionsError(path *foundation.NSSt
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfFileOptionsError, path.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return GLKTextureInfoFromID(_ret), nil
 }
@@ -124,7 +124,7 @@ func GLKTextureLoaderCubeMapWithContentsOfURLOptionsError(url *foundation.NSURL,
 	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return GLKTextureInfoFromID(_ret), nil
 }

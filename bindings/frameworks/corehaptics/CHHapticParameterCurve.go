@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class CHHapticParameterCurve @abstract A CHHapticParameterCurve is a set of CHHapticParameterCurveControlPoints which describe the control (inflection) points for the parameter values to be applied to the associated pattern. @discussion The CHHapticParameterCurve generates an interpolated value output which passed through each control point at its associated relative time.  These times will all be relative to the start time of the CHHapticParameterCurve within the playing pattern.
@@ -32,7 +32,7 @@ func CHHapticParameterCurveFromID(id objc.ID) *CHHapticParameterCurve {
 	}
 	o := &CHHapticParameterCurve{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

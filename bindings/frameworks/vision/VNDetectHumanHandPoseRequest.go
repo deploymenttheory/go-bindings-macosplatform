@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest
@@ -33,7 +33,7 @@ func VNDetectHumanHandPoseRequestFromID(id objc.ID) *VNDetectHumanHandPoseReques
 	}
 	o := &VNDetectHumanHandPoseRequest{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -43,7 +43,7 @@ func VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError(revision ui
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsVNDetectHumanHandPoseRequest), _vNDetectHumanHandPoseRequestSelSupportedJointNamesForRevisionError, revision, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -53,7 +53,7 @@ func (o *VNDetectHumanHandPoseRequest) SupportedJointNamesAndReturnError() (*fou
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectHumanHandPoseRequestSelSupportedJointNamesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -64,7 +64,7 @@ func VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError(revis
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsVNDetectHumanHandPoseRequest), _vNDetectHumanHandPoseRequestSelSupportedJointsGroupNamesForRevisionError, revision, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -74,7 +74,7 @@ func (o *VNDetectHumanHandPoseRequest) SupportedJointsGroupNamesAndReturnError()
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectHumanHandPoseRequestSelSupportedJointsGroupNamesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

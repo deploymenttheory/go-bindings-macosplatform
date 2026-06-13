@@ -7,9 +7,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/purecg/emit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/purecg/meta"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/purecg/naming"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
 
 // methodID returns the structured ID comment for an ObjC class method.

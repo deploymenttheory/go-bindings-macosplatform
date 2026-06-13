@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avsemanticsegmentationmatte
@@ -35,7 +35,7 @@ func AVSemanticSegmentationMatteFromID(id objc.ID) *AVSemanticSegmentationMatte 
 	}
 	o := &AVSemanticSegmentationMatte{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -45,7 +45,7 @@ func AVSemanticSegmentationMatteSemanticSegmentationMatteFromImageSourceAuxiliar
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSemanticSegmentationMatte), _aVSemanticSegmentationMatteSelSemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentationError, imageSourceAuxiliaryDataType, imageSourceAuxiliaryDataInfoDictionary, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVSemanticSegmentationMatteFromID(_ret), nil
 }
@@ -63,7 +63,7 @@ func (o *AVSemanticSegmentationMatte) SemanticSegmentationMatteByReplacingSemant
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSemanticSegmentationMatteSelSemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError, pixelBuffer, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVSemanticSegmentationMatteFromID(_ret), nil
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzdiskblockdevicestoragedeviceattachment
@@ -31,7 +31,7 @@ func VZDiskBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *VZDiskBlockDevi
 	}
 	o := &VZDiskBlockDeviceStorageDeviceAttachment{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -41,7 +41,7 @@ func (o *VZDiskBlockDeviceStorageDeviceAttachment) InitWithFileHandleReadOnlySyn
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskBlockDeviceStorageDeviceAttachmentSelInitWithFileHandleReadOnlySynchronizationModeError, fileHandle.Ptr(), readOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return VZDiskBlockDeviceStorageDeviceAttachmentFromID(_ret), nil
 }
