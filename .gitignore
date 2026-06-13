@@ -1,0 +1,50 @@
+# macOS
+.DS_Store
+
+# VSCode
+.vs
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Build and temp files
+/build/
+/tmp/
+*.log
+*.bak
+
+# Windows-specific 
+*.winfile eol=crlf
+
+# Go development
+*.test
+/vendor/
+/bin/
+/dist/
+/pkg/
+coverage.out
+coverage.html
+
+# Python virtual environments
+scripts/python/venv/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.pytest_cache/
+*.egg-info/
+
+# AI instructions
+.claude
+.cursor
+
+# Binaries and executables
+*.dll
+*.exe
+*.dylib
+*.so
