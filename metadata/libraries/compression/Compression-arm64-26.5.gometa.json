@@ -1,0 +1,658 @@
+{
+  "framework": "Compression",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {
+    "_anon_COMPRESSION_LZ4": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "COMPRESSION_LZ4",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_ZLIB",
+          "value": "517",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_LZMA",
+          "value": "774",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_LZ4_RAW",
+          "value": "257",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_BROTLI",
+          "value": "2818",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_LZFSE",
+          "value": "2049",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_LZBITMAP",
+          "value": "1794",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_COMPRESSION_STATUS_OK": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "COMPRESSION_STATUS_OK",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_STATUS_ERROR",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_STATUS_END",
+          "value": "1",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_COMPRESSION_STREAM_ENCODE": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "COMPRESSION_STREAM_ENCODE",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_STREAM_DECODE",
+          "value": "1",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_COMPRESSION_STREAM_FINALIZE": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "COMPRESSION_STREAM_FINALIZE",
+          "value": "1",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "compression_algorithm": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "COMPRESSION_LZ4",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_ZLIB",
+          "value": "517",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_LZMA",
+          "value": "774",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_LZ4_RAW",
+          "value": "257",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_BROTLI",
+          "value": "2818",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_LZFSE",
+          "value": "2049",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_LZBITMAP",
+          "value": "1794",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "compression.h",
+      "sdk_line": 115,
+      "doc": "@enum compression_algorithm @abstract Tag used to select a compression algorithm. @discussion libcompression supports a number of different compression algorithms, but we have only implemented algorithms that we believe are the best choice in some set of circumstances; there are many, many compression algorithms that we do not provide because using one of the algorithms we do provide is [almost] always a better choice. There are four commonly-known encoders implemented: LZ4, zlib (level 5), LZMA (level 6) and Brotli (level 2). If you require that your compression be interoperable with non-Apple devices, you should use one of these three schemes: - Use LZ4 if speed is critical, and you are willing to sacrifice compression ratio to achieve it. - Use LZMA if compression ratio is critical, and you are willing to sacrifice speed to achieve it.  (Note: the performance impact of making this choice cannot be overstated.  LZMA is an order of magnitude slower for both compression and decompression than other schemes). - Use zlib otherwise. If you do not require interoperability with non-Apple devices, use LZFSE in the place of zlib in the hierarchy above.  It is an Apple-developed algorithm that is faster than, and generally compresses better than zlib. It is slower than LZ4 and does not compress as well as LZMA, however, so you will still want to use those algorithms in the situations described. Brotli is a widely adopted content-encoding-method for the web. Thus, Brotli is included in libcompression especially to provide decoding capabilities. In many other use-cases, one of the above mentioned algorithms is probably a better choice. Further details on the supported public formats, and their implementation in the compression library: - LZ4 is an extremely high-performance compressor.  The open source version is already one of the fastest compressors of which we are aware, and we have optimized it still further in our implementation.  The encoded format we produce and consume is compatible with the open source version, except that we add a very simple frame to the raw stream to allow some additional validation and functionality. The frame is documented here so that you can easily wrap another LZ4 encoder/decoder to produce/consume the same data stream if necessary.  An LZ4 encoded buffer is a sequence of blocks, each of which begins with a header.  There are three possible headers: a \"compressed block header\" is (hex) 62 76 34 31, followed by the size in bytes of the decoded (plaintext) data represented by the block and the size (in bytes) of the encoded data stored in the block.  Both size fields are stored as (possibly unaligned) 32-bit little-endian values.  The compressed block header is followed immediately by the actual lz4-encoded data stream. an \"uncompressed block header\" is (hex) 62 76 34 2d, followed by the size of the data stored in the uncompressed block as a (possibly unaligned) 32-bit little-endian value.  The uncompressed block header is followed immediately by the uncompressed data buffer of the specified size. an \"end of stream header\" is (hex) 62 76 34 24, and marks the end of the lz4 frame.  No further data may be written or read beyond this header. If you are implementing a wrapper for a raw LZ4 decoder, keep in mind that a compressed block may reference data from the previous block, so the (decoded) previous block must be available to the decoder. - We implement the LZMA level 6 encoder only.  This is the default compression level for open source LZMA, and provides excellent compression.  The LZMA decoder supports decoding data compressed with any compression level. - We implement the zlib level 5 encoder only.  This compression level provides a good balance between compression speed and compression ratio.  The zlib decoder supports decoding data compressed with any compression level. The encoded format is the raw DEFLATE format as described in IETF RFC 1951. Using the ZLIB library, the equivalent configuration of the encoder would be obtained with a call to: deflateInit2(zstream,5,Z_DEFLATED,-15,8,Z_DEFAULT_STRATEGY) - LZ4_RAW is supported by the buffer APIs only, and encodes/decodes payloads compatible with the LZ4 library, without the frame headers described above. - We implement Brotli level 2 encoder only. This compression level provides a good balance between compression speed and compression ratio. The Brotli decoder supports decoding data compressed with any compression level."
+    },
+    "compression_status": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "COMPRESSION_STATUS_OK",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_STATUS_ERROR",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_STATUS_END",
+          "value": "1",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "compression.h",
+      "sdk_line": 349
+    },
+    "compression_stream_flags": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "COMPRESSION_STREAM_FINALIZE",
+          "value": "1",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "compression.h",
+      "sdk_line": 342
+    },
+    "compression_stream_operation": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "COMPRESSION_STREAM_ENCODE",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "COMPRESSION_STREAM_DECODE",
+          "value": "1",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "compression.h",
+      "sdk_line": 331
+    }
+  },
+  "structs": {
+    "compression_stream": {
+      "fields": [
+        {
+          "name": "dst_ptr",
+          "objc_type": "uint8_t * _Nonnull"
+        },
+        {
+          "name": "dst_size",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "src_ptr",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "src_size",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "state",
+          "objc_type": "void * _Nullable"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "compression.h",
+      "sdk_line": 310
+    }
+  },
+  "functions": [
+    {
+      "name": "compression_encode_scratch_buffer_size",
+      "args": [
+        {
+          "name": "algorithm",
+          "objc_type": "compression_algorithm"
+        }
+      ],
+      "return": {
+        "objc_type": "size_t"
+      },
+      "availability": {
+        "macos_introduced": "10.11"
+      },
+      "sdk_file": "compression.h",
+      "sdk_line": 150
+    },
+    {
+      "name": "compression_encode_buffer",
+      "args": [
+        {
+          "name": "dst_buffer",
+          "objc_type": "uint8_t *restrict _Nonnull"
+        },
+        {
+          "name": "dst_size",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "src_buffer",
+          "objc_type": "const uint8_t *restrict _Nonnull"
+        },
+        {
+          "name": "src_size",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "scratch_buffer",
+          "objc_type": "void *restrict _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "algorithm",
+          "objc_type": "compression_algorithm"
+        }
+      ],
+      "return": {
+        "objc_type": "size_t"
+      },
+      "availability": {
+        "macos_introduced": "10.11"
+      },
+      "sdk_file": "compression.h",
+      "sdk_line": 191
+    },
+    {
+      "name": "compression_decode_scratch_buffer_size",
+      "args": [
+        {
+          "name": "algorithm",
+          "objc_type": "compression_algorithm"
+        }
+      ],
+      "return": {
+        "objc_type": "size_t"
+      },
+      "availability": {
+        "macos_introduced": "10.11"
+      },
+      "sdk_file": "compression.h",
+      "sdk_line": 213
+    },
+    {
+      "name": "compression_decode_buffer",
+      "args": [
+        {
+          "name": "dst_buffer",
+          "objc_type": "uint8_t *restrict _Nonnull"
+        },
+        {
+          "name": "dst_size",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "src_buffer",
+          "objc_type": "const uint8_t *restrict _Nonnull"
+        },
+        {
+          "name": "src_size",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "scratch_buffer",
+          "objc_type": "void *restrict _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "algorithm",
+          "objc_type": "compression_algorithm"
+        }
+      ],
+      "return": {
+        "objc_type": "size_t"
+      },
+      "availability": {
+        "macos_introduced": "10.11"
+      },
+      "sdk_file": "compression.h",
+      "sdk_line": 256
+    },
+    {
+      "name": "compression_stream_init",
+      "args": [
+        {
+          "name": "stream",
+          "objc_type": "compression_stream * _Nonnull"
+        },
+        {
+          "name": "operation",
+          "objc_type": "compression_stream_operation"
+        },
+        {
+          "name": "algorithm",
+          "objc_type": "compression_algorithm"
+        }
+      ],
+      "return": {
+        "objc_type": "compression_status"
+      },
+      "availability": {
+        "macos_introduced": "10.11"
+      },
+      "sdk_file": "compression.h",
+      "sdk_line": 389
+    },
+    {
+      "name": "compression_stream_process",
+      "args": [
+        {
+          "name": "stream",
+          "objc_type": "compression_stream * _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "compression_status"
+      },
+      "availability": {
+        "macos_introduced": "10.11"
+      },
+      "sdk_file": "compression.h",
+      "sdk_line": 452
+    },
+    {
+      "name": "compression_stream_destroy",
+      "args": [
+        {
+          "name": "stream",
+          "objc_type": "compression_stream * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "compression_status"
+      },
+      "availability": {
+        "macos_introduced": "10.11"
+      },
+      "sdk_file": "compression.h",
+      "sdk_line": 470
+    }
+  ],
+  "externs": null,
+  "block_types": {},
+  "typedefs": {
+    "Class": "Class",
+    "SEL": "SEL *",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wint_t": "int",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "blkcnt_t": "__darwin_blkcnt_t",
+    "blksize_t": "__darwin_blksize_t",
+    "caddr_t": "char *",
+    "clock_t": "__darwin_clock_t",
+    "compression_algorithm": "enum compression_algorithm",
+    "compression_status": "enum compression_status",
+    "compression_stream": "struct compression_stream",
+    "compression_stream_flags": "enum compression_stream_flags",
+    "compression_stream_operation": "enum compression_stream_operation",
+    "daddr_t": "int32_t",
+    "dev_t": "__darwin_dev_t",
+    "errno_t": "int",
+    "fd_mask": "__int32_t",
+    "fd_set": "struct fd_set",
+    "fixpt_t": "u_int32_t",
+    "fsblkcnt_t": "__darwin_fsblkcnt_t",
+    "fsfilcnt_t": "__darwin_fsfilcnt_t",
+    "gid_t": "__darwin_gid_t",
+    "id": "id",
+    "id_t": "__darwin_id_t",
+    "in_addr_t": "__uint32_t",
+    "in_port_t": "__uint16_t",
+    "ino64_t": "__darwin_ino64_t",
+    "ino_t": "__darwin_ino_t",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "key_t": "__int32_t",
+    "mode_t": "__darwin_mode_t",
+    "nlink_t": "__uint16_t",
+    "off_t": "__darwin_off_t",
+    "os_block_t": "void (^)(void)",
+    "os_function_t": "void (*)(void * _Nullable)",
+    "pid_t": "__darwin_pid_t",
+    "pthread_attr_t": "__darwin_pthread_attr_t",
+    "pthread_cond_t": "__darwin_pthread_cond_t",
+    "pthread_condattr_t": "__darwin_pthread_condattr_t",
+    "pthread_key_t": "__darwin_pthread_key_t",
+    "pthread_mutex_t": "__darwin_pthread_mutex_t",
+    "pthread_mutexattr_t": "__darwin_pthread_mutexattr_t",
+    "pthread_once_t": "__darwin_pthread_once_t",
+    "pthread_rwlock_t": "__darwin_pthread_rwlock_t",
+    "pthread_rwlockattr_t": "__darwin_pthread_rwlockattr_t",
+    "pthread_t": "__darwin_pthread_t",
+    "qaddr_t": "quad_t *",
+    "quad_t": "int64_t",
+    "register_t": "int64_t",
+    "rsize_t": "__darwin_size_t",
+    "segsz_t": "int32_t",
+    "size_t": "__darwin_size_t",
+    "ssize_t": "__darwin_ssize_t",
+    "suseconds_t": "__darwin_suseconds_t",
+    "swblk_t": "int32_t",
+    "syscall_arg_t": "u_int64_t",
+    "time_t": "__darwin_time_t",
+    "u_char": "unsigned char",
+    "u_int": "unsigned int",
+    "u_int16_t": "unsigned short",
+    "u_int32_t": "unsigned int",
+    "u_int64_t": "unsigned long long",
+    "u_int8_t": "unsigned char",
+    "u_long": "unsigned long",
+    "u_quad_t": "u_int64_t",
+    "u_short": "unsigned short",
+    "uid_t": "__darwin_uid_t",
+    "uint": "unsigned int",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long",
+    "useconds_t": "__darwin_useconds_t",
+    "user_addr_t": "u_int64_t",
+    "user_long_t": "int64_t",
+    "user_off_t": "int64_t",
+    "user_size_t": "u_int64_t",
+    "user_ssize_t": "int64_t",
+    "user_time_t": "int64_t",
+    "user_ulong_t": "u_int64_t",
+    "ushort": "unsigned short"
+  },
+  "link_lib": "compression",
+  "header": "compression.h"
+}

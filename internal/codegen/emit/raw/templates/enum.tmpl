@@ -1,0 +1,90 @@
+{{/*
+    enum.tmpl — code generation templates for ObjC enum types.
+
+    Named templates:
+      named_enum   full named ObjC enum: type decl + const block + String/Parse/Serialize/isMultiValue
+      anon_enum    anonymous C enum: const block only (no type declaration)
+*/}}
+
+
+{{define "named_enum"}}{{.CommentBlock}}{{if .IsBitmask}}// Bitmask — values may be combined with |.
+{{end}}type {{.GoName}} {{.GoType}}
+
+const ({{range .Members}}
+{{.CommentBlock}}	{{.ConstName}} {{$.GoName}} = {{.Value}}{{end}}
+)
+
+{{if .HasMembers -}}
+{{if .IsBitmask}}func (i {{.GoName}}) String() string {
+	var values []string
+{{- range .Members}}
+{{- if .IsZeroVal}}
+	if i == 0 {
+		values = append(values, {{.ObjCName | printf "%q"}})
+	}
+{{- else}}
+	if i&{{.ConstName}} == {{.ConstName}} {
+		values = append(values, {{.ObjCName | printf "%q"}})
+	}
+{{- end}}{{end}}
+	return strings.Join(values, ",")
+}
+
+func Parse{{.GoName}}(v string) (any, error) {
+	var result {{.GoName}}
+	for _, str := range strings.Split(v, ",") {
+		switch str {
+{{- range .Members}}
+		case {{.ObjCName | printf "%q"}}:
+			result |= {{.ConstName}}
+{{- end}}
+		default:
+			return nil, nil
+		}
+	}
+	return &result, nil
+}
+{{else}}func (i {{.GoName}}) String() string {
+	switch i {
+{{- range .UniqueMembers}}
+	case {{.ConstName}}:
+		return {{.ObjCName | printf "%q"}}
+{{- end}}
+	default:
+		return fmt.Sprintf("{{.DefaultFmt}}", int64(i))
+	}
+}
+
+func Parse{{.GoName}}(v string) (any, error) {
+	result := {{.FirstConst}}
+	switch v {
+{{- range .Members}}
+	case {{.ObjCName | printf "%q"}}:
+		result = {{.ConstName}}
+{{- end}}
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+{{end}}
+func Serialize{{.GoName}}(values []{{.GoName}}) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i {{.GoName}}) isMultiValue() bool {
+	return {{if .IsBitmask}}true{{else}}false{{end}}
+}
+
+{{end}}{{end}}
+
+
+{{define "anon_enum"}}const ({{range .}}
+	{{.ConstName}} = {{.Value}}{{end}}
+)
+
+{{end}}

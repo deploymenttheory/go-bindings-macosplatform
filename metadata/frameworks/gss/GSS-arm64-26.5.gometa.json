@@ -1,0 +1,4561 @@
+{
+  "framework": "GSS",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {
+    "acl_entry_id_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_FIRST_ENTRY",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_NEXT_ENTRY",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_LAST_ENTRY",
+          "value": "-2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 118
+    },
+    "acl_flag_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_FLAG_DEFER_INHERIT",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_FLAG_NO_INHERIT",
+          "value": "131072",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_INHERITED",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_FILE_INHERIT",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_DIRECTORY_INHERIT",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_LIMIT_INHERIT",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_ONLY_INHERIT",
+          "value": "256",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 125
+    },
+    "acl_perm_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_READ_DATA",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_LIST_DIRECTORY",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_DATA",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ADD_FILE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXECUTE",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "ACL_SEARCH",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "ACL_DELETE",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "ACL_APPEND_DATA",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ADD_SUBDIRECTORY",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_DELETE_CHILD",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_ATTRIBUTES",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_ATTRIBUTES",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_EXTATTRIBUTES",
+          "value": "512",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_EXTATTRIBUTES",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_SECURITY",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_SECURITY",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "ACL_CHANGE_OWNER",
+          "value": "8192",
+          "availability": {}
+        },
+        {
+          "name": "ACL_SYNCHRONIZE",
+          "value": "1048576",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 72
+    },
+    "acl_tag_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_UNDEFINED_TAG",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXTENDED_ALLOW",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXTENDED_DENY",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 94
+    },
+    "acl_type_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_TYPE_EXTENDED",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_ACCESS",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_DEFAULT",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_AFS",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_CODA",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_NTFS",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_NWFS",
+          "value": "5",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 101
+    },
+    "clockid_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "_CLOCK_REALTIME",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW_APPROX",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW_APPROX",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_PROCESS_CPUTIME_ID",
+          "value": "12",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_THREAD_CPUTIME_ID",
+          "value": "16",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "_time.h",
+      "sdk_line": 156
+    },
+    "dispatch_autorelease_frequency_t": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_INHERIT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_NEVER",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "queue.h",
+      "sdk_line": 300,
+      "is_extensible": true
+    },
+    "dispatch_block_flags_t": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "DISPATCH_BLOCK_BARRIER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_BLOCK_DETACHED",
+          "value": "2",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_ASSIGN_CURRENT",
+          "value": "4",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_NO_QOS_CLASS",
+          "value": "8",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_INHERIT_QOS_CLASS",
+          "value": "16",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_ENFORCE_QOS_CLASS",
+          "value": "32",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        }
+      ],
+      "availability": {},
+      "sdk_file": "block.h",
+      "sdk_line": 302,
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "filesec_property_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "FILESEC_OWNER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GROUP",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_UUID",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_MODE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GRPUUID",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_RAW",
+          "value": "100",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_ALLOCSIZE",
+          "value": "101",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "fcntl.h",
+      "sdk_line": 582
+    },
+    "idtype_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "P_ALL",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "P_PID",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "P_PGID",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "wait.h",
+      "sdk_line": 79
+    },
+    "mpo_flags_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "MPO_PORT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "MPO_SERVICE_PORT",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "MPO_REPLY_PORT",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "MPO_WEAK_REPLY_PORT",
+          "value": "16384",
+          "availability": {}
+        },
+        {
+          "name": "MPO_NOTIFICATION_PORT",
+          "value": "17408",
+          "availability": {}
+        },
+        {
+          "name": "MPO_EXCEPTION_PORT",
+          "value": "32768",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT_WITH_PORT_ARRAY",
+          "value": "65536",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "port.h",
+      "sdk_line": 1102,
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "os_clockid_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
+          "value": "32",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "clock.h",
+      "sdk_line": 188
+    },
+    "ptrauth_key": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ptrauth_key_none",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asia",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asib",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asda",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asdb",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_code",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_code",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_data",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_data",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_return_address",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_frame_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_function_pointer",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_function",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_cxx_vtable_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_method_list_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_isa_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_super_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_sel_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_class_ro_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_descriptor_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_init_fini_pointer",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ptrauth.h",
+      "sdk_line": 13
+    },
+    "qos_class_t": {
+      "go_type": "uint32",
+      "members": [
+        {
+          "name": "QOS_CLASS_USER_INTERACTIVE",
+          "value": "33",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_USER_INITIATED",
+          "value": "25",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_DEFAULT",
+          "value": "21",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_UTILITY",
+          "value": "17",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_BACKGROUND",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_UNSPECIFIED",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "qos.h",
+      "sdk_line": 121
+    }
+  },
+  "structs": {
+    "gss_OID_desc_struct": {
+      "fields": [
+        {
+          "name": "length",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "elements",
+          "objc_type": "void *"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 102
+    },
+    "gss_OID_set_desc_struct": {
+      "fields": [
+        {
+          "name": "count",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "elements",
+          "objc_type": "gss_OID"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 108
+    },
+    "gss_auth_identity": {
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 153
+    },
+    "gss_buffer_desc_struct": {
+      "fields": [
+        {
+          "name": "length",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "value",
+          "objc_type": "void *"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 120
+    },
+    "gss_buffer_set_desc_struct": {
+      "fields": [
+        {
+          "name": "count",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "elements",
+          "objc_type": "gss_buffer_desc *"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 136
+    },
+    "gss_channel_bindings_struct": {
+      "fields": [
+        {
+          "name": "initiator_addrtype",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "initiator_address",
+          "objc_type": "gss_buffer_desc"
+        },
+        {
+          "name": "acceptor_addrtype",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "acceptor_address",
+          "objc_type": "gss_buffer_desc"
+        },
+        {
+          "name": "application_data",
+          "objc_type": "gss_buffer_desc"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 126
+    },
+    "gss_cred_id_t_desc_struct": {
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 116
+    },
+    "gss_ctx_id_t_desc_struct": {
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 98
+    },
+    "gss_iov_buffer_desc_struct": {
+      "fields": [
+        {
+          "name": "type",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "gss_buffer_desc"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 141
+    },
+    "gss_krb5_cfx_keydata": {
+      "fields": [
+        {
+          "name": "have_acceptor_subkey",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "ctx_key",
+          "objc_type": "gss_krb5_lucid_key_t"
+        },
+        {
+          "name": "acceptor_subkey",
+          "objc_type": "gss_krb5_lucid_key_t"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi_krb5.h",
+      "sdk_line": 96
+    },
+    "gss_krb5_lucid_context_v1": {
+      "fields": [
+        {
+          "name": "version",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "initiate",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "endtime",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "send_seq",
+          "objc_type": "OM_uint64"
+        },
+        {
+          "name": "recv_seq",
+          "objc_type": "OM_uint64"
+        },
+        {
+          "name": "protocol",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "rfc1964_kd",
+          "objc_type": "gss_krb5_rfc1964_keydata_t"
+        },
+        {
+          "name": "cfx_kd",
+          "objc_type": "gss_krb5_cfx_keydata_t"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi_krb5.h",
+      "sdk_line": 102
+    },
+    "gss_krb5_lucid_context_version": {
+      "fields": [
+        {
+          "name": "version",
+          "objc_type": "OM_uint32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi_krb5.h",
+      "sdk_line": 113
+    },
+    "gss_krb5_lucid_key": {
+      "fields": [
+        {
+          "name": "type",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "length",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "data",
+          "objc_type": "void * _Nullable"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi_krb5.h",
+      "sdk_line": 84
+    },
+    "gss_krb5_rfc1964_keydata": {
+      "fields": [
+        {
+          "name": "sign_alg",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "seal_alg",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "ctx_key",
+          "objc_type": "gss_krb5_lucid_key_t"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "GSS/gssapi_krb5.h",
+      "sdk_line": 90
+    },
+    "gss_name_t_desc_struct": {
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 94
+    },
+    "krb5_ccache_data": {
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 285
+    }
+  },
+  "functions": [
+    {
+      "name": "gss_accept_sec_context",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "acceptor_cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "input_token",
+          "objc_type": "gss_buffer_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "input_chan_bindings",
+          "objc_type": "gss_channel_bindings_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "src_name",
+          "objc_type": "gss_name_t  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "mech_type",
+          "objc_type": "gss_OID  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "output_token",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "ret_flags",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "time_rec",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "delegated_cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 59
+    },
+    {
+      "name": "gss_acquire_cred",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "desired_name",
+          "objc_type": "gss_name_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "time_req",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "desired_mechs",
+          "objc_type": "gss_OID_set  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "cred_usage",
+          "objc_type": "gss_cred_usage_t"
+        },
+        {
+          "name": "output_cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "actual_mechs",
+          "objc_type": "gss_OID_set  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "time_rec",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 73
+    },
+    {
+      "name": "gss_acquire_cred_with_password",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "desired_name",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "password",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        },
+        {
+          "name": "time_req",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "desired_mechs",
+          "objc_type": "gss_OID_set  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "cred_usage",
+          "objc_type": "gss_cred_usage_t"
+        },
+        {
+          "name": "output_cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "actual_mechs",
+          "objc_type": "gss_OID_set  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "time_rec",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 84
+    },
+    {
+      "name": "gss_add_buffer_set_member",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "member_buffer",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        },
+        {
+          "name": "buffer_set",
+          "objc_type": "gss_buffer_set_t  _Nonnull * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 96
+    },
+    {
+      "name": "gss_add_cred",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "input_cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "desired_name",
+          "objc_type": "gss_name_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "desired_mech",
+          "objc_type": "gss_OID  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "cred_usage",
+          "objc_type": "gss_cred_usage_t"
+        },
+        {
+          "name": "initiator_time_req",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "acceptor_time_req",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "output_cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "actual_mechs",
+          "objc_type": "gss_OID_set  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "initiator_time_rec",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "acceptor_time_rec",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 102
+    },
+    {
+      "name": "gss_add_oid_set_member",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "member_oid",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "oid_set",
+          "objc_type": "gss_OID_set  _Nonnull * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 134
+    },
+    {
+      "name": "gss_canonicalize_name",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "input_name",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "mech_type",
+          "objc_type": "gss_OID  _Nonnull const"
+        },
+        {
+          "name": "output_name",
+          "objc_type": "gss_name_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 164
+    },
+    {
+      "name": "gss_compare_name",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "name1_arg",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "name2_arg",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "name_equal",
+          "objc_type": "int * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 171
+    },
+    {
+      "name": "gss_context_time",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nonnull const"
+        },
+        {
+          "name": "time_rec",
+          "objc_type": "OM_uint32 * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 178
+    },
+    {
+      "name": "gss_create_empty_buffer_set",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "buffer_set",
+          "objc_type": "gss_buffer_set_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 184
+    },
+    {
+      "name": "gss_create_empty_oid_set",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "oid_set",
+          "objc_type": "gss_OID_set  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 189
+    },
+    {
+      "name": "gss_decapsulate_token",
+      "args": [
+        {
+          "name": "input_token",
+          "objc_type": "gss_const_buffer_t _Nonnull"
+        },
+        {
+          "name": "oid",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "output_token",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 194
+    },
+    {
+      "name": "gss_delete_sec_context",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "output_token",
+          "objc_type": "gss_buffer_t _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 200
+    },
+    {
+      "name": "gss_destroy_cred",
+      "args": [
+        {
+          "name": "min_stat",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 220
+    },
+    {
+      "name": "gss_display_mech_attr",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "mech_attr",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "name",
+          "objc_type": "gss_buffer_t _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "short_desc",
+          "objc_type": "gss_buffer_t _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "long_desc",
+          "objc_type": "gss_buffer_t _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 237
+    },
+    {
+      "name": "gss_display_name",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "input_name",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "output_name_buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "output_name_type",
+          "objc_type": "gss_OID  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 262
+    },
+    {
+      "name": "gss_display_status",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "status_value",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "status_type",
+          "objc_type": "int"
+        },
+        {
+          "name": "mech_type",
+          "objc_type": "gss_OID  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "message_content",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "status_string",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 269
+    },
+    {
+      "name": "gss_duplicate_name",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "src_name",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "dest_name",
+          "objc_type": "gss_name_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 278
+    },
+    {
+      "name": "gss_duplicate_oid",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "src_oid",
+          "objc_type": "gss_OID _Nonnull"
+        },
+        {
+          "name": "dest_oid",
+          "objc_type": "gss_OID  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 284
+    },
+    {
+      "name": "gss_encapsulate_token",
+      "args": [
+        {
+          "name": "input_token",
+          "objc_type": "gss_const_buffer_t _Nonnull"
+        },
+        {
+          "name": "oid",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "output_token",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 290
+    },
+    {
+      "name": "gss_export_cred",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "cred_handle",
+          "objc_type": "gss_cred_id_t _Nonnull"
+        },
+        {
+          "name": "token",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 296
+    },
+    {
+      "name": "gss_export_name",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "input_name",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "exported_name",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 302
+    },
+    {
+      "name": "gss_export_sec_context",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "interprocess_token",
+          "objc_type": "gss_buffer_t _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 308
+    },
+    {
+      "name": "gss_get_mic",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nonnull const"
+        },
+        {
+          "name": "qop_req",
+          "objc_type": "gss_qop_t"
+        },
+        {
+          "name": "message_buffer",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        },
+        {
+          "name": "message_token",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 314
+    },
+    {
+      "name": "gss_import_cred",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "token",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 322
+    },
+    {
+      "name": "gss_import_name",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "input_name_buffer",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        },
+        {
+          "name": "input_name_type",
+          "objc_type": "gss_const_OID _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "output_name",
+          "objc_type": "gss_name_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 353
+    },
+    {
+      "name": "gss_import_sec_context",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "interprocess_token",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 364
+    },
+    {
+      "name": "gss_indicate_mechs",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "mech_set",
+          "objc_type": "gss_OID_set  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 370
+    },
+    {
+      "name": "gss_indicate_mechs_by_attrs",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "desired_mech_attrs",
+          "objc_type": "gss_const_OID_set _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "except_mech_attrs",
+          "objc_type": "gss_const_OID_set _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "critical_mech_attrs",
+          "objc_type": "gss_const_OID_set _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "mechs",
+          "objc_type": "gss_OID_set  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 381
+    },
+    {
+      "name": "gss_init_sec_context",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "initiator_cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "target_name",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "input_mech_type",
+          "objc_type": "gss_OID  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "req_flags",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "time_req",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "input_chan_bindings",
+          "objc_type": "gss_channel_bindings_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "input_token",
+          "objc_type": "gss_buffer_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "actual_mech_type",
+          "objc_type": "gss_OID  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "output_token",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "ret_flags",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "time_rec",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 450
+    },
+    {
+      "name": "gss_inquire_attrs_for_mech",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "mech",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "mech_attr",
+          "objc_type": "gss_OID_set  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "known_mech_attrs",
+          "objc_type": "gss_OID_set  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 480
+    },
+    {
+      "name": "gss_inquire_context",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nonnull const"
+        },
+        {
+          "name": "src_name",
+          "objc_type": "gss_name_t  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "targ_name",
+          "objc_type": "gss_name_t  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "lifetime_rec",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "mech_type",
+          "objc_type": "gss_OID  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "ctx_flags",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "locally_initiated",
+          "objc_type": "int * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "xopen",
+          "objc_type": "int * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 487
+    },
+    {
+      "name": "gss_inquire_cred",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "name_ret",
+          "objc_type": "gss_name_t  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "lifetime",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "cred_usage",
+          "objc_type": "gss_cred_usage_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "mechanisms",
+          "objc_type": "gss_OID_set  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 499
+    },
+    {
+      "name": "gss_inquire_cred_by_mech",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "mech_type",
+          "objc_type": "gss_OID  _Nonnull const"
+        },
+        {
+          "name": "cred_name",
+          "objc_type": "gss_name_t  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "initiator_lifetime",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "acceptor_lifetime",
+          "objc_type": "OM_uint32 * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "cred_usage",
+          "objc_type": "gss_cred_usage_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 508
+    },
+    {
+      "name": "gss_inquire_cred_by_oid",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "cred_handle",
+          "objc_type": "gss_cred_id_t  _Nonnull const"
+        },
+        {
+          "name": "desired_object",
+          "objc_type": "gss_OID  _Nonnull const"
+        },
+        {
+          "name": "data_set",
+          "objc_type": "gss_buffer_set_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 518
+    },
+    {
+      "name": "gss_inquire_mech_for_saslname",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "sasl_mech_name",
+          "objc_type": "gss_buffer_t  _Nullable const",
+          "nullable": true
+        },
+        {
+          "name": "mech_type",
+          "objc_type": "gss_OID  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 535
+    },
+    {
+      "name": "gss_inquire_mechs_for_name",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "input_name",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "mech_types",
+          "objc_type": "gss_OID_set  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 541
+    },
+    {
+      "name": "gss_inquire_name",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "input_name",
+          "objc_type": "gss_name_t _Nonnull"
+        },
+        {
+          "name": "name_is_MN",
+          "objc_type": "int * _Nonnull"
+        },
+        {
+          "name": "MN_mech",
+          "objc_type": "gss_OID  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "attrs",
+          "objc_type": "gss_buffer_set_t  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 547
+    },
+    {
+      "name": "gss_inquire_names_for_mech",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "mechanism",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "name_types",
+          "objc_type": "gss_OID_set  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 555
+    },
+    {
+      "name": "gss_inquire_saslname_for_mech",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "desired_mech",
+          "objc_type": "gss_OID  _Nonnull const"
+        },
+        {
+          "name": "sasl_mech_name",
+          "objc_type": "gss_buffer_t _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "mech_name",
+          "objc_type": "gss_buffer_t _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "mech_description",
+          "objc_type": "gss_buffer_t _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 575
+    },
+    {
+      "name": "gss_inquire_sec_context_by_oid",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nonnull const"
+        },
+        {
+          "name": "desired_object",
+          "objc_type": "gss_OID  _Nonnull const"
+        },
+        {
+          "name": "data_set",
+          "objc_type": "gss_buffer_set_t  _Nonnull * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 583
+    },
+    {
+      "name": "gss_iter_creds",
+      "args": [
+        {
+          "name": "min_stat",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "mech",
+          "objc_type": "gss_const_OID _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "useriter",
+          "objc_type": "void (^ _Nonnull)(gss_OID _Nullable, gss_cred_id_t _Nullable)",
+          "is_block": true,
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 602
+    },
+    {
+      "name": "gss_iter_creds_f",
+      "args": [
+        {
+          "name": "min_stat",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "mech",
+          "objc_type": "gss_const_OID _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "userctx",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "useriter",
+          "objc_type": "void (* _Nonnull)(void * _Nullable, gss_OID _Nullable, gss_cred_id_t _Nullable)",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 622
+    },
+    {
+      "name": "gss_krb5_ccache_name",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "name",
+          "objc_type": "const char * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "out_name",
+          "objc_type": "const char * _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 630
+    },
+    {
+      "name": "gss_krb5_copy_ccache",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "cred",
+          "objc_type": "gss_cred_id_t _Nonnull"
+        },
+        {
+          "name": "out",
+          "objc_type": "struct krb5_ccache_data * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 636
+    },
+    {
+      "name": "gss_krb5_export_lucid_sec_context",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "version",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "rctx",
+          "objc_type": "void * _Nonnull * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 642
+    },
+    {
+      "name": "gss_krb5_free_lucid_sec_context",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "c",
+          "objc_type": "void * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 649
+    },
+    {
+      "name": "gss_krb5_set_allowable_enctypes",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "cred",
+          "objc_type": "gss_cred_id_t _Nonnull"
+        },
+        {
+          "name": "num_enctypes",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "enctypes",
+          "objc_type": "int32_t * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 654
+    },
+    {
+      "name": "gss_oid_equal",
+      "args": [
+        {
+          "name": "a",
+          "objc_type": "gss_const_OID _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "b",
+          "objc_type": "gss_const_OID _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 675
+    },
+    {
+      "name": "gss_oid_to_str",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "oid",
+          "objc_type": "gss_OID _Nonnull"
+        },
+        {
+          "name": "oid_str",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 698
+    },
+    {
+      "name": "gss_process_context_token",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nonnull const"
+        },
+        {
+          "name": "token_buffer",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 704
+    },
+    {
+      "name": "gss_pseudo_random",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context",
+          "objc_type": "gss_ctx_id_t _Nonnull"
+        },
+        {
+          "name": "prf_key",
+          "objc_type": "int"
+        },
+        {
+          "name": "prf_in",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        },
+        {
+          "name": "desired_output_len",
+          "objc_type": "ssize_t"
+        },
+        {
+          "name": "prf_out",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 710
+    },
+    {
+      "name": "gss_release_buffer",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 719
+    },
+    {
+      "name": "gss_release_buffer_set",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "buffer_set",
+          "objc_type": "gss_buffer_set_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 724
+    },
+    {
+      "name": "gss_release_cred",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 751
+    },
+    {
+      "name": "gss_release_name",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "input_name",
+          "objc_type": "gss_name_t  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 772
+    },
+    {
+      "name": "gss_release_oid",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "oid",
+          "objc_type": "gss_OID  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 799
+    },
+    {
+      "name": "gss_release_oid_set",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "set",
+          "objc_type": "gss_OID_set  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 804
+    },
+    {
+      "name": "gss_seal",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t _Nonnull"
+        },
+        {
+          "name": "conf_req_flag",
+          "objc_type": "int"
+        },
+        {
+          "name": "qop_req",
+          "objc_type": "int"
+        },
+        {
+          "name": "input_message_buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "conf_state",
+          "objc_type": "int * _Nonnull"
+        },
+        {
+          "name": "output_message_buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 809
+    },
+    {
+      "name": "gss_set_cred_option",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "object",
+          "objc_type": "gss_OID  _Nonnull const"
+        },
+        {
+          "name": "value",
+          "objc_type": "gss_buffer_t  _Nullable const",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 819
+    },
+    {
+      "name": "gss_set_sec_context_option",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nonnull * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "object",
+          "objc_type": "gss_OID  _Nonnull const"
+        },
+        {
+          "name": "value",
+          "objc_type": "gss_buffer_t  _Nullable const",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 826
+    },
+    {
+      "name": "gss_sign",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t _Nonnull"
+        },
+        {
+          "name": "qop_req",
+          "objc_type": "int"
+        },
+        {
+          "name": "message_buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "message_token",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 833
+    },
+    {
+      "name": "gss_test_oid_set_member",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "member",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "set",
+          "objc_type": "gss_OID_set  _Nonnull const"
+        },
+        {
+          "name": "present",
+          "objc_type": "int * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 841
+    },
+    {
+      "name": "gss_unseal",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t _Nonnull"
+        },
+        {
+          "name": "input_message_buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "output_message_buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "conf_state",
+          "objc_type": "int * _Nonnull"
+        },
+        {
+          "name": "qop_state",
+          "objc_type": "int * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 848
+    },
+    {
+      "name": "gss_unwrap",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nonnull const"
+        },
+        {
+          "name": "input_message_buffer",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        },
+        {
+          "name": "output_message_buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "conf_state",
+          "objc_type": "int * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "qop_state",
+          "objc_type": "gss_qop_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 857
+    },
+    {
+      "name": "gss_userok",
+      "args": [
+        {
+          "name": "name",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "user",
+          "objc_type": "const char * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 866
+    },
+    {
+      "name": "gss_verify",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t _Nonnull"
+        },
+        {
+          "name": "message_buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "token_buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        },
+        {
+          "name": "qop_state",
+          "objc_type": "int * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 871
+    },
+    {
+      "name": "gss_verify_mic",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nonnull const"
+        },
+        {
+          "name": "message_buffer",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        },
+        {
+          "name": "token_buffer",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        },
+        {
+          "name": "qop_state",
+          "objc_type": "gss_qop_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 879
+    },
+    {
+      "name": "gss_wrap",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nonnull const"
+        },
+        {
+          "name": "conf_req_flag",
+          "objc_type": "int"
+        },
+        {
+          "name": "qop_req",
+          "objc_type": "gss_qop_t"
+        },
+        {
+          "name": "input_message_buffer",
+          "objc_type": "gss_buffer_t  _Nonnull const"
+        },
+        {
+          "name": "conf_state",
+          "objc_type": "int * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "output_message_buffer",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 902
+    },
+    {
+      "name": "gss_wrap_size_limit",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t  _Nonnull const"
+        },
+        {
+          "name": "conf_req_flag",
+          "objc_type": "int"
+        },
+        {
+          "name": "qop_req",
+          "objc_type": "gss_qop_t"
+        },
+        {
+          "name": "req_output_size",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "max_input_size",
+          "objc_type": "OM_uint32 * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 912
+    },
+    {
+      "name": "gsskrb5_extract_authz_data_from_sec_context",
+      "args": [
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32 * _Nonnull"
+        },
+        {
+          "name": "context_handle",
+          "objc_type": "gss_ctx_id_t _Nonnull"
+        },
+        {
+          "name": "ad_type",
+          "objc_type": "int"
+        },
+        {
+          "name": "ad_data",
+          "objc_type": "gss_buffer_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 921
+    },
+    {
+      "name": "gsskrb5_register_acceptor_identity",
+      "args": [
+        {
+          "name": "identity",
+          "objc_type": "const char * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 928
+    },
+    {
+      "name": "krb5_gss_register_acceptor_identity",
+      "args": [
+        {
+          "name": "identity",
+          "objc_type": "const char * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_protos.h",
+      "sdk_line": 931
+    },
+    {
+      "name": "GSSCreateCredentialFromUUID",
+      "args": [
+        {
+          "name": "uuid",
+          "objc_type": "CFUUIDRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "gss_cred_id_t  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_apple.h",
+      "sdk_line": 45
+    },
+    {
+      "name": "GSSCreateError",
+      "args": [
+        {
+          "name": "mech",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "major_status",
+          "objc_type": "OM_uint32"
+        },
+        {
+          "name": "minor_status",
+          "objc_type": "OM_uint32"
+        }
+      ],
+      "return": {
+        "objc_type": "CFErrorRef  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_apple.h",
+      "sdk_line": 48
+    },
+    {
+      "name": "GSSCreateName",
+      "args": [
+        {
+          "name": "name",
+          "objc_type": "CFTypeRef _Nonnull"
+        },
+        {
+          "name": "name_type",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "gss_name_t  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_apple.h",
+      "sdk_line": 66
+    },
+    {
+      "name": "GSSCredentialCopyName",
+      "args": [
+        {
+          "name": "cred",
+          "objc_type": "gss_cred_id_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "gss_name_t  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_apple.h",
+      "sdk_line": 82
+    },
+    {
+      "name": "GSSCredentialCopyUUID",
+      "args": [
+        {
+          "name": "credential",
+          "objc_type": "gss_cred_id_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFUUIDRef  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_apple.h",
+      "sdk_line": 97
+    },
+    {
+      "name": "GSSCredentialGetLifetime",
+      "args": [
+        {
+          "name": "cred",
+          "objc_type": "gss_cred_id_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_apple.h",
+      "sdk_line": 111
+    },
+    {
+      "name": "GSSNameCreateDisplayString",
+      "args": [
+        {
+          "name": "name",
+          "objc_type": "gss_name_t _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_apple.h",
+      "sdk_line": 125
+    },
+    {
+      "name": "gss_aapl_change_password",
+      "args": [
+        {
+          "name": "name",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "mech",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "attributes",
+          "objc_type": "CFDictionaryRef _Nonnull"
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_apple.h",
+      "sdk_line": 143
+    },
+    {
+      "name": "gss_aapl_initial_cred",
+      "args": [
+        {
+          "name": "desired_name",
+          "objc_type": "gss_name_t  _Nonnull const"
+        },
+        {
+          "name": "desired_mech",
+          "objc_type": "gss_const_OID _Nonnull"
+        },
+        {
+          "name": "attributes",
+          "objc_type": "CFDictionaryRef _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "output_cred_handle",
+          "objc_type": "gss_cred_id_t  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "OM_uint32"
+      },
+      "availability": {},
+      "sdk_file": "GSS/gssapi_apple.h",
+      "sdk_line": 205
+    }
+  ],
+  "externs": [
+    {
+      "name": "__gss_krb5_copy_ccache_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 9
+    },
+    {
+      "name": "__gss_krb5_get_tkt_flags_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 12
+    },
+    {
+      "name": "__gss_krb5_extract_authz_data_from_sec_context_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 15
+    },
+    {
+      "name": "__gss_krb5_compat_des3_mic_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 18
+    },
+    {
+      "name": "__gss_krb5_register_acceptor_identity_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 21
+    },
+    {
+      "name": "__gss_krb5_export_lucid_context_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 24
+    },
+    {
+      "name": "__gss_krb5_export_lucid_context_v1_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 27
+    },
+    {
+      "name": "__gss_krb5_set_dns_canonicalize_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 30
+    },
+    {
+      "name": "__gss_krb5_get_subkey_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 33
+    },
+    {
+      "name": "__gss_krb5_get_initiator_subkey_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 36
+    },
+    {
+      "name": "__gss_krb5_get_acceptor_subkey_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 39
+    },
+    {
+      "name": "__gss_krb5_send_to_kdc_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 42
+    },
+    {
+      "name": "__gss_krb5_get_authtime_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 45
+    },
+    {
+      "name": "__gss_krb5_get_service_keyblock_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 48
+    },
+    {
+      "name": "__gss_krb5_set_allowable_enctypes_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 51
+    },
+    {
+      "name": "__gss_krb5_set_default_realm_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 54
+    },
+    {
+      "name": "__gss_krb5_ccache_name_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 57
+    },
+    {
+      "name": "__gss_krb5_set_time_offset_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 60
+    },
+    {
+      "name": "__gss_krb5_get_time_offset_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 63
+    },
+    {
+      "name": "__gss_krb5_plugin_register_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 66
+    },
+    {
+      "name": "__gss_ntlm_get_session_key_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 69
+    },
+    {
+      "name": "__gss_c_nt_ntlm_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 72
+    },
+    {
+      "name": "__gss_c_nt_dn_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 75
+    },
+    {
+      "name": "__gss_krb5_nt_principal_name_referral_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 78
+    },
+    {
+      "name": "__gss_c_ntlm_guest_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 81
+    },
+    {
+      "name": "__gss_c_ntlm_v1_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 84
+    },
+    {
+      "name": "__gss_c_ntlm_v2_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 87
+    },
+    {
+      "name": "__gss_c_ntlm_session_key_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 90
+    },
+    {
+      "name": "__gss_c_ntlm_force_v1_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 93
+    },
+    {
+      "name": "__gss_krb5_cred_no_ci_flags_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 96
+    },
+    {
+      "name": "__gss_c_nt_uuid_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 99
+    },
+    {
+      "name": "__gss_c_ntlm_support_channelbindings_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 102
+    },
+    {
+      "name": "__gss_c_ntlm_support_lm2_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 105
+    },
+    {
+      "name": "__gss_krb5_import_cred_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 108
+    },
+    {
+      "name": "__gss_c_ntlm_reset_keys_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 112
+    },
+    {
+      "name": "__gss_c_cred_diag_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 115
+    },
+    {
+      "name": "__gss_c_cred_validate_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 118
+    },
+    {
+      "name": "__gss_c_cred_set_default_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 121
+    },
+    {
+      "name": "__gss_c_cred_get_default_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 124
+    },
+    {
+      "name": "__gss_c_cred_renew_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 127
+    },
+    {
+      "name": "__gss_c_ctx_pfs_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 130
+    },
+    {
+      "name": "__gss_c_ma_sasl_mech_name_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 134
+    },
+    {
+      "name": "__gss_c_ma_mech_name_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 137
+    },
+    {
+      "name": "__gss_c_ma_mech_description_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 140
+    },
+    {
+      "name": "__gss_c_cred_password_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 144
+    },
+    {
+      "name": "__gss_c_cred_certificate_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 147
+    },
+    {
+      "name": "__gss_c_cred_secidentity_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 150
+    },
+    {
+      "name": "__gss_c_cred_heimbase_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 153
+    },
+    {
+      "name": "__gss_sasl_digest_md5_mechanism_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 157
+    },
+    {
+      "name": "__gss_netlogon_mechanism_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 160
+    },
+    {
+      "name": "__gss_appl_lkdc_supported_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 163
+    },
+    {
+      "name": "__gss_netlogon_set_session_key_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 167
+    },
+    {
+      "name": "__gss_netlogon_set_sign_algorithm_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 170
+    },
+    {
+      "name": "__gss_netlogon_nt_netbios_dns_name_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 173
+    },
+    {
+      "name": "__gss_c_inq_win2k_pac_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 177
+    },
+    {
+      "name": "__gss_c_inq_sspi_session_key_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 180
+    },
+    {
+      "name": "__gss_krb5_mechanism_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 186
+    },
+    {
+      "name": "__gss_ntlm_mechanism_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 189
+    },
+    {
+      "name": "__gss_iakerb_mechanism_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 192
+    },
+    {
+      "name": "__gss_pku2u_mechanism_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 195
+    },
+    {
+      "name": "__gss_spnego_mechanism_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 198
+    },
+    {
+      "name": "__gss_scram_mechanism_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 201
+    },
+    {
+      "name": "__gss_c_nt_user_name_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 207
+    },
+    {
+      "name": "__gss_c_nt_machine_uid_name_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 210
+    },
+    {
+      "name": "__gss_c_nt_string_uid_name_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 213
+    },
+    {
+      "name": "__gss_c_nt_hostbased_service_x_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 216
+    },
+    {
+      "name": "__gss_c_nt_hostbased_service_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 219
+    },
+    {
+      "name": "__gss_c_nt_anonymous_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 222
+    },
+    {
+      "name": "__gss_c_nt_export_name_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 225
+    },
+    {
+      "name": "__gss_krb5_nt_principal_name_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 228
+    },
+    {
+      "name": "__gss_krb5_nt_principal_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 231
+    },
+    {
+      "name": "__gss_c_peer_has_updated_spnego_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 235
+    },
+    {
+      "name": "__gss_c_ma_mech_concrete_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 244
+    },
+    {
+      "name": "__gss_c_ma_mech_pseudo_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 247
+    },
+    {
+      "name": "__gss_c_ma_mech_composite_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 250
+    },
+    {
+      "name": "__gss_c_ma_mech_nego_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 253
+    },
+    {
+      "name": "__gss_c_ma_mech_glue_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 256
+    },
+    {
+      "name": "__gss_c_ma_not_mech_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 259
+    },
+    {
+      "name": "__gss_c_ma_deprecated_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 262
+    },
+    {
+      "name": "__gss_c_ma_not_dflt_mech_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 265
+    },
+    {
+      "name": "__gss_c_ma_itok_framed_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 268
+    },
+    {
+      "name": "__gss_c_ma_auth_init_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 271
+    },
+    {
+      "name": "__gss_c_ma_auth_targ_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 274
+    },
+    {
+      "name": "__gss_c_ma_auth_init_init_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 277
+    },
+    {
+      "name": "__gss_c_ma_auth_targ_init_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 280
+    },
+    {
+      "name": "__gss_c_ma_auth_init_anon_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 283
+    },
+    {
+      "name": "__gss_c_ma_auth_targ_anon_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 286
+    },
+    {
+      "name": "__gss_c_ma_deleg_cred_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 289
+    },
+    {
+      "name": "__gss_c_ma_integ_prot_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 292
+    },
+    {
+      "name": "__gss_c_ma_conf_prot_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 295
+    },
+    {
+      "name": "__gss_c_ma_mic_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 298
+    },
+    {
+      "name": "__gss_c_ma_wrap_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 301
+    },
+    {
+      "name": "__gss_c_ma_prot_ready_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 304
+    },
+    {
+      "name": "__gss_c_ma_replay_det_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 307
+    },
+    {
+      "name": "__gss_c_ma_oos_det_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 310
+    },
+    {
+      "name": "__gss_c_ma_cbindings_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 313
+    },
+    {
+      "name": "__gss_c_ma_pfs_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 316
+    },
+    {
+      "name": "__gss_c_ma_compress_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 319
+    },
+    {
+      "name": "__gss_c_ma_ctx_trans_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_oid.h",
+      "sdk_line": 322
+    },
+    {
+      "name": "__gss_c_attr_local_login_user",
+      "objc_type": "gss_buffer_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi.h",
+      "sdk_line": 385
+    },
+    {
+      "name": "__gss_krb5_nt_principal_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_krb5.h",
+      "sdk_line": 57
+    },
+    {
+      "name": "__gss_krb5_nt_principal_name_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_krb5.h",
+      "sdk_line": 60
+    },
+    {
+      "name": "__gss_krb5_nt_principal_name_referral_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_krb5.h",
+      "sdk_line": 63
+    },
+    {
+      "name": "__gss_spnego_mechanism_oid_desc",
+      "objc_type": "gss_OID_desc",
+      "availability": {},
+      "sdk_file": "GSS/gssapi_spnego.h",
+      "sdk_line": 49
+    }
+  ],
+  "block_types": {},
+  "typedefs": {
+    "AbsoluteTime": "UnsignedWide",
+    "BOOL": "bool",
+    "Boolean": "unsigned char",
+    "Byte": "UInt8",
+    "ByteCount": "unsigned long",
+    "ByteOffset": "unsigned long",
+    "BytePtr": "UInt8 *",
+    "CharParameter": "short",
+    "Class": "struct objc_class *",
+    "CompTimeValue": "wide",
+    "ConstLogicalAddress": "const void *",
+    "ConstStr15Param": "const unsigned char *",
+    "ConstStr255Param": "const unsigned char *",
+    "ConstStr27Param": "const unsigned char *",
+    "ConstStr31Param": "const unsigned char *",
+    "ConstStr32Param": "const unsigned char *",
+    "ConstStr63Param": "const unsigned char *",
+    "ConstStrFileNameParam": "ConstStr63Param",
+    "ConstStringPtr": "const unsigned char *",
+    "Duration": "SInt32",
+    "FILE": "struct __sFILE",
+    "Fixed": "SInt32",
+    "FixedPoint": "struct FixedPoint",
+    "FixedPtr": "Fixed *",
+    "FixedRect": "struct FixedRect",
+    "Float32": "float",
+    "Float32Point": "struct Float32Point",
+    "Float64": "double",
+    "Float80": "struct Float80",
+    "Float96": "struct Float96",
+    "FourCharCode": "UInt32",
+    "Fract": "SInt32",
+    "FractPtr": "Fract *",
+    "Handle": "Ptr *",
+    "IMP": "void (*)(void)",
+    "ItemCount": "unsigned long",
+    "LangCode": "SInt16",
+    "LogicalAddress": "void *",
+    "NSInteger": "long",
+    "NSUInteger": "unsigned long",
+    "NumVersion": "struct NumVersion",
+    "NumVersionVariant": "union NumVersionVariant",
+    "NumVersionVariantHandle": "NumVersionVariantPtr *",
+    "NumVersionVariantPtr": "NumVersionVariant *",
+    "OM_uint32": "uint32_t",
+    "OM_uint64": "uint64_t",
+    "OSErr": "SInt16",
+    "OSStatus": "SInt32",
+    "OSType": "FourCharCode",
+    "OSTypePtr": "OSType *",
+    "OptionBits": "UInt32",
+    "PBVersion": "UInt32",
+    "PRefCon": "void *",
+    "PhysicalAddress": "void *",
+    "Point": "struct Point",
+    "PointPtr": "Point *",
+    "ProcHandle": "ProcPtr *",
+    "ProcPtr": "long (*)(void)",
+    "ProcessSerialNumber": "struct ProcessSerialNumber",
+    "ProcessSerialNumberPtr": "ProcessSerialNumber *",
+    "Ptr": "char *",
+    "Rect": "struct Rect",
+    "RectPtr": "Rect *",
+    "RegionCode": "SInt16",
+    "Register68kProcPtr": "void (*)(void)",
+    "ResType": "FourCharCode",
+    "ResTypePtr": "ResType *",
+    "SEL": "struct objc_selector *",
+    "SInt16": "short",
+    "SInt32": "int",
+    "SInt64": "long long",
+    "SInt8": "signed char",
+    "SRefCon": "void *",
+    "ScriptCode": "SInt16",
+    "ShortFixed": "short",
+    "ShortFixedPtr": "ShortFixed *",
+    "SignedByte": "SInt8",
+    "Size": "long",
+    "Str15": "unsigned char[16]",
+    "Str255": "unsigned char[256]",
+    "Str27": "unsigned char[28]",
+    "Str31": "unsigned char[32]",
+    "Str32": "unsigned char[33]",
+    "Str32Field": "unsigned char[34]",
+    "Str63": "unsigned char[64]",
+    "StrFileName": "Str63",
+    "StringHandle": "StringPtr *",
+    "StringPtr": "unsigned char *",
+    "Style": "unsigned char",
+    "StyleField": "Style",
+    "StyleParameter": "short",
+    "TimeBase": "struct TimeBaseRecord *",
+    "TimeRecord": "struct TimeRecord",
+    "TimeScale": "SInt32",
+    "TimeValue": "SInt32",
+    "TimeValue64": "SInt64",
+    "UInt16": "unsigned short",
+    "UInt32": "unsigned int",
+    "UInt64": "unsigned long long",
+    "UInt8": "unsigned char",
+    "URefCon": "void *",
+    "UTF16Char": "UInt16",
+    "UTF32Char": "UInt32",
+    "UTF8Char": "UInt8",
+    "UniChar": "UInt16",
+    "UniCharCount": "unsigned long",
+    "UniCharCountPtr": "UniCharCount *",
+    "UniCharPtr": "UniChar *",
+    "UnicodeScalarValue": "UInt32",
+    "UniversalProcHandle": "UniversalProcPtr *",
+    "UniversalProcPtr": "ProcPtr",
+    "UnsignedFixed": "UInt32",
+    "UnsignedFixedPtr": "UnsignedFixed *",
+    "UnsignedWide": "struct UnsignedWide",
+    "UnsignedWidePtr": "UnsignedWide *",
+    "VHSelect": "SInt8",
+    "VersRec": "struct VersRec",
+    "VersRecHndl": "VersRecPtr *",
+    "VersRecPtr": "VersRec *",
+    "WidePtr": "wide *",
+    "_RuneCharClass": "struct _RuneCharClass",
+    "_RuneEntry": "struct _RuneEntry",
+    "_RuneLocale": "struct _RuneLocale",
+    "_RuneRange": "struct _RuneRange",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_nl_item": "int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wctrans_t": "int",
+    "__darwin_wctype_t": "__uint32_t",
+    "__darwin_wint_t": "int",
+    "__gnuc_va_list": "__builtin_va_list",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "acl_entry_id_t": "enum acl_entry_id_t",
+    "acl_entry_t": "struct _acl_entry *",
+    "acl_flag_t": "enum acl_flag_t",
+    "acl_flagset_t": "struct _acl_flagset *",
+    "acl_perm_t": "enum acl_perm_t",
+    "acl_permset_mask_t": "u_int64_t",
+    "acl_permset_t": "struct _acl_permset *",
+    "acl_t": "struct _acl *",
+    "acl_tag_t": "enum acl_tag_t",
+    "acl_type_t": "enum acl_type_t",
+    "alarm_type_t": "int",
+    "audit_token_t": "struct audit_token_t",
+    "blkcnt_t": "__darwin_blkcnt_t",
+    "blksize_t": "__darwin_blksize_t",
+    "boolean_t": "int",
+    "caddr_t": "char *",
+    "clock_attr_t": "int *",
+    "clock_flavor_t": "int",
+    "clock_id_t": "int",
+    "clock_res_t": "int",
+    "clock_t": "__darwin_clock_t",
+    "clockid_t": "enum clockid_t",
+    "cpu_subtype_t": "integer_t",
+    "cpu_threadtype_t": "integer_t",
+    "cpu_type_t": "integer_t",
+    "ct_rune_t": "__darwin_ct_rune_t",
+    "daddr_t": "int32_t",
+    "dev_t": "__darwin_dev_t",
+    "dispatch_autorelease_frequency_t": "enum dispatch_autorelease_frequency_t",
+    "dispatch_block_flags_t": "enum dispatch_block_flags_t",
+    "dispatch_block_t": "void (^)(void)",
+    "dispatch_data_applier_t": "bool (^)(dispatch_data_t _Nonnull, size_t, const void * _Nonnull, size_t)",
+    "dispatch_data_t": "NSObject\u003cOS_dispatch_data\u003e *",
+    "dispatch_fd_t": "int",
+    "dispatch_function_t": "void (*)(void * _Nullable)",
+    "dispatch_group_t": "NSObject\u003cOS_dispatch_group\u003e *",
+    "dispatch_io_close_flags_t": "unsigned long",
+    "dispatch_io_handler_t": "void (^)(bool, dispatch_data_t _Nullable, int)",
+    "dispatch_io_interval_flags_t": "unsigned long",
+    "dispatch_io_t": "NSObject\u003cOS_dispatch_io\u003e *",
+    "dispatch_io_type_t": "unsigned long",
+    "dispatch_object_t": "NSObject\u003cOS_dispatch_object\u003e *",
+    "dispatch_once_t": "intptr_t",
+    "dispatch_qos_class_t": "qos_class_t",
+    "dispatch_queue_attr_t": "NSObject\u003cOS_dispatch_queue_attr\u003e *",
+    "dispatch_queue_concurrent_t": "NSObject\u003cOS_dispatch_queue_concurrent\u003e *",
+    "dispatch_queue_global_t": "NSObject\u003cOS_dispatch_queue_global\u003e *",
+    "dispatch_queue_main_t": "NSObject\u003cOS_dispatch_queue_main\u003e *",
+    "dispatch_queue_priority_t": "long",
+    "dispatch_queue_serial_executor_t": "NSObject\u003cOS_dispatch_queue_serial_executor\u003e *",
+    "dispatch_queue_serial_t": "NSObject\u003cOS_dispatch_queue_serial\u003e *",
+    "dispatch_queue_t": "NSObject\u003cOS_dispatch_queue\u003e *",
+    "dispatch_semaphore_t": "NSObject\u003cOS_dispatch_semaphore\u003e *",
+    "dispatch_source_mach_recv_flags_t": "unsigned long",
+    "dispatch_source_mach_send_flags_t": "unsigned long",
+    "dispatch_source_memorypressure_flags_t": "unsigned long",
+    "dispatch_source_proc_flags_t": "unsigned long",
+    "dispatch_source_t": "NSObject\u003cOS_dispatch_source\u003e *",
+    "dispatch_source_timer_flags_t": "unsigned long",
+    "dispatch_source_type_t": "const struct dispatch_source_type_s *",
+    "dispatch_source_vnode_flags_t": "unsigned long",
+    "dispatch_time_t": "uint64_t",
+    "dispatch_workloop_t": "NSObject\u003cOS_dispatch_workloop\u003e *",
+    "div_t": "struct div_t",
+    "double_t": "double",
+    "errno_t": "int",
+    "extended80": "Float80",
+    "extended96": "Float96",
+    "fattributiontag_t": "struct fattributiontag",
+    "fchecklv_t": "struct fchecklv",
+    "fd_mask": "__int32_t",
+    "fd_set": "struct fd_set",
+    "fgetsigsinfo_t": "struct fgetsigsinfo",
+    "filesec_property_t": "enum filesec_property_t",
+    "filesec_t": "struct _filesec *",
+    "fixpt_t": "u_int32_t",
+    "float_t": "float",
+    "fpos_t": "__darwin_off_t",
+    "fpunchhole_t": "struct fpunchhole",
+    "fsblkcnt_t": "__darwin_fsblkcnt_t",
+    "fsfilcnt_t": "__darwin_fsfilcnt_t",
+    "fsignatures_t": "struct fsignatures",
+    "fspecread_t": "struct fspecread",
+    "fstore_t": "struct fstore",
+    "fsupplement_t": "struct fsupplement",
+    "ftrimactivefile_t": "struct ftrimactivefile",
+    "gid_t": "__darwin_gid_t",
+    "gss_OID": "struct gss_OID_desc_struct *",
+    "gss_OID_desc": "struct gss_OID_desc_struct",
+    "gss_OID_set": "struct gss_OID_set_desc_struct *",
+    "gss_OID_set_desc": "struct gss_OID_set_desc_struct",
+    "gss_auth_identity_t": "struct gss_auth_identity *",
+    "gss_buffer_desc": "struct gss_buffer_desc_struct",
+    "gss_buffer_set_desc": "struct gss_buffer_set_desc_struct",
+    "gss_buffer_set_t": "struct gss_buffer_set_desc_struct *",
+    "gss_buffer_t": "struct gss_buffer_desc_struct *",
+    "gss_channel_bindings_t": "struct gss_channel_bindings_struct *",
+    "gss_const_OID": "const gss_OID_desc *",
+    "gss_const_OID_set": "const gss_OID_set_desc *",
+    "gss_const_buffer_t": "const gss_buffer_desc *",
+    "gss_const_channel_bindings_t": "const struct gss_channel_bindings_struct *",
+    "gss_const_cred_id_t": "const struct gss_cred_id_t_desc_struct *",
+    "gss_const_ctx_id_t": "const struct gss_ctx_id_t_desc_struct",
+    "gss_const_name_t": "const struct gss_name_t_desc_struct *",
+    "gss_cred_id_t": "struct gss_cred_id_t_desc_struct *",
+    "gss_cred_usage_t": "int",
+    "gss_ctx_id_t": "struct gss_ctx_id_t_desc_struct *",
+    "gss_iov_buffer_desc": "struct gss_iov_buffer_desc_struct",
+    "gss_iov_buffer_t": "struct gss_iov_buffer_desc_struct *",
+    "gss_krb5_cfx_keydata_t": "struct gss_krb5_cfx_keydata",
+    "gss_krb5_lucid_context_v1_t": "struct gss_krb5_lucid_context_v1",
+    "gss_krb5_lucid_context_version_t": "struct gss_krb5_lucid_context_version",
+    "gss_krb5_lucid_key_t": "struct gss_krb5_lucid_key",
+    "gss_krb5_rfc1964_keydata_t": "struct gss_krb5_rfc1964_keydata",
+    "gss_name_t": "struct gss_name_t_desc_struct *",
+    "gss_qop_t": "OM_uint32",
+    "gss_status_id_t": "OM_uint32 *",
+    "gss_uint32": "uint32_t",
+    "guid_t": "union guid_t",
+    "id": "struct objc_object *",
+    "id_t": "__darwin_id_t",
+    "idtype_t": "enum idtype_t",
+    "imaxdiv_t": "struct imaxdiv_t",
+    "in_addr_t": "__uint32_t",
+    "in_port_t": "__uint16_t",
+    "ino64_t": "__darwin_ino64_t",
+    "ino_t": "__darwin_ino_t",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "integer_t": "int",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "jmp_buf": "int[48]",
+    "kauth_ace_rights_t": "u_int32_t",
+    "kauth_ace_t": "struct kauth_ace *",
+    "kauth_acl_t": "struct kauth_acl *",
+    "kauth_filesec_t": "struct kauth_filesec *",
+    "kern_return_t": "int",
+    "key_t": "__int32_t",
+    "ldiv_t": "struct ldiv_t",
+    "lldiv_t": "struct lldiv_t",
+    "locale_t": "struct _xlocale *",
+    "mach_msg_audit_trailer_t": "struct mach_msg_audit_trailer_t",
+    "mach_msg_base_t": "struct mach_msg_base_t",
+    "mach_msg_bits_t": "unsigned int",
+    "mach_msg_body_t": "struct mach_msg_body_t",
+    "mach_msg_context_trailer_t": "struct mach_msg_context_trailer_t",
+    "mach_msg_copy_options_t": "unsigned int",
+    "mach_msg_descriptor_t": "union mach_msg_descriptor_t",
+    "mach_msg_descriptor_type_t": "unsigned int",
+    "mach_msg_empty_rcv_t": "struct mach_msg_empty_rcv_t",
+    "mach_msg_empty_send_t": "struct mach_msg_empty_send_t",
+    "mach_msg_empty_t": "union mach_msg_empty_t",
+    "mach_msg_filter_id": "int",
+    "mach_msg_format_0_trailer_t": "mach_msg_security_trailer_t",
+    "mach_msg_guard_flags_t": "unsigned int",
+    "mach_msg_guarded_port_descriptor32_t": "struct mach_msg_guarded_port_descriptor32_t",
+    "mach_msg_guarded_port_descriptor64_t": "struct mach_msg_guarded_port_descriptor64_t",
+    "mach_msg_guarded_port_descriptor_t": "struct mach_msg_guarded_port_descriptor_t",
+    "mach_msg_header_t": "struct mach_msg_header_t",
+    "mach_msg_id_t": "integer_t",
+    "mach_msg_mac_trailer_t": "struct mach_msg_mac_trailer_t",
+    "mach_msg_max_trailer_t": "mach_msg_mac_trailer_t",
+    "mach_msg_ool_descriptor32_t": "struct mach_msg_ool_descriptor32_t",
+    "mach_msg_ool_descriptor64_t": "struct mach_msg_ool_descriptor64_t",
+    "mach_msg_ool_descriptor_t": "struct mach_msg_ool_descriptor_t",
+    "mach_msg_ool_ports_descriptor32_t": "struct mach_msg_ool_ports_descriptor32_t",
+    "mach_msg_ool_ports_descriptor64_t": "struct mach_msg_ool_ports_descriptor64_t",
+    "mach_msg_ool_ports_descriptor_t": "struct mach_msg_ool_ports_descriptor_t",
+    "mach_msg_option_t": "integer_t",
+    "mach_msg_options_t": "integer_t",
+    "mach_msg_port_descriptor_t": "struct mach_msg_port_descriptor_t",
+    "mach_msg_priority_t": "unsigned int",
+    "mach_msg_return_t": "kern_return_t",
+    "mach_msg_security_trailer_t": "struct mach_msg_security_trailer_t",
+    "mach_msg_seqno_trailer_t": "struct mach_msg_seqno_trailer_t",
+    "mach_msg_size_t": "natural_t",
+    "mach_msg_timeout_t": "natural_t",
+    "mach_msg_trailer_info_t": "char *",
+    "mach_msg_trailer_size_t": "unsigned int",
+    "mach_msg_trailer_t": "struct mach_msg_trailer_t",
+    "mach_msg_trailer_type_t": "unsigned int",
+    "mach_msg_type_descriptor_t": "struct mach_msg_type_descriptor_t",
+    "mach_msg_type_name_t": "unsigned int",
+    "mach_msg_type_number_t": "natural_t",
+    "mach_msg_type_size_t": "natural_t",
+    "mach_port_array_t": "mach_port_t *",
+    "mach_port_context_t": "vm_offset_t",
+    "mach_port_delta_t": "integer_t",
+    "mach_port_flavor_t": "int",
+    "mach_port_guard_info_t": "struct mach_port_guard_info",
+    "mach_port_info_ext_t": "struct mach_port_info_ext",
+    "mach_port_info_t": "integer_t *",
+    "mach_port_limits_t": "struct mach_port_limits",
+    "mach_port_mscount_t": "natural_t",
+    "mach_port_msgcount_t": "natural_t",
+    "mach_port_name_array_t": "mach_port_name_t *",
+    "mach_port_name_t": "natural_t",
+    "mach_port_options_ptr_t": "mach_port_options_t *",
+    "mach_port_options_t": "struct mach_port_options",
+    "mach_port_qos_t": "struct mach_port_qos",
+    "mach_port_right_t": "natural_t",
+    "mach_port_rights_t": "natural_t",
+    "mach_port_seqno_t": "natural_t",
+    "mach_port_srights_t": "unsigned int",
+    "mach_port_status_t": "struct mach_port_status",
+    "mach_port_t": "__darwin_mach_port_t",
+    "mach_port_type_array_t": "mach_port_type_t *",
+    "mach_port_type_t": "natural_t",
+    "mach_port_urefs_t": "natural_t",
+    "mach_service_port_info_data_t": "struct mach_service_port_info",
+    "mach_service_port_info_t": "struct mach_service_port_info *",
+    "mach_timespec_t": "struct mach_timespec",
+    "mach_vm_address_t": "uint64_t",
+    "mach_vm_offset_t": "uint64_t",
+    "mach_vm_size_t": "uint64_t",
+    "malloc_type_id_t": "unsigned long long",
+    "malloc_zone_t": "struct _malloc_zone_t",
+    "max_align_t": "long double",
+    "mcontext_t": "struct __darwin_mcontext64 *",
+    "mode_t": "__darwin_mode_t",
+    "mpo_flags_t": "enum mpo_flags_t",
+    "msg_labels_t": "struct msg_labels_t",
+    "natural_t": "__darwin_natural_t",
+    "nlink_t": "__uint16_t",
+    "ntsid_t": "struct ntsid_t",
+    "objc_objectptr_t": "const void *",
+    "objc_zone_t": "struct _malloc_zone_t *",
+    "off_t": "__darwin_off_t",
+    "os_block_t": "void (^)(void)",
+    "os_clockid_t": "enum os_clockid_t",
+    "os_function_t": "void (*)(void * _Nullable)",
+    "os_workgroup_attr_s": "struct os_workgroup_attr_opaque_s",
+    "os_workgroup_attr_t": "struct os_workgroup_attr_opaque_s *",
+    "os_workgroup_index": "uint32_t",
+    "os_workgroup_interval_data_s": "struct os_workgroup_interval_data_opaque_s",
+    "os_workgroup_interval_data_t": "struct os_workgroup_interval_data_opaque_s *",
+    "os_workgroup_interval_t": "OS_os_workgroup\u003cOS_os_workgroup_interval\u003e *",
+    "os_workgroup_join_token_s": "struct os_workgroup_join_token_opaque_s",
+    "os_workgroup_join_token_t": "struct os_workgroup_join_token_opaque_s *",
+    "os_workgroup_mpt_attr_s": "struct os_workgroup_max_parallel_threads_attr_s",
+    "os_workgroup_mpt_attr_t": "struct os_workgroup_max_parallel_threads_attr_s *",
+    "os_workgroup_parallel_t": "OS_os_workgroup\u003cOS_os_workgroup_parallel\u003e *",
+    "os_workgroup_t": "OS_os_workgroup *",
+    "os_workgroup_working_arena_destructor_t": "void (*)(void * _Nullable)",
+    "pid_t": "__darwin_pid_t",
+    "pthread_attr_t": "__darwin_pthread_attr_t",
+    "pthread_cond_t": "__darwin_pthread_cond_t",
+    "pthread_condattr_t": "__darwin_pthread_condattr_t",
+    "pthread_key_t": "__darwin_pthread_key_t",
+    "pthread_mutex_t": "__darwin_pthread_mutex_t",
+    "pthread_mutexattr_t": "__darwin_pthread_mutexattr_t",
+    "pthread_once_t": "__darwin_pthread_once_t",
+    "pthread_rwlock_t": "__darwin_pthread_rwlock_t",
+    "pthread_rwlockattr_t": "__darwin_pthread_rwlockattr_t",
+    "pthread_t": "__darwin_pthread_t",
+    "ptrauth_extra_data_t": "unsigned long",
+    "ptrauth_generic_signature_t": "unsigned long",
+    "ptrauth_key": "enum ptrauth_key",
+    "ptrdiff_t": "long",
+    "qaddr_t": "quad_t *",
+    "qos_class_t": "enum qos_class_t",
+    "quad_t": "int64_t",
+    "register_t": "int64_t",
+    "rlim_t": "__uint64_t",
+    "rsize_t": "__darwin_size_t",
+    "rune_t": "__darwin_rune_t",
+    "rusage_info_current": "struct rusage_info_v6",
+    "rusage_info_t": "void *",
+    "security_token_t": "struct security_token_t",
+    "segsz_t": "int32_t",
+    "sig_atomic_t": "int",
+    "sig_t": "void (*)(int)",
+    "siginfo_t": "struct __siginfo",
+    "sigjmp_buf": "int[49]",
+    "sigset_t": "__darwin_sigset_t",
+    "size_t": "unsigned long",
+    "sleep_type_t": "int",
+    "ssize_t": "__darwin_ssize_t",
+    "stack_t": "struct __darwin_sigaltstack",
+    "suseconds_t": "__darwin_suseconds_t",
+    "swblk_t": "int32_t",
+    "syscall_arg_t": "u_int64_t",
+    "time_t": "__darwin_time_t",
+    "time_value_t": "struct time_value",
+    "u_char": "unsigned char",
+    "u_int": "unsigned int",
+    "u_int16_t": "unsigned short",
+    "u_int32_t": "unsigned int",
+    "u_int64_t": "unsigned long long",
+    "u_int8_t": "unsigned char",
+    "u_long": "unsigned long",
+    "u_quad_t": "u_int64_t",
+    "u_short": "unsigned short",
+    "ucontext_t": "struct __darwin_ucontext",
+    "uid_t": "__darwin_uid_t",
+    "uint": "unsigned int",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long",
+    "useconds_t": "__darwin_useconds_t",
+    "user_addr_t": "u_int64_t",
+    "user_long_t": "int64_t",
+    "user_off_t": "int64_t",
+    "user_size_t": "u_int64_t",
+    "user_ssize_t": "int64_t",
+    "user_time_t": "int64_t",
+    "user_ulong_t": "u_int64_t",
+    "ushort": "unsigned short",
+    "uuid_t": "__darwin_uuid_t",
+    "va_list": "__darwin_va_list",
+    "vm32_address_t": "uint32_t",
+    "vm32_offset_t": "uint32_t",
+    "vm32_size_t": "uint32_t",
+    "vm_map_address_t": "uint64_t",
+    "vm_map_offset_t": "uint64_t",
+    "vm_map_size_t": "uint64_t",
+    "vm_offset_t": "uintptr_t",
+    "vm_size_t": "uintptr_t",
+    "wchar_t": "int",
+    "wide": "struct wide",
+    "wint_t": "__darwin_wint_t"
+  }
+}

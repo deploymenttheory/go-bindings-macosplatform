@@ -1,0 +1,1596 @@
+{
+  "framework": "FSEvents",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {
+    "_anon_kFSEventStreamCreateFlagNone": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kFSEventStreamCreateFlagNone",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamCreateFlagUseCFTypes",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamCreateFlagNoDefer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamCreateFlagWatchRoot",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamCreateFlagIgnoreSelf",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamCreateFlagFileEvents",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamCreateFlagMarkSelf",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamCreateFlagUseExtendedData",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamCreateFlagFullHistory",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamCreateWithDocID",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamCreateDeviceState",
+          "value": "512",
+          "availability": {
+            "macos_introduced": "26.0"
+          }
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kFSEventStreamEventFlagNone": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kFSEventStreamEventFlagNone",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagMustScanSubDirs",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagUserDropped",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagKernelDropped",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagEventIdsWrapped",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagHistoryDone",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagRootChanged",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagMount",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagUnmount",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemCreated",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemRemoved",
+          "value": "512",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemInodeMetaMod",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemRenamed",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemModified",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemFinderInfoMod",
+          "value": "8192",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemChangeOwner",
+          "value": "16384",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemXattrMod",
+          "value": "32768",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemIsFile",
+          "value": "65536",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemIsDir",
+          "value": "131072",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemIsSymlink",
+          "value": "262144",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagOwnEvent",
+          "value": "524288",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemIsHardlink",
+          "value": "1048576",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemIsLastHardlink",
+          "value": "2097152",
+          "availability": {}
+        },
+        {
+          "name": "kFSEventStreamEventFlagItemCloned",
+          "value": "4194304",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kFSEventStreamEventIdSinceNow": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "kFSEventStreamEventIdSinceNow",
+          "value": "18446744073709551615",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "dispatch_autorelease_frequency_t": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_INHERIT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_NEVER",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "queue.h",
+      "sdk_line": 300,
+      "is_extensible": true
+    },
+    "dispatch_block_flags_t": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "DISPATCH_BLOCK_BARRIER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_BLOCK_DETACHED",
+          "value": "2",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_ASSIGN_CURRENT",
+          "value": "4",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_NO_QOS_CLASS",
+          "value": "8",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_INHERIT_QOS_CLASS",
+          "value": "16",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_ENFORCE_QOS_CLASS",
+          "value": "32",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        }
+      ],
+      "availability": {},
+      "sdk_file": "block.h",
+      "sdk_line": 302,
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "filesec_property_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "FILESEC_OWNER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GROUP",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_UUID",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_MODE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GRPUUID",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_RAW",
+          "value": "100",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_ALLOCSIZE",
+          "value": "101",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "fcntl.h",
+      "sdk_line": 582
+    },
+    "idtype_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "P_ALL",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "P_PID",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "P_PGID",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "wait.h",
+      "sdk_line": 79
+    },
+    "mpo_flags_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "MPO_PORT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "MPO_SERVICE_PORT",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "MPO_REPLY_PORT",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "MPO_WEAK_REPLY_PORT",
+          "value": "16384",
+          "availability": {}
+        },
+        {
+          "name": "MPO_NOTIFICATION_PORT",
+          "value": "17408",
+          "availability": {}
+        },
+        {
+          "name": "MPO_EXCEPTION_PORT",
+          "value": "32768",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT_WITH_PORT_ARRAY",
+          "value": "65536",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "port.h",
+      "sdk_line": 1102,
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "os_clockid_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
+          "value": "32",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "clock.h",
+      "sdk_line": 188
+    },
+    "ptrauth_key": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ptrauth_key_none",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asia",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asib",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asda",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asdb",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_code",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_code",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_data",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_data",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_return_address",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_frame_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_function_pointer",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_function",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_cxx_vtable_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_method_list_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_isa_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_super_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_sel_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_class_ro_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_descriptor_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_init_fini_pointer",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ptrauth.h",
+      "sdk_line": 13
+    },
+    "qos_class_t": {
+      "go_type": "uint32",
+      "members": [
+        {
+          "name": "QOS_CLASS_USER_INTERACTIVE",
+          "value": "33",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_USER_INITIATED",
+          "value": "25",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_DEFAULT",
+          "value": "21",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_UTILITY",
+          "value": "17",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_BACKGROUND",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_UNSPECIFIED",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "qos.h",
+      "sdk_line": 121
+    }
+  },
+  "structs": {
+    "FSEventStreamContext": {
+      "fields": [
+        {
+          "name": "version",
+          "objc_type": "CFIndex"
+        },
+        {
+          "name": "info",
+          "objc_type": "void * _Nullable"
+        },
+        {
+          "name": "retain",
+          "objc_type": "CFAllocatorRetainCallBack _Nullable"
+        },
+        {
+          "name": "release",
+          "objc_type": "CFAllocatorReleaseCallBack _Nullable"
+        },
+        {
+          "name": "copyDescription",
+          "objc_type": "CFAllocatorCopyDescriptionCallBack _Nullable"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 609
+    },
+    "__FSEventStream": {
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 592
+    }
+  },
+  "functions": [
+    {
+      "name": "FSEventStreamCreate",
+      "args": [
+        {
+          "name": "allocator",
+          "objc_type": "CFAllocatorRef _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "callback",
+          "objc_type": "FSEventStreamCallback _Nonnull"
+        },
+        {
+          "name": "context",
+          "objc_type": "FSEventStreamContext * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "pathsToWatch",
+          "objc_type": "CFArrayRef _Nonnull"
+        },
+        {
+          "name": "sinceWhen",
+          "objc_type": "FSEventStreamEventId"
+        },
+        {
+          "name": "latency",
+          "objc_type": "CFTimeInterval"
+        },
+        {
+          "name": "flags",
+          "objc_type": "FSEventStreamCreateFlags"
+        }
+      ],
+      "return": {
+        "objc_type": "FSEventStreamRef  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 783
+    },
+    {
+      "name": "FSEventStreamCreateRelativeToDevice",
+      "args": [
+        {
+          "name": "allocator",
+          "objc_type": "CFAllocatorRef _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "callback",
+          "objc_type": "FSEventStreamCallback _Nonnull"
+        },
+        {
+          "name": "context",
+          "objc_type": "FSEventStreamContext * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "deviceToWatch",
+          "objc_type": "dev_t"
+        },
+        {
+          "name": "pathsToWatchRelativeToDevice",
+          "objc_type": "CFArrayRef _Nonnull"
+        },
+        {
+          "name": "sinceWhen",
+          "objc_type": "FSEventStreamEventId"
+        },
+        {
+          "name": "latency",
+          "objc_type": "CFTimeInterval"
+        },
+        {
+          "name": "flags",
+          "objc_type": "FSEventStreamCreateFlags"
+        }
+      ],
+      "return": {
+        "objc_type": "FSEventStreamRef  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 867
+    },
+    {
+      "name": "FSEventStreamGetLatestEventId",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "ConstFSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "FSEventStreamEventId"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 904
+    },
+    {
+      "name": "FSEventStreamGetDeviceBeingWatched",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "ConstFSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "dev_t"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 928
+    },
+    {
+      "name": "FSEventStreamCopyPathsBeingWatched",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "ConstFSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef  _Nonnull"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 953
+    },
+    {
+      "name": "FSEventsGetCurrentEventId",
+      "return": {
+        "objc_type": "FSEventStreamEventId"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 973
+    },
+    {
+      "name": "FSEventsCopyUUIDForDevice",
+      "args": [
+        {
+          "name": "dev",
+          "objc_type": "dev_t"
+        }
+      ],
+      "return": {
+        "objc_type": "CFUUIDRef  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1009
+    },
+    {
+      "name": "FSEventsGetLastEventIdForDeviceBeforeTime",
+      "args": [
+        {
+          "name": "dev",
+          "objc_type": "dev_t"
+        },
+        {
+          "name": "time",
+          "objc_type": "CFAbsoluteTime"
+        }
+      ],
+      "return": {
+        "objc_type": "FSEventStreamEventId"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1046
+    },
+    {
+      "name": "FSEventsPurgeEventsForDeviceUpToEventId",
+      "args": [
+        {
+          "name": "dev",
+          "objc_type": "dev_t"
+        },
+        {
+          "name": "eventId",
+          "objc_type": "FSEventStreamEventId"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1075
+    },
+    {
+      "name": "FSEventStreamRetain",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1101
+    },
+    {
+      "name": "FSEventStreamRelease",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1123
+    },
+    {
+      "name": "FSEventStreamScheduleWithRunLoop",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        },
+        {
+          "name": "runLoop",
+          "objc_type": "CFRunLoopRef _Nonnull"
+        },
+        {
+          "name": "runLoopMode",
+          "objc_type": "CFStringRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.5",
+        "macos_deprecated": "13.0",
+        "deprecation_message": "Use FSEventStreamSetDispatchQueue instead.",
+        "replaced_by": "fseventstreamsetdispatchqueue instead"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1159
+    },
+    {
+      "name": "FSEventStreamUnscheduleFromRunLoop",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        },
+        {
+          "name": "runLoop",
+          "objc_type": "CFRunLoopRef _Nonnull"
+        },
+        {
+          "name": "runLoopMode",
+          "objc_type": "CFStringRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.5",
+        "macos_deprecated": "13.0",
+        "deprecation_message": "Use FSEventStreamSetDispatchQueue instead.",
+        "replaced_by": "fseventstreamsetdispatchqueue instead"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1189
+    },
+    {
+      "name": "FSEventStreamSetDispatchQueue",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        },
+        {
+          "name": "q",
+          "objc_type": "dispatch_queue_t _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1230
+    },
+    {
+      "name": "FSEventStreamInvalidate",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1257
+    },
+    {
+      "name": "FSEventStreamStart",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1290
+    },
+    {
+      "name": "FSEventStreamFlushAsync",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "FSEventStreamEventId"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1320
+    },
+    {
+      "name": "FSEventStreamFlushSync",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1347
+    },
+    {
+      "name": "FSEventStreamStop",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1372
+    },
+    {
+      "name": "FSEventStreamShow",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "ConstFSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1396
+    },
+    {
+      "name": "FSEventStreamCopyDescription",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "ConstFSEventStreamRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef  _Nonnull"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1416
+    },
+    {
+      "name": "FSEventStreamSetExclusionPaths",
+      "args": [
+        {
+          "name": "streamRef",
+          "objc_type": "FSEventStreamRef _Nonnull"
+        },
+        {
+          "name": "pathsToExclude",
+          "objc_type": "CFArrayRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
+      "sdk_line": 1435
+    }
+  ],
+  "externs": null,
+  "block_types": {},
+  "typedefs": {
+    "AbsoluteTime": "UnsignedWide",
+    "BOOL": "bool",
+    "Boolean": "unsigned char",
+    "Byte": "UInt8",
+    "ByteCount": "unsigned long",
+    "ByteOffset": "unsigned long",
+    "BytePtr": "UInt8 *",
+    "CharParameter": "short",
+    "Class": "struct objc_class *",
+    "CompTimeValue": "wide",
+    "ConstFSEventStreamRef": "const struct __FSEventStream *",
+    "ConstLogicalAddress": "const void *",
+    "ConstStr15Param": "const unsigned char *",
+    "ConstStr255Param": "const unsigned char *",
+    "ConstStr27Param": "const unsigned char *",
+    "ConstStr31Param": "const unsigned char *",
+    "ConstStr32Param": "const unsigned char *",
+    "ConstStr63Param": "const unsigned char *",
+    "ConstStrFileNameParam": "ConstStr63Param",
+    "ConstStringPtr": "const unsigned char *",
+    "Duration": "SInt32",
+    "FSEventStreamCallback": "void (*)(ConstFSEventStreamRef _Nonnull, void * _Nullable, size_t, void * _Nonnull, const FSEventStreamEventFlags * _Nonnull, const FSEventStreamEventId * _Nonnull)",
+    "FSEventStreamContext": "struct FSEventStreamContext",
+    "FSEventStreamCreateFlags": "UInt32",
+    "FSEventStreamEventFlags": "UInt32",
+    "FSEventStreamEventId": "UInt64",
+    "FSEventStreamRef": "struct __FSEventStream *",
+    "Fixed": "SInt32",
+    "FixedPoint": "struct FixedPoint",
+    "FixedPtr": "Fixed *",
+    "FixedRect": "struct FixedRect",
+    "Float32": "float",
+    "Float32Point": "struct Float32Point",
+    "Float64": "double",
+    "Float80": "struct Float80",
+    "Float96": "struct Float96",
+    "FourCharCode": "UInt32",
+    "Fract": "SInt32",
+    "FractPtr": "Fract *",
+    "Handle": "Ptr *",
+    "IMP": "void (*)(void)",
+    "ItemCount": "unsigned long",
+    "LangCode": "SInt16",
+    "LogicalAddress": "void *",
+    "NSInteger": "long",
+    "NSUInteger": "unsigned long",
+    "NumVersion": "struct NumVersion",
+    "NumVersionVariant": "union NumVersionVariant",
+    "NumVersionVariantHandle": "NumVersionVariantPtr *",
+    "NumVersionVariantPtr": "NumVersionVariant *",
+    "OSErr": "SInt16",
+    "OSStatus": "SInt32",
+    "OSType": "FourCharCode",
+    "OSTypePtr": "OSType *",
+    "OptionBits": "UInt32",
+    "PBVersion": "UInt32",
+    "PRefCon": "void *",
+    "PhysicalAddress": "void *",
+    "Point": "struct Point",
+    "PointPtr": "Point *",
+    "ProcHandle": "ProcPtr *",
+    "ProcPtr": "long (*)(void)",
+    "ProcessSerialNumber": "struct ProcessSerialNumber",
+    "ProcessSerialNumberPtr": "ProcessSerialNumber *",
+    "Ptr": "char *",
+    "Rect": "struct Rect",
+    "RectPtr": "Rect *",
+    "RegionCode": "SInt16",
+    "Register68kProcPtr": "void (*)(void)",
+    "ResType": "FourCharCode",
+    "ResTypePtr": "ResType *",
+    "SEL": "struct objc_selector *",
+    "SInt16": "short",
+    "SInt32": "int",
+    "SInt64": "long long",
+    "SInt8": "signed char",
+    "SRefCon": "void *",
+    "ScriptCode": "SInt16",
+    "ShortFixed": "short",
+    "ShortFixedPtr": "ShortFixed *",
+    "SignedByte": "SInt8",
+    "Size": "long",
+    "Str15": "unsigned char[16]",
+    "Str255": "unsigned char[256]",
+    "Str27": "unsigned char[28]",
+    "Str31": "unsigned char[32]",
+    "Str32": "unsigned char[33]",
+    "Str32Field": "unsigned char[34]",
+    "Str63": "unsigned char[64]",
+    "StrFileName": "Str63",
+    "StringHandle": "StringPtr *",
+    "StringPtr": "unsigned char *",
+    "Style": "unsigned char",
+    "StyleField": "Style",
+    "StyleParameter": "short",
+    "TimeBase": "struct TimeBaseRecord *",
+    "TimeRecord": "struct TimeRecord",
+    "TimeScale": "SInt32",
+    "TimeValue": "SInt32",
+    "TimeValue64": "SInt64",
+    "UInt16": "unsigned short",
+    "UInt32": "unsigned int",
+    "UInt64": "unsigned long long",
+    "UInt8": "unsigned char",
+    "URefCon": "void *",
+    "UTF16Char": "UInt16",
+    "UTF32Char": "UInt32",
+    "UTF8Char": "UInt8",
+    "UniChar": "UInt16",
+    "UniCharCount": "unsigned long",
+    "UniCharCountPtr": "UniCharCount *",
+    "UniCharPtr": "UniChar *",
+    "UnicodeScalarValue": "UInt32",
+    "UniversalProcHandle": "UniversalProcPtr *",
+    "UniversalProcPtr": "ProcPtr",
+    "UnsignedFixed": "UInt32",
+    "UnsignedFixedPtr": "UnsignedFixed *",
+    "UnsignedWide": "struct UnsignedWide",
+    "UnsignedWidePtr": "UnsignedWide *",
+    "VHSelect": "SInt8",
+    "VersRec": "struct VersRec",
+    "VersRecHndl": "VersRecPtr *",
+    "VersRecPtr": "VersRec *",
+    "WidePtr": "wide *",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_nl_item": "int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wctrans_t": "int",
+    "__darwin_wctype_t": "__uint32_t",
+    "__darwin_wint_t": "int",
+    "__gnuc_va_list": "__builtin_va_list",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "alarm_type_t": "int",
+    "audit_token_t": "struct audit_token_t",
+    "blkcnt_t": "__darwin_blkcnt_t",
+    "blksize_t": "__darwin_blksize_t",
+    "boolean_t": "int",
+    "caddr_t": "char *",
+    "clock_attr_t": "int *",
+    "clock_flavor_t": "int",
+    "clock_id_t": "int",
+    "clock_res_t": "int",
+    "clock_t": "__darwin_clock_t",
+    "ct_rune_t": "__darwin_ct_rune_t",
+    "daddr_t": "int32_t",
+    "dev_t": "__darwin_dev_t",
+    "dispatch_autorelease_frequency_t": "enum dispatch_autorelease_frequency_t",
+    "dispatch_block_flags_t": "enum dispatch_block_flags_t",
+    "dispatch_block_t": "void (^)(void)",
+    "dispatch_data_applier_t": "bool (^)(dispatch_data_t _Nonnull, size_t, const void * _Nonnull, size_t)",
+    "dispatch_data_t": "NSObject\u003cOS_dispatch_data\u003e *",
+    "dispatch_fd_t": "int",
+    "dispatch_function_t": "void (*)(void * _Nullable)",
+    "dispatch_group_t": "NSObject\u003cOS_dispatch_group\u003e *",
+    "dispatch_io_close_flags_t": "unsigned long",
+    "dispatch_io_handler_t": "void (^)(bool, dispatch_data_t _Nullable, int)",
+    "dispatch_io_interval_flags_t": "unsigned long",
+    "dispatch_io_t": "NSObject\u003cOS_dispatch_io\u003e *",
+    "dispatch_io_type_t": "unsigned long",
+    "dispatch_object_t": "NSObject\u003cOS_dispatch_object\u003e *",
+    "dispatch_once_t": "intptr_t",
+    "dispatch_qos_class_t": "qos_class_t",
+    "dispatch_queue_attr_t": "NSObject\u003cOS_dispatch_queue_attr\u003e *",
+    "dispatch_queue_concurrent_t": "NSObject\u003cOS_dispatch_queue_concurrent\u003e *",
+    "dispatch_queue_global_t": "NSObject\u003cOS_dispatch_queue_global\u003e *",
+    "dispatch_queue_main_t": "NSObject\u003cOS_dispatch_queue_main\u003e *",
+    "dispatch_queue_priority_t": "long",
+    "dispatch_queue_serial_executor_t": "NSObject\u003cOS_dispatch_queue_serial_executor\u003e *",
+    "dispatch_queue_serial_t": "NSObject\u003cOS_dispatch_queue_serial\u003e *",
+    "dispatch_queue_t": "NSObject\u003cOS_dispatch_queue\u003e *",
+    "dispatch_semaphore_t": "NSObject\u003cOS_dispatch_semaphore\u003e *",
+    "dispatch_source_mach_recv_flags_t": "unsigned long",
+    "dispatch_source_mach_send_flags_t": "unsigned long",
+    "dispatch_source_memorypressure_flags_t": "unsigned long",
+    "dispatch_source_proc_flags_t": "unsigned long",
+    "dispatch_source_t": "NSObject\u003cOS_dispatch_source\u003e *",
+    "dispatch_source_timer_flags_t": "unsigned long",
+    "dispatch_source_type_t": "const struct dispatch_source_type_s *",
+    "dispatch_source_vnode_flags_t": "unsigned long",
+    "dispatch_time_t": "uint64_t",
+    "dispatch_workloop_t": "NSObject\u003cOS_dispatch_workloop\u003e *",
+    "div_t": "struct div_t",
+    "errno_t": "int",
+    "extended80": "Float80",
+    "extended96": "Float96",
+    "fattributiontag_t": "struct fattributiontag",
+    "fchecklv_t": "struct fchecklv",
+    "fd_mask": "__int32_t",
+    "fd_set": "struct fd_set",
+    "fgetsigsinfo_t": "struct fgetsigsinfo",
+    "filesec_property_t": "enum filesec_property_t",
+    "filesec_t": "struct _filesec *",
+    "fixpt_t": "u_int32_t",
+    "fpunchhole_t": "struct fpunchhole",
+    "fsblkcnt_t": "__darwin_fsblkcnt_t",
+    "fsfilcnt_t": "__darwin_fsfilcnt_t",
+    "fsignatures_t": "struct fsignatures",
+    "fspecread_t": "struct fspecread",
+    "fstore_t": "struct fstore",
+    "fsupplement_t": "struct fsupplement",
+    "ftrimactivefile_t": "struct ftrimactivefile",
+    "gid_t": "__darwin_gid_t",
+    "id": "struct objc_object *",
+    "id_t": "__darwin_id_t",
+    "idtype_t": "enum idtype_t",
+    "in_addr_t": "__uint32_t",
+    "in_port_t": "__uint16_t",
+    "ino64_t": "__darwin_ino64_t",
+    "ino_t": "__darwin_ino_t",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "integer_t": "int",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "kern_return_t": "int",
+    "key_t": "__int32_t",
+    "ldiv_t": "struct ldiv_t",
+    "lldiv_t": "struct lldiv_t",
+    "mach_msg_audit_trailer_t": "struct mach_msg_audit_trailer_t",
+    "mach_msg_base_t": "struct mach_msg_base_t",
+    "mach_msg_bits_t": "unsigned int",
+    "mach_msg_body_t": "struct mach_msg_body_t",
+    "mach_msg_context_trailer_t": "struct mach_msg_context_trailer_t",
+    "mach_msg_copy_options_t": "unsigned int",
+    "mach_msg_descriptor_t": "union mach_msg_descriptor_t",
+    "mach_msg_descriptor_type_t": "unsigned int",
+    "mach_msg_empty_rcv_t": "struct mach_msg_empty_rcv_t",
+    "mach_msg_empty_send_t": "struct mach_msg_empty_send_t",
+    "mach_msg_empty_t": "union mach_msg_empty_t",
+    "mach_msg_filter_id": "int",
+    "mach_msg_format_0_trailer_t": "mach_msg_security_trailer_t",
+    "mach_msg_guard_flags_t": "unsigned int",
+    "mach_msg_guarded_port_descriptor32_t": "struct mach_msg_guarded_port_descriptor32_t",
+    "mach_msg_guarded_port_descriptor64_t": "struct mach_msg_guarded_port_descriptor64_t",
+    "mach_msg_guarded_port_descriptor_t": "struct mach_msg_guarded_port_descriptor_t",
+    "mach_msg_header_t": "struct mach_msg_header_t",
+    "mach_msg_id_t": "integer_t",
+    "mach_msg_mac_trailer_t": "struct mach_msg_mac_trailer_t",
+    "mach_msg_max_trailer_t": "mach_msg_mac_trailer_t",
+    "mach_msg_ool_descriptor32_t": "struct mach_msg_ool_descriptor32_t",
+    "mach_msg_ool_descriptor64_t": "struct mach_msg_ool_descriptor64_t",
+    "mach_msg_ool_descriptor_t": "struct mach_msg_ool_descriptor_t",
+    "mach_msg_ool_ports_descriptor32_t": "struct mach_msg_ool_ports_descriptor32_t",
+    "mach_msg_ool_ports_descriptor64_t": "struct mach_msg_ool_ports_descriptor64_t",
+    "mach_msg_ool_ports_descriptor_t": "struct mach_msg_ool_ports_descriptor_t",
+    "mach_msg_option_t": "integer_t",
+    "mach_msg_options_t": "integer_t",
+    "mach_msg_port_descriptor_t": "struct mach_msg_port_descriptor_t",
+    "mach_msg_priority_t": "unsigned int",
+    "mach_msg_return_t": "kern_return_t",
+    "mach_msg_security_trailer_t": "struct mach_msg_security_trailer_t",
+    "mach_msg_seqno_trailer_t": "struct mach_msg_seqno_trailer_t",
+    "mach_msg_size_t": "natural_t",
+    "mach_msg_timeout_t": "natural_t",
+    "mach_msg_trailer_info_t": "char *",
+    "mach_msg_trailer_size_t": "unsigned int",
+    "mach_msg_trailer_t": "struct mach_msg_trailer_t",
+    "mach_msg_trailer_type_t": "unsigned int",
+    "mach_msg_type_descriptor_t": "struct mach_msg_type_descriptor_t",
+    "mach_msg_type_name_t": "unsigned int",
+    "mach_msg_type_number_t": "natural_t",
+    "mach_msg_type_size_t": "natural_t",
+    "mach_port_array_t": "mach_port_t *",
+    "mach_port_context_t": "vm_offset_t",
+    "mach_port_delta_t": "integer_t",
+    "mach_port_flavor_t": "int",
+    "mach_port_guard_info_t": "struct mach_port_guard_info",
+    "mach_port_info_ext_t": "struct mach_port_info_ext",
+    "mach_port_info_t": "integer_t *",
+    "mach_port_limits_t": "struct mach_port_limits",
+    "mach_port_mscount_t": "natural_t",
+    "mach_port_msgcount_t": "natural_t",
+    "mach_port_name_array_t": "mach_port_name_t *",
+    "mach_port_name_t": "natural_t",
+    "mach_port_options_ptr_t": "mach_port_options_t *",
+    "mach_port_options_t": "struct mach_port_options",
+    "mach_port_qos_t": "struct mach_port_qos",
+    "mach_port_right_t": "natural_t",
+    "mach_port_rights_t": "natural_t",
+    "mach_port_seqno_t": "natural_t",
+    "mach_port_srights_t": "unsigned int",
+    "mach_port_status_t": "struct mach_port_status",
+    "mach_port_t": "__darwin_mach_port_t",
+    "mach_port_type_array_t": "mach_port_type_t *",
+    "mach_port_type_t": "natural_t",
+    "mach_port_urefs_t": "natural_t",
+    "mach_service_port_info_data_t": "struct mach_service_port_info",
+    "mach_service_port_info_t": "struct mach_service_port_info *",
+    "mach_timespec_t": "struct mach_timespec",
+    "mach_vm_address_t": "uint64_t",
+    "mach_vm_offset_t": "uint64_t",
+    "mach_vm_size_t": "uint64_t",
+    "malloc_type_id_t": "unsigned long long",
+    "malloc_zone_t": "struct _malloc_zone_t",
+    "max_align_t": "long double",
+    "mcontext_t": "struct __darwin_mcontext64 *",
+    "mode_t": "__darwin_mode_t",
+    "mpo_flags_t": "enum mpo_flags_t",
+    "msg_labels_t": "struct msg_labels_t",
+    "natural_t": "__darwin_natural_t",
+    "nlink_t": "__uint16_t",
+    "objc_objectptr_t": "const void *",
+    "objc_zone_t": "struct _malloc_zone_t *",
+    "off_t": "__darwin_off_t",
+    "os_block_t": "void (^)(void)",
+    "os_clockid_t": "enum os_clockid_t",
+    "os_function_t": "void (*)(void * _Nullable)",
+    "os_workgroup_attr_s": "struct os_workgroup_attr_opaque_s",
+    "os_workgroup_attr_t": "struct os_workgroup_attr_opaque_s *",
+    "os_workgroup_index": "uint32_t",
+    "os_workgroup_interval_data_s": "struct os_workgroup_interval_data_opaque_s",
+    "os_workgroup_interval_data_t": "struct os_workgroup_interval_data_opaque_s *",
+    "os_workgroup_interval_t": "OS_os_workgroup\u003cOS_os_workgroup_interval\u003e *",
+    "os_workgroup_join_token_s": "struct os_workgroup_join_token_opaque_s",
+    "os_workgroup_join_token_t": "struct os_workgroup_join_token_opaque_s *",
+    "os_workgroup_mpt_attr_s": "struct os_workgroup_max_parallel_threads_attr_s",
+    "os_workgroup_mpt_attr_t": "struct os_workgroup_max_parallel_threads_attr_s *",
+    "os_workgroup_parallel_t": "OS_os_workgroup\u003cOS_os_workgroup_parallel\u003e *",
+    "os_workgroup_t": "OS_os_workgroup *",
+    "os_workgroup_working_arena_destructor_t": "void (*)(void * _Nullable)",
+    "pid_t": "__darwin_pid_t",
+    "pthread_attr_t": "__darwin_pthread_attr_t",
+    "pthread_cond_t": "__darwin_pthread_cond_t",
+    "pthread_condattr_t": "__darwin_pthread_condattr_t",
+    "pthread_key_t": "__darwin_pthread_key_t",
+    "pthread_mutex_t": "__darwin_pthread_mutex_t",
+    "pthread_mutexattr_t": "__darwin_pthread_mutexattr_t",
+    "pthread_once_t": "__darwin_pthread_once_t",
+    "pthread_rwlock_t": "__darwin_pthread_rwlock_t",
+    "pthread_rwlockattr_t": "__darwin_pthread_rwlockattr_t",
+    "pthread_t": "__darwin_pthread_t",
+    "ptrauth_extra_data_t": "unsigned long",
+    "ptrauth_generic_signature_t": "unsigned long",
+    "ptrauth_key": "enum ptrauth_key",
+    "ptrdiff_t": "long",
+    "qaddr_t": "quad_t *",
+    "qos_class_t": "enum qos_class_t",
+    "quad_t": "int64_t",
+    "register_t": "int64_t",
+    "rlim_t": "__uint64_t",
+    "rsize_t": "__darwin_size_t",
+    "rune_t": "__darwin_rune_t",
+    "rusage_info_current": "struct rusage_info_v6",
+    "rusage_info_t": "void *",
+    "security_token_t": "struct security_token_t",
+    "segsz_t": "int32_t",
+    "sig_atomic_t": "int",
+    "sig_t": "void (*)(int)",
+    "siginfo_t": "struct __siginfo",
+    "sigset_t": "__darwin_sigset_t",
+    "size_t": "unsigned long",
+    "sleep_type_t": "int",
+    "ssize_t": "__darwin_ssize_t",
+    "stack_t": "struct __darwin_sigaltstack",
+    "suseconds_t": "__darwin_suseconds_t",
+    "swblk_t": "int32_t",
+    "syscall_arg_t": "u_int64_t",
+    "time_t": "__darwin_time_t",
+    "time_value_t": "struct time_value",
+    "u_char": "unsigned char",
+    "u_int": "unsigned int",
+    "u_int16_t": "unsigned short",
+    "u_int32_t": "unsigned int",
+    "u_int64_t": "unsigned long long",
+    "u_int8_t": "unsigned char",
+    "u_long": "unsigned long",
+    "u_quad_t": "u_int64_t",
+    "u_short": "unsigned short",
+    "ucontext_t": "struct __darwin_ucontext",
+    "uid_t": "__darwin_uid_t",
+    "uint": "unsigned int",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long",
+    "useconds_t": "__darwin_useconds_t",
+    "user_addr_t": "u_int64_t",
+    "user_long_t": "int64_t",
+    "user_off_t": "int64_t",
+    "user_size_t": "u_int64_t",
+    "user_ssize_t": "int64_t",
+    "user_time_t": "int64_t",
+    "user_ulong_t": "u_int64_t",
+    "ushort": "unsigned short",
+    "uuid_t": "__darwin_uuid_t",
+    "va_list": "__builtin_va_list",
+    "vm32_address_t": "uint32_t",
+    "vm32_offset_t": "uint32_t",
+    "vm32_size_t": "uint32_t",
+    "vm_map_address_t": "uint64_t",
+    "vm_map_offset_t": "uint64_t",
+    "vm_map_size_t": "uint64_t",
+    "vm_offset_t": "uintptr_t",
+    "vm_size_t": "uintptr_t",
+    "wchar_t": "int",
+    "wide": "struct wide"
+  },
+  "parent_framework": "CoreServices",
+  "declared_imports": {
+    "CoreFoundation": true
+  }
+}

@@ -1,0 +1,1326 @@
+{
+  "framework": "TWAIN",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {},
+  "structs": {
+    "TW_ARRAY": {
+      "fields": [
+        {
+          "name": "ItemType",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "NumItems",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "ItemList",
+          "objc_type": "TW_UINT8[1]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 241
+    },
+    "TW_AUDIOINFO": {
+      "fields": [
+        {
+          "name": "Name",
+          "objc_type": "TW_STR255"
+        },
+        {
+          "name": "Reserved",
+          "objc_type": "TW_UINT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 502
+    },
+    "TW_CALLBACK": {
+      "fields": [
+        {
+          "name": "CallBackProc",
+          "objc_type": "TW_MEMREF"
+        },
+        {
+          "name": "RefCon",
+          "objc_type": "TW_MEMREF"
+        },
+        {
+          "name": "Message",
+          "objc_type": "TW_INT16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 563
+    },
+    "TW_CAPABILITY": {
+      "fields": [
+        {
+          "name": "Cap",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "ConType",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "hContainer",
+          "objc_type": "TW_HANDLE"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 273
+    },
+    "TW_CAPEXT": {
+      "fields": [
+        {
+          "name": "Cap",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "Properties",
+          "objc_type": "TW_UINT16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 463
+    },
+    "TW_CIECOLOR": {
+      "fields": [
+        {
+          "name": "ColorSpace",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "LowEndian",
+          "objc_type": "TW_INT16"
+        },
+        {
+          "name": "DeviceDependent",
+          "objc_type": "TW_INT16"
+        },
+        {
+          "name": "VersionNumber",
+          "objc_type": "TW_INT32"
+        },
+        {
+          "name": "StageABC",
+          "objc_type": "TW_TRANSFORMSTAGE"
+        },
+        {
+          "name": "StageLMN",
+          "objc_type": "TW_TRANSFORMSTAGE"
+        },
+        {
+          "name": "WhitePoint",
+          "objc_type": "TW_CIEPOINT"
+        },
+        {
+          "name": "BlackPoint",
+          "objc_type": "TW_CIEPOINT"
+        },
+        {
+          "name": "WhitePaper",
+          "objc_type": "TW_CIEPOINT"
+        },
+        {
+          "name": "BlackInk",
+          "objc_type": "TW_CIEPOINT"
+        },
+        {
+          "name": "Samples",
+          "objc_type": "TW_FIX32[1]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 280
+    },
+    "TW_CIEPOINT": {
+      "fields": [
+        {
+          "name": "X",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "Y",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "Z",
+          "objc_type": "TW_FIX32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 184
+    },
+    "TW_CUSTOMDSDATA": {
+      "fields": [
+        {
+          "name": "InfoLength",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "hData",
+          "objc_type": "TW_HANDLE"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 481
+    },
+    "TW_DECODEFUNCTION": {
+      "fields": [
+        {
+          "name": "StartIn",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "BreakIn",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "EndIn",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "StartOut",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "BreakOut",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "EndOut",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "Gamma",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "SampleCount",
+          "objc_type": "TW_FIX32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 191
+    },
+    "TW_DEVICEEVENT": {
+      "fields": [
+        {
+          "name": "Event",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "DeviceName",
+          "objc_type": "TW_STR255"
+        },
+        {
+          "name": "BatteryMinutes",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "BatteryPercentage",
+          "objc_type": "TW_INT16"
+        },
+        {
+          "name": "PowerSupply",
+          "objc_type": "TW_INT32"
+        },
+        {
+          "name": "XResolution",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "YResolution",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "FlashUsed2",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "AutomaticCapture",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "TimeBeforeFirstCapture",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "TimeBetweenCaptures",
+          "objc_type": "TW_UINT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 508
+    },
+    "TW_ELEMENT8": {
+      "fields": [
+        {
+          "name": "Index",
+          "objc_type": "TW_UINT8"
+        },
+        {
+          "name": "Channel1",
+          "objc_type": "TW_UINT8"
+        },
+        {
+          "name": "Channel2",
+          "objc_type": "TW_UINT8"
+        },
+        {
+          "name": "Channel3",
+          "objc_type": "TW_UINT8"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 203
+    },
+    "TW_ENUMERATION": {
+      "fields": [
+        {
+          "name": "ItemType",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "NumItems",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "CurrentIndex",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "DefaultIndex",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "ItemList",
+          "objc_type": "TW_UINT8[1]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 248
+    },
+    "TW_EVENT": {
+      "fields": [
+        {
+          "name": "pEvent",
+          "objc_type": "TW_MEMREF"
+        },
+        {
+          "name": "TWMessage",
+          "objc_type": "TW_UINT16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 295
+    },
+    "TW_EXTIMAGEINFO": {
+      "fields": [
+        {
+          "name": "NumInfos",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "Info",
+          "objc_type": "TW_INFO[1]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 494
+    },
+    "TW_FILESYSTEM": {
+      "fields": [
+        {
+          "name": "InputName",
+          "objc_type": "TW_STR255"
+        },
+        {
+          "name": "OutputName",
+          "objc_type": "TW_STR255"
+        },
+        {
+          "name": "Context",
+          "objc_type": "TW_MEMREF"
+        },
+        {
+          "name": "Recursive",
+          "objc_type": "int"
+        },
+        {
+          "name": "FileType",
+          "objc_type": "TW_INT32"
+        },
+        {
+          "name": "Size",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "CreateTimeDate",
+          "objc_type": "TW_STR32"
+        },
+        {
+          "name": "ModifiedTimeDate",
+          "objc_type": "TW_STR32"
+        },
+        {
+          "name": "FreeSpace",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "NewImageSize",
+          "objc_type": "TW_INT32"
+        },
+        {
+          "name": "NumberOfFiles",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "NumberOfSnippets",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "DeviceGroupMask",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "Reserved",
+          "objc_type": "char[508]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 523
+    },
+    "TW_FIX32": {
+      "fields": [
+        {
+          "name": "Whole",
+          "objc_type": "TW_INT16"
+        },
+        {
+          "name": "Frac",
+          "objc_type": "TW_UINT16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 174
+    },
+    "TW_FRAME": {
+      "fields": [
+        {
+          "name": "Left",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "Top",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "Right",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "Bottom",
+          "objc_type": "TW_FIX32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 211
+    },
+    "TW_GRAYRESPONSE": {
+      "fields": [
+        {
+          "name": "Response",
+          "objc_type": "TW_ELEMENT8[1]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 301
+    },
+    "TW_IDENTITY": {
+      "fields": [
+        {
+          "name": "Id",
+          "objc_type": "TW_MEMREF"
+        },
+        {
+          "name": "Version",
+          "objc_type": "TW_VERSION"
+        },
+        {
+          "name": "ProtocolMajor",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "ProtocolMinor",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "SupportedGroups",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "Manufacturer",
+          "objc_type": "TW_STR32"
+        },
+        {
+          "name": "ProductFamily",
+          "objc_type": "TW_STR32"
+        },
+        {
+          "name": "ProductName",
+          "objc_type": "TW_STR32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 306
+    },
+    "TW_IMAGEINFO": {
+      "fields": [
+        {
+          "name": "XResolution",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "YResolution",
+          "objc_type": "TW_FIX32"
+        },
+        {
+          "name": "ImageWidth",
+          "objc_type": "TW_INT32"
+        },
+        {
+          "name": "ImageLength",
+          "objc_type": "TW_INT32"
+        },
+        {
+          "name": "SamplesPerPixel",
+          "objc_type": "TW_INT16"
+        },
+        {
+          "name": "BitsPerSample",
+          "objc_type": "TW_INT16[8]"
+        },
+        {
+          "name": "BitsPerPixel",
+          "objc_type": "TW_INT16"
+        },
+        {
+          "name": "Planar",
+          "objc_type": "TW_BOOL"
+        },
+        {
+          "name": "PixelType",
+          "objc_type": "TW_INT16"
+        },
+        {
+          "name": "Compression",
+          "objc_type": "TW_UINT16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 318
+    },
+    "TW_IMAGELAYOUT": {
+      "fields": [
+        {
+          "name": "Frame",
+          "objc_type": "TW_FRAME"
+        },
+        {
+          "name": "DocumentNumber",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "PageNumber",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "FrameNumber",
+          "objc_type": "TW_UINT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 332
+    },
+    "TW_IMAGEMEMXFER": {
+      "fields": [
+        {
+          "name": "Compression",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "BytesPerRow",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "Columns",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "Rows",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "XOffset",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "YOffset",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "BytesWritten",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "Memory",
+          "objc_type": "TW_MEMORY"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 340
+    },
+    "TW_INFO": {
+      "fields": [
+        {
+          "name": "InfoID",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "ItemType",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "NumItems",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "CondCode",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "Item",
+          "objc_type": "TW_UINT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 486
+    },
+    "TW_JPEGCOMPRESSION": {
+      "fields": [
+        {
+          "name": "ColorSpace",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "SubSampling",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "NumComponents",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "RestartFrequency",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "QuantMap",
+          "objc_type": "TW_UINT16[4]"
+        },
+        {
+          "name": "QuantTable",
+          "objc_type": "TW_MEMORY[4]"
+        },
+        {
+          "name": "HuffmanMap",
+          "objc_type": "TW_UINT16[4]"
+        },
+        {
+          "name": "HuffmanDC",
+          "objc_type": "TW_MEMORY[2]"
+        },
+        {
+          "name": "HuffmanAC",
+          "objc_type": "TW_MEMORY[2]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 353
+    },
+    "TW_MEMORY": {
+      "fields": [
+        {
+          "name": "Flags",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "Length",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "TheMem",
+          "objc_type": "TW_MEMREF"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 219
+    },
+    "TW_ONEVALUE": {
+      "fields": [
+        {
+          "name": "ItemType",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "Item",
+          "objc_type": "TW_UINT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 257
+    },
+    "TW_PALETTE8": {
+      "fields": [
+        {
+          "name": "NumColors",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "PaletteType",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "Colors",
+          "objc_type": "TW_ELEMENT8[256]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 366
+    },
+    "TW_PASSTHRU": {
+      "fields": [
+        {
+          "name": "pCommand",
+          "objc_type": "TW_MEMREF"
+        },
+        {
+          "name": "CommandBytes",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "Direction",
+          "objc_type": "TW_INT32"
+        },
+        {
+          "name": "pData",
+          "objc_type": "TW_MEMREF"
+        },
+        {
+          "name": "DataBytes",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "DataBytesXfered",
+          "objc_type": "TW_UINT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 544
+    },
+    "TW_PENDINGXFERS": {
+      "fields": [
+        {
+          "name": "Count",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "TW_JOBCONTROL",
+          "objc_type": "union (unnamed union at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/TWAIN.framework/Headers/TWAIN.h:375:4)"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 373
+    },
+    "TW_RANGE": {
+      "fields": [
+        {
+          "name": "ItemType",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "MinValue",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "MaxValue",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "StepSize",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "DefaultValue",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "CurrentValue",
+          "objc_type": "TW_UINT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 263
+    },
+    "TW_RGBRESPONSE": {
+      "fields": [
+        {
+          "name": "Response",
+          "objc_type": "TW_ELEMENT8[1]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 382
+    },
+    "TW_SETUPAUDIOFILEXFER": {
+      "fields": [
+        {
+          "name": "FileName",
+          "objc_type": "TW_STR255"
+        },
+        {
+          "name": "Format",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "VRefNum",
+          "objc_type": "TW_INT16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 554
+    },
+    "TW_SETUPFILEXFER": {
+      "fields": [
+        {
+          "name": "FileName",
+          "objc_type": "TW_STR255"
+        },
+        {
+          "name": "Format",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "VRefNum",
+          "objc_type": "TW_INT16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 387
+    },
+    "TW_SETUPFILEXFER2": {
+      "fields": [
+        {
+          "name": "FileName",
+          "objc_type": "TW_MEMREF"
+        },
+        {
+          "name": "FileNameType",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "Format",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "VRefNum",
+          "objc_type": "TW_INT16"
+        },
+        {
+          "name": "ParID",
+          "objc_type": "TW_UINT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 395
+    },
+    "TW_SETUPMEMXFER": {
+      "fields": [
+        {
+          "name": "MinBufSize",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "MaxBufSize",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "Preferred",
+          "objc_type": "TW_UINT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 404
+    },
+    "TW_STATUS": {
+      "fields": [
+        {
+          "name": "ConditionCode",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "Reserved",
+          "objc_type": "TW_UINT16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 411
+    },
+    "TW_TRANSFORMSTAGE": {
+      "fields": [
+        {
+          "name": "Decode",
+          "objc_type": "TW_DECODEFUNCTION[3]"
+        },
+        {
+          "name": "Mix",
+          "objc_type": "TW_FIX32[3][3]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 226
+    },
+    "TW_TWUNKDSENTRYPARAMS": {
+      "fields": [
+        {
+          "name": "destFlag",
+          "objc_type": "TW_INT8"
+        },
+        {
+          "name": "dest",
+          "objc_type": "TW_IDENTITY"
+        },
+        {
+          "name": "dataGroup",
+          "objc_type": "TW_INT32"
+        },
+        {
+          "name": "dataArgType",
+          "objc_type": "TW_INT16"
+        },
+        {
+          "name": "message",
+          "objc_type": "TW_INT16"
+        },
+        {
+          "name": "pDataSize",
+          "objc_type": "TW_INT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 433
+    },
+    "TW_TWUNKDSENTRYRETURN": {
+      "fields": [
+        {
+          "name": "returnCode",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "conditionCode",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "pDataSize",
+          "objc_type": "TW_INT32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 449
+    },
+    "TW_TWUNKIDENTITY": {
+      "fields": [
+        {
+          "name": "identity",
+          "objc_type": "TW_IDENTITY"
+        },
+        {
+          "name": "dsPath",
+          "objc_type": "TW_STR255"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 426
+    },
+    "TW_USERINTERFACE": {
+      "fields": [
+        {
+          "name": "ShowUI",
+          "objc_type": "TW_BOOL"
+        },
+        {
+          "name": "ModalUI",
+          "objc_type": "TW_BOOL"
+        },
+        {
+          "name": "hParent",
+          "objc_type": "TW_HANDLE"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 417
+    },
+    "TW_VERSION": {
+      "fields": [
+        {
+          "name": "MajorNum",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "MinorNum",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "Language",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "Country",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "Info",
+          "objc_type": "TW_STR32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 232
+    }
+  },
+  "functions": [
+    {
+      "name": "DSM_Entry",
+      "args": [
+        {
+          "name": "pOrigin",
+          "objc_type": "pTW_IDENTITY"
+        },
+        {
+          "name": "pDest",
+          "objc_type": "pTW_IDENTITY"
+        },
+        {
+          "name": "DG",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "DAT",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "MSG",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "pData",
+          "objc_type": "TW_MEMREF"
+        }
+      ],
+      "return": {
+        "objc_type": "TW_UINT16"
+      },
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 1867
+    },
+    {
+      "name": "DS_Entry",
+      "args": [
+        {
+          "name": "pOrigin",
+          "objc_type": "pTW_IDENTITY"
+        },
+        {
+          "name": "DG",
+          "objc_type": "TW_UINT32"
+        },
+        {
+          "name": "DAT",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "MSG",
+          "objc_type": "TW_UINT16"
+        },
+        {
+          "name": "pData",
+          "objc_type": "TW_MEMREF"
+        }
+      ],
+      "return": {
+        "objc_type": "TW_UINT16"
+      },
+      "availability": {},
+      "sdk_file": "TWAIN/TWAIN.h",
+      "sdk_line": 1957
+    }
+  ],
+  "externs": null,
+  "block_types": {},
+  "typedefs": {
+    "Class": "Class",
+    "DSENTRYPROC": "TW_UINT16 (*)(pTW_IDENTITY, TW_UINT32, TW_UINT16, TW_UINT16, TW_MEMREF)",
+    "DSMENTRYPROC": "TW_UINT16 (*)(pTW_IDENTITY, pTW_IDENTITY, TW_UINT32, TW_UINT16, TW_UINT16, TW_MEMREF)",
+    "SEL": "SEL *",
+    "TW_ARRAY": "struct TW_ARRAY",
+    "TW_AUDIOINFO": "struct TW_AUDIOINFO",
+    "TW_BOOL": "unsigned short",
+    "TW_CALLBACK": "struct TW_CALLBACK",
+    "TW_CAPABILITY": "struct TW_CAPABILITY",
+    "TW_CAPEXT": "struct TW_CAPEXT",
+    "TW_CIECOLOR": "struct TW_CIECOLOR",
+    "TW_CIEPOINT": "struct TW_CIEPOINT",
+    "TW_CUSTOMDSDATA": "struct TW_CUSTOMDSDATA",
+    "TW_DECODEFUNCTION": "struct TW_DECODEFUNCTION",
+    "TW_DEVICEEVENT": "struct TW_DEVICEEVENT",
+    "TW_ELEMENT8": "struct TW_ELEMENT8",
+    "TW_ENUMERATION": "struct TW_ENUMERATION",
+    "TW_EVENT": "struct TW_EVENT",
+    "TW_EXTIMAGEINFO": "struct TW_EXTIMAGEINFO",
+    "TW_FILESYSTEM": "struct TW_FILESYSTEM",
+    "TW_FIX32": "struct TW_FIX32",
+    "TW_FRAME": "struct TW_FRAME",
+    "TW_GRAYRESPONSE": "struct TW_GRAYRESPONSE",
+    "TW_HANDLE": "char **",
+    "TW_IDENTITY": "struct TW_IDENTITY",
+    "TW_IMAGEINFO": "struct TW_IMAGEINFO",
+    "TW_IMAGELAYOUT": "struct TW_IMAGELAYOUT",
+    "TW_IMAGEMEMXFER": "struct TW_IMAGEMEMXFER",
+    "TW_INFO": "struct TW_INFO",
+    "TW_INT16": "short",
+    "TW_INT32": "int",
+    "TW_INT8": "char",
+    "TW_JPEGCOMPRESSION": "struct TW_JPEGCOMPRESSION",
+    "TW_MEMORY": "struct TW_MEMORY",
+    "TW_MEMREF": "char *",
+    "TW_ONEVALUE": "struct TW_ONEVALUE",
+    "TW_PALETTE8": "struct TW_PALETTE8",
+    "TW_PASSTHRU": "struct TW_PASSTHRU",
+    "TW_PENDINGXFERS": "struct TW_PENDINGXFERS",
+    "TW_RANGE": "struct TW_RANGE",
+    "TW_RGBRESPONSE": "struct TW_RGBRESPONSE",
+    "TW_SETUPAUDIOFILEXFER": "struct TW_SETUPAUDIOFILEXFER",
+    "TW_SETUPFILEXFER": "struct TW_SETUPFILEXFER",
+    "TW_SETUPFILEXFER2": "struct TW_SETUPFILEXFER2",
+    "TW_SETUPMEMXFER": "struct TW_SETUPMEMXFER",
+    "TW_STATUS": "struct TW_STATUS",
+    "TW_STR128": "unsigned char[130]",
+    "TW_STR255": "unsigned char[256]",
+    "TW_STR32": "unsigned char[34]",
+    "TW_STR64": "unsigned char[66]",
+    "TW_TRANSFORMSTAGE": "struct TW_TRANSFORMSTAGE",
+    "TW_TWUNKDSENTRYPARAMS": "struct TW_TWUNKDSENTRYPARAMS",
+    "TW_TWUNKDSENTRYRETURN": "struct TW_TWUNKDSENTRYRETURN",
+    "TW_TWUNKIDENTITY": "struct TW_TWUNKIDENTITY",
+    "TW_UINT16": "unsigned short",
+    "TW_UINT32": "unsigned int",
+    "TW_UINT8": "unsigned char",
+    "TW_USERINTERFACE": "struct TW_USERINTERFACE",
+    "TW_VERSION": "struct TW_VERSION",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__int128_t": "__int128",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "id": "id",
+    "pTW_ARRAY": "struct TW_ARRAY *",
+    "pTW_AUDIOINFO": "struct TW_AUDIOINFO *",
+    "pTW_BOOL": "unsigned short *",
+    "pTW_CALLBACK": "struct TW_CALLBACK *",
+    "pTW_CAPABILITY": "struct TW_CAPABILITY *",
+    "pTW_CAPEXT": "struct TW_CAPEXT *",
+    "pTW_CIECOLOR": "struct TW_CIECOLOR *",
+    "pTW_CIEPOINT": "struct TW_CIEPOINT *",
+    "pTW_CUSTOMDSDATA": "struct TW_CUSTOMDSDATA *",
+    "pTW_DECODEFUNCTION": "struct TW_DECODEFUNCTION *",
+    "pTW_DEVICEEVENT": "struct TW_DEVICEEVENT *",
+    "pTW_ELEMENT8": "struct TW_ELEMENT8 *",
+    "pTW_ENUMERATION": "struct TW_ENUMERATION *",
+    "pTW_EVENT": "struct TW_EVENT *",
+    "pTW_EXTIMAGEINFO": "struct TW_EXTIMAGEINFO *",
+    "pTW_FILESYSTEM": "struct TW_FILESYSTEM *",
+    "pTW_FIX32": "struct TW_FIX32 *",
+    "pTW_FRAME": "struct TW_FRAME *",
+    "pTW_GRAYRESPONSE": "struct TW_GRAYRESPONSE *",
+    "pTW_IDENTITY": "struct TW_IDENTITY *",
+    "pTW_IMAGEINFO": "struct TW_IMAGEINFO *",
+    "pTW_IMAGELAYOUT": "struct TW_IMAGELAYOUT *",
+    "pTW_IMAGEMEMXFER": "struct TW_IMAGEMEMXFER *",
+    "pTW_INFO": "struct TW_INFO *",
+    "pTW_INT16": "short *",
+    "pTW_INT32": "int *",
+    "pTW_INT8": "char *",
+    "pTW_JPEGCOMPRESSION": "struct TW_JPEGCOMPRESSION *",
+    "pTW_MEMORY": "struct TW_MEMORY *",
+    "pTW_ONEVALUE": "struct TW_ONEVALUE *",
+    "pTW_PALETTE8": "struct TW_PALETTE8 *",
+    "pTW_PASSTHRU": "struct TW_PASSTHRU *",
+    "pTW_PENDINGXFERS": "struct TW_PENDINGXFERS *",
+    "pTW_RANGE": "struct TW_RANGE *",
+    "pTW_RGBRESPONSE": "struct TW_RGBRESPONSE *",
+    "pTW_SETUPAUDIOFILEXFER": "struct TW_SETUPAUDIOFILEXFER *",
+    "pTW_SETUPFILEXFER": "struct TW_SETUPFILEXFER *",
+    "pTW_SETUPFILEXFER2": "struct TW_SETUPFILEXFER2 *",
+    "pTW_SETUPMEMXFER": "struct TW_SETUPMEMXFER *",
+    "pTW_STATUS": "struct TW_STATUS *",
+    "pTW_STR128": "unsigned char *",
+    "pTW_STR255": "unsigned char *",
+    "pTW_STR32": "unsigned char *",
+    "pTW_STR64": "unsigned char *",
+    "pTW_TRANSFORMSTAGE": "struct TW_TRANSFORMSTAGE *",
+    "pTW_TWUNKDSENTRYPARAMS": "struct TW_TWUNKDSENTRYPARAMS *",
+    "pTW_TWUNKDSENTRYRETURN": "struct TW_TWUNKDSENTRYRETURN *",
+    "pTW_TWUNKIDENTITY": "struct TW_TWUNKIDENTITY *",
+    "pTW_UINT16": "unsigned short *",
+    "pTW_UINT32": "unsigned int *",
+    "pTW_UINT8": "unsigned char *",
+    "pTW_USERINTERFACE": "struct TW_USERINTERFACE *",
+    "pTW_VERSION": "struct TW_VERSION *"
+  }
+}

@@ -1,0 +1,2234 @@
+{
+  "framework": "OpenAL",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {},
+  "structs": {
+    "ALCcontext_struct": {
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 50
+    },
+    "ALCdevice_struct": {
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 49
+    }
+  },
+  "functions": [
+    {
+      "name": "alEnable",
+      "args": [
+        {
+          "name": "capability",
+          "objc_type": "ALenum"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 372
+    },
+    {
+      "name": "alDisable",
+      "args": [
+        {
+          "name": "capability",
+          "objc_type": "ALenum"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 374
+    },
+    {
+      "name": "alIsEnabled",
+      "args": [
+        {
+          "name": "capability",
+          "objc_type": "ALenum"
+        }
+      ],
+      "return": {
+        "objc_type": "ALboolean"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 376
+    },
+    {
+      "name": "alGetString",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        }
+      ],
+      "return": {
+        "objc_type": "const ALchar *"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 382
+    },
+    {
+      "name": "alGetBooleanv",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "data",
+          "objc_type": "ALboolean *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 384
+    },
+    {
+      "name": "alGetIntegerv",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "data",
+          "objc_type": "ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 386
+    },
+    {
+      "name": "alGetFloatv",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "data",
+          "objc_type": "ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 388
+    },
+    {
+      "name": "alGetDoublev",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "data",
+          "objc_type": "ALdouble *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 390
+    },
+    {
+      "name": "alGetBoolean",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        }
+      ],
+      "return": {
+        "objc_type": "ALboolean"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 392
+    },
+    {
+      "name": "alGetInteger",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        }
+      ],
+      "return": {
+        "objc_type": "ALint"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 394
+    },
+    {
+      "name": "alGetFloat",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        }
+      ],
+      "return": {
+        "objc_type": "ALfloat"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 396
+    },
+    {
+      "name": "alGetDouble",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        }
+      ],
+      "return": {
+        "objc_type": "ALdouble"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 398
+    },
+    {
+      "name": "alGetError",
+      "return": {
+        "objc_type": "ALenum"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 405
+    },
+    {
+      "name": "alIsExtensionPresent",
+      "args": [
+        {
+          "name": "extname",
+          "objc_type": "const ALchar *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALboolean"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 413
+    },
+    {
+      "name": "alGetProcAddress",
+      "args": [
+        {
+          "name": "fname",
+          "objc_type": "const ALchar *"
+        }
+      ],
+      "return": {
+        "objc_type": "void *"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 415
+    },
+    {
+      "name": "alGetEnumValue",
+      "args": [
+        {
+          "name": "ename",
+          "objc_type": "const ALchar *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALenum"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 417
+    },
+    {
+      "name": "alListenerf",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALfloat"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 436
+    },
+    {
+      "name": "alListener3f",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALfloat"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALfloat"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALfloat"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 438
+    },
+    {
+      "name": "alListenerfv",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "const ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 440
+    },
+    {
+      "name": "alListeneri",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 442
+    },
+    {
+      "name": "alListener3i",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALint"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALint"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 444
+    },
+    {
+      "name": "alListeneriv",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "const ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 446
+    },
+    {
+      "name": "alGetListenerf",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 451
+    },
+    {
+      "name": "alGetListener3f",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALfloat *"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALfloat *"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 453
+    },
+    {
+      "name": "alGetListenerfv",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 455
+    },
+    {
+      "name": "alGetListeneri",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 457
+    },
+    {
+      "name": "alGetListener3i",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALint *"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALint *"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 459
+    },
+    {
+      "name": "alGetListeneriv",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 461
+    },
+    {
+      "name": "alGenSources",
+      "args": [
+        {
+          "name": "n",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "sources",
+          "objc_type": "ALuint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 498
+    },
+    {
+      "name": "alDeleteSources",
+      "args": [
+        {
+          "name": "n",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "sources",
+          "objc_type": "const ALuint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 501
+    },
+    {
+      "name": "alIsSource",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        }
+      ],
+      "return": {
+        "objc_type": "ALboolean"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 504
+    },
+    {
+      "name": "alSourcef",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALfloat"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 509
+    },
+    {
+      "name": "alSource3f",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALfloat"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALfloat"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALfloat"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 511
+    },
+    {
+      "name": "alSourcefv",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "const ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 513
+    },
+    {
+      "name": "alSourcei",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 515
+    },
+    {
+      "name": "alSource3i",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALint"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALint"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 517
+    },
+    {
+      "name": "alSourceiv",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "const ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 519
+    },
+    {
+      "name": "alGetSourcef",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 524
+    },
+    {
+      "name": "alGetSource3f",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALfloat *"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALfloat *"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 526
+    },
+    {
+      "name": "alGetSourcefv",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 528
+    },
+    {
+      "name": "alGetSourcei",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 530
+    },
+    {
+      "name": "alGetSource3i",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALint *"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALint *"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 532
+    },
+    {
+      "name": "alGetSourceiv",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 534
+    },
+    {
+      "name": "alSourcePlayv",
+      "args": [
+        {
+          "name": "ns",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "sids",
+          "objc_type": "const ALuint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 542
+    },
+    {
+      "name": "alSourceStopv",
+      "args": [
+        {
+          "name": "ns",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "sids",
+          "objc_type": "const ALuint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 545
+    },
+    {
+      "name": "alSourceRewindv",
+      "args": [
+        {
+          "name": "ns",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "sids",
+          "objc_type": "const ALuint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 548
+    },
+    {
+      "name": "alSourcePausev",
+      "args": [
+        {
+          "name": "ns",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "sids",
+          "objc_type": "const ALuint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 551
+    },
+    {
+      "name": "alSourcePlay",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 558
+    },
+    {
+      "name": "alSourceStop",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 561
+    },
+    {
+      "name": "alSourceRewind",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 564
+    },
+    {
+      "name": "alSourcePause",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 567
+    },
+    {
+      "name": "alSourceQueueBuffers",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "numEntries",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "bids",
+          "objc_type": "const ALuint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 572
+    },
+    {
+      "name": "alSourceUnqueueBuffers",
+      "args": [
+        {
+          "name": "sid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "numEntries",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "bids",
+          "objc_type": "ALuint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 574
+    },
+    {
+      "name": "alGenBuffers",
+      "args": [
+        {
+          "name": "n",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "buffers",
+          "objc_type": "ALuint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 592
+    },
+    {
+      "name": "alDeleteBuffers",
+      "args": [
+        {
+          "name": "n",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "buffers",
+          "objc_type": "const ALuint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 595
+    },
+    {
+      "name": "alIsBuffer",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        }
+      ],
+      "return": {
+        "objc_type": "ALboolean"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 598
+    },
+    {
+      "name": "alBufferData",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "format",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "data",
+          "objc_type": "const ALvoid *"
+        },
+        {
+          "name": "size",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "freq",
+          "objc_type": "ALsizei"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 601
+    },
+    {
+      "name": "alBufferf",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALfloat"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 606
+    },
+    {
+      "name": "alBuffer3f",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALfloat"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALfloat"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALfloat"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 608
+    },
+    {
+      "name": "alBufferfv",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "const ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 610
+    },
+    {
+      "name": "alBufferi",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 612
+    },
+    {
+      "name": "alBuffer3i",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALint"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALint"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 614
+    },
+    {
+      "name": "alBufferiv",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "const ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 616
+    },
+    {
+      "name": "alGetBufferf",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 621
+    },
+    {
+      "name": "alGetBuffer3f",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALfloat *"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALfloat *"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 623
+    },
+    {
+      "name": "alGetBufferfv",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "ALfloat *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 625
+    },
+    {
+      "name": "alGetBufferi",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value",
+          "objc_type": "ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 627
+    },
+    {
+      "name": "alGetBuffer3i",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "value1",
+          "objc_type": "ALint *"
+        },
+        {
+          "name": "value2",
+          "objc_type": "ALint *"
+        },
+        {
+          "name": "value3",
+          "objc_type": "ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 629
+    },
+    {
+      "name": "alGetBufferiv",
+      "args": [
+        {
+          "name": "bid",
+          "objc_type": "ALuint"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "values",
+          "objc_type": "ALint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 631
+    },
+    {
+      "name": "alDopplerFactor",
+      "args": [
+        {
+          "name": "value",
+          "objc_type": "ALfloat"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 637
+    },
+    {
+      "name": "alDopplerVelocity",
+      "args": [
+        {
+          "name": "value",
+          "objc_type": "ALfloat"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 639
+    },
+    {
+      "name": "alSpeedOfSound",
+      "args": [
+        {
+          "name": "value",
+          "objc_type": "ALfloat"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 641
+    },
+    {
+      "name": "alDistanceModel",
+      "args": [
+        {
+          "name": "distanceModel",
+          "objc_type": "ALenum"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/al.h",
+      "sdk_line": 643
+    },
+    {
+      "name": "alcCreateContext",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        },
+        {
+          "name": "attrlist",
+          "objc_type": "const ALCint *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALCcontext *"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 191
+    },
+    {
+      "name": "alcMakeContextCurrent",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "ALCcontext *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALCboolean"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 193
+    },
+    {
+      "name": "alcProcessContext",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "ALCcontext *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 195
+    },
+    {
+      "name": "alcSuspendContext",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "ALCcontext *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 197
+    },
+    {
+      "name": "alcDestroyContext",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "ALCcontext *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 199
+    },
+    {
+      "name": "alcGetCurrentContext",
+      "return": {
+        "objc_type": "ALCcontext *"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 201
+    },
+    {
+      "name": "alcGetContextsDevice",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "ALCcontext *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALCdevice *"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 203
+    },
+    {
+      "name": "alcOpenDevice",
+      "args": [
+        {
+          "name": "devicename",
+          "objc_type": "const ALCchar *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALCdevice *"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 209
+    },
+    {
+      "name": "alcCloseDevice",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALCboolean"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 211
+    },
+    {
+      "name": "alcGetError",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALCenum"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 218
+    },
+    {
+      "name": "alcIsExtensionPresent",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        },
+        {
+          "name": "extname",
+          "objc_type": "const ALCchar *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALCboolean"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 226
+    },
+    {
+      "name": "alcGetProcAddress",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        },
+        {
+          "name": "funcname",
+          "objc_type": "const ALCchar *"
+        }
+      ],
+      "return": {
+        "objc_type": "void *"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 228
+    },
+    {
+      "name": "alcGetEnumValue",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        },
+        {
+          "name": "enumname",
+          "objc_type": "const ALCchar *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALCenum"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 230
+    },
+    {
+      "name": "alcGetString",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALCenum"
+        }
+      ],
+      "return": {
+        "objc_type": "const ALCchar *"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 236
+    },
+    {
+      "name": "alcGetIntegerv",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        },
+        {
+          "name": "param",
+          "objc_type": "ALCenum"
+        },
+        {
+          "name": "size",
+          "objc_type": "ALCsizei"
+        },
+        {
+          "name": "data",
+          "objc_type": "ALCint *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 238
+    },
+    {
+      "name": "alcCaptureOpenDevice",
+      "args": [
+        {
+          "name": "devicename",
+          "objc_type": "const ALCchar *"
+        },
+        {
+          "name": "frequency",
+          "objc_type": "ALCuint"
+        },
+        {
+          "name": "format",
+          "objc_type": "ALCenum"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "ALCsizei"
+        }
+      ],
+      "return": {
+        "objc_type": "ALCdevice *"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 244
+    },
+    {
+      "name": "alcCaptureCloseDevice",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALCboolean"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 246
+    },
+    {
+      "name": "alcCaptureStart",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 248
+    },
+    {
+      "name": "alcCaptureStop",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 250
+    },
+    {
+      "name": "alcCaptureSamples",
+      "args": [
+        {
+          "name": "device",
+          "objc_type": "ALCdevice *"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "ALCvoid *"
+        },
+        {
+          "name": "samples",
+          "objc_type": "ALCsizei"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alc.h",
+      "sdk_line": 252
+    },
+    {
+      "name": "alutInit",
+      "args": [
+        {
+          "name": "argc",
+          "objc_type": "ALint *"
+        },
+        {
+          "name": "argv",
+          "objc_type": "ALbyte **"
+        }
+      ],
+      "return": {
+        "objc_type": "ALvoid"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alut.h",
+      "sdk_line": 39
+    },
+    {
+      "name": "alutExit",
+      "return": {
+        "objc_type": "ALvoid"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alut.h",
+      "sdk_line": 40
+    },
+    {
+      "name": "alutLoadWAVFile",
+      "args": [
+        {
+          "name": "file",
+          "objc_type": "ALbyte *"
+        },
+        {
+          "name": "format",
+          "objc_type": "ALenum *"
+        },
+        {
+          "name": "data",
+          "objc_type": "ALvoid **"
+        },
+        {
+          "name": "size",
+          "objc_type": "ALsizei *"
+        },
+        {
+          "name": "freq",
+          "objc_type": "ALsizei *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALvoid"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alut.h",
+      "sdk_line": 41
+    },
+    {
+      "name": "alutLoadWAVMemory",
+      "args": [
+        {
+          "name": "memory",
+          "objc_type": "ALbyte *"
+        },
+        {
+          "name": "format",
+          "objc_type": "ALenum *"
+        },
+        {
+          "name": "data",
+          "objc_type": "ALvoid **"
+        },
+        {
+          "name": "size",
+          "objc_type": "ALsizei *"
+        },
+        {
+          "name": "freq",
+          "objc_type": "ALsizei *"
+        }
+      ],
+      "return": {
+        "objc_type": "ALvoid"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alut.h",
+      "sdk_line": 42
+    },
+    {
+      "name": "alutUnloadWAV",
+      "args": [
+        {
+          "name": "format",
+          "objc_type": "ALenum"
+        },
+        {
+          "name": "data",
+          "objc_type": "ALvoid *"
+        },
+        {
+          "name": "size",
+          "objc_type": "ALsizei"
+        },
+        {
+          "name": "freq",
+          "objc_type": "ALsizei"
+        }
+      ],
+      "return": {
+        "objc_type": "ALvoid"
+      },
+      "availability": {},
+      "sdk_file": "OpenAL/alut.h",
+      "sdk_line": 43
+    }
+  ],
+  "externs": null,
+  "block_types": {},
+  "typedefs": {
+    "ALCboolean": "char",
+    "ALCbyte": "char",
+    "ALCchar": "char",
+    "ALCcontext": "struct ALCcontext_struct",
+    "ALCdevice": "struct ALCdevice_struct",
+    "ALCdouble": "double",
+    "ALCenum": "int",
+    "ALCfloat": "float",
+    "ALCint": "int",
+    "ALCshort": "short",
+    "ALCsizei": "int",
+    "ALCubyte": "unsigned char",
+    "ALCuint": "unsigned int",
+    "ALCushort": "unsigned short",
+    "ALCvoid": "void",
+    "ALboolean": "char",
+    "ALbyte": "char",
+    "ALchar": "char",
+    "ALdouble": "double",
+    "ALenum": "int",
+    "ALfloat": "float",
+    "ALint": "int",
+    "ALshort": "short",
+    "ALsizei": "int",
+    "ALubyte": "unsigned char",
+    "ALuint": "unsigned int",
+    "ALushort": "unsigned short",
+    "ALvoid": "void",
+    "Class": "Class",
+    "LPALBUFFER3F": "void (*)(ALuint, ALenum, ALfloat, ALfloat, ALfloat)",
+    "LPALBUFFER3I": "void (*)(ALuint, ALenum, ALint, ALint, ALint)",
+    "LPALBUFFERDATA": "void (*)(ALuint, ALenum, const ALvoid *, ALsizei, ALsizei)",
+    "LPALBUFFERF": "void (*)(ALuint, ALenum, ALfloat)",
+    "LPALBUFFERFV": "void (*)(ALuint, ALenum, const ALfloat *)",
+    "LPALBUFFERI": "void (*)(ALuint, ALenum, ALint)",
+    "LPALBUFFERIV": "void (*)(ALuint, ALenum, const ALint *)",
+    "LPALCCAPTURECLOSEDEVICE": "ALCboolean (*)(ALCdevice *)",
+    "LPALCCAPTUREOPENDEVICE": "ALCdevice *(*)(const ALCchar *, ALCuint, ALCenum, ALCsizei)",
+    "LPALCCAPTURESAMPLES": "void (*)(ALCdevice *, ALCvoid *, ALCsizei)",
+    "LPALCCAPTURESTART": "void (*)(ALCdevice *)",
+    "LPALCCAPTURESTOP": "void (*)(ALCdevice *)",
+    "LPALCCLOSEDEVICE": "ALCboolean (*)(ALCdevice *)",
+    "LPALCCREATECONTEXT": "ALCcontext *(*)(ALCdevice *, const ALCint *)",
+    "LPALCDESTROYCONTEXT": "void (*)(ALCcontext *)",
+    "LPALCGETCONTEXTSDEVICE": "ALCdevice *(*)(ALCcontext *)",
+    "LPALCGETCURRENTCONTEXT": "ALCcontext *(*)(void)",
+    "LPALCGETENUMVALUE": "ALCenum (*)(ALCdevice *, const ALCchar *)",
+    "LPALCGETERROR": "ALCenum (*)(ALCdevice *)",
+    "LPALCGETINTEGERV": "void (*)(ALCdevice *, ALCenum, ALCsizei, ALCint *)",
+    "LPALCGETPROCADDRESS": "void *(*)(ALCdevice *, const ALCchar *)",
+    "LPALCGETSTRING": "const ALCchar *(*)(ALCdevice *, ALCenum)",
+    "LPALCISEXTENSIONPRESENT": "ALCboolean (*)(ALCdevice *, const ALCchar *)",
+    "LPALCMAKECONTEXTCURRENT": "ALCboolean (*)(ALCcontext *)",
+    "LPALCOPENDEVICE": "ALCdevice *(*)(const ALCchar *)",
+    "LPALCPROCESSCONTEXT": "void (*)(ALCcontext *)",
+    "LPALCSUSPENDCONTEXT": "void (*)(ALCcontext *)",
+    "LPALDELETEBUFFERS": "void (*)(ALsizei, const ALuint *)",
+    "LPALDELETESOURCES": "void (*)(ALsizei, const ALuint *)",
+    "LPALDISABLE": "void (*)(ALenum)",
+    "LPALDISTANCEMODEL": "void (*)(ALenum)",
+    "LPALDOPPLERFACTOR": "void (*)(ALfloat)",
+    "LPALDOPPLERVELOCITY": "void (*)(ALfloat)",
+    "LPALENABLE": "void (*)(ALenum)",
+    "LPALGENBUFFERS": "void (*)(ALsizei, ALuint *)",
+    "LPALGENSOURCES": "void (*)(ALsizei, ALuint *)",
+    "LPALGETBOOLEAN": "ALboolean (*)(ALenum)",
+    "LPALGETBOOLEANV": "void (*)(ALenum, ALboolean *)",
+    "LPALGETBUFFER3F": "void (*)(ALuint, ALenum, ALfloat *, ALfloat *, ALfloat *)",
+    "LPALGETBUFFER3I": "void (*)(ALuint, ALenum, ALint *, ALint *, ALint *)",
+    "LPALGETBUFFERF": "void (*)(ALuint, ALenum, ALfloat *)",
+    "LPALGETBUFFERFV": "void (*)(ALuint, ALenum, ALfloat *)",
+    "LPALGETBUFFERI": "void (*)(ALuint, ALenum, ALint *)",
+    "LPALGETBUFFERIV": "void (*)(ALuint, ALenum, ALint *)",
+    "LPALGETDOUBLE": "ALdouble (*)(ALenum)",
+    "LPALGETDOUBLEV": "void (*)(ALenum, ALdouble *)",
+    "LPALGETENUMVALUE": "ALenum (*)(const ALchar *)",
+    "LPALGETERROR": "ALenum (*)(void)",
+    "LPALGETFLOAT": "ALfloat (*)(ALenum)",
+    "LPALGETFLOATV": "void (*)(ALenum, ALfloat *)",
+    "LPALGETINTEGER": "ALint (*)(ALenum)",
+    "LPALGETINTEGERV": "void (*)(ALenum, ALint *)",
+    "LPALGETLISTENER3F": "void (*)(ALenum, ALfloat *, ALfloat *, ALfloat *)",
+    "LPALGETLISTENER3I": "void (*)(ALenum, ALint *, ALint *, ALint *)",
+    "LPALGETLISTENERF": "void (*)(ALenum, ALfloat *)",
+    "LPALGETLISTENERFV": "void (*)(ALenum, ALfloat *)",
+    "LPALGETLISTENERI": "void (*)(ALenum, ALint *)",
+    "LPALGETLISTENERIV": "void (*)(ALenum, ALint *)",
+    "LPALGETPROCADDRESS": "void *(*)(const ALchar *)",
+    "LPALGETSOURCE3F": "void (*)(ALuint, ALenum, ALfloat *, ALfloat *, ALfloat *)",
+    "LPALGETSOURCE3I": "void (*)(ALuint, ALenum, ALint *, ALint *, ALint *)",
+    "LPALGETSOURCEF": "void (*)(ALuint, ALenum, ALfloat *)",
+    "LPALGETSOURCEFV": "void (*)(ALuint, ALenum, ALfloat *)",
+    "LPALGETSOURCEI": "void (*)(ALuint, ALenum, ALint *)",
+    "LPALGETSOURCEIV": "void (*)(ALuint, ALenum, ALint *)",
+    "LPALGETSTRING": "const ALchar *(*)(ALenum)",
+    "LPALISBUFFER": "ALboolean (*)(ALuint)",
+    "LPALISENABLED": "ALboolean (*)(ALenum)",
+    "LPALISEXTENSIONPRESENT": "ALboolean (*)(const ALchar *)",
+    "LPALISSOURCE": "ALboolean (*)(ALuint)",
+    "LPALLISTENER3F": "void (*)(ALenum, ALfloat, ALfloat, ALfloat)",
+    "LPALLISTENER3I": "void (*)(ALenum, ALint, ALint, ALint)",
+    "LPALLISTENERF": "void (*)(ALenum, ALfloat)",
+    "LPALLISTENERFV": "void (*)(ALenum, const ALfloat *)",
+    "LPALLISTENERI": "void (*)(ALenum, ALint)",
+    "LPALLISTENERIV": "void (*)(ALenum, const ALint *)",
+    "LPALSOURCE3F": "void (*)(ALuint, ALenum, ALfloat, ALfloat, ALfloat)",
+    "LPALSOURCE3I": "void (*)(ALuint, ALenum, ALint, ALint, ALint)",
+    "LPALSOURCEF": "void (*)(ALuint, ALenum, ALfloat)",
+    "LPALSOURCEFV": "void (*)(ALuint, ALenum, const ALfloat *)",
+    "LPALSOURCEI": "void (*)(ALuint, ALenum, ALint)",
+    "LPALSOURCEIV": "void (*)(ALuint, ALenum, const ALint *)",
+    "LPALSOURCEPAUSE": "void (*)(ALuint)",
+    "LPALSOURCEPAUSEV": "void (*)(ALsizei, const ALuint *)",
+    "LPALSOURCEPLAY": "void (*)(ALuint)",
+    "LPALSOURCEPLAYV": "void (*)(ALsizei, const ALuint *)",
+    "LPALSOURCEQUEUEBUFFERS": "void (*)(ALuint, ALsizei, const ALuint *)",
+    "LPALSOURCEREWIND": "void (*)(ALuint)",
+    "LPALSOURCEREWINDV": "void (*)(ALsizei, const ALuint *)",
+    "LPALSOURCESTOP": "void (*)(ALuint)",
+    "LPALSOURCESTOPV": "void (*)(ALsizei, const ALuint *)",
+    "LPALSOURCEUNQUEUEBUFFERS": "void (*)(ALuint, ALsizei, ALuint *)",
+    "LPALSPEEDOFSOUND": "void (*)(ALfloat)",
+    "SEL": "SEL *",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__int128_t": "__int128",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "alBufferDataStaticProcPtr": "ALvoid (*)(ALint, ALenum, const ALvoid * _Nonnull, ALsizei, ALsizei)",
+    "alMacOSXGetRenderChannelCountProcPtr": "ALint (*)(void)",
+    "alMacOSXRenderChannelCountProcPtr": "ALvoid (*)(ALint)",
+    "alSourceAddNotificationProcPtr": "ALenum (*)(ALuint, ALuint, alSourceNotificationProc _Nonnull, ALvoid * _Nullable)",
+    "alSourceGetRenderingQualityProcPtr": "ALint (*)(ALuint)",
+    "alSourceNotificationProc": "ALvoid (*)(ALuint, ALuint, ALvoid * _Nullable)",
+    "alSourceRemoveNotificationProcPtr": "ALvoid (*)(ALuint, ALuint, alSourceNotificationProc _Nonnull, ALvoid * _Nullable)",
+    "alSourceRenderingQualityProcPtr": "ALvoid (*)(ALuint, ALint)",
+    "alcASAGetListenerProcPtr": "ALenum (*)(ALuint, ALvoid * _Nonnull, ALuint * _Nonnull)",
+    "alcASAGetSourceProcPtr": "ALenum (*)(ALuint, ALuint, ALvoid * _Nonnull, ALuint * _Nonnull)",
+    "alcASASetListenerProcPtr": "ALenum (*)(ALuint, ALvoid * _Nonnull, ALuint)",
+    "alcASASetSourceProcPtr": "ALenum (*)(ALuint, ALuint, ALvoid * _Nonnull, ALuint)",
+    "alcMacOSXGetMixerMaxiumumBussesProcPtr": "ALint (*)(void)",
+    "alcMacOSXGetMixerOutputRateProcPtr": "ALdouble (*)(void)",
+    "alcMacOSXGetRenderingQualityProcPtr": "ALint (*)(void)",
+    "alcMacOSXMixerMaxiumumBussesProcPtr": "ALvoid (*)(ALint)",
+    "alcMacOSXMixerOutputRateProcPtr": "ALvoid (*)(ALdouble)",
+    "alcMacOSXRenderingQualityProcPtr": "ALvoid (*)(ALint)",
+    "alcOutputCapturerAvailableSamplesProcPtr": "ALint (*)(void)",
+    "alcOutputCapturerPrepareProcPtr": "ALvoid (*)(ALCuint, ALCenum, ALCsizei)",
+    "alcOutputCapturerSamplesProcPtr": "ALvoid (*)(ALCvoid * _Nonnull, ALCsizei)",
+    "alcOutputCapturerStartProcPtr": "ALvoid (*)(void)",
+    "alcOutputCapturerStopProcPtr": "ALvoid (*)(void)",
+    "id": "id"
+  }
+}

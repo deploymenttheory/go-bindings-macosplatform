@@ -1,0 +1,73 @@
+# macOS
+.DS_Store
+
+# VSCode
+.vs
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Build and temp files
+/build/
+/tmp/
+*.log
+*.bak
+
+# Windows-specific 
+*.winfile eol=crlf
+
+# Go development
+*.test
+/vendor/
+
+# Generated acceptance test sample (regenerated per run by cmd/genacceptance)
+acceptance/generated_acceptance_test.go
+acceptance-attestation.jsonl
+/bin/
+/dist/
+/pkg/
+coverage.out
+coverage.html
+
+# Python virtual environments
+scripts/python/venv/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.pytest_cache/
+*.egg-info/
+
+# AI instructions
+.claude
+.cursor
+
+# Binaries and executables
+*.dll
+*.exe
+*.dylib
+*.so
+
+# Orin app build artifacts
+/orin
+/orin2
+/tart
+/Orin.app/
+app/orin/orin
+app/orin2/orin2
+*.tvm
+
+# Weave app build artifact (build with: go build -o weave ./example/weave/)
+example/weave/weave
+/weave
+
+# Dev
+./cache
+./generate
+# Apple provisioning profiles — contain signing credentials, never commit
+*.provisionprofile

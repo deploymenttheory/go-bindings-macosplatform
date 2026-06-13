@@ -1,0 +1,5 @@
+{
+  "Foundation": {
+    "extra_include_dirs": ["usr/include/objc"]
+  }
+}

@@ -1,0 +1,54 @@
+{{/*
+    structs.tmpl — templates for C struct and CF opaque pointer types.
+
+    Named templates:
+      struct          regular C struct type definition
+      cf_wrapper      CoreFoundation opaque pointer wrapper (ptr field + Ptr() + NewX())
+      cf_alias        typedef alias pointing to a primary CF wrapper
+      struct_typedef  non-CF struct typedef alias
+*/}}
+
+
+{{define "struct"}}{{.CommentBlock}}type {{.GoName}} struct {
+{{- range .Fields}}
+	{{.Name}} {{.GoType}}
+{{- end}}
+}
+
+{{end}}
+
+
+{{define "cf_wrapper"}}type {{.GoName}} struct {
+	ptr unsafe.Pointer
+}
+
+func (c *{{.GoName}}) Ptr() unsafe.Pointer {
+	if c == nil {
+		return nil
+	}
+	return c.ptr
+}
+
+func New{{.GoName}}(ptr unsafe.Pointer) *{{.GoName}} {
+	if ptr == nil {
+		return nil
+	}
+	o := &{{.GoName}}{ptr: ptr}
+	objc.Track(o, o.Ptr)
+	return o
+}
+
+{{end}}
+
+
+{{define "cf_alias"}}type {{.GoAlias}} = {{.GoPrimary}}
+
+func New{{.GoAlias}}(ptr unsafe.Pointer) *{{.GoAlias}} { return New{{.GoPrimary}}(ptr) }
+
+{{end}}
+
+
+{{define "struct_typedef"}}// {{.GoAlias}} is a typedef alias for {{.GoTarget}}.
+type {{.GoAlias}} = {{.GoTarget}}
+
+{{end}}

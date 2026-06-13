@@ -1,0 +1,2836 @@
+{
+  "framework": "CoreHaptics",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {
+    "CHHapticDynamicParameter": {
+      "super": "NSObject",
+      "methods": [
+        {
+          "selector": "init",
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "availability": {
+            "unavailable": true
+          },
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 230
+        },
+        {
+          "selector": "initWithParameterID:value:relativeTime:",
+          "args": [
+            {
+              "name": "parameterID",
+              "objc_type": "CHHapticDynamicParameterID _Nonnull"
+            },
+            {
+              "name": "value",
+              "objc_type": "float"
+            },
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nonnull"
+          },
+          "is_init": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 242,
+          "designated_init": true,
+          "doc": "@method initWithParameterID:value:relativeTime @abstract Initialize a CHHapticDynamicParameter with a parameter ID, value, and relative time. @param parameterID The CHHapticDynamicParameterID for the desired parameter change. @param value The value for that parameter. @param time The time at which this parameter should be applied, relative to the start time of the pattern."
+        },
+        {
+          "selector": "parameterID",
+          "return": {
+            "objc_type": "CHHapticDynamicParameterID _Nonnull"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 218,
+          "doc": "@property parameterID The ID of the dynamic parameter to use."
+        },
+        {
+          "selector": "value",
+          "return": {
+            "objc_type": "float"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 223,
+          "doc": "@property value The value of the parameter."
+        },
+        {
+          "selector": "setValue:",
+          "args": [
+            {
+              "name": "value",
+              "objc_type": "float"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h"
+        },
+        {
+          "selector": "relativeTime",
+          "return": {
+            "objc_type": "NSTimeInterval"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 228,
+          "doc": "@property relativeTime The time at which the parameter should be applied, relative to the start time for the pattern."
+        },
+        {
+          "selector": "setRelativeTime:",
+          "args": [
+            {
+              "name": "relativeTime",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h"
+        }
+      ],
+      "properties": [
+        {
+          "name": "parameterID",
+          "objc_type": "CHHapticDynamicParameterID _Nonnull",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 218,
+          "doc": "@property parameterID The ID of the dynamic parameter to use."
+        },
+        {
+          "name": "value",
+          "objc_type": "float",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 223,
+          "doc": "@property value The value of the parameter."
+        },
+        {
+          "name": "relativeTime",
+          "objc_type": "NSTimeInterval",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 228,
+          "doc": "@property relativeTime The time at which the parameter should be applied, relative to the start time for the pattern."
+        }
+      ],
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 213
+    },
+    "CHHapticEngine": {
+      "super": "NSObject",
+      "methods": [
+        {
+          "selector": "capabilitiesForHardware",
+          "class_method": true,
+          "return": {
+            "objc_type": "id\u003cCHHapticDeviceCapability\u003e _Nonnull"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 143,
+          "doc": "@method capabilitiesForHardware @abstract Get the protocol that describes haptic and audio capabilities on this device. @discussion Detailed description on the capability protocol is in CHHapticDeviceCapability.h."
+        },
+        {
+          "selector": "init",
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "availability": {
+            "unavailable": true
+          },
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 219
+        },
+        {
+          "selector": "initAndReturnError:",
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 231,
+          "designated_init": true,
+          "doc": "@method initAndReturnError: @abstract Create an instance of the CHHapticEngine. @discussion More than one instance may exist within a process.  Each will function independently of the others. CHHapticEngines created using this method will be associated with the device's internal haptics hardware system, if one exists.  For systems without internal haptics, this method will fail with the error `CHHapticErrorCodeNotSupported`. To access engine instances associated with external game controllers, see the GameController framework documentation for the `hapticEngines` property on the GCController class."
+        },
+        {
+          "selector": "initWithAudioSession:error:",
+          "args": [
+            {
+              "name": "audioSession",
+              "objc_type": "AVAudioSession * _Nullable",
+              "nullable": true
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 245,
+          "designated_init": true,
+          "doc": "@method initWithAudioSession:error @abstract Create an instance of an CHHapticEngine and associate it with an audio session.  If 'audioSession' is nil, the engine will create its own. @discussion More than one instance may exist within a process.  Each will function independently of the others, but all CHHapticEngines which share an audio session will have identical audio behavior with regard to interruptions, etc. CHHapticEngines created using this method will be associated with the device's internal haptics hardware system, if one exists.  For systems without internal haptics, this method will fail with the error `CHHapticErrorCodeNotSupported`. To access engine instances associated with external game controllers, see the GameController framework documentation for the `hapticEngines` property on the GCController class."
+        },
+        {
+          "selector": "startWithCompletionHandler:",
+          "args": [
+            {
+              "name": "completionHandler",
+              "objc_type": "CHHapticCompletionHandler _Nullable",
+              "nullable": true
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 253,
+          "doc": "@method startWithCompletionHandler: @abstract Asynchronously start the engine. The handler will be called when the operation completes. @discussion The handler is guaranteed to be called on either success or failure."
+        },
+        {
+          "selector": "startAndReturnError:",
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 261,
+          "doc": "@method startAndReturnError: @abstract Start the engine and block until the engine has started. @discussion This method will return NO upon failure, and outError will be set to a valid NSError describing the error."
+        },
+        {
+          "selector": "stopWithCompletionHandler:",
+          "args": [
+            {
+              "name": "completionHandler",
+              "objc_type": "CHHapticCompletionHandler _Nullable",
+              "nullable": true
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 269,
+          "doc": "@method stopWithCompletionHandler: @abstract Asynchronously stop the engine.  The handler will be called when the operation completes. @discussion The handler is guaranteed to be called on either success or failure."
+        },
+        {
+          "selector": "notifyWhenPlayersFinished:",
+          "args": [
+            {
+              "name": "finishedHandler",
+              "objc_type": "CHHapticEngineFinishedHandler _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 282,
+          "doc": "@method notifyWhenPlayersFinished: @abstract Tell the engine to asynchronously call the passed-in handler when all active pattern players associated with this engine have stopped. @param finishedHandler The block that will be called asynchronously.  The return value of this block determines the action the engine will take when the block finishes (see `CHHapticEngineFinishedHandler`). @discussion If additional players are started after this call is made, they will delay the callback. If no players are active or the engine is stopped, the callback will happen immediately."
+        },
+        {
+          "selector": "createPlayerWithPattern:error:",
+          "args": [
+            {
+              "name": "pattern",
+              "objc_type": "CHHapticPattern * _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "id\u003cCHHapticPatternPlayer\u003e _Nullable",
+            "nullable": true
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 290,
+          "doc": "@method createPlayerWithPattern:error @abstract Factory method for creating a CHHapticPatternPlayer from a CHHapticPattern. @param pattern The pattern to be played."
+        },
+        {
+          "selector": "createAdvancedPlayerWithPattern:error:",
+          "args": [
+            {
+              "name": "pattern",
+              "objc_type": "CHHapticPattern * _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "id\u003cCHHapticAdvancedPatternPlayer\u003e _Nullable",
+            "nullable": true
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 299,
+          "doc": "@method createAdvancedPlayerWithPattern:error @abstract Factory method for creating a CHHapticAdvancedPatternPlayer from a CHHapticPattern. @param pattern The pattern to be played."
+        },
+        {
+          "selector": "registerAudioResource:options:error:",
+          "args": [
+            {
+              "name": "resourceURL",
+              "objc_type": "NSURL * _Nonnull"
+            },
+            {
+              "name": "options",
+              "objc_type": "NSDictionary * _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "CHHapticAudioResourceID"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 333,
+          "doc": "@method registerAudioResource:options:error @abstract Register an external audio file for use as a custom waveform. @param resourceURL A URL referencing the location of the audio file to be registered. @param options A dictionary containing CHHapticAudioResourceKey/value pairs describing how this resource should be played. @param outError If register operation fails, this will be set to a valid NSError describing the error."
+        },
+        {
+          "selector": "unregisterAudioResource:error:",
+          "args": [
+            {
+              "name": "resourceID",
+              "objc_type": "CHHapticAudioResourceID"
+            }
+          ],
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 345,
+          "doc": "@method unregisterAudioResource:error @abstract Unregister and remove a previously-registered audio resource. @param resourceID The resource ID that was returned when the resource was registered. @param outError If the unregister operation fails, this will be set to a valid NSError describing the error."
+        },
+        {
+          "selector": "playPatternFromURL:error:",
+          "args": [
+            {
+              "name": "fileURL",
+              "objc_type": "NSURL * _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 359,
+          "doc": "@method playPatternFromURL:error @abstract Simple one-shot call to play a pattern specified by a URL. @param fileURL The URL of the file containing a haptic/audio pattern dictionary. @param outError If the operation fails, this will be set to a valid NSError describing the error. @discussion The engine should be started prior to calling this method if low latency is desired. If this is not done, this method will start it, which can cause a significant delay."
+        },
+        {
+          "selector": "playPatternFromData:error:",
+          "args": [
+            {
+              "name": "data",
+              "objc_type": "NSData * _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 373,
+          "doc": "@method playPatternFromData:error @abstract Simple one-shot call to play a pattern specified by NSData. @param data The NSData containing a haptic/audio pattern dictionary. @param outError If the operation fails, this will be set to a valid NSError describing the error. @discussion The engine should be started prior to calling this method if low latency is desired. If this is not done, this method will start it, which can cause a significant delay."
+        },
+        {
+          "selector": "currentTime",
+          "return": {
+            "objc_type": "NSTimeInterval"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 149,
+          "doc": "@property currentTime The absolute time from which all current and future event times may be calculated. The units are seconds."
+        },
+        {
+          "selector": "stoppedHandler",
+          "return": {
+            "objc_type": "CHHapticEngineStoppedHandler _Nonnull"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 161
+        },
+        {
+          "selector": "setStoppedHandler:",
+          "args": [
+            {
+              "name": "stoppedHandler",
+              "objc_type": "CHHapticEngineStoppedHandler _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h"
+        },
+        {
+          "selector": "resetHandler",
+          "return": {
+            "objc_type": "CHHapticEngineResetHandler _Nonnull"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 172,
+          "doc": "@property resetHandler @abstract This block will called asynchronously if the haptic engine has to reset itself after a server failure. @discussion In response to this handler being called, the client must release all haptic pattern players and recreate them.  All CHHapticPattern objects and CHHapticEngine properties will have been preserved. In general, callbacks arrive on a non-main thread and it is the client's responsibility to handle it in a thread-safe manner."
+        },
+        {
+          "selector": "setResetHandler:",
+          "args": [
+            {
+              "name": "resetHandler",
+              "objc_type": "CHHapticEngineResetHandler _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h"
+        },
+        {
+          "selector": "playsHapticsOnly",
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 180,
+          "doc": "@property playsHapticsOnly If set to YES, the CHHapticEngine will ignore all events of type CHHapticEventTypeAudio and play only haptic events. @discussion This behavior change will only take effect after the engine is stopped and restarted. The default is NO."
+        },
+        {
+          "selector": "setPlaysHapticsOnly:",
+          "args": [
+            {
+              "name": "playsHapticsOnly",
+              "objc_type": "BOOL"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h"
+        },
+        {
+          "selector": "playsAudioOnly",
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "availability": {
+            "macos_introduced": "13.0"
+          },
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 188,
+          "doc": "@property playsAudioOnly If set to YES, the CHHapticEngine will ignore all events of type CHHapticEventTypeHaptic and play only audio events. @discussion This behavior change will only take effect after the engine is stopped and restarted. The default is NO."
+        },
+        {
+          "selector": "setPlaysAudioOnly:",
+          "args": [
+            {
+              "name": "playsAudioOnly",
+              "objc_type": "BOOL"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {
+            "macos_introduced": "13.0"
+          },
+          "sdk_file": "CoreHaptics/CHHapticEngine.h"
+        },
+        {
+          "selector": "isMutedForAudio",
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 195,
+          "doc": "@property isMutedForAudio When set to YES, the CHHapticEngine mutes audio playback from its players. @discussion Default is NO."
+        },
+        {
+          "selector": "setIsMutedForAudio:",
+          "args": [
+            {
+              "name": "isMutedForAudio",
+              "objc_type": "BOOL"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h"
+        },
+        {
+          "selector": "isMutedForHaptics",
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 202,
+          "doc": "@property isMutedForHaptics When set to YES, the CHHapticEngine mutes haptic playback from its players. @discussion Default is NO."
+        },
+        {
+          "selector": "setIsMutedForHaptics:",
+          "args": [
+            {
+              "name": "isMutedForHaptics",
+              "objc_type": "BOOL"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h"
+        },
+        {
+          "selector": "isAutoShutdownEnabled",
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 217,
+          "doc": "@property autoShutdownEnabled @abstract When auto shutdown is enabled, the haptic engine can start and stop the hardware dynamically, to conserve power. @discussion To conserve power, it is advised that the client stop the haptic engine when not in use. But when auto shutdown is enabled, the haptic engine will stop the hardware if it was running idle for a certain duration, and restart it later when required. Note that, because this operation is dynamic, it may affect the start times of the pattern players (e.g. `CHHapticPatternplayer`), if the engine has to resume from its shutdown state. This feature is disabled by default, but the client can enable it if needed."
+        },
+        {
+          "selector": "setAutoShutdownEnabled:",
+          "args": [
+            {
+              "name": "autoShutdownEnabled",
+              "objc_type": "BOOL"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h"
+        },
+        {
+          "selector": "intendedSpatialExperience",
+          "return": {
+            "objc_type": "CASpatialAudioExperience *"
+          },
+          "availability": {
+            "unavailable": true
+          },
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 383,
+          "doc": "@property intendedSpatialExperience @abstract The CHHapticEngine's intended `CASpatialAudioExperience`. @discussion Only useful for engines that have audio output. If unspecified, the property value defaults to `CAAutomaticSpatialAudio`."
+        },
+        {
+          "selector": "setIntendedSpatialExperience:",
+          "args": [
+            {
+              "name": "intendedSpatialExperience",
+              "objc_type": "CASpatialAudioExperience *"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {
+            "unavailable": true
+          },
+          "sdk_file": "CoreHaptics/CHHapticEngine.h"
+        }
+      ],
+      "properties": [
+        {
+          "name": "currentTime",
+          "objc_type": "NSTimeInterval",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 149,
+          "doc": "@property currentTime The absolute time from which all current and future event times may be calculated. The units are seconds."
+        },
+        {
+          "name": "stoppedHandler",
+          "objc_type": "CHHapticEngineStoppedHandler _Nonnull",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 161
+        },
+        {
+          "name": "resetHandler",
+          "objc_type": "CHHapticEngineResetHandler _Nonnull",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 172,
+          "doc": "@property resetHandler @abstract This block will called asynchronously if the haptic engine has to reset itself after a server failure. @discussion In response to this handler being called, the client must release all haptic pattern players and recreate them.  All CHHapticPattern objects and CHHapticEngine properties will have been preserved. In general, callbacks arrive on a non-main thread and it is the client's responsibility to handle it in a thread-safe manner."
+        },
+        {
+          "name": "playsHapticsOnly",
+          "objc_type": "BOOL",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 180,
+          "doc": "@property playsHapticsOnly If set to YES, the CHHapticEngine will ignore all events of type CHHapticEventTypeAudio and play only haptic events. @discussion This behavior change will only take effect after the engine is stopped and restarted. The default is NO."
+        },
+        {
+          "name": "playsAudioOnly",
+          "objc_type": "BOOL",
+          "availability": {
+            "macos_introduced": "13.0"
+          },
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 188,
+          "doc": "@property playsAudioOnly If set to YES, the CHHapticEngine will ignore all events of type CHHapticEventTypeHaptic and play only audio events. @discussion This behavior change will only take effect after the engine is stopped and restarted. The default is NO."
+        },
+        {
+          "name": "isMutedForAudio",
+          "objc_type": "BOOL",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 195,
+          "doc": "@property isMutedForAudio When set to YES, the CHHapticEngine mutes audio playback from its players. @discussion Default is NO."
+        },
+        {
+          "name": "isMutedForHaptics",
+          "objc_type": "BOOL",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 202,
+          "doc": "@property isMutedForHaptics When set to YES, the CHHapticEngine mutes haptic playback from its players. @discussion Default is NO."
+        },
+        {
+          "name": "autoShutdownEnabled",
+          "objc_type": "BOOL",
+          "getter": "isAutoShutdownEnabled",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 217,
+          "doc": "@property autoShutdownEnabled @abstract When auto shutdown is enabled, the haptic engine can start and stop the hardware dynamically, to conserve power. @discussion To conserve power, it is advised that the client stop the haptic engine when not in use. But when auto shutdown is enabled, the haptic engine will stop the hardware if it was running idle for a certain duration, and restart it later when required. Note that, because this operation is dynamic, it may affect the start times of the pattern players (e.g. `CHHapticPatternplayer`), if the engine has to resume from its shutdown state. This feature is disabled by default, but the client can enable it if needed."
+        },
+        {
+          "name": "intendedSpatialExperience",
+          "objc_type": "CASpatialAudioExperience *",
+          "availability": {
+            "unavailable": true
+          },
+          "sdk_file": "CoreHaptics/CHHapticEngine.h",
+          "sdk_line": 383,
+          "doc": "@property intendedSpatialExperience @abstract The CHHapticEngine's intended `CASpatialAudioExperience`. @discussion Only useful for engines that have audio output. If unspecified, the property value defaults to `CAAutomaticSpatialAudio`."
+        }
+      ],
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticEngine.h",
+      "sdk_line": 135
+    },
+    "CHHapticEvent": {
+      "super": "NSObject",
+      "methods": [
+        {
+          "selector": "init",
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "availability": {
+            "unavailable": true
+          },
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 98
+        },
+        {
+          "selector": "initWithEventType:parameters:relativeTime:",
+          "args": [
+            {
+              "name": "type",
+              "objc_type": "CHHapticEventType _Nonnull"
+            },
+            {
+              "name": "eventParams",
+              "objc_type": "NSArray\u003cCHHapticEventParameter *\u003e * _Nonnull"
+            },
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nonnull"
+          },
+          "is_init": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 110,
+          "doc": "@method initWithEventType:parameters:relativeTime @abstract Initialize a new CHHapticEvent.  This can only be used to create Transient event types (which do not require a duration). @param type The type of event. @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern."
+        },
+        {
+          "selector": "initWithEventType:parameters:relativeTime:duration:",
+          "args": [
+            {
+              "name": "type",
+              "objc_type": "CHHapticEventType _Nonnull"
+            },
+            {
+              "name": "eventParams",
+              "objc_type": "NSArray\u003cCHHapticEventParameter *\u003e * _Nonnull"
+            },
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            },
+            {
+              "name": "duration",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nonnull"
+          },
+          "is_init": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 127,
+          "doc": "@method initWithEventType:parameters:relativeTime:duration @abstract Initialize a new CHHapticEvent, providing a duration. @param type The type of event. @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern. @param duration For Continuous event types, the length of time before the event playback begins its release. For Transient event types, the logical length of the event (used to determine pattern end and loop points)."
+        },
+        {
+          "selector": "initWithAudioResourceID:parameters:relativeTime:",
+          "args": [
+            {
+              "name": "resID",
+              "objc_type": "CHHapticAudioResourceID"
+            },
+            {
+              "name": "eventParams",
+              "objc_type": "NSArray\u003cCHHapticEventParameter *\u003e * _Nonnull"
+            },
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nonnull"
+          },
+          "is_init": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 143,
+          "doc": "@method initWithAudioResourceID:parameters:relativeTime @abstract Initialize a new CHHapticEvent using a previously-loaded audio resource. @param resID A previously-registered audio resource ID (see `CHHapticEngine(registerAudioResource:options:error)`). @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern."
+        },
+        {
+          "selector": "initWithAudioResourceID:parameters:relativeTime:duration:",
+          "args": [
+            {
+              "name": "resID",
+              "objc_type": "CHHapticAudioResourceID"
+            },
+            {
+              "name": "eventParams",
+              "objc_type": "NSArray\u003cCHHapticEventParameter *\u003e * _Nonnull"
+            },
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            },
+            {
+              "name": "duration",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nonnull"
+          },
+          "is_init": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 162,
+          "doc": "@method initWithAudioResourceID:parameters:relativeTime:duration @abstract Initialize a new CHHapticEvent using a previously-loaded audio resource. @param resID A previously-registered audio resource ID (see `CHHapticEngine(registerAudioResource:options:error)`). @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern. @param duration The duration of this event in seconds. @discussion If the specified duration is less than the duration of the audio resource, its playback will be truncated.  If it is greater, its playback will be padded with silence.  If zero, it will be ignored."
+        },
+        {
+          "selector": "type",
+          "return": {
+            "objc_type": "CHHapticEventType _Nonnull"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 81,
+          "doc": "@property type The type of event."
+        },
+        {
+          "selector": "eventParameters",
+          "return": {
+            "objc_type": "NSArray\u003cCHHapticEventParameter *\u003e * _Nonnull"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 86,
+          "doc": "@property eventParameters NSArray of Event parameters.  Can be empty."
+        },
+        {
+          "selector": "relativeTime",
+          "return": {
+            "objc_type": "NSTimeInterval"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 91,
+          "doc": "@property relativeTime The relative time for this event versus the start time of the pattern.  Units are seconds."
+        },
+        {
+          "selector": "setRelativeTime:",
+          "args": [
+            {
+              "name": "relativeTime",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h"
+        },
+        {
+          "selector": "duration",
+          "return": {
+            "objc_type": "NSTimeInterval"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 96,
+          "doc": "@property duration The duration for this event.  Units are seconds.  If unset (0.0), Continuous event types will have no fixed end."
+        },
+        {
+          "selector": "setDuration:",
+          "args": [
+            {
+              "name": "duration",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h"
+        }
+      ],
+      "properties": [
+        {
+          "name": "type",
+          "objc_type": "CHHapticEventType _Nonnull",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 81,
+          "doc": "@property type The type of event."
+        },
+        {
+          "name": "eventParameters",
+          "objc_type": "NSArray\u003cCHHapticEventParameter *\u003e * _Nonnull",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 86,
+          "doc": "@property eventParameters NSArray of Event parameters.  Can be empty."
+        },
+        {
+          "name": "relativeTime",
+          "objc_type": "NSTimeInterval",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 91,
+          "doc": "@property relativeTime The relative time for this event versus the start time of the pattern.  Units are seconds."
+        },
+        {
+          "name": "duration",
+          "objc_type": "NSTimeInterval",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticEvent.h",
+          "sdk_line": 96,
+          "doc": "@property duration The duration for this event.  Units are seconds.  If unset (0.0), Continuous event types will have no fixed end."
+        }
+      ],
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticEvent.h",
+      "sdk_line": 76
+    },
+    "CHHapticEventParameter": {
+      "super": "NSObject",
+      "methods": [
+        {
+          "selector": "init",
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "availability": {
+            "unavailable": true
+          },
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 198
+        },
+        {
+          "selector": "initWithParameterID:value:",
+          "args": [
+            {
+              "name": "parameterID",
+              "objc_type": "CHHapticEventParameterID _Nonnull"
+            },
+            {
+              "name": "value",
+              "objc_type": "float"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nonnull"
+          },
+          "is_init": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 199,
+          "designated_init": true
+        },
+        {
+          "selector": "parameterID",
+          "return": {
+            "objc_type": "CHHapticEventParameterID _Nonnull"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 190,
+          "doc": "@property parameterID The ID of the event parameter to use."
+        },
+        {
+          "selector": "value",
+          "return": {
+            "objc_type": "float"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 196,
+          "doc": "@property value The value of the event parameter."
+        },
+        {
+          "selector": "setValue:",
+          "args": [
+            {
+              "name": "value",
+              "objc_type": "float"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h"
+        }
+      ],
+      "properties": [
+        {
+          "name": "parameterID",
+          "objc_type": "CHHapticEventParameterID _Nonnull",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 190,
+          "doc": "@property parameterID The ID of the event parameter to use."
+        },
+        {
+          "name": "value",
+          "objc_type": "float",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 196,
+          "doc": "@property value The value of the event parameter."
+        }
+      ],
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 184
+    },
+    "CHHapticParameterCurve": {
+      "super": "NSObject",
+      "methods": [
+        {
+          "selector": "init",
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "availability": {
+            "unavailable": true
+          },
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 290
+        },
+        {
+          "selector": "initWithParameterID:controlPoints:relativeTime:",
+          "args": [
+            {
+              "name": "parameterID",
+              "objc_type": "CHHapticDynamicParameterID _Nonnull"
+            },
+            {
+              "name": "controlPoints",
+              "objc_type": "NSArray\u003cCHHapticParameterCurveControlPoint *\u003e * _Nonnull"
+            },
+            {
+              "name": "relativeTime",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nonnull"
+          },
+          "is_init": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 303,
+          "designated_init": true,
+          "doc": "@method initWithParameterID:controlPoints:relativeTime @abstract Initialize a CHHapticParameterCurve with a parameter ID, time, and an array of CHHapticParameterCurveControlPoint. @param parameterID The CHHapticDynamicParameterID for the desired parameter. @param controlPoints An array of CHHapticParameterCurveControlPoints. @param relativeTime The time at which this parameter curve should start, relative to the start time of the CHHapticPattern to which this parameter curve belongs."
+        },
+        {
+          "selector": "parameterID",
+          "return": {
+            "objc_type": "CHHapticDynamicParameterID _Nonnull"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 286
+        },
+        {
+          "selector": "relativeTime",
+          "return": {
+            "objc_type": "NSTimeInterval"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 287
+        },
+        {
+          "selector": "setRelativeTime:",
+          "args": [
+            {
+              "name": "relativeTime",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h"
+        },
+        {
+          "selector": "controlPoints",
+          "return": {
+            "objc_type": "NSArray\u003cCHHapticParameterCurveControlPoint *\u003e * _Nonnull"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 288
+        }
+      ],
+      "properties": [
+        {
+          "name": "parameterID",
+          "objc_type": "CHHapticDynamicParameterID _Nonnull",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 286
+        },
+        {
+          "name": "relativeTime",
+          "objc_type": "NSTimeInterval",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 287
+        },
+        {
+          "name": "controlPoints",
+          "objc_type": "NSArray\u003cCHHapticParameterCurveControlPoint *\u003e * _Nonnull",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 288
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 284,
+      "doc": "@class CHHapticParameterCurve @abstract A CHHapticParameterCurve is a set of CHHapticParameterCurveControlPoints which describe the control (inflection) points for the parameter values to be applied to the associated pattern. @discussion The CHHapticParameterCurve generates an interpolated value output which passed through each control point at its associated relative time.  These times will all be relative to the start time of the CHHapticParameterCurve within the playing pattern."
+    },
+    "CHHapticParameterCurveControlPoint": {
+      "super": "NSObject",
+      "methods": [
+        {
+          "selector": "init",
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "availability": {
+            "unavailable": true
+          },
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 260
+        },
+        {
+          "selector": "initWithRelativeTime:value:",
+          "args": [
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            },
+            {
+              "name": "value",
+              "objc_type": "float"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nonnull"
+          },
+          "is_init": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 270,
+          "designated_init": true,
+          "doc": "@method initWithRelativeTime:value @abstract Initialize a CHHapticParameterCurveControlPoint with a relative time and value. @param value The value of the associated parameter. @param time The time at which the associated parameter will reach this value, relative to the start time of the parameter curve."
+        },
+        {
+          "selector": "relativeTime",
+          "return": {
+            "objc_type": "NSTimeInterval"
+          },
+          "availability": {
+            "macos_introduced": "10.15"
+          },
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 257
+        },
+        {
+          "selector": "setRelativeTime:",
+          "args": [
+            {
+              "name": "relativeTime",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h"
+        },
+        {
+          "selector": "value",
+          "return": {
+            "objc_type": "float"
+          },
+          "availability": {
+            "macos_introduced": "10.15"
+          },
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 258
+        },
+        {
+          "selector": "setValue:",
+          "args": [
+            {
+              "name": "value",
+              "objc_type": "float"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticParameter.h"
+        }
+      ],
+      "properties": [
+        {
+          "name": "relativeTime",
+          "objc_type": "NSTimeInterval",
+          "availability": {
+            "macos_introduced": "10.15"
+          },
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 257
+        },
+        {
+          "name": "value",
+          "objc_type": "float",
+          "availability": {
+            "macos_introduced": "10.15"
+          },
+          "sdk_file": "CoreHaptics/CHHapticParameter.h",
+          "sdk_line": 258
+        }
+      ],
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 255
+    },
+    "CHHapticPattern": {
+      "super": "NSObject",
+      "methods": [
+        {
+          "selector": "init",
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "availability": {
+            "unavailable": true
+          },
+          "sdk_file": "CoreHaptics/CHHapticPattern.h",
+          "sdk_line": 143
+        },
+        {
+          "selector": "initWithEvents:parameters:error:",
+          "args": [
+            {
+              "name": "events",
+              "objc_type": "NSArray\u003cCHHapticEvent *\u003e * _Nonnull"
+            },
+            {
+              "name": "parameters",
+              "objc_type": "NSArray\u003cCHHapticDynamicParameter *\u003e * _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPattern.h",
+          "sdk_line": 153,
+          "doc": "@method initWithEvents:parameters:error @abstract Initialize a new CHHapticPattern. @param events An NSArray of CHHapticEvents.  Can be empty. @param parameters An NSArray of CHHapticDynamicParameters.  Can be empty."
+        },
+        {
+          "selector": "initWithEvents:parameterCurves:error:",
+          "args": [
+            {
+              "name": "events",
+              "objc_type": "NSArray\u003cCHHapticEvent *\u003e * _Nonnull"
+            },
+            {
+              "name": "parameterCurves",
+              "objc_type": "NSArray\u003cCHHapticParameterCurve *\u003e * _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPattern.h",
+          "sdk_line": 165,
+          "doc": "@method initWithEvents:parameterCurves:error @abstract Initialize a new CHHapticPattern with parameters modulated by parameter curves. @param events An NSArray of CHHapticEvents.  Can be empty. @param parameterCurves An NSArray of CHHapticParameterCurves.  Can be empty."
+        },
+        {
+          "selector": "initWithDictionary:error:",
+          "args": [
+            {
+              "name": "patternDict",
+              "objc_type": "NSDictionary\u003cCHHapticPatternKey,id\u003e * _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPattern.h",
+          "sdk_line": 175,
+          "doc": "@method initWithDictionary:error @abstract Initialize a new CHHapticPattern using the passed-in NSDictionary. @param patternDict NSDictionary containing a pattern property list."
+        },
+        {
+          "selector": "initWithContentsOfURL:error:",
+          "args": [
+            {
+              "name": "ahapURL",
+              "objc_type": "NSURL * _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "instancetype _Nullable",
+            "nullable": true
+          },
+          "is_init": true,
+          "has_nserror": true,
+          "availability": {
+            "macos_introduced": "13.0"
+          },
+          "sdk_file": "CoreHaptics/CHHapticPattern.h",
+          "sdk_line": 186,
+          "doc": "@method initWithContentsOfURL:error @abstract Initialize a new CHHapticPattern using the contents of the passed-in NSURL. @param ahapURL NSURL of an ahap file. @discussion This URL must reference a valid AHAP file."
+        },
+        {
+          "selector": "exportDictionaryAndReturnError:",
+          "return": {
+            "objc_type": "NSDictionary\u003cCHHapticPatternKey,id\u003e * _Nullable",
+            "nullable": true
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPattern.h",
+          "sdk_line": 196,
+          "doc": "@method exportDictionaryAndReturnError:error @abstract Returns a NSDictionary representation of the contents of the pattern. @discussion Patterns containing custom audio resource IDs cannot be exported and will return nil with the error code set to CHHapticErrorCodeOperationNotPermitted."
+        },
+        {
+          "selector": "duration",
+          "return": {
+            "objc_type": "NSTimeInterval"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPattern.h",
+          "sdk_line": 141,
+          "doc": "@property duration Pattern duration is calculated as the start time of the pattern's last event or parameter, plus that event's duration if present."
+        }
+      ],
+      "properties": [
+        {
+          "name": "duration",
+          "objc_type": "NSTimeInterval",
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPattern.h",
+          "sdk_line": 141,
+          "doc": "@property duration Pattern duration is calculated as the start time of the pattern's last event or parameter, plus that event's duration if present."
+        }
+      ],
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 136
+    }
+  },
+  "protocols": {
+    "CHHapticAdvancedPatternPlayer": {
+      "protocols": [
+        "CHHapticPatternPlayer"
+      ],
+      "methods": [
+        {
+          "selector": "pauseAtTime:error:",
+          "args": [
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 115,
+          "doc": "@method pauseAtTime:error @abstract Pause playback of the pattern at the specified time (see `CHHapticEngine(currentTime)`). @discussion If 'time' is set to `CHHapticTimeImmediate`, the pattern will be paused immediately."
+        },
+        {
+          "selector": "resumeAtTime:error:",
+          "args": [
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 124,
+          "doc": "@method resumeAtTime:error @abstract Resume playback on a previously-paused player at the specified time (see `CHHapticEngine(currentTime)`). @discussion If 'time' is set to `CHHapticTimeImmediate`, the pattern is resumed as soon as possible. Playback will resume at the time offset in the pattern at which it was paused."
+        },
+        {
+          "selector": "seekToOffset:error:",
+          "args": [
+            {
+              "name": "offsetTime",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 135,
+          "doc": "@method seekToOffset:error @abstract Set the playback position on an active player to the specified offset time. @discussion If 'offsetTime' is set to 0.0, the pattern will start from the beginning.  If set to \u003e= the duration of the pattern, playback will terminate as soon as possible unless the player is looped, in which case playback will start at the beginning of the loop."
+        },
+        {
+          "selector": "loopEnabled",
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 142,
+          "doc": "@property loopEnabled @abstract When set to YES, the player will loop back to the beginning of the pattern whenever playback reaches the `loopEnd` time."
+        },
+        {
+          "selector": "setLoopEnabled:",
+          "args": [
+            {
+              "name": "loopEnabled",
+              "objc_type": "BOOL"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h"
+        },
+        {
+          "selector": "loopEnd",
+          "return": {
+            "objc_type": "NSTimeInterval"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 150,
+          "doc": "@property loopEnd @abstract The time in seconds at which the pattern will loop back if looping is enabled. @discussion If set to 0.0, the loop length will be set to the end of the last event in the pattern."
+        },
+        {
+          "selector": "setLoopEnd:",
+          "args": [
+            {
+              "name": "loopEnd",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h"
+        },
+        {
+          "selector": "playbackRate",
+          "return": {
+            "objc_type": "float"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 161,
+          "doc": "@property playbackRate @abstract Allows a pattern to be played back at any multiple of its normal rate.  The rate can be adjusted at any point before or during pattern playback. @discussion This rate factor scales the relative times of all events and parameters as they are played, as well as the durations of Continuous events and the `loopEnd` time.  It does not affect the pitches of the events. Any value greater than 0.0 is valid; all others are ignored."
+        },
+        {
+          "selector": "setPlaybackRate:",
+          "args": [
+            {
+              "name": "playbackRate",
+              "objc_type": "float"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h"
+        },
+        {
+          "selector": "isMuted",
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 167,
+          "doc": "@property isMuted @abstract When set to YES, all audio and haptic output will be silenced."
+        },
+        {
+          "selector": "setIsMuted:",
+          "args": [
+            {
+              "name": "isMuted",
+              "objc_type": "BOOL"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h"
+        },
+        {
+          "selector": "completionHandler",
+          "return": {
+            "objc_type": "CHHapticAdvancedPatternPlayerCompletionHandler _Nonnull"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 173,
+          "doc": "@property completionHandler @abstract The block or enclosure that will be called when the player finishes."
+        },
+        {
+          "selector": "setCompletionHandler:",
+          "args": [
+            {
+              "name": "completionHandler",
+              "objc_type": "CHHapticAdvancedPatternPlayerCompletionHandler _Nonnull"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h"
+        }
+      ],
+      "availability": {
+        "macos_introduced": "10.15"
+      }
+    },
+    "CHHapticDeviceCapability": {
+      "availability": {
+        "macos_introduced": "10.15"
+      }
+    },
+    "CHHapticParameterAttributes": {
+      "protocols": [
+        "NSObject"
+      ],
+      "methods": [
+        {
+          "selector": "minValue",
+          "return": {
+            "objc_type": "float"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticDeviceCapability.h",
+          "sdk_line": 31,
+          "doc": "@property minValue @abstract The minimum value for the parameter."
+        },
+        {
+          "selector": "maxValue",
+          "return": {
+            "objc_type": "float"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticDeviceCapability.h",
+          "sdk_line": 37,
+          "doc": "@property maxValue @abstract The maximum value for the parameter."
+        },
+        {
+          "selector": "defaultValue",
+          "return": {
+            "objc_type": "float"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticDeviceCapability.h",
+          "sdk_line": 43,
+          "doc": "@property maxValue @abstract The default value for the parameter."
+        }
+      ],
+      "availability": {
+        "macos_introduced": "10.15"
+      }
+    },
+    "CHHapticPatternPlayer": {
+      "protocols": [
+        "NSObject"
+      ],
+      "methods": [
+        {
+          "selector": "startAtTime:error:",
+          "args": [
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 42,
+          "doc": "@method startAtTime:error @abstract Start playing the pattern at the specified time (see `CHHapticEngine(currentTime)`). If 'time' is set to `CHHapticTimeImmediate`, the pattern is started as soon as possible."
+        },
+        {
+          "selector": "stopAtTime:error:",
+          "args": [
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 49,
+          "doc": "@method stopAtTime:error @abstract Stop playing the pattern at the specified time (see `CHHapticEngine(currentTime)`). If 'time' is set to `CHHapticTimeImmediate`, the pattern is stopped as soon as possible."
+        },
+        {
+          "selector": "sendParameters:atTime:error:",
+          "args": [
+            {
+              "name": "parameters",
+              "objc_type": "NSArray\u003cCHHapticDynamicParameter *\u003e * _Nonnull"
+            },
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 56,
+          "doc": "@method sendParameters:atTime:error @abstract Send an array of CHHapticDynamicParameters, starting at the specified time (see `CHHapticEngine(currentTime)`). If 'time' is set to `CHHapticTimeImmediate`, the parameters are sent as soon as possible."
+        },
+        {
+          "selector": "scheduleParameterCurve:atTime:error:",
+          "args": [
+            {
+              "name": "parameterCurve",
+              "objc_type": "CHHapticParameterCurve * _Nonnull"
+            },
+            {
+              "name": "time",
+              "objc_type": "NSTimeInterval"
+            }
+          ],
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 70
+        },
+        {
+          "selector": "cancelAndReturnError:",
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "has_nserror": true,
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h",
+          "sdk_line": 79
+        },
+        {
+          "selector": "isMuted",
+          "return": {
+            "objc_type": "BOOL"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h"
+        },
+        {
+          "selector": "setIsMuted:",
+          "args": [
+            {
+              "name": "isMuted",
+              "objc_type": "BOOL"
+            }
+          ],
+          "return": {
+            "objc_type": "void"
+          },
+          "availability": {},
+          "sdk_file": "CoreHaptics/CHHapticPatternPlayer.h"
+        }
+      ],
+      "availability": {
+        "macos_introduced": "10.15"
+      }
+    }
+  },
+  "enums": {
+    "CHHapticEngineFinishedAction": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "CHHapticEngineFinishedActionStopEngine",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticEngineFinishedActionLeaveEngineRunning",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreHaptics/CHHapticEngine.h",
+      "is_extensible": true
+    },
+    "CHHapticEngineStoppedReason": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "CHHapticEngineStoppedReasonAudioSessionInterrupt",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticEngineStoppedReasonApplicationSuspended",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticEngineStoppedReasonIdleTimeout",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticEngineStoppedReasonNotifyWhenFinished",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticEngineStoppedReasonEngineDestroyed",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticEngineStoppedReasonGameControllerDisconnect",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticEngineStoppedReasonSystemError",
+          "value": "-1",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreHaptics/CHHapticEngine.h",
+      "is_extensible": true
+    },
+    "CHHapticErrorCode": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "CHHapticErrorCodeEngineNotRunning",
+          "value": "-4805",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeOperationNotPermitted",
+          "value": "-4806",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeEngineStartTimeout",
+          "value": "-4808",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeNotSupported",
+          "value": "-4809",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeServerInitFailed",
+          "value": "-4810",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeServerInterrupted",
+          "value": "-4811",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidPatternPlayer",
+          "value": "-4812",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidPatternData",
+          "value": "-4813",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidPatternDictionary",
+          "value": "-4814",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidAudioSession",
+          "value": "-4815",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidEngineParameter",
+          "value": "-4816",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidParameterType",
+          "value": "-4820",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidEventType",
+          "value": "-4821",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidEventTime",
+          "value": "-4822",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidEventDuration",
+          "value": "-4823",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidAudioResource",
+          "value": "-4824",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeResourceNotAvailable",
+          "value": "-4825",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeBadEventEntry",
+          "value": "-4830",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeBadParameterEntry",
+          "value": "-4831",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInvalidTime",
+          "value": "-4840",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeFileNotFound",
+          "value": "-4851",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeInsufficientPower",
+          "value": "-4897",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeUnknownError",
+          "value": "-4898",
+          "availability": {}
+        },
+        {
+          "name": "CHHapticErrorCodeMemoryError",
+          "value": "-4899",
+          "availability": {}
+        }
+      ],
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticErrors.h"
+    },
+    "idtype_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "P_ALL",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "P_PID",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "P_PGID",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "wait.h",
+      "sdk_line": 79
+    },
+    "ptrauth_key": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ptrauth_key_none",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asia",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asib",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asda",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asdb",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_code",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_code",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_data",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_data",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_return_address",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_frame_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_function_pointer",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_function",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_cxx_vtable_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_method_list_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_isa_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_super_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_sel_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_class_ro_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_descriptor_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_init_fini_pointer",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ptrauth.h",
+      "sdk_line": 13
+    }
+  },
+  "structs": {},
+  "functions": null,
+  "externs": [
+    {
+      "name": "CHHapticEventParameterIDHapticIntensity",
+      "objc_type": "API_UNAVAILABLE CHHapticEventParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 80
+    },
+    {
+      "name": "CHHapticEventParameterIDHapticSharpness",
+      "objc_type": "API_UNAVAILABLE CHHapticEventParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 81
+    },
+    {
+      "name": "CHHapticEventParameterIDAttackTime",
+      "objc_type": "API_UNAVAILABLE CHHapticEventParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 83
+    },
+    {
+      "name": "CHHapticEventParameterIDDecayTime",
+      "objc_type": "API_UNAVAILABLE CHHapticEventParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 84
+    },
+    {
+      "name": "CHHapticEventParameterIDReleaseTime",
+      "objc_type": "API_UNAVAILABLE CHHapticEventParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 85
+    },
+    {
+      "name": "CHHapticEventParameterIDSustained",
+      "objc_type": "API_UNAVAILABLE CHHapticEventParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 86
+    },
+    {
+      "name": "CHHapticEventParameterIDAudioVolume",
+      "objc_type": "API_UNAVAILABLE CHHapticEventParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 88
+    },
+    {
+      "name": "CHHapticEventParameterIDAudioPitch",
+      "objc_type": "API_UNAVAILABLE CHHapticEventParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 89
+    },
+    {
+      "name": "CHHapticEventParameterIDAudioPan",
+      "objc_type": "API_UNAVAILABLE CHHapticEventParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 90
+    },
+    {
+      "name": "CHHapticEventParameterIDAudioBrightness",
+      "objc_type": "API_UNAVAILABLE CHHapticEventParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 91
+    },
+    {
+      "name": "CHHapticDynamicParameterIDHapticIntensityControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 163
+    },
+    {
+      "name": "CHHapticDynamicParameterIDHapticSharpnessControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 164
+    },
+    {
+      "name": "CHHapticDynamicParameterIDHapticAttackTimeControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 165
+    },
+    {
+      "name": "CHHapticDynamicParameterIDHapticDecayTimeControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 166
+    },
+    {
+      "name": "CHHapticDynamicParameterIDHapticReleaseTimeControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 167
+    },
+    {
+      "name": "CHHapticDynamicParameterIDAudioVolumeControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 169
+    },
+    {
+      "name": "CHHapticDynamicParameterIDAudioPanControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 170
+    },
+    {
+      "name": "CHHapticDynamicParameterIDAudioBrightnessControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 171
+    },
+    {
+      "name": "CHHapticDynamicParameterIDAudioPitchControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 172
+    },
+    {
+      "name": "CHHapticDynamicParameterIDAudioAttackTimeControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 173
+    },
+    {
+      "name": "CHHapticDynamicParameterIDAudioDecayTimeControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 174
+    },
+    {
+      "name": "CHHapticDynamicParameterIDAudioReleaseTimeControl",
+      "objc_type": "API_UNAVAILABLE CHHapticDynamicParameterID",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticParameter.h",
+      "sdk_line": 175
+    },
+    {
+      "name": "CHHapticEventTypeHapticTransient",
+      "objc_type": "API_UNAVAILABLE CHHapticEventType",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticEvent.h",
+      "sdk_line": 54
+    },
+    {
+      "name": "CHHapticEventTypeHapticContinuous",
+      "objc_type": "API_UNAVAILABLE CHHapticEventType",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticEvent.h",
+      "sdk_line": 56
+    },
+    {
+      "name": "CHHapticEventTypeAudioContinuous",
+      "objc_type": "API_UNAVAILABLE CHHapticEventType",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticEvent.h",
+      "sdk_line": 58
+    },
+    {
+      "name": "CHHapticEventTypeAudioCustom",
+      "objc_type": "API_UNAVAILABLE CHHapticEventType",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticEvent.h",
+      "sdk_line": 60
+    },
+    {
+      "name": "CHHapticAudioResourceKeyUseVolumeEnvelope",
+      "objc_type": "API_UNAVAILABLE CHHapticAudioResourceKey",
+      "availability": {
+        "macos_introduced": "12.0"
+      },
+      "sdk_file": "CoreHaptics/CHHapticEngine.h",
+      "sdk_line": 317
+    },
+    {
+      "name": "CHHapticAudioResourceKeyLoopEnabled",
+      "objc_type": "API_UNAVAILABLE CHHapticAudioResourceKey",
+      "availability": {
+        "macos_introduced": "13.0"
+      },
+      "sdk_file": "CoreHaptics/CHHapticEngine.h",
+      "sdk_line": 320
+    },
+    {
+      "name": "CHHapticPatternKeyVersion",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 98
+    },
+    {
+      "name": "CHHapticPatternKeyPattern",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 100
+    },
+    {
+      "name": "CHHapticPatternKeyEvent",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 102
+    },
+    {
+      "name": "CHHapticPatternKeyEventType",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 104
+    },
+    {
+      "name": "CHHapticPatternKeyTime",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 106
+    },
+    {
+      "name": "CHHapticPatternKeyEventDuration",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 108
+    },
+    {
+      "name": "CHHapticPatternKeyEventWaveformPath",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 110
+    },
+    {
+      "name": "CHHapticPatternKeyEventParameters",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 112
+    },
+    {
+      "name": "CHHapticPatternKeyEventWaveformUseVolumeEnvelope",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "12.0"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 114
+    },
+    {
+      "name": "CHHapticPatternKeyEventWaveformLoopEnabled",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "13.0"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 116
+    },
+    {
+      "name": "CHHapticPatternKeyParameter",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 118
+    },
+    {
+      "name": "CHHapticPatternKeyParameterID",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 120
+    },
+    {
+      "name": "CHHapticPatternKeyParameterValue",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 122
+    },
+    {
+      "name": "CHHapticPatternKeyParameterCurve",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 124
+    },
+    {
+      "name": "CHHapticPatternKeyParameterCurveControlPoints",
+      "objc_type": "API_UNAVAILABLE CHHapticPatternKey",
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "CoreHaptics/CHHapticPattern.h",
+      "sdk_line": 126
+    }
+  ],
+  "block_types": {},
+  "typedefs": {
+    "AbsoluteTime": "UnsignedWide",
+    "BOOL": "bool",
+    "Boolean": "unsigned char",
+    "Byte": "UInt8",
+    "ByteCount": "unsigned long",
+    "ByteOffset": "unsigned long",
+    "BytePtr": "UInt8 *",
+    "CHHapticAdvancedPatternPlayerCompletionHandler": "void (^)(NSError * _Nullable)",
+    "CHHapticAudioResourceID": "NSUInteger",
+    "CHHapticAudioResourceKey": "NSString *",
+    "CHHapticCompletionHandler": "void (^)(NSError * _Nullable)",
+    "CHHapticDynamicParameterID": "NSString *",
+    "CHHapticEngineFinishedAction": "enum CHHapticEngineFinishedAction",
+    "CHHapticEngineFinishedHandler": "CHHapticEngineFinishedAction (^)(NSError * _Nullable)",
+    "CHHapticEngineResetHandler": "void (^)(void)",
+    "CHHapticEngineStoppedHandler": "void (^)(CHHapticEngineStoppedReason)",
+    "CHHapticEngineStoppedReason": "enum CHHapticEngineStoppedReason",
+    "CHHapticErrorCode": "enum CHHapticErrorCode",
+    "CHHapticEventParameterID": "NSString *",
+    "CHHapticEventType": "NSString *",
+    "CHHapticPatternKey": "NSString *",
+    "CharParameter": "short",
+    "Class": "struct objc_class *",
+    "CompTimeValue": "wide",
+    "ConstLogicalAddress": "const void *",
+    "ConstStr15Param": "const unsigned char *",
+    "ConstStr255Param": "const unsigned char *",
+    "ConstStr27Param": "const unsigned char *",
+    "ConstStr31Param": "const unsigned char *",
+    "ConstStr32Param": "const unsigned char *",
+    "ConstStr63Param": "const unsigned char *",
+    "ConstStrFileNameParam": "ConstStr63Param",
+    "ConstStringPtr": "const unsigned char *",
+    "Duration": "SInt32",
+    "Fixed": "SInt32",
+    "FixedPoint": "struct FixedPoint",
+    "FixedPtr": "Fixed *",
+    "FixedRect": "struct FixedRect",
+    "Float32": "float",
+    "Float32Point": "struct Float32Point",
+    "Float64": "double",
+    "Float80": "struct Float80",
+    "Float96": "struct Float96",
+    "FourCharCode": "UInt32",
+    "Fract": "SInt32",
+    "FractPtr": "Fract *",
+    "Handle": "Ptr *",
+    "IMP": "void (*)(void)",
+    "ItemCount": "unsigned long",
+    "LangCode": "SInt16",
+    "LogicalAddress": "void *",
+    "NSInteger": "long",
+    "NSUInteger": "unsigned long",
+    "NumVersion": "struct NumVersion",
+    "NumVersionVariant": "union NumVersionVariant",
+    "NumVersionVariantHandle": "NumVersionVariantPtr *",
+    "NumVersionVariantPtr": "NumVersionVariant *",
+    "OSErr": "SInt16",
+    "OSStatus": "SInt32",
+    "OSType": "FourCharCode",
+    "OSTypePtr": "OSType *",
+    "OptionBits": "UInt32",
+    "PBVersion": "UInt32",
+    "PRefCon": "void *",
+    "PhysicalAddress": "void *",
+    "Point": "struct Point",
+    "PointPtr": "Point *",
+    "ProcHandle": "ProcPtr *",
+    "ProcPtr": "long (*)(void)",
+    "ProcessSerialNumber": "struct ProcessSerialNumber",
+    "ProcessSerialNumberPtr": "ProcessSerialNumber *",
+    "Ptr": "char *",
+    "Rect": "struct Rect",
+    "RectPtr": "Rect *",
+    "RegionCode": "SInt16",
+    "Register68kProcPtr": "void (*)(void)",
+    "ResType": "FourCharCode",
+    "ResTypePtr": "ResType *",
+    "SEL": "struct objc_selector *",
+    "SInt16": "short",
+    "SInt32": "int",
+    "SInt64": "long long",
+    "SInt8": "signed char",
+    "SRefCon": "void *",
+    "ScriptCode": "SInt16",
+    "ShortFixed": "short",
+    "ShortFixedPtr": "ShortFixed *",
+    "SignedByte": "SInt8",
+    "Size": "long",
+    "Str15": "unsigned char[16]",
+    "Str255": "unsigned char[256]",
+    "Str27": "unsigned char[28]",
+    "Str31": "unsigned char[32]",
+    "Str32": "unsigned char[33]",
+    "Str32Field": "unsigned char[34]",
+    "Str63": "unsigned char[64]",
+    "StrFileName": "Str63",
+    "StringHandle": "StringPtr *",
+    "StringPtr": "unsigned char *",
+    "Style": "unsigned char",
+    "StyleField": "Style",
+    "StyleParameter": "short",
+    "TimeBase": "struct TimeBaseRecord *",
+    "TimeRecord": "struct TimeRecord",
+    "TimeScale": "SInt32",
+    "TimeValue": "SInt32",
+    "TimeValue64": "SInt64",
+    "UInt16": "unsigned short",
+    "UInt32": "unsigned int",
+    "UInt64": "unsigned long long",
+    "UInt8": "unsigned char",
+    "URefCon": "void *",
+    "UTF16Char": "UInt16",
+    "UTF32Char": "UInt32",
+    "UTF8Char": "UInt8",
+    "UniChar": "UInt16",
+    "UniCharCount": "unsigned long",
+    "UniCharCountPtr": "UniCharCount *",
+    "UniCharPtr": "UniChar *",
+    "UnicodeScalarValue": "UInt32",
+    "UniversalProcHandle": "UniversalProcPtr *",
+    "UniversalProcPtr": "ProcPtr",
+    "UnsignedFixed": "UInt32",
+    "UnsignedFixedPtr": "UnsignedFixed *",
+    "UnsignedWide": "struct UnsignedWide",
+    "UnsignedWidePtr": "UnsignedWide *",
+    "VHSelect": "SInt8",
+    "VersRec": "struct VersRec",
+    "VersRecHndl": "VersRecPtr *",
+    "VersRecPtr": "VersRec *",
+    "WidePtr": "wide *",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_nl_item": "int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wctrans_t": "int",
+    "__darwin_wctype_t": "__uint32_t",
+    "__darwin_wint_t": "int",
+    "__gnuc_va_list": "__builtin_va_list",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "blkcnt_t": "__darwin_blkcnt_t",
+    "blksize_t": "__darwin_blksize_t",
+    "caddr_t": "char *",
+    "clock_t": "__darwin_clock_t",
+    "ct_rune_t": "__darwin_ct_rune_t",
+    "daddr_t": "int32_t",
+    "dev_t": "__darwin_dev_t",
+    "div_t": "struct div_t",
+    "errno_t": "int",
+    "extended80": "Float80",
+    "extended96": "Float96",
+    "fd_mask": "__int32_t",
+    "fd_set": "struct fd_set",
+    "fixpt_t": "u_int32_t",
+    "fsblkcnt_t": "__darwin_fsblkcnt_t",
+    "fsfilcnt_t": "__darwin_fsfilcnt_t",
+    "gid_t": "__darwin_gid_t",
+    "id": "struct objc_object *",
+    "id_t": "__darwin_id_t",
+    "idtype_t": "enum idtype_t",
+    "in_addr_t": "__uint32_t",
+    "in_port_t": "__uint16_t",
+    "ino64_t": "__darwin_ino64_t",
+    "ino_t": "__darwin_ino_t",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "key_t": "__int32_t",
+    "ldiv_t": "struct ldiv_t",
+    "lldiv_t": "struct lldiv_t",
+    "malloc_type_id_t": "unsigned long long",
+    "malloc_zone_t": "struct _malloc_zone_t",
+    "max_align_t": "long double",
+    "mcontext_t": "struct __darwin_mcontext64 *",
+    "mode_t": "__darwin_mode_t",
+    "nlink_t": "__uint16_t",
+    "objc_objectptr_t": "const void *",
+    "objc_zone_t": "struct _malloc_zone_t *",
+    "off_t": "__darwin_off_t",
+    "pid_t": "__darwin_pid_t",
+    "pthread_attr_t": "__darwin_pthread_attr_t",
+    "pthread_cond_t": "__darwin_pthread_cond_t",
+    "pthread_condattr_t": "__darwin_pthread_condattr_t",
+    "pthread_key_t": "__darwin_pthread_key_t",
+    "pthread_mutex_t": "__darwin_pthread_mutex_t",
+    "pthread_mutexattr_t": "__darwin_pthread_mutexattr_t",
+    "pthread_once_t": "__darwin_pthread_once_t",
+    "pthread_rwlock_t": "__darwin_pthread_rwlock_t",
+    "pthread_rwlockattr_t": "__darwin_pthread_rwlockattr_t",
+    "pthread_t": "__darwin_pthread_t",
+    "ptrauth_extra_data_t": "unsigned long",
+    "ptrauth_generic_signature_t": "unsigned long",
+    "ptrauth_key": "enum ptrauth_key",
+    "ptrdiff_t": "long",
+    "qaddr_t": "quad_t *",
+    "quad_t": "int64_t",
+    "register_t": "int64_t",
+    "rlim_t": "__uint64_t",
+    "rsize_t": "unsigned long",
+    "rune_t": "__darwin_rune_t",
+    "rusage_info_current": "struct rusage_info_v6",
+    "rusage_info_t": "void *",
+    "segsz_t": "int32_t",
+    "sig_atomic_t": "int",
+    "sig_t": "void (*)(int)",
+    "siginfo_t": "struct __siginfo",
+    "sigset_t": "__darwin_sigset_t",
+    "size_t": "__darwin_size_t",
+    "ssize_t": "__darwin_ssize_t",
+    "stack_t": "struct __darwin_sigaltstack",
+    "suseconds_t": "__darwin_suseconds_t",
+    "swblk_t": "int32_t",
+    "syscall_arg_t": "u_int64_t",
+    "time_t": "__darwin_time_t",
+    "u_char": "unsigned char",
+    "u_int": "unsigned int",
+    "u_int16_t": "unsigned short",
+    "u_int32_t": "unsigned int",
+    "u_int64_t": "unsigned long long",
+    "u_int8_t": "unsigned char",
+    "u_long": "unsigned long",
+    "u_quad_t": "u_int64_t",
+    "u_short": "unsigned short",
+    "ucontext_t": "struct __darwin_ucontext",
+    "uid_t": "__darwin_uid_t",
+    "uint": "unsigned int",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long",
+    "useconds_t": "__darwin_useconds_t",
+    "user_addr_t": "u_int64_t",
+    "user_long_t": "int64_t",
+    "user_off_t": "int64_t",
+    "user_size_t": "u_int64_t",
+    "user_ssize_t": "int64_t",
+    "user_time_t": "int64_t",
+    "user_ulong_t": "u_int64_t",
+    "ushort": "unsigned short",
+    "va_list": "__builtin_va_list",
+    "wchar_t": "__darwin_wchar_t",
+    "wide": "struct wide"
+  },
+  "declared_imports": {
+    "Foundation": true
+  }
+}

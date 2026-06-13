@@ -1,0 +1,2348 @@
+{
+  "framework": "PCSC",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {},
+  "structs": {
+    "CFDyLibPointers": {
+      "fields": [
+        {
+          "name": "pvfWriteFramework",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfInitializePlugin",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfIdentifyToken",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfFinalizePlugin",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfGetStatus",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfGetCapabilities",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfExtendedFeature",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfGenerateKeys",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfImportKey",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfExportKey",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfComputeCrypt",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfExtAuthenticate",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfListKeys",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfCreatePIN",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfVerifyPIN",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfChangePIN",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfUnblockPIN",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfListPINs",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfCreateObject",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfDeleteObject",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfWriteObject",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfReadObject",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfListObjects",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfLogoutAll",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "pvfGetChallenge",
+          "objc_type": "MSCPVoid32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/mscdefines.h",
+      "sdk_line": 88
+    },
+    "MSCCryptInit": {
+      "fields": [
+        {
+          "name": "keyNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "cipherMode",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "cipherDirection",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "optParams",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "optParamsSize",
+          "objc_type": "MSCUShort16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 375
+    },
+    "MSCEventWaitInfo": {
+      "fields": [
+        {
+          "name": "arraySize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "tokenArray",
+          "objc_type": "MSCLPTokenInfo"
+        },
+        {
+          "name": "appData",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "callBack",
+          "objc_type": "MSCCallBack"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/mscdefines.h",
+      "sdk_line": 153
+    },
+    "MSCGenKeyParams": {
+      "fields": [
+        {
+          "name": "algoType",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "keySize",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "privateKeyACL",
+          "objc_type": "MSCKeyACL"
+        },
+        {
+          "name": "publicKeyACL",
+          "objc_type": "MSCKeyACL"
+        },
+        {
+          "name": "privateKeyPolicy",
+          "objc_type": "MSCKeyPolicy"
+        },
+        {
+          "name": "publicKeyPolicy",
+          "objc_type": "MSCKeyPolicy"
+        },
+        {
+          "name": "keyGenOptions",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pOptParams",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "optParamsSize",
+          "objc_type": "MSCULong32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 347
+    },
+    "MSCInitTokenParams": {
+      "fields": [
+        {
+          "name": "transportKey",
+          "objc_type": "MSCUChar8[264]"
+        },
+        {
+          "name": "transportKeyLen",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "transportBehavior",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "objectMemory",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "newTransportKey",
+          "objc_type": "MSCUChar8[264]"
+        },
+        {
+          "name": "newTransportKeyLen",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "defaultCHV",
+          "objc_type": "MSCUChar8[264]"
+        },
+        {
+          "name": "defaultCHVLen",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "defaultCHVTries",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "defaultCHVUnblock",
+          "objc_type": "MSCUChar8[264]"
+        },
+        {
+          "name": "defaultCHVUnblockSize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "defaultCHVUnblockTries",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "createObjectACL",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "createKeysACL",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "createPINsACL",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "maxNumberKeys",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "maxNumberPINs",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "maxNumberObjects",
+          "objc_type": "MSCUShort16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 281
+    },
+    "MSCKeyACL": {
+      "fields": [
+        {
+          "name": "readPermission",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "writePermission",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "usePermission",
+          "objc_type": "MSCUShort16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 331
+    },
+    "MSCKeyInfo": {
+      "fields": [
+        {
+          "name": "keyNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "keyType",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "keyPartner",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "keyMapping",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "keySize",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "keyPolicy",
+          "objc_type": "MSCKeyPolicy"
+        },
+        {
+          "name": "keyACL",
+          "objc_type": "MSCKeyACL"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 363
+    },
+    "MSCKeyPolicy": {
+      "fields": [
+        {
+          "name": "cipherMode",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "cipherDirection",
+          "objc_type": "MSCUShort16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 324
+    },
+    "MSCObjectACL": {
+      "fields": [
+        {
+          "name": "readPermission",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "writePermission",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "deletePermission",
+          "objc_type": "MSCUShort16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 339
+    },
+    "MSCObjectInfo": {
+      "fields": [
+        {
+          "name": "objectID",
+          "objc_type": "MSCChar8[16]"
+        },
+        {
+          "name": "objectSize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "objectACL",
+          "objc_type": "MSCObjectACL"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 648
+    },
+    "MSCStatusInfo": {
+      "fields": [
+        {
+          "name": "appVersion",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "swVersion",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "freeMemory",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "totalMemory",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "usedPINs",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "usedKeys",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "loggedID",
+          "objc_type": "MSCUShort16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 636
+    },
+    "MSCTokenConnection": {
+      "fields": [
+        {
+          "name": "hContext",
+          "objc_type": "MSCLong32"
+        },
+        {
+          "name": "hCard",
+          "objc_type": "MSCLong32"
+        },
+        {
+          "name": "ioType",
+          "objc_type": "LPSCARD_IO_REQUEST"
+        },
+        {
+          "name": "pMac",
+          "objc_type": "MSCUChar8[128]"
+        },
+        {
+          "name": "macSize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "tokenLibHandle",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "libPointers",
+          "objc_type": "CFDyLibPointers"
+        },
+        {
+          "name": "tokenInfo",
+          "objc_type": "MSCTokenInfo"
+        },
+        {
+          "name": "loggedIDs",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "shareMode",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "rwCallback",
+          "objc_type": "LPRWEventCallback"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/mscdefines.h",
+      "sdk_line": 164
+    },
+    "MSCTokenInfo": {
+      "fields": [
+        {
+          "name": "tokenName",
+          "objc_type": "MSCChar8[150]"
+        },
+        {
+          "name": "slotName",
+          "objc_type": "MSCChar8[52]"
+        },
+        {
+          "name": "svProvider",
+          "objc_type": "MSCChar8[200]"
+        },
+        {
+          "name": "tokenId",
+          "objc_type": "MSCUChar8[33]"
+        },
+        {
+          "name": "tokenApp",
+          "objc_type": "MSCUChar8[64]"
+        },
+        {
+          "name": "tokenAppLen",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "tokenIdLength",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "tokenState",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "tokenType",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "addParams",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "addParamsSize",
+          "objc_type": "MSCULong32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/mscdefines.h",
+      "sdk_line": 130
+    },
+    "SCARD_READERSTATE_A": {
+      "fields": [
+        {
+          "name": "szReader",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "pvUserData",
+          "objc_type": "void *"
+        },
+        {
+          "name": "dwCurrentState",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "dwEventState",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "cbAtr",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "rgbAtr",
+          "objc_type": "unsigned char[33]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/pcsclite.h",
+      "sdk_line": 71
+    },
+    "_SCARD_IO_REQUEST": {
+      "fields": [
+        {
+          "name": "dwProtocol",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "cbPciLength",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "PCSC/pcsclite.h",
+      "sdk_line": 86,
+      "doc": "Protocol Control Information (PCI)"
+    }
+  },
+  "functions": [
+    {
+      "name": "pcsc_stringify_error",
+      "args": [
+        {
+          "name": "err",
+          "objc_type": "int32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "char *"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/pcsclite.h",
+      "sdk_line": 320
+    },
+    {
+      "name": "SCardEstablishContext",
+      "args": [
+        {
+          "name": "dwScope",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "pvReserved1",
+          "objc_type": "const void *"
+        },
+        {
+          "name": "pvReserved2",
+          "objc_type": "const void *"
+        },
+        {
+          "name": "phContext",
+          "objc_type": "LPSCARDCONTEXT"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 50
+    },
+    {
+      "name": "SCardReleaseContext",
+      "args": [
+        {
+          "name": "hContext",
+          "objc_type": "SCARDCONTEXT"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 53
+    },
+    {
+      "name": "SCardIsValidContext",
+      "args": [
+        {
+          "name": "hContext",
+          "objc_type": "SCARDCONTEXT"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 55
+    },
+    {
+      "name": "SCardSetTimeout",
+      "args": [
+        {
+          "name": "hContext",
+          "objc_type": "SCARDCONTEXT"
+        },
+        {
+          "name": "dwTimeout",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 57
+    },
+    {
+      "name": "SCardConnect",
+      "args": [
+        {
+          "name": "hContext",
+          "objc_type": "SCARDCONTEXT"
+        },
+        {
+          "name": "szReader",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "dwShareMode",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "dwPreferredProtocols",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "phCard",
+          "objc_type": "LPSCARDHANDLE"
+        },
+        {
+          "name": "pdwActiveProtocol",
+          "objc_type": "uint32_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 59
+    },
+    {
+      "name": "SCardReconnect",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        },
+        {
+          "name": "dwShareMode",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "dwPreferredProtocols",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "dwInitialization",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "pdwActiveProtocol",
+          "objc_type": "uint32_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 65
+    },
+    {
+      "name": "SCardDisconnect",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        },
+        {
+          "name": "dwDisposition",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 70
+    },
+    {
+      "name": "SCardBeginTransaction",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 72
+    },
+    {
+      "name": "SCardEndTransaction",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        },
+        {
+          "name": "dwDisposition",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 74
+    },
+    {
+      "name": "SCardCancelTransaction",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 76
+    },
+    {
+      "name": "SCardStatus",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        },
+        {
+          "name": "mszReaderNames",
+          "objc_type": "char *"
+        },
+        {
+          "name": "pcchReaderLen",
+          "objc_type": "uint32_t *"
+        },
+        {
+          "name": "pdwState",
+          "objc_type": "uint32_t *"
+        },
+        {
+          "name": "pdwProtocol",
+          "objc_type": "uint32_t *"
+        },
+        {
+          "name": "pbAtr",
+          "objc_type": "unsigned char *"
+        },
+        {
+          "name": "pcbAtrLen",
+          "objc_type": "uint32_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 78
+    },
+    {
+      "name": "SCardGetStatusChange",
+      "args": [
+        {
+          "name": "hContext",
+          "objc_type": "SCARDCONTEXT"
+        },
+        {
+          "name": "dwTimeout",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "rgReaderStates",
+          "objc_type": "LPSCARD_READERSTATE_A"
+        },
+        {
+          "name": "cReaders",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 84
+    },
+    {
+      "name": "SCardControl",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        },
+        {
+          "name": "pbSendBuffer",
+          "objc_type": "const void *"
+        },
+        {
+          "name": "cbSendLength",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "pbRecvBuffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "pcbRecvLength",
+          "objc_type": "uint32_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 88
+    },
+    {
+      "name": "SCardControl132",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        },
+        {
+          "name": "dwControlCode",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "pbSendBuffer",
+          "objc_type": "const void *"
+        },
+        {
+          "name": "cbSendLength",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "pbRecvBuffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "cbRecvLength",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "lpBytesReturned",
+          "objc_type": "uint32_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 92
+    },
+    {
+      "name": "SCardTransmit",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        },
+        {
+          "name": "pioSendPci",
+          "objc_type": "LPCSCARD_IO_REQUEST"
+        },
+        {
+          "name": "pbSendBuffer",
+          "objc_type": "const unsigned char *"
+        },
+        {
+          "name": "cbSendLength",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "pioRecvPci",
+          "objc_type": "LPSCARD_IO_REQUEST"
+        },
+        {
+          "name": "pbRecvBuffer",
+          "objc_type": "unsigned char *"
+        },
+        {
+          "name": "pcbRecvLength",
+          "objc_type": "uint32_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 96
+    },
+    {
+      "name": "SCardListReaderGroups",
+      "args": [
+        {
+          "name": "hContext",
+          "objc_type": "SCARDCONTEXT"
+        },
+        {
+          "name": "mszGroups",
+          "objc_type": "char *"
+        },
+        {
+          "name": "pcchGroups",
+          "objc_type": "uint32_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 102
+    },
+    {
+      "name": "SCardListReaders",
+      "args": [
+        {
+          "name": "hContext",
+          "objc_type": "SCARDCONTEXT"
+        },
+        {
+          "name": "mszGroups",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "mszReaders",
+          "objc_type": "char *"
+        },
+        {
+          "name": "pcchReaders",
+          "objc_type": "uint32_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 105
+    },
+    {
+      "name": "SCardCancel",
+      "args": [
+        {
+          "name": "hContext",
+          "objc_type": "SCARDCONTEXT"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 109
+    },
+    {
+      "name": "SCardGetAttrib",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        },
+        {
+          "name": "dwAttrId",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "pbAttr",
+          "objc_type": "uint8_t *"
+        },
+        {
+          "name": "pcbAttrLen",
+          "objc_type": "uint32_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 111
+    },
+    {
+      "name": "SCardSetAttrib",
+      "args": [
+        {
+          "name": "hCard",
+          "objc_type": "SCARDHANDLE"
+        },
+        {
+          "name": "dwAttrId",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "pbAttr",
+          "objc_type": "const uint8_t *"
+        },
+        {
+          "name": "cbAttrLen",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int32_t"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 114
+    },
+    {
+      "name": "SCardUnload",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "PCSC/winscard.h",
+      "sdk_line": 117
+    },
+    {
+      "name": "MSCListTokens",
+      "args": [
+        {
+          "name": "listScope",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "tokenArray",
+          "objc_type": "MSCLPTokenInfo"
+        },
+        {
+          "name": "arrayLength",
+          "objc_type": "MSCPULong32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 675
+    },
+    {
+      "name": "MSCEstablishConnection",
+      "args": [
+        {
+          "name": "tokenStruct",
+          "objc_type": "MSCLPTokenInfo"
+        },
+        {
+          "name": "sharingMode",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "applicationName",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "nameSize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 685
+    },
+    {
+      "name": "MSCReleaseConnection",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "endAction",
+          "objc_type": "MSCULong32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 699
+    },
+    {
+      "name": "MSCWaitForTokenEvent",
+      "args": [
+        {
+          "name": "tokenArray",
+          "objc_type": "MSCLPTokenInfo"
+        },
+        {
+          "name": "arraySize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "timeoutValue",
+          "objc_type": "MSCULong32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 709
+    },
+    {
+      "name": "MSCCancelEventWait",
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 720
+    },
+    {
+      "name": "MSCBeginTransaction",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 749
+    },
+    {
+      "name": "MSCEndTransaction",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "endAction",
+          "objc_type": "MSCULong32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 757
+    },
+    {
+      "name": "MSCWriteFramework",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "pInitParams",
+          "objc_type": "MSCLPInitTokenParams"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 766
+    },
+    {
+      "name": "MSCGetStatus",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "pStatusInfo",
+          "objc_type": "MSCLPStatusInfo"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 782
+    },
+    {
+      "name": "MSCGetCapabilities",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "Tag",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "Value",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "Length",
+          "objc_type": "MSCPULong32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 786
+    },
+    {
+      "name": "MSCExtendedFeature",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "extFeature",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "outData",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "outLength",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "inData",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "inLength",
+          "objc_type": "MSCPULong32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 790
+    },
+    {
+      "name": "MSCGenerateKeys",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "prvKeyNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pubKeyNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pParams",
+          "objc_type": "MSCLPGenKeyParams"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 796
+    },
+    {
+      "name": "MSCImportKey",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "keyNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pKeyACL",
+          "objc_type": "MSCLPKeyACL"
+        },
+        {
+          "name": "pKeyBlob",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "keyBlobSize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "keyPolicy",
+          "objc_type": "MSCLPKeyPolicy"
+        },
+        {
+          "name": "pAddParams",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "addParamsSize",
+          "objc_type": "MSCUChar8"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 801
+    },
+    {
+      "name": "MSCExportKey",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "keyNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pKeyBlob",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "keyBlobSize",
+          "objc_type": "MSCPULong32"
+        },
+        {
+          "name": "pAddParams",
+          "objc_type": "MSCPVoid32"
+        },
+        {
+          "name": "addParamsSize",
+          "objc_type": "MSCUChar8"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 810
+    },
+    {
+      "name": "MSCComputeCrypt",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "cryptInit",
+          "objc_type": "MSCLPCryptInit"
+        },
+        {
+          "name": "pInputData",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "inputDataSize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "pOutputData",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "outputDataSize",
+          "objc_type": "MSCPULong32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 817
+    },
+    {
+      "name": "MSCExtAuthenticate",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "keyNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "cipherMode",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "cipherDirection",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pData",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "dataSize",
+          "objc_type": "MSCULong32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 824
+    },
+    {
+      "name": "MSCListKeys",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "seqOption",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pKeyInfo",
+          "objc_type": "MSCLPKeyInfo"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 832
+    },
+    {
+      "name": "MSCCreatePIN",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "pinNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pinAttempts",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pPinCode",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "pinCodeSize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "pUnblockCode",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "unblockCodeSize",
+          "objc_type": "MSCUChar8"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 837
+    },
+    {
+      "name": "MSCVerifyPIN",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "pinNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pPinCode",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "pinCodeSize",
+          "objc_type": "MSCULong32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 846
+    },
+    {
+      "name": "MSCChangePIN",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "pinNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pOldPinCode",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "oldPinCodeSize",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pNewPinCode",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "newPinCodeSize",
+          "objc_type": "MSCUChar8"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 852
+    },
+    {
+      "name": "MSCUnblockPIN",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "pinNum",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pUnblockCode",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "unblockCodeSize",
+          "objc_type": "MSCULong32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 859
+    },
+    {
+      "name": "MSCListPINs",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "pPinBitMask",
+          "objc_type": "MSCPUShort16"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 864
+    },
+    {
+      "name": "MSCCreateObject",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "objectID",
+          "objc_type": "MSCString"
+        },
+        {
+          "name": "objectSize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "pObjectACL",
+          "objc_type": "MSCLPObjectACL"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 868
+    },
+    {
+      "name": "MSCDeleteObject",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "objectID",
+          "objc_type": "MSCString"
+        },
+        {
+          "name": "zeroFlag",
+          "objc_type": "MSCUChar8"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 873
+    },
+    {
+      "name": "MSCWriteObject",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "objectID",
+          "objc_type": "MSCString"
+        },
+        {
+          "name": "offset",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "pInputData",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "dataSize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "rwCallback",
+          "objc_type": "LPRWEventCallback"
+        },
+        {
+          "name": "addParams",
+          "objc_type": "MSCPVoid32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 877
+    },
+    {
+      "name": "MSCReadObject",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "objectID",
+          "objc_type": "MSCString"
+        },
+        {
+          "name": "offset",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "pOutputData",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "dataSize",
+          "objc_type": "MSCULong32"
+        },
+        {
+          "name": "rwCallback",
+          "objc_type": "LPRWEventCallback"
+        },
+        {
+          "name": "addParams",
+          "objc_type": "MSCPVoid32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 883
+    },
+    {
+      "name": "MSCReadAllocateObject",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "objectID",
+          "objc_type": "MSCString"
+        },
+        {
+          "name": "pOutputData",
+          "objc_type": "MSCPUChar8 *"
+        },
+        {
+          "name": "dataSize",
+          "objc_type": "MSCPULong32"
+        },
+        {
+          "name": "rwCallback",
+          "objc_type": "LPRWEventCallback"
+        },
+        {
+          "name": "addParams",
+          "objc_type": "MSCPVoid32"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 889
+    },
+    {
+      "name": "MSCListObjects",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "seqOption",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pObjectInfo",
+          "objc_type": "MSCLPObjectInfo"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 895
+    },
+    {
+      "name": "MSCLogoutAll",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 899
+    },
+    {
+      "name": "MSCGetChallenge",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "pSeed",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "seedSize",
+          "objc_type": "MSCUShort16"
+        },
+        {
+          "name": "pRandomData",
+          "objc_type": "MSCPUChar8"
+        },
+        {
+          "name": "randomDataSize",
+          "objc_type": "MSCUShort16"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 902
+    },
+    {
+      "name": "MSCGetKeyAttributes",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "keyNumber",
+          "objc_type": "MSCUChar8"
+        },
+        {
+          "name": "pKeyInfo",
+          "objc_type": "MSCLPKeyInfo"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 920
+    },
+    {
+      "name": "MSCGetObjectAttributes",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        },
+        {
+          "name": "objectID",
+          "objc_type": "MSCString"
+        },
+        {
+          "name": "pObjectInfo",
+          "objc_type": "MSCLPObjectInfo"
+        }
+      ],
+      "return": {
+        "objc_type": "MSC_RV"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 925
+    },
+    {
+      "name": "msc_error",
+      "args": [
+        {
+          "name": "errorCode",
+          "objc_type": "unsigned long"
+        }
+      ],
+      "return": {
+        "objc_type": "char *"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 930
+    },
+    {
+      "name": "MSCIsTokenReset",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        }
+      ],
+      "return": {
+        "objc_type": "MSCUChar8"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 936
+    },
+    {
+      "name": "MSCClearReset",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        }
+      ],
+      "return": {
+        "objc_type": "MSCUChar8"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 942
+    },
+    {
+      "name": "MSCIsTokenMoved",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        }
+      ],
+      "return": {
+        "objc_type": "MSCUChar8"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 948
+    },
+    {
+      "name": "MSCIsTokenChanged",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        }
+      ],
+      "return": {
+        "objc_type": "MSCUChar8"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 954
+    },
+    {
+      "name": "MSCIsTokenKnown",
+      "args": [
+        {
+          "name": "pConnection",
+          "objc_type": "MSCLPTokenConnection"
+        }
+      ],
+      "return": {
+        "objc_type": "MSCUChar8"
+      },
+      "availability": {},
+      "sdk_file": "PCSC/musclecard.h",
+      "sdk_line": 960
+    }
+  ],
+  "externs": [
+    {
+      "name": "g_rgSCardT0Pci",
+      "objc_type": "SCARD_IO_REQUEST",
+      "availability": {},
+      "sdk_file": "PCSC/pcsclite.h",
+      "sdk_line": 95
+    },
+    {
+      "name": "g_rgSCardT1Pci",
+      "objc_type": "SCARD_IO_REQUEST",
+      "availability": {},
+      "sdk_file": "PCSC/pcsclite.h"
+    },
+    {
+      "name": "g_rgSCardRawPci",
+      "objc_type": "SCARD_IO_REQUEST",
+      "availability": {},
+      "sdk_file": "PCSC/pcsclite.h",
+      "sdk_line": 96
+    }
+  ],
+  "block_types": {},
+  "typedefs": {
+    "BOOL": "int16_t",
+    "BYTE": "uint8_t",
+    "CFDyLibPointers": "struct CFDyLibPointers",
+    "Class": "Class",
+    "DWORD": "uint32_t",
+    "LONG": "int32_t",
+    "LPBYTE": "BYTE *",
+    "LPCBYTE": "const BYTE *",
+    "LPCFDyLibPointers": "struct CFDyLibPointers *",
+    "LPCSCARD_IO_REQUEST": "const SCARD_IO_REQUEST *",
+    "LPCSTR": "const char *",
+    "LPCTSTR": "const char *",
+    "LPCVOID": "const void *",
+    "LPCWSTR": "char *",
+    "LPDWORD": "DWORD *",
+    "LPRWEventCallback": "MSC_RV (*)(MSCPVoid32, int)",
+    "LPSCARDCONTEXT": "SCARDCONTEXT *",
+    "LPSCARDHANDLE": "SCARDHANDLE *",
+    "LPSCARD_IO_REQUEST": "struct _SCARD_IO_REQUEST *",
+    "LPSCARD_READERSTATE_A": "SCARD_READERSTATE_A *",
+    "LPSTR": "char *",
+    "LPTSTR": "char *",
+    "LPVOID": "void *",
+    "MSCCString": "const char *",
+    "MSCCallBack": "MSCULong32 (*)(MSCLPTokenInfo, MSCULong32, MSCPVoid32)",
+    "MSCCertACL": "struct MSCObjectACL",
+    "MSCChar8": "char",
+    "MSCCryptInit": "struct MSCCryptInit",
+    "MSCEventWaitInfo": "struct MSCEventWaitInfo",
+    "MSCGenKeyParams": "struct MSCGenKeyParams",
+    "MSCInitTokenParams": "struct MSCInitTokenParams",
+    "MSCKeyACL": "struct MSCKeyACL",
+    "MSCKeyInfo": "struct MSCKeyInfo",
+    "MSCKeyPolicy": "struct MSCKeyPolicy",
+    "MSCLPCertACL": "struct MSCObjectACL *",
+    "MSCLPCryptInit": "struct MSCCryptInit *",
+    "MSCLPEventWaitInfo": "struct MSCEventWaitInfo *",
+    "MSCLPGenKeyParams": "struct MSCGenKeyParams *",
+    "MSCLPInitTokenParams": "struct MSCInitTokenParams *",
+    "MSCLPKeyACL": "struct MSCKeyACL *",
+    "MSCLPKeyBlob": "MSCPUChar8",
+    "MSCLPKeyInfo": "struct MSCKeyInfo *",
+    "MSCLPKeyPolicy": "struct MSCKeyPolicy *",
+    "MSCLPObjectACL": "struct MSCObjectACL *",
+    "MSCLPObjectInfo": "struct MSCObjectInfo *",
+    "MSCLPStatusInfo": "struct MSCStatusInfo *",
+    "MSCLPTokenConnection": "struct MSCTokenConnection *",
+    "MSCLPTokenInfo": "struct MSCTokenInfo *",
+    "MSCLong32": "int32_t",
+    "MSCObjectACL": "struct MSCObjectACL",
+    "MSCObjectInfo": "struct MSCObjectInfo",
+    "MSCPCUChar8": "const uint8_t *",
+    "MSCPCVoid32": "const void *",
+    "MSCPLong32": "int32_t *",
+    "MSCPShort16": "int16_t *",
+    "MSCPUChar8": "uint8_t *",
+    "MSCPULong32": "uint32_t *",
+    "MSCPUShort16": "uint16_t *",
+    "MSCPVoid32": "void *",
+    "MSCShort16": "int16_t",
+    "MSCStatusInfo": "struct MSCStatusInfo",
+    "MSCString": "char *",
+    "MSCTokenConnection": "struct MSCTokenConnection",
+    "MSCTokenInfo": "struct MSCTokenInfo",
+    "MSCUChar8": "uint8_t",
+    "MSCULong32": "uint32_t",
+    "MSCUShort16": "uint16_t",
+    "MSC_RV": "uint32_t",
+    "PDWORD": "uint32_t *",
+    "PSCARDCONTEXT": "SCARDCONTEXT *",
+    "PSCARDHANDLE": "SCARDHANDLE *",
+    "PSCARD_IO_REQUEST": "struct _SCARD_IO_REQUEST *",
+    "PSCARD_READERSTATE_A": "SCARD_READERSTATE_A *",
+    "PUCHAR": "uint8_t *",
+    "PULONG": "uint32_t *",
+    "RESPONSECODE": "int32_t",
+    "SCARDCONTEXT": "int32_t",
+    "SCARDHANDLE": "int32_t",
+    "SCARD_IO_REQUEST": "struct _SCARD_IO_REQUEST",
+    "SCARD_READERSTATE": "SCARD_READERSTATE_A",
+    "SCARD_READERSTATE_A": "struct SCARD_READERSTATE_A",
+    "SEL": "SEL *",
+    "UCHAR": "uint8_t",
+    "ULONG": "uint32_t",
+    "USHORT": "uint16_t",
+    "WORD": "uint16_t",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wint_t": "int",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "id": "id",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long"
+  }
+}

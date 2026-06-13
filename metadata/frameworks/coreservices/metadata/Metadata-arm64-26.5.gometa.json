@@ -1,0 +1,4253 @@
+{
+  "framework": "Metadata",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {
+    "MDLabelDomain": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kMDLabelUserDomain",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kMDLabelLocalDomain",
+          "value": "1",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 70,
+      "doc": "@typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate()."
+    },
+    "MDQueryOptionFlags": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kMDQuerySynchronous",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kMDQueryWantsUpdates",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kMDQueryAllowFSTranslation",
+          "value": "8",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 83
+    },
+    "MDQuerySortOptionFlags": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kMDQueryReverseSortOrderFlag",
+          "value": "1",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 751,
+      "doc": "@enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order."
+    },
+    "_anon_kMDLabelUserDomain": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kMDLabelUserDomain",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kMDLabelLocalDomain",
+          "value": "1",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kMDQueryReverseSortOrderFlag": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kMDQueryReverseSortOrderFlag",
+          "value": "1",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kMDQuerySynchronous": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kMDQuerySynchronous",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kMDQueryWantsUpdates",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kMDQueryAllowFSTranslation",
+          "value": "8",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "acl_entry_id_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_FIRST_ENTRY",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_NEXT_ENTRY",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_LAST_ENTRY",
+          "value": "-2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 118
+    },
+    "acl_flag_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_FLAG_DEFER_INHERIT",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_FLAG_NO_INHERIT",
+          "value": "131072",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_INHERITED",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_FILE_INHERIT",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_DIRECTORY_INHERIT",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_LIMIT_INHERIT",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_ONLY_INHERIT",
+          "value": "256",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 125
+    },
+    "acl_perm_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_READ_DATA",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_LIST_DIRECTORY",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_DATA",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ADD_FILE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXECUTE",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "ACL_SEARCH",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "ACL_DELETE",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "ACL_APPEND_DATA",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ADD_SUBDIRECTORY",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_DELETE_CHILD",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_ATTRIBUTES",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_ATTRIBUTES",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_EXTATTRIBUTES",
+          "value": "512",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_EXTATTRIBUTES",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_SECURITY",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_SECURITY",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "ACL_CHANGE_OWNER",
+          "value": "8192",
+          "availability": {}
+        },
+        {
+          "name": "ACL_SYNCHRONIZE",
+          "value": "1048576",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 72
+    },
+    "acl_tag_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_UNDEFINED_TAG",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXTENDED_ALLOW",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXTENDED_DENY",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 94
+    },
+    "acl_type_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_TYPE_EXTENDED",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_ACCESS",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_DEFAULT",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_AFS",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_CODA",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_NTFS",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_NWFS",
+          "value": "5",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 101
+    },
+    "clockid_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "_CLOCK_REALTIME",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW_APPROX",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW_APPROX",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_PROCESS_CPUTIME_ID",
+          "value": "12",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_THREAD_CPUTIME_ID",
+          "value": "16",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "_time.h",
+      "sdk_line": 156
+    },
+    "dispatch_autorelease_frequency_t": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_INHERIT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_NEVER",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "queue.h",
+      "sdk_line": 300,
+      "is_extensible": true
+    },
+    "dispatch_block_flags_t": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "DISPATCH_BLOCK_BARRIER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_BLOCK_DETACHED",
+          "value": "2",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_ASSIGN_CURRENT",
+          "value": "4",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_NO_QOS_CLASS",
+          "value": "8",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_INHERIT_QOS_CLASS",
+          "value": "16",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_ENFORCE_QOS_CLASS",
+          "value": "32",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        }
+      ],
+      "availability": {},
+      "sdk_file": "block.h",
+      "sdk_line": 302,
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "filesec_property_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "FILESEC_OWNER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GROUP",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_UUID",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_MODE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GRPUUID",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_RAW",
+          "value": "100",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_ALLOCSIZE",
+          "value": "101",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "fcntl.h",
+      "sdk_line": 582
+    },
+    "idtype_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "P_ALL",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "P_PID",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "P_PGID",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "wait.h",
+      "sdk_line": 79
+    },
+    "mpo_flags_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "MPO_PORT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "MPO_SERVICE_PORT",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "MPO_REPLY_PORT",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "MPO_WEAK_REPLY_PORT",
+          "value": "16384",
+          "availability": {}
+        },
+        {
+          "name": "MPO_NOTIFICATION_PORT",
+          "value": "17408",
+          "availability": {}
+        },
+        {
+          "name": "MPO_EXCEPTION_PORT",
+          "value": "32768",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT_WITH_PORT_ARRAY",
+          "value": "65536",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "port.h",
+      "sdk_line": 1102,
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "os_clockid_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
+          "value": "32",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "clock.h",
+      "sdk_line": 188
+    },
+    "ptrauth_key": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ptrauth_key_none",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asia",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asib",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asda",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asdb",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_code",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_code",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_data",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_data",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_return_address",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_frame_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_function_pointer",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_function",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_cxx_vtable_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_method_list_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_isa_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_super_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_sel_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_class_ro_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_descriptor_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_init_fini_pointer",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ptrauth.h",
+      "sdk_line": 13
+    },
+    "qos_class_t": {
+      "go_type": "uint32",
+      "members": [
+        {
+          "name": "QOS_CLASS_USER_INTERACTIVE",
+          "value": "33",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_USER_INITIATED",
+          "value": "25",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_DEFAULT",
+          "value": "21",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_UTILITY",
+          "value": "17",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_BACKGROUND",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_UNSPECIFIED",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "qos.h",
+      "sdk_line": 121
+    }
+  },
+  "structs": {
+    "MDQueryBatchingParams": {
+      "fields": [
+        {
+          "name": "first_max_num",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "first_max_ms",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "progress_max_num",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "progress_max_ms",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "update_max_num",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "update_max_ms",
+          "objc_type": "size_t"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 307,
+      "doc": "@typedef MDQueryBatchingParams Structure containing the progress notification batching parameters of an MDQuery. The first notification can be triggered by the either first_max_num or first_max_ms limit being exceeded. Subsequent notifications are triggered by either the progress_max_num or progress_max_ms limit. The default batching parameters are undefined and subject to change. @field first_max_num The maximum number of results that can accumulate before a progress notification is sent out by the MDQuery, for the first notification. @field first_max_ms The maximum number of milliseconds that can pass before a progress notification is sent out. This value is advisory, in that the notification will be triggered \"at some point after first_max_ms milliseconds have passed since the query began accumulating results\", but generally not very long after, for the first progress notification. @field progress_max_num The maximum number of results that can accumulate before a progress notification is sent out by the MDQuery, for notifications after the first, during the initial gathering phase of the query. @field progress_max_ms The maximum number of milliseconds that can pass before a progress notification is sent out. This value is advisory, in that the notification will be triggered \"at some point after first_max_ms milliseconds have passed since the query began accumulating results\", but generally not very long after, for progress notifications after the first, during the initial gathering phase of the query. @field update_max_num The maximum number of results that can accumulate before an update notification is sent out by the MDQuery, for notifications after the gathering phase of the query has finished. @field update_max_ms The maximum number of milliseconds that can pass before a progress notification is sent out. This value is advisory, in that the notification will be triggered \"at some point after first_max_ms milliseconds have passed since the query began accumulating results\", but generally not very long after, for update notifications after the gathering phase of the query has finished."
+    },
+    "__MDItem": {
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 67,
+      "doc": "@typedef MDItemRef This is the type of a reference to MDItems."
+    },
+    "__MDLabel": {
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 30,
+      "doc": "@typedef MDLabelRef @abstract This is the type of a reference to an MDLabel."
+    },
+    "__MDQuery": {
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 81,
+      "doc": "@typedef MDQueryRef This is the type of a reference to MDQuerys."
+    }
+  },
+  "functions": [
+    {
+      "name": "MDItemGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 73,
+      "doc": "@function MDItemGetTypeID Returns the type identifier of all MDItem instances."
+    },
+    {
+      "name": "MDItemCreate",
+      "args": [
+        {
+          "name": "allocator",
+          "objc_type": "CFAllocatorRef"
+        },
+        {
+          "name": "path",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "MDItemRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 87,
+      "doc": "@function MDItemCreate Returns an metadata item for the given path. @param allocator The CFAllocator which should be used to allocate memory for the query and its sub-storage. This parameter may be NULL in which case the current default CFAllocator is used. @param path A path to the file for which to create the MDItem. [[Currently, the path must exist. MDItemRefs may or may not be uniqued. Use CFEqual() to compare them.]] @result An MDItemRef, or NULL on failure."
+    },
+    {
+      "name": "MDItemCreateWithURL",
+      "args": [
+        {
+          "name": "allocator",
+          "objc_type": "CFAllocatorRef"
+        },
+        {
+          "name": "url",
+          "objc_type": "CFURLRef"
+        }
+      ],
+      "return": {
+        "objc_type": "MDItemRef"
+      },
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 101,
+      "doc": "@function MDItemCreateWithURL Returns an metadata item for the given path. @param allocator The CFAllocator which should be used to allocate memory for the query and its sub-storage. This parameter may be NULL in which case the current default CFAllocator is used. @param url A url to the file for which to create the MDItem. [[Currently, the file must exist. MDItemRefs may or may not be uniqued. Use CFEqual() to compare them.]] @result An MDItemRef, or NULL on failure."
+    },
+    {
+      "name": "MDItemsCreateWithURLs",
+      "args": [
+        {
+          "name": "allocator",
+          "objc_type": "CFAllocatorRef"
+        },
+        {
+          "name": "urls",
+          "objc_type": "CFArrayRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 112,
+      "doc": "@function MDItemsCreateWithURLs Returns metadata items for the given urls. @param allocator The CFAllocator which should be used to allocate memory for the array. This parameter may be NULL in which case the current default CFAllocator is used. @param urls A CFArray of urls to the file for which to create the MDItem. @result A CFArrayRef of MDItemRefs, or NULL on failure. Missing items will have kCFNull entries in the result array."
+    },
+    {
+      "name": "MDItemCopyAttribute",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "MDItemRef"
+        },
+        {
+          "name": "name",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFTypeRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 122,
+      "doc": "@function MDItemCopyAttribute Returns the value of the given attribute for the item. @param item The item to be interrogated. @param name The name of the desired attribute. @result A CFTypeRef, or NULL on failure, or if the attribute does not exist, of if the attribute is not readable."
+    },
+    {
+      "name": "MDItemCopyAttributes",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "MDItemRef"
+        },
+        {
+          "name": "names",
+          "objc_type": "CFArrayRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDictionaryRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 135,
+      "doc": "@function MDItemCopyAttributes Returns the values of the given attributes for the item. @param item The item to be interrogated. @param names A CFArray of the names of the desired attributes. @result A CFDictionary where the keys are the attribute names, and the values are the attribute values, or NULL on failure. If an attribute does not exist, or is unreadable, there will be no key-value pair for it in the dictionary."
+    },
+    {
+      "name": "MDItemCopyAttributeList",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "MDItemRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDictionaryRef"
+      },
+      "variadic": true,
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 149,
+      "doc": "@function MDItemCopyAttributeList Returns the values of the given attributes for the item. @param item The item to be interrogated. @param ... A comma-separated varargs list of the string attribute names. @result A CFDictionary where the keys are the attribute names, and the values are the attribute values, or NULL on failure. If an attribute does not exist, or is unreadable, there will be no key-value pair for it in the dictionary."
+    },
+    {
+      "name": "MDItemCopyAttributeNames",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "MDItemRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 158,
+      "doc": "@function MDItemCopyAttributeNames Returns an array of the attribute names existing in the item. @param item The item to be interrogated. @result A CFArray of CFString attribute names, or NULL on failure."
+    },
+    {
+      "name": "MDItemsCopyAttributes",
+      "args": [
+        {
+          "name": "items",
+          "objc_type": "CFArrayRef"
+        },
+        {
+          "name": "names",
+          "objc_type": "CFArrayRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {
+        "macos_introduced": "10.12"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 170,
+      "doc": "@function MDItemsCopyAttributes Returns metadata for the given items. @param items A CFArray of MDItemRefs to items for which to fetch data @param names A CFArray of attribute names for which to fetch data. The attribute names are CFStrings @result A CFArrayRef, or NULL on failure. Each entry in the array is either kCFNull, if the item is not accessible, or a CFArray of attribute values. If an attribute is not available, there will be a kCFNull in its slot in the nested array."
+    },
+    {
+      "name": "MDItemGetCacheFileDescriptors",
+      "args": [
+        {
+          "name": "items",
+          "objc_type": "CFArrayRef"
+        },
+        {
+          "name": "completionHandler",
+          "objc_type": "void (^)(CFArrayRef)",
+          "is_block": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "15.2"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 178
+    },
+    {
+      "name": "__MDItemCopyAttributesEllipsis1",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "MDItemRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDictionaryRef"
+      },
+      "variadic": true,
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1030
+    },
+    {
+      "name": "MDQueryGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 117,
+      "doc": "@function MDQueryGetTypeID Returns the type identifier of all MDQuery instances."
+    },
+    {
+      "name": "MDQueryCreate",
+      "args": [
+        {
+          "name": "allocator",
+          "objc_type": "CFAllocatorRef"
+        },
+        {
+          "name": "queryString",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "valueListAttrs",
+          "objc_type": "CFArrayRef"
+        },
+        {
+          "name": "sortingAttrs",
+          "objc_type": "CFArrayRef"
+        }
+      ],
+      "return": {
+        "objc_type": "MDQueryRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 153,
+      "doc": "@function MDQueryCreate Creates a new query with the given query expression. @param allocator The CFAllocator which should be used to allocate memory for the query and its sub-storage. This parameter may be NULL in which case the current default CFAllocator is used. @param queryString The query expression string for this query. The syntax for query expressions is explained above in the header overview documentation. @param valueListAttrs An optional array of attribute names. The query will collect the values of these attributes into uniqued lists, which can be used or displayed to summarize the results of the query, or allow a user to further qualify the items for which they are searching. This parameter may be NULL if no value lists are desired. Value list collection increases CPU usage and significantly increases the memory usage of an MDQuery. The attribute names are CFStrings. @param sortingAttrs An optional array of attribute names. The query will results of the query based on the values of these attributes. The first name in the array is used as the primary sort key, the second as the secondary key, and so on. The comparison of like-typed values is a simple, literal comparison. This parameter may be NULL if no sorting is desired. Sorting increases memory usage and significantly increases the CPU usage of an MDQuery. However, when possible, it is almost always cheaper to have the MDQuery do the sorting, rather than you fetching all the results and attributes from each of them and doing the sorting yourself. The attribute names are CFStrings. @result An MDQueryRef, or NULL on failure. If the query string is empty or malformed (invalid syntax), returns NULL."
+    },
+    {
+      "name": "MDQueryCreateSubset",
+      "args": [
+        {
+          "name": "allocator",
+          "objc_type": "CFAllocatorRef"
+        },
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "queryString",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "valueListAttrs",
+          "objc_type": "CFArrayRef"
+        },
+        {
+          "name": "sortingAttrs",
+          "objc_type": "CFArrayRef"
+        }
+      ],
+      "return": {
+        "objc_type": "MDQueryRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 193,
+      "doc": "@function MDQueryCreateSubset Creates a new query, which is a subset of the given query. Only results matched by the given query can be matched by the query expression of this query. @param allocator The CFAllocator which should be used to allocate memory for the query and its sub-storage. This parameter may be NULL in which case the current default CFAllocator is used. @param query The parent query of the new query. @param queryString The query expression string for this query. This expression in effect may further restrict the matches found by the parent query. If the string is empty the behavior is undefined. @param valueListAttrs An optional array of attribute names. The query will collect the values of these attributes into uniqued lists, which can be used or displayed to summarize the results of the query, or allow a user to further qualify the items for which they are searching. This parameter may be NULL if no value lists are desired. Value list collection increases CPU usage and significantly increases the memory usage of an MDQuery. The attribute names are CFStrings. @param sortingAttrs An optional array of attribute names. The query will sort results of the query based on the values of these attributes. The first name in the array is used as the primary sort key, the second as the secondary key, and so on. The comparison of like-typed values is a simple, literal comparison. This parameter may be NULL if no sorting is desired. Sorting increases memory usage and significantly increases the CPU usage of an MDQuery. However, when possible, it is almost always cheaper to have the MDQuery do the sorting, rather than you fetching all the results and attributes from each of them and doing the sorting yourself. The attribute names are CFStrings. @result An MDQueryRef, or NULL on failure. If the query string is empty or malformed (invalid syntax), returns NULL."
+    },
+    {
+      "name": "MDQueryCreateForItems",
+      "args": [
+        {
+          "name": "allocator",
+          "objc_type": "CFAllocatorRef"
+        },
+        {
+          "name": "queryString",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "valueListAttrs",
+          "objc_type": "CFArrayRef"
+        },
+        {
+          "name": "sortingAttrs",
+          "objc_type": "CFArrayRef"
+        },
+        {
+          "name": "items",
+          "objc_type": "CFArrayRef"
+        }
+      ],
+      "return": {
+        "objc_type": "MDQueryRef"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 231,
+      "doc": "@function MDQueryCreateForItems Creates a new query with the given query expression. @param allocator The CFAllocator which should be used to allocate memory for the query and its sub-storage. This parameter may be NULL in which case the current default CFAllocator is used. @param queryString The query expression string for this query. The syntax for query expressions is explained above in the header overview documentation. @param valueListAttrs An optional array of attribute names. The query will collect the values of these attributes into uniqued lists, which can be used or displayed to summarize the results of the query, or allow a user to further qualify the items for which they are searching. This parameter may be NULL if no value lists are desired. Value list collection increases CPU usage and significantly increases the memory usage of an MDQuery. The attribute names are CFStrings. @param sortingAttrs An optional array of attribute names. The query will results of the query based on the values of these attributes. The first name in the array is used as the primary sort key, the second as the secondary key, and so on. The comparison of like-typed values is a simple, literal comparison. This parameter may be NULL if no sorting is desired. Sorting increases memory usage and significantly increases the CPU usage of an MDQuery. However, when possible, it is almost always cheaper to have the MDQuery do the sorting, rather than you fetching all the results and attributes from each of them and doing the sorting yourself. The attribute names are CFStrings. @param items An array of items. The query will only return results in this set. @result An MDQueryRef, or NULL on failure. If the query string is empty or malformed (invalid syntax), returns NULL."
+    },
+    {
+      "name": "MDQueryCopyQueryString",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 244,
+      "doc": "@function MDQueryCopyQueryString Returns the query string of the query. @param query The query to be interrogated. @result The query string of the query."
+    },
+    {
+      "name": "MDQueryCopyValueListAttributes",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 253,
+      "doc": "@function MDQueryCopyValueListAttributes Returns the list of attribute names for which the query is collecting the lists of values. @param query The query to be interrogated. @result The list of value list attribute names of the query."
+    },
+    {
+      "name": "MDQueryCopySortingAttributes",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 262,
+      "doc": "@function MDQueryCopySortingAttributes Returns the list of attribute names the query is using to sort the results. @param query The query to be interrogated. @result The list of sorting attribute names of the query."
+    },
+    {
+      "name": "MDQueryGetBatchingParameters",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "MDQueryBatchingParams"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 324,
+      "doc": "@function MDQueryGetBatchingParameters Returns the current parameters that control batching of progress notifications. @param query The query to be interrogated. @result An MDQueryBatchingParams structure with the current batching parameters."
+    },
+    {
+      "name": "MDQuerySetBatchingParameters",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "params",
+          "objc_type": "MDQueryBatchingParams"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 332,
+      "doc": "@function MDQuerySetBatchingParameters @param query The query whose batching parameters are to be set. @param params An MDQueryBatchingParams structure with the batching parameters to set."
+    },
+    {
+      "name": "MDQuerySetCreateResultFunction",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "func",
+          "objc_type": "MDQueryCreateResultFunction"
+        },
+        {
+          "name": "context",
+          "objc_type": "void *"
+        },
+        {
+          "name": "cb",
+          "objc_type": "const CFArrayCallBacks *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 430,
+      "doc": "@function MDQuerySetCreateResultFunction Sets the function used to create the result objects of the MDQuery. If no create function is set on an MDQuery, the default result objects are MDItemRefs. Results created after a create function is set will be created through the given create function, but values created before the function was set (or after it is unset) are not modified. Therefore it is not advisable to change this function after MDQueryExecute() has been called with the query. The create-result function is called lazily as results are requested from a query, so it will not generally be called on all results, if in fact any. This avoids the cost of creating potentially hundreds of thousands of what might be temporary objects. @param query The query to whose result create function is to be set. @param func The callback function the MDQuery will use to create its results, such as those returned from MDQueryGetResultAtIndex(). This parameter may be NULL, in which case any previous result creation settings are cancelled, and the MDQuery will subsequently produce MDItemRefs. If the function (when the parameter is not NULL) is not of type MDQueryCreateResultFunction or does not behave as a MDQueryCreateResultFunction must, the behavior is undefined. @param context A pointer-sized user-defined value, which is passed as the third parameter to the create function, but is otherwise unused by MDQuery. The MDQuery does not retain the context in any way, so it must remain valid for at least the lifetime of the query. If the context is not what is expected by the create function, the behavior is undefined. @param cb A pointer to a CFArrayCallBacks structure initialized with the callbacks for the query to use to manage the created result objects. A copy of the contents of the callbacks structure is made, so that a pointer to a structure on the stack can be passed in, or can be reused for multiple query creations. Only version 0 of the CFArrayCallBacks is supported. The retain field may be NULL, in which case the MDQuery will do nothing to add a retain to the created results for the query. The release field may be NULL, in which case the MDQuery will do nothing to remove the query's retain (such as the one it gets from the create function) on the result objects when the query is destroyed. If the copyDescription field is NULL, the query will create a simple description for the result objects. If the equal field is NULL, the query will use pointer equality to test for equality of results. This callbacks parameter itself may be NULL, which is treated as if a valid structure of version 0 with all fields NULL had been passed in. Otherwise, if any of the fields are not valid pointers to functions of the correct type, or this parameter is not a valid pointer to a CFArrayCallBacks callbacks structure, the behavior is undefined. If any of the value values returned from the create function is not one understood by one or more of the callback functions, the behavior when those callback functions are used is undefined. For example, if the create function can return NULL, then NULL must be understood by the callback functions as a possible parameter. The retain and release callbacks must be a matched set -- do not assume that the retain function will be unused or that additional reference counts will not be taken on the created results."
+    },
+    {
+      "name": "MDQuerySetCreateValueFunction",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "func",
+          "objc_type": "MDQueryCreateValueFunction"
+        },
+        {
+          "name": "context",
+          "objc_type": "void *"
+        },
+        {
+          "name": "cb",
+          "objc_type": "const CFArrayCallBacks *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 519,
+      "doc": "@function MDQuerySetCreateValueFunction Sets the function used to create the value objects of the MDQuery. These are the values of the value lists that were requested when the query was created. If no create function is set on an MDQuery, the default value objects are the CFTypeRef values of the attributes. Values created after a create function is set will be created through the given create function, but values created before the function was set (or after it is unset) are not modified. Therefore it is not advisable to change this function after MDQueryExecute() has been called with the query. @param query The query to whose value create function is to be set. @param func The callback function the MDQuery will use to create the value list values, such as those returned from MDQueryCopyValuesOfAttribute(). This parameter may be NULL, in which case any previous value creation settings are cancelled, and the MDQuery will subsequently produce the default CFTypeRefs. If the function (when the parameter is not NULL) is not of type MDQueryCreateValueFunction or does not behave as a MDQueryCreateValueFunction must, the behavior is undefined. @param context A pointer-sized user-defined value, which is passed as the fourth parameter to the create function, but is otherwise unused by MDQuery. The MDQuery does not retain the context in any way, so it must remain valid for at least the lifetime of the query. If the context is not what is expected by the create function, the behavior is undefined. @param cb A pointer to a CFArrayCallBacks structure initialized with the callbacks for the query to use to manage the created value objects. A copy of the contents of the callbacks structure is made, so that a pointer to a structure on the stack can be passed in, or can be reused for multiple query creations. Only version 0 of the CFArrayCallBacks is supported. The retain field may be NULL, in which case the MDQuery will do nothing to add a retain to the created values for the query. The release field may be NULL, in which case the MDQuery will do nothing to remove the query's retain (such as the one it gets from the create function) on the value objects when the query is destroyed. If the copyDescription field is NULL, the query will create a simple description for the value objects. If the equal field is NULL, the query will use pointer equality to test for equality of values. This callbacks parameter itself may be NULL, which is treated as if a valid structure of version 0 with all fields NULL had been passed in. Otherwise, if any of the fields are not valid pointers to functions of the correct type, or this parameter is not a valid pointer to a CFArrayCallBacks callbacks structure, the behavior is undefined. If any of the value values returned from the create function is not one understood by one or more of the callback functions, the behavior when those callback functions are used is undefined. For example, if the create function can return NULL, then NULL must be understood by the callback functions as a possible parameter. The retain and release callbacks must be a matched set -- do not assume that the retain function will be unused or that additional reference counts will not be taken on the created values."
+    },
+    {
+      "name": "MDQuerySetDispatchQueue",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "queue",
+          "objc_type": "dispatch_queue_t"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 532
+    },
+    {
+      "name": "MDQueryExecute",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "optionFlags",
+          "objc_type": "CFOptionFlags"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 568,
+      "doc": "@function MDQueryExecute Run the query, and populate the query with the results. Queries only gather results or process updates while the current thread's run loop is running. Queries normally operate asynchronously, and send out progress and update notifications to report changes to the list of results that has been collected. Queries have two phases: the initial gathering of all currently matching results, and a second live-update phase where queries monitor the state of the system and update themselves to external changes in files or the operating environment (for example, as time advances, files which did not match the query when it was started may later match the query). Query notifications are posted within the context of the same thread which executes the query. [[There are three operational modes: (1) synchronous static queries, which collect the list of current results and then do not watch for updates to the results, (2) asynchronous static queries, which collect the results asychronously after this function returns, and then do not watch for updates to the results, and (3) asynchronous live queries which collect the initial results asychronously after this function returns, and then do watch for updates to the results, until the query is destroyed. There is little reason not to allow the fourth case, synchronous collection of initial results, followed by asynchronous monitoring for updates, so this may change in the future.]] @param query The query to execute. @param optionFlags Bitwise or of MDQueryOptionFlags @result Returns true if the query was started (executed in the case of a synchronous query), false otherwise. Queries cannot be executed more than once."
+    },
+    {
+      "name": "MDQueryStop",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 593,
+      "doc": "@function MDQueryStop Stops the query from ever generating more results. Queries may be executed only once, so a stopped query cannot be restarted. The query will also not generate any result updates. The query is static after this function returns. The query will do final processing of results that have come in but not yet been processed (because, say, the batching parameters hasn't triggered that yet). That may trigger a progress notification, so be aware of that if you are stopping a query from within your progress note handler; that is, during this function, a recursive progress and/or finished notification might occur, which might recursively call your notification handler. It is safe to call this function recursively. You would call this function to stop a query that is generating way too many results to be useful, but still want to access the results that have come in so far. If a query is stopped before the gathering phase finishes, it will not report itself as finished, nor will it send out a finished notification. @param query The query to stop."
+    },
+    {
+      "name": "MDQueryDisableUpdates",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 606,
+      "doc": "@function MDQueryDisableUpdates Disables updates to the query result list. This should be called before iterating through the list of results to prevent the result list from changing during the iteration. The disabled state is a counter, and disabling can be done recursively and from different threads. @param query The query for which updates are to be disabled. @result The generation number of the query. This changes each time the query's result set has changed."
+    },
+    {
+      "name": "MDQueryEnableUpdates",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 617,
+      "doc": "@function MDQueryEnableUpdates Re-enables updates to the query result list. This should be called when finished iterating through the list of results, to allow changes to the result list to occur. Changes will be allowed when all the disables have been matched by a corresponding enable. @param query The query for which updates are to be enabled."
+    },
+    {
+      "name": "MDQueryIsGatheringComplete",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 627,
+      "doc": "@function MDQueryIsGatheringComplete Returns true if the first phase of a query, the initial result gathering, has finished. @param query The query to be interrogated. @result A boolean indicating whether or not the first phase of a query has completed."
+    },
+    {
+      "name": "MDQueryGetResultCount",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 637,
+      "doc": "@function MDQueryGetResultCount Returns the number of results currently collected by the query. Note that the number of results in a query will change over time as the query's result list is updated. @param query The query to be interrogated. @result The number of results in the query."
+    },
+    {
+      "name": "MDQueryGetResultAtIndex",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "idx",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "const void *"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 658,
+      "doc": "@function MDQueryGetResultAtIndex Returns the current result at the given index. This function causes the result object to be created if it hasn't been created already. For performance reasons, it is not advisable to ask for results that you don't need, to avoid the cost of creating them. If possible, call this function to fetch only the results you need to display or otherwise process. Note that the index of a particular result will change over time, as the query's result list is updated. @param query The query to be interrogated. @param idx The index into the query's result list. If the index is negative, or is equal to or larger than the current number of results in the query, the behavior is undefined. @result Returns the MDItemRef currently at the given index, or if a result-create function has been set, returns the result returned by that function."
+    },
+    {
+      "name": "MDQueryGetIndexOfResult",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "result",
+          "objc_type": "const void *"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 680,
+      "doc": "@function MDQueryGetIndexOfResult Returns the current index of the given result. If a result-create function has been set, and the equal callback is non-NULL, it will be used to test the query's results against the candidate result. Note that the index of a result will change over time, as the query's result list is updated. @param query The query to be interrogated. @param result The candidate result object for which to search. If a custom create-result function has been set, and this parameter is not a valid result object that the provided callbacks can handle, the behavior is undefined. If a custom create-result function has not been set, this parameter must be a valid MDItemRef. @result The index of the given result, or kCFNotFound if the value is not one of the query's existing results. If you provided a custom result creation function, as well as a custom object comparator function, result will be objects created by that function."
+    },
+    {
+      "name": "MDQueryGetAttributeValueOfResultAtIndex",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "name",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "idx",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "void *"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 697,
+      "doc": "@function MDQueryGetAttributeValueOfResultAtIndex Returns the value of the named attribute for the result at the given index. @param query The query to be interrogated. @param name The attribute name for which to return the values. If the attribute is not one of those requested in the valueListAttrs or sortingAttrs parameters to one of the query creation functions, the result will be NULL. @param idx The index into the query's result list. If the index is negative, or is equal to or larger than the current number of results in the query, the behavior is undefined. @result The value of the attribute, or NULL if the attribute doesn't exist in the query on that result."
+    },
+    {
+      "name": "MDQueryCopyValuesOfAttribute",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "name",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 713,
+      "doc": "@function MDQueryCopyValuesOfAttribute Returns the list of values, from the results of the query, of the named attribute. The list is not ordered in any way. The list contains only one occurrence of each value. Note that this list may change over time, as the query's result list is updated. @param query The query to be interrogated. @param name The attribute name for which to return the values. If the attribute is not one of those requested in the valueListAttrs parameter to one of the query creation functions, the behavior is undefined. @result A CFArray holding the value objects for that attribute."
+    },
+    {
+      "name": "MDQueryGetCountOfResultsWithAttributeValue",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "name",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "value",
+          "objc_type": "CFTypeRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 732,
+      "doc": "@function MDQueryGetCountOfResultsWithAttributeValue Returns the number of results which have the given attribute and attribute value. Note that this count may change over time, as the query's result list is updated. @param query The query to be interrogated. @param name The attribute name for which to return the number of results with the given value. If the attribute is not one of those requested in the valueListAttrs parameter to one of the query creation functions, the behavior is undefined. @param value The attribute value for which to return the number of results with that value. This parameter may be NULL, in which case the number of results that do not contain the named attribute is returned. @result The number of results with that attribute and value."
+    },
+    {
+      "name": "MDQuerySetSortOrder",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "sortingAttrs",
+          "objc_type": "CFArrayRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 745,
+      "doc": "@function MDQuerySetSortOrder Sets the sort order for a query. @param query The query for which the sort order is to be set. @param sortingAttrs An array of attribute names, as in MDQueryCreate. The query's result set will be sorted according to the order of these attributes. All names in the array have to have been passed as sortingAttrs when the query was created. The attribute names are CFStrings @result A boolean, true on success, false on failure."
+    },
+    {
+      "name": "MDQuerySetSortOptionFlagsForAttribute",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "fieldName",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "flags",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 765,
+      "doc": "@function MDQuerySetSortOptionFlagsForAttribute Sets the sort flags for a query. @param query The query for which the sort flags is to be set. @param fieldName The attribute name for which sort option flags are to be set. The attribute name must have been part of the sortingFlags when the query was created. @param flags A uint32_t containing MDQuerySortOptionFlags to be applied to the attibute @result A boolean, true on success, false on failure."
+    },
+    {
+      "name": "MDQueryGetSortOptionFlagsForAttribute",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "fieldName",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 774,
+      "doc": "@function MDQueryGetSortOptionFlagsForAttribute Gets the sort option flags for a sorting attribute. @param query The query for which fetch sort option flags. @param fieldName The attribute name for which sort option flags are to be fetched. @result A uint32_t, with MDQuerySortOptionFlags set for the attribute."
+    },
+    {
+      "name": "MDQuerySetSortComparator",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "comparator",
+          "objc_type": "MDQuerySortComparatorFunction"
+        },
+        {
+          "name": "context",
+          "objc_type": "void *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 837,
+      "doc": "@function MDQuerySetSortComparator Sets the function used to sort the results of an MDQuery. You may set the comparator function as many times as you like, even while the query is executing. Whenever the comparator function is set, all results are re-sorted using the new comparator function before the function returns. The function pointer can be NULL to cancel custom sorting and revert to the default sorting. The default sort provided by MDQueryCreate() is a assending sort strings are compared using CFStringCompare() with the options kCFCompareNonliteral | kCFCompareLocalized | kCFCompareNumerically. CFDataRefs are compared by using memcmp() of the data pointers. @param query The query to whose result sort function is to be set. @param func The callback function the MDQuery will use to sort its results. If the function (when the parameter is not NULL) is not of type MDQuerySortComparatorFunction or does not behave as a MDQuerySortComparatorFunction must, the behavior is undefined. The function pointer may be NULL to cancel any custom comparator. @param context A pointer-sized user-defined value, which is passed as the third parameter to the sort function, but is otherwise unused by MDQuery. The MDQuery does not retain the context in any way, so it must remain valid for the lifetime of the query or until the sort function is set again. If the context is not what is expected by the comparator, the behavior is undefined."
+    },
+    {
+      "name": "MDQuerySetSortComparatorBlock",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "comparator",
+          "objc_type": "CFComparisonResult (^)(const CFTypeRef *, const CFTypeRef *)",
+          "is_block": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 862
+    },
+    {
+      "name": "MDQuerySetSearchScope",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "scopeDirectories",
+          "objc_type": "CFArrayRef"
+        },
+        {
+          "name": "scopeOptions",
+          "objc_type": "OptionBits"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 1000
+    },
+    {
+      "name": "MDQuerySetMaxCount",
+      "args": [
+        {
+          "name": "query",
+          "objc_type": "MDQueryRef"
+        },
+        {
+          "name": "size",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 1055,
+      "doc": "@function MDQuerySetMaxCount @discussion Use MDQuerySetMaxCount to limit the number of results returned by the query engine.  This must be called before the query is executed. @param query The query object to modify. @param size The maximum number of results desired."
+    },
+    {
+      "name": "MDLabelGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 32
+    },
+    {
+      "name": "MDItemCopyLabels",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "MDItemRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 43,
+      "doc": "@function MDItemCopyLabels @abstract Returns an array of the labels set on the specified item. @param item The item to be interrogated. @result A CFArrayRef containing MDLabelRefs for the labels set on the item, or NULL on failure."
+    },
+    {
+      "name": "MDItemSetLabel",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "MDItemRef"
+        },
+        {
+          "name": "label",
+          "objc_type": "MDLabelRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 53,
+      "doc": "@function MDItemSetLabel @abstract Sets a label on the specified item. @param item The item to be updated. @param label The label. @result True if the label was successfully set on the item, false otherwise."
+    },
+    {
+      "name": "MDItemRemoveLabel",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "MDItemRef"
+        },
+        {
+          "name": "label",
+          "objc_type": "MDLabelRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 63,
+      "doc": "@function MDItemRemoveLabel @abstract Removes a label from the specified item. @param item The item to be updated. @param label The label. @result True if the label was successfully removed from the item, false otherwise."
+    },
+    {
+      "name": "MDLabelCreate",
+      "args": [
+        {
+          "name": "allocator",
+          "objc_type": "CFAllocatorRef"
+        },
+        {
+          "name": "displayName",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "kind",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "domain",
+          "objc_type": "MDLabelDomain"
+        }
+      ],
+      "return": {
+        "objc_type": "MDLabelRef"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 86,
+      "doc": "@function MDLabelCreate @abstract Returns a label with the specified parameters. If there is already a label that exactly matches the parameters, a reference to the existing label will be returned; otherwise this will attempt to create a new label.  A successful creation of a new private label definition will generate a kMDLabelAddedNotification. Note that this function can only create labels with \"Private\" visibility. Creating \"Public\" labels requires creating and installing a label bundle. @param allocator The CFAllocator which should be used to allocate memory for the label. This parameter may be NULL in which case the current default CFAllocator is used. Use kCFAllocatorNull to request a reference to an existing label only. @param displayName The label's display name. @param kind The label's kind string. @param domain The domain of the label (normally kMDLabelUserDomain). @result An MDLabelRef, or NULL on failure."
+    },
+    {
+      "name": "MDLabelCopyAttribute",
+      "args": [
+        {
+          "name": "label",
+          "objc_type": "MDLabelRef"
+        },
+        {
+          "name": "name",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFTypeRef"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 99,
+      "doc": "@function MDLabelCopyAttribute @abstract Copy the value of the named attribute of a label. @param label The label. @param name The name of the desired attribute. @result A CFTypeRef, or NULL on failure, or if the attribute does not exist, or if the attribute is not readable."
+    },
+    {
+      "name": "MDLabelCopyAttributeName",
+      "args": [
+        {
+          "name": "label",
+          "objc_type": "MDLabelRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 109,
+      "doc": "@function MDLabelCopyAttributeName @abstract Copy the MDItem attribute name of a label. The attribute name can be used in an MDQuery string to search for MDItems that have the label set. The value of the MDItem attribute is a CFDate corresponding to the time the label was set on the item. @param label The label. @result A CFStringRef, or NULL on failure."
+    },
+    {
+      "name": "MDLabelDelete",
+      "args": [
+        {
+          "name": "label",
+          "objc_type": "MDLabelRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 118,
+      "doc": "@function MDLabelDelete @abstract Deletes the user's definition or override of the specified label from ~/Library/Metadata. Labels defined in bundles elsewhere in the filesystem cannot be deleted using this API. Deleting an override of a label merely makes the original definition of the label visible again and thus will generate a kMDLabelChangedNotification. A successful deletion of a private label definition will generate a kMDLabelRemovedNotification. @param label The label. @result True if a label definition or override was successfully deleted."
+    },
+    {
+      "name": "MDLabelSetAttributes",
+      "args": [
+        {
+          "name": "label",
+          "objc_type": "MDLabelRef"
+        },
+        {
+          "name": "attrs",
+          "objc_type": "CFDictionaryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 128,
+      "doc": "@function MDLabelSetAttributes @abstract Updates the attributes of the specified label. Labels defined in ~/Library/Metadata are modified directly. Labels defined in bundles elsewhere in the filesystem are overridden by creating a private copy of the label definition in ~/Library/Metadata. The updated attributes are then stored in the private copy. A successful call to MDLabelSetAttributes() will generate a kMDLabelChangedNotification. @param label The label. @param attrs A dictionary containing the attributes to be modified. To remove an attribute, include it in the dictionary with kCFNull as its value. @result True if the label definition or override was successfully updated."
+    },
+    {
+      "name": "MDCopyLabelKinds",
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 137,
+      "doc": "@function MDCopyLabelKinds @abstract Copy the list of label kind strings. @result A CFArrayRef containing all of the label kind strings, or NULL on failure."
+    },
+    {
+      "name": "MDCopyLabelsMatchingExpression",
+      "args": [
+        {
+          "name": "simpleQueryString",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 146,
+      "doc": "@function MDCopyLabelsMatchingExpression @abstract Copy the list of labels matching the specified query expression. @param simpleQueryString The query expression string. @result A CFArrayRef containing all of the matching labels, or NULL on failure."
+    },
+    {
+      "name": "MDCopyLabelsWithKind",
+      "args": [
+        {
+          "name": "kind",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 155,
+      "doc": "@function MDCopyLabelsWithKind @abstract Copy the list of labels with the specified kind string. @param kind The kind string, or NULL to copy all labels. @result A CFArrayRef containing all of the labels with the specified kind string, or NULL on failure."
+    },
+    {
+      "name": "MDCopyLabelWithUUID",
+      "args": [
+        {
+          "name": "labelUUID",
+          "objc_type": "CFUUIDRef"
+        }
+      ],
+      "return": {
+        "objc_type": "MDLabelRef"
+      },
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 164,
+      "doc": "@function MDCopyLabelWithUUID @abstract Copy the label with the specified UUID. @param labelUUID The label UUID. @result An MDLabelRef, or NULL on failure."
+    },
+    {
+      "name": "MDSchemaCopyAttributesForContentType",
+      "args": [
+        {
+          "name": "contentTypeUTI",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDictionaryRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 35,
+      "doc": "@function MDSchemaCopyAttributesForContentType Returns an dictionary attributes to display or show the user for a given UTI type. This function does not walk up the UTI hiearchy and perform a union of the information. @param utiType the UTI type to be interrogated. @result A CFDictionaryRef with keys ==  to kMDAttributeDisplayValues etc.."
+    },
+    {
+      "name": "MDSchemaCopyMetaAttributesForAttribute",
+      "args": [
+        {
+          "name": "name",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDictionaryRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 43,
+      "doc": "@function MDSchemaCopyMetaAttributesForAttribute Returns an dictionary of the meta attributes of attribute @param name the attribute whose schema you are interested in. @result A CFDictionary of the description of the attribute."
+    },
+    {
+      "name": "MDSchemaCopyAllAttributes",
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 50,
+      "doc": "@function MDSchemaCopyAllAttributes Returns an array of all of the attributes defined in the schema @result A CFArray of the attribute names."
+    },
+    {
+      "name": "MDSchemaCopyDisplayNameForAttribute",
+      "args": [
+        {
+          "name": "name",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 59,
+      "doc": "@function MDSchemaCopyDisplayNameForAttribute Returns the localized name of an attribute @param name the attribute whose localization you are interested in @result the localized name of the passed in attribute, or NULL if there is no localized name is avaliable."
+    },
+    {
+      "name": "MDSchemaCopyDisplayDescriptionForAttribute",
+      "args": [
+        {
+          "name": "name",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 68,
+      "doc": "@function MDSchemaCopyDisplayDescriptionForAttribute Returns the localized description of an attribute. @param name the attribute whose localization you are interested in @result the localized description of the passed in attribute, or NULL if there is no localized description is avaliable."
+    }
+  ],
+  "externs": [
+    {
+      "name": "kMDItemAttributeChangeDate",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 467
+    },
+    {
+      "name": "kMDItemContentType",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 468
+    },
+    {
+      "name": "kMDItemContentTypeTree",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 469
+    },
+    {
+      "name": "kMDItemKeywords",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 470
+    },
+    {
+      "name": "kMDItemTitle",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 471
+    },
+    {
+      "name": "kMDItemAuthors",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 472
+    },
+    {
+      "name": "kMDItemEditors",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 473
+    },
+    {
+      "name": "kMDItemParticipants",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 474
+    },
+    {
+      "name": "kMDItemProjects",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 475
+    },
+    {
+      "name": "kMDItemDownloadedDate",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 476
+    },
+    {
+      "name": "kMDItemWhereFroms",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 477
+    },
+    {
+      "name": "kMDItemComment",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 478
+    },
+    {
+      "name": "kMDItemCopyright",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 479
+    },
+    {
+      "name": "kMDItemLastUsedDate",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 480
+    },
+    {
+      "name": "kMDItemContentCreationDate",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 481
+    },
+    {
+      "name": "kMDItemContentModificationDate",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 482
+    },
+    {
+      "name": "kMDItemDateAdded",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 483
+    },
+    {
+      "name": "kMDItemDurationSeconds",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 484
+    },
+    {
+      "name": "kMDItemContactKeywords",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 485
+    },
+    {
+      "name": "kMDItemVersion",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 486
+    },
+    {
+      "name": "kMDItemPixelHeight",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 488
+    },
+    {
+      "name": "kMDItemXMPCredit",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 489
+    },
+    {
+      "name": "kMDItemXMPDigitalSourceType",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 490
+    },
+    {
+      "name": "kMDItemPixelWidth",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 491
+    },
+    {
+      "name": "kMDItemPixelCount",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 492
+    },
+    {
+      "name": "kMDItemColorSpace",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 493
+    },
+    {
+      "name": "kMDItemBitsPerSample",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 494
+    },
+    {
+      "name": "kMDItemFlashOnOff",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 495
+    },
+    {
+      "name": "kMDItemFocalLength",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 496
+    },
+    {
+      "name": "kMDItemAcquisitionMake",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 497
+    },
+    {
+      "name": "kMDItemAcquisitionModel",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 498
+    },
+    {
+      "name": "kMDItemISOSpeed",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 499
+    },
+    {
+      "name": "kMDItemOrientation",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 500
+    },
+    {
+      "name": "kMDItemLayerNames",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 501
+    },
+    {
+      "name": "kMDItemWhiteBalance",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 502
+    },
+    {
+      "name": "kMDItemAperture",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 503
+    },
+    {
+      "name": "kMDItemProfileName",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 504
+    },
+    {
+      "name": "kMDItemResolutionWidthDPI",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 505
+    },
+    {
+      "name": "kMDItemResolutionHeightDPI",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 506
+    },
+    {
+      "name": "kMDItemExposureMode",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 507
+    },
+    {
+      "name": "kMDItemExposureTimeSeconds",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 508
+    },
+    {
+      "name": "kMDItemEXIFVersion",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 509
+    },
+    {
+      "name": "kMDItemCameraOwner",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 511
+    },
+    {
+      "name": "kMDItemFocalLength35mm",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 512
+    },
+    {
+      "name": "kMDItemLensModel",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 513
+    },
+    {
+      "name": "kMDItemEXIFGPSVersion",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 515
+    },
+    {
+      "name": "kMDItemAltitude",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 516
+    },
+    {
+      "name": "kMDItemLatitude",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 517
+    },
+    {
+      "name": "kMDItemLongitude",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 518
+    },
+    {
+      "name": "kMDItemSpeed",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 519
+    },
+    {
+      "name": "kMDItemTimestamp",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 520
+    },
+    {
+      "name": "kMDItemGPSTrack",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 521
+    },
+    {
+      "name": "kMDItemImageDirection",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 522
+    },
+    {
+      "name": "kMDItemNamedLocation",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 523
+    },
+    {
+      "name": "kMDItemGPSStatus",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 525
+    },
+    {
+      "name": "kMDItemGPSMeasureMode",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 526
+    },
+    {
+      "name": "kMDItemGPSDOP",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 527
+    },
+    {
+      "name": "kMDItemGPSMapDatum",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 528
+    },
+    {
+      "name": "kMDItemGPSDestLatitude",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 529
+    },
+    {
+      "name": "kMDItemGPSDestLongitude",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 530
+    },
+    {
+      "name": "kMDItemGPSDestBearing",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 531
+    },
+    {
+      "name": "kMDItemGPSDestDistance",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 532
+    },
+    {
+      "name": "kMDItemGPSProcessingMethod",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 533
+    },
+    {
+      "name": "kMDItemGPSAreaInformation",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 534
+    },
+    {
+      "name": "kMDItemGPSDateStamp",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 535
+    },
+    {
+      "name": "kMDItemGPSDifferental",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 536
+    },
+    {
+      "name": "kMDItemMediaExtensions",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "15.0"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 538
+    },
+    {
+      "name": "kMDItemCodecs",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "15.0"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 539
+    },
+    {
+      "name": "kMDItemMediaTypes",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "15.0"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 540
+    },
+    {
+      "name": "kMDItemStreamable",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "15.0"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 541
+    },
+    {
+      "name": "kMDItemTotalBitRate",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "15.0"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 542
+    },
+    {
+      "name": "kMDItemVideoBitRate",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 543
+    },
+    {
+      "name": "kMDItemAudioBitRate",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 544
+    },
+    {
+      "name": "kMDItemDeliveryType",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 545
+    },
+    {
+      "name": "kMDItemAlbum",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 547
+    },
+    {
+      "name": "kMDItemHasAlphaChannel",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 548
+    },
+    {
+      "name": "kMDItemRedEyeOnOff",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 549
+    },
+    {
+      "name": "kMDItemMeteringMode",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 550
+    },
+    {
+      "name": "kMDItemMaxAperture",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 551
+    },
+    {
+      "name": "kMDItemFNumber",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 552
+    },
+    {
+      "name": "kMDItemExposureProgram",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 553
+    },
+    {
+      "name": "kMDItemExposureTimeString",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 554
+    },
+    {
+      "name": "kMDItemHeadline",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 557
+    },
+    {
+      "name": "kMDItemInstructions",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 558
+    },
+    {
+      "name": "kMDItemCity",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 559
+    },
+    {
+      "name": "kMDItemStateOrProvince",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 560
+    },
+    {
+      "name": "kMDItemCountry",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 561
+    },
+    {
+      "name": "kMDItemFSName",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 629
+    },
+    {
+      "name": "kMDItemDisplayName",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 630
+    },
+    {
+      "name": "kMDItemPath",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 631
+    },
+    {
+      "name": "kMDItemFSSize",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 632
+    },
+    {
+      "name": "kMDItemFSCreationDate",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 633
+    },
+    {
+      "name": "kMDItemFSContentChangeDate",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 634
+    },
+    {
+      "name": "kMDItemFSOwnerUserID",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 635
+    },
+    {
+      "name": "kMDItemFSOwnerGroupID",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 636
+    },
+    {
+      "name": "kMDItemFSExists",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 637
+    },
+    {
+      "name": "kMDItemFSIsReadable",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 638
+    },
+    {
+      "name": "kMDItemFSIsWriteable",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 639
+    },
+    {
+      "name": "kMDItemFSHasCustomIcon",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 640
+    },
+    {
+      "name": "kMDItemFSIsExtensionHidden",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 641
+    },
+    {
+      "name": "kMDItemFSIsStationery",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 642
+    },
+    {
+      "name": "kMDItemFSInvisible",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 643
+    },
+    {
+      "name": "kMDItemFSLabel",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 644
+    },
+    {
+      "name": "kMDItemFSNodeCount",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 645
+    },
+    {
+      "name": "kMDItemHTMLContent",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.11"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 647
+    },
+    {
+      "name": "kMDItemTextContent",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.11"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 648
+    },
+    {
+      "name": "kMDItemAudioSampleRate",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 710
+    },
+    {
+      "name": "kMDItemAudioChannelCount",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 711
+    },
+    {
+      "name": "kMDItemTempo",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 712
+    },
+    {
+      "name": "kMDItemKeySignature",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 713
+    },
+    {
+      "name": "kMDItemTimeSignature",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 714
+    },
+    {
+      "name": "kMDItemAudioEncodingApplication",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 715
+    },
+    {
+      "name": "kMDItemComposer",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 716
+    },
+    {
+      "name": "kMDItemLyricist",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 717
+    },
+    {
+      "name": "kMDItemAudioTrackNumber",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 718
+    },
+    {
+      "name": "kMDItemRecordingDate",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 719
+    },
+    {
+      "name": "kMDItemMusicalGenre",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 720
+    },
+    {
+      "name": "kMDItemIsGeneralMIDISequence",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 721
+    },
+    {
+      "name": "kMDItemRecordingYear",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 722
+    },
+    {
+      "name": "kMDItemOrganizations",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 793
+    },
+    {
+      "name": "kMDItemLanguages",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 794
+    },
+    {
+      "name": "kMDItemRights",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 795
+    },
+    {
+      "name": "kMDItemPublishers",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 796
+    },
+    {
+      "name": "kMDItemContributors",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 797
+    },
+    {
+      "name": "kMDItemCoverage",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 798
+    },
+    {
+      "name": "kMDItemSubject",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 799
+    },
+    {
+      "name": "kMDItemTheme",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 800
+    },
+    {
+      "name": "kMDItemDescription",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 801
+    },
+    {
+      "name": "kMDItemIdentifier",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 802
+    },
+    {
+      "name": "kMDItemAudiences",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 803
+    },
+    {
+      "name": "kMDItemNumberOfPages",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 862
+    },
+    {
+      "name": "kMDItemPageWidth",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 863
+    },
+    {
+      "name": "kMDItemPageHeight",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 864
+    },
+    {
+      "name": "kMDItemSecurityMethod",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 865
+    },
+    {
+      "name": "kMDItemCreator",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 866
+    },
+    {
+      "name": "kMDItemEncodingApplications",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 867
+    },
+    {
+      "name": "kMDItemDueDate",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 868
+    },
+    {
+      "name": "kMDItemStarRating",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 869
+    },
+    {
+      "name": "kMDItemPhoneNumbers",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 870
+    },
+    {
+      "name": "kMDItemEmailAddresses",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 871
+    },
+    {
+      "name": "kMDItemInstantMessageAddresses",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 872
+    },
+    {
+      "name": "kMDItemKind",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 873
+    },
+    {
+      "name": "kMDItemRecipients",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 874
+    },
+    {
+      "name": "kMDItemFinderComment",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 875
+    },
+    {
+      "name": "kMDItemFonts",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 876
+    },
+    {
+      "name": "kMDItemAppleLoopsRootKey",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 935
+    },
+    {
+      "name": "kMDItemAppleLoopsKeyFilterType",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 936
+    },
+    {
+      "name": "kMDItemAppleLoopsLoopMode",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 937
+    },
+    {
+      "name": "kMDItemAppleLoopDescriptors",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 938
+    },
+    {
+      "name": "kMDItemMusicalInstrumentCategory",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 939
+    },
+    {
+      "name": "kMDItemMusicalInstrumentName",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 940
+    },
+    {
+      "name": "kMDItemCFBundleIdentifier",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 942
+    },
+    {
+      "name": "kMDItemSupportFileType",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.5",
+        "macos_deprecated": "10.5",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 943
+    },
+    {
+      "name": "kMDItemInformation",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 997,
+      "doc": "@const kMDItemInformation Information about the item @const kMDItemDirector Director of the movie @const kMDItemProducer Producer of the content @const kMDItemGenre Genre of the movie @const kMDItemPerformers Performers in the movie @const kMDItemOriginalFormat Original format of the movie @const kMDItemOriginalSource Original source of the movie @const kMDItemAuthorEmailAddresses This attribute indicates the author of the emails message addresses. (This is always the email address, and not the human readable version) @const kMDItemRecipientEmailAddresses This attribute indicates the recipients email addresses. (This is always the email address,  and not the human readable version). @const kMDItemAuthorAddresses This attribute indicates the author addresses of the document. @const kMDItemRecipientAddresses This attribute indicates the recipient addresses of the document. @const kMDItemURL Url of the item @const kMDItemIsLikelyJunk This attribute indicates if the document is likely to be considered junk. @const kMDItemExecutableArchitectures Array of executables architectures the item contains. @const kMDItemExecutablePlatform Indicates platform required to execute this application. @const kMDItemApplicationCategories Array of categories the item application is a member of."
+    },
+    {
+      "name": "kMDItemDirector",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 998
+    },
+    {
+      "name": "kMDItemProducer",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 999
+    },
+    {
+      "name": "kMDItemGenre",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1000
+    },
+    {
+      "name": "kMDItemPerformers",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1001
+    },
+    {
+      "name": "kMDItemOriginalFormat",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1002
+    },
+    {
+      "name": "kMDItemOriginalSource",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1003
+    },
+    {
+      "name": "kMDItemAuthorEmailAddresses",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1004
+    },
+    {
+      "name": "kMDItemRecipientEmailAddresses",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1005
+    },
+    {
+      "name": "kMDItemAuthorAddresses",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1006
+    },
+    {
+      "name": "kMDItemRecipientAddresses",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1007
+    },
+    {
+      "name": "kMDItemURL",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1008
+    },
+    {
+      "name": "kMDItemLabelIcon",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7",
+        "macos_deprecated": "10.7",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1010
+    },
+    {
+      "name": "kMDItemLabelID",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7",
+        "macos_deprecated": "10.7",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1011
+    },
+    {
+      "name": "kMDItemLabelKind",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7",
+        "macos_deprecated": "10.7",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1012
+    },
+    {
+      "name": "kMDItemLabelUUID",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7",
+        "macos_deprecated": "10.7",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1013
+    },
+    {
+      "name": "kMDItemIsLikelyJunk",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1015
+    },
+    {
+      "name": "kMDItemExecutableArchitectures",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1016
+    },
+    {
+      "name": "kMDItemExecutablePlatform",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1017
+    },
+    {
+      "name": "kMDItemApplicationCategories",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1018
+    },
+    {
+      "name": "kMDItemIsApplicationManaged",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDItem.h",
+      "sdk_line": 1020
+    },
+    {
+      "name": "kMDQueryProgressNotification",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 881,
+      "doc": "@constant kMDQueryProgressNotification The name of the notification sent to indicate changes to the query's results list during the initial gathering phase of a query's execution. Mostly adds will occur during this phase, but removals and changes can also occur, as in any update. This info dictionary parameter of the notification can carry the kMDQueryUpdateChangedItems and kMDQueryUpdateRemovedItems keys. Note that these keys may be have empty arrays for values, or be missing, if there are no changes of that particular type. For performance reasons, added results are not indicated in progress notifications (to avoid the cost of creating the result objects). These notifications are sent out by a query before the kMDQueryDidFinishNotification."
+    },
+    {
+      "name": "kMDQueryDidFinishNotification",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 894,
+      "doc": "@constant kMDQueryDidFinishNotification The name of the notification sent to indicate that the query has finished with the initial result-gathering phase, and may now proceed into the live-update phase (if that option was chosen when the query was executed). This notification often shortly follows after the last progress notification. It is usually not necessary to update any displayed UI in response to this notification, since it doesn't indicate any change in the result list of a query."
+    },
+    {
+      "name": "kMDQueryDidUpdateNotification",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 909,
+      "doc": "@constant kMDQueryDidUpdateNotification The name of the notification sent to indicate changes to the query's results list during the second, live-update, phase of a query's execution. This notification can carry the kMDQueryUpdateAddedItems, kMDQueryUpdateChangedItems, and kMDQueryUpdateRemovedItems keys in the info dictionary parameter of the notification. Note that these keys may be have empty arrays for values, or be missing, if there are no changes of that particular type. These notifications are sent out by a query after the kMDQueryDidUpdateNotification."
+    },
+    {
+      "name": "kMDQueryUpdateAddedItems",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 920,
+      "doc": "@constant kMDQueryUpdateAddedItems The name of the key in a query notification's info dictionary which identifies the list of added results. A result is added if the file contents or some metadata attribute of it is changed, and it now matches the query. Result objects are created for the newly added results, to be put in the list."
+    },
+    {
+      "name": "kMDQueryUpdateChangedItems",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 937,
+      "doc": "@constant kMDQueryUpdateChangedItems The name of the key in a query notification's info dictionary which identifies the list of changed results. A result is changed if the file contents or some metadata attribute of it is changed, but it still matches the query. The list only contains result objects which have previously been created, and does not indicate results which have been changed for which result objects have not been created. [[This is for performance reasons, to avoid creating result objects just to represent a change of a result which has not been looked at, but this semantic may change.]]"
+    },
+    {
+      "name": "kMDQueryUpdateRemovedItems",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 952,
+      "doc": "@constant kMDQueryUpdateRemovedItems The name of the key in a query notification's info dictionary which identifies the list of removed results. A result can be removed if it no longer matches the query. The list only contains result objects which have previously been created, and does not indicate results which have been removed for which result objects have not been created. [[This is for performance reasons, to avoid creating temporary result objects just to represent the deletion of the result, but this semantic may change.]]"
+    },
+    {
+      "name": "kMDQueryResultContentRelevance",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 980,
+      "doc": "@constant kMDQueryResultContentRelevance The name of a query-specific attribute for use in sorting. The relevance of an item is a CFNumberRef with a floating point value. This is the relevance for content searches. The maximum and minimum values for a particular search cannot be determined until all of the results have been returned.  If there are multiple kMDItemTextContent predicates in the query, no relevance is returned. This is an attribute of a result item that is specific to the item in the context of the query. Also, the relevance does not compare the result relative to the other results of a query, but is computed just on the result item itself. Finally, this is only the relevance value for content, not a relevance for the item as a whole. The relevance attribute may not even be computed for an item if the item is found to match the query through evaluation of other attributes of the item than its contents. If the value is not computed, it is treated as an attribute on the item which does not exist (for sorting purposes, for example)."
+    },
+    {
+      "name": "kMDQueryScopeHome",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 1008,
+      "doc": "@constant kMDQueryScopeHome A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to the volume and directory that contains the current user's home directory"
+    },
+    {
+      "name": "kMDQueryScopeComputer",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 1016,
+      "doc": "@constant kMDQueryScopeComputer A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to all locally mounted volumes, plus the user's home directory (which may be on a remote volume)."
+    },
+    {
+      "name": "kMDQueryScopeNetwork",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 1023,
+      "doc": "@constant kMDQueryScopeNetwork A constant, which can be passed in the scopeDirectories array, to specify that the search should include all user mounted remote volumes."
+    },
+    {
+      "name": "kMDQueryScopeAllIndexed",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 1031,
+      "doc": "@constant kMDQueryScopeAllIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to indexed, locally mounted volumes and indexed user mounted remote volumes, plus the user's home directory."
+    },
+    {
+      "name": "kMDQueryScopeComputerIndexed",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 1039,
+      "doc": "@constant kMDQueryScopeComputerIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to indexed, locally mounted volumes, plus the user's home directory (which may be on a remote volume)."
+    },
+    {
+      "name": "kMDQueryScopeNetworkIndexed",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.6"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDQuery.h",
+      "sdk_line": 1046,
+      "doc": "@constant kMDQueryScopeNetworkIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should include indexed user mounted remote volumes."
+    },
+    {
+      "name": "kMDLabelBundleURL",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 208,
+      "doc": "@constant kMDLabelBundleURL @abstract This is the bundle URL for the label. Type is a CFURL. This attribute is read-only. @constant kMDLabelContentChangeDate @abstract This is the date the the label content last changed. Type is a CFDate. This attribute is read-only, but its value will be altered by setting any of the writable attributes described below. @constant kMDLabelDisplayName @abstract This is the localized name of the label. Type is a CFString. @constant kMDLabelIconData @abstract This is the data that should be used to create an icon image source for the label. Pass this data to the ImageIO framework to create a CGImageSourceRef. To reset a label's icon to its default image, set kMDLabelIconData to kCFNull. Type is a CFData. @constant kMDLabelIconUUID @abstract This is the UUID of the icon image source for the label. Labels that share the same icon image source will have the same icon UUID. Type is a CFUUID. This attribute is read-only, but its value may be altered by setting the kMDLabelIconData attribute described above. @constant kMDLabelIsMutuallyExclusiveSetMember @abstract This attribute is true if the label kind specifies a mutually-exclusive set of labels. Type is a CFBoolean. This attribute is read-only. @constant kMDLabelKind @abstract This is the kind string for the label. The label kind is the name of the bundle the label is defined in. Type is a CFString. This attribute is read-only. @constant kMDLabelSetsFinderColor @abstract This attribute is optional and applicable only to labels with \"Public\" visibility. If it is present, then when the label is set on a file the file's Finder color will be set to the specified value (0 - 7). If the label is later removed, the file's Finder color will be reverted either to the color specified by the most-recently-set label with this attribute that remains set on the file, or to 0 (none). Type is a CFNumber. This attribute is ignored for unless the label's visibility is \"Public\". @constant kMDLabelUUID @abstract This is the UUID of the label. Type is a CFUUID. This attribute is read-only. @constant kMDLabelVisibility @abstract This is a constant describing the label's visibility, either \"Public\" (kMDPublicVisibility) or \"Private\" (kMDPrivateVisibility). Type is a CFString. This attribute is read-only."
+    },
+    {
+      "name": "kMDLabelContentChangeDate",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 211
+    },
+    {
+      "name": "kMDLabelDisplayName",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 214
+    },
+    {
+      "name": "kMDLabelIconData",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 217
+    },
+    {
+      "name": "kMDLabelIconUUID",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 220
+    },
+    {
+      "name": "kMDLabelIsMutuallyExclusiveSetMember",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 223
+    },
+    {
+      "name": "kMDLabelKind",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 226
+    },
+    {
+      "name": "kMDLabelSetsFinderColor",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 229
+    },
+    {
+      "name": "kMDLabelUUID",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 232
+    },
+    {
+      "name": "kMDLabelVisibility",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 235
+    },
+    {
+      "name": "kMDLabelKindIsMutuallyExclusiveSetKey",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 247,
+      "doc": "@constant kMDLabelKindIsMutuallyExclusiveSetKey @abstract This key is used in the Info.plist file of a label bundle to specify that the label kind constitutes a mutually exclusive set. The value is a CFBoolean. @constant kMDLabelKindVisibilityKey @abstract This key is used in the Info.plist file of a label bundle to specify the visibility of the labels defined by the bundle. The value is a CFString constant, either \"Public\" (kMDPublicVisibility) or \"Private\" (kMDPrivateVisibility)."
+    },
+    {
+      "name": "kMDLabelKindVisibilityKey",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 250
+    },
+    {
+      "name": "kMDPrivateVisibility",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 253
+    },
+    {
+      "name": "kMDPublicVisibility",
+      "objc_type": "CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 256
+    },
+    {
+      "name": "kMDLabelAddedNotification",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 263,
+      "doc": "@constant kMDLabelAddedNotification @abstract The name of the notification sent when a label has been added. The notification object is the subject MDLabelRef. All label notifications are distributed to processes owned by the same uid that have initialized the Metadata framework label APIs."
+    },
+    {
+      "name": "kMDLabelChangedNotification",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 270,
+      "doc": "@constant kMDLabelChangedNotification @abstract The name of the notification sent when a label has been changed. The notification object is the subject MDLabelRef. The label's new attributes can be retrieved using MDLabelCopyAttribute()."
+    },
+    {
+      "name": "kMDLabelRemovedNotification",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.7"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDLabel.h",
+      "sdk_line": 277,
+      "doc": "@constant kMDLabelRemovedNotification @abstract The name of the notification sent when a label has been deleted. The notification object is the subject MDLabelRef. The label's kMDLabelIconUUID, kMDLabelKind, kMDLabelKindBundleURL and kMDLabelUUID attributes can still be retrieved using MDLabelCopyAttribute(), and the label may still be passed to MDLabelCopyAttributeName()."
+    },
+    {
+      "name": "kMDAttributeDisplayValues",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 71
+    },
+    {
+      "name": "kMDAttributeAllValues",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 75
+    },
+    {
+      "name": "kMDAttributeReadOnlyValues",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 79
+    },
+    {
+      "name": "kMDExporterAvaliable",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 84
+    },
+    {
+      "name": "kMDAttributeName",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 91
+    },
+    {
+      "name": "kMDAttributeType",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 92
+    },
+    {
+      "name": "kMDAttributeMultiValued",
+      "objc_type": "const CFStringRef",
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/Metadata/MDSchema.h",
+      "sdk_line": 93
+    }
+  ],
+  "block_types": {},
+  "typedefs": {
+    "AbsoluteTime": "UnsignedWide",
+    "BOOL": "bool",
+    "Boolean": "unsigned char",
+    "Byte": "UInt8",
+    "ByteCount": "unsigned long",
+    "ByteOffset": "unsigned long",
+    "BytePtr": "UInt8 *",
+    "CharParameter": "short",
+    "Class": "struct objc_class *",
+    "CompTimeValue": "wide",
+    "ConstLogicalAddress": "const void *",
+    "ConstStr15Param": "const unsigned char *",
+    "ConstStr255Param": "const unsigned char *",
+    "ConstStr27Param": "const unsigned char *",
+    "ConstStr31Param": "const unsigned char *",
+    "ConstStr32Param": "const unsigned char *",
+    "ConstStr63Param": "const unsigned char *",
+    "ConstStrFileNameParam": "ConstStr63Param",
+    "ConstStringPtr": "const unsigned char *",
+    "Duration": "SInt32",
+    "FILE": "struct __sFILE",
+    "Fixed": "SInt32",
+    "FixedPoint": "struct FixedPoint",
+    "FixedPtr": "Fixed *",
+    "FixedRect": "struct FixedRect",
+    "Float32": "float",
+    "Float32Point": "struct Float32Point",
+    "Float64": "double",
+    "Float80": "struct Float80",
+    "Float96": "struct Float96",
+    "FourCharCode": "UInt32",
+    "Fract": "SInt32",
+    "FractPtr": "Fract *",
+    "Handle": "Ptr *",
+    "IMP": "void (*)(void)",
+    "ItemCount": "unsigned long",
+    "LangCode": "SInt16",
+    "LogicalAddress": "void *",
+    "MDItemRef": "struct __MDItem *",
+    "MDLabelDomain": "enum MDLabelDomain",
+    "MDLabelRef": "struct __MDLabel *",
+    "MDQueryBatchingParams": "struct MDQueryBatchingParams",
+    "MDQueryCreateResultFunction": "const void *(*)(MDQueryRef, MDItemRef, void *)",
+    "MDQueryCreateValueFunction": "const void *(*)(MDQueryRef, CFStringRef, CFTypeRef, void *)",
+    "MDQueryOptionFlags": "enum MDQueryOptionFlags",
+    "MDQueryRef": "struct __MDQuery *",
+    "MDQuerySortComparatorFunction": "CFComparisonResult (*)(const CFTypeRef *, const CFTypeRef *, void *)",
+    "MDQuerySortOptionFlags": "enum MDQuerySortOptionFlags",
+    "NSInteger": "long",
+    "NSUInteger": "unsigned long",
+    "NumVersion": "struct NumVersion",
+    "NumVersionVariant": "union NumVersionVariant",
+    "NumVersionVariantHandle": "NumVersionVariantPtr *",
+    "NumVersionVariantPtr": "NumVersionVariant *",
+    "OSErr": "SInt16",
+    "OSStatus": "SInt32",
+    "OSType": "FourCharCode",
+    "OSTypePtr": "OSType *",
+    "OptionBits": "UInt32",
+    "PBVersion": "UInt32",
+    "PRefCon": "void *",
+    "PhysicalAddress": "void *",
+    "Point": "struct Point",
+    "PointPtr": "Point *",
+    "ProcHandle": "ProcPtr *",
+    "ProcPtr": "long (*)(void)",
+    "ProcessSerialNumber": "struct ProcessSerialNumber",
+    "ProcessSerialNumberPtr": "ProcessSerialNumber *",
+    "Ptr": "char *",
+    "Rect": "struct Rect",
+    "RectPtr": "Rect *",
+    "RegionCode": "SInt16",
+    "Register68kProcPtr": "void (*)(void)",
+    "ResType": "FourCharCode",
+    "ResTypePtr": "ResType *",
+    "SEL": "struct objc_selector *",
+    "SInt16": "short",
+    "SInt32": "int",
+    "SInt64": "long long",
+    "SInt8": "signed char",
+    "SRefCon": "void *",
+    "ScriptCode": "SInt16",
+    "ShortFixed": "short",
+    "ShortFixedPtr": "ShortFixed *",
+    "SignedByte": "SInt8",
+    "Size": "long",
+    "Str15": "unsigned char[16]",
+    "Str255": "unsigned char[256]",
+    "Str27": "unsigned char[28]",
+    "Str31": "unsigned char[32]",
+    "Str32": "unsigned char[33]",
+    "Str32Field": "unsigned char[34]",
+    "Str63": "unsigned char[64]",
+    "StrFileName": "Str63",
+    "StringHandle": "StringPtr *",
+    "StringPtr": "unsigned char *",
+    "Style": "unsigned char",
+    "StyleField": "Style",
+    "StyleParameter": "short",
+    "TimeBase": "struct TimeBaseRecord *",
+    "TimeRecord": "struct TimeRecord",
+    "TimeScale": "SInt32",
+    "TimeValue": "SInt32",
+    "TimeValue64": "SInt64",
+    "UInt16": "unsigned short",
+    "UInt32": "unsigned int",
+    "UInt64": "unsigned long long",
+    "UInt8": "unsigned char",
+    "URefCon": "void *",
+    "UTF16Char": "UInt16",
+    "UTF32Char": "UInt32",
+    "UTF8Char": "UInt8",
+    "UniChar": "UInt16",
+    "UniCharCount": "unsigned long",
+    "UniCharCountPtr": "UniCharCount *",
+    "UniCharPtr": "UniChar *",
+    "UnicodeScalarValue": "UInt32",
+    "UniversalProcHandle": "UniversalProcPtr *",
+    "UniversalProcPtr": "ProcPtr",
+    "UnsignedFixed": "UInt32",
+    "UnsignedFixedPtr": "UnsignedFixed *",
+    "UnsignedWide": "struct UnsignedWide",
+    "UnsignedWidePtr": "UnsignedWide *",
+    "VHSelect": "SInt8",
+    "VersRec": "struct VersRec",
+    "VersRecHndl": "VersRecPtr *",
+    "VersRecPtr": "VersRec *",
+    "WidePtr": "wide *",
+    "_RuneCharClass": "struct _RuneCharClass",
+    "_RuneEntry": "struct _RuneEntry",
+    "_RuneLocale": "struct _RuneLocale",
+    "_RuneRange": "struct _RuneRange",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_nl_item": "int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wctrans_t": "int",
+    "__darwin_wctype_t": "__uint32_t",
+    "__darwin_wint_t": "int",
+    "__gnuc_va_list": "__builtin_va_list",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "acl_entry_id_t": "enum acl_entry_id_t",
+    "acl_entry_t": "struct _acl_entry *",
+    "acl_flag_t": "enum acl_flag_t",
+    "acl_flagset_t": "struct _acl_flagset *",
+    "acl_perm_t": "enum acl_perm_t",
+    "acl_permset_mask_t": "u_int64_t",
+    "acl_permset_t": "struct _acl_permset *",
+    "acl_t": "struct _acl *",
+    "acl_tag_t": "enum acl_tag_t",
+    "acl_type_t": "enum acl_type_t",
+    "alarm_type_t": "int",
+    "audit_token_t": "struct audit_token_t",
+    "blkcnt_t": "__darwin_blkcnt_t",
+    "blksize_t": "__darwin_blksize_t",
+    "boolean_t": "int",
+    "caddr_t": "char *",
+    "clock_attr_t": "int *",
+    "clock_flavor_t": "int",
+    "clock_id_t": "int",
+    "clock_res_t": "int",
+    "clock_t": "__darwin_clock_t",
+    "clockid_t": "enum clockid_t",
+    "cpu_subtype_t": "integer_t",
+    "cpu_threadtype_t": "integer_t",
+    "cpu_type_t": "integer_t",
+    "ct_rune_t": "__darwin_ct_rune_t",
+    "daddr_t": "int32_t",
+    "dev_t": "__darwin_dev_t",
+    "dispatch_autorelease_frequency_t": "enum dispatch_autorelease_frequency_t",
+    "dispatch_block_flags_t": "enum dispatch_block_flags_t",
+    "dispatch_block_t": "void (^)(void)",
+    "dispatch_data_applier_t": "bool (^)(dispatch_data_t _Nonnull, size_t, const void * _Nonnull, size_t)",
+    "dispatch_data_t": "NSObject\u003cOS_dispatch_data\u003e *",
+    "dispatch_fd_t": "int",
+    "dispatch_function_t": "void (*)(void * _Nullable)",
+    "dispatch_group_t": "NSObject\u003cOS_dispatch_group\u003e *",
+    "dispatch_io_close_flags_t": "unsigned long",
+    "dispatch_io_handler_t": "void (^)(bool, dispatch_data_t _Nullable, int)",
+    "dispatch_io_interval_flags_t": "unsigned long",
+    "dispatch_io_t": "NSObject\u003cOS_dispatch_io\u003e *",
+    "dispatch_io_type_t": "unsigned long",
+    "dispatch_object_t": "NSObject\u003cOS_dispatch_object\u003e *",
+    "dispatch_once_t": "intptr_t",
+    "dispatch_qos_class_t": "qos_class_t",
+    "dispatch_queue_attr_t": "NSObject\u003cOS_dispatch_queue_attr\u003e *",
+    "dispatch_queue_concurrent_t": "NSObject\u003cOS_dispatch_queue_concurrent\u003e *",
+    "dispatch_queue_global_t": "NSObject\u003cOS_dispatch_queue_global\u003e *",
+    "dispatch_queue_main_t": "NSObject\u003cOS_dispatch_queue_main\u003e *",
+    "dispatch_queue_priority_t": "long",
+    "dispatch_queue_serial_executor_t": "NSObject\u003cOS_dispatch_queue_serial_executor\u003e *",
+    "dispatch_queue_serial_t": "NSObject\u003cOS_dispatch_queue_serial\u003e *",
+    "dispatch_queue_t": "NSObject\u003cOS_dispatch_queue\u003e *",
+    "dispatch_semaphore_t": "NSObject\u003cOS_dispatch_semaphore\u003e *",
+    "dispatch_source_mach_recv_flags_t": "unsigned long",
+    "dispatch_source_mach_send_flags_t": "unsigned long",
+    "dispatch_source_memorypressure_flags_t": "unsigned long",
+    "dispatch_source_proc_flags_t": "unsigned long",
+    "dispatch_source_t": "NSObject\u003cOS_dispatch_source\u003e *",
+    "dispatch_source_timer_flags_t": "unsigned long",
+    "dispatch_source_type_t": "const struct dispatch_source_type_s *",
+    "dispatch_source_vnode_flags_t": "unsigned long",
+    "dispatch_time_t": "uint64_t",
+    "dispatch_workloop_t": "NSObject\u003cOS_dispatch_workloop\u003e *",
+    "div_t": "struct div_t",
+    "double_t": "double",
+    "errno_t": "int",
+    "extended80": "Float80",
+    "extended96": "Float96",
+    "fattributiontag_t": "struct fattributiontag",
+    "fchecklv_t": "struct fchecklv",
+    "fd_mask": "__int32_t",
+    "fd_set": "struct fd_set",
+    "fgetsigsinfo_t": "struct fgetsigsinfo",
+    "filesec_property_t": "enum filesec_property_t",
+    "filesec_t": "struct _filesec *",
+    "fixpt_t": "u_int32_t",
+    "float_t": "float",
+    "fpos_t": "__darwin_off_t",
+    "fpunchhole_t": "struct fpunchhole",
+    "fsblkcnt_t": "__darwin_fsblkcnt_t",
+    "fsfilcnt_t": "__darwin_fsfilcnt_t",
+    "fsignatures_t": "struct fsignatures",
+    "fspecread_t": "struct fspecread",
+    "fstore_t": "struct fstore",
+    "fsupplement_t": "struct fsupplement",
+    "ftrimactivefile_t": "struct ftrimactivefile",
+    "gid_t": "__darwin_gid_t",
+    "guid_t": "union guid_t",
+    "id": "struct objc_object *",
+    "id_t": "__darwin_id_t",
+    "idtype_t": "enum idtype_t",
+    "imaxdiv_t": "struct imaxdiv_t",
+    "in_addr_t": "__uint32_t",
+    "in_port_t": "__uint16_t",
+    "ino64_t": "__darwin_ino64_t",
+    "ino_t": "__darwin_ino_t",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "integer_t": "int",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "jmp_buf": "int[48]",
+    "kauth_ace_rights_t": "u_int32_t",
+    "kauth_ace_t": "struct kauth_ace *",
+    "kauth_acl_t": "struct kauth_acl *",
+    "kauth_filesec_t": "struct kauth_filesec *",
+    "kern_return_t": "int",
+    "key_t": "__int32_t",
+    "ldiv_t": "struct ldiv_t",
+    "lldiv_t": "struct lldiv_t",
+    "locale_t": "struct _xlocale *",
+    "mach_msg_audit_trailer_t": "struct mach_msg_audit_trailer_t",
+    "mach_msg_base_t": "struct mach_msg_base_t",
+    "mach_msg_bits_t": "unsigned int",
+    "mach_msg_body_t": "struct mach_msg_body_t",
+    "mach_msg_context_trailer_t": "struct mach_msg_context_trailer_t",
+    "mach_msg_copy_options_t": "unsigned int",
+    "mach_msg_descriptor_t": "union mach_msg_descriptor_t",
+    "mach_msg_descriptor_type_t": "unsigned int",
+    "mach_msg_empty_rcv_t": "struct mach_msg_empty_rcv_t",
+    "mach_msg_empty_send_t": "struct mach_msg_empty_send_t",
+    "mach_msg_empty_t": "union mach_msg_empty_t",
+    "mach_msg_filter_id": "int",
+    "mach_msg_format_0_trailer_t": "mach_msg_security_trailer_t",
+    "mach_msg_guard_flags_t": "unsigned int",
+    "mach_msg_guarded_port_descriptor32_t": "struct mach_msg_guarded_port_descriptor32_t",
+    "mach_msg_guarded_port_descriptor64_t": "struct mach_msg_guarded_port_descriptor64_t",
+    "mach_msg_guarded_port_descriptor_t": "struct mach_msg_guarded_port_descriptor_t",
+    "mach_msg_header_t": "struct mach_msg_header_t",
+    "mach_msg_id_t": "integer_t",
+    "mach_msg_mac_trailer_t": "struct mach_msg_mac_trailer_t",
+    "mach_msg_max_trailer_t": "mach_msg_mac_trailer_t",
+    "mach_msg_ool_descriptor32_t": "struct mach_msg_ool_descriptor32_t",
+    "mach_msg_ool_descriptor64_t": "struct mach_msg_ool_descriptor64_t",
+    "mach_msg_ool_descriptor_t": "struct mach_msg_ool_descriptor_t",
+    "mach_msg_ool_ports_descriptor32_t": "struct mach_msg_ool_ports_descriptor32_t",
+    "mach_msg_ool_ports_descriptor64_t": "struct mach_msg_ool_ports_descriptor64_t",
+    "mach_msg_ool_ports_descriptor_t": "struct mach_msg_ool_ports_descriptor_t",
+    "mach_msg_option_t": "integer_t",
+    "mach_msg_options_t": "integer_t",
+    "mach_msg_port_descriptor_t": "struct mach_msg_port_descriptor_t",
+    "mach_msg_priority_t": "unsigned int",
+    "mach_msg_return_t": "kern_return_t",
+    "mach_msg_security_trailer_t": "struct mach_msg_security_trailer_t",
+    "mach_msg_seqno_trailer_t": "struct mach_msg_seqno_trailer_t",
+    "mach_msg_size_t": "natural_t",
+    "mach_msg_timeout_t": "natural_t",
+    "mach_msg_trailer_info_t": "char *",
+    "mach_msg_trailer_size_t": "unsigned int",
+    "mach_msg_trailer_t": "struct mach_msg_trailer_t",
+    "mach_msg_trailer_type_t": "unsigned int",
+    "mach_msg_type_descriptor_t": "struct mach_msg_type_descriptor_t",
+    "mach_msg_type_name_t": "unsigned int",
+    "mach_msg_type_number_t": "natural_t",
+    "mach_msg_type_size_t": "natural_t",
+    "mach_port_array_t": "mach_port_t *",
+    "mach_port_context_t": "vm_offset_t",
+    "mach_port_delta_t": "integer_t",
+    "mach_port_flavor_t": "int",
+    "mach_port_guard_info_t": "struct mach_port_guard_info",
+    "mach_port_info_ext_t": "struct mach_port_info_ext",
+    "mach_port_info_t": "integer_t *",
+    "mach_port_limits_t": "struct mach_port_limits",
+    "mach_port_mscount_t": "natural_t",
+    "mach_port_msgcount_t": "natural_t",
+    "mach_port_name_array_t": "mach_port_name_t *",
+    "mach_port_name_t": "natural_t",
+    "mach_port_options_ptr_t": "mach_port_options_t *",
+    "mach_port_options_t": "struct mach_port_options",
+    "mach_port_qos_t": "struct mach_port_qos",
+    "mach_port_right_t": "natural_t",
+    "mach_port_rights_t": "natural_t",
+    "mach_port_seqno_t": "natural_t",
+    "mach_port_srights_t": "unsigned int",
+    "mach_port_status_t": "struct mach_port_status",
+    "mach_port_t": "__darwin_mach_port_t",
+    "mach_port_type_array_t": "mach_port_type_t *",
+    "mach_port_type_t": "natural_t",
+    "mach_port_urefs_t": "natural_t",
+    "mach_service_port_info_data_t": "struct mach_service_port_info",
+    "mach_service_port_info_t": "struct mach_service_port_info *",
+    "mach_timespec_t": "struct mach_timespec",
+    "mach_vm_address_t": "uint64_t",
+    "mach_vm_offset_t": "uint64_t",
+    "mach_vm_size_t": "uint64_t",
+    "malloc_type_id_t": "unsigned long long",
+    "malloc_zone_t": "struct _malloc_zone_t",
+    "max_align_t": "long double",
+    "mcontext_t": "struct __darwin_mcontext64 *",
+    "mode_t": "__darwin_mode_t",
+    "mpo_flags_t": "enum mpo_flags_t",
+    "msg_labels_t": "struct msg_labels_t",
+    "natural_t": "__darwin_natural_t",
+    "nlink_t": "__uint16_t",
+    "ntsid_t": "struct ntsid_t",
+    "objc_objectptr_t": "const void *",
+    "objc_zone_t": "struct _malloc_zone_t *",
+    "off_t": "__darwin_off_t",
+    "os_block_t": "void (^)(void)",
+    "os_clockid_t": "enum os_clockid_t",
+    "os_function_t": "void (*)(void * _Nullable)",
+    "os_workgroup_attr_s": "struct os_workgroup_attr_opaque_s",
+    "os_workgroup_attr_t": "struct os_workgroup_attr_opaque_s *",
+    "os_workgroup_index": "uint32_t",
+    "os_workgroup_interval_data_s": "struct os_workgroup_interval_data_opaque_s",
+    "os_workgroup_interval_data_t": "struct os_workgroup_interval_data_opaque_s *",
+    "os_workgroup_interval_t": "OS_os_workgroup\u003cOS_os_workgroup_interval\u003e *",
+    "os_workgroup_join_token_s": "struct os_workgroup_join_token_opaque_s",
+    "os_workgroup_join_token_t": "struct os_workgroup_join_token_opaque_s *",
+    "os_workgroup_mpt_attr_s": "struct os_workgroup_max_parallel_threads_attr_s",
+    "os_workgroup_mpt_attr_t": "struct os_workgroup_max_parallel_threads_attr_s *",
+    "os_workgroup_parallel_t": "OS_os_workgroup\u003cOS_os_workgroup_parallel\u003e *",
+    "os_workgroup_t": "OS_os_workgroup *",
+    "os_workgroup_working_arena_destructor_t": "void (*)(void * _Nullable)",
+    "pid_t": "__darwin_pid_t",
+    "pthread_attr_t": "__darwin_pthread_attr_t",
+    "pthread_cond_t": "__darwin_pthread_cond_t",
+    "pthread_condattr_t": "__darwin_pthread_condattr_t",
+    "pthread_key_t": "__darwin_pthread_key_t",
+    "pthread_mutex_t": "__darwin_pthread_mutex_t",
+    "pthread_mutexattr_t": "__darwin_pthread_mutexattr_t",
+    "pthread_once_t": "__darwin_pthread_once_t",
+    "pthread_rwlock_t": "__darwin_pthread_rwlock_t",
+    "pthread_rwlockattr_t": "__darwin_pthread_rwlockattr_t",
+    "pthread_t": "__darwin_pthread_t",
+    "ptrauth_extra_data_t": "unsigned long",
+    "ptrauth_generic_signature_t": "unsigned long",
+    "ptrauth_key": "enum ptrauth_key",
+    "ptrdiff_t": "long",
+    "qaddr_t": "quad_t *",
+    "qos_class_t": "enum qos_class_t",
+    "quad_t": "int64_t",
+    "register_t": "int64_t",
+    "rlim_t": "__uint64_t",
+    "rsize_t": "__darwin_size_t",
+    "rune_t": "__darwin_rune_t",
+    "rusage_info_current": "struct rusage_info_v6",
+    "rusage_info_t": "void *",
+    "security_token_t": "struct security_token_t",
+    "segsz_t": "int32_t",
+    "sig_atomic_t": "int",
+    "sig_t": "void (*)(int)",
+    "siginfo_t": "struct __siginfo",
+    "sigjmp_buf": "int[49]",
+    "sigset_t": "__darwin_sigset_t",
+    "size_t": "__darwin_size_t",
+    "sleep_type_t": "int",
+    "ssize_t": "__darwin_ssize_t",
+    "stack_t": "struct __darwin_sigaltstack",
+    "suseconds_t": "__darwin_suseconds_t",
+    "swblk_t": "int32_t",
+    "syscall_arg_t": "u_int64_t",
+    "time_t": "__darwin_time_t",
+    "time_value_t": "struct time_value",
+    "u_char": "unsigned char",
+    "u_int": "unsigned int",
+    "u_int16_t": "unsigned short",
+    "u_int32_t": "unsigned int",
+    "u_int64_t": "unsigned long long",
+    "u_int8_t": "unsigned char",
+    "u_long": "unsigned long",
+    "u_quad_t": "u_int64_t",
+    "u_short": "unsigned short",
+    "ucontext_t": "struct __darwin_ucontext",
+    "uid_t": "__darwin_uid_t",
+    "uint": "unsigned int",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long",
+    "useconds_t": "__darwin_useconds_t",
+    "user_addr_t": "u_int64_t",
+    "user_long_t": "int64_t",
+    "user_off_t": "int64_t",
+    "user_size_t": "u_int64_t",
+    "user_ssize_t": "int64_t",
+    "user_time_t": "int64_t",
+    "user_ulong_t": "u_int64_t",
+    "ushort": "unsigned short",
+    "uuid_t": "__darwin_uuid_t",
+    "va_list": "__darwin_va_list",
+    "vm32_address_t": "uint32_t",
+    "vm32_offset_t": "uint32_t",
+    "vm32_size_t": "uint32_t",
+    "vm_map_address_t": "uint64_t",
+    "vm_map_offset_t": "uint64_t",
+    "vm_map_size_t": "uint64_t",
+    "vm_offset_t": "uintptr_t",
+    "vm_size_t": "uintptr_t",
+    "wchar_t": "__darwin_wchar_t",
+    "wide": "struct wide",
+    "wint_t": "__darwin_wint_t"
+  },
+  "parent_framework": "CoreServices"
+}

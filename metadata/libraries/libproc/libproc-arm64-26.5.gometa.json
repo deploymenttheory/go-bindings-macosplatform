@@ -1,0 +1,1304 @@
+{
+  "framework": "libproc",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {
+    "clockid_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "_CLOCK_REALTIME",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW_APPROX",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW_APPROX",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_PROCESS_CPUTIME_ID",
+          "value": "12",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_THREAD_CPUTIME_ID",
+          "value": "16",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "_time.h",
+      "sdk_line": 156
+    },
+    "cryptex_auth_type_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "CRYPTEX1_AUTH_ENV_GENERIC",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "CRYPTEX1_AUTH_ENV_GENERIC_SUPPLEMENTAL",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "CRYPTEX_AUTH_PDI_NONCE",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "CRYPTEX_AUTH_MOBILE_ASSET",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "CRYPTEX_AUTH_MAX",
+          "value": "9",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "mount.h",
+      "sdk_line": 188
+    },
+    "graftdmg_type_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "GRAFTDMG_CRYPTEX_BOOT",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "GRAFTDMG_CRYPTEX_PREBOOT",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "GRAFTDMG_CRYPTEX_DOWNLEVEL",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "GRAFTDMG_CRYPTEX_AUTH_ENV_GENERIC",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "GRAFTDMG_CRYPTEX_PDI_NONCE",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "GRAFTDMG_CRYPTEX_EFFECTIVE_AP",
+          "value": "7",
+          "availability": {}
+        },
+        {
+          "name": "GRAFTDMG_CRYPTEX_MOBILE_ASSET",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "GRAFTDMG_CRYPTEX_MAX",
+          "value": "9",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "mount.h",
+      "sdk_line": 188
+    },
+    "mpo_flags_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "MPO_PORT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "MPO_SERVICE_PORT",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "MPO_REPLY_PORT",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "MPO_WEAK_REPLY_PORT",
+          "value": "16384",
+          "availability": {}
+        },
+        {
+          "name": "MPO_NOTIFICATION_PORT",
+          "value": "17408",
+          "availability": {}
+        },
+        {
+          "name": "MPO_EXCEPTION_PORT",
+          "value": "32768",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT_WITH_PORT_ARRAY",
+          "value": "65536",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "port.h",
+      "sdk_line": 1102,
+      "is_bitmask": true,
+      "is_extensible": true
+    }
+  },
+  "structs": {},
+  "functions": [
+    {
+      "name": "proc_listpidspath",
+      "args": [
+        {
+          "name": "type",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "typeinfo",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "path",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "pathflags",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 85,
+      "doc": "@function proc_listpidspath @discussion A function which will search through the current processes looking for open file references which match a specified path or volume. @param type types of processes to be searched (see proc_listpids) @param typeinfo adjunct information for type @param path file or volume path @param pathflags flags to control which files should be considered during the process search. @param buffer a C array of int-sized values to be filled with process identifiers that hold an open file reference matching the specified path or volume.  Pass NULL to obtain the minimum buffer size needed to hold the currently active processes. @param buffersize the size (in bytes) of the provided buffer. @result the number of bytes of data returned in the provided buffer; -1 if an error was encountered;"
+    },
+    {
+      "name": "proc_listpids",
+      "args": [
+        {
+          "name": "type",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "typeinfo",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 92
+    },
+    {
+      "name": "proc_listallpids",
+      "args": [
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 93
+    },
+    {
+      "name": "proc_listpgrppids",
+      "args": [
+        {
+          "name": "pgrpid",
+          "objc_type": "pid_t"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 94
+    },
+    {
+      "name": "proc_listchildpids",
+      "args": [
+        {
+          "name": "ppid",
+          "objc_type": "pid_t"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 95
+    },
+    {
+      "name": "proc_pidinfo",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "int"
+        },
+        {
+          "name": "flavor",
+          "objc_type": "int"
+        },
+        {
+          "name": "arg",
+          "objc_type": "uint64_t"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 96
+    },
+    {
+      "name": "proc_pidfdinfo",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "int"
+        },
+        {
+          "name": "fd",
+          "objc_type": "int"
+        },
+        {
+          "name": "flavor",
+          "objc_type": "int"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 97
+    },
+    {
+      "name": "proc_pidfileportinfo",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "int"
+        },
+        {
+          "name": "fileport",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "flavor",
+          "objc_type": "int"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 98
+    },
+    {
+      "name": "proc_name",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "int"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 99
+    },
+    {
+      "name": "proc_regionfilename",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "int"
+        },
+        {
+          "name": "address",
+          "objc_type": "uint64_t"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 100
+    },
+    {
+      "name": "proc_kmsgbuf",
+      "args": [
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 101
+    },
+    {
+      "name": "proc_pidpath",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "int"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 102
+    },
+    {
+      "name": "proc_pidpath_audittoken",
+      "args": [
+        {
+          "name": "audittoken",
+          "objc_type": "audit_token_t *"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {
+        "macos_introduced": "11.0"
+      },
+      "sdk_file": "libproc.h",
+      "sdk_line": 103
+    },
+    {
+      "name": "proc_libversion",
+      "args": [
+        {
+          "name": "major",
+          "objc_type": "int *"
+        },
+        {
+          "name": "minor",
+          "objc_type": "int *"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {
+        "macos_introduced": "11.0"
+      },
+      "sdk_file": "libproc.h",
+      "sdk_line": 104
+    },
+    {
+      "name": "proc_pid_rusage",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "int"
+        },
+        {
+          "name": "flavor",
+          "objc_type": "int"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "rusage_info_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 111
+    },
+    {
+      "name": "proc_setpcontrol",
+      "args": [
+        {
+          "name": "control",
+          "objc_type": "const int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 122
+    },
+    {
+      "name": "proc_setpcontrol",
+      "args": [
+        {
+          "name": "control",
+          "objc_type": "const int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 123
+    },
+    {
+      "name": "proc_track_dirty",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "pid_t"
+        },
+        {
+          "name": "flags",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 125
+    },
+    {
+      "name": "proc_set_dirty",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "pid_t"
+        },
+        {
+          "name": "dirty",
+          "objc_type": "_Bool"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 126
+    },
+    {
+      "name": "proc_get_dirty",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "pid_t"
+        },
+        {
+          "name": "flags",
+          "objc_type": "uint32_t *"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 127
+    },
+    {
+      "name": "proc_clear_dirty",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "pid_t"
+        },
+        {
+          "name": "flags",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 128
+    },
+    {
+      "name": "proc_terminate",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "pid_t"
+        },
+        {
+          "name": "sig",
+          "objc_type": "int *"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 130
+    },
+    {
+      "name": "proc_terminate_all_rsr",
+      "args": [
+        {
+          "name": "sig",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 131
+    },
+    {
+      "name": "proc_signal_with_audittoken",
+      "args": [
+        {
+          "name": "audittoken",
+          "objc_type": "audit_token_t *"
+        },
+        {
+          "name": "sig",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 132
+    },
+    {
+      "name": "proc_terminate_with_audittoken",
+      "args": [
+        {
+          "name": "audittoken",
+          "objc_type": "audit_token_t *"
+        },
+        {
+          "name": "sig",
+          "objc_type": "int *"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 133
+    },
+    {
+      "name": "proc_signal_delegate",
+      "args": [
+        {
+          "name": "instigator",
+          "objc_type": "audit_token_t"
+        },
+        {
+          "name": "target",
+          "objc_type": "audit_token_t"
+        },
+        {
+          "name": "sig",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 134
+    },
+    {
+      "name": "proc_terminate_delegate",
+      "args": [
+        {
+          "name": "instigator",
+          "objc_type": "audit_token_t"
+        },
+        {
+          "name": "target",
+          "objc_type": "audit_token_t"
+        },
+        {
+          "name": "sig",
+          "objc_type": "int *"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 135
+    },
+    {
+      "name": "proc_set_no_smt",
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {
+        "macos_introduced": "11.0"
+      },
+      "sdk_file": "libproc.h",
+      "sdk_line": 144
+    },
+    {
+      "name": "proc_setthread_no_smt",
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {
+        "macos_introduced": "11.0"
+      },
+      "sdk_file": "libproc.h",
+      "sdk_line": 147
+    },
+    {
+      "name": "proc_set_csm",
+      "args": [
+        {
+          "name": "flags",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {
+        "macos_introduced": "11.0"
+      },
+      "sdk_file": "libproc.h",
+      "sdk_line": 155
+    },
+    {
+      "name": "proc_setthread_csm",
+      "args": [
+        {
+          "name": "flags",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {
+        "macos_introduced": "11.0"
+      },
+      "sdk_file": "libproc.h",
+      "sdk_line": 158
+    },
+    {
+      "name": "proc_udata_info",
+      "args": [
+        {
+          "name": "pid",
+          "objc_type": "int"
+        },
+        {
+          "name": "flavor",
+          "objc_type": "int"
+        },
+        {
+          "name": "buffer",
+          "objc_type": "void *"
+        },
+        {
+          "name": "buffersize",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "libproc.h",
+      "sdk_line": 169
+    }
+  ],
+  "externs": null,
+  "block_types": {},
+  "typedefs": {
+    "Class": "Class",
+    "SEL": "SEL *",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_nl_item": "int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wctrans_t": "int",
+    "__darwin_wctype_t": "__uint32_t",
+    "__darwin_wint_t": "int",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "attrgroup_t": "u_int32_t",
+    "attribute_set_t": "struct attribute_set",
+    "attrreference_t": "struct attrreference",
+    "au_asflgs_t": "u_int64_t",
+    "au_asid_t": "pid_t",
+    "au_class_t": "u_int32_t",
+    "au_ctlmode_t": "unsigned char",
+    "au_emod_t": "u_int16_t",
+    "au_evclass_map_t": "struct au_evclass_map",
+    "au_event_t": "u_int16_t",
+    "au_expire_after_t": "struct au_expire_after",
+    "au_fstat_t": "struct audit_fstat",
+    "au_id_t": "uid_t",
+    "au_mask_t": "struct au_mask",
+    "au_qctrl_t": "struct au_qctrl",
+    "au_session_t": "struct au_session",
+    "au_stat_t": "struct audit_stat",
+    "au_tid_addr_t": "struct au_tid_addr",
+    "au_tid_t": "struct au_tid",
+    "audit_token_t": "struct audit_token_t",
+    "auditinfo_addr_t": "struct auditinfo_addr",
+    "auditinfo_t": "struct auditinfo",
+    "auditpinfo_addr_t": "struct auditpinfo_addr",
+    "auditpinfo_t": "struct auditpinfo",
+    "blkcnt_t": "__darwin_blkcnt_t",
+    "blksize_t": "__darwin_blksize_t",
+    "boolean_t": "int",
+    "caddr_t": "char *",
+    "clock_t": "__darwin_clock_t",
+    "clockid_t": "enum clockid_t",
+    "cpu_subtype_t": "integer_t",
+    "cpu_threadtype_t": "integer_t",
+    "cpu_type_t": "integer_t",
+    "cryptex_auth_type_t": "enum cryptex_auth_type_t",
+    "daddr_t": "int32_t",
+    "dev_t": "__darwin_dev_t",
+    "errno_t": "int",
+    "extentrecord": "struct diskextent[8]",
+    "fd_mask": "__int32_t",
+    "fd_set": "struct fd_set",
+    "fhandle_t": "struct fhandle",
+    "filesec_t": "struct _filesec *",
+    "fixpt_t": "u_int32_t",
+    "fsblkcnt_t": "__darwin_fsblkcnt_t",
+    "fsfilcnt_t": "__darwin_fsfilcnt_t",
+    "fsfile_type_t": "u_int32_t",
+    "fsid_t": "struct fsid",
+    "fsobj_id_t": "struct fsobj_id",
+    "fsobj_tag_t": "u_int32_t",
+    "fsobj_type_t": "u_int32_t",
+    "fsvolid_t": "u_int32_t",
+    "gid_t": "__darwin_gid_t",
+    "graftdmg_args_un": "union graft_args",
+    "graftdmg_type_t": "enum graftdmg_type_t",
+    "id": "id",
+    "id_t": "__darwin_id_t",
+    "in6_addr_t": "struct in6_addr",
+    "in_addr_t": "__uint32_t",
+    "in_port_t": "__uint16_t",
+    "ino64_t": "__darwin_ino64_t",
+    "ino_t": "__darwin_ino_t",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "integer_t": "int",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "kauth_cred_t": "struct ucred *",
+    "kern_return_t": "int",
+    "key_t": "__int32_t",
+    "mach_msg_audit_trailer_t": "struct mach_msg_audit_trailer_t",
+    "mach_msg_base_t": "struct mach_msg_base_t",
+    "mach_msg_bits_t": "unsigned int",
+    "mach_msg_body_t": "struct mach_msg_body_t",
+    "mach_msg_context_trailer_t": "struct mach_msg_context_trailer_t",
+    "mach_msg_copy_options_t": "unsigned int",
+    "mach_msg_descriptor_t": "union mach_msg_descriptor_t",
+    "mach_msg_descriptor_type_t": "unsigned int",
+    "mach_msg_empty_rcv_t": "struct mach_msg_empty_rcv_t",
+    "mach_msg_empty_send_t": "struct mach_msg_empty_send_t",
+    "mach_msg_empty_t": "union mach_msg_empty_t",
+    "mach_msg_filter_id": "int",
+    "mach_msg_format_0_trailer_t": "mach_msg_security_trailer_t",
+    "mach_msg_guard_flags_t": "unsigned int",
+    "mach_msg_guarded_port_descriptor32_t": "struct mach_msg_guarded_port_descriptor32_t",
+    "mach_msg_guarded_port_descriptor64_t": "struct mach_msg_guarded_port_descriptor64_t",
+    "mach_msg_guarded_port_descriptor_t": "struct mach_msg_guarded_port_descriptor_t",
+    "mach_msg_header_t": "struct mach_msg_header_t",
+    "mach_msg_id_t": "integer_t",
+    "mach_msg_mac_trailer_t": "struct mach_msg_mac_trailer_t",
+    "mach_msg_max_trailer_t": "mach_msg_mac_trailer_t",
+    "mach_msg_ool_descriptor32_t": "struct mach_msg_ool_descriptor32_t",
+    "mach_msg_ool_descriptor64_t": "struct mach_msg_ool_descriptor64_t",
+    "mach_msg_ool_descriptor_t": "struct mach_msg_ool_descriptor_t",
+    "mach_msg_ool_ports_descriptor32_t": "struct mach_msg_ool_ports_descriptor32_t",
+    "mach_msg_ool_ports_descriptor64_t": "struct mach_msg_ool_ports_descriptor64_t",
+    "mach_msg_ool_ports_descriptor_t": "struct mach_msg_ool_ports_descriptor_t",
+    "mach_msg_option_t": "integer_t",
+    "mach_msg_options_t": "integer_t",
+    "mach_msg_port_descriptor_t": "struct mach_msg_port_descriptor_t",
+    "mach_msg_priority_t": "unsigned int",
+    "mach_msg_return_t": "kern_return_t",
+    "mach_msg_security_trailer_t": "struct mach_msg_security_trailer_t",
+    "mach_msg_seqno_trailer_t": "struct mach_msg_seqno_trailer_t",
+    "mach_msg_size_t": "natural_t",
+    "mach_msg_timeout_t": "natural_t",
+    "mach_msg_trailer_info_t": "char *",
+    "mach_msg_trailer_size_t": "unsigned int",
+    "mach_msg_trailer_t": "struct mach_msg_trailer_t",
+    "mach_msg_trailer_type_t": "unsigned int",
+    "mach_msg_type_descriptor_t": "struct mach_msg_type_descriptor_t",
+    "mach_msg_type_name_t": "unsigned int",
+    "mach_msg_type_number_t": "natural_t",
+    "mach_msg_type_size_t": "natural_t",
+    "mach_port_array_t": "mach_port_t *",
+    "mach_port_context_t": "vm_offset_t",
+    "mach_port_delta_t": "integer_t",
+    "mach_port_flavor_t": "int",
+    "mach_port_guard_info_t": "struct mach_port_guard_info",
+    "mach_port_info_ext_t": "struct mach_port_info_ext",
+    "mach_port_info_t": "integer_t *",
+    "mach_port_limits_t": "struct mach_port_limits",
+    "mach_port_mscount_t": "natural_t",
+    "mach_port_msgcount_t": "natural_t",
+    "mach_port_name_array_t": "mach_port_name_t *",
+    "mach_port_name_t": "natural_t",
+    "mach_port_options_ptr_t": "mach_port_options_t *",
+    "mach_port_options_t": "struct mach_port_options",
+    "mach_port_qos_t": "struct mach_port_qos",
+    "mach_port_right_t": "natural_t",
+    "mach_port_rights_t": "natural_t",
+    "mach_port_seqno_t": "natural_t",
+    "mach_port_srights_t": "unsigned int",
+    "mach_port_status_t": "struct mach_port_status",
+    "mach_port_t": "__darwin_mach_port_t",
+    "mach_port_type_array_t": "mach_port_type_t *",
+    "mach_port_type_t": "natural_t",
+    "mach_port_urefs_t": "natural_t",
+    "mach_service_port_info_data_t": "struct mach_service_port_info",
+    "mach_service_port_info_t": "struct mach_service_port_info *",
+    "mach_vm_address_t": "uint64_t",
+    "mach_vm_offset_t": "uint64_t",
+    "mach_vm_size_t": "uint64_t",
+    "max_align_t": "long double",
+    "mcontext_t": "struct __darwin_mcontext64 *",
+    "mode_t": "__darwin_mode_t",
+    "mount_t": "struct mount *",
+    "mpo_flags_t": "enum mpo_flags_t",
+    "msg_labels_t": "struct msg_labels_t",
+    "natural_t": "__darwin_natural_t",
+    "nlink_t": "__uint16_t",
+    "off_t": "__darwin_off_t",
+    "os_block_t": "void (^)(void)",
+    "os_function_t": "void (*)(void * _Nullable)",
+    "pid_t": "__darwin_pid_t",
+    "posix_cred_t": "struct posix_cred *",
+    "proc_info_udata_t": "uint64_t",
+    "pthread_attr_t": "__darwin_pthread_attr_t",
+    "pthread_cond_t": "__darwin_pthread_cond_t",
+    "pthread_condattr_t": "__darwin_pthread_condattr_t",
+    "pthread_key_t": "__darwin_pthread_key_t",
+    "pthread_mutex_t": "__darwin_pthread_mutex_t",
+    "pthread_mutexattr_t": "__darwin_pthread_mutexattr_t",
+    "pthread_once_t": "__darwin_pthread_once_t",
+    "pthread_rwlock_t": "__darwin_pthread_rwlock_t",
+    "pthread_rwlockattr_t": "__darwin_pthread_rwlockattr_t",
+    "pthread_t": "__darwin_pthread_t",
+    "ptrdiff_t": "long",
+    "qaddr_t": "quad_t *",
+    "quad_t": "int64_t",
+    "register_t": "int64_t",
+    "rlim_t": "__uint64_t",
+    "rsize_t": "__darwin_size_t",
+    "rusage_info_current": "struct rusage_info_v6",
+    "rusage_info_t": "void *",
+    "sa_endpoints_t": "struct sa_endpoints",
+    "sa_family_t": "__uint8_t",
+    "sae_associd_t": "__uint32_t",
+    "sae_connid_t": "__uint32_t",
+    "secure_boot_cryptex_args_t": "struct secure_boot_cryptex_args",
+    "security_token_t": "struct security_token_t",
+    "segsz_t": "int32_t",
+    "sig_atomic_t": "int",
+    "sig_t": "void (*)(int)",
+    "siginfo_t": "struct __siginfo",
+    "sigset_t": "__darwin_sigset_t",
+    "size_t": "__darwin_size_t",
+    "socklen_t": "__darwin_socklen_t",
+    "ssize_t": "__darwin_ssize_t",
+    "stack_t": "struct __darwin_sigaltstack",
+    "suseconds_t": "__darwin_suseconds_t",
+    "swblk_t": "int32_t",
+    "syscall_arg_t": "u_int64_t",
+    "tcp_cc": "__uint32_t",
+    "tcp_seq": "__uint32_t",
+    "text_encoding_t": "u_int32_t",
+    "time_t": "__darwin_time_t",
+    "token_t": "struct au_token",
+    "u_char": "unsigned char",
+    "u_int": "unsigned int",
+    "u_int16_t": "unsigned short",
+    "u_int32_t": "unsigned int",
+    "u_int64_t": "unsigned long long",
+    "u_int8_t": "unsigned char",
+    "u_long": "unsigned long",
+    "u_quad_t": "u_int64_t",
+    "u_short": "unsigned short",
+    "ucontext_t": "struct __darwin_ucontext",
+    "uid_t": "__darwin_uid_t",
+    "uint": "unsigned int",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long",
+    "useconds_t": "__darwin_useconds_t",
+    "user_addr_t": "u_int64_t",
+    "user_long_t": "int64_t",
+    "user_off_t": "int64_t",
+    "user_size_t": "u_int64_t",
+    "user_ssize_t": "int64_t",
+    "user_time_t": "int64_t",
+    "user_ulong_t": "u_int64_t",
+    "ushort": "unsigned short",
+    "uuid_string_t": "__darwin_uuid_string_t",
+    "uuid_t": "__darwin_uuid_t",
+    "vm32_address_t": "uint32_t",
+    "vm32_offset_t": "uint32_t",
+    "vm32_size_t": "uint32_t",
+    "vm_map_address_t": "uint64_t",
+    "vm_map_offset_t": "uint64_t",
+    "vm_map_size_t": "uint64_t",
+    "vm_offset_t": "uintptr_t",
+    "vm_size_t": "uintptr_t",
+    "vnode_t": "struct vnode *",
+    "vol_attributes_attr_t": "struct vol_attributes_attr",
+    "vol_capabilities_attr_t": "struct vol_capabilities_attr",
+    "vol_capabilities_set_t": "u_int32_t[4]",
+    "wchar_t": "int"
+  },
+  "link_lib": "proc",
+  "header": "libproc.h"
+}

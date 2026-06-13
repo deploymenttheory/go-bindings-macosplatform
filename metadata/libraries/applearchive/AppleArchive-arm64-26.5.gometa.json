@@ -1,0 +1,5379 @@
+{
+  "framework": "AppleArchive",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {
+    "AAACEQualifierTypes": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AA_ACE_QUALIFIER_TYPE_USER",
+          "value": "85",
+          "availability": {}
+        },
+        {
+          "name": "AA_ACE_QUALIFIER_TYPE_GROUP",
+          "value": "71",
+          "availability": {}
+        },
+        {
+          "name": "AA_ACE_QUALIFIER_TYPE_SID",
+          "value": "83",
+          "availability": {}
+        },
+        {
+          "name": "AA_ACE_QUALIFIER_TYPE_UUID",
+          "value": "73",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 25
+    },
+    "AACompressionAlgorithms": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AA_COMPRESSION_ALGORITHM_NONE",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AA_COMPRESSION_ALGORITHM_LZ4",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "AA_COMPRESSION_ALGORITHM_ZLIB",
+          "value": "1285",
+          "availability": {}
+        },
+        {
+          "name": "AA_COMPRESSION_ALGORITHM_LZMA",
+          "value": "774",
+          "availability": {}
+        },
+        {
+          "name": "AA_COMPRESSION_ALGORITHM_LZFSE",
+          "value": "2049",
+          "availability": {}
+        },
+        {
+          "name": "AA_COMPRESSION_ALGORITHM_LZBITMAP",
+          "value": "1794",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 32
+    },
+    "AAEntryMessages": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AA_ENTRY_MESSAGE_SEARCH_PRUNE_DIR",
+          "value": "10",
+          "availability": {},
+          "doc": "@abstract Skip directory \\p path in search? @discussion If the callback returns a \u003e0 value, the directory is not searched. \\p data is not used. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_SEARCH_EXCLUDE",
+          "value": "11",
+          "availability": {},
+          "doc": "@abstract Exclude entry \\p path in search? @discussion If the callback returns a \u003e0 value, the entry is skipped. \\p data is not used. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_SEARCH_FAIL",
+          "value": "12",
+          "availability": {},
+          "doc": "@abstract Error on entry \\p path in search @discussion If the callback returns a \u003e0 value, signals an error when searching \\p path. \\p data is not used. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_EXTRACT_BEGIN",
+          "value": "20",
+          "availability": {},
+          "doc": "@abstract Begin entry \\p path, skip? @discussion If the callback returns a \u003e0 value, the entry is skipped. \\p data is a AAHeader instance. If the entry is skipped, this will be the last message relative to this entry. Otherwise, more messages may be received, with a final END or FAIL. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_EXTRACT_END",
+          "value": "21",
+          "availability": {},
+          "doc": "@abstract End entry \\p path @discussion Signals we are done processing entry \\p path. If not NULL, \\p data is a pointer to two uint64_t values containing the entry IDX,IDZ. This will be the last message relative to this entry. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_EXTRACT_FAIL",
+          "value": "22",
+          "availability": {},
+          "doc": "@abstract Processing entry \\p path failed, abort? @discussion Signals an error processing entry \\p path. If the callback returns a \u003e0 value, the current action is interrupted. If not NULL, \\p data is a pointer to two uint64_t values containing the entry IDX,IDZ. This will be the last message relative to this entry. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_EXTRACT_ATTRIBUTES",
+          "value": "23",
+          "availability": {},
+          "doc": "@abstract Modify entry attributes @discussion \\p data is a pointer to a AAEntryAttributes structure, which can be modified by the callback before being applied. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_EXTRACT_XAT",
+          "value": "24",
+          "availability": {},
+          "doc": "@abstract Modify entry XAT blob @discussion \\p data is a AAEntryXATBlob instance, which can be modified by the callback before being applied. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_EXTRACT_ACL",
+          "value": "25",
+          "availability": {},
+          "doc": "@abstract Modify entry ACL blob @discussion \\p data is a AAEntryACLBlob instance, which can be modified by the callback before being applied. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_ENCODE_SCANNING",
+          "value": "30",
+          "availability": {},
+          "doc": "@abstract Report entry scanning (hashing data, collecting attributes) from the archive encoder @discussion \\p data is not used If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_ENCODE_WRITING",
+          "value": "31",
+          "availability": {},
+          "doc": "@abstract Report entry writing from the archive encoder @discussion If not NULL, \\p data is a pointer to two uint64_t values containing the total DAT blob size, and the currently processed DAT blob size.  For files with large data blobs, this callback will be received several times to allow progress tracking and cancellation. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_CONVERT_EXCLUDE",
+          "value": "40",
+          "availability": {},
+          "doc": "@abstract Exclude entry \\p path in conversion? @discussion If the callback returns a \u003e0 value, the entry is skipped. \\p data is a AAHeader instance. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_PROCESS_EXCLUDE",
+          "value": "50",
+          "availability": {},
+          "doc": "@abstract Exclude entry \\p path in processing? @discussion If the callback returns a \u003e0 value, the entry is skipped. \\p data is a AAHeader instance. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        },
+        {
+          "name": "AA_ENTRY_MESSAGE_DECODE_READING",
+          "value": "60",
+          "availability": {},
+          "doc": "@abstract Report entry reading from the archive decoder @discussion If not NULL, \\p data is a pointer to two uint64_t values containing the total DAT blob size, and the currently processed DAT blob size.  For files with large data blobs, this callback will be received several times to allow progress tracking and cancellation. If the callback returns a negative value, the current operation will be aborted as soon as possible."
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AAEntryMessage.h",
+      "sdk_line": 19
+    },
+    "AAEntryTypes": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AA_ENTRY_TYPE_REG",
+          "value": "70",
+          "availability": {}
+        },
+        {
+          "name": "AA_ENTRY_TYPE_DIR",
+          "value": "68",
+          "availability": {}
+        },
+        {
+          "name": "AA_ENTRY_TYPE_LNK",
+          "value": "76",
+          "availability": {}
+        },
+        {
+          "name": "AA_ENTRY_TYPE_FIFO",
+          "value": "80",
+          "availability": {}
+        },
+        {
+          "name": "AA_ENTRY_TYPE_CHR",
+          "value": "67",
+          "availability": {}
+        },
+        {
+          "name": "AA_ENTRY_TYPE_BLK",
+          "value": "66",
+          "availability": {}
+        },
+        {
+          "name": "AA_ENTRY_TYPE_SOCK",
+          "value": "83",
+          "availability": {}
+        },
+        {
+          "name": "AA_ENTRY_TYPE_WHT",
+          "value": "87",
+          "availability": {}
+        },
+        {
+          "name": "AA_ENTRY_TYPE_DOOR",
+          "value": "82",
+          "availability": {}
+        },
+        {
+          "name": "AA_ENTRY_TYPE_PORT",
+          "value": "84",
+          "availability": {}
+        },
+        {
+          "name": "AA_ENTRY_TYPE_METADATA",
+          "value": "77",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 48
+    },
+    "AAFieldTypes": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AA_FIELD_TYPE_FLAG",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AA_FIELD_TYPE_UINT",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "AA_FIELD_TYPE_STRING",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "AA_FIELD_TYPE_HASH",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "AA_FIELD_TYPE_TIMESPEC",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "AA_FIELD_TYPE_BLOB",
+          "value": "5",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 67
+    },
+    "AAFlags": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "AA_FLAG_IGNORE_EPERM",
+          "value": "1",
+          "availability": {},
+          "doc": "@abstract Ignore EPERM errors @discussion Ignore permission errors (EPERM) in system calls when archiving and extracting files."
+        },
+        {
+          "name": "AA_FLAG_ARCHIVE_DEDUPLICATE_DAT",
+          "value": "2",
+          "availability": {},
+          "doc": "@abstract Skip duplicate DAT fields @discussion The default for regular files is to archive a DAT blob for each entry, even if it means duplicating the blob for each instance of a hard link cluster (same HLC field) / clone cluster (same CLC field) / files with same data cluster (same SLC field). If this flag is set, it lowers the requirement to only have at least one entry with DAT in each HLC/CLC/SLC cluster. There may still be some duplicate DAT in the archive, in case a file belongs to different HLC/CLC/SLC clusters. Setting this flag will make the archive smaller, but will prevent some uses of the archive. For example when extracting a subset of the archive, if the file carrying the DAT blob in a cluster is excluded, extracting other files of the same cluster will fail."
+        },
+        {
+          "name": "AA_FLAG_ARCHIVE_NO_RESOLVE_ACL_QUALIFIERS",
+          "value": "4",
+          "availability": {},
+          "doc": "@abstract Don't resolve ACL entry qualifiers @discussion By default, when archiving, ACL entry qualifiers are resolved to user name, group name, or SID whenever possible. If this flag is set, do not resolve the qualifiers, and store GUID."
+        },
+        {
+          "name": "AA_FLAG_REPLACE_ATTRIBUTES",
+          "value": "8",
+          "availability": {},
+          "doc": "@abstract Replace XAT/ACL when applying @discussion Clear extended attributes / access control lists before setting them with the *ApplyToPath functions"
+        },
+        {
+          "name": "AA_FLAG_EXTRACT_NO_AUTO_DEDUP",
+          "value": "16",
+          "availability": {},
+          "doc": "@abstract Don't extract duplicates as clones/hard links @discussion By default, files with identical data (archived with the same SLC cluster ID) are extracted as clones if the filesystem supports it. If this flag is set, extract them as copies."
+        },
+        {
+          "name": "AA_FLAG_EXTRACT_NO_AUTO_SPARSE",
+          "value": "32",
+          "availability": {},
+          "doc": "@abstract Don't extract zero blocks as holes @discussion By default, holes are created for aligned blocks of 0 in file data if the filesystem supports it. If this flag is set, do not use holes, and store all 0."
+        },
+        {
+          "name": "AA_FLAG_CROSS_VOLUME_BOUNDARIES",
+          "value": "64",
+          "availability": {},
+          "doc": "@abstract Allow crossing volume boundaries @discussion By default, when iterating directory contents, search is restricted to the initial volume. If this flag is set, allow descent into different volumes."
+        },
+        {
+          "name": "AA_FLAG_EXTRACT_AUTO_DEDUP_AS_HARD_LINKS",
+          "value": "128",
+          "availability": {},
+          "doc": "@abstract Extract duplicates as hard links @discussion By default, when auto-deduplication is enabled, files with identical data (archived with the same SLC cluster ID) are extracted as clones if the filesystem supports it. If this flag is set, extract them as hard links instead. WARNING: this should be used with caution, because hard links are not copy on write: any change made to one file in the SLC cluster will be reflected in all other members of the cluster."
+        },
+        {
+          "name": "AA_FLAG_DECODE_INSERT_IDX",
+          "value": "256",
+          "availability": {},
+          "doc": "@abstract Insert IDX,IDZ field when decoding archive @discussion If this bit is set, the archive decoder will insert IDX,IDZ fields in the header before returning from readHeader.  These are the offset and size of the entry in the uncompressed archive."
+        },
+        {
+          "name": "AA_FLAG_EXCLUDE_METADATA_ENTRIES",
+          "value": "512",
+          "availability": {},
+          "doc": "@abstract Exclude metadata entries @discussion If this bit is set, metadata entries will be excluded from processing."
+        },
+        {
+          "name": "AA_FLAG_PROCESS_RANDOM_ACCESS_OUTPUT",
+          "value": "1024",
+          "availability": {},
+          "doc": "@abstract Use \\p pwrite on the output stream in RandomAccessByteStreamProcess"
+        },
+        {
+          "name": "AA_FLAG_VERBOSITY_0",
+          "value": "0",
+          "availability": {},
+          "doc": "@abstract Verbosity level @discussion A verbosity level can be passed to most functions, logging to stderr: 0 = silent, this is the default 1 = info, log call args and global stats 2 = debug, log some debug details 3 = heavy debug, log all debug details"
+        },
+        {
+          "name": "AA_FLAG_VERBOSITY_1",
+          "value": "4611686018427387904",
+          "availability": {}
+        },
+        {
+          "name": "AA_FLAG_VERBOSITY_2",
+          "value": "9223372036854775808",
+          "availability": {}
+        },
+        {
+          "name": "AA_FLAG_VERBOSITY_3",
+          "value": "13835058055282163712",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AAFlagSet.h",
+      "sdk_line": 16
+    },
+    "AAHashFunctions": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AA_HASH_FUNCTION_CRC32",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "AA_HASH_FUNCTION_SHA1",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "AA_HASH_FUNCTION_SHA256",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "AA_HASH_FUNCTION_SHA384",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "AA_HASH_FUNCTION_SHA512",
+          "value": "5",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 19
+    },
+    "AEAContextFieldRepresentations": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AEA_CONTEXT_FIELD_REPRESENTATION_RAW",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_REPRESENTATION_X963",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_REPRESENTATION_GENERATE",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AEADefs.h",
+      "sdk_line": 62
+    },
+    "AEAContextFieldValues": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AEA_CONTEXT_CIPHERSUITE_HKDF_SHA256_HMAC",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_CIPHERSUITE_HKDF_SHA256_AESCTR_HMAC",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_SIGNATURE_NONE",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_SIGNATURE_ECDSA_P256",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_ENCRYPTION_NONE",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_ENCRYPTION_SYMMETRIC",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_ENCRYPTION_ECDHE_P256",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_ENCRYPTION_SCRYPT",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_CHECKSUM_NONE",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_CHECKSUM_MURMURHASH64",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_CHECKSUM_SHA256",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_PADDING_NONE",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_PADDING_ADAPTIVE",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_PADDING_MIN_SIZE",
+          "value": "16",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AEADefs.h",
+      "sdk_line": 70
+    },
+    "AEAContextFields": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AEA_CONTEXT_FIELD_PROFILE",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_PADDING_SIZE",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_CHECKSUM_MODE",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_COMPRESSION_ALGORITHM",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_COMPRESSION_BLOCK_SIZE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_AUTH_DATA",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_MAIN_KEY",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_SIGNING_PUBLIC_KEY",
+          "value": "7",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_SIGNING_PRIVATE_KEY",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_SYMMETRIC_KEY",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_RECIPIENT_PUBLIC_KEY",
+          "value": "10",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_RECIPIENT_PRIVATE_KEY",
+          "value": "11",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_SIGNATURE_ENCRYPTION_KEY",
+          "value": "12",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_RAW_SIZE",
+          "value": "13",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_CONTAINER_SIZE",
+          "value": "14",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_BLOCKS_PER_CLUSTER",
+          "value": "17",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_ARCHIVE_IDENTIFIER",
+          "value": "18",
+          "availability": {}
+        },
+        {
+          "name": "AEA_CONTEXT_FIELD_PASSWORD",
+          "value": "19",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AEADefs.h",
+      "sdk_line": 36
+    },
+    "AEAProfiles": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AEA_PROFILE__HKDF_SHA256_HMAC__NONE__ECDSA_P256",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__SYMMETRIC__NONE",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__SYMMETRIC__ECDSA_P256",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__ECDHE_P256__NONE",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__ECDHE_P256__ECDSA_P256",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "AEA_PROFILE__HKDF_SHA256_AESCTR_HMAC__SCRYPT__NONE",
+          "value": "5",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AEADefs.h",
+      "sdk_line": 22
+    },
+    "clockid_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "_CLOCK_REALTIME",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW_APPROX",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW_APPROX",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_PROCESS_CPUTIME_ID",
+          "value": "12",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_THREAD_CPUTIME_ID",
+          "value": "16",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "_time.h",
+      "sdk_line": 156
+    },
+    "filesec_property_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "FILESEC_OWNER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GROUP",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_UUID",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_MODE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GRPUUID",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_RAW",
+          "value": "100",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_ALLOCSIZE",
+          "value": "101",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "fcntl.h",
+      "sdk_line": 582
+    }
+  },
+  "structs": {
+    "AAAccessControlEntry": {
+      "fields": [
+        {
+          "name": "tag",
+          "objc_type": "AAACETag"
+        },
+        {
+          "name": "perms",
+          "objc_type": "AAACEPermSet"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAACEFlagSet"
+        },
+        {
+          "name": "qualifier_type",
+          "objc_type": "AAACEQualifierType"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 50
+    },
+    "AAArchiveStream_impl": {
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 125
+    },
+    "AAByteStream_impl": {
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 124
+    },
+    "AAEntryACLBlob_impl": {
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 122
+    },
+    "AAEntryAttributes": {
+      "fields": [
+        {
+          "name": "",
+          "objc_type": "union AAEntryAttributes::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AppleArchive/AAEntryAttributes.h:21:3)"
+        },
+        {
+          "name": "uid",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "gid",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "flg",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "mod",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "btm",
+          "objc_type": "struct timespec"
+        },
+        {
+          "name": "ctm",
+          "objc_type": "struct timespec"
+        },
+        {
+          "name": "mtm",
+          "objc_type": "struct timespec"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AAEntryAttributes.h",
+      "sdk_line": 18
+    },
+    "AAEntryXATBlob_impl": {
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 123
+    },
+    "AAFieldKeySet_impl": {
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 121
+    },
+    "AAHeader_impl": {
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 120
+    },
+    "AAPathList_impl": {
+      "availability": {},
+      "sdk_file": "AADefs.h",
+      "sdk_line": 119
+    },
+    "AEAAuthData_impl": {
+      "availability": {},
+      "sdk_file": "AEADefs.h",
+      "sdk_line": 106
+    },
+    "AEAContext_impl": {
+      "availability": {},
+      "sdk_file": "AEADefs.h",
+      "sdk_line": 105
+    }
+  },
+  "functions": [
+    {
+      "name": "AAByteStreamWrite",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "buf",
+          "objc_type": "const void * _Nonnull"
+        },
+        {
+          "name": "nbyte",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "ssize_t"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 28,
+      "doc": "@abstract Sequential write @param s ByteStream @param buf provides the bytes to write @param nbyte number of bytes to write @return number of bytes written on success, and a negative error code on failure or if \\p write is not implemented"
+    },
+    {
+      "name": "AAByteStreamPWrite",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "buf",
+          "objc_type": "const void * _Nonnull"
+        },
+        {
+          "name": "nbyte",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "offset",
+          "objc_type": "off_t"
+        }
+      ],
+      "return": {
+        "objc_type": "ssize_t"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 44,
+      "doc": "@abstract Random-access write @param s ByteStream @param buf provides the bytes to write @param nbyte number of bytes to write @param offset write location in stream @return number of bytes written on success, and a negative error code on failure or if \\p pwrite is not implemented"
+    },
+    {
+      "name": "AAByteStreamRead",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "buf",
+          "objc_type": "void * _Nonnull"
+        },
+        {
+          "name": "nbyte",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "ssize_t"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 60,
+      "doc": "@abstract Sequential read @param s ByteStream @param buf receives the bytes to read @param nbyte number of bytes to read @return number of bytes read on success, and a negative error code on failure or if \\p read is not implemented"
+    },
+    {
+      "name": "AAByteStreamPRead",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "buf",
+          "objc_type": "void * _Nonnull"
+        },
+        {
+          "name": "nbyte",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "offset",
+          "objc_type": "off_t"
+        }
+      ],
+      "return": {
+        "objc_type": "ssize_t"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 76,
+      "doc": "@abstract Random-access read @param s ByteStream @param buf receives the bytes to read @param nbyte number of bytes to read @param offset read location in stream @return number of bytes read on success, and a negative error code on failure or if \\p pread is not implemented"
+    },
+    {
+      "name": "AAByteStreamSeek",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "offset",
+          "objc_type": "off_t"
+        },
+        {
+          "name": "whence",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "off_t"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 95,
+      "doc": "@abstract Seek @discussion Set internal stream position to \\p offset, relative to \\p whence, one of SEEK_SET, SEEK_CUR, SEEK_END @param s ByteStream @param offset new location relative to origin @param whence origin @return the new stream position on success, relative to the beginning of the stream, and a negative value on failure"
+    },
+    {
+      "name": "AAByteStreamCancel",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 108,
+      "doc": "@abstract Cancel, the stream still needs to be closed @discussion Asynchronous cancellation. Subsequent calls to the stream are expected to fail. @param s ByteStream"
+    },
+    {
+      "name": "AAByteStreamClose",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 121,
+      "doc": "@abstract Close stream @discussion Destroy the stream and release all resources.  The stream handle becomes invalid after this call. @param s ByteStream, ignored if NULL @return 0 on success, a negative value on failure"
+    },
+    {
+      "name": "AAFileStreamOpenWithFD",
+      "args": [
+        {
+          "name": "fd",
+          "objc_type": "int"
+        },
+        {
+          "name": "automatic_close",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 138,
+      "doc": "@abstract Create file stream with an open file descriptor @discussion All calls are directly mapped to the read, write, etc. system calls. @param fd is the opened file descriptor @param automatic_close if not 0, we'll close(fd) when the stream is closed @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AAFileStreamOpenWithPath",
+      "args": [
+        {
+          "name": "path",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "open_flags",
+          "objc_type": "int"
+        },
+        {
+          "name": "open_mode",
+          "objc_type": "mode_t"
+        }
+      ],
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 157,
+      "doc": "@abstract Open a new file descriptor and create file stream @discussion The file is opened with open(path, open_flags, open_mode). All calls are directly mapped to the read, write, etc. system calls. We will call close(fd) when the stream is destroyed. @param path is the file to open @param open_flags are the flags passed to open(2) @param open_mode is the creation mode passed to open(2) @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AACompressionOutputStreamOpen",
+      "args": [
+        {
+          "name": "compressed_stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "compression_algorithm",
+          "objc_type": "AACompressionAlgorithm"
+        },
+        {
+          "name": "block_size",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 178,
+      "doc": "@abstract Create a block compression (pbz*) sequential output stream @discussion This stream is write-only, and supports only sequential writes. pwrite, read, pread, seek are not implemented. \\p compressed_stream must implement \\p write. @param compressed_stream is the output stream receiving the compressed data @param compression_algorithm is the compression algorithm to use @param block_size is the compression block size (bytes) @param flags stream flags @param n_threads is the number of worker threads, 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AACompressionOutputStreamOpenExisting",
+      "args": [
+        {
+          "name": "compressed_stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 202,
+      "doc": "@abstract Create a block compression (pbz*) sequential output stream appending data to an existing block compression stream @discussion This stream is write-only, and supports only sequential writes. pwrite, read, pread, seek are not implemented. Data is appended to the existing stream. If smaller than block size, the last block in the existing stream will be modified to add incoming data. \\p compressed_stream must implement \\p pread, \\p seek, and \\p write. The returned stream MUST be closed before \\p compressed_stream @param compressed_stream is the output stream providing/receiving the compressed data @param flags stream flags @param n_threads is the number of worker threads, 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AADecompressionInputStreamOpen",
+      "args": [
+        {
+          "name": "compressed_stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 226,
+      "doc": "@abstract Create a decompression sequential input stream @description A few bytes of the input will be read by this function, to identify the compression used. It recognizes block compression (pbz*), LZFSE and LZ4 frames as generated by the Compression library, zlib, gzip, bzip2, and xz. If none of these compression formats can be identified, a copy stream is created, directly relaying the input data. This stream is read-only, and supports only sequential reads. pread, write, pwrite, seek are not implemented. The returned stream MUST be closed before \\p compressed_stream @param compressed_stream is the input stream providing the compressed data, only read is called @param flags stream flags @param n_threads is the number of worker threads (used only for block compression), 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AADecompressionRandomAccessInputStreamOpen",
+      "args": [
+        {
+          "name": "compressed_stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "alloc_limit",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 252,
+      "doc": "@abstract Create a decompression random access input stream @description The input stream MUST use the block compression format (pbz*). The size specified in \\p alloc_limit is the requested limit for memory allocation. Depending on the block size and compressor algorithm, we may have to allocate more memory in some cases.  Increasing this value allows more blocks to be cached, and increases performance.  Set it to 0 to request minimal allocation, and to SIZE_MAX to request best performance. This stream is read-only and supports random access reads. write and pwrite are not implemented, but read, pread and seek are. The returned stream MUST be closed before \\p compressed_stream @param compressed_stream is the input stream providing the compressed data, only pread and seek are called @param alloc_limit is the requested max memory allocation size @param flags stream flags @param n_threads is the number of worker threads (used only for block compression), 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AATempFileStreamOpen",
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 268,
+      "doc": "@abstract Open a new temporary file descriptor and create a file stream @discussion All calls are directly mapped to the read, write, etc. system calls. AAByteStreamClose will remove the file. @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AASharedBufferPipeOpen",
+      "args": [
+        {
+          "name": "ostream",
+          "objc_type": "AAByteStream  _Nonnull * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "istream",
+          "objc_type": "AAByteStream  _Nonnull * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "buffer_capacity",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 287,
+      "doc": "@abstract Create a shared buffer and associated pair of stream streams @discussion This shared buffer allows data buffering between two threads. The writer thread writes to the buffer through \\p ostream and blocks when full, and the reader thread reads from the buffer through \\p istream and blocks when empty. If \\p ostream receives a write call with nbyte=0, it is considered EOF, and after all data is read, further reads on \\p istream will return 0. @param ostream is initialized with a new sequential write stream, writing data to the buffer @param istream is initialized with a new sequential read stream, reading data from the buffer @param buffer_capacity is the size to allocate for the buffer (bytes) @return 0 and set both streams to new instances on success, return a negative error code and set both streams to NULL on failure"
+    },
+    {
+      "name": "AAByteStreamProcess",
+      "args": [
+        {
+          "name": "istream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "ostream",
+          "objc_type": "AAByteStream _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "off_t"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 305,
+      "doc": "@abstract Process all data of a stream @discussion Read all bytes from \\p istream, and write them to \\p ostream. @param istream input byte stream @param ostream output byte stream @return number of bytes processed on success, and a negative error code on failure"
+    },
+    {
+      "name": "AARandomAccessByteStreamProcess",
+      "args": [
+        {
+          "name": "istream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "ostream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "max_offset",
+          "objc_type": "off_t"
+        },
+        {
+          "name": "block_size",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "off_t"
+      },
+      "availability": {},
+      "sdk_file": "AAByteStream.h",
+      "sdk_line": 326,
+      "doc": "@abstract Process a random access stream @discussion Perform random access reads from \\p istream with buffers of \\p block_size bytes. If \\p AA_FLAG_PROCESS_RANDOM_ACCESS_OUTPUT is set, write the data using \\p pwrite to the output stream. Otherwise, write the blocks in order using \\p write to the output stream. @param istream input byte stream, must implement \\p pread @param ostream output byte stream @param max_offset max number of bytes to process, or -1 to process to EOF @param block_size is the buffer size for each \\p pread call @param flags operation flags @param n_threads number of reader threads @return number of bytes processed on success, and a negative error code on failure"
+    },
+    {
+      "name": "AACustomByteStreamOpen",
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AACustomByteStream.h",
+      "sdk_line": 142,
+      "doc": "@abstract Create a new custom byte stream @discussion All callbacks are initially empty"
+    },
+    {
+      "name": "AACustomByteStreamSetData",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "data",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomByteStream.h",
+      "sdk_line": 154,
+      "doc": "@abstract Set custom byte stream data @discussion This value is passed as first argument to all callbacks @param s target object @param data stream data"
+    },
+    {
+      "name": "AACustomByteStreamSetCloseProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAByteStreamCloseProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomByteStream.h",
+      "sdk_line": 166,
+      "doc": "@abstract Set custom byte stream close callback @discussion If the stream data is non NULL, a non NULL close callback is mandatory @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomByteStreamSetReadProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAByteStreamReadProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomByteStream.h",
+      "sdk_line": 175,
+      "doc": "@abstract Set custom byte stream read callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomByteStreamSetPReadProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAByteStreamPReadProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomByteStream.h",
+      "sdk_line": 184,
+      "doc": "@abstract Set custom byte stream pread callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomByteStreamSetWriteProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAByteStreamWriteProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomByteStream.h",
+      "sdk_line": 193,
+      "doc": "@abstract Set custom byte stream write callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomByteStreamSetPWriteProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAByteStreamPWriteProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomByteStream.h",
+      "sdk_line": 202,
+      "doc": "@abstract Set custom byte stream pwrite callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomByteStreamSetSeekProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAByteStreamSeekProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomByteStream.h",
+      "sdk_line": 211,
+      "doc": "@abstract Set custom byte stream seek callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomByteStreamSetCancelProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAByteStreamCancelProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomByteStream.h",
+      "sdk_line": 220,
+      "doc": "@abstract Set custom byte stream cancel callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AAFieldKeySetCreate",
+      "return": {
+        "objc_type": "AAFieldKeySet  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 29,
+      "doc": "@abstract Create an empty field key set @return a new non zero instance on success, and NULL on failure"
+    },
+    {
+      "name": "AAFieldKeySetCreateWithString",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "const char * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "AAFieldKeySet  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 43,
+      "doc": "@abstract Create a field key set from a string representation @discussion Create a set from 0-terminated string \\p s=\"AAA,BBB,CCC,DDD\" (length must be exactly 4*N-1). The keys do not need to be ordered in \\p s.  Characters do not need to be uppercase. @param s the string to parse @return a new non zero instance on success, and NULL on failure"
+    },
+    {
+      "name": "AAFieldKeySetClone",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "AAFieldKeySet  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 53,
+      "doc": "@abstract Create a clone of a field key set @param key_set object to copy @return a new non zero instance on success, and NULL on failure"
+    },
+    {
+      "name": "AAFieldKeySetDestroy",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 63,
+      "doc": "@abstract Destroy a field key set @discussion Do nothing if \\p key_set is NULL @param key_set target object"
+    },
+    {
+      "name": "AAFieldKeySetClear",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 73,
+      "doc": "@abstract Remove all entries in a field key set @param key_set target object @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AAFieldKeySetContainsKey",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 84,
+      "doc": "@abstract Does \\p key_set contain \\p key? @param key_set target object @param key query key @return 1 if \\p key is in \\p key_set, 0 if not, and a negative error code on failure"
+    },
+    {
+      "name": "AAFieldKeySetInsertKey",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 97,
+      "doc": "@abstract Insert \\p key to \\p key_set @discussion Do nothing if \\p key is already in \\p key_set @param key_set target object @param key value to add @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AAFieldKeySetRemoveKey",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 110,
+      "doc": "@abstract Remove \\p key from \\p key_set @discussion Do nothing if \\p key is not in \\p key_set @param key_set target object @param key value to remove @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AAFieldKeySetInsertKeySet",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "s",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 123,
+      "doc": "@abstract Insert all keys in \\p s to \\p key_set @discussion key_set = key_set UNION s @param key_set target object @param s set to add @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AAFieldKeySetRemoveKeySet",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "s",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 136,
+      "doc": "@abstract Remove all keys in \\p s from \\p key_set @discussion key_set = key_set INTER (NOT s) @param key_set target object @param s set to remove @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AAFieldKeySetSelectKeySet",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "s",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 149,
+      "doc": "@abstract Remove all keys not in \\p s from \\p key_set @discussion key_set = key_set INTER s @param key_set target object @param s set to remove @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AAFieldKeySetGetKeyCount",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 159,
+      "doc": "@abstract Field key count @param key_set target object @return number of keys in \\p key_set"
+    },
+    {
+      "name": "AAFieldKeySetGetKey",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "AAFieldKey"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 170,
+      "doc": "@abatract Get key at index \\p i @param key_set target object @param i key index @return a valid key on success, and a key with ikey = 0 on failure"
+    },
+    {
+      "name": "AAFieldKeySetSerialize",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "s",
+          "objc_type": "char * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAFieldKeys.h",
+      "sdk_line": 182,
+      "doc": "@abstract Serialize \\p key_set to string @param key_set target object @param capacity bytes allocated in \\p s, must be at least 4 * NKeys @param s receives the string representation of \\p key_set @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderCreate",
+      "return": {
+        "objc_type": "AAHeader  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 24,
+      "doc": "@abstract Create an empty Header @return a new non zero instance on success, and NULL on failure"
+    },
+    {
+      "name": "AAHeaderDestroy",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 32,
+      "doc": "@abstract Destroy a Header @param header is the header to destroy, do nothing if NULL"
+    },
+    {
+      "name": "AAHeaderCreateWithEncodedData",
+      "args": [
+        {
+          "name": "data_size",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "data",
+          "objc_type": "const uint8_t * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "AAHeader  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 43,
+      "doc": "@abstract Create a Header and initialize with encoded data @param data_size number of bytes in \\p data @param data encoded data to parse @return a non-zero instance on success, and 0 on failure"
+    },
+    {
+      "name": "AAHeaderClone",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "AAHeader  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 55
+    },
+    {
+      "name": "AAHeaderAssign",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "from_header",
+          "objc_type": "AAHeader _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 69,
+      "doc": "@abstract Assign header values @discussion Assign \\p from_header contents to \\p header @param header is the target header @param from_header is the source header @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderCreateWithPath",
+      "args": [
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "dir",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "path",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        }
+      ],
+      "return": {
+        "objc_type": "AAHeader  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 97,
+      "doc": "@abstract Create header with fields \\p key_set from filesystem object DIR+\"/\"+PATH @discussion Always includes the following fields: TYP,PAT,LNK (symlinks only),DEV (devices only)          -- entry type, path, definition Includes the following fields if present in \\p key_set: UID,GID,MOD,FLG,MTM,CTM,BTM,INO,SIZ,DUZ                 -- entry metadata CKS,SH1,SH2,SH3,SH5                                     -- from entry data (expensive, regular files only) Other keys in \\p key_set are ignored. Previous contents of \\p header are discarded by this call, and \\p header will be left empty on failure. @param key_set fields to include @param dir root path @param path relative path of filesystem object @param flags operation flags @return a non-zero instance on success, and 0 on failure"
+    },
+    {
+      "name": "AAHeaderGetFieldCount",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 113,
+      "doc": "@abstract Get number of fields in \\p header @param header target object @return the number of fields \u003e= 0"
+    },
+    {
+      "name": "AAHeaderGetKeyIndex",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 127,
+      "doc": "@abstract Get one index for \\p key in \\p header @discussion If more than one field has \\p key, the returned index will be any one of these fields @param header target object @param key query key @return index \u003e= 0 if KEY is in \\p header, and -1 if not (this is not an error)"
+    },
+    {
+      "name": "AAHeaderGetFieldType",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 138,
+      "doc": "@abstract Get type for field \\p i in \\p header @param header target object @param i field index @return one of AA_FIELD_TYPE_... \u003e= 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderGetFieldKey",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "AAFieldKey"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 149,
+      "doc": "@abstract Get key for field \\p i in \\p header @param header target object @param i field index @return a valid field on success, and a field with ikey = 0 on failure"
+    },
+    {
+      "name": "AAHeaderGetPayloadSize",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint64_t"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 159,
+      "doc": "@abstract Get payload size, total size of all BLOB fields (64-bit) @param header target object @return payload size \u003e= 0"
+    },
+    {
+      "name": "AAHeaderRemoveField",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 170,
+      "doc": "@abstract Remove field \\p from \\p header @param header target object @param i field index @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderClear",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 180,
+      "doc": "@abstract Remove all fields from \\p header @param header target object @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderSetFieldFlag",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 194,
+      "doc": "@abstract Set Flag field \\p i in \\p header @param header target object @param i field index, or UINT32_MAX to append a new field @param key field key @return 0 and set return value on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderSetFieldUInt",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "value",
+          "objc_type": "uint64_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 207,
+      "doc": "@abstract Set UInt field \\p i in \\p header @param header target object @param i field index, or UINT32_MAX to append a new field @param key field key @param value new field value @return 0 and set return value on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderSetFieldString",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "value",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "length",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 221,
+      "doc": "@abstract Set String field \\p i in \\p header @param header target object @param i field index, or UINT32_MAX to append a new field @param key field key @param value new field value @param length new field length @return 0 and set return value on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderSetFieldHash",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "hash_function",
+          "objc_type": "AAHashFunction"
+        },
+        {
+          "name": "value",
+          "objc_type": "const uint8_t * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 235,
+      "doc": "@abstract Set Hash field \\p i in \\p header @param header target object @param i field index, or UINT32_MAX to append a new field @param key field key @param hash_function new field hash function, one of AA_HASH_FUNCTION_* @param value new field value @return 0 and set return value on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderSetFieldTimespec",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "value",
+          "objc_type": "const struct timespec * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 248,
+      "doc": "@abstract Set Timespec field \\p i in \\p header @param header target object @param i field index, or UINT32_MAX to append a new field @param key field key @param value new field value (seconds, nanoseconds) @return 0 and set return value on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderSetFieldBlob",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "size",
+          "objc_type": "uint64_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 261,
+      "doc": "@abstract Set Blob field \\p i in \\p header @param header target object @param i field index, or UINT32_MAX to append a new field @param key field key @param size new field blob size @return 0 and set return value on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderAppendFieldFlag",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 272,
+      "doc": "@abstract Append flag field \\p key to \\p header @param header target object @param key field key @return the index \u003e= 0 of the new field on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderAppendFieldUInt",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "value",
+          "objc_type": "uint64_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 283,
+      "doc": "@abstract Append uint field \\p key to \\p header @param header target object @param key field key @param value field value @return the index \u003e= 0 of the new field on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderAppendFieldString",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "value",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "length",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 295,
+      "doc": "@abstract Append string field \\p key to \\p header @param header target object @param key field key @param value pointer to \\p length characters, the string doesn't need to be 0-terminated @param length string length @return the index \u003e= 0 of the new field on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderAppendFieldCString",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "value",
+          "objc_type": "const char * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 306,
+      "doc": "@abstract Append C string field \\p key to header @param header target object @param key field key @param value pointer to a 0-terminated string @return the index \u003e= 0 of the new field on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderAppendFieldHash",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "hash_function",
+          "objc_type": "AAHashFunction"
+        },
+        {
+          "name": "value",
+          "objc_type": "const uint8_t * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 318,
+      "doc": "@abstract Append hash field \\p key to \\p header @param header target object @param key field key @param hash_function hash function, one of AA_HASH_FUNCTION_* @param value pointer to hash value (size determined by hash type) @return the index \u003e= 0 of the new field on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderAppendFieldTimespec",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "value",
+          "objc_type": "const struct timespec * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 329,
+      "doc": "@abstract Append timespec field \\p key to \\p header @param header target object @param key field key @param value value seconds, nanoseconds @return the index \u003e= 0 of the new field on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderAppendFieldBlob",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "size",
+          "objc_type": "uint64_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 340,
+      "doc": "@abstract Append blob field \\p key to \\p header @param header target object @param key field key @param size blob size @return the index \u003e= 0 of the new field on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderGetFieldUInt",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "value",
+          "objc_type": "uint64_t * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 355,
+      "doc": "@abstract Get value for UInt field \\p i in \\p header @param header target object @param i field index, field type must match the type expected by this function @param value receives the field value @return 0 and set return value on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderGetFieldString",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "value",
+          "objc_type": "char * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "length",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 374,
+      "doc": "@abstract Get value for String field \\p i in \\p header @discussion If \\p capacity is 0, \\p length receives the length of the string, and \\p value not accessed. If \\p capacity \u003e strlen(string), \\p length receives the length of the string, and \\p value receives a 0-terminated copy of the string. Otherwise, the call fails. @param header target object @param i field index, field type must match the type expected by this function @param capacity number of bytes available in \\p value @param value receives a 0-terminated copy of the field string on success, can be NULL if \\p capacity is 0 @param length receives the length of the field string on success, if not NULL @return 0 and set return value on success, and a negative error code on failure (includes insufficient capacity)"
+    },
+    {
+      "name": "AAHeaderGetFieldHash",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "hash_function",
+          "objc_type": "AAHashFunction * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "value",
+          "objc_type": "uint8_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 389,
+      "doc": "@abstract Get value for Hash field \\p i in \\p header If \\p capacity is 0, \\p hash_function receives the hash function, and \\p value is not accessed @param header target object @param i field index, field type must match the type expected by this function @param capacity number of bytes available in \\p value @param hash_function receives the hash function, if not NULL, one of AA_HASH_FUNCTION_* @param value receives the hash value on success, can be NULL if \\p capacity is 0 @return 0 and set return value on success, and a negative error code on failure (includes insufficient capacity)"
+    },
+    {
+      "name": "AAHeaderGetFieldTimespec",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "value",
+          "objc_type": "struct timespec * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 401,
+      "doc": "@abstract Get value for Timespec field \\p i in \\p header @param header target object @param i field index, field type must match the type expected by this function @param value receives seconds, nanoseconds @return 0 and set return value on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderGetFieldBlob",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "size",
+          "objc_type": "uint64_t * _Nonnull"
+        },
+        {
+          "name": "offset",
+          "objc_type": "uint64_t * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 414,
+      "doc": "@abstract Get value for Blob field \\p i in \\p header @param header target object @param i field index, field type must match the type expected by this function @param size receives the blob size @param offset receives the blob offset in the blob section of the entry. Offset 0 is the first byte after the header @return 0 and set return value on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderGetFieldUIntWithKey",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "value",
+          "objc_type": "uint64_t * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 427,
+      "doc": "@abstract Lookup \\p key and get UInt field value @param header target object @param key query key @param value receives the field value @return 1 if key exists and GetFieldUInt succeeded, 0 if key doesn't exist, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderGetFieldStringWithKey",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "value",
+          "objc_type": "char * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "length",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 447,
+      "doc": "@abstract Lookup \\p key and get String field value @param header target object @param key query key @param capacity number of bytes available in \\p value @param length receives the length of the field string on success, if not NULL @param value receives a 0-terminated copy of the field string on success, can be NULL if \\p capacity is 0 @return 1 if key exists and GetFieldString succeeded, 0 if key doesn't exist, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderGetFieldHashWithKey",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "hash_function",
+          "objc_type": "AAHashFunction * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "value",
+          "objc_type": "uint8_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 467,
+      "doc": "@abstract Lookup \\p key and get Hash field value @param header target object @param key query key @param capacity number of bytes available in \\p value @param hash_function receives the hash function, if not NULL, one of AA_HASH_FUNCTION_* @param value receives the hash value on success, can be NULL if \\p capacity is 0 @return 1 if key exists and GetFieldHash succeeded, 0 if key doesn't exist, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderGetFieldTimespecWithKey",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "value",
+          "objc_type": "struct timespec * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 485,
+      "doc": "@abstract Lookup \\p key and get Timespec field value @param header target object @param key query key @param value receives seconds, nanoseconds @return 1 if key exists and GetFieldTimespec succeeded, 0 if key doesn't exist, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderGetFieldBlobWithKey",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "size",
+          "objc_type": "uint64_t * _Nonnull"
+        },
+        {
+          "name": "offset",
+          "objc_type": "uint64_t * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 504,
+      "doc": "@abstract Lookup \\p key and get Blob field value @param header target object @param key query key @param size receives the blob size @param offset receives the blob offset in the blob section of the entry. Offset 0 is the first byte after the header @return 1 if key exists and GetFieldBlob succeeded, 0 if key doesn't exist, and a negative error code on failure"
+    },
+    {
+      "name": "AAHeaderGetEncodedSize",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "size_t"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 520,
+      "doc": "@abstract Get header blob size, size of the data blob encoding the header @return header blob size \u003e= 0"
+    },
+    {
+      "name": "AAHeaderGetEncodedData",
+      "args": [
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "const uint8_t * _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAHeader.h",
+      "sdk_line": 528,
+      "doc": "@abstract Get header blob data, encoding the header. This pointer becomes invalid when HEADER is modified, or destroyed. @return a pointer to the read only header blob data on success, and 0 on failure"
+    },
+    {
+      "name": "AAEntryACLBlobCreate",
+      "return": {
+        "objc_type": "AAEntryACLBlob  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 64,
+      "doc": "@abstract Create an empty ACL (Access Control List blob) @return a non-zero instance on success, and 0 on failure"
+    },
+    {
+      "name": "AAEntryACLBlobDestroy",
+      "args": [
+        {
+          "name": "acl",
+          "objc_type": "AAEntryACLBlob _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 70,
+      "doc": "@abstract Destroy ACL"
+    },
+    {
+      "name": "AAEntryACLBlobCreateWithEncodedData",
+      "args": [
+        {
+          "name": "data",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "data_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "AAEntryACLBlob  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 82,
+      "doc": "@abstract Create from encoded data representing an ACL field @param data encoded data to parse @param data_size number of bytes in \\p data @return a non-zero instance on success, and 0 on failure"
+    },
+    {
+      "name": "AAEntryACLBlobCreateWithPath",
+      "args": [
+        {
+          "name": "dir",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "path",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        }
+      ],
+      "return": {
+        "objc_type": "AAEntryACLBlob  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 96,
+      "doc": "@abstact Create ACL blob from filesystem object DIR+\"/\"+PATH @param dir reference directory @param path additional path under \\p dir, may be empty @param flags operation flags @return a non-zero instance on success, and 0 on failure"
+    },
+    {
+      "name": "AAEntryACLBlobApplyToPath",
+      "args": [
+        {
+          "name": "acl",
+          "objc_type": "AAEntryACLBlob _Nonnull"
+        },
+        {
+          "name": "dir",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "path",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 116,
+      "doc": "@abstract Apply ACL contents to filesystem object DIR+\"/\"+PATH @discussion If \\p AA_FLAG_IGNORE_EPERM is set, the call won't fail on permission errors (EPERM) If \\p AA_FLAG_REPLACE_ATTRIBUTES is set, the call will clear ACL first @param acl target object @param dir reference directory @param path additional path under \\p dir, may be empty @param flags operation flags @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryACLBlobGetEntryCount",
+      "args": [
+        {
+          "name": "acl",
+          "objc_type": "AAEntryACLBlob _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 128,
+      "doc": "@abstract Get number of entries in ACL @return the number of entries \u003e= 0"
+    },
+    {
+      "name": "AAEntryACLBlobGetEntry",
+      "args": [
+        {
+          "name": "acl",
+          "objc_type": "AAEntryACLBlob _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "ace",
+          "objc_type": "AAAccessControlEntry * _Nonnull"
+        },
+        {
+          "name": "qualifier_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "qualifier_value",
+          "objc_type": "uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "qualifier_size",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 151,
+      "doc": "@abstract Get ACL entry contents @discussion Set all fields in \\p entry to the contents of entry \\p i in \\p acl. \\p qualifier_size is always set to the actual qualifier size in ACL. If \\p qualifier_capacity is 0, \\p qualifier_value is not accessed and can be 0. If \\p qualifier_capacity \u003e= qualifier_size, \\p qualifier_value receives a copy of the qualifier. Otherwise, the call fails. @param acl target object @param i index of entry to get @param ace access control entry @param qualifier_capacity is the number of bytes allocated in \\p qualifier_value, or 0 for size query only @param qualifier_value receives the ACE qualifier value if capacity is large enough, not accessed is capacity is 0 @param qualifier_size receives the ACE qualifier size, if not NULL @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryACLBlobAppendEntry",
+      "args": [
+        {
+          "name": "acl",
+          "objc_type": "AAEntryACLBlob _Nonnull"
+        },
+        {
+          "name": "ace",
+          "objc_type": "const AAAccessControlEntry * _Nonnull"
+        },
+        {
+          "name": "qualifier_value",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "qualifier_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 174,
+      "doc": "@abstract Append an ACL entry @discussion Append \\p entry, \\p qualifier_value. \\p qualifier_value must point to \\p qualifier_size bytes of data @param acl target object @param ace access control entry @param qualifier_value ACE qualifier value, \\p qualifier_size bytes @param qualifier_size ACE qualifier size @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryACLBlobSetEntry",
+      "args": [
+        {
+          "name": "acl",
+          "objc_type": "AAEntryACLBlob _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "ace",
+          "objc_type": "const AAAccessControlEntry * _Nonnull"
+        },
+        {
+          "name": "qualifier_value",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "qualifier_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 196,
+      "doc": "@abstract Update an ACL entry @discussion Set entry \\p i in ACL to \\p entry, \\p qualifier_value. \\p qualifier_value must point to \\p qualifier_size bytes of data @param acl target object @param i index of entry to update @param ace access control entry @param qualifier_size ACE qualifier size @param qualifier_value ACE qualifier value, \\p qualifier_size bytes @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryACLBlobClear",
+      "args": [
+        {
+          "name": "acl",
+          "objc_type": "AAEntryACLBlob _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 211,
+      "doc": "@abstract Remove all ACL entries @param acl target object @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryACLBlobRemoveEntry",
+      "args": [
+        {
+          "name": "acl",
+          "objc_type": "AAEntryACLBlob _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 223,
+      "doc": "@abstract Remove one ACL entry @param acl target object @param i index of entry to remove @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryACLBlobGetEncodedSize",
+      "args": [
+        {
+          "name": "acl",
+          "objc_type": "AAEntryACLBlob _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "size_t"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 235,
+      "doc": "@abstract Get size of the data blob encoding the ACL field @param acl target object @return blob size \u003e= 0"
+    },
+    {
+      "name": "AAEntryACLBlobGetEncodedData",
+      "args": [
+        {
+          "name": "acl",
+          "objc_type": "AAEntryACLBlob _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "const uint8_t * _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryACLBlob.h",
+      "sdk_line": 248,
+      "doc": "@abstract Get data blob encoding the ACL field @discussion This pointer becomes invalid after ACL is modified, or destroyed. @param acl target object @return a pointer to the ACL blob data on success, and 0 on failure"
+    },
+    {
+      "name": "AAEntryXATBlobCreate",
+      "return": {
+        "objc_type": "AAEntryXATBlob  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 30,
+      "doc": "@abstract Create an empty XAT (extended attributes blob) @return a non-zero instance on success, and 0 on failure"
+    },
+    {
+      "name": "AAEntryXATBlobDestroy",
+      "args": [
+        {
+          "name": "xat",
+          "objc_type": "AAEntryXATBlob _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 38,
+      "doc": "@abstract Destroy XAT @param xat target object"
+    },
+    {
+      "name": "AAEntryXATBlobCreateWithEncodedData",
+      "args": [
+        {
+          "name": "data",
+          "objc_type": "const uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "data_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "AAEntryXATBlob  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 50,
+      "doc": "@abstract Create from encoded data representing an XAT field @param data encoded data to parse @param data_size number of bytes in \\p data @return a non-zero instance on success, and 0 on failure"
+    },
+    {
+      "name": "AAEntryXATBlobCreateWithPath",
+      "args": [
+        {
+          "name": "dir",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "path",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        }
+      ],
+      "return": {
+        "objc_type": "AAEntryXATBlob  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 64,
+      "doc": "@abstact Create XAT blob from filesystem object DIR+\"/\"+PATH @param dir reference directory @param path additional path under \\p dir, may be empty @param flags operation flags @return a non-zero instance on success, and 0 on failure"
+    },
+    {
+      "name": "AAEntryXATBlobApplyToPath",
+      "args": [
+        {
+          "name": "xat",
+          "objc_type": "AAEntryXATBlob _Nonnull"
+        },
+        {
+          "name": "dir",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "path",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 84,
+      "doc": "@abstract Apply XAT contents to filesystem object DIR+\"/\"+PATH @discussion If \\p AA_FLAG_IGNORE_EPERM is set, the call won't fail on permission errors (EPERM) If \\p AA_FLAG_REPLACE_ATTRIBUTES is set, the call will clear extended attributes first @param xat target object @param dir reference directory @param path additional path under \\p dir, may be empty @param flags operation flags @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryXATBlobGetEntryCount",
+      "args": [
+        {
+          "name": "xat",
+          "objc_type": "AAEntryXATBlob _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 98,
+      "doc": "@abstract Get number of entries in XAT @param xat target object @return the number of entries"
+    },
+    {
+      "name": "AAEntryXATBlobGetEntry",
+      "args": [
+        {
+          "name": "xat",
+          "objc_type": "AAEntryXATBlob _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "key_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "char * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "key_length",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "data_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "data",
+          "objc_type": "uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "data_size",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 124,
+      "doc": "@abstract Get a XAT entry @discussion If \\p key_capacity is 0, \\p key_length receives strlen(attribute_key), and \\p key is not accessed. If \\p key_capacity \u003e strlen(attribute_key), \\p key_length receives strlen(attribute_key), and \\p key receives a 0-terminated copy of attribute_key. Otherwise the call fails. If \\p data_capacity is 0, \\p data_size receives the attribute_data size, and \\p data is not accessed. If \\p data_capacity \u003e= attribute_data size, \\p data_size receives the attribute_data size, and \\p data receives a copy of attribute_data. Otherwise the call fails. @param xat target object @param i index of entry to get @param key_capacity number of bytes allocated in \\p key, or 0 for key length query @param key receives 0-terminated key value if \\p key_capacity allows it @param key_length receives key length (strlen, does not include final 0), if not NULL @param data_capacity number of bytes allocated in \\p data, or 0 for data size query @param data receives data value if \\p data_capacity allows it @param data_size receives data size, if not NULL @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryXATBlobAppendEntry",
+      "args": [
+        {
+          "name": "xat",
+          "objc_type": "AAEntryXATBlob _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "data",
+          "objc_type": "const uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "data_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 148,
+      "doc": "@abstract Append a XAT entry @discussion \\p key must be 0-terminated, and \\p data must point to \\p data_size bytes @param xat target object @param key 0-terminated attribute key @param data_size attribute value size in bytes @param data attribute value, \\p data_size bytes, can be NULL if data_size is 0 @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryXATBlobSetEntry",
+      "args": [
+        {
+          "name": "xat",
+          "objc_type": "AAEntryXATBlob _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "data",
+          "objc_type": "const uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "data_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 169,
+      "doc": "@abstract Update a XAT entry @discussion \\p key must be 0-terminated, and \\p data must point to \\p data_size bytes @param xat target object @param i index of entry to update @param key 0-terminated attribute key @param data_size attribute value size in bytes @param data attribute value, \\p data_size bytes @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryXATBlobClear",
+      "args": [
+        {
+          "name": "xat",
+          "objc_type": "AAEntryXATBlob _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 184,
+      "doc": "@abstract Remove all XAT entries @param xat target object @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryXATBlobRemoveEntry",
+      "args": [
+        {
+          "name": "xat",
+          "objc_type": "AAEntryXATBlob _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 196,
+      "doc": "@abstract Remove an entry from XAT @param xat target object @param i index of entry to remove @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryXATBlobGetEncodedSize",
+      "args": [
+        {
+          "name": "xat",
+          "objc_type": "AAEntryXATBlob _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "size_t"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 208,
+      "doc": "@abstract Get blob size, size of the data blob encoding the XAT field @param xat target object @return blob size \u003e= 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAEntryXATBlobGetEncodedData",
+      "args": [
+        {
+          "name": "xat",
+          "objc_type": "AAEntryXATBlob _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "const uint8_t * _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAEntryXATBlob.h",
+      "sdk_line": 221,
+      "doc": "@abstract Get blob data, encoding the header @discussion This pointer becomes invalid when XAT is modified, or destroyed. @param xat target object @return a pointer to the XAT blob data on success, and 0 on failure"
+    },
+    {
+      "name": "AAPathListCreateWithDirectoryContents",
+      "args": [
+        {
+          "name": "dir",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "path",
+          "objc_type": "const char * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "msg_data",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "msg_proc",
+          "objc_type": "AAEntryMessageProc _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAPathList  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAPathList.h",
+      "sdk_line": 37,
+      "doc": "@abstract Create a new path list with validated entries from a directory @discussion Starting from directory \\p dir/path, search sub-directories and then all other filesystem objects under \\p dir/path. The search and entry selection is controlled by calls to the \\p msg_proc callback.  Paths passed to the callback are relative to \\p dir, the empty string referring to \\p dir itself. Paths stored in the result list are relative to \\p dir. \\p path can be NULL or empty. If not NULL or empty, it should be of the form \"some/path/to/a/directory\" and not include \".\", \"..\", or symbolic links. @param dir input directory to search @param path optional sub-directory to restrict search, may be NULL to search the entire \\p dir @param msg_data is passed as first argument to \\p msg_proc @param msg_proc is called with queries to the caller if not NULL @param flags search flags @param n_threads is the number of worker threads, or 0 for default @return a new non-NULL instance on success, and NULL on failure"
+    },
+    {
+      "name": "AAPathListCreateWithPath",
+      "args": [
+        {
+          "name": "dir",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "path",
+          "objc_type": "const char * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "AAPathList  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAPathList.h",
+      "sdk_line": 56,
+      "doc": "@abstract Create a new path list with a single path @discussion The path list only contains \\p path, referring to existing filesystem object \\p dir/path @param dir base directory @param path entry path under \\p dir @return a new non-NULL instance on success, and NULL on failure"
+    },
+    {
+      "name": "AAPathListDestroy",
+      "args": [
+        {
+          "name": "path_list",
+          "objc_type": "AAPathList _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AAPathList.h",
+      "sdk_line": 68,
+      "doc": "@abstract Destroy a path list @discussion Do nothing if \\p path_list is NULL @param path_list target object"
+    },
+    {
+      "name": "AAPathListNodeGetPath",
+      "args": [
+        {
+          "name": "path_list",
+          "objc_type": "AAPathList _Nonnull"
+        },
+        {
+          "name": "node",
+          "objc_type": "uint64_t"
+        },
+        {
+          "name": "path_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "path",
+          "objc_type": "char * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "path_length",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAPathList.h",
+      "sdk_line": 89,
+      "doc": "@abstract Get node path @discussion Let node_path be the path string corresponding to the given node. If \\p capacity is 0, \\p length receives strlen(node_path), and \\p path is not accessed. if \\p capacity \u003e strlen(node_path), store a 0-terminated copy of node_path in path, and \\p length receives strlen(node_path). Otherwise, return an error. @param path_list target object @param node index of node to retrieve @param path_capacity bytes available in \\p path @param path receives a 0-terminated copy of node_path on success @param path_length receives strlen(node_path) on success if not NULL @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAPathListNodeFirst",
+      "args": [
+        {
+          "name": "path_list",
+          "objc_type": "AAPathList _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint64_t"
+      },
+      "availability": {},
+      "sdk_file": "AAPathList.h",
+      "sdk_line": 104,
+      "doc": "@abstract Iterator on non-excluded entries, first node @param path_list target object @return index of first node, or UINT64_MAX if none"
+    },
+    {
+      "name": "AAPathListNodeNext",
+      "args": [
+        {
+          "name": "path_list",
+          "objc_type": "AAPathList _Nonnull"
+        },
+        {
+          "name": "node",
+          "objc_type": "uint64_t"
+        }
+      ],
+      "return": {
+        "objc_type": "uint64_t"
+      },
+      "availability": {},
+      "sdk_file": "AAPathList.h",
+      "sdk_line": 116,
+      "doc": "@abstrsct Iterator on non-excluded entries, next node @param path_list target object @paran node current node @return index of next node, or UINT64_MAX if none"
+    },
+    {
+      "name": "AAArchiveStreamWriteHeader",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "header",
+          "objc_type": "AAHeader _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 43,
+      "doc": "@abstract Begin a new entry @discussion All data blobs for the previous entry must have been written before this call. @param s target stream @param header is the header for the new entry @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AAArchiveStreamWriteBlob",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "buf",
+          "objc_type": "const void * _Nonnull"
+        },
+        {
+          "name": "nbyte",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 60,
+      "doc": "@abatract Write data for current blob @discussion Several write calls are allowed for the same blob. The total number of written bytes for a given blob MUST match the blob size stored in the header. Data for all blobs defined in the current header must be written. @param s target stream @param key is the blob key, MUST correspond to blob keys in the entry header, in the same order @param buf data buffer @param nbyte number of bytes in \\p buf @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AAArchiveStreamReadHeader",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "header",
+          "objc_type": "AAHeader  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 78,
+      "doc": "@abstract Get next archive entry header @discussion If \\p *header is initially NULL and there is an entry to return, a new \\p AAHeader instance is returned, the caller gains ownership of the object, and should destroy it after use. \\p *header is allowed to be non NULL when this function is called. In that case, the contents of this existing object will be replaced with the new header contents. @param s the target stream @param header receives the next entry AAHeader object if an entry is found, and is left unchanged otherwise @return 1 and set/update the parameters if an entry is found, 0 if we reached the end of the archive, and a negative error code on failure"
+    },
+    {
+      "name": "AAArchiveStreamReadBlob",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "AAFieldKey"
+        },
+        {
+          "name": "buf",
+          "objc_type": "void * _Nonnull"
+        },
+        {
+          "name": "nbyte",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 97,
+      "doc": "@abstract Read archive entry blob data @discussion This function reads data stored in the first unread blob matching \\p key.  Blob data can only be read in the order they are stored in the header.  Reading more data than the blob size stored in the header is an error. @param s the target stream @param key field key of blob to read @param buf receives blob data @param nbyte the number of bytes to read @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAArchiveStreamCancel",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 113,
+      "doc": "@abstract Cancel stream @discussion After this call, other stream operations are expected to fail @param s target stream"
+    },
+    {
+      "name": "AAArchiveStreamClose",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 121,
+      "doc": "@abstract Close an archive output stream @param s target stream, do nothing if NULL"
+    },
+    {
+      "name": "AAArchiveStreamWritePathList",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "path_list",
+          "objc_type": "AAPathList _Nonnull"
+        },
+        {
+          "name": "key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "dir",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "msg_data",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "msg_proc",
+          "objc_type": "AAEntryMessageProc _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 157,
+      "doc": "@abstract Write the fields defined in \\p key_set for all filesystem objects dir.'/'.path where \\p path in \\p path_list @discussion The following fields are accepted: TYP,PAT,LNK,DEV (always included) UID,GID,MOD,FLG,MTM,BTM,CTM, (attributes) CKS,SH1,SH2,SH3,SH5, (digests) XAT,ACL,DAT,HLC,CLC,SLC Hard link (HLC) and clone (CLC) information relating files in \\p path_list is obtained from the filesystem, and stored in the archive. If same data (SLC) information is required, a hash will be computed for each file, and then contents compared. When extracting entries with a SLC field, the auto-clone feature can be used, creating filesystem clones (when supported) instead of copies. The entry message callback for the encoder will receive a AA_ENTRY_MESSAGE_SCANNING for each entry (in a non predictable order) when first scanned and possibly hashed. Then it will receive a AA_ENTRY_MESSAGE_ENCODING for each entry (in archive order) when the AppleArchive elements are be written for the entry. If the client returns a negative value to any of these callbacks, the operation will be aborted. @param s target stream @param path_list path list providing all the paths of the entries to write @param key_set set of keys to include for each entry @param dir 0-terminated directory path, not stored in the PAT field of the archive entry @param msg_data is passed as first argument to \\p msg_proc @param msg_proc is called with queries to the caller if not NULL @param flags convert flags @param n_threads is the number of worker threads, or 0 for default @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AAExtractArchiveOutputStreamOpen",
+      "args": [
+        {
+          "name": "dir",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "msg_data",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "msg_proc",
+          "objc_type": "AAEntryMessageProc _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAArchiveStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 197,
+      "doc": "@abstract Open an extraction archive output stream @discussion For each entry received by the stream, \\p msg_proc is first called with the BEGIN message. If the client returns a non 0 value, the entry is discarded. Otherwise, the entry will be extracted, and the callback will be called with the ATTRIBUTES,XAT,ACL messages to allow the client to make modifications to the extracted fields before writing to the filesystem. When the entry is fully extracted, the callback is called with END. When the entry extraction fails, the callback is called with FAIL, and if it returns non 0, processing is aborted. Otherwise, processing continues.  BEGIN messages are called in archive order and will always be the first call for a given entry.  END of FAIL will always be the last call for a given entry, and will not necessarily be called in the same order.  In particular, for directories, END will only be called after all directory contents are extracted. The creation and/or final attribute updates for some entries may be delayed to the AAArchiveStreamClose() call for the returned stream.  Before accessing the extracted entries in `dir`, it is necessary to first call AAArchiveStreamClose() and check its return value. @param dir output directory, must exist @param msg_data is passed as first argument to \\p msg_proc @param msg_proc is called with queries to the caller if not NULL @param flags extract flags @param n_threads is the number of worker threads, or 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AAConvertArchiveOutputStreamOpen",
+      "args": [
+        {
+          "name": "stream",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "insert_key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "remove_key_set",
+          "objc_type": "AAFieldKeySet _Nonnull"
+        },
+        {
+          "name": "msg_data",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "msg_proc",
+          "objc_type": "AAEntryMessageProc _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAArchiveStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 227,
+      "doc": "@abstract Create a conversion archive output stream @discussion For each entry received by the stream, the \\p msg_proc is first called with the CONVERT_EXCLUDE message. If the client returns a non 0 value, the entry is discarded. Otherwise, the entry will be converted. For each incoming entry header, fields in \\p remove_key_set are removed from the entry.  Fields in \\p insert_key_set are inserted if the data present in the entry allows to compute them.  This is the case for example for digest fields SH1, SH2, etc. when the input archive contains DAT blobs. Mandatory fields are never removed. The returned stream MUST be closed before \\p stream. @param stream archive output stream receiving the produced archive @param insert_key_set fields to insert in the converted archive @param remove_key_set fields to remove in the converted archive @param msg_data is passed as first argument to \\p msg_proc @param msg_proc is called with queries to the caller if not NULL @param flags convert flags @param n_threads is the number of worker threads, or 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AAEncodeArchiveOutputStreamOpen",
+      "args": [
+        {
+          "name": "stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "msg_data",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "msg_proc",
+          "objc_type": "AAEntryMessageProc _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAArchiveStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 252,
+      "doc": "@abstract Encode archive to a byte stream @discussion Received archive data is encoded and sent to \\p stream. The returned stream MUST be closed before \\p stream. @param stream byte stream receiving the encoded archive @param msg_data is passed as first argument to \\p msg_proc @param msg_proc is called with queries to the caller if not NULL @param flags encoder flags @param n_threads is the number of worker threads, or 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AADecodeArchiveInputStreamOpen",
+      "args": [
+        {
+          "name": "stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "msg_data",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "msg_proc",
+          "objc_type": "AAEntryMessageProc _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAArchiveStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 277,
+      "doc": "@abstract Decode archive from a byte stream @discussion Raw archive data is read from \\p stream and decoded.  The stream functions will then allow iteration through the decoded entries in archive order. The returned stream MUST be closed before \\p stream. @param stream input stream providing raw archive data @param msg_data is passed as first argument to \\p msg_proc @param msg_proc is called with queries to the caller if not NULL @param flags decoder flags @param n_threads is the number of worker threads, or 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AAArchiveStreamProcess",
+      "args": [
+        {
+          "name": "istream",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "ostream",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "msg_data",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "msg_proc",
+          "objc_type": "AAEntryMessageProc _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "ssize_t"
+      },
+      "availability": {},
+      "sdk_file": "AAArchiveStream.h",
+      "sdk_line": 301,
+      "doc": "@abstract Process all entries of an archive @discussion Read all entries from \\p istream, and write them to \\p ostream. @param istream input archive stream @param ostream output archive stream @param msg_data is passed as first argument to \\p msg_proc @param msg_proc is called with queries to the caller if not NULL @param flags encoder flags @param n_threads is the number of worker threads, or 0 for default @return the number of archive entries transferred on success, and a negative error code on failure"
+    },
+    {
+      "name": "AACustomArchiveStreamOpen",
+      "return": {
+        "objc_type": "AAArchiveStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AACustomArchiveStream.h",
+      "sdk_line": 51,
+      "doc": "@abstract Create a new custom archive output stream @discussion All callbacks are initially empty"
+    },
+    {
+      "name": "AACustomArchiveStreamSetData",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "data",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomArchiveStream.h",
+      "sdk_line": 63,
+      "doc": "@abstract Set custom archive stream data @discussion This value is passed as first argument to all callbacks @param s target object @param data stream data"
+    },
+    {
+      "name": "AACustomArchiveStreamSetCloseProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAArchiveStreamCloseProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomArchiveStream.h",
+      "sdk_line": 75,
+      "doc": "@abstract Set custom archive stream close callback @discussion If the stream data is non NULL, a non NULL destructor callback is mandatory @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomArchiveStreamSetCancelProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAArchiveStreamCancelProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomArchiveStream.h",
+      "sdk_line": 84,
+      "doc": "@abstract Set custom archive stream cancel callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomArchiveStreamSetWriteHeaderProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAArchiveStreamWriteHeaderProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomArchiveStream.h",
+      "sdk_line": 93,
+      "doc": "@abstract Set custom archive stream write header callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomArchiveStreamSetWriteBlobProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAArchiveStreamWriteBlobProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomArchiveStream.h",
+      "sdk_line": 102,
+      "doc": "@abstract Set custom archive stream write blob callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomArchiveStreamSetReadHeaderProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAArchiveStreamReadHeaderProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomArchiveStream.h",
+      "sdk_line": 111,
+      "doc": "@abstract Set custom archive stream read header callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AACustomArchiveStreamSetReadBlobProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream _Nonnull"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAArchiveStreamReadBlobProc _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AACustomArchiveStream.h",
+      "sdk_line": 120,
+      "doc": "@abstract Set custom archive stream read blob callback @param s target object @param proc callback"
+    },
+    {
+      "name": "AEAAuthDataCreate",
+      "return": {
+        "objc_type": "AEAAuthData  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 28,
+      "doc": "@abstract Create an empty auth data blob @return a non-zero instance on success, and 0 on failure"
+    },
+    {
+      "name": "AEAAuthDataDestroy",
+      "args": [
+        {
+          "name": "auth_data",
+          "objc_type": "AEAAuthData _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 36,
+      "doc": "@abstract Destroy auth data blob @param auth_data target object, can be NULL"
+    },
+    {
+      "name": "AEAAuthDataCreateWithContext",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "AEAAuthData  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 47,
+      "doc": "@abstract Create from auth data field in context @param context provides the auth data @return a non-zero instance on success, and 0 on failure"
+    },
+    {
+      "name": "AEAAuthDataGetEntryCount",
+      "args": [
+        {
+          "name": "auth_data",
+          "objc_type": "AEAAuthData _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 58,
+      "doc": "@abstract Get number of entries in auth data @param auth_data target object @return the number of entries"
+    },
+    {
+      "name": "AEAAuthDataGetEntry",
+      "args": [
+        {
+          "name": "auth_data",
+          "objc_type": "AEAAuthData _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "key_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "char * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "key_length",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "data_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "data",
+          "objc_type": "uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "data_size",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 84,
+      "doc": "@abstract Get a auth data entry @discussion If \\p key_capacity is 0, \\p key_length receives strlen(entry_key), and \\p key is not accessed. If \\p key_capacity \u003e strlen(entry_key), \\p key_length receives strlen(entry_key), and \\p key receives a 0-terminated copy of entry_key. Otherwise the call fails. If \\p data_capacity is 0, \\p data_size receives the entry_data size, and \\p data is not accessed. If \\p data_capacity \u003e= entry_data size, \\p data_size receives the entry_data size, and \\p data receives a copy of entry_data. Otherwise the call fails. @param auth_data target object @param i index of entry to get @param key_capacity number of bytes allocated in \\p key, or 0 for key length query @param key receives 0-terminated key value if \\p key_capacity allows it @param key_length receives key length (strlen, does not include final 0), if not NULL @param data_capacity number of bytes allocated in \\p data, or 0 for data size query @param data receives data value if \\p data_capacity allows it @param data_size receives data size, if not NULL @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAAuthDataAppendEntry",
+      "args": [
+        {
+          "name": "auth_data",
+          "objc_type": "AEAAuthData _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "data",
+          "objc_type": "const uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "data_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 108,
+      "doc": "@abstract Append a auth data entry @discussion \\p key must be 0-terminated, and \\p data must point to \\p data_size bytes @param auth_data target object @param key 0-terminated entry key @param data_size entry value size in bytes @param data entry value, \\p data_size bytes, can be NULL if data_size is 0 @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAAuthDataSetEntry",
+      "args": [
+        {
+          "name": "auth_data",
+          "objc_type": "AEAAuthData _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "const char * _Nonnull"
+        },
+        {
+          "name": "data",
+          "objc_type": "const uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "data_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 129,
+      "doc": "@abstract Update a auth data entry @discussion \\p key must be 0-terminated, and \\p data must point to \\p data_size bytes @param auth_data target object @param i index of entry to update @param key 0-terminated entry key @param data_size entry value size in bytes @param data entry value, \\p data_size bytes @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAAuthDataClear",
+      "args": [
+        {
+          "name": "auth_data",
+          "objc_type": "AEAAuthData _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 144,
+      "doc": "@abstract Remove all auth data entries @param auth_data target object @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAAuthDataRemoveEntry",
+      "args": [
+        {
+          "name": "auth_data",
+          "objc_type": "AEAAuthData _Nonnull"
+        },
+        {
+          "name": "i",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 156,
+      "doc": "@abstract Remove an entry from auth data @param auth_data target object @param i index of entry to remove @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAAuthDataGetEncodedSize",
+      "args": [
+        {
+          "name": "auth_data",
+          "objc_type": "AEAAuthData _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "size_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 168,
+      "doc": "@abstract Get blob size, size of the data blob encoding the auth data @param auth_data target object @return blob size \u003e= 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAAuthDataGetEncodedData",
+      "args": [
+        {
+          "name": "auth_data",
+          "objc_type": "AEAAuthData _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "const uint8_t * _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AEAAuthData.h",
+      "sdk_line": 181,
+      "doc": "@abstract Get blob data, encoding the header @discussion This pointer becomes invalid when auth_data is modified, or destroyed. @param auth_data target object @return a pointer to the encoded blob data on success, and 0 on failure"
+    },
+    {
+      "name": "AEAContextCreateWithProfile",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "AEAProfile"
+        }
+      ],
+      "return": {
+        "objc_type": "AEAContext  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 32,
+      "doc": "@abstract Create a new encryption context from a profile @discussion The new context will be initialized with the given \\p profile. The context must be destroyed after use by calling \\p AEAContextDestroy. The profile defines the ciphersuite, encryption mode, and signature mode. Other context parameters are set to sensible default values. @param profile one of the pre-defined profiles @return a new context instance on success, NULL on failure"
+    },
+    {
+      "name": "AEAContextCreateWithEncryptedStream",
+      "args": [
+        {
+          "name": "encrypted_stream",
+          "objc_type": "AAByteStream _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "AEAContext  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 52,
+      "doc": "@abstract Create an encryption context from an existing encrypted stream @discussion The new context will be initialized with the archive prologue read from \\p encrypted_stream. The caller can then use this context to query the archive profile, unique identifier, and auth data; attach the keys required to open the archive, and eventually open a decryption stream for reading, or open an encryption stream for append. The context must be destroyed after use by calling \\p AEAContextDestroy. \\p read is called on \\p encrypted_stream to read the encrypted prologue and store it in the context. \\p encrypted_stream is expected to be positionned on the first byte of the archive magic before this call, and will point to the first byte after the prologue after a successful call. @param encrypted_stream provides encrypted data, only \\p read is called, and the entire archive prologue will be read. @return a new context instance on success, NULL on failure"
+    },
+    {
+      "name": "AEAContextDestroy",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 60,
+      "doc": "@abstract Destroy an encryption context @param context object to destroy, do nothing if NULL"
+    },
+    {
+      "name": "AEAContextGetFieldUInt",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "field",
+          "objc_type": "AEAContextField"
+        }
+      ],
+      "return": {
+        "objc_type": "uint64_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 71,
+      "doc": "@abstract Get context uint field @param context target object @param field query field @return context field value on success, UINT64_MAX on failure"
+    },
+    {
+      "name": "AEAContextGetFieldBlob",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "field",
+          "objc_type": "AEAContextField"
+        },
+        {
+          "name": "representation",
+          "objc_type": "AEAContextFieldRepresentation"
+        },
+        {
+          "name": "buf_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "buf",
+          "objc_type": "uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "buf_size",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 88,
+      "doc": "@abstract Get context blob field @param context target object @param field query field @param representation specifies the representation to use to store the data in \\p buf @param buf_capacity bytes allocated in \\p buf, can be 0 to query size @param buf receives the data, can be NULL if \\p buf_capacity is 0 @param buf_size receives the data size if not NULL (bytes) @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetFieldUInt",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "field",
+          "objc_type": "AEAContextField"
+        },
+        {
+          "name": "value",
+          "objc_type": "uint64_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 106,
+      "doc": "@abstract Set context uint field @param context target object @param field field to set @param value new field value @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetFieldBlob",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "field",
+          "objc_type": "AEAContextField"
+        },
+        {
+          "name": "representation",
+          "objc_type": "AEAContextFieldRepresentation"
+        },
+        {
+          "name": "buf",
+          "objc_type": "const uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "buf_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 123,
+      "doc": "@abstract Set context blob field @param context target object @param field field to set @param representation specifies the representation used for \\p buf data @param buf new field value, can be NULL if \\p buf_size is 0 @param buf_size bytes in \\p buf @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextGenerateFieldBlob",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "field",
+          "objc_type": "AEAContextField"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 143,
+      "doc": "@abstract Generate random context blob field @discussion Uses a cryptographic random number generator to set the field. SYMMETRIC_KEY and PASSWORD are the only valid fields that can be set using this function. @param context target object @param field field to set @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextGetProfile",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 155,
+      "doc": "@abstract Get context profile @param context target object @return context profile"
+    },
+    {
+      "name": "AEAProfileGetCiphersuite",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 164,
+      "doc": "@abstract Get profile ciphersuite @param profile profile @return profile ciphersuite"
+    },
+    {
+      "name": "AEAProfileGetSignatureMode",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 183,
+      "doc": "@abstract Get profile signature mode @param profile profile @return profile signature mode"
+    },
+    {
+      "name": "AEAProfileGetEncryptionMode",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 202,
+      "doc": "@abstract Get profile encryption mode @param profile profile @return profile encryption mode"
+    },
+    {
+      "name": "AEAContextGetPaddingSize",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint64_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 224,
+      "doc": "@abstract Get context padding size, or one of the AEA_CONTEXT_PADDING_* constants @discussion This is available only when encrypting. @param context target object @return context padding mode"
+    },
+    {
+      "name": "AEAContextGetChecksumMode",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 233,
+      "doc": "@abstract Get context checksum mode @param context target object @return context checksum mode"
+    },
+    {
+      "name": "AEAContextGetCompressionAlgorithm",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "AACompressionAlgorithm"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 242,
+      "doc": "@abstract Get context compression algorithm @param context target object @return context compression algorithm"
+    },
+    {
+      "name": "AEAContextGetCompressionBlockSize",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "size_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 251,
+      "doc": "@abstract Get context compression block size @param context target object @return context compression block size"
+    },
+    {
+      "name": "AEAContextGetRawSize",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint64_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 260,
+      "doc": "@abstract Get archive raw data size @param context target object @return Uncompressed size of data stored in archive (as stored in root header)"
+    },
+    {
+      "name": "AEAContextGetContainerSize",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint64_t"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 269,
+      "doc": "@abstract Get archive container size @param context target object @return Archive container size (as stored in root header)"
+    },
+    {
+      "name": "AEAContextGetAuthData",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "auth_data_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "auth_data",
+          "objc_type": "uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "auth_data_size",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 281,
+      "doc": "@abstract Get context auth data @param context target object @param auth_data_capacity is the number of bytes allocated in \\p auth_data, can be 0 to query size @param auth_data receives a copy of the context auth data on success (raw bytes), can be NULL when \\p auth_data_capacity is 0 @param auth_data_size receives the auth data size if not NULL (bytes) @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAContextGetSignatureEncryptionKey",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "key_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "key_size",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 308,
+      "doc": "@abstract Get context signature encryption key @discussion This key is needed to sign the archive after it has been closed, without requiring the encryption credentials. @param context target object @param key_capacity bytes allocated in \\p key, can be 0 to query size @param key receives the key (raw bytes), can be NULL if \\p key_capacity is 0 @param key_size receives the key size if not NULL (bytes) @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAContextGetArchiveIdentifier",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "identifier_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "identifier",
+          "objc_type": "uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "identifier_size",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 333,
+      "doc": "@abstract Get archive unique identifier @param context target object @param identifier_capacity bytes allocated in \\p identifier, can be 0 to query size @param identifier receives the archive identifier (raw bytes), can be NULL if \\p identifier_capacity is 0 @param identifier_size receives the archive identifier size if not NULL (bytes) @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAContextGetMainKey",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "key_capacity",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "key",
+          "objc_type": "uint8_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "key_size",
+          "objc_type": "size_t * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 358,
+      "doc": "@abstract Get archive main key @param context target object @param key_capacity bytes allocated in \\p key, can be 0 to query size @param key receives the key (raw bytes), can be NULL if \\p key_capacity is 0 @param key_size receives the key size if not NULL (bytes) @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetCompressionAlgorithm",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "compression_algorithm",
+          "objc_type": "AACompressionAlgorithm"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 382,
+      "doc": "@abstract Set context compression algorithm @param context target object @param compression_algorithm algorithm @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetCompressionBlockSize",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "compression_block_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 392,
+      "doc": "@abstract Set context compression block size @param context target object @param compression_block_size block size, will be internally clamped to a limited range @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetChecksumMode",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "checksum_mode",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 405,
+      "doc": "@abstract Set context checksum mode @param context target object @param checksum_mode checksum mode @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetPaddingSize",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "padding_size",
+          "objc_type": "uint64_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 420,
+      "doc": "@abstract Set context padding size @discussion When encrypting, the final archive size will be multiple of \\p padding_size. Valid byte sizes are \u003e= AEA_CONTEXT_PADDING_MIN_SIZE. Special padding schemes are one of AEA_CONTEXT_PADDING_*, including AEA_CONTEXT_PADDING_NONE (0) for no padding. @param context target object @param padding_size requested padding size in bytes if \u003e= AEA_CONTEXT_PADDING_MIN_SIZE, or a special padding scheme AEA_CONTEXT_PADDING_* @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetAuthData",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "auth_data",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "auth_data_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 437,
+      "doc": "@abstract Set context auth data @discussion The auth data is an opaque data blob stored unencrypted in the archive prologue. @param context target object @param auth_data auth data (raw data) @param auth_data_size auth data size (bytes) @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetAuthData",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "auth_data",
+          "objc_type": "AEAAuthData _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 459,
+      "doc": "@abstract Set context auth data from encoded key-\u003evalue blob @param context target object @param auth_data auth data blob @return 0 on success, and a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetSignatureEncryptionKey",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "key_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 486,
+      "doc": "@abstract Set context signature encryption key @discussion The signature encryption key can be obtained from a context after it has been used to open an encryption stream.  The signature encryption key allows signing the stream after it is closed, without requiring the encryption credentials. i.e. the stream can be signed offline by a process not able to decrypt it. @param context target object @param key key data (raw data) @param key_size key size (bytes) @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetSymmetricKey",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "key_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 513,
+      "doc": "@abstract Set context symmetric key @discussion Stores a copy of \\p key in \\p context.  Required to encrypt/decrypt a stream when encryption mode is \\b SYMMETRIC. An internal size range is enforced for the key. The caller is expected to enforce key strength policies. @param context target object @param key key (raw data) @param key_size key size (bytes) @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetPassword",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "password",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "password_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 540,
+      "doc": "@abstract Set context password @discussion Stores a copy of \\p password in \\p context.  Required to encrypt/decrypt a stream when encryption mode is \\b SCRYPT. An internal size range is enforced for the password. The caller is expected to enforce password strength policies. @param context target object @param password password (raw data) @param password_size password size (bytes) @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetSigningPublicKey",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "key_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 567,
+      "doc": "@abstract Set context signing public key (x9.63 representation) @discussion Stores a copy of \\p key in \\p context.  This is required to open the stream when signature mode is \\b ECDSA_P256.  The corresponding private key must be used to sign the archive, and the same key must be passed when opening the archive for decryption. @param context target object @param key key @param key_size key size (bytes) @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetSigningPrivateKey",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "key_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 594,
+      "doc": "@abstract Set context signing private key (x9.63 representation) @discussion Stores a copy of \\p key in \\p context.  This can be passed instead of the signing public key to an encryption stream when signature mode is \\b ECDSA_P256.  In that case, the encryption stream will be signed on close. The corresponding public key must be used to decrypt the stream and verify the signature. @param context target object @param key key @param key_size key size (bytes) @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetRecipientPublicKey",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "key_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 620,
+      "doc": "@abstract Set context recipient public key (x9.63 representation) @discussion Stores a copy of \\p key in \\p context.  This is required to encrypt a stream when encryption mode is \\b ECDHE_P256.  The corresponding private key must be used to decrypt the archive. @param context target object @param key key @param key_size key size (bytes) @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetRecipientPrivateKey",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "key_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 646,
+      "doc": "@abstract Set context recipient private key (x9.63 representation) @discussion Stores a copy of \\p key in \\p context.  This is required to decrypt a stream when encryption mode is \\b ECDHE_P256. @param context target object @param key key @param key_size key size (bytes) @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextSetMainKey",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "const uint8_t * _Nonnull"
+        },
+        {
+          "name": "key_size",
+          "objc_type": "size_t"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAContext.h",
+      "sdk_line": 673,
+      "doc": "@abstract Set archive main key @discussion The main key can be obtained from a context after it has been used to open an encryption stream.  The main key allows re-opening the stream to append data to it, and is not intended to be communicated to the archive recipients, or third parties. @param context target object @param key key data (raw data) @param key_size key size (bytes) @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAEncryptionOutputStreamOpen",
+      "args": [
+        {
+          "name": "encrypted_stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AEAStreams.h",
+      "sdk_line": 37,
+      "doc": "@abstract Create a new encryption output stream @discussion The stream receiving the data \\p encrypted_stream must implement random access \\p pwrite. The returned stream provides sequential \\p write only. If the signature mode is not \\b NONE, the archive must eventually be signed, either on close if the private signing key is provided in \\p context, or after closing, if only the public signing key is available at this point.  To sign the archive after the stream is closed, it is necessary to query the signature encryption key, and pass it with the context when calling \\p AEAStreamSign. @param encrypted_stream receives encrypted data, only \\p pwrite is called @param context provides parameters, keys, and associated data @param flags stream flags @param n_threads is the number of worker threads, 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AEAEncryptionOutputStreamOpenExisting",
+      "args": [
+        {
+          "name": "encrypted_stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AEAStreams.h",
+      "sdk_line": 64,
+      "doc": "@abstract Create a new encryption output stream appending data to an existing archive @discussion The stream receiving the data \\p encrypted_stream must implement random access \\p pread,pwrite. The returned stream provides sequential \\p write only.  No signature verification is done when the archive is opened with this function. \\p context must have been created from the same \\p encrypted_stream.  If the call is successful, \\p context is updated with the compression algorithm and block size. If the signature mode is not \\b NONE, the archive must be signed again, either on close if the private signing key is provided, or offline if only the public signing key is provided. @param encrypted_stream is the encrypted data stream, \\p pread,pwrite will be called @param context provides parameters, keys, and associated data @param flags stream flags @param n_threads is the number of worker threads, 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AEAEncryptionOutputStreamCloseAndUpdateContext",
+      "args": [
+        {
+          "name": "stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAStreams.h",
+      "sdk_line": 84,
+      "doc": "@abstract Close encryption output stream and collect archive attributes @discussion \\p stream must be an encryption stream. This function will close the stream, as if AAByteStreamClose(stream) were called, and collect the archive raw size, archive container size, and archive identifier in \\p context. Other fields in \\p context are not modified. @param stream is the encryption output stream @param context receives attributes @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEAContextDecryptAttributes",
+      "args": [
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAStreams.h",
+      "sdk_line": 107,
+      "doc": "@abstract Validate decryption keys, and collect archive attributes @discussion \\p context must have been created from an encrypted stream.  If the call is successful, \\p context is updated with the decrypted archive attributes (raw size, container size, compression algorithm, block size, etc.)  If the call fails, it indicates the provided credentials do not match the archive prologue stored in `context`, either because the keys are invalid, or the prologue could not be authenticated. The same validation and update is done when opening a decryption input stream: it is not necessary to call this function before `AEADecryptionInputStreamOpen` or `AEADecryptionRandomAccessInputStreamOpen`. @param context provides archive encrypted prologue and credentials, receives decrypted attributes @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AEADecryptionInputStreamOpen",
+      "args": [
+        {
+          "name": "encrypted_stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AEAStreams.h",
+      "sdk_line": 133,
+      "doc": "@abstract Create a new sequential decryption input stream @discussion The stream providing the data \\p encrypted_stream must implement sequential \\p read. The returned stream provides sequential \\p read only. When this function is called, \\p encrypted_stream is expected to be pointing the first byte after the prologue loaded in \\p context.  This will be the case when \\p context is created with \\p AEAContextCreateWithEncryptedStream \\p context must have been created from the same \\p encrypted_stream.  If the call is successful, \\p context is updated with the archive attributes. @param encrypted_stream provides encrypted data, only \\p read is called @param context provides parameters, keys, and associated data @param flags stream flags @param n_threads is the number of worker threads, 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AEADecryptionRandomAccessInputStreamOpen",
+      "args": [
+        {
+          "name": "encrypted_stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        },
+        {
+          "name": "alloc_limit",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "flags",
+          "objc_type": "AAFlagSet"
+        },
+        {
+          "name": "n_threads",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "AAByteStream  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "AEAStreams.h",
+      "sdk_line": 163,
+      "doc": "@abstract Create a new random access decryption input stream @discussion The stream providing the data \\p encrypted_stream must implement \\p read, \\p pread and \\p seek. The returned stream is read-only and implements \\p read, \\p pread and \\p seek. The size specified in \\p alloc_limit is the requested limit for memory allocation. Depending on the block size and compressor algorithm, we may have to allocate more memory in some cases.  Increasing this value allows more blocks to be cached, and increases performance.  Set it to 0 to request minimal allocation, and to SIZE_MAX to request best performance. The returned stream MUST be closed before \\p encrypted_stream \\p context must have been created from the same \\p encrypted_stream.  If the call is successful, \\p context is updated with the archive attributes. @param encrypted_stream provides encrypted data, must implement \\p pread. @param context provides parameters, keys, and associated data @param alloc_limit is the requested max memory allocation size @param flags stream flags @param n_threads is the number of worker threads, 0 for default @return a new stream instance on success, and NULL on failure"
+    },
+    {
+      "name": "AEAStreamSign",
+      "args": [
+        {
+          "name": "encrypted_stream",
+          "objc_type": "AAByteStream _Nonnull"
+        },
+        {
+          "name": "context",
+          "objc_type": "AEAContext _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "AEAStreams.h",
+      "sdk_line": 193,
+      "doc": "@abstract Sign an encrypted_stream @discussion Must be called on a ByteStream with random read-write access to an encrypted stream, _after_ the stream has been written and closed. \\p context needs to be created from the same stream, and populated with the required keys before this call. The function signs the archive prologue (replacing the signature segment with 0x00), using the \\p signing_private_key and \\p signing_encryption_key in \\p context then stores the encrypted signature back in the archive.  Other data in the archive is left unchanged. The private key used to sign the archive must match the signing public key used to create the archive, or unlocking the archive will fail. @param encrypted_stream is the stream to sign @param context provides parameters, keys, and associated data @return 0 on success, a negative error code on failure"
+    },
+    {
+      "name": "AAByteStreamAbort",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AppleArchive.h",
+      "sdk_line": 66
+    },
+    {
+      "name": "AACustomByteStreamSetAbortProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAByteStream"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAByteStreamCancelProc"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AppleArchive.h",
+      "sdk_line": 71
+    },
+    {
+      "name": "AAArchiveStreamAbort",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AppleArchive.h",
+      "sdk_line": 76
+    },
+    {
+      "name": "AACustomArchiveStreamSetAbortProc",
+      "args": [
+        {
+          "name": "s",
+          "objc_type": "AAArchiveStream"
+        },
+        {
+          "name": "proc",
+          "objc_type": "AAArchiveStreamCancelProc"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "AppleArchive.h",
+      "sdk_line": 81
+    }
+  ],
+  "externs": null,
+  "block_types": {},
+  "typedefs": {
+    "AAACEFlagSet": "uint64_t",
+    "AAACEPermSet": "uint64_t",
+    "AAACEQualifierType": "uint32_t",
+    "AAACETag": "uint32_t",
+    "AAAccessControlEntry": "struct AAAccessControlEntry",
+    "AAArchiveStream": "struct AAArchiveStream_impl *",
+    "AAArchiveStreamCancelProc": "void (*)(void * _Nullable)",
+    "AAArchiveStreamCloseProc": "int (*)(void * _Nullable)",
+    "AAArchiveStreamReadBlobProc": "int (*)(void * _Nullable, AAFieldKey, void * _Nonnull, size_t)",
+    "AAArchiveStreamReadHeaderProc": "int (*)(void * _Nullable, AAHeader  _Nullable * _Nonnull)",
+    "AAArchiveStreamWriteBlobProc": "int (*)(void * _Nullable, AAFieldKey, const void * _Nonnull, size_t)",
+    "AAArchiveStreamWriteHeaderProc": "int (*)(void * _Nullable, AAHeader _Nonnull)",
+    "AAByteStream": "struct AAByteStream_impl *",
+    "AAByteStreamCancelProc": "void (*)(void * _Nullable)",
+    "AAByteStreamCloseProc": "int (*)(void * _Nullable)",
+    "AAByteStreamPReadProc": "ssize_t (*)(void * _Nullable, void * _Nonnull, size_t, off_t)",
+    "AAByteStreamPWriteProc": "ssize_t (*)(void * _Nullable, const void * _Nonnull, size_t, off_t)",
+    "AAByteStreamReadProc": "ssize_t (*)(void * _Nullable, void * _Nonnull, size_t)",
+    "AAByteStreamSeekProc": "off_t (*)(void * _Nullable, off_t, int)",
+    "AAByteStreamWriteProc": "ssize_t (*)(void * _Nullable, const void * _Nonnull, size_t)",
+    "AACompressionAlgorithm": "uint32_t",
+    "AAEntryACLBlob": "struct AAEntryACLBlob_impl *",
+    "AAEntryAttributes": "struct AAEntryAttributes",
+    "AAEntryMessage": "uint32_t",
+    "AAEntryMessageProc": "int (*)(void * _Nullable, AAEntryMessage, const char * _Nonnull, void * _Nullable)",
+    "AAEntryType": "uint32_t",
+    "AAEntryXATBlob": "struct AAEntryXATBlob_impl *",
+    "AAFieldKey": "union AAFieldKey",
+    "AAFieldKeySet": "struct AAFieldKeySet_impl *",
+    "AAFieldType": "uint32_t",
+    "AAFlagSet": "uint64_t",
+    "AAHashFunction": "uint32_t",
+    "AAHeader": "struct AAHeader_impl *",
+    "AAPathList": "struct AAPathList_impl *",
+    "AEAAuthData": "struct AEAAuthData_impl *",
+    "AEAContext": "struct AEAContext_impl *",
+    "AEAContextField": "uint32_t",
+    "AEAContextFieldRepresentation": "uint32_t",
+    "AEAProfile": "uint32_t",
+    "Class": "Class",
+    "SEL": "SEL *",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_nl_item": "int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wctrans_t": "int",
+    "__darwin_wctype_t": "__uint32_t",
+    "__darwin_wint_t": "int",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "blkcnt_t": "__darwin_blkcnt_t",
+    "blksize_t": "__darwin_blksize_t",
+    "caddr_t": "char *",
+    "clock_t": "__darwin_clock_t",
+    "clockid_t": "enum clockid_t",
+    "daddr_t": "int32_t",
+    "dev_t": "__darwin_dev_t",
+    "errno_t": "int",
+    "fattributiontag_t": "struct fattributiontag",
+    "fchecklv_t": "struct fchecklv",
+    "fd_mask": "__int32_t",
+    "fd_set": "struct fd_set",
+    "fgetsigsinfo_t": "struct fgetsigsinfo",
+    "filesec_property_t": "enum filesec_property_t",
+    "filesec_t": "struct _filesec *",
+    "fixpt_t": "u_int32_t",
+    "fpunchhole_t": "struct fpunchhole",
+    "fsblkcnt_t": "__darwin_fsblkcnt_t",
+    "fsfilcnt_t": "__darwin_fsfilcnt_t",
+    "fsignatures_t": "struct fsignatures",
+    "fspecread_t": "struct fspecread",
+    "fstore_t": "struct fstore",
+    "fsupplement_t": "struct fsupplement",
+    "ftrimactivefile_t": "struct ftrimactivefile",
+    "gid_t": "__darwin_gid_t",
+    "id": "id",
+    "id_t": "__darwin_id_t",
+    "in_addr_t": "__uint32_t",
+    "in_port_t": "__uint16_t",
+    "ino64_t": "__darwin_ino64_t",
+    "ino_t": "__darwin_ino_t",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "key_t": "__int32_t",
+    "max_align_t": "long double",
+    "mode_t": "__darwin_mode_t",
+    "nlink_t": "__uint16_t",
+    "off_t": "__darwin_off_t",
+    "pid_t": "__darwin_pid_t",
+    "pthread_attr_t": "__darwin_pthread_attr_t",
+    "pthread_cond_t": "__darwin_pthread_cond_t",
+    "pthread_condattr_t": "__darwin_pthread_condattr_t",
+    "pthread_key_t": "__darwin_pthread_key_t",
+    "pthread_mutex_t": "__darwin_pthread_mutex_t",
+    "pthread_mutexattr_t": "__darwin_pthread_mutexattr_t",
+    "pthread_once_t": "__darwin_pthread_once_t",
+    "pthread_rwlock_t": "__darwin_pthread_rwlock_t",
+    "pthread_rwlockattr_t": "__darwin_pthread_rwlockattr_t",
+    "pthread_t": "__darwin_pthread_t",
+    "ptrdiff_t": "long",
+    "qaddr_t": "quad_t *",
+    "quad_t": "int64_t",
+    "register_t": "int64_t",
+    "rsize_t": "unsigned long",
+    "segsz_t": "int32_t",
+    "sigset_t": "__darwin_sigset_t",
+    "size_t": "unsigned long",
+    "ssize_t": "__darwin_ssize_t",
+    "suseconds_t": "__darwin_suseconds_t",
+    "swblk_t": "int32_t",
+    "syscall_arg_t": "u_int64_t",
+    "time_t": "__darwin_time_t",
+    "u_char": "unsigned char",
+    "u_int": "unsigned int",
+    "u_int16_t": "unsigned short",
+    "u_int32_t": "unsigned int",
+    "u_int64_t": "unsigned long long",
+    "u_int8_t": "unsigned char",
+    "u_long": "unsigned long",
+    "u_quad_t": "u_int64_t",
+    "u_short": "unsigned short",
+    "uid_t": "__darwin_uid_t",
+    "uint": "unsigned int",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long",
+    "useconds_t": "__darwin_useconds_t",
+    "user_addr_t": "u_int64_t",
+    "user_long_t": "int64_t",
+    "user_off_t": "int64_t",
+    "user_size_t": "u_int64_t",
+    "user_ssize_t": "int64_t",
+    "user_time_t": "int64_t",
+    "user_ulong_t": "u_int64_t",
+    "ushort": "unsigned short",
+    "uuid_t": "__darwin_uuid_t",
+    "wchar_t": "int"
+  },
+  "link_lib": "AppleArchive",
+  "header": "AppleArchive/AppleArchive.h"
+}

@@ -1,0 +1,3369 @@
+{
+  "framework": "CoreAudioTypes",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {
+    "AVAudioSessionErrorCode": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AVAudioSessionErrorCodeNone",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeMediaServicesFailed",
+          "value": "1836282486",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeIsBusy",
+          "value": "560030580",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeIncompatibleCategory",
+          "value": "560161140",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeCannotInterruptOthers",
+          "value": "560557684",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeMissingEntitlement",
+          "value": "1701737535",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeSiriIsRecording",
+          "value": "1936290409",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeCannotStartPlaying",
+          "value": "561015905",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeCannotStartRecording",
+          "value": "561145187",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeBadParam",
+          "value": "-50",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeInsufficientPriority",
+          "value": "561017449",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeResourceNotAvailable",
+          "value": "561145203",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeUnspecified",
+          "value": "2003329396",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeExpiredSession",
+          "value": "561210739",
+          "availability": {}
+        },
+        {
+          "name": "AVAudioSessionErrorCodeSessionNotActive",
+          "value": "1768841571",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/AudioSessionTypes.h",
+      "is_extensible": true
+    },
+    "AudioChannelBitmap": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kAudioChannelBit_Left",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_Right",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_Center",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_LFEScreen",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_LeftSurround",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_RightSurround",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_LeftCenter",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_RightCenter",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_CenterSurround",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_LeftSurroundDirect",
+          "value": "512",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_RightSurroundDirect",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_TopCenterSurround",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_VerticalHeightLeft",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_VerticalHeightCenter",
+          "value": "8192",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_VerticalHeightRight",
+          "value": "16384",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_TopBackLeft",
+          "value": "32768",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_TopBackCenter",
+          "value": "65536",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_TopBackRight",
+          "value": "131072",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_LeftTopFront",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_CenterTopFront",
+          "value": "8192",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_RightTopFront",
+          "value": "16384",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_LeftTopMiddle",
+          "value": "2097152",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_CenterTopMiddle",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_RightTopMiddle",
+          "value": "8388608",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_LeftTopRear",
+          "value": "16777216",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_CenterTopRear",
+          "value": "33554432",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelBit_RightTopRear",
+          "value": "67108864",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "AudioChannelCoordinateIndex": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kAudioChannelCoordinates_LeftRight",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelCoordinates_BackFront",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelCoordinates_DownUp",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelCoordinates_Azimuth",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelCoordinates_Elevation",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelCoordinates_Distance",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "is_extensible": true
+    },
+    "AudioChannelFlags": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kAudioChannelFlags_AllOff",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelFlags_RectangularCoordinates",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelFlags_SphericalCoordinates",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelFlags_Meters",
+          "value": "4",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "AudioTimeStampFlags": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kAudioTimeStampNothingValid",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kAudioTimeStampSampleTimeValid",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kAudioTimeStampHostTimeValid",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kAudioTimeStampRateScalarValid",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kAudioTimeStampWordClockTimeValid",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "kAudioTimeStampSMPTETimeValid",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "kAudioTimeStampSampleHostTimeValid",
+          "value": "3",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "MPEG4ObjectID": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kMPEG4Object_AAC_Main",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kMPEG4Object_AAC_LC",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kMPEG4Object_AAC_SSR",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "kMPEG4Object_AAC_LTP",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kMPEG4Object_AAC_SBR",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "kMPEG4Object_AAC_Scalable",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "kMPEG4Object_TwinVQ",
+          "value": "7",
+          "availability": {}
+        },
+        {
+          "name": "kMPEG4Object_CELP",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "kMPEG4Object_HVXC",
+          "value": "9",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "is_extensible": true
+    },
+    "SMPTETimeFlags": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kSMPTETimeUnknown",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeValid",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeRunning",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "SMPTETimeType": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kSMPTETimeType24",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType25",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType30Drop",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType30",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType2997",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType2997Drop",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType60",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType5994",
+          "value": "7",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType60Drop",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType5994Drop",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType50",
+          "value": "10",
+          "availability": {}
+        },
+        {
+          "name": "kSMPTETimeType2398",
+          "value": "11",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "is_extensible": true
+    },
+    "_anon_AVAudioSessionErrorInsufficientPriority": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "AVAudioSessionErrorInsufficientPriority",
+          "value": "561017449",
+          "availability": {
+            "unavailable": true
+          }
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kAudioChannelLabel_Unknown": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kAudioChannelLabel_Unknown",
+          "value": "4294967295",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Unused",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_UseCoordinates",
+          "value": "100",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Left",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Right",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Center",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LFEScreen",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftSurround",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightSurround",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftCenter",
+          "value": "7",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightCenter",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_CenterSurround",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftSurroundDirect",
+          "value": "10",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightSurroundDirect",
+          "value": "11",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_TopCenterSurround",
+          "value": "12",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_VerticalHeightLeft",
+          "value": "13",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_VerticalHeightCenter",
+          "value": "14",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_VerticalHeightRight",
+          "value": "15",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_TopBackLeft",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_TopBackCenter",
+          "value": "17",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_TopBackRight",
+          "value": "18",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RearSurroundLeft",
+          "value": "33",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RearSurroundRight",
+          "value": "34",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftWide",
+          "value": "35",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightWide",
+          "value": "36",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LFE2",
+          "value": "37",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftTotal",
+          "value": "38",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightTotal",
+          "value": "39",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HearingImpaired",
+          "value": "40",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Narration",
+          "value": "41",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Mono",
+          "value": "42",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_DialogCentricMix",
+          "value": "43",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_CenterSurroundDirect",
+          "value": "44",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Haptic",
+          "value": "45",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftTopFront",
+          "value": "13",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_CenterTopFront",
+          "value": "14",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightTopFront",
+          "value": "15",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftTopMiddle",
+          "value": "49",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_CenterTopMiddle",
+          "value": "12",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightTopMiddle",
+          "value": "51",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftTopRear",
+          "value": "52",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_CenterTopRear",
+          "value": "53",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightTopRear",
+          "value": "54",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftSideSurround",
+          "value": "55",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightSideSurround",
+          "value": "56",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftBottom",
+          "value": "57",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightBottom",
+          "value": "58",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_CenterBottom",
+          "value": "59",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftTopSurround",
+          "value": "60",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightTopSurround",
+          "value": "61",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LFE3",
+          "value": "62",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftBackSurround",
+          "value": "63",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightBackSurround",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_LeftEdgeOfScreen",
+          "value": "65",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_RightEdgeOfScreen",
+          "value": "66",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Ambisonic_W",
+          "value": "200",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Ambisonic_X",
+          "value": "201",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Ambisonic_Y",
+          "value": "202",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Ambisonic_Z",
+          "value": "203",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_MS_Mid",
+          "value": "204",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_MS_Side",
+          "value": "205",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_XY_X",
+          "value": "206",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_XY_Y",
+          "value": "207",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_BinauralLeft",
+          "value": "208",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_BinauralRight",
+          "value": "209",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HeadphonesLeft",
+          "value": "301",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HeadphonesRight",
+          "value": "302",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_ClickTrack",
+          "value": "304",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_ForeignLanguage",
+          "value": "305",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete",
+          "value": "400",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_0",
+          "value": "65536",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_1",
+          "value": "65537",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_2",
+          "value": "65538",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_3",
+          "value": "65539",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_4",
+          "value": "65540",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_5",
+          "value": "65541",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_6",
+          "value": "65542",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_7",
+          "value": "65543",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_8",
+          "value": "65544",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_9",
+          "value": "65545",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_10",
+          "value": "65546",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_11",
+          "value": "65547",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_12",
+          "value": "65548",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_13",
+          "value": "65549",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_14",
+          "value": "65550",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_15",
+          "value": "65551",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Discrete_65535",
+          "value": "131071",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN",
+          "value": "500",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_0",
+          "value": "131072",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_1",
+          "value": "131073",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_2",
+          "value": "131074",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_3",
+          "value": "131075",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_4",
+          "value": "131076",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_5",
+          "value": "131077",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_6",
+          "value": "131078",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_7",
+          "value": "131079",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_8",
+          "value": "131080",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_9",
+          "value": "131081",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_10",
+          "value": "131082",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_11",
+          "value": "131083",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_12",
+          "value": "131084",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_13",
+          "value": "131085",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_14",
+          "value": "131086",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_15",
+          "value": "131087",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_ACN_65024",
+          "value": "196096",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_SN3D",
+          "value": "131072",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_HOA_N3D",
+          "value": "196608",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_Object",
+          "value": "262144",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_BeginReserved",
+          "value": "4026531840",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLabel_EndReserved",
+          "value": "4294967294",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kAudioChannelLayoutTag_UseChannelDescriptions": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kAudioChannelLayoutTag_UseChannelDescriptions",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_UseChannelBitmap",
+          "value": "65536",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Mono",
+          "value": "6553601",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Stereo",
+          "value": "6619138",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_StereoHeadphones",
+          "value": "6684674",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MatrixStereo",
+          "value": "6750210",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MidSide",
+          "value": "6815746",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_XY",
+          "value": "6881282",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Binaural",
+          "value": "6946818",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Ambisonic_B_Format",
+          "value": "7012356",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Quadraphonic",
+          "value": "7077892",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Pentagonal",
+          "value": "7143429",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Hexagonal",
+          "value": "7208966",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Octagonal",
+          "value": "7274504",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Cube",
+          "value": "7340040",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_1_0",
+          "value": "6553601",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_2_0",
+          "value": "6619138",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_3_0_A",
+          "value": "7405571",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_3_0_B",
+          "value": "7471107",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_4_0_A",
+          "value": "7536644",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_4_0_B",
+          "value": "7602180",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_5_0_A",
+          "value": "7667717",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_5_0_B",
+          "value": "7733253",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_5_0_C",
+          "value": "7798789",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_5_0_D",
+          "value": "7864325",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_5_1_A",
+          "value": "7929862",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_5_1_B",
+          "value": "7995398",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_5_1_C",
+          "value": "8060934",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_5_1_D",
+          "value": "8126470",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_6_1_A",
+          "value": "8192007",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_7_1_A",
+          "value": "8257544",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_7_1_B",
+          "value": "8323080",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_7_1_C",
+          "value": "8388616",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Emagic_Default_7_1",
+          "value": "8454152",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_SMPTE_DTV",
+          "value": "8519688",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_ITU_1_0",
+          "value": "6553601",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_ITU_2_0",
+          "value": "6619138",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_ITU_2_1",
+          "value": "8585219",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_ITU_2_2",
+          "value": "8650756",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_ITU_3_0",
+          "value": "7405571",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_ITU_3_1",
+          "value": "7536644",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_ITU_3_2",
+          "value": "7667717",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_ITU_3_2_1",
+          "value": "7929862",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_ITU_3_4_1",
+          "value": "8388616",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_0",
+          "value": "6553601",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_1",
+          "value": "6619138",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_2",
+          "value": "8585219",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_3",
+          "value": "8650756",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_4",
+          "value": "8716291",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_5",
+          "value": "8781828",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_6",
+          "value": "8847365",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_7",
+          "value": "7405571",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_8",
+          "value": "7536644",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_9",
+          "value": "7667717",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_10",
+          "value": "8912900",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_11",
+          "value": "8978437",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_12",
+          "value": "7929862",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_13",
+          "value": "7536644",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_14",
+          "value": "7667717",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_15",
+          "value": "8912900",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_16",
+          "value": "8978437",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_17",
+          "value": "7929862",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_18",
+          "value": "9043973",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_19",
+          "value": "7733253",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DVD_20",
+          "value": "7995398",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_4",
+          "value": "7077892",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_5",
+          "value": "7143429",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_6",
+          "value": "7208966",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_8",
+          "value": "7274504",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_5_0",
+          "value": "7733253",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_6_0",
+          "value": "9109510",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_7_0",
+          "value": "9175047",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_7_0_Front",
+          "value": "9699335",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_5_1",
+          "value": "7929862",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_6_1",
+          "value": "8192007",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_7_1",
+          "value": "8388616",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AudioUnit_7_1_Front",
+          "value": "8257544",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_3_0",
+          "value": "7471107",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_Quadraphonic",
+          "value": "7077892",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_4_0",
+          "value": "7602180",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_5_0",
+          "value": "7864325",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_5_1",
+          "value": "8126470",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_6_0",
+          "value": "9240582",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_6_1",
+          "value": "9306119",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_7_0",
+          "value": "9371655",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_7_1",
+          "value": "8323080",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_7_1_B",
+          "value": "11993096",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_7_1_C",
+          "value": "12058632",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AAC_Octagonal",
+          "value": "9437192",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_TMH_10_2_std",
+          "value": "9502736",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_TMH_10_2_full",
+          "value": "9568277",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AC3_1_0_1",
+          "value": "9764866",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AC3_3_0",
+          "value": "9830403",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AC3_3_1",
+          "value": "9895940",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AC3_3_0_1",
+          "value": "9961476",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AC3_2_1_1",
+          "value": "10027012",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_AC3_3_1_1",
+          "value": "10092549",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC_6_0_A",
+          "value": "10158086",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC_7_0_A",
+          "value": "10223623",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_6_1_A",
+          "value": "10289159",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_6_1_B",
+          "value": "10354695",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_6_1_C",
+          "value": "10420231",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_7_1_A",
+          "value": "10485768",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_7_1_B",
+          "value": "10551304",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_7_1_C",
+          "value": "10616840",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_7_1_D",
+          "value": "10682376",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_7_1_E",
+          "value": "10747912",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_7_1_F",
+          "value": "10813448",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_7_1_G",
+          "value": "10878984",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EAC3_7_1_H",
+          "value": "10944520",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_3_1",
+          "value": "11010052",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_4_1",
+          "value": "11075589",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_6_0_A",
+          "value": "11141126",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_6_0_B",
+          "value": "11206662",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_6_0_C",
+          "value": "11272198",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_6_1_A",
+          "value": "11337735",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_6_1_B",
+          "value": "11403271",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_6_1_C",
+          "value": "11468807",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_7_0",
+          "value": "11534343",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_7_1",
+          "value": "11599880",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_8_0_A",
+          "value": "11665416",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_8_0_B",
+          "value": "11730952",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_8_1_A",
+          "value": "11796489",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_8_1_B",
+          "value": "11862025",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DTS_6_1_D",
+          "value": "11927559",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_WAVE_2_1",
+          "value": "8716291",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_WAVE_3_0",
+          "value": "7405571",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_WAVE_4_0_A",
+          "value": "8650756",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_WAVE_4_0_B",
+          "value": "12124164",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_WAVE_5_0_A",
+          "value": "7667717",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_WAVE_5_0_B",
+          "value": "12189701",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_WAVE_5_1_A",
+          "value": "7929862",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_WAVE_5_1_B",
+          "value": "12255238",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_WAVE_6_1",
+          "value": "12320775",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_WAVE_7_1",
+          "value": "12386312",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_HOA_ACN_SN3D",
+          "value": "12451840",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_HOA_ACN_N3D",
+          "value": "12517376",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Atmos_5_1_2",
+          "value": "12713992",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Atmos_5_1_4",
+          "value": "12779530",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Atmos_7_1_2",
+          "value": "12845066",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Atmos_7_1_4",
+          "value": "12582924",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Atmos_9_1_6",
+          "value": "12648464",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_Mono",
+          "value": "6553601",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_Stereo",
+          "value": "6619138",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_Quadraphonic",
+          "value": "7077892",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_4_0_A",
+          "value": "7536644",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_4_0_B",
+          "value": "7602180",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_4_0_C",
+          "value": "12910596",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_5_0_A",
+          "value": "7667717",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_5_0_B",
+          "value": "7733253",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_5_0_C",
+          "value": "7798789",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_5_0_D",
+          "value": "7864325",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_5_1_A",
+          "value": "7929862",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_5_1_B",
+          "value": "7995398",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_5_1_C",
+          "value": "8060934",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_5_1_D",
+          "value": "8126470",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_6_0_A",
+          "value": "9240582",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_6_0_B",
+          "value": "12976134",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_6_0_C",
+          "value": "9109510",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_6_1_A",
+          "value": "9306119",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_6_1_B",
+          "value": "13041671",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_6_1_C",
+          "value": "8192007",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_6_1_D",
+          "value": "13107207",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_7_1_A",
+          "value": "8388616",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_7_1_B",
+          "value": "13172744",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_7_1_C",
+          "value": "8388616",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_7_1_SDDS_A",
+          "value": "8257544",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_7_1_SDDS_B",
+          "value": "8323080",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_7_1_SDDS_C",
+          "value": "8454152",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_Atmos_5_1_2",
+          "value": "12713992",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_Atmos_5_1_4",
+          "value": "12779530",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_Atmos_7_1_2",
+          "value": "12845066",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_Atmos_7_1_4_A",
+          "value": "12582924",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_Atmos_7_1_4_B",
+          "value": "13238284",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Logic_Atmos_7_1_6",
+          "value": "13303822",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_DiscreteInOrder",
+          "value": "9633792",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_1",
+          "value": "6553601",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_2",
+          "value": "6619138",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_3",
+          "value": "7405571",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_4",
+          "value": "7536644",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_5",
+          "value": "7667717",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_6",
+          "value": "7929862",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_7",
+          "value": "8323080",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_9",
+          "value": "8585219",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_10",
+          "value": "8650756",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_11",
+          "value": "8192007",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_12",
+          "value": "8388616",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_13",
+          "value": "13369368",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_14",
+          "value": "13434888",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_15",
+          "value": "13500428",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_16",
+          "value": "13565962",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_17",
+          "value": "13631500",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_18",
+          "value": "13697038",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_19",
+          "value": "13762572",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_CICP_20",
+          "value": "13828110",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Ogg_3_0",
+          "value": "9830403",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Ogg_4_0",
+          "value": "12124164",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Ogg_5_0",
+          "value": "13893637",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Ogg_5_1",
+          "value": "13959174",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Ogg_6_1",
+          "value": "14024711",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Ogg_7_1",
+          "value": "14090248",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_5_0_E",
+          "value": "14155781",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_5_1_E",
+          "value": "14221318",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_6_1_B",
+          "value": "14286855",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_MPEG_7_1_D",
+          "value": "14352392",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_BeginReserved",
+          "value": "4026531840",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_EndReserved",
+          "value": "4294901759",
+          "availability": {}
+        },
+        {
+          "name": "kAudioChannelLayoutTag_Unknown",
+          "value": "4294901760",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kAudioFormatFlagIsFloat": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kAudioFormatFlagIsFloat",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFlagIsBigEndian",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFlagIsSignedInteger",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFlagIsPacked",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFlagIsAlignedHigh",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFlagIsNonInterleaved",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFlagIsNonMixable",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFlagsAreAllClear",
+          "value": "2147483648",
+          "availability": {}
+        },
+        {
+          "name": "kLinearPCMFormatFlagIsFloat",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kLinearPCMFormatFlagIsBigEndian",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kLinearPCMFormatFlagIsSignedInteger",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "kLinearPCMFormatFlagIsPacked",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "kLinearPCMFormatFlagIsAlignedHigh",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "kLinearPCMFormatFlagIsNonInterleaved",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "kLinearPCMFormatFlagIsNonMixable",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "kLinearPCMFormatFlagsSampleFractionShift",
+          "value": "7",
+          "availability": {}
+        },
+        {
+          "name": "kLinearPCMFormatFlagsSampleFractionMask",
+          "value": "8064",
+          "availability": {}
+        },
+        {
+          "name": "kLinearPCMFormatFlagsAreAllClear",
+          "value": "2147483648",
+          "availability": {}
+        },
+        {
+          "name": "kAppleLosslessFormatFlag_16BitSourceData",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kAppleLosslessFormatFlag_20BitSourceData",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kAppleLosslessFormatFlag_24BitSourceData",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "kAppleLosslessFormatFlag_32BitSourceData",
+          "value": "4",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kAudioFormatFlagsNativeEndian": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kAudioFormatFlagsNativeEndian",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFlagsCanonical",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFlagsAudioUnitCanonical",
+          "value": "41",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFlagsNativeFloatPacked",
+          "value": "9",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kAudioFormatLinearPCM": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kAudioFormatLinearPCM",
+          "value": "1819304813",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatAC3",
+          "value": "1633889587",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormat60958AC3",
+          "value": "1667326771",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatAppleIMA4",
+          "value": "1768775988",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4AAC",
+          "value": "1633772320",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4CELP",
+          "value": "1667591280",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4HVXC",
+          "value": "1752594531",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4TwinVQ",
+          "value": "1953986161",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMACE3",
+          "value": "1296122675",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMACE6",
+          "value": "1296122678",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatULaw",
+          "value": "1970037111",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatALaw",
+          "value": "1634492791",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatQDesign",
+          "value": "1363430723",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatQDesign2",
+          "value": "1363430706",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatQUALCOMM",
+          "value": "1365470320",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEGLayer1",
+          "value": "778924081",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEGLayer2",
+          "value": "778924082",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEGLayer3",
+          "value": "778924083",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatTimeCode",
+          "value": "1953066341",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMIDIStream",
+          "value": "1835623529",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatParameterValueStream",
+          "value": "1634760307",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatAppleLossless",
+          "value": "1634492771",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4AAC_HE",
+          "value": "1633772392",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4AAC_LD",
+          "value": "1633772396",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4AAC_ELD",
+          "value": "1633772389",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4AAC_ELD_SBR",
+          "value": "1633772390",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4AAC_ELD_V2",
+          "value": "1633772391",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4AAC_HE_V2",
+          "value": "1633772400",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEG4AAC_Spatial",
+          "value": "1633772403",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMPEGD_USAC",
+          "value": "1970495843",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatAMR",
+          "value": "1935764850",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatAMR_WB",
+          "value": "1935767394",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatAudible",
+          "value": "1096107074",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatiLBC",
+          "value": "1768710755",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatDVIIntelIMA",
+          "value": "1836253201",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatMicrosoftGSM",
+          "value": "1836253233",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatAES3",
+          "value": "1634038579",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatEnhancedAC3",
+          "value": "1700998451",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatFLAC",
+          "value": "1718378851",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatOpus",
+          "value": "1869641075",
+          "availability": {}
+        },
+        {
+          "name": "kAudioFormatAPAC",
+          "value": "1634754915",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kAudio_NoError": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kAudio_NoError",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kAudio_UnimplementedError",
+          "value": "-4",
+          "availability": {}
+        },
+        {
+          "name": "kAudio_FileNotFoundError",
+          "value": "-43",
+          "availability": {}
+        },
+        {
+          "name": "kAudio_FilePermissionError",
+          "value": "-54",
+          "availability": {}
+        },
+        {
+          "name": "kAudio_TooManyFilesOpenError",
+          "value": "-42",
+          "availability": {}
+        },
+        {
+          "name": "kAudio_BadFilePathError",
+          "value": "561017960",
+          "availability": {}
+        },
+        {
+          "name": "kAudio_ParamError",
+          "value": "-50",
+          "availability": {}
+        },
+        {
+          "name": "kAudio_MemFullError",
+          "value": "-108",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "ptrauth_key": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ptrauth_key_none",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asia",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asib",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asda",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asdb",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_code",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_code",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_data",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_data",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_return_address",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_frame_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_function_pointer",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_function",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_cxx_vtable_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_method_list_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_isa_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_super_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_sel_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_class_ro_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_descriptor_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_init_fini_pointer",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ptrauth.h",
+      "sdk_line": 13
+    }
+  },
+  "structs": {
+    "AudioBuffer": {
+      "fields": [
+        {
+          "name": "mNumberChannels",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mDataByteSize",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mData",
+          "objc_type": "void * _Nullable"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 163,
+      "doc": "@struct         AudioBuffer @abstract       A structure to hold a buffer of audio data. @var            mNumberChannels The number of interleaved channels in the buffer. @var            mDataByteSize The number of bytes in the buffer pointed at by mData. @var            mData A pointer to the buffer of audio data."
+    },
+    "AudioBufferList": {
+      "fields": [
+        {
+          "name": "mNumberBuffers",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mBuffers",
+          "objc_type": "AudioBuffer[1]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 179,
+      "doc": "@struct         AudioBufferList @abstract       A variable length array of AudioBuffer structures. @var            mNumberBuffers The number of AudioBuffers in the mBuffers array. @var            mBuffers A variable length array of AudioBuffers."
+    },
+    "AudioChannelDescription": {
+      "fields": [
+        {
+          "name": "mChannelLabel",
+          "objc_type": "AudioChannelLabel"
+        },
+        {
+          "name": "mChannelFlags",
+          "objc_type": "AudioChannelFlags"
+        },
+        {
+          "name": "mCoordinates",
+          "objc_type": "Float32[3]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 1518,
+      "doc": "@struct         AudioChannelDescription @abstract       This structure describes a single channel. @var            mChannelLabel The AudioChannelLabel that describes the channel. @var            mChannelFlags Flags that control the interpretation of mCoordinates. @var            mCoordinates An ordered triple that specifies a precise speaker location."
+    },
+    "AudioChannelLayout": {
+      "fields": [
+        {
+          "name": "mChannelLayoutTag",
+          "objc_type": "AudioChannelLayoutTag"
+        },
+        {
+          "name": "mChannelBitmap",
+          "objc_type": "AudioChannelBitmap"
+        },
+        {
+          "name": "mNumberChannelDescriptions",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mChannelDescriptions",
+          "objc_type": "AudioChannelDescription[1]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 1540,
+      "doc": "@struct         AudioChannelLayout @abstract       This structure is used to specify channel layouts in files and hardware. @var            mChannelLayoutTag The AudioChannelLayoutTag that indicates the layout. @var            mChannelBitmap If mChannelLayoutTag is set to kAudioChannelLayoutTag_UseChannelBitmap, this field is the channel usage bitmap. @var            mNumberChannelDescriptions The number of items in the mChannelDescriptions array. @var            mChannelDescriptions A variable length array of AudioChannelDescriptions that describe the layout."
+    },
+    "AudioClassDescription": {
+      "fields": [
+        {
+          "name": "mType",
+          "objc_type": "OSType"
+        },
+        {
+          "name": "mSubType",
+          "objc_type": "OSType"
+        },
+        {
+          "name": "mManufacturer",
+          "objc_type": "OSType"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 935,
+      "doc": "@struct         AudioClassDescription @abstract       This structure is used to describe codecs installed on the system. @var            mType The four char code codec type. @var            mSubType The four char code codec subtype. @var            mManufacturer The four char code codec manufacturer."
+    },
+    "AudioFormatListItem": {
+      "fields": [
+        {
+          "name": "mASBD",
+          "objc_type": "AudioStreamBasicDescription"
+        },
+        {
+          "name": "mChannelLayoutTag",
+          "objc_type": "AudioChannelLayoutTag"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 1584,
+      "doc": "@struct     AudioFormatListItem @abstract   this struct is used as output from the kAudioFormatProperty_FormatList property @var        mASBD an AudioStreamBasicDescription @var        mChannelLayoutTag an AudioChannelLayoutTag"
+    },
+    "AudioStreamBasicDescription": {
+      "fields": [
+        {
+          "name": "mSampleRate",
+          "objc_type": "Float64"
+        },
+        {
+          "name": "mFormatID",
+          "objc_type": "AudioFormatID"
+        },
+        {
+          "name": "mFormatFlags",
+          "objc_type": "AudioFormatFlags"
+        },
+        {
+          "name": "mBytesPerPacket",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mFramesPerPacket",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mBytesPerFrame",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mChannelsPerFrame",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mBitsPerChannel",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mReserved",
+          "objc_type": "UInt32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 271,
+      "doc": "@struct         AudioStreamBasicDescription @abstract       This structure encapsulates all the information for describing the basic format properties of a stream of audio data. @discussion     This structure is sufficient to describe any constant bit rate format that  has channels that are the same size. Extensions are required for variable bit rate data and for constant bit rate data where the channels have unequal sizes. However, where applicable, the appropriate fields will be filled out correctly for these kinds of formats (the extra data is provided via separate properties). In all fields, a value of 0 indicates that the field is either unknown, not applicable or otherwise is inapproprate for the format and should be ignored. Note that 0 is still a valid value for most formats in the mFormatFlags field. In audio data a frame is one sample across all channels. In non-interleaved audio, the per frame fields identify one channel. In interleaved audio, the per frame fields identify the set of n channels. In uncompressed audio, a Packet is one frame, (mFramesPerPacket == 1). In compressed audio, a Packet is an indivisible chunk of compressed data, for example an AAC packet will contain 1024 sample frames. @var            mSampleRate The number of sample frames per second of the data in the stream. @var            mFormatID The AudioFormatID indicating the general kind of data in the stream. @var            mFormatFlags The AudioFormatFlags for the format indicated by mFormatID. @var            mBytesPerPacket The number of bytes in a packet of data. @var            mFramesPerPacket The number of sample frames in each packet of data. @var            mBytesPerFrame The number of bytes in a single sample frame of data. @var            mChannelsPerFrame The number of channels in each frame of data. @var            mBitsPerChannel The number of bits of sample data for each channel in a frame of data. @var            mReserved Pads the structure out to force an even 8 byte alignment."
+    },
+    "AudioStreamPacketDependencyDescription": {
+      "fields": [
+        {
+          "name": "mIsIndependentlyDecodable",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mPreRollCount",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mFlags",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mReserved",
+          "objc_type": "UInt32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 709,
+      "doc": "@struct         AudioStreamPacketDependencyDescription @abstract       A structure to provide a description of the dependencies of one audio packet on other audio packets. @var            mIsIndependentlyDecodable 1 if the packet is independently decodable, 0 otherwise. @var            mPreRollCount The count of packets that must be decoded after this packet in order to refresh the decoder, if the packet is independently decodable.  This value should be ignored if ``mIsIndependentlyDecodable`` is 0. @var            mFlags Currently unused. @var            mReserved Reserved for future use. @discussion For independently decodable packets, the ``mPreRollCount`` indicates how many additional packets need to be decoded after this packet in order for the decoder to start returning optimal output, if this is the first packet decoded since the decoder was initialized. For example, if this packet is packet #123 of some given packet stream, and ``mIsIndependentlyDecodable`` is 0, or ``mIsIndependentlyDecodable`` is 1 and ``mPreRollCount`` is non-zero, and the client desires optimal output starting with the output corresponding with packet #123 (because for example the client is an audio player whose user seeks to a starting playback position corresponding with packet #123), the client would scan back, starting at packet #122, searching for an independently decodable packet with a preroll not intersecting packet #123.  If for packet #122 ``mIsIndependentlyDecodable`` is 0, or ``mIsIndependentlyDecodable`` is 1 but ``mPreRollCount`` is 2 or more, the client would still not get optimal output for packet #123 if starting here, so the client continues to scan back. If for packet #121 ``mIsIndependentlyDecodable`` is 1 and ``mPreRollCount`` is 2 or less, the client would start decoding from this point, but discard the output equivalent of the two extra input packets (desired first output packet - actual first decoded packet, or 122 - 120 == 2)."
+    },
+    "AudioStreamPacketDescription": {
+      "fields": [
+        {
+          "name": "mStartOffset",
+          "objc_type": "SInt64"
+        },
+        {
+          "name": "mVariableFramesInPacket",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mDataByteSize",
+          "objc_type": "UInt32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 668,
+      "doc": "@struct         AudioStreamPacketDescription @abstract       This structure describes the packet layout of a buffer of data where the size of each packet may not be the same or where there is extraneous data between packets. @var            mStartOffset The number of bytes from the start of the buffer to the beginning of the packet. @var            mVariableFramesInPacket The number of sample frames of data in the packet. For formats with a constant number of frames per packet, this field is set to 0. @var            mDataByteSize The number of bytes in the packet."
+    },
+    "AudioTimeStamp": {
+      "fields": [
+        {
+          "name": "mSampleTime",
+          "objc_type": "Float64"
+        },
+        {
+          "name": "mHostTime",
+          "objc_type": "UInt64"
+        },
+        {
+          "name": "mRateScalar",
+          "objc_type": "Float64"
+        },
+        {
+          "name": "mWordClockTime",
+          "objc_type": "UInt64"
+        },
+        {
+          "name": "mSMPTETime",
+          "objc_type": "SMPTETime"
+        },
+        {
+          "name": "mFlags",
+          "objc_type": "AudioTimeStampFlags"
+        },
+        {
+          "name": "mReserved",
+          "objc_type": "UInt32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 870,
+      "doc": "@struct         AudioTimeStamp @abstract       A structure that holds different representations of the same point in time. @var            mSampleTime The absolute sample frame time. @var            mHostTime The host machine's time base, mach_absolute_time. @var            mRateScalar The ratio of actual host ticks per sample frame to the nominal host ticks per sample frame. @var            mWordClockTime The word clock time. @var            mSMPTETime The SMPTE time. @var            mFlags A set of flags indicating which representations of the time are valid. @var            mReserved Pads the structure out to force an even 8 byte alignment."
+    },
+    "AudioValueRange": {
+      "fields": [
+        {
+          "name": "mMinimum",
+          "objc_type": "Float64"
+        },
+        {
+          "name": "mMaximum",
+          "objc_type": "Float64"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 117,
+      "doc": "@struct         AudioValueRange @abstract       This structure holds a pair of numbers that represent a continuous range of values. @var            mMinimum The minimum value. @var            mMaximum The maximum value."
+    },
+    "AudioValueTranslation": {
+      "fields": [
+        {
+          "name": "mInputData",
+          "objc_type": "void * _Nonnull"
+        },
+        {
+          "name": "mInputDataSize",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mOutputData",
+          "objc_type": "void * _Nonnull"
+        },
+        {
+          "name": "mOutputDataSize",
+          "objc_type": "UInt32"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 140,
+      "doc": "@struct         AudioValueTranslation @abstract       This stucture holds the buffers necessary for translation operations. @var            mInputData The buffer containing the data to be translated. @var            mInputDataSize The number of bytes in the buffer pointed at by mInputData. @var            mOutputData The buffer to hold the result of the translation. @var            mOutputDataSize The number of bytes in the buffer pointed at by mOutputData."
+    },
+    "SMPTETime": {
+      "fields": [
+        {
+          "name": "mSubframes",
+          "objc_type": "SInt16"
+        },
+        {
+          "name": "mSubframeDivisor",
+          "objc_type": "SInt16"
+        },
+        {
+          "name": "mCounter",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "mType",
+          "objc_type": "SMPTETimeType"
+        },
+        {
+          "name": "mFlags",
+          "objc_type": "SMPTETimeFlags"
+        },
+        {
+          "name": "mHours",
+          "objc_type": "SInt16"
+        },
+        {
+          "name": "mMinutes",
+          "objc_type": "SInt16"
+        },
+        {
+          "name": "mSeconds",
+          "objc_type": "SInt16"
+        },
+        {
+          "name": "mFrames",
+          "objc_type": "SInt16"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 808,
+      "doc": "@struct         SMPTETime @abstract       A structure for holding a SMPTE time. @var            mSubframes The number of subframes in the full message. @var            mSubframeDivisor The number of subframes per frame (typically 80). @var            mCounter The total number of messages received. @var            mType The kind of SMPTE time using the SMPTE time type constants. @var            mFlags A set of flags that indicate the SMPTE state. @var            mHours The number of hours in the full message. @var            mMinutes The number of minutes in the full message. @var            mSeconds The number of seconds in the full message. @var            mFrames The number of frames in the full message."
+    }
+  },
+  "functions": [
+    {
+      "name": "AudioChannelLayoutTag_GetNumberOfChannels",
+      "args": [
+        {
+          "name": "inLayoutTag",
+          "objc_type": "AudioChannelLayoutTag"
+        }
+      ],
+      "return": {
+        "objc_type": "UInt32"
+      },
+      "availability": {},
+      "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
+      "sdk_line": 1571
+    }
+  ],
+  "externs": null,
+  "block_types": {},
+  "typedefs": {
+    "AVAudioInteger": "long",
+    "AVAudioSessionErrorCode": "enum AVAudioSessionErrorCode",
+    "AVAudioUInteger": "unsigned long",
+    "AbsoluteTime": "UnsignedWide",
+    "AudioBuffer": "struct AudioBuffer",
+    "AudioBufferList": "struct AudioBufferList",
+    "AudioChannelBitmap": "enum AudioChannelBitmap",
+    "AudioChannelCoordinateIndex": "enum AudioChannelCoordinateIndex",
+    "AudioChannelDescription": "struct AudioChannelDescription",
+    "AudioChannelFlags": "enum AudioChannelFlags",
+    "AudioChannelLabel": "UInt32",
+    "AudioChannelLayout": "struct AudioChannelLayout",
+    "AudioChannelLayoutTag": "UInt32",
+    "AudioClassDescription": "struct AudioClassDescription",
+    "AudioFormatFlags": "UInt32",
+    "AudioFormatID": "UInt32",
+    "AudioFormatListItem": "struct AudioFormatListItem",
+    "AudioSampleType": "Float32",
+    "AudioSessionID": "uint32_t",
+    "AudioStreamBasicDescription": "struct AudioStreamBasicDescription",
+    "AudioStreamPacketDependencyDescription": "struct AudioStreamPacketDependencyDescription",
+    "AudioStreamPacketDescription": "struct AudioStreamPacketDescription",
+    "AudioTimeStamp": "struct AudioTimeStamp",
+    "AudioTimeStampFlags": "enum AudioTimeStampFlags",
+    "AudioUnitSampleType": "Float32",
+    "AudioValueRange": "struct AudioValueRange",
+    "AudioValueTranslation": "struct AudioValueTranslation",
+    "Boolean": "unsigned char",
+    "Byte": "UInt8",
+    "ByteCount": "unsigned long",
+    "ByteOffset": "unsigned long",
+    "BytePtr": "UInt8 *",
+    "CharParameter": "short",
+    "Class": "Class",
+    "CompTimeValue": "wide",
+    "ConstLogicalAddress": "const void *",
+    "ConstStr15Param": "const unsigned char *",
+    "ConstStr255Param": "const unsigned char *",
+    "ConstStr27Param": "const unsigned char *",
+    "ConstStr31Param": "const unsigned char *",
+    "ConstStr32Param": "const unsigned char *",
+    "ConstStr63Param": "const unsigned char *",
+    "ConstStrFileNameParam": "ConstStr63Param",
+    "ConstStringPtr": "const unsigned char *",
+    "Duration": "SInt32",
+    "Fixed": "SInt32",
+    "FixedPoint": "struct FixedPoint",
+    "FixedPtr": "Fixed *",
+    "FixedRect": "struct FixedRect",
+    "Float32": "float",
+    "Float32Point": "struct Float32Point",
+    "Float64": "double",
+    "Float80": "struct Float80",
+    "Float96": "struct Float96",
+    "FourCharCode": "UInt32",
+    "Fract": "SInt32",
+    "FractPtr": "Fract *",
+    "Handle": "Ptr *",
+    "ItemCount": "unsigned long",
+    "LangCode": "SInt16",
+    "LogicalAddress": "void *",
+    "MPEG4ObjectID": "enum MPEG4ObjectID",
+    "NumVersion": "struct NumVersion",
+    "NumVersionVariant": "union NumVersionVariant",
+    "NumVersionVariantHandle": "NumVersionVariantPtr *",
+    "NumVersionVariantPtr": "NumVersionVariant *",
+    "OSErr": "SInt16",
+    "OSStatus": "SInt32",
+    "OSType": "FourCharCode",
+    "OSTypePtr": "OSType *",
+    "OptionBits": "UInt32",
+    "PBVersion": "UInt32",
+    "PRefCon": "void *",
+    "PhysicalAddress": "void *",
+    "Point": "struct Point",
+    "PointPtr": "Point *",
+    "ProcHandle": "ProcPtr *",
+    "ProcPtr": "long (*)(void)",
+    "ProcessSerialNumber": "struct ProcessSerialNumber",
+    "ProcessSerialNumberPtr": "ProcessSerialNumber *",
+    "Ptr": "char *",
+    "Rect": "struct Rect",
+    "RectPtr": "Rect *",
+    "RegionCode": "SInt16",
+    "Register68kProcPtr": "void (*)(void)",
+    "ResType": "FourCharCode",
+    "ResTypePtr": "ResType *",
+    "SEL": "SEL *",
+    "SInt16": "short",
+    "SInt32": "int",
+    "SInt64": "long long",
+    "SInt8": "signed char",
+    "SMPTETime": "struct SMPTETime",
+    "SMPTETimeFlags": "enum SMPTETimeFlags",
+    "SMPTETimeType": "enum SMPTETimeType",
+    "SRefCon": "void *",
+    "ScriptCode": "SInt16",
+    "ShortFixed": "short",
+    "ShortFixedPtr": "ShortFixed *",
+    "SignedByte": "SInt8",
+    "Size": "long",
+    "Str15": "unsigned char[16]",
+    "Str255": "unsigned char[256]",
+    "Str27": "unsigned char[28]",
+    "Str31": "unsigned char[32]",
+    "Str32": "unsigned char[33]",
+    "Str32Field": "unsigned char[34]",
+    "Str63": "unsigned char[64]",
+    "StrFileName": "Str63",
+    "StringHandle": "StringPtr *",
+    "StringPtr": "unsigned char *",
+    "Style": "unsigned char",
+    "StyleField": "Style",
+    "StyleParameter": "short",
+    "TimeBase": "struct TimeBaseRecord *",
+    "TimeRecord": "struct TimeRecord",
+    "TimeScale": "SInt32",
+    "TimeValue": "SInt32",
+    "TimeValue64": "SInt64",
+    "UInt16": "unsigned short",
+    "UInt32": "unsigned int",
+    "UInt64": "unsigned long long",
+    "UInt8": "unsigned char",
+    "URefCon": "void *",
+    "UTF16Char": "UInt16",
+    "UTF32Char": "UInt32",
+    "UTF8Char": "UInt8",
+    "UniChar": "UInt16",
+    "UniCharCount": "unsigned long",
+    "UniCharCountPtr": "UniCharCount *",
+    "UniCharPtr": "UniChar *",
+    "UnicodeScalarValue": "UInt32",
+    "UniversalProcHandle": "UniversalProcPtr *",
+    "UniversalProcPtr": "ProcPtr",
+    "UnsignedFixed": "UInt32",
+    "UnsignedFixedPtr": "UnsignedFixed *",
+    "UnsignedWide": "struct UnsignedWide",
+    "UnsignedWidePtr": "UnsignedWide *",
+    "VHSelect": "SInt8",
+    "VersRec": "struct VersRec",
+    "VersRecHndl": "VersRecPtr *",
+    "VersRecPtr": "VersRec *",
+    "WidePtr": "wide *",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wint_t": "int",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "blkcnt_t": "__darwin_blkcnt_t",
+    "blksize_t": "__darwin_blksize_t",
+    "caddr_t": "char *",
+    "clock_t": "__darwin_clock_t",
+    "daddr_t": "int32_t",
+    "dev_t": "__darwin_dev_t",
+    "errno_t": "int",
+    "extended80": "Float80",
+    "extended96": "Float96",
+    "fd_mask": "__int32_t",
+    "fd_set": "struct fd_set",
+    "fixpt_t": "u_int32_t",
+    "fsblkcnt_t": "__darwin_fsblkcnt_t",
+    "fsfilcnt_t": "__darwin_fsfilcnt_t",
+    "gid_t": "__darwin_gid_t",
+    "id": "id",
+    "id_t": "__darwin_id_t",
+    "in_addr_t": "__uint32_t",
+    "in_port_t": "__uint16_t",
+    "ino64_t": "__darwin_ino64_t",
+    "ino_t": "__darwin_ino_t",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "key_t": "__int32_t",
+    "malloc_type_id_t": "unsigned long long",
+    "malloc_zone_t": "struct _malloc_zone_t",
+    "max_align_t": "long double",
+    "mode_t": "__darwin_mode_t",
+    "nlink_t": "__uint16_t",
+    "off_t": "__darwin_off_t",
+    "pid_t": "__darwin_pid_t",
+    "pthread_attr_t": "__darwin_pthread_attr_t",
+    "pthread_cond_t": "__darwin_pthread_cond_t",
+    "pthread_condattr_t": "__darwin_pthread_condattr_t",
+    "pthread_key_t": "__darwin_pthread_key_t",
+    "pthread_mutex_t": "__darwin_pthread_mutex_t",
+    "pthread_mutexattr_t": "__darwin_pthread_mutexattr_t",
+    "pthread_once_t": "__darwin_pthread_once_t",
+    "pthread_rwlock_t": "__darwin_pthread_rwlock_t",
+    "pthread_rwlockattr_t": "__darwin_pthread_rwlockattr_t",
+    "pthread_t": "__darwin_pthread_t",
+    "ptrauth_extra_data_t": "unsigned long",
+    "ptrauth_generic_signature_t": "unsigned long",
+    "ptrauth_key": "enum ptrauth_key",
+    "ptrdiff_t": "long",
+    "qaddr_t": "quad_t *",
+    "quad_t": "int64_t",
+    "register_t": "int64_t",
+    "rsize_t": "__darwin_size_t",
+    "segsz_t": "int32_t",
+    "size_t": "unsigned long",
+    "ssize_t": "__darwin_ssize_t",
+    "suseconds_t": "__darwin_suseconds_t",
+    "swblk_t": "int32_t",
+    "syscall_arg_t": "u_int64_t",
+    "time_t": "__darwin_time_t",
+    "u_char": "unsigned char",
+    "u_int": "unsigned int",
+    "u_int16_t": "unsigned short",
+    "u_int32_t": "unsigned int",
+    "u_int64_t": "unsigned long long",
+    "u_int8_t": "unsigned char",
+    "u_long": "unsigned long",
+    "u_quad_t": "u_int64_t",
+    "u_short": "unsigned short",
+    "uid_t": "__darwin_uid_t",
+    "uint": "unsigned int",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long",
+    "useconds_t": "__darwin_useconds_t",
+    "user_addr_t": "u_int64_t",
+    "user_long_t": "int64_t",
+    "user_off_t": "int64_t",
+    "user_size_t": "u_int64_t",
+    "user_ssize_t": "int64_t",
+    "user_time_t": "int64_t",
+    "user_ulong_t": "u_int64_t",
+    "ushort": "unsigned short",
+    "wchar_t": "int",
+    "wide": "struct wide"
+  },
+  "declared_imports": {
+    "CoreFoundation": true
+  }
+}

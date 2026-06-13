@@ -1,0 +1,5 @@
+{
+  "comment": "xpc_debugger_api_misuse_info is declared in xpc/debug.h but libSystem exports no such symbol on macOS 26.5 — the CGo bridge fails to link (Undefined symbols: _xpc_debugger_api_misuse_info).",
+
+  "exclude_functions": ["xpc_debugger_api_misuse_info"]
+}

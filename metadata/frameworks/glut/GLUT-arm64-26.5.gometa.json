@@ -1,0 +1,2049 @@
+{
+  "framework": "GLUT",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {},
+  "structs": {},
+  "functions": [
+    {
+      "name": "glutInit",
+      "args": [
+        {
+          "name": "argcp",
+          "objc_type": "int *"
+        },
+        {
+          "name": "argv",
+          "objc_type": "char **"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 431
+    },
+    {
+      "name": "glutInitDisplayMode",
+      "args": [
+        {
+          "name": "mode",
+          "objc_type": "unsigned int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 432
+    },
+    {
+      "name": "glutInitDisplayString",
+      "args": [
+        {
+          "name": "string",
+          "objc_type": "const char *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 434
+    },
+    {
+      "name": "glutInitWindowPosition",
+      "args": [
+        {
+          "name": "x",
+          "objc_type": "int"
+        },
+        {
+          "name": "y",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 436
+    },
+    {
+      "name": "glutInitWindowSize",
+      "args": [
+        {
+          "name": "width",
+          "objc_type": "int"
+        },
+        {
+          "name": "height",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 437
+    },
+    {
+      "name": "glutMainLoop",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 438
+    },
+    {
+      "name": "glutCreateWindow",
+      "args": [
+        {
+          "name": "title",
+          "objc_type": "const char *"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 441
+    },
+    {
+      "name": "glutCreateSubWindow",
+      "args": [
+        {
+          "name": "win",
+          "objc_type": "int"
+        },
+        {
+          "name": "x",
+          "objc_type": "int"
+        },
+        {
+          "name": "y",
+          "objc_type": "int"
+        },
+        {
+          "name": "width",
+          "objc_type": "int"
+        },
+        {
+          "name": "height",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 442
+    },
+    {
+      "name": "glutDestroyWindow",
+      "args": [
+        {
+          "name": "win",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 443
+    },
+    {
+      "name": "glutPostRedisplay",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 444
+    },
+    {
+      "name": "glutPostWindowRedisplay",
+      "args": [
+        {
+          "name": "win",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 446
+    },
+    {
+      "name": "glutSwapBuffers",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 448
+    },
+    {
+      "name": "glutGetWindow",
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 449
+    },
+    {
+      "name": "glutSetWindow",
+      "args": [
+        {
+          "name": "win",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 450
+    },
+    {
+      "name": "glutSetWindowTitle",
+      "args": [
+        {
+          "name": "title",
+          "objc_type": "const char *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 451
+    },
+    {
+      "name": "glutSetIconTitle",
+      "args": [
+        {
+          "name": "title",
+          "objc_type": "const char *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 452
+    },
+    {
+      "name": "glutPositionWindow",
+      "args": [
+        {
+          "name": "x",
+          "objc_type": "int"
+        },
+        {
+          "name": "y",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 453
+    },
+    {
+      "name": "glutReshapeWindow",
+      "args": [
+        {
+          "name": "width",
+          "objc_type": "int"
+        },
+        {
+          "name": "height",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 454
+    },
+    {
+      "name": "glutPopWindow",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 455
+    },
+    {
+      "name": "glutPushWindow",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 456
+    },
+    {
+      "name": "glutIconifyWindow",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 457
+    },
+    {
+      "name": "glutShowWindow",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 458
+    },
+    {
+      "name": "glutHideWindow",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 459
+    },
+    {
+      "name": "glutFullScreen",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 461
+    },
+    {
+      "name": "glutSetCursor",
+      "args": [
+        {
+          "name": "cursor",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 462
+    },
+    {
+      "name": "glutWarpPointer",
+      "args": [
+        {
+          "name": "x",
+          "objc_type": "int"
+        },
+        {
+          "name": "y",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 464
+    },
+    {
+      "name": "glutSurfaceTexture",
+      "args": [
+        {
+          "name": "target",
+          "objc_type": "GLenum"
+        },
+        {
+          "name": "internalformat",
+          "objc_type": "GLenum"
+        },
+        {
+          "name": "surfacewin",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 470
+    },
+    {
+      "name": "glutWMCloseFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(void)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 474
+    },
+    {
+      "name": "glutCheckLoop",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 475
+    },
+    {
+      "name": "glutEstablishOverlay",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 480
+    },
+    {
+      "name": "glutRemoveOverlay",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 481
+    },
+    {
+      "name": "glutUseLayer",
+      "args": [
+        {
+          "name": "layer",
+          "objc_type": "GLenum"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 482
+    },
+    {
+      "name": "glutPostOverlayRedisplay",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 483
+    },
+    {
+      "name": "glutPostWindowOverlayRedisplay",
+      "args": [
+        {
+          "name": "win",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 485
+    },
+    {
+      "name": "glutShowOverlay",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 487
+    },
+    {
+      "name": "glutHideOverlay",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 488
+    },
+    {
+      "name": "glutCreateMenu",
+      "args": [
+        {
+          "name": "",
+          "objc_type": "void (*)(int)"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 492
+    },
+    {
+      "name": "glutDestroyMenu",
+      "args": [
+        {
+          "name": "menu",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 493
+    },
+    {
+      "name": "glutGetMenu",
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 494
+    },
+    {
+      "name": "glutSetMenu",
+      "args": [
+        {
+          "name": "menu",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 495
+    },
+    {
+      "name": "glutAddMenuEntry",
+      "args": [
+        {
+          "name": "label",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "value",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 496
+    },
+    {
+      "name": "glutAddSubMenu",
+      "args": [
+        {
+          "name": "label",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "submenu",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 497
+    },
+    {
+      "name": "glutChangeToMenuEntry",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "int"
+        },
+        {
+          "name": "label",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "value",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 498
+    },
+    {
+      "name": "glutChangeToSubMenu",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "int"
+        },
+        {
+          "name": "label",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "submenu",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 499
+    },
+    {
+      "name": "glutRemoveMenuItem",
+      "args": [
+        {
+          "name": "item",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 500
+    },
+    {
+      "name": "glutAttachMenu",
+      "args": [
+        {
+          "name": "button",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 501
+    },
+    {
+      "name": "glutDetachMenu",
+      "args": [
+        {
+          "name": "button",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 502
+    },
+    {
+      "name": "glutDisplayFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(void)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 505
+    },
+    {
+      "name": "glutReshapeFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 506
+    },
+    {
+      "name": "glutKeyboardFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(unsigned char, int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 507
+    },
+    {
+      "name": "glutMouseFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int, int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 508
+    },
+    {
+      "name": "glutMotionFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 509
+    },
+    {
+      "name": "glutPassiveMotionFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 510
+    },
+    {
+      "name": "glutEntryFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 511
+    },
+    {
+      "name": "glutVisibilityFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 512
+    },
+    {
+      "name": "glutIdleFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(void)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 513
+    },
+    {
+      "name": "glutTimerFunc",
+      "args": [
+        {
+          "name": "millis",
+          "objc_type": "unsigned int"
+        },
+        {
+          "name": "func",
+          "objc_type": "void (*)(int)"
+        },
+        {
+          "name": "value",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 514
+    },
+    {
+      "name": "glutMenuStateFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 515
+    },
+    {
+      "name": "glutSpecialFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 517
+    },
+    {
+      "name": "glutSpaceballMotionFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 518
+    },
+    {
+      "name": "glutSpaceballRotateFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 519
+    },
+    {
+      "name": "glutSpaceballButtonFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 520
+    },
+    {
+      "name": "glutButtonBoxFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 521
+    },
+    {
+      "name": "glutDialsFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 522
+    },
+    {
+      "name": "glutTabletMotionFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 523
+    },
+    {
+      "name": "glutTabletButtonFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int, int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 524
+    },
+    {
+      "name": "glutMenuStatusFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 526
+    },
+    {
+      "name": "glutOverlayDisplayFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(void)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 527
+    },
+    {
+      "name": "glutWindowStatusFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 529
+    },
+    {
+      "name": "glutKeyboardUpFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(unsigned char, int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 532
+    },
+    {
+      "name": "glutSpecialUpFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(int, int, int)"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 533
+    },
+    {
+      "name": "glutJoystickFunc",
+      "args": [
+        {
+          "name": "func",
+          "objc_type": "void (*)(unsigned int, int, int, int)"
+        },
+        {
+          "name": "pollInterval",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 534
+    },
+    {
+      "name": "glutSetColor",
+      "args": [
+        {
+          "name": "",
+          "objc_type": "int"
+        },
+        {
+          "name": "red",
+          "objc_type": "GLfloat"
+        },
+        {
+          "name": "green",
+          "objc_type": "GLfloat"
+        },
+        {
+          "name": "blue",
+          "objc_type": "GLfloat"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 540
+    },
+    {
+      "name": "glutGetColor",
+      "args": [
+        {
+          "name": "ndx",
+          "objc_type": "int"
+        },
+        {
+          "name": "component",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "GLfloat"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 541
+    },
+    {
+      "name": "glutCopyColormap",
+      "args": [
+        {
+          "name": "win",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 542
+    },
+    {
+      "name": "glutGet",
+      "args": [
+        {
+          "name": "type",
+          "objc_type": "GLenum"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 545
+    },
+    {
+      "name": "glutDeviceGet",
+      "args": [
+        {
+          "name": "type",
+          "objc_type": "GLenum"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 546
+    },
+    {
+      "name": "glutExtensionSupported",
+      "args": [
+        {
+          "name": "name",
+          "objc_type": "const char *"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 549
+    },
+    {
+      "name": "glutGetModifiers",
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 552
+    },
+    {
+      "name": "glutLayerGet",
+      "args": [
+        {
+          "name": "type",
+          "objc_type": "GLenum"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 553
+    },
+    {
+      "name": "glutGetProcAddress",
+      "args": [
+        {
+          "name": "procName",
+          "objc_type": "const char *"
+        }
+      ],
+      "return": {
+        "objc_type": "void *"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 556
+    },
+    {
+      "name": "glutBitmapCharacter",
+      "args": [
+        {
+          "name": "font",
+          "objc_type": "void *"
+        },
+        {
+          "name": "character",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 560
+    },
+    {
+      "name": "glutBitmapWidth",
+      "args": [
+        {
+          "name": "font",
+          "objc_type": "void *"
+        },
+        {
+          "name": "character",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 561
+    },
+    {
+      "name": "glutStrokeCharacter",
+      "args": [
+        {
+          "name": "font",
+          "objc_type": "void *"
+        },
+        {
+          "name": "character",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 562
+    },
+    {
+      "name": "glutStrokeWidth",
+      "args": [
+        {
+          "name": "font",
+          "objc_type": "void *"
+        },
+        {
+          "name": "character",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 563
+    },
+    {
+      "name": "glutBitmapLength",
+      "args": [
+        {
+          "name": "font",
+          "objc_type": "void *"
+        },
+        {
+          "name": "string",
+          "objc_type": "const unsigned char *"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 565
+    },
+    {
+      "name": "glutStrokeLength",
+      "args": [
+        {
+          "name": "font",
+          "objc_type": "void *"
+        },
+        {
+          "name": "string",
+          "objc_type": "const unsigned char *"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 566
+    },
+    {
+      "name": "glutWireSphere",
+      "args": [
+        {
+          "name": "radius",
+          "objc_type": "GLdouble"
+        },
+        {
+          "name": "slices",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "stacks",
+          "objc_type": "GLint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 570
+    },
+    {
+      "name": "glutSolidSphere",
+      "args": [
+        {
+          "name": "radius",
+          "objc_type": "GLdouble"
+        },
+        {
+          "name": "slices",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "stacks",
+          "objc_type": "GLint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 571
+    },
+    {
+      "name": "glutWireCone",
+      "args": [
+        {
+          "name": "base",
+          "objc_type": "GLdouble"
+        },
+        {
+          "name": "height",
+          "objc_type": "GLdouble"
+        },
+        {
+          "name": "slices",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "stacks",
+          "objc_type": "GLint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 572
+    },
+    {
+      "name": "glutSolidCone",
+      "args": [
+        {
+          "name": "base",
+          "objc_type": "GLdouble"
+        },
+        {
+          "name": "height",
+          "objc_type": "GLdouble"
+        },
+        {
+          "name": "slices",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "stacks",
+          "objc_type": "GLint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 573
+    },
+    {
+      "name": "glutWireCube",
+      "args": [
+        {
+          "name": "size",
+          "objc_type": "GLdouble"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 574
+    },
+    {
+      "name": "glutSolidCube",
+      "args": [
+        {
+          "name": "size",
+          "objc_type": "GLdouble"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 575
+    },
+    {
+      "name": "glutWireTorus",
+      "args": [
+        {
+          "name": "innerRadius",
+          "objc_type": "GLdouble"
+        },
+        {
+          "name": "outerRadius",
+          "objc_type": "GLdouble"
+        },
+        {
+          "name": "sides",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "rings",
+          "objc_type": "GLint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 576
+    },
+    {
+      "name": "glutSolidTorus",
+      "args": [
+        {
+          "name": "innerRadius",
+          "objc_type": "GLdouble"
+        },
+        {
+          "name": "outerRadius",
+          "objc_type": "GLdouble"
+        },
+        {
+          "name": "sides",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "rings",
+          "objc_type": "GLint"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 577
+    },
+    {
+      "name": "glutWireDodecahedron",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 578
+    },
+    {
+      "name": "glutSolidDodecahedron",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 579
+    },
+    {
+      "name": "glutWireTeapot",
+      "args": [
+        {
+          "name": "size",
+          "objc_type": "GLdouble"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 580
+    },
+    {
+      "name": "glutSolidTeapot",
+      "args": [
+        {
+          "name": "size",
+          "objc_type": "GLdouble"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 581
+    },
+    {
+      "name": "glutWireOctahedron",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 582
+    },
+    {
+      "name": "glutSolidOctahedron",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 583
+    },
+    {
+      "name": "glutWireTetrahedron",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 584
+    },
+    {
+      "name": "glutSolidTetrahedron",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 585
+    },
+    {
+      "name": "glutWireIcosahedron",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 586
+    },
+    {
+      "name": "glutSolidIcosahedron",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 587
+    },
+    {
+      "name": "glutVideoResizeGet",
+      "args": [
+        {
+          "name": "param",
+          "objc_type": "GLenum"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 591
+    },
+    {
+      "name": "glutSetupVideoResizing",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 592
+    },
+    {
+      "name": "glutStopVideoResizing",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 593
+    },
+    {
+      "name": "glutVideoResize",
+      "args": [
+        {
+          "name": "x",
+          "objc_type": "int"
+        },
+        {
+          "name": "y",
+          "objc_type": "int"
+        },
+        {
+          "name": "width",
+          "objc_type": "int"
+        },
+        {
+          "name": "height",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 594
+    },
+    {
+      "name": "glutVideoPan",
+      "args": [
+        {
+          "name": "x",
+          "objc_type": "int"
+        },
+        {
+          "name": "y",
+          "objc_type": "int"
+        },
+        {
+          "name": "width",
+          "objc_type": "int"
+        },
+        {
+          "name": "height",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 595
+    },
+    {
+      "name": "glutReportErrors",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 598
+    },
+    {
+      "name": "glutIgnoreKeyRepeat",
+      "args": [
+        {
+          "name": "ignore",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 614
+    },
+    {
+      "name": "glutSetKeyRepeat",
+      "args": [
+        {
+          "name": "repeatMode",
+          "objc_type": "int"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 615
+    },
+    {
+      "name": "glutForceJoystickFunc",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 616
+    },
+    {
+      "name": "glutGameModeString",
+      "args": [
+        {
+          "name": "string",
+          "objc_type": "const char *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 628
+    },
+    {
+      "name": "glutEnterGameMode",
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 629
+    },
+    {
+      "name": "glutLeaveGameMode",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 630
+    },
+    {
+      "name": "glutGameModeGet",
+      "args": [
+        {
+          "name": "mode",
+          "objc_type": "GLenum"
+        }
+      ],
+      "return": {
+        "objc_type": "int"
+      },
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 631
+    }
+  ],
+  "externs": [
+    {
+      "name": "glutStrokeRoman",
+      "objc_type": "void *",
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 268
+    },
+    {
+      "name": "glutStrokeMonoRoman",
+      "objc_type": "void *",
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 269
+    },
+    {
+      "name": "glutBitmap9By15",
+      "objc_type": "void *",
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 276
+    },
+    {
+      "name": "glutBitmap8By13",
+      "objc_type": "void *",
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 277
+    },
+    {
+      "name": "glutBitmapTimesRoman10",
+      "objc_type": "void *",
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 278
+    },
+    {
+      "name": "glutBitmapTimesRoman24",
+      "objc_type": "void *",
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 279
+    },
+    {
+      "name": "glutBitmapHelvetica10",
+      "objc_type": "void *",
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 280
+    },
+    {
+      "name": "glutBitmapHelvetica12",
+      "objc_type": "void *",
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 281
+    },
+    {
+      "name": "glutBitmapHelvetica18",
+      "objc_type": "void *",
+      "availability": {},
+      "sdk_file": "GLUT/GLUT.h",
+      "sdk_line": 282
+    }
+  ],
+  "block_types": {},
+  "typedefs": {
+    "Class": "Class",
+    "SEL": "SEL *",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wint_t": "int",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "id": "id",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long"
+  },
+  "declared_imports": {
+    "OpenGL": true
+  }
+}

@@ -1,0 +1,2252 @@
+{
+  "framework": "OpenGL",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {
+    "CGLCPContextPriorityRequest": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLCPContextPriorityRequestHigh",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPContextPriorityRequestNormal",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPContextPriorityRequestLow",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 205
+    },
+    "_CGLContextEnable": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLCESwapRectangle",
+          "value": "201",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCESwapLimit",
+          "value": "203",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCERasterization",
+          "value": "221",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCEStateValidation",
+          "value": "301",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCESurfaceBackingSize",
+          "value": "305",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCEDisplayListOptimization",
+          "value": "307",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCEMPEngine",
+          "value": "313",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCECrashOnRemovedFunctions",
+          "value": "316",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 146
+    },
+    "_CGLContextParameter": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLCPSwapRectangle",
+          "value": "200",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPSwapInterval",
+          "value": "222",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPDispatchTableSize",
+          "value": "224",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPClientStorage",
+          "value": "226",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPSurfaceTexture",
+          "value": "228",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPSurfaceOrder",
+          "value": "235",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPSurfaceOpacity",
+          "value": "236",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPSurfaceBackingSize",
+          "value": "304",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPSurfaceSurfaceVolatile",
+          "value": "306",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPReclaimResources",
+          "value": "308",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPCurrentRendererID",
+          "value": "309",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPGPUVertexProcessing",
+          "value": "310",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPGPUFragmentProcessing",
+          "value": "311",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPHasDrawable",
+          "value": "314",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPMPSwapsInFlight",
+          "value": "315",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPGPURestartStatus",
+          "value": "317",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPAbortOnGPURestartStatusBlacklisted",
+          "value": "318",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPAbortOnGPURestartStatusDenied",
+          "value": "318",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPSupportGPURestart",
+          "value": "319",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPSupportSeparateAddressSpace",
+          "value": "320",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPContextPriorityRequest",
+          "value": "608",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 170
+    },
+    "_CGLError": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLNoError",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadAttribute",
+          "value": "10000",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadProperty",
+          "value": "10001",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadPixelFormat",
+          "value": "10002",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadRendererInfo",
+          "value": "10003",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadContext",
+          "value": "10004",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadDrawable",
+          "value": "10005",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadDisplay",
+          "value": "10006",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadState",
+          "value": "10007",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadValue",
+          "value": "10008",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadMatch",
+          "value": "10009",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadEnumeration",
+          "value": "10010",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadOffScreen",
+          "value": "10011",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadFullScreen",
+          "value": "10012",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadWindow",
+          "value": "10013",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadAddress",
+          "value": "10014",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadCodeModule",
+          "value": "10015",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadAlloc",
+          "value": "10016",
+          "availability": {}
+        },
+        {
+          "name": "kCGLBadConnection",
+          "value": "10017",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 239
+    },
+    "_CGLGPURestartStatus": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLCPGPURestartStatusNone",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPGPURestartStatusCaused",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPGPURestartStatusBlacklisted",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPGPURestartStatusDenied",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 160
+    },
+    "_CGLGlobalOption": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLGOFormatCacheSize",
+          "value": "501",
+          "availability": {}
+        },
+        {
+          "name": "kCGLGOClearFormatCache",
+          "value": "502",
+          "availability": {}
+        },
+        {
+          "name": "kCGLGORetainRenderers",
+          "value": "503",
+          "availability": {}
+        },
+        {
+          "name": "kCGLGOUseBuildCache",
+          "value": "506",
+          "availability": {}
+        },
+        {
+          "name": "kCGLGOResetLibrary",
+          "value": "504",
+          "availability": {}
+        },
+        {
+          "name": "kCGLGOUseErrorHandler",
+          "value": "505",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 215
+    },
+    "_CGLOpenGLProfile": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLOGLPVersion_Legacy",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "kCGLOGLPVersion_3_2_Core",
+          "value": "12800",
+          "availability": {}
+        },
+        {
+          "name": "kCGLOGLPVersion_GL3_Core",
+          "value": "12800",
+          "availability": {}
+        },
+        {
+          "name": "kCGLOGLPVersion_GL4_Core",
+          "value": "16640",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 229
+    },
+    "_CGLPixelFormatAttribute": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLPFAAllRenderers",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFATripleBuffer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFADoubleBuffer",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAColorSize",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAAlphaSize",
+          "value": "11",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFADepthSize",
+          "value": "12",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAStencilSize",
+          "value": "13",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAMinimumPolicy",
+          "value": "51",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAMaximumPolicy",
+          "value": "52",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFASampleBuffers",
+          "value": "55",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFASamples",
+          "value": "56",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAColorFloat",
+          "value": "58",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAMultisample",
+          "value": "59",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFASupersample",
+          "value": "60",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFASampleAlpha",
+          "value": "61",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFARendererID",
+          "value": "70",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFANoRecovery",
+          "value": "72",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAAccelerated",
+          "value": "73",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAClosestPolicy",
+          "value": "74",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFABackingStore",
+          "value": "76",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFABackingVolatile",
+          "value": "77",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFADisplayMask",
+          "value": "84",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAAllowOfflineRenderers",
+          "value": "96",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAAcceleratedCompute",
+          "value": "97",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAOpenGLProfile",
+          "value": "99",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFASupportsAutomaticGraphicsSwitching",
+          "value": "101",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAVirtualScreenCount",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAAuxBuffers",
+          "value": "7",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAAccumSize",
+          "value": "14",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAAuxDepthStencil",
+          "value": "57",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAStereo",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAOffScreen",
+          "value": "53",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAWindow",
+          "value": "80",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFACompliant",
+          "value": "83",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAPBuffer",
+          "value": "90",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFARemotePBuffer",
+          "value": "91",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFASingleRenderer",
+          "value": "71",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFARobust",
+          "value": "75",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAMPSafe",
+          "value": "78",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAMultiScreen",
+          "value": "81",
+          "availability": {}
+        },
+        {
+          "name": "kCGLPFAFullScreen",
+          "value": "54",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 53
+    },
+    "_CGLRendererProperty": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLRPOffScreen",
+          "value": "53",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPRendererID",
+          "value": "70",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPAccelerated",
+          "value": "73",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPBackingStore",
+          "value": "76",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPWindow",
+          "value": "80",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPCompliant",
+          "value": "83",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPDisplayMask",
+          "value": "84",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPBufferModes",
+          "value": "100",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPColorModes",
+          "value": "103",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPAccumModes",
+          "value": "104",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPDepthModes",
+          "value": "105",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPStencilModes",
+          "value": "106",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPMaxAuxBuffers",
+          "value": "107",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPMaxSampleBuffers",
+          "value": "108",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPMaxSamples",
+          "value": "109",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPSampleModes",
+          "value": "110",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPSampleAlpha",
+          "value": "111",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPGPUVertProcCapable",
+          "value": "122",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPGPUFragProcCapable",
+          "value": "123",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPRendererCount",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPOnline",
+          "value": "129",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPAcceleratedCompute",
+          "value": "130",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPVideoMemoryMegabytes",
+          "value": "131",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPTextureMemoryMegabytes",
+          "value": "132",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPMajorGLVersion",
+          "value": "133",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPRegistryIDLow",
+          "value": "140",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPRegistryIDHigh",
+          "value": "141",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPRemovable",
+          "value": "142",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPRobust",
+          "value": "75",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPMPSafe",
+          "value": "78",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPMultiScreen",
+          "value": "81",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPFullScreen",
+          "value": "54",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPVideoMemory",
+          "value": "120",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRPTextureMemory",
+          "value": "121",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 104
+    },
+    "_anon_kCGLCPContextPriorityRequestHigh": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLCPContextPriorityRequestHigh",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPContextPriorityRequestNormal",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kCGLCPContextPriorityRequestLow",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "_anon_kCGLRendererGenericID": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kCGLRendererGenericID",
+          "value": "131584",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererGenericFloatID",
+          "value": "132096",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererAppleSWID",
+          "value": "132608",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererATIRage128ID",
+          "value": "135168",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererATIRadeonID",
+          "value": "135680",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererATIRageProID",
+          "value": "136192",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererATIRadeon8500ID",
+          "value": "136704",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererATIRadeon9700ID",
+          "value": "137216",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererATIRadeonX1000ID",
+          "value": "137472",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererATIRadeonX2000ID",
+          "value": "137728",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererATIRadeonX3000ID",
+          "value": "137984",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererATIRadeonX4000ID",
+          "value": "138240",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererGeForce2MXID",
+          "value": "139264",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererGeForce3ID",
+          "value": "139776",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererGeForceFXID",
+          "value": "140288",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererGeForce8xxxID",
+          "value": "140800",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererGeForceID",
+          "value": "141056",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererVTBladeXP2ID",
+          "value": "143360",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererIntel900ID",
+          "value": "147456",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererIntelX3100ID",
+          "value": "147968",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererIntelHDID",
+          "value": "148224",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererIntelHD4000ID",
+          "value": "148480",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererIntelHD5000ID",
+          "value": "148736",
+          "availability": {}
+        },
+        {
+          "name": "kCGLRendererMesa3DFXID",
+          "value": "262144",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    }
+  },
+  "structs": {
+    "CGLShareGroupRec": {
+      "availability": {},
+      "sdk_file": "OpenGL/CGLDevice.h",
+      "sdk_line": 17
+    },
+    "_CGLContextObject": {
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 45
+    },
+    "_CGLPBufferObject": {
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 48
+    },
+    "_CGLPixelFormatObject": {
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 46
+    },
+    "_CGLRendererInfoObject": {
+      "availability": {},
+      "sdk_file": "OpenGL/CGLTypes.h",
+      "sdk_line": 47
+    },
+    "__GLsync": {
+      "availability": {},
+      "sdk_file": "OpenGL/gltypes.h",
+      "sdk_line": 43
+    },
+    "__IOSurface": {
+      "availability": {},
+      "sdk_file": "OpenGL/CGLIOSurface.h",
+      "sdk_line": 18
+    },
+    "_cl_device_id": {
+      "availability": {},
+      "sdk_file": "OpenGL/CGLDevice.h",
+      "sdk_line": 21
+    }
+  },
+  "functions": [
+    {
+      "name": "CGLSetCurrentContext",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/CGLCurrent.h",
+      "sdk_line": 19
+    },
+    {
+      "name": "CGLGetCurrentContext",
+      "return": {
+        "objc_type": "CGLContextObj  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/CGLCurrent.h",
+      "sdk_line": 20
+    },
+    {
+      "name": "CGLGetShareGroup",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLShareGroupObj  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/CGLDevice.h",
+      "sdk_line": 19
+    },
+    {
+      "name": "CGLGetDeviceFromGLRenderer",
+      "args": [
+        {
+          "name": "rendererID",
+          "objc_type": "GLint"
+        }
+      ],
+      "return": {
+        "objc_type": "cl_device_id  _Nonnull"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/CGLDevice.h",
+      "sdk_line": 30
+    },
+    {
+      "name": "CGLTexImageIOSurface2D",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "target",
+          "objc_type": "GLenum"
+        },
+        {
+          "name": "internal_format",
+          "objc_type": "GLenum"
+        },
+        {
+          "name": "width",
+          "objc_type": "GLsizei"
+        },
+        {
+          "name": "height",
+          "objc_type": "GLsizei"
+        },
+        {
+          "name": "format",
+          "objc_type": "GLenum"
+        },
+        {
+          "name": "type",
+          "objc_type": "GLenum"
+        },
+        {
+          "name": "ioSurface",
+          "objc_type": "IOSurfaceRef _Nonnull"
+        },
+        {
+          "name": "plane",
+          "objc_type": "GLuint"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/CGLIOSurface.h",
+      "sdk_line": 81,
+      "doc": "@function  CGLTexImageIOSurface2D CGLTexImageIOSurface2D() allows you to bind a single image plane from an IOSurfaceRef to an OpenGL texture object.   It is the rough equivalent to glTexImage2D(), except that the underlying source data comes from an IOSurface rather than from an explicit pointer. Note that unlike glTexImage2D(), the binding is \"live\", in that if the contents of the IOSurface change, the contents become visible to OpenGL without making another call to CGLTexImageIOSurface2D().   That being said, there are a few synchronization things to worry about if you are using IOSurface to pass data between contexts and/or different processes, or between the CPU and OpenGL. In general IOSurface follows Apple's cross-context synchronization rules for OpenGL. Put simply, in order for changes done to an IOSurface on context A to become visible to context B, you must flush context A's command stream (via an explicit call to glFlush, glFlushRenderAPPLE, etc.), and then perform a 'bind' (in this case, glBindTexture()) on context B.  Note that in the case of an IOSurface backed texture used as a color buffer attachment for an FBO, you are only required to call glBindFramebuffer() again.  You do not have to call glFramebufferTexture2D(). Likewise, if you make changes to an IOSurface with the CPU, you *must* wrap those changes with calls to IOSurfaceLock() and IOSurfaceUnlock(), and call glBindTexture() again for OpenGL to pick up the changes. Going in the other direction, if you want changes made with OpenGL to an IOSurface to become visible to the CPU, you must also perform an explicit flush of the OpenGL context before calling IOSurfaceLock(), or you may not get the most recent data. IOSurface and OpenGL make no guarantees about correctness if these rules are not followed. Because of the way IOSurface is currently implemented, it does not allow for any kind of automatic format conversion to take place between the data in the IOSurface and the data seen by the GPU.   This means that OpenGL is going to interpret the data in the IOSurface exactly as how it is specified by the format and type parameters passed to CGLTexImageIOSurface2D(). The upshot if this is that the only supported format/type combinations are those that have exact matching hardware formats.   The table at the bottom of this file lists the format/type/ internalFormat combinations that are supported in Mac OS X 10.6. In cases where a given format/type combination has both an Internal Format and Sized Internal Format, either one may be used. Note that CGLTexImageIOSurface2D for the most part doesn't care what the pixel format or bytes per element of the IOSurface is.  Instead it only enforces the rule that there must be enough data in the plane being bound to cover what is required by the width/height/format/type parameters.   However, if you are using the IOSurface texture as a color buffer attachment to an FBO, then you must ensure that the bytes per element value of the IOSurface must match the effective bytes per pixel value for the format and type combination you are passing to OpenGL. @param ctx              The CGLContextObj for the OpenGL context you are using @param target           Must currently be GL_TEXTURE_RECTANGLE_ARB as of Mac OS X 10.6.0. @param internal_format  One of the supported values from the table below that matches the format/type combination. @param width            The width of the texture in pixels. @param height           The height of the texture in pixels. @param format           The OpenGL texture format enum @param type             The OpenGL texture type enum @param ioSurface        The IOSurfaceRef this texture is being bound to @param plane            Which plane of the IOSurface this texture is being bound to"
+    },
+    {
+      "name": "CGLChoosePixelFormat",
+      "args": [
+        {
+          "name": "attribs",
+          "objc_type": "const CGLPixelFormatAttribute * _Nonnull"
+        },
+        {
+          "name": "pix",
+          "objc_type": "CGLPixelFormatObj  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "npix",
+          "objc_type": "GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 31
+    },
+    {
+      "name": "CGLDestroyPixelFormat",
+      "args": [
+        {
+          "name": "pix",
+          "objc_type": "CGLPixelFormatObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 32
+    },
+    {
+      "name": "CGLDescribePixelFormat",
+      "args": [
+        {
+          "name": "pix",
+          "objc_type": "CGLPixelFormatObj _Nonnull"
+        },
+        {
+          "name": "pix_num",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "attrib",
+          "objc_type": "CGLPixelFormatAttribute"
+        },
+        {
+          "name": "value",
+          "objc_type": "GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 33
+    },
+    {
+      "name": "CGLReleasePixelFormat",
+      "args": [
+        {
+          "name": "pix",
+          "objc_type": "CGLPixelFormatObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 34
+    },
+    {
+      "name": "CGLRetainPixelFormat",
+      "args": [
+        {
+          "name": "pix",
+          "objc_type": "CGLPixelFormatObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLPixelFormatObj  _Nonnull"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 35
+    },
+    {
+      "name": "CGLGetPixelFormatRetainCount",
+      "args": [
+        {
+          "name": "pix",
+          "objc_type": "CGLPixelFormatObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "GLuint"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 36
+    },
+    {
+      "name": "CGLQueryRendererInfo",
+      "args": [
+        {
+          "name": "display_mask",
+          "objc_type": "GLuint"
+        },
+        {
+          "name": "rend",
+          "objc_type": "CGLRendererInfoObj  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "nrend",
+          "objc_type": "GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 41
+    },
+    {
+      "name": "CGLDestroyRendererInfo",
+      "args": [
+        {
+          "name": "rend",
+          "objc_type": "CGLRendererInfoObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 42
+    },
+    {
+      "name": "CGLDescribeRenderer",
+      "args": [
+        {
+          "name": "rend",
+          "objc_type": "CGLRendererInfoObj _Nonnull"
+        },
+        {
+          "name": "rend_num",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "prop",
+          "objc_type": "CGLRendererProperty"
+        },
+        {
+          "name": "value",
+          "objc_type": "GLint * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 43
+    },
+    {
+      "name": "CGLCreateContext",
+      "args": [
+        {
+          "name": "pix",
+          "objc_type": "CGLPixelFormatObj _Nonnull"
+        },
+        {
+          "name": "share",
+          "objc_type": "CGLContextObj _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 48
+    },
+    {
+      "name": "CGLDestroyContext",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 49
+    },
+    {
+      "name": "CGLCopyContext",
+      "args": [
+        {
+          "name": "src",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "dst",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "mask",
+          "objc_type": "GLbitfield"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 50
+    },
+    {
+      "name": "CGLRetainContext",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLContextObj  _Nonnull"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 51
+    },
+    {
+      "name": "CGLReleaseContext",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 52
+    },
+    {
+      "name": "CGLGetContextRetainCount",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "GLuint"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 53
+    },
+    {
+      "name": "CGLGetPixelFormat",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLPixelFormatObj  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 54
+    },
+    {
+      "name": "CGLCreatePBuffer",
+      "args": [
+        {
+          "name": "width",
+          "objc_type": "GLsizei"
+        },
+        {
+          "name": "height",
+          "objc_type": "GLsizei"
+        },
+        {
+          "name": "target",
+          "objc_type": "GLenum"
+        },
+        {
+          "name": "internalFormat",
+          "objc_type": "GLenum"
+        },
+        {
+          "name": "max_level",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "pbuffer",
+          "objc_type": "CGLPBufferObj  _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 59
+    },
+    {
+      "name": "CGLDestroyPBuffer",
+      "args": [
+        {
+          "name": "pbuffer",
+          "objc_type": "CGLPBufferObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 60
+    },
+    {
+      "name": "CGLDescribePBuffer",
+      "args": [
+        {
+          "name": "obj",
+          "objc_type": "CGLPBufferObj _Nonnull"
+        },
+        {
+          "name": "width",
+          "objc_type": "GLsizei * _Nonnull"
+        },
+        {
+          "name": "height",
+          "objc_type": "GLsizei * _Nonnull"
+        },
+        {
+          "name": "target",
+          "objc_type": "GLenum * _Nonnull"
+        },
+        {
+          "name": "internalFormat",
+          "objc_type": "GLenum * _Nonnull"
+        },
+        {
+          "name": "mipmap",
+          "objc_type": "GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 61
+    },
+    {
+      "name": "CGLTexImagePBuffer",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "pbuffer",
+          "objc_type": "CGLPBufferObj _Nonnull"
+        },
+        {
+          "name": "source",
+          "objc_type": "GLenum"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 62
+    },
+    {
+      "name": "CGLRetainPBuffer",
+      "args": [
+        {
+          "name": "pbuffer",
+          "objc_type": "CGLPBufferObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLPBufferObj  _Nonnull"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 63
+    },
+    {
+      "name": "CGLReleasePBuffer",
+      "args": [
+        {
+          "name": "pbuffer",
+          "objc_type": "CGLPBufferObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 64
+    },
+    {
+      "name": "CGLGetPBufferRetainCount",
+      "args": [
+        {
+          "name": "pbuffer",
+          "objc_type": "CGLPBufferObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "GLuint"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 65
+    },
+    {
+      "name": "CGLSetOffScreen",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "width",
+          "objc_type": "GLsizei"
+        },
+        {
+          "name": "height",
+          "objc_type": "GLsizei"
+        },
+        {
+          "name": "rowbytes",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "baseaddr",
+          "objc_type": "void * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 70
+    },
+    {
+      "name": "CGLGetOffScreen",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "width",
+          "objc_type": "GLsizei * _Nonnull"
+        },
+        {
+          "name": "height",
+          "objc_type": "GLsizei * _Nonnull"
+        },
+        {
+          "name": "rowbytes",
+          "objc_type": "GLint * _Nonnull"
+        },
+        {
+          "name": "baseaddr",
+          "objc_type": "void * _Nullable * _Nonnull",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 71
+    },
+    {
+      "name": "CGLSetFullScreen",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 72
+    },
+    {
+      "name": "CGLSetFullScreenOnDisplay",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "display_mask",
+          "objc_type": "GLuint"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 73
+    },
+    {
+      "name": "CGLSetPBuffer",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "pbuffer",
+          "objc_type": "CGLPBufferObj _Nonnull"
+        },
+        {
+          "name": "face",
+          "objc_type": "GLenum"
+        },
+        {
+          "name": "level",
+          "objc_type": "GLint"
+        },
+        {
+          "name": "screen",
+          "objc_type": "GLint"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 75
+    },
+    {
+      "name": "CGLGetPBuffer",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "pbuffer",
+          "objc_type": "CGLPBufferObj  _Nullable * _Nonnull",
+          "nullable": true
+        },
+        {
+          "name": "face",
+          "objc_type": "GLenum * _Nonnull"
+        },
+        {
+          "name": "level",
+          "objc_type": "GLint * _Nonnull"
+        },
+        {
+          "name": "screen",
+          "objc_type": "GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 76
+    },
+    {
+      "name": "CGLClearDrawable",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 78
+    },
+    {
+      "name": "CGLFlushDrawable",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 79
+    },
+    {
+      "name": "CGLEnable",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "pname",
+          "objc_type": "CGLContextEnable"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 84
+    },
+    {
+      "name": "CGLDisable",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "pname",
+          "objc_type": "CGLContextEnable"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 85
+    },
+    {
+      "name": "CGLIsEnabled",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "pname",
+          "objc_type": "CGLContextEnable"
+        },
+        {
+          "name": "enable",
+          "objc_type": "GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 86
+    },
+    {
+      "name": "CGLSetParameter",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "pname",
+          "objc_type": "CGLContextParameter"
+        },
+        {
+          "name": "params",
+          "objc_type": "const GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 87
+    },
+    {
+      "name": "CGLGetParameter",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "pname",
+          "objc_type": "CGLContextParameter"
+        },
+        {
+          "name": "params",
+          "objc_type": "GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 88
+    },
+    {
+      "name": "CGLSetVirtualScreen",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "screen",
+          "objc_type": "GLint"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 93
+    },
+    {
+      "name": "CGLGetVirtualScreen",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        },
+        {
+          "name": "screen",
+          "objc_type": "GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 94
+    },
+    {
+      "name": "CGLUpdateContext",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 96
+    },
+    {
+      "name": "CGLSetGlobalOption",
+      "args": [
+        {
+          "name": "pname",
+          "objc_type": "CGLGlobalOption"
+        },
+        {
+          "name": "params",
+          "objc_type": "const GLint * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 101
+    },
+    {
+      "name": "CGLGetGlobalOption",
+      "args": [
+        {
+          "name": "pname",
+          "objc_type": "CGLGlobalOption"
+        },
+        {
+          "name": "params",
+          "objc_type": "GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 102
+    },
+    {
+      "name": "CGLSetOption",
+      "args": [
+        {
+          "name": "pname",
+          "objc_type": "CGLGlobalOption"
+        },
+        {
+          "name": "param",
+          "objc_type": "GLint"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 104
+    },
+    {
+      "name": "CGLGetOption",
+      "args": [
+        {
+          "name": "pname",
+          "objc_type": "CGLGlobalOption"
+        },
+        {
+          "name": "param",
+          "objc_type": "GLint * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 105
+    },
+    {
+      "name": "CGLLockContext",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 110
+    },
+    {
+      "name": "CGLUnlockContext",
+      "args": [
+        {
+          "name": "ctx",
+          "objc_type": "CGLContextObj _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CGLError"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 112
+    },
+    {
+      "name": "CGLGetVersion",
+      "args": [
+        {
+          "name": "majorvers",
+          "objc_type": "GLint * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "minorvers",
+          "objc_type": "GLint * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 117
+    },
+    {
+      "name": "CGLErrorString",
+      "args": [
+        {
+          "name": "error",
+          "objc_type": "CGLError"
+        }
+      ],
+      "return": {
+        "objc_type": "const char * _Nonnull"
+      },
+      "availability": {},
+      "sdk_file": "OpenGL/OpenGL.h",
+      "sdk_line": 122
+    }
+  ],
+  "externs": null,
+  "block_types": {},
+  "typedefs": {
+    "CGLCPContextPriorityRequest": "enum CGLCPContextPriorityRequest",
+    "CGLContextEnable": "enum _CGLContextEnable",
+    "CGLContextObj": "struct _CGLContextObject *",
+    "CGLContextParameter": "enum _CGLContextParameter",
+    "CGLError": "enum _CGLError",
+    "CGLGPURestartStatus": "enum _CGLGPURestartStatus",
+    "CGLGlobalOption": "enum _CGLGlobalOption",
+    "CGLOpenGLProfile": "enum _CGLOpenGLProfile",
+    "CGLPBufferObj": "struct _CGLPBufferObject *",
+    "CGLPixelFormatAttribute": "enum _CGLPixelFormatAttribute",
+    "CGLPixelFormatObj": "struct _CGLPixelFormatObject *",
+    "CGLRendererInfoObj": "struct _CGLRendererInfoObject *",
+    "CGLRendererProperty": "enum _CGLRendererProperty",
+    "CGLShareGroupObj": "struct CGLShareGroupRec *",
+    "Class": "Class",
+    "GLbitfield": "uint32_t",
+    "GLboolean": "uint8_t",
+    "GLbyte": "int8_t",
+    "GLchar": "char",
+    "GLcharARB": "char",
+    "GLclampd": "double",
+    "GLclampf": "float",
+    "GLdouble": "double",
+    "GLenum": "uint32_t",
+    "GLfixed": "int32_t",
+    "GLfloat": "float",
+    "GLhalf": "uint16_t",
+    "GLhalfARB": "uint16_t",
+    "GLhandleARB": "void *",
+    "GLint": "int32_t",
+    "GLint64": "int64_t",
+    "GLint64EXT": "int64_t",
+    "GLintptr": "intptr_t",
+    "GLintptrARB": "intptr_t",
+    "GLshort": "int16_t",
+    "GLsizei": "int32_t",
+    "GLsizeiptr": "intptr_t",
+    "GLsizeiptrARB": "intptr_t",
+    "GLsync": "struct __GLsync *",
+    "GLubyte": "uint8_t",
+    "GLuint": "uint32_t",
+    "GLuint64": "uint64_t",
+    "GLuint64EXT": "uint64_t",
+    "GLushort": "uint16_t",
+    "GLvoid": "void",
+    "IOSurfaceRef": "struct __IOSurface *",
+    "SEL": "SEL *",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wint_t": "int",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "cl_device_id": "struct _cl_device_id *",
+    "id": "id",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long"
+  }
+}

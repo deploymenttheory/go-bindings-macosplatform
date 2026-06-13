@@ -1,0 +1,11 @@
+{{/*
+    blocks.tmpl — template for ObjC block typedef items.
+
+    Named templates:
+      block_type_item   one Go named func type alias for an ObjC block typedef
+*/}}
+
+{{define "block_type_item"}}// {{.GoName}} is the Go equivalent of the ObjC block type used in {{.Framework}}.
+type {{.GoName}} = {{.Sig}}
+
+{{end}}

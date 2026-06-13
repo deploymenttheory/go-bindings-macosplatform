@@ -1,0 +1,2961 @@
+{
+  "framework": "SearchKit",
+  "sdk_version": "26.5",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "classes": {},
+  "protocols": {},
+  "enums": {
+    "SKDocumentIndexState": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kSKDocumentStateNotIndexed",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kSKDocumentStateIndexed",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kSKDocumentStateAddPending",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kSKDocumentStateDeletePending",
+          "value": "3",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 144
+    },
+    "SKIndexType": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kSKIndexUnknown",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kSKIndexInverted",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kSKIndexVector",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kSKIndexInvertedVector",
+          "value": "3",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 112
+    },
+    "SKSearchType": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kSKSearchRanked",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kSKSearchBooleanRanked",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kSKSearchRequiredRanked",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kSKSearchPrefixRanked",
+          "value": "3",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 374
+    },
+    "_anon_kSKSearchOptionDefault": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kSKSearchOptionDefault",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kSKSearchOptionNoRelevanceScores",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "kSKSearchOptionSpaceMeansOR",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "kSKSearchOptionFindSimilar",
+          "value": "4",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "acl_entry_id_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_FIRST_ENTRY",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_NEXT_ENTRY",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_LAST_ENTRY",
+          "value": "-2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 118
+    },
+    "acl_flag_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_FLAG_DEFER_INHERIT",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_FLAG_NO_INHERIT",
+          "value": "131072",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_INHERITED",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_FILE_INHERIT",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_DIRECTORY_INHERIT",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_LIMIT_INHERIT",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_ONLY_INHERIT",
+          "value": "256",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 125
+    },
+    "acl_perm_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_READ_DATA",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_LIST_DIRECTORY",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_DATA",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ADD_FILE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXECUTE",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "ACL_SEARCH",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "ACL_DELETE",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "ACL_APPEND_DATA",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ADD_SUBDIRECTORY",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_DELETE_CHILD",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_ATTRIBUTES",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_ATTRIBUTES",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_EXTATTRIBUTES",
+          "value": "512",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_EXTATTRIBUTES",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_SECURITY",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_SECURITY",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "ACL_CHANGE_OWNER",
+          "value": "8192",
+          "availability": {}
+        },
+        {
+          "name": "ACL_SYNCHRONIZE",
+          "value": "1048576",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 72
+    },
+    "acl_tag_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_UNDEFINED_TAG",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXTENDED_ALLOW",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXTENDED_DENY",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 94
+    },
+    "acl_type_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ACL_TYPE_EXTENDED",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_ACCESS",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_DEFAULT",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_AFS",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_CODA",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_NTFS",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_NWFS",
+          "value": "5",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 101
+    },
+    "clockid_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "_CLOCK_REALTIME",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW_APPROX",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW_APPROX",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_PROCESS_CPUTIME_ID",
+          "value": "12",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_THREAD_CPUTIME_ID",
+          "value": "16",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "_time.h",
+      "sdk_line": 156
+    },
+    "dispatch_autorelease_frequency_t": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_INHERIT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_NEVER",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "queue.h",
+      "sdk_line": 300,
+      "is_extensible": true
+    },
+    "dispatch_block_flags_t": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "DISPATCH_BLOCK_BARRIER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_BLOCK_DETACHED",
+          "value": "2",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_ASSIGN_CURRENT",
+          "value": "4",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_NO_QOS_CLASS",
+          "value": "8",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_INHERIT_QOS_CLASS",
+          "value": "16",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_ENFORCE_QOS_CLASS",
+          "value": "32",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        }
+      ],
+      "availability": {},
+      "sdk_file": "block.h",
+      "sdk_line": 302,
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "filesec_property_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "FILESEC_OWNER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GROUP",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_UUID",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_MODE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GRPUUID",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_RAW",
+          "value": "100",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_ALLOCSIZE",
+          "value": "101",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "fcntl.h",
+      "sdk_line": 582
+    },
+    "idtype_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "P_ALL",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "P_PID",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "P_PGID",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "wait.h",
+      "sdk_line": 79
+    },
+    "mpo_flags_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "MPO_PORT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "MPO_SERVICE_PORT",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "MPO_REPLY_PORT",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "MPO_WEAK_REPLY_PORT",
+          "value": "16384",
+          "availability": {}
+        },
+        {
+          "name": "MPO_NOTIFICATION_PORT",
+          "value": "17408",
+          "availability": {}
+        },
+        {
+          "name": "MPO_EXCEPTION_PORT",
+          "value": "32768",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT_WITH_PORT_ARRAY",
+          "value": "65536",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "port.h",
+      "sdk_line": 1102,
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "os_clockid_t": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
+          "value": "32",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "clock.h",
+      "sdk_line": 188
+    },
+    "ptrauth_key": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "ptrauth_key_none",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asia",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asib",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asda",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asdb",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_code",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_code",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_data",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_data",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_return_address",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_frame_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_function_pointer",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_function",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_cxx_vtable_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_method_list_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_isa_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_super_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_sel_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_class_ro_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_descriptor_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_init_fini_pointer",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ptrauth.h",
+      "sdk_line": 13
+    },
+    "qos_class_t": {
+      "go_type": "uint32",
+      "members": [
+        {
+          "name": "QOS_CLASS_USER_INTERACTIVE",
+          "value": "33",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_USER_INITIATED",
+          "value": "25",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_DEFAULT",
+          "value": "21",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_UTILITY",
+          "value": "17",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_BACKGROUND",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_UNSPECIFIED",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "qos.h",
+      "sdk_line": 121
+    }
+  },
+  "structs": {
+    "__SKIndex": {
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 62
+    },
+    "__SKIndexDocumentIterator": {
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 86
+    },
+    "__SKSearch": {
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 66
+    },
+    "__SKSearchGroup": {
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 323
+    },
+    "__SKSearchResults": {
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 346
+    },
+    "__SKSummary": {
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 53
+    }
+  },
+  "functions": [
+    {
+      "name": "SKDocumentGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKDocument.h",
+      "sdk_line": 67
+    },
+    {
+      "name": "SKDocumentCreateWithURL",
+      "args": [
+        {
+          "name": "inURL",
+          "objc_type": "CFURLRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKDocumentRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKDocument.h",
+      "sdk_line": 98
+    },
+    {
+      "name": "SKDocumentCopyURL",
+      "args": [
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFURLRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKDocument.h",
+      "sdk_line": 116
+    },
+    {
+      "name": "SKDocumentCreate",
+      "args": [
+        {
+          "name": "inScheme",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "inParent",
+          "objc_type": "SKDocumentRef"
+        },
+        {
+          "name": "inName",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKDocumentRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKDocument.h",
+      "sdk_line": 157
+    },
+    {
+      "name": "SKDocumentGetSchemeName",
+      "args": [
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKDocument.h",
+      "sdk_line": 183
+    },
+    {
+      "name": "SKDocumentGetName",
+      "args": [
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKDocument.h",
+      "sdk_line": 206
+    },
+    {
+      "name": "SKDocumentGetParent",
+      "args": [
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKDocumentRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKDocument.h",
+      "sdk_line": 230
+    },
+    {
+      "name": "SKIndexGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 75
+    },
+    {
+      "name": "SKIndexDocumentIteratorGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 99
+    },
+    {
+      "name": "SKIndexCreateWithURL",
+      "args": [
+        {
+          "name": "inURL",
+          "objc_type": "CFURLRef"
+        },
+        {
+          "name": "inIndexName",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "inIndexType",
+          "objc_type": "SKIndexType"
+        },
+        {
+          "name": "inAnalysisProperties",
+          "objc_type": "CFDictionaryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKIndexRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 214
+    },
+    {
+      "name": "SKIndexOpenWithURL",
+      "args": [
+        {
+          "name": "inURL",
+          "objc_type": "CFURLRef"
+        },
+        {
+          "name": "inIndexName",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "inWriteAccess",
+          "objc_type": "Boolean"
+        }
+      ],
+      "return": {
+        "objc_type": "SKIndexRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 255
+    },
+    {
+      "name": "SKIndexCreateWithMutableData",
+      "args": [
+        {
+          "name": "inData",
+          "objc_type": "CFMutableDataRef"
+        },
+        {
+          "name": "inIndexName",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "inIndexType",
+          "objc_type": "SKIndexType"
+        },
+        {
+          "name": "inAnalysisProperties",
+          "objc_type": "CFDictionaryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKIndexRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 294
+    },
+    {
+      "name": "SKIndexOpenWithData",
+      "args": [
+        {
+          "name": "inData",
+          "objc_type": "CFDataRef"
+        },
+        {
+          "name": "inIndexName",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKIndexRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 331
+    },
+    {
+      "name": "SKIndexOpenWithMutableData",
+      "args": [
+        {
+          "name": "inData",
+          "objc_type": "CFMutableDataRef"
+        },
+        {
+          "name": "inIndexName",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKIndexRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 367
+    },
+    {
+      "name": "SKIndexFlush",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 394
+    },
+    {
+      "name": "SKIndexSetMaximumBytesBeforeFlush",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inBytesForUpdate",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 409
+    },
+    {
+      "name": "SKIndexGetMaximumBytesBeforeFlush",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 430
+    },
+    {
+      "name": "SKIndexCompact",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 456
+    },
+    {
+      "name": "SKIndexGetIndexType",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKIndexType"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 479
+    },
+    {
+      "name": "SKIndexGetAnalysisProperties",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDictionaryRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 498
+    },
+    {
+      "name": "SKIndexGetDocumentCount",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 522
+    },
+    {
+      "name": "SKIndexClose",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 537
+    },
+    {
+      "name": "SKIndexAddDocumentWithText",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        },
+        {
+          "name": "inDocumentText",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "inCanReplace",
+          "objc_type": "Boolean"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 575
+    },
+    {
+      "name": "SKIndexAddDocument",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        },
+        {
+          "name": "inMIMETypeHint",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "inCanReplace",
+          "objc_type": "Boolean"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 624
+    },
+    {
+      "name": "SKIndexRemoveDocument",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 656
+    },
+    {
+      "name": "SKIndexCopyDocumentProperties",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDictionaryRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 677
+    },
+    {
+      "name": "SKIndexSetDocumentProperties",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        },
+        {
+          "name": "inProperties",
+          "objc_type": "CFDictionaryRef"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 696
+    },
+    {
+      "name": "SKIndexGetDocumentState",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKDocumentIndexState"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 721
+    },
+    {
+      "name": "SKIndexGetDocumentID",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKDocumentID"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 742
+    },
+    {
+      "name": "SKIndexCopyDocumentForDocumentID",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocumentID",
+          "objc_type": "SKDocumentID"
+        }
+      ],
+      "return": {
+        "objc_type": "SKDocumentRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 759
+    },
+    {
+      "name": "SKIndexRenameDocument",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        },
+        {
+          "name": "inNewName",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 776
+    },
+    {
+      "name": "SKIndexMoveDocument",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocument",
+          "objc_type": "SKDocumentRef"
+        },
+        {
+          "name": "inNewParent",
+          "objc_type": "SKDocumentRef"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 794
+    },
+    {
+      "name": "SKIndexDocumentIteratorCreate",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inParentDocument",
+          "objc_type": "SKDocumentRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKIndexDocumentIteratorRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 813
+    },
+    {
+      "name": "SKIndexDocumentIteratorCopyNext",
+      "args": [
+        {
+          "name": "inIterator",
+          "objc_type": "SKIndexDocumentIteratorRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKDocumentRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 835
+    },
+    {
+      "name": "SKIndexGetMaximumDocumentID",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKDocumentID"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 853
+    },
+    {
+      "name": "SKIndexGetDocumentTermCount",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocumentID",
+          "objc_type": "SKDocumentID"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 868
+    },
+    {
+      "name": "SKIndexCopyTermIDArrayForDocumentID",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocumentID",
+          "objc_type": "SKDocumentID"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 888
+    },
+    {
+      "name": "SKIndexGetDocumentTermFrequency",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inDocumentID",
+          "objc_type": "SKDocumentID"
+        },
+        {
+          "name": "inTermID",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 905
+    },
+    {
+      "name": "SKIndexGetMaximumTermID",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 928
+    },
+    {
+      "name": "SKIndexGetTermDocumentCount",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inTermID",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 943
+    },
+    {
+      "name": "SKIndexCopyDocumentIDArrayForTermID",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inTermID",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 963
+    },
+    {
+      "name": "SKIndexCopyTermStringForTermID",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inTermID",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 980
+    },
+    {
+      "name": "SKIndexGetTermIDForTermString",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inTermString",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 1000
+    },
+    {
+      "name": "SKLoadDefaultExtractorPlugIns",
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKIndex.h",
+      "sdk_line": 1026
+    },
+    {
+      "name": "SKSearchGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 79
+    },
+    {
+      "name": "SKSearchCreate",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inQuery",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "inSearchOptions",
+          "objc_type": "SKSearchOptions"
+        }
+      ],
+      "return": {
+        "objc_type": "SKSearchRef"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 129
+    },
+    {
+      "name": "SKSearchCancel",
+      "args": [
+        {
+          "name": "inSearch",
+          "objc_type": "SKSearchRef"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 147
+    },
+    {
+      "name": "SKSearchFindMatches",
+      "args": [
+        {
+          "name": "inSearch",
+          "objc_type": "SKSearchRef"
+        },
+        {
+          "name": "inMaximumCount",
+          "objc_type": "CFIndex"
+        },
+        {
+          "name": "outDocumentIDsArray",
+          "objc_type": "SKDocumentID *"
+        },
+        {
+          "name": "outScoresArray",
+          "objc_type": "float *"
+        },
+        {
+          "name": "maximumTime",
+          "objc_type": "CFTimeInterval"
+        },
+        {
+          "name": "outFoundCount",
+          "objc_type": "CFIndex *"
+        }
+      ],
+      "return": {
+        "objc_type": "Boolean"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 195
+    },
+    {
+      "name": "SKIndexCopyInfoForDocumentIDs",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inCount",
+          "objc_type": "CFIndex"
+        },
+        {
+          "name": "inDocumentIDsArray",
+          "objc_type": "SKDocumentID *"
+        },
+        {
+          "name": "outNamesArray",
+          "objc_type": "CFStringRef *"
+        },
+        {
+          "name": "outParentIDsArray",
+          "objc_type": "SKDocumentID *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 236
+    },
+    {
+      "name": "SKIndexCopyDocumentRefsForDocumentIDs",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inCount",
+          "objc_type": "CFIndex"
+        },
+        {
+          "name": "inDocumentIDsArray",
+          "objc_type": "SKDocumentID *"
+        },
+        {
+          "name": "outDocumentRefsArray",
+          "objc_type": "SKDocumentRef *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 270
+    },
+    {
+      "name": "SKIndexCopyDocumentURLsForDocumentIDs",
+      "args": [
+        {
+          "name": "inIndex",
+          "objc_type": "SKIndexRef"
+        },
+        {
+          "name": "inCount",
+          "objc_type": "CFIndex"
+        },
+        {
+          "name": "inDocumentIDsArray",
+          "objc_type": "SKDocumentID *"
+        },
+        {
+          "name": "outDocumentURLsArray",
+          "objc_type": "CFURLRef *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 303
+    },
+    {
+      "name": "SKSearchGroupGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {
+        "macos_introduced": "10.3",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 336
+    },
+    {
+      "name": "SKSearchResultsGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {
+        "macos_introduced": "10.3",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 359
+    },
+    {
+      "name": "SKSearchGroupCreate",
+      "args": [
+        {
+          "name": "inArrayOfInIndexes",
+          "objc_type": "CFArrayRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKSearchGroupRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 435
+    },
+    {
+      "name": "SKSearchGroupCopyIndexes",
+      "args": [
+        {
+          "name": "inSearchGroup",
+          "objc_type": "SKSearchGroupRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 453
+    },
+    {
+      "name": "SKSearchResultsCreateWithQuery",
+      "args": [
+        {
+          "name": "inSearchGroup",
+          "objc_type": "SKSearchGroupRef"
+        },
+        {
+          "name": "inQuery",
+          "objc_type": "CFStringRef"
+        },
+        {
+          "name": "inSearchType",
+          "objc_type": "SKSearchType"
+        },
+        {
+          "name": "inMaxFoundDocuments",
+          "objc_type": "CFIndex"
+        },
+        {
+          "name": "inContext",
+          "objc_type": "void *"
+        },
+        {
+          "name": "inFilterCallBack",
+          "objc_type": "SKSearchResultsFilterCallBack"
+        }
+      ],
+      "return": {
+        "objc_type": "SKSearchResultsRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 499
+    },
+    {
+      "name": "SKSearchResultsCreateWithDocuments",
+      "args": [
+        {
+          "name": "inSearchGroup",
+          "objc_type": "SKSearchGroupRef"
+        },
+        {
+          "name": "inExampleDocuments",
+          "objc_type": "CFArrayRef"
+        },
+        {
+          "name": "inMaxFoundDocuments",
+          "objc_type": "CFIndex"
+        },
+        {
+          "name": "inContext",
+          "objc_type": "void *"
+        },
+        {
+          "name": "inFilterCallBack",
+          "objc_type": "SKSearchResultsFilterCallBack"
+        }
+      ],
+      "return": {
+        "objc_type": "SKSearchResultsRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 549
+    },
+    {
+      "name": "SKSearchResultsGetCount",
+      "args": [
+        {
+          "name": "inSearchResults",
+          "objc_type": "SKSearchResultsRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.3",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 569
+    },
+    {
+      "name": "SKSearchResultsGetInfoInRange",
+      "args": [
+        {
+          "name": "inSearchResults",
+          "objc_type": "SKSearchResultsRef"
+        },
+        {
+          "name": "inRange",
+          "objc_type": "CFRange"
+        },
+        {
+          "name": "outDocumentsArray",
+          "objc_type": "SKDocumentRef *"
+        },
+        {
+          "name": "outIndexesArray",
+          "objc_type": "SKIndexRef *"
+        },
+        {
+          "name": "outScoresArray",
+          "objc_type": "float *"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.3",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 618
+    },
+    {
+      "name": "SKSearchResultsCopyMatchingTerms",
+      "args": [
+        {
+          "name": "inSearchResults",
+          "objc_type": "SKSearchResultsRef"
+        },
+        {
+          "name": "inItem",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef"
+      },
+      "availability": {
+        "macos_introduced": "10.3",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSearch.h",
+      "sdk_line": 650
+    },
+    {
+      "name": "SKSummaryGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 69
+    },
+    {
+      "name": "SKSummaryCreateWithString",
+      "args": [
+        {
+          "name": "inString",
+          "objc_type": "CFStringRef"
+        }
+      ],
+      "return": {
+        "objc_type": "SKSummaryRef"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 97
+    },
+    {
+      "name": "SKSummaryGetSentenceCount",
+      "args": [
+        {
+          "name": "summary",
+          "objc_type": "SKSummaryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 117
+    },
+    {
+      "name": "SKSummaryGetParagraphCount",
+      "args": [
+        {
+          "name": "summary",
+          "objc_type": "SKSummaryRef"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 137
+    },
+    {
+      "name": "SKSummaryCopySentenceAtIndex",
+      "args": [
+        {
+          "name": "summary",
+          "objc_type": "SKSummaryRef"
+        },
+        {
+          "name": "i",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 160
+    },
+    {
+      "name": "SKSummaryCopyParagraphAtIndex",
+      "args": [
+        {
+          "name": "summary",
+          "objc_type": "SKSummaryRef"
+        },
+        {
+          "name": "i",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 185
+    },
+    {
+      "name": "SKSummaryCopySentenceSummaryString",
+      "args": [
+        {
+          "name": "summary",
+          "objc_type": "SKSummaryRef"
+        },
+        {
+          "name": "numSentences",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 211
+    },
+    {
+      "name": "SKSummaryCopyParagraphSummaryString",
+      "args": [
+        {
+          "name": "summary",
+          "objc_type": "SKSummaryRef"
+        },
+        {
+          "name": "numParagraphs",
+          "objc_type": "CFIndex"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 237
+    },
+    {
+      "name": "SKSummaryGetSentenceSummaryInfo",
+      "args": [
+        {
+          "name": "summary",
+          "objc_type": "SKSummaryRef"
+        },
+        {
+          "name": "numSentencesInSummary",
+          "objc_type": "CFIndex"
+        },
+        {
+          "name": "outRankOrderOfSentences",
+          "objc_type": "CFIndex *"
+        },
+        {
+          "name": "outSentenceIndexOfSentences",
+          "objc_type": "CFIndex *"
+        },
+        {
+          "name": "outParagraphIndexOfSentences",
+          "objc_type": "CFIndex *"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 278
+    },
+    {
+      "name": "SKSummaryGetParagraphSummaryInfo",
+      "args": [
+        {
+          "name": "summary",
+          "objc_type": "SKSummaryRef"
+        },
+        {
+          "name": "numParagraphsInSummary",
+          "objc_type": "CFIndex"
+        },
+        {
+          "name": "outRankOrderOfParagraphs",
+          "objc_type": "CFIndex *"
+        },
+        {
+          "name": "outParagraphIndexOfParagraphs",
+          "objc_type": "CFIndex *"
+        }
+      ],
+      "return": {
+        "objc_type": "CFIndex"
+      },
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKSummary.h",
+      "sdk_line": 318
+    }
+  ],
+  "externs": [
+    {
+      "name": "kSKMinTermLength",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKAnalysis.h",
+      "sdk_line": 54
+    },
+    {
+      "name": "kSKSubstitutions",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKAnalysis.h",
+      "sdk_line": 71
+    },
+    {
+      "name": "kSKStopWords",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.3"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKAnalysis.h",
+      "sdk_line": 88
+    },
+    {
+      "name": "kSKProximityIndexing",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKAnalysis.h",
+      "sdk_line": 107
+    },
+    {
+      "name": "kSKMaximumTerms",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKAnalysis.h",
+      "sdk_line": 127
+    },
+    {
+      "name": "kSKTermChars",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKAnalysis.h",
+      "sdk_line": 146
+    },
+    {
+      "name": "kSKStartTermChars",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKAnalysis.h",
+      "sdk_line": 165
+    },
+    {
+      "name": "kSKEndTermChars",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.4"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKAnalysis.h",
+      "sdk_line": 184
+    },
+    {
+      "name": "kSKLanguageTypes",
+      "objc_type": "const CFStringRef",
+      "availability": {
+        "macos_introduced": "10.3",
+        "macos_deprecated": "10.4",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "CoreServices.framework/Frameworks/SearchKit/SKAnalysis.h",
+      "sdk_line": 207
+    }
+  ],
+  "block_types": {},
+  "typedefs": {
+    "AbsoluteTime": "UnsignedWide",
+    "BOOL": "bool",
+    "Boolean": "unsigned char",
+    "Byte": "UInt8",
+    "ByteCount": "unsigned long",
+    "ByteOffset": "unsigned long",
+    "BytePtr": "UInt8 *",
+    "CharParameter": "short",
+    "Class": "struct objc_class *",
+    "CompTimeValue": "wide",
+    "ConstLogicalAddress": "const void *",
+    "ConstStr15Param": "const unsigned char *",
+    "ConstStr255Param": "const unsigned char *",
+    "ConstStr27Param": "const unsigned char *",
+    "ConstStr31Param": "const unsigned char *",
+    "ConstStr32Param": "const unsigned char *",
+    "ConstStr63Param": "const unsigned char *",
+    "ConstStrFileNameParam": "ConstStr63Param",
+    "ConstStringPtr": "const unsigned char *",
+    "Duration": "SInt32",
+    "FILE": "struct __sFILE",
+    "Fixed": "SInt32",
+    "FixedPoint": "struct FixedPoint",
+    "FixedPtr": "Fixed *",
+    "FixedRect": "struct FixedRect",
+    "Float32": "float",
+    "Float32Point": "struct Float32Point",
+    "Float64": "double",
+    "Float80": "struct Float80",
+    "Float96": "struct Float96",
+    "FourCharCode": "UInt32",
+    "Fract": "SInt32",
+    "FractPtr": "Fract *",
+    "Handle": "Ptr *",
+    "IMP": "void (*)(void)",
+    "ItemCount": "unsigned long",
+    "LangCode": "SInt16",
+    "LogicalAddress": "void *",
+    "NSInteger": "long",
+    "NSUInteger": "unsigned long",
+    "NumVersion": "struct NumVersion",
+    "NumVersionVariant": "union NumVersionVariant",
+    "NumVersionVariantHandle": "NumVersionVariantPtr *",
+    "NumVersionVariantPtr": "NumVersionVariant *",
+    "OSErr": "SInt16",
+    "OSStatus": "SInt32",
+    "OSType": "FourCharCode",
+    "OSTypePtr": "OSType *",
+    "OptionBits": "UInt32",
+    "PBVersion": "UInt32",
+    "PRefCon": "void *",
+    "PhysicalAddress": "void *",
+    "Point": "struct Point",
+    "PointPtr": "Point *",
+    "ProcHandle": "ProcPtr *",
+    "ProcPtr": "long (*)(void)",
+    "ProcessSerialNumber": "struct ProcessSerialNumber",
+    "ProcessSerialNumberPtr": "ProcessSerialNumber *",
+    "Ptr": "char *",
+    "Rect": "struct Rect",
+    "RectPtr": "Rect *",
+    "RegionCode": "SInt16",
+    "Register68kProcPtr": "void (*)(void)",
+    "ResType": "FourCharCode",
+    "ResTypePtr": "ResType *",
+    "SEL": "struct objc_selector *",
+    "SInt16": "short",
+    "SInt32": "int",
+    "SInt64": "long long",
+    "SInt8": "signed char",
+    "SKDocumentID": "CFIndex",
+    "SKDocumentIndexState": "enum SKDocumentIndexState",
+    "SKDocumentRef": "CFTypeRef",
+    "SKIndexDocumentIteratorRef": "struct __SKIndexDocumentIterator *",
+    "SKIndexRef": "struct __SKIndex *",
+    "SKIndexType": "enum SKIndexType",
+    "SKSearchGroupRef": "struct __SKSearchGroup *",
+    "SKSearchOptions": "UInt32",
+    "SKSearchRef": "struct __SKSearch *",
+    "SKSearchResultsFilterCallBack": "Boolean (*)(SKIndexRef, SKDocumentRef, void *)",
+    "SKSearchResultsRef": "struct __SKSearchResults *",
+    "SKSearchType": "enum SKSearchType",
+    "SKSummaryRef": "struct __SKSummary *",
+    "SRefCon": "void *",
+    "ScriptCode": "SInt16",
+    "ShortFixed": "short",
+    "ShortFixedPtr": "ShortFixed *",
+    "SignedByte": "SInt8",
+    "Size": "long",
+    "Str15": "unsigned char[16]",
+    "Str255": "unsigned char[256]",
+    "Str27": "unsigned char[28]",
+    "Str31": "unsigned char[32]",
+    "Str32": "unsigned char[33]",
+    "Str32Field": "unsigned char[34]",
+    "Str63": "unsigned char[64]",
+    "StrFileName": "Str63",
+    "StringHandle": "StringPtr *",
+    "StringPtr": "unsigned char *",
+    "Style": "unsigned char",
+    "StyleField": "Style",
+    "StyleParameter": "short",
+    "TimeBase": "struct TimeBaseRecord *",
+    "TimeRecord": "struct TimeRecord",
+    "TimeScale": "SInt32",
+    "TimeValue": "SInt32",
+    "TimeValue64": "SInt64",
+    "UInt16": "unsigned short",
+    "UInt32": "unsigned int",
+    "UInt64": "unsigned long long",
+    "UInt8": "unsigned char",
+    "URefCon": "void *",
+    "UTF16Char": "UInt16",
+    "UTF32Char": "UInt32",
+    "UTF8Char": "UInt8",
+    "UniChar": "UInt16",
+    "UniCharCount": "unsigned long",
+    "UniCharCountPtr": "UniCharCount *",
+    "UniCharPtr": "UniChar *",
+    "UnicodeScalarValue": "UInt32",
+    "UniversalProcHandle": "UniversalProcPtr *",
+    "UniversalProcPtr": "ProcPtr",
+    "UnsignedFixed": "UInt32",
+    "UnsignedFixedPtr": "UnsignedFixed *",
+    "UnsignedWide": "struct UnsignedWide",
+    "UnsignedWidePtr": "UnsignedWide *",
+    "VHSelect": "SInt8",
+    "VersRec": "struct VersRec",
+    "VersRecHndl": "VersRecPtr *",
+    "VersRecPtr": "VersRec *",
+    "WidePtr": "wide *",
+    "_RuneCharClass": "struct _RuneCharClass",
+    "_RuneEntry": "struct _RuneEntry",
+    "_RuneLocale": "struct _RuneLocale",
+    "_RuneRange": "struct _RuneRange",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_nl_item": "int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wctrans_t": "int",
+    "__darwin_wctype_t": "__uint32_t",
+    "__darwin_wint_t": "int",
+    "__gnuc_va_list": "__builtin_va_list",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "acl_entry_id_t": "enum acl_entry_id_t",
+    "acl_entry_t": "struct _acl_entry *",
+    "acl_flag_t": "enum acl_flag_t",
+    "acl_flagset_t": "struct _acl_flagset *",
+    "acl_perm_t": "enum acl_perm_t",
+    "acl_permset_mask_t": "u_int64_t",
+    "acl_permset_t": "struct _acl_permset *",
+    "acl_t": "struct _acl *",
+    "acl_tag_t": "enum acl_tag_t",
+    "acl_type_t": "enum acl_type_t",
+    "alarm_type_t": "int",
+    "audit_token_t": "struct audit_token_t",
+    "blkcnt_t": "__darwin_blkcnt_t",
+    "blksize_t": "__darwin_blksize_t",
+    "boolean_t": "int",
+    "caddr_t": "char *",
+    "clock_attr_t": "int *",
+    "clock_flavor_t": "int",
+    "clock_id_t": "int",
+    "clock_res_t": "int",
+    "clock_t": "__darwin_clock_t",
+    "clockid_t": "enum clockid_t",
+    "cpu_subtype_t": "integer_t",
+    "cpu_threadtype_t": "integer_t",
+    "cpu_type_t": "integer_t",
+    "ct_rune_t": "__darwin_ct_rune_t",
+    "daddr_t": "int32_t",
+    "dev_t": "__darwin_dev_t",
+    "dispatch_autorelease_frequency_t": "enum dispatch_autorelease_frequency_t",
+    "dispatch_block_flags_t": "enum dispatch_block_flags_t",
+    "dispatch_block_t": "void (^)(void)",
+    "dispatch_data_applier_t": "bool (^)(dispatch_data_t _Nonnull, size_t, const void * _Nonnull, size_t)",
+    "dispatch_data_t": "NSObject\u003cOS_dispatch_data\u003e *",
+    "dispatch_fd_t": "int",
+    "dispatch_function_t": "void (*)(void * _Nullable)",
+    "dispatch_group_t": "NSObject\u003cOS_dispatch_group\u003e *",
+    "dispatch_io_close_flags_t": "unsigned long",
+    "dispatch_io_handler_t": "void (^)(bool, dispatch_data_t _Nullable, int)",
+    "dispatch_io_interval_flags_t": "unsigned long",
+    "dispatch_io_t": "NSObject\u003cOS_dispatch_io\u003e *",
+    "dispatch_io_type_t": "unsigned long",
+    "dispatch_object_t": "NSObject\u003cOS_dispatch_object\u003e *",
+    "dispatch_once_t": "intptr_t",
+    "dispatch_qos_class_t": "qos_class_t",
+    "dispatch_queue_attr_t": "NSObject\u003cOS_dispatch_queue_attr\u003e *",
+    "dispatch_queue_concurrent_t": "NSObject\u003cOS_dispatch_queue_concurrent\u003e *",
+    "dispatch_queue_global_t": "NSObject\u003cOS_dispatch_queue_global\u003e *",
+    "dispatch_queue_main_t": "NSObject\u003cOS_dispatch_queue_main\u003e *",
+    "dispatch_queue_priority_t": "long",
+    "dispatch_queue_serial_executor_t": "NSObject\u003cOS_dispatch_queue_serial_executor\u003e *",
+    "dispatch_queue_serial_t": "NSObject\u003cOS_dispatch_queue_serial\u003e *",
+    "dispatch_queue_t": "NSObject\u003cOS_dispatch_queue\u003e *",
+    "dispatch_semaphore_t": "NSObject\u003cOS_dispatch_semaphore\u003e *",
+    "dispatch_source_mach_recv_flags_t": "unsigned long",
+    "dispatch_source_mach_send_flags_t": "unsigned long",
+    "dispatch_source_memorypressure_flags_t": "unsigned long",
+    "dispatch_source_proc_flags_t": "unsigned long",
+    "dispatch_source_t": "NSObject\u003cOS_dispatch_source\u003e *",
+    "dispatch_source_timer_flags_t": "unsigned long",
+    "dispatch_source_type_t": "const struct dispatch_source_type_s *",
+    "dispatch_source_vnode_flags_t": "unsigned long",
+    "dispatch_time_t": "uint64_t",
+    "dispatch_workloop_t": "NSObject\u003cOS_dispatch_workloop\u003e *",
+    "div_t": "struct div_t",
+    "double_t": "double",
+    "errno_t": "int",
+    "extended80": "Float80",
+    "extended96": "Float96",
+    "fattributiontag_t": "struct fattributiontag",
+    "fchecklv_t": "struct fchecklv",
+    "fd_mask": "__int32_t",
+    "fd_set": "struct fd_set",
+    "fgetsigsinfo_t": "struct fgetsigsinfo",
+    "filesec_property_t": "enum filesec_property_t",
+    "filesec_t": "struct _filesec *",
+    "fixpt_t": "u_int32_t",
+    "float_t": "float",
+    "fpos_t": "__darwin_off_t",
+    "fpunchhole_t": "struct fpunchhole",
+    "fsblkcnt_t": "__darwin_fsblkcnt_t",
+    "fsfilcnt_t": "__darwin_fsfilcnt_t",
+    "fsignatures_t": "struct fsignatures",
+    "fspecread_t": "struct fspecread",
+    "fstore_t": "struct fstore",
+    "fsupplement_t": "struct fsupplement",
+    "ftrimactivefile_t": "struct ftrimactivefile",
+    "gid_t": "__darwin_gid_t",
+    "guid_t": "union guid_t",
+    "id": "struct objc_object *",
+    "id_t": "__darwin_id_t",
+    "idtype_t": "enum idtype_t",
+    "imaxdiv_t": "struct imaxdiv_t",
+    "in_addr_t": "__uint32_t",
+    "in_port_t": "__uint16_t",
+    "ino64_t": "__darwin_ino64_t",
+    "ino_t": "__darwin_ino_t",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "integer_t": "int",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "jmp_buf": "int[48]",
+    "kauth_ace_rights_t": "u_int32_t",
+    "kauth_ace_t": "struct kauth_ace *",
+    "kauth_acl_t": "struct kauth_acl *",
+    "kauth_filesec_t": "struct kauth_filesec *",
+    "kern_return_t": "int",
+    "key_t": "__int32_t",
+    "ldiv_t": "struct ldiv_t",
+    "lldiv_t": "struct lldiv_t",
+    "locale_t": "struct _xlocale *",
+    "mach_msg_audit_trailer_t": "struct mach_msg_audit_trailer_t",
+    "mach_msg_base_t": "struct mach_msg_base_t",
+    "mach_msg_bits_t": "unsigned int",
+    "mach_msg_body_t": "struct mach_msg_body_t",
+    "mach_msg_context_trailer_t": "struct mach_msg_context_trailer_t",
+    "mach_msg_copy_options_t": "unsigned int",
+    "mach_msg_descriptor_t": "union mach_msg_descriptor_t",
+    "mach_msg_descriptor_type_t": "unsigned int",
+    "mach_msg_empty_rcv_t": "struct mach_msg_empty_rcv_t",
+    "mach_msg_empty_send_t": "struct mach_msg_empty_send_t",
+    "mach_msg_empty_t": "union mach_msg_empty_t",
+    "mach_msg_filter_id": "int",
+    "mach_msg_format_0_trailer_t": "mach_msg_security_trailer_t",
+    "mach_msg_guard_flags_t": "unsigned int",
+    "mach_msg_guarded_port_descriptor32_t": "struct mach_msg_guarded_port_descriptor32_t",
+    "mach_msg_guarded_port_descriptor64_t": "struct mach_msg_guarded_port_descriptor64_t",
+    "mach_msg_guarded_port_descriptor_t": "struct mach_msg_guarded_port_descriptor_t",
+    "mach_msg_header_t": "struct mach_msg_header_t",
+    "mach_msg_id_t": "integer_t",
+    "mach_msg_mac_trailer_t": "struct mach_msg_mac_trailer_t",
+    "mach_msg_max_trailer_t": "mach_msg_mac_trailer_t",
+    "mach_msg_ool_descriptor32_t": "struct mach_msg_ool_descriptor32_t",
+    "mach_msg_ool_descriptor64_t": "struct mach_msg_ool_descriptor64_t",
+    "mach_msg_ool_descriptor_t": "struct mach_msg_ool_descriptor_t",
+    "mach_msg_ool_ports_descriptor32_t": "struct mach_msg_ool_ports_descriptor32_t",
+    "mach_msg_ool_ports_descriptor64_t": "struct mach_msg_ool_ports_descriptor64_t",
+    "mach_msg_ool_ports_descriptor_t": "struct mach_msg_ool_ports_descriptor_t",
+    "mach_msg_option_t": "integer_t",
+    "mach_msg_options_t": "integer_t",
+    "mach_msg_port_descriptor_t": "struct mach_msg_port_descriptor_t",
+    "mach_msg_priority_t": "unsigned int",
+    "mach_msg_return_t": "kern_return_t",
+    "mach_msg_security_trailer_t": "struct mach_msg_security_trailer_t",
+    "mach_msg_seqno_trailer_t": "struct mach_msg_seqno_trailer_t",
+    "mach_msg_size_t": "natural_t",
+    "mach_msg_timeout_t": "natural_t",
+    "mach_msg_trailer_info_t": "char *",
+    "mach_msg_trailer_size_t": "unsigned int",
+    "mach_msg_trailer_t": "struct mach_msg_trailer_t",
+    "mach_msg_trailer_type_t": "unsigned int",
+    "mach_msg_type_descriptor_t": "struct mach_msg_type_descriptor_t",
+    "mach_msg_type_name_t": "unsigned int",
+    "mach_msg_type_number_t": "natural_t",
+    "mach_msg_type_size_t": "natural_t",
+    "mach_port_array_t": "mach_port_t *",
+    "mach_port_context_t": "vm_offset_t",
+    "mach_port_delta_t": "integer_t",
+    "mach_port_flavor_t": "int",
+    "mach_port_guard_info_t": "struct mach_port_guard_info",
+    "mach_port_info_ext_t": "struct mach_port_info_ext",
+    "mach_port_info_t": "integer_t *",
+    "mach_port_limits_t": "struct mach_port_limits",
+    "mach_port_mscount_t": "natural_t",
+    "mach_port_msgcount_t": "natural_t",
+    "mach_port_name_array_t": "mach_port_name_t *",
+    "mach_port_name_t": "natural_t",
+    "mach_port_options_ptr_t": "mach_port_options_t *",
+    "mach_port_options_t": "struct mach_port_options",
+    "mach_port_qos_t": "struct mach_port_qos",
+    "mach_port_right_t": "natural_t",
+    "mach_port_rights_t": "natural_t",
+    "mach_port_seqno_t": "natural_t",
+    "mach_port_srights_t": "unsigned int",
+    "mach_port_status_t": "struct mach_port_status",
+    "mach_port_t": "__darwin_mach_port_t",
+    "mach_port_type_array_t": "mach_port_type_t *",
+    "mach_port_type_t": "natural_t",
+    "mach_port_urefs_t": "natural_t",
+    "mach_service_port_info_data_t": "struct mach_service_port_info",
+    "mach_service_port_info_t": "struct mach_service_port_info *",
+    "mach_timespec_t": "struct mach_timespec",
+    "mach_vm_address_t": "uint64_t",
+    "mach_vm_offset_t": "uint64_t",
+    "mach_vm_size_t": "uint64_t",
+    "malloc_type_id_t": "unsigned long long",
+    "malloc_zone_t": "struct _malloc_zone_t",
+    "max_align_t": "long double",
+    "mcontext_t": "struct __darwin_mcontext64 *",
+    "mode_t": "__darwin_mode_t",
+    "mpo_flags_t": "enum mpo_flags_t",
+    "msg_labels_t": "struct msg_labels_t",
+    "natural_t": "__darwin_natural_t",
+    "nlink_t": "__uint16_t",
+    "ntsid_t": "struct ntsid_t",
+    "objc_objectptr_t": "const void *",
+    "objc_zone_t": "struct _malloc_zone_t *",
+    "off_t": "__darwin_off_t",
+    "os_block_t": "void (^)(void)",
+    "os_clockid_t": "enum os_clockid_t",
+    "os_function_t": "void (*)(void * _Nullable)",
+    "os_workgroup_attr_s": "struct os_workgroup_attr_opaque_s",
+    "os_workgroup_attr_t": "struct os_workgroup_attr_opaque_s *",
+    "os_workgroup_index": "uint32_t",
+    "os_workgroup_interval_data_s": "struct os_workgroup_interval_data_opaque_s",
+    "os_workgroup_interval_data_t": "struct os_workgroup_interval_data_opaque_s *",
+    "os_workgroup_interval_t": "OS_os_workgroup\u003cOS_os_workgroup_interval\u003e *",
+    "os_workgroup_join_token_s": "struct os_workgroup_join_token_opaque_s",
+    "os_workgroup_join_token_t": "struct os_workgroup_join_token_opaque_s *",
+    "os_workgroup_mpt_attr_s": "struct os_workgroup_max_parallel_threads_attr_s",
+    "os_workgroup_mpt_attr_t": "struct os_workgroup_max_parallel_threads_attr_s *",
+    "os_workgroup_parallel_t": "OS_os_workgroup\u003cOS_os_workgroup_parallel\u003e *",
+    "os_workgroup_t": "OS_os_workgroup *",
+    "os_workgroup_working_arena_destructor_t": "void (*)(void * _Nullable)",
+    "pid_t": "__darwin_pid_t",
+    "pthread_attr_t": "__darwin_pthread_attr_t",
+    "pthread_cond_t": "__darwin_pthread_cond_t",
+    "pthread_condattr_t": "__darwin_pthread_condattr_t",
+    "pthread_key_t": "__darwin_pthread_key_t",
+    "pthread_mutex_t": "__darwin_pthread_mutex_t",
+    "pthread_mutexattr_t": "__darwin_pthread_mutexattr_t",
+    "pthread_once_t": "__darwin_pthread_once_t",
+    "pthread_rwlock_t": "__darwin_pthread_rwlock_t",
+    "pthread_rwlockattr_t": "__darwin_pthread_rwlockattr_t",
+    "pthread_t": "__darwin_pthread_t",
+    "ptrauth_extra_data_t": "unsigned long",
+    "ptrauth_generic_signature_t": "unsigned long",
+    "ptrauth_key": "enum ptrauth_key",
+    "ptrdiff_t": "long",
+    "qaddr_t": "quad_t *",
+    "qos_class_t": "enum qos_class_t",
+    "quad_t": "int64_t",
+    "register_t": "int64_t",
+    "rlim_t": "__uint64_t",
+    "rsize_t": "__darwin_size_t",
+    "rune_t": "__darwin_rune_t",
+    "rusage_info_current": "struct rusage_info_v6",
+    "rusage_info_t": "void *",
+    "security_token_t": "struct security_token_t",
+    "segsz_t": "int32_t",
+    "sig_atomic_t": "int",
+    "sig_t": "void (*)(int)",
+    "siginfo_t": "struct __siginfo",
+    "sigjmp_buf": "int[49]",
+    "sigset_t": "__darwin_sigset_t",
+    "size_t": "__darwin_size_t",
+    "sleep_type_t": "int",
+    "ssize_t": "__darwin_ssize_t",
+    "stack_t": "struct __darwin_sigaltstack",
+    "suseconds_t": "__darwin_suseconds_t",
+    "swblk_t": "int32_t",
+    "syscall_arg_t": "u_int64_t",
+    "time_t": "__darwin_time_t",
+    "time_value_t": "struct time_value",
+    "u_char": "unsigned char",
+    "u_int": "unsigned int",
+    "u_int16_t": "unsigned short",
+    "u_int32_t": "unsigned int",
+    "u_int64_t": "unsigned long long",
+    "u_int8_t": "unsigned char",
+    "u_long": "unsigned long",
+    "u_quad_t": "u_int64_t",
+    "u_short": "unsigned short",
+    "ucontext_t": "struct __darwin_ucontext",
+    "uid_t": "__darwin_uid_t",
+    "uint": "unsigned int",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long",
+    "useconds_t": "__darwin_useconds_t",
+    "user_addr_t": "u_int64_t",
+    "user_long_t": "int64_t",
+    "user_off_t": "int64_t",
+    "user_size_t": "u_int64_t",
+    "user_ssize_t": "int64_t",
+    "user_time_t": "int64_t",
+    "user_ulong_t": "u_int64_t",
+    "ushort": "unsigned short",
+    "uuid_t": "__darwin_uuid_t",
+    "va_list": "__darwin_va_list",
+    "vm32_address_t": "uint32_t",
+    "vm32_offset_t": "uint32_t",
+    "vm32_size_t": "uint32_t",
+    "vm_map_address_t": "uint64_t",
+    "vm_map_offset_t": "uint64_t",
+    "vm_map_size_t": "uint64_t",
+    "vm_offset_t": "uintptr_t",
+    "vm_size_t": "uintptr_t",
+    "wchar_t": "__darwin_wchar_t",
+    "wide": "struct wide",
+    "wint_t": "__darwin_wint_t"
+  },
+  "parent_framework": "CoreServices"
+}

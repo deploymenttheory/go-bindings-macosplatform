@@ -1,0 +1,126 @@
+name: Acceptance Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'bindings/frameworks/**'
+      - 'acceptance/**'
+      - 'cmd/genacceptance/**'
+      - 'runtime/**'
+      - 'internal/**'
+      - 'metadata/**'
+      - 'scripts/ci/**'
+      - '.github/workflows/acceptance.yml'
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'bindings/frameworks/**'
+      - 'acceptance/**'
+      - 'cmd/genacceptance/**'
+      - 'runtime/**'
+      - 'internal/**'
+      - 'metadata/**'
+      - 'scripts/ci/**'
+      - '.github/workflows/acceptance.yml'
+  workflow_dispatch:
+    inputs:
+      n:
+        description: 'Number of functions to sample'
+        default: '100'
+        required: false
+        type: string
+      seed:
+        description: 'Random seed (0 = time-based, non-zero for reproducible run)'
+        default: '0'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    name: 'Acceptance Tests (${{ matrix.os }})'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-14, macos-15, macos-latest]
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+      - name: Set up Go
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Detect macOS version
+        id: version
+        run: go run ./scripts/ci/macosversion/
+
+      - name: Run unit tests
+        run: go test ./internal/...
+
+      # Structural integrity gate over the committed metadata artifact:
+      # dangling superclasses, ownership ties, enum base-type conflicts,
+      # availability anomalies, mixed-SDK trees. Errors fail; warnings report.
+      - name: Validate committed metadata
+        run: go run ./cmd/generate/ validate
+
+      # Acceptance tests require the committed bindings to match the running macOS SDK.
+      # The bindings are generated against SDK major 26; skip on other major versions
+      # but emit a visible warning so maintainers know tests were not exercised.
+      - name: Warn on unexpected SDK major
+        if: steps.version.outputs.macos_major != '26'
+        run: |
+          echo "::warning::Acceptance tests require SDK major 26; skipping on ${{ steps.version.outputs.macos_major }}. Update the SDK major check in acceptance.yml when the bindings are regenerated for a new SDK."
+
+      # Ratchet: regeneration must not introduce type degradations beyond the
+      # committed baseline. Fixing degradations shrinks the baseline (rewrite it
+      # with --diagnostics); introducing one requires a reviewed baseline edit.
+      - name: Check for new unsafe.Pointer degradations (baseline ratchet)
+        if: steps.version.outputs.macos_major == '26'
+        run: |
+          go run ./cmd/generate/ bindings \
+            --frameworks-out /tmp/fw-strict-check \
+            --libraries-out /tmp/lib-strict-check \
+            --diagnostics-baseline metadata/diagnostics-baseline.json
+
+      - name: Build framework packages
+        if: steps.version.outputs.macos_major == '26'
+        run: go build ./bindings/frameworks/...
+
+      - name: Generate acceptance tests
+        if: steps.version.outputs.macos_major == '26'
+        run: |
+          go run ./cmd/genacceptance/ \
+            --n "${{ inputs.n || '100' }}" \
+            --seed "${{ inputs.seed || '0' }}"
+
+      - name: Run acceptance tests
+        if: steps.version.outputs.macos_major == '26'
+        run: |
+          GENACCEPT_ATTEST=acceptance-attestation.jsonl \
+          go test ./acceptance/ \
+            -v \
+            -timeout 600s \
+            -count=1
+
+      - name: Upload test artifacts
+        if: steps.version.outputs.macos_major == '26' && always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: acceptance-artifacts-${{ matrix.os }}-${{ github.run_id }}
+          path: |
+            acceptance-attestation.jsonl
+            acceptance/generated_acceptance_test.go
+          if-no-files-found: ignore
