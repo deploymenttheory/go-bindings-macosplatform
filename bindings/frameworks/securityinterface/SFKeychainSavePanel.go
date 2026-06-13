@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class SFKeychainSavePanel @abstract SFKeychainSavePanel is a panel and sheet interface used to create a keychain using the NSSavePanel UI.
@@ -34,7 +34,7 @@ func SFKeychainSavePanelFromID(id objc.ID) *SFKeychainSavePanel {
 	}
 	o := &SFKeychainSavePanel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

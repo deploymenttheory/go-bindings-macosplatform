@@ -6,11 +6,11 @@ package foundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdirectoryenumerator
-type NSDirectoryEnumerator[ObjectType pureobjc.AnyObject] struct {
+type NSDirectoryEnumerator[ObjectType purego.AnyObject] struct {
 	NSEnumerator[ObjectType]
 }
 
@@ -24,13 +24,13 @@ var (
 	_nSDirectoryEnumeratorSelLevel = objc.RegisterName("level")
 )
 
-func NSDirectoryEnumeratorFromID[ObjectType pureobjc.AnyObject](id objc.ID) *NSDirectoryEnumerator[ObjectType] {
+func NSDirectoryEnumeratorFromID[ObjectType purego.AnyObject](id objc.ID) *NSDirectoryEnumerator[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSDirectoryEnumerator[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

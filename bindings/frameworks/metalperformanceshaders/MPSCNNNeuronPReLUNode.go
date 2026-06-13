@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @abstract   A ReLU node with parameter a provided independently for each feature channel @discussion For each pixel, applies the following function: @code f(x) = x                if x >= 0 = aData[i] * x     if x < 0,  i is the index of the feature channel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      aData                   An array of single precision floating-point alpha values to use @endcode
@@ -30,7 +30,7 @@ func MPSCNNNeuronPReLUNodeFromID(id objc.ID) *MPSCNNNeuronPReLUNode {
 	}
 	o := &MPSCNNNeuronPReLUNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

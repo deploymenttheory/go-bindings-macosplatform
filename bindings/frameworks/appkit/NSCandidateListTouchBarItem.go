@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscandidatelisttouchbaritem
-type NSCandidateListTouchBarItem[CandidateType pureobjc.AnyObject] struct {
+type NSCandidateListTouchBarItem[CandidateType purego.AnyObject] struct {
 	NSTouchBarItem
 }
 
@@ -36,13 +36,13 @@ var (
 	_nSCandidateListTouchBarItemSelSetCustomizationLabel = objc.RegisterName("setCustomizationLabel:")
 )
 
-func NSCandidateListTouchBarItemFromID[CandidateType pureobjc.AnyObject](id objc.ID) *NSCandidateListTouchBarItem[CandidateType] {
+func NSCandidateListTouchBarItemFromID[CandidateType purego.AnyObject](id objc.ID) *NSCandidateListTouchBarItem[CandidateType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSCandidateListTouchBarItem[CandidateType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

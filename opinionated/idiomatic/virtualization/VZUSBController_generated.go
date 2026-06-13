@@ -7,7 +7,7 @@ package virtualization
 import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -31,7 +31,7 @@ func (x *USBController) AttachDevice(ctx context.Context, device raw.VZUSBDevice
 	_ch := make(chan error, 1)
 	x.inner.AttachDeviceCompletionHandler(device, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -49,7 +49,7 @@ func (x *USBController) DetachDevice(ctx context.Context, device raw.VZUSBDevice
 	_ch := make(chan error, 1)
 	x.inner.DetachDeviceCompletionHandler(device, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

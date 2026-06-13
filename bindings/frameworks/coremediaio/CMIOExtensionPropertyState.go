@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensionpropertystate
-type CMIOExtensionPropertyState[ObjectType pureobjc.AnyObject] struct {
+type CMIOExtensionPropertyState[ObjectType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -25,13 +25,13 @@ var (
 	_cMIOExtensionPropertyStateSelAttributes = objc.RegisterName("attributes")
 )
 
-func CMIOExtensionPropertyStateFromID[ObjectType pureobjc.AnyObject](id objc.ID) *CMIOExtensionPropertyState[ObjectType] {
+func CMIOExtensionPropertyStateFromID[ObjectType purego.AnyObject](id objc.ID) *CMIOExtensionPropertyState[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &CMIOExtensionPropertyState[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlarealight
@@ -32,7 +32,7 @@ func MDLAreaLightFromID(id objc.ID) *MDLAreaLight {
 	}
 	o := &MDLAreaLight{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

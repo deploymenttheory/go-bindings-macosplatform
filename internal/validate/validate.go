@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/meta"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 )
 
 // Severity classifies a finding. Errors fail `generate validate`; warnings
@@ -37,7 +37,7 @@ func (f Finding) String() string {
 
 // Frameworks runs every check over the loaded metadata set and returns the
 // combined findings, sorted for deterministic output.
-func Frameworks(frameworks []*meta.FrameworkMeta) []Finding {
+func Frameworks(frameworks []*macosplatformmetadata.FrameworkMeta) []Finding {
 	findings := make([]Finding, 0, len(frameworks))
 	findings = append(findings, checkDanglingSuperclasses(frameworks)...)
 	findings = append(findings, checkSuperchainCycles(frameworks)...)
@@ -70,7 +70,7 @@ func HasErrors(findings []Finding) bool {
 }
 
 // allClassNames builds the global set of class names across all frameworks.
-func allClassNames(frameworks []*meta.FrameworkMeta) map[string]bool {
+func allClassNames(frameworks []*macosplatformmetadata.FrameworkMeta) map[string]bool {
 	names := make(map[string]bool)
 	for _, framework := range frameworks {
 		for name := range framework.Classes {
@@ -86,7 +86,7 @@ func allClassNames(frameworks []*meta.FrameworkMeta) map[string]bool {
 // Severity is warning, not error: the usual cause is a superclass that Apple
 // marks API_UNAVAILABLE(macos) (iOS-only base class), which the scanner
 // intentionally omits — but a sudden spike indicates a scanner regression.
-func checkDanglingSuperclasses(frameworks []*meta.FrameworkMeta) []Finding {
+func checkDanglingSuperclasses(frameworks []*macosplatformmetadata.FrameworkMeta) []Finding {
 	known := allClassNames(frameworks)
 	var findings []Finding
 	for _, framework := range frameworks {
@@ -110,7 +110,7 @@ func checkDanglingSuperclasses(frameworks []*meta.FrameworkMeta) []Finding {
 // checkSuperchainCycles reports circular superclass chains (A→B→A). Valid
 // ObjC metadata never contains these, but a malformed file would send the
 // emitter into an infinite loop.
-func checkSuperchainCycles(frameworks []*meta.FrameworkMeta) []Finding {
+func checkSuperchainCycles(frameworks []*macosplatformmetadata.FrameworkMeta) []Finding {
 	super := make(map[string]string)
 	for _, framework := range frameworks {
 		for name, class := range framework.Classes {
@@ -152,7 +152,7 @@ func checkSuperchainCycles(frameworks []*meta.FrameworkMeta) []Finding {
 // count. The loader breaks such ties alphabetically, which is deterministic
 // but arbitrary — a tie usually means header leakage the scanner should have
 // filtered.
-func checkOwnershipTies(frameworks []*meta.FrameworkMeta) []Finding {
+func checkOwnershipTies(frameworks []*macosplatformmetadata.FrameworkMeta) []Finding {
 	type entry struct {
 		framework string
 		score     int
@@ -211,7 +211,7 @@ func checkOwnershipTies(frameworks []*meta.FrameworkMeta) []Finding {
 // different underlying Go types. Duplicated names are normal (Apple's headers
 // re-export each other); a conflicting base type is not — first-write-wins in
 // the loader means one framework's generated casts would be wrong.
-func checkEnumConflicts(frameworks []*meta.FrameworkMeta) []Finding {
+func checkEnumConflicts(frameworks []*macosplatformmetadata.FrameworkMeta) []Finding {
 	type entry struct {
 		framework string
 		goType    string
@@ -256,7 +256,7 @@ func checkEnumConflicts(frameworks []*meta.FrameworkMeta) []Finding {
 // checkEmptyFrameworks reports frameworks whose metadata contains no
 // declarations at all. Swift-only frameworks and umbrellas are legitimately
 // empty; anything else usually means the scan partially failed.
-func checkEmptyFrameworks(frameworks []*meta.FrameworkMeta) []Finding {
+func checkEmptyFrameworks(frameworks []*macosplatformmetadata.FrameworkMeta) []Finding {
 	var findings []Finding
 	for _, framework := range frameworks {
 		if framework.IsSwiftOnly || len(framework.UmbrellaFor) > 0 {
@@ -278,7 +278,7 @@ func checkEmptyFrameworks(frameworks []*meta.FrameworkMeta) []Finding {
 
 // checkAvailability reports availability anomalies on classes: malformed
 // version strings and deprecated-before-introduced ranges.
-func checkAvailability(frameworks []*meta.FrameworkMeta) []Finding {
+func checkAvailability(frameworks []*macosplatformmetadata.FrameworkMeta) []Finding {
 	var findings []Finding
 	for _, framework := range frameworks {
 		for name, class := range framework.Classes {
@@ -308,7 +308,7 @@ func checkAvailability(frameworks []*meta.FrameworkMeta) []Finding {
 	return findings
 }
 
-func checkAvailabilityVersions(frameworkName, decl string, avail meta.Availability) []Finding {
+func checkAvailabilityVersions(frameworkName, decl string, avail macosplatformmetadata.Availability) []Finding {
 	var findings []Finding
 	intro, introOK := parseVersion(avail.MacOSIntroduced)
 	if avail.MacOSIntroduced != "" && !introOK && !isDeprecationSentinel(avail.MacOSIntroduced) {
@@ -380,7 +380,7 @@ func parseVersion(s string) (int, bool) {
 // checkSDKConsistency reports metadata files scanned against a different SDK
 // version or architecture than the majority — the signature of a partial
 // re-scan that left the committed tree mixed.
-func checkSDKConsistency(frameworks []*meta.FrameworkMeta) []Finding {
+func checkSDKConsistency(frameworks []*macosplatformmetadata.FrameworkMeta) []Finding {
 	sdkCount := map[string]int{}
 	archCount := map[string]int{}
 	for _, framework := range frameworks {

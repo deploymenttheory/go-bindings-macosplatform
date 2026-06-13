@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/browserenginekit/bewebcontentprocess
@@ -33,7 +33,7 @@ func BEWebContentProcessFromID(id objc.ID) *BEWebContentProcess {
 	}
 	o := &BEWebContentProcess{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -92,7 +92,7 @@ func (o *BEWebContentProcess) MakeLibXPCConnectionError() (*foundation.NSObject,
 	_ret := objc.Send[objc.ID](o.Ptr(), _bEWebContentProcessSelMakeLibXPCConnectionError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSObjectFromID(_ret), nil
 }
@@ -102,7 +102,7 @@ func (o *BEWebContentProcess) GrantCapabilityError(capability *BEProcessCapabili
 	var _nsErr uintptr
 	_ret := objc.Send[BEProcessCapabilityGrant](o.Ptr(), _bEWebContentProcessSelGrantCapabilityError, capability.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

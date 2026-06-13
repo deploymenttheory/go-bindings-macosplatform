@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 var (
@@ -2844,7 +2844,7 @@ func CGPDFDictionaryApplyBlock(dict unsafe.Pointer, block func(string, unsafe.Po
 	var __block_block objc.Block
 	if block != nil {
 		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr, blockParam1 unsafe.Pointer, blockParam2 unsafe.Pointer) bool {
-			return block(pureobjc.GoCString(blockParam0), blockParam1, blockParam2)
+			return block(purego.GoCString(blockParam0), blockParam1, blockParam2)
 		})
 		defer __block_block.Release()
 	}

@@ -9,13 +9,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A tree data structure where each level has 4 children that subdivide a given space into the four quadrants. Stores arbitrary NSObject data via points and quads.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkquadtree
-type GKQuadtree[ElementType pureobjc.AnyObject] struct {
+type GKQuadtree[ElementType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -31,13 +31,13 @@ var (
 	_gKQuadtreeSelRemoveElementWithNode = objc.RegisterName("removeElement:withNode:")
 )
 
-func GKQuadtreeFromID[ElementType pureobjc.AnyObject](id objc.ID) *GKQuadtree[ElementType] {
+func GKQuadtreeFromID[ElementType purego.AnyObject](id objc.ID) *GKQuadtree[ElementType] {
 	if id == 0 {
 		return nil
 	}
 	o := &GKQuadtree[ElementType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

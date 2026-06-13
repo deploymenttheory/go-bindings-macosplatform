@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class			DREraseProgressPanel @abstract 		Manages a panel that displays progress while erasing media. @discussion		A DREraseProgressPanel object manages a panel that displays and updates erase progress. The erase panel is responsible for begining the erase. The erase is begun and a progress panel is displayed on screen by calling @link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressSheetForErase:modalForWindow: beginProgressSheetForErase:modalForWindow: @/link if a sheet interface is desired, or @link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressPanelForErase: beginProgressPanelForErase:  @/link for a non-modal panel. A DREraseProgressPanel sends a @link //apple_ref/occ/instm/NSObject/eraseProgressPanel:eraseDidFinish: eraseProgressPanel:eraseDidFinish: @/link message to it's delegate when the erase completes. This method allows the delegate to take over end-of-erase handling from the erase progress panel to customize error dialogs or user notification.
@@ -33,7 +33,7 @@ func DREraseProgressPanelFromID(id objc.ID) *DREraseProgressPanel {
 	}
 	o := &DREraseProgressPanel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

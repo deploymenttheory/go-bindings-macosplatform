@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager
@@ -58,7 +58,7 @@ func NSFileProviderManagerFromID(id objc.ID) *NSFileProviderManager {
 	}
 	o := &NSFileProviderManager{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -132,7 +132,7 @@ func (o *NSFileProviderManager) TemporaryDirectoryURLWithError() (*foundation.NS
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelTemporaryDirectoryURLWithError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSURLFromID(_ret), nil
 }
@@ -331,7 +331,7 @@ func (o *NSFileProviderManager) StateDirectoryURLWithError() (*foundation.NSURL,
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelStateDirectoryURLWithError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSURLFromID(_ret), nil
 }
@@ -341,7 +341,7 @@ func NSFileProviderManagerCheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonE
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSFileProviderManager), _nSFileProviderManagerSelCheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError, eligible, url.Ptr(), unsupportedReason, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -376,7 +376,7 @@ func (o *NSFileProviderManager) ListAvailableTestingOperationsWithError() (*foun
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelListAvailableTestingOperationsWithError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[NSFileProviderTestingOperation](_ret), nil
 }
@@ -386,7 +386,7 @@ func (o *NSFileProviderManager) RunTestingOperationsError(operations *foundation
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[NSFileProviderTestingOperation, objc.ID]](o.Ptr(), _nSFileProviderManagerSelRunTestingOperationsError, operations.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcphysicalinputelementcollection
-type GCPhysicalInputElementCollection[Key pureobjc.AnyObject, Element pureobjc.AnyObject] struct {
+type GCPhysicalInputElementCollection[Key purego.AnyObject, Element purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -23,13 +23,13 @@ var (
 	_gCPhysicalInputElementCollectionSelCount = objc.RegisterName("count")
 )
 
-func GCPhysicalInputElementCollectionFromID[Key pureobjc.AnyObject, Element pureobjc.AnyObject](id objc.ID) *GCPhysicalInputElementCollection[Key, Element] {
+func GCPhysicalInputElementCollectionFromID[Key purego.AnyObject, Element purego.AnyObject](id objc.ID) *GCPhysicalInputElementCollection[Key, Element] {
 	if id == 0 {
 		return nil
 	}
 	o := &GCPhysicalInputElementCollection[Key, Element]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

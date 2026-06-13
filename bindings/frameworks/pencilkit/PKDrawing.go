@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkdrawing
@@ -40,7 +40,7 @@ func PKDrawingFromID(id objc.ID) *PKDrawing {
 	}
 	o := &PKDrawing{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -64,7 +64,7 @@ func (o *PKDrawing) InitWithDataError(data *foundation.NSData) (*PKDrawing, erro
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return PKDrawingFromID(_ret), nil
 }

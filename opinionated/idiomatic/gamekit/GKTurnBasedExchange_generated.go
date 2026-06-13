@@ -8,7 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -32,7 +32,7 @@ func (x *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context
 	_ch := make(chan error, 1)
 	x.inner.CancelWithLocalizableMessageKeyArgumentsCompletionHandler(foundation.NSStringStringWithUTF8String(key), arguments, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -50,7 +50,7 @@ func (x *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx cont
 	_ch := make(chan error, 1)
 	x.inner.ReplyWithLocalizableMessageKeyArgumentsDataCompletionHandler(foundation.NSStringStringWithUTF8String(key), arguments, data, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

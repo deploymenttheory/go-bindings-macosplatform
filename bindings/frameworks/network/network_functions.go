@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avrouting"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 var (
@@ -2572,7 +2572,7 @@ func NwProxyConfigEnumerateExcludedDomains(config *foundation.NSObject, enumerat
 	var __block_enumerator objc.Block
 	if enumerator != nil {
 		__block_enumerator = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr) {
-			enumerator(pureobjc.GoCString(blockParam0))
+			enumerator(purego.GoCString(blockParam0))
 		})
 		defer __block_enumerator.Release()
 	}
@@ -2584,7 +2584,7 @@ func NwProxyConfigEnumerateMatchDomains(config *foundation.NSObject, enumerator 
 	var __block_enumerator objc.Block
 	if enumerator != nil {
 		__block_enumerator = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr) {
-			enumerator(pureobjc.GoCString(blockParam0))
+			enumerator(purego.GoCString(blockParam0))
 		})
 		defer __block_enumerator.Release()
 	}
@@ -3013,7 +3013,7 @@ func NwTxtRecordAccessKey(txt_record *foundation.NSObject, key string, access_va
 	var __block_access_value objc.Block
 	if access_value != nil {
 		__block_access_value = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr, blockParam1 unsafe.Pointer, blockParam2 *uint8, blockParam3 unsafe.Pointer) bool {
-			return access_value(pureobjc.GoCString(blockParam0), blockParam1, blockParam2, blockParam3)
+			return access_value(purego.GoCString(blockParam0), blockParam1, blockParam2, blockParam3)
 		})
 		defer __block_access_value.Release()
 	}
@@ -3025,7 +3025,7 @@ func NwTxtRecordApply(txt_record *foundation.NSObject, applier func(string, unsa
 	var __block_applier objc.Block
 	if applier != nil {
 		__block_applier = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr, blockParam1 unsafe.Pointer, blockParam2 *uint8, blockParam3 unsafe.Pointer) bool {
-			return applier(pureobjc.GoCString(blockParam0), blockParam1, blockParam2, blockParam3)
+			return applier(purego.GoCString(blockParam0), blockParam1, blockParam2, blockParam3)
 		})
 		defer __block_applier.Release()
 	}
@@ -3172,7 +3172,7 @@ func NwWsRequestEnumerateAdditionalHeaders(request *foundation.NSObject, enumera
 	var __block_enumerator objc.Block
 	if enumerator != nil {
 		__block_enumerator = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr, blockParam1 uintptr) bool {
-			return enumerator(pureobjc.GoCString(blockParam0), pureobjc.GoCString(blockParam1))
+			return enumerator(purego.GoCString(blockParam0), purego.GoCString(blockParam1))
 		})
 		defer __block_enumerator.Release()
 	}
@@ -3184,7 +3184,7 @@ func NwWsRequestEnumerateSubprotocols(request *foundation.NSObject, enumerator f
 	var __block_enumerator objc.Block
 	if enumerator != nil {
 		__block_enumerator = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr) bool {
-			return enumerator(pureobjc.GoCString(blockParam0))
+			return enumerator(purego.GoCString(blockParam0))
 		})
 		defer __block_enumerator.Release()
 	}
@@ -3206,7 +3206,7 @@ func NwWsResponseEnumerateAdditionalHeaders(response *foundation.NSObject, enume
 	var __block_enumerator objc.Block
 	if enumerator != nil {
 		__block_enumerator = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr, blockParam1 uintptr) bool {
-			return enumerator(pureobjc.GoCString(blockParam0), pureobjc.GoCString(blockParam1))
+			return enumerator(purego.GoCString(blockParam0), purego.GoCString(blockParam1))
 		})
 		defer __block_enumerator.Release()
 	}

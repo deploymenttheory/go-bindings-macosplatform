@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutablemovie
@@ -54,7 +54,7 @@ func AVMutableMovieFromID(id objc.ID) *AVMutableMovie {
 	}
 	o := &AVMutableMovie{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -64,7 +64,7 @@ func AVMutableMovieMovieWithURLOptionsError(uRL *foundation.NSURL, options *foun
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVMutableMovieFromID(_ret), nil
 }
@@ -75,7 +75,7 @@ func (o *AVMutableMovie) InitWithURLOptionsError(uRL *foundation.NSURL, options 
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVMutableMovieFromID(_ret), nil
 }
@@ -86,7 +86,7 @@ func AVMutableMovieMovieWithDataOptionsError(data *foundation.NSData, options *f
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVMutableMovieFromID(_ret), nil
 }
@@ -97,7 +97,7 @@ func (o *AVMutableMovie) InitWithDataOptionsError(data *foundation.NSData, optio
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVMutableMovieFromID(_ret), nil
 }
@@ -108,7 +108,7 @@ func AVMutableMovieMovieWithSettingsFromMovieOptionsError(movie *AVMovie, option
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithSettingsFromMovieOptionsError, movie.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVMutableMovieFromID(_ret), nil
 }
@@ -119,7 +119,7 @@ func (o *AVMutableMovie) InitWithSettingsFromMovieOptionsError(movie *AVMovie, o
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithSettingsFromMovieOptionsError, movie.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVMutableMovieFromID(_ret), nil
 }
@@ -151,7 +151,7 @@ func (o *AVMutableMovie) InsertTimeRangeOfAssetAtTimeCopySampleDataError(timeRan
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVMutableMovieSelInsertTimeRangeOfAssetAtTimeCopySampleDataError, timeRange, asset.Ptr(), startTime, copySampleData, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

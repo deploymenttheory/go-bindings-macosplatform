@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/shazamkit/shsession
@@ -33,7 +33,7 @@ func SHSessionFromID(id objc.ID) *SHSession {
 	}
 	o := &SHSession{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @brief Groups a set of requirements that need to be satisfied in order to grant access to certain resource or operation
@@ -37,7 +37,7 @@ func LARightFromID(id objc.ID) *LARight {
 	}
 	o := &LARight{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

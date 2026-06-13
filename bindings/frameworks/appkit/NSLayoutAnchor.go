@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/appkit/nslayoutanchor
-type NSLayoutAnchor[AnchorType pureobjc.AnyObject] struct {
+type NSLayoutAnchor[AnchorType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -29,13 +29,13 @@ var (
 	_nSLayoutAnchorSelConstraintsAffectingLayout = objc.RegisterName("constraintsAffectingLayout")
 )
 
-func NSLayoutAnchorFromID[AnchorType pureobjc.AnyObject](id objc.ID) *NSLayoutAnchor[AnchorType] {
+func NSLayoutAnchorFromID[AnchorType purego.AnyObject](id objc.ID) *NSLayoutAnchor[AnchorType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSLayoutAnchor[AnchorType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

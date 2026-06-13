@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 var (
@@ -410,7 +410,7 @@ func OSDictionaryApply(obj *int32, applier func(string, unsafe.Pointer) bool) bo
 	var __block_applier objc.Block
 	if applier != nil {
 		__block_applier = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr, blockParam1 unsafe.Pointer) bool {
-			return applier(pureobjc.GoCString(blockParam0), blockParam1)
+			return applier(purego.GoCString(blockParam0), blockParam1)
 		})
 		defer __block_applier.Release()
 	}

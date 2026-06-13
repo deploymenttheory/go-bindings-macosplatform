@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class 		DRNotificationCenter @discussion	A DRNotificationCenter object (or simply, notification center) is essentially a notification dispatch table. It notifies all observers of notifications meeting specific criteria. This information is encapsulated in NSNotification objects, also known as notifications. Client objects register themselves with the notification center as observers of specific notifications posted by DiscRecording. When an event occurs, DiscRecording posts an appropriate notification to the notification center. The notification center dispatches a message to each registered observer, passing the notification as the sole argument. There are two main differences between a DRNotificationCenter and the NSNotificationCenter from Foundation. First is that only Disc Recording posts notifications received through this mechanism. You use this to obtain device plug/unplug events, burn status, etc. Second, there can be multple notification centers active at once. Each run loop of your application will have it's own notification center and notifications from that notification center will be posted to the runloop it was created on.
@@ -30,7 +30,7 @@ func DRNotificationCenterFromID(id objc.ID) *DRNotificationCenter {
 	}
 	o := &DRNotificationCenter{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

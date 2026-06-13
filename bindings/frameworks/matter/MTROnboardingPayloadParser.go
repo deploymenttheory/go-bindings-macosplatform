@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/matter/mtronboardingpayloadparser
@@ -28,7 +28,7 @@ func MTROnboardingPayloadParserFromID(id objc.ID) *MTROnboardingPayloadParser {
 	}
 	o := &MTROnboardingPayloadParser{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -37,7 +37,7 @@ func MTROnboardingPayloadParserSetupPayloadForOnboardingPayloadError(onboardingP
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTROnboardingPayloadParser), _mTROnboardingPayloadParserSelSetupPayloadForOnboardingPayloadError, onboardingPayload.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTRSetupPayloadFromID(_ret), nil
 }

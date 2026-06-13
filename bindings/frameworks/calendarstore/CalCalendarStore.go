@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/calendarstore/calcalendarstore
@@ -46,7 +46,7 @@ func CalCalendarStoreFromID(id objc.ID) *CalCalendarStore {
 	}
 	o := &CalCalendarStore{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -75,7 +75,7 @@ func (o *CalCalendarStore) SaveCalendarError(calendar *CalCalendar) (bool, error
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _calCalendarStoreSelSaveCalendarError, calendar.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -85,7 +85,7 @@ func (o *CalCalendarStore) RemoveCalendarError(calendar *CalCalendar) (bool, err
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _calCalendarStoreSelRemoveCalendarError, calendar.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -121,7 +121,7 @@ func (o *CalCalendarStore) SaveEventSpanError(event *CalEvent, span CalSpan) (bo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _calCalendarStoreSelSaveEventSpanError, event.Ptr(), span, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -131,7 +131,7 @@ func (o *CalCalendarStore) RemoveEventSpanError(event *CalEvent, span CalSpan) (
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _calCalendarStoreSelRemoveEventSpanError, event.Ptr(), span, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -141,7 +141,7 @@ func (o *CalCalendarStore) SaveTaskError(task *CalTask) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _calCalendarStoreSelSaveTaskError, task.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -151,7 +151,7 @@ func (o *CalCalendarStore) RemoveTaskError(task *CalTask) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _calCalendarStoreSelRemoveTaskError, task.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzdiskimagestoragedeviceattachment
@@ -33,7 +33,7 @@ func VZDiskImageStorageDeviceAttachmentFromID(id objc.ID) *VZDiskImageStorageDev
 	}
 	o := &VZDiskImageStorageDeviceAttachment{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -43,7 +43,7 @@ func (o *VZDiskImageStorageDeviceAttachment) InitWithURLReadOnlyError(url *found
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskImageStorageDeviceAttachmentSelInitWithURLReadOnlyError, url.Ptr(), readOnly, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return VZDiskImageStorageDeviceAttachmentFromID(_ret), nil
 }
@@ -54,7 +54,7 @@ func (o *VZDiskImageStorageDeviceAttachment) InitWithURLReadOnlyCachingModeSynch
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskImageStorageDeviceAttachmentSelInitWithURLReadOnlyCachingModeSynchronizationModeError, url.Ptr(), readOnly, cachingMode, synchronizationMode, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return VZDiskImageStorageDeviceAttachmentFromID(_ret), nil
 }

@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	objc "github.com/deploymenttheory/go-bindings-macosplatform/internal/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 )
 
 func init() {
@@ -43,7 +43,7 @@ func TestMain(m *testing.M) {
 			// Pump the main run loop for up to 50ms. The run loop returns early
 			// when a dispatch item arrives, so latency for RunOnMainThread is
 			// negligible in practice.
-			objc.PumpMainRunLoop(0.05)
+			cgo.PumpMainRunLoop(0.05)
 		}
 	}
 }

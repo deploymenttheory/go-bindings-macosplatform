@@ -9,7 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -478,7 +478,7 @@ func (x *Window) TransferWindowSharingToWindow(ctx context.Context, window *raw.
 	_ch := make(chan error, 1)
 	x.inner.TransferWindowSharingToWindowCompletionHandler(window, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -496,7 +496,7 @@ func (x *Window) RequestSharingOfWindow(ctx context.Context, window *raw.NSWindo
 	_ch := make(chan error, 1)
 	x.inner.RequestSharingOfWindowCompletionHandler(window, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -514,7 +514,7 @@ func (x *Window) RequestSharingOfWindowUsingPreviewTitle(ctx context.Context, im
 	_ch := make(chan error, 1)
 	x.inner.RequestSharingOfWindowUsingPreviewTitleCompletionHandler(image, foundation.NSStringStringWithUTF8String(title), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

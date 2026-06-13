@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstableviewdiffabledatasource
-type NSTableViewDiffableDataSource[SectionIdentifierType pureobjc.AnyObject, ItemIdentifierType pureobjc.AnyObject] struct {
+type NSTableViewDiffableDataSource[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -33,13 +33,13 @@ var (
 	_nSTableViewDiffableDataSourceSelSetDefaultRowAnimation = objc.RegisterName("setDefaultRowAnimation:")
 )
 
-func NSTableViewDiffableDataSourceFromID[SectionIdentifierType pureobjc.AnyObject, ItemIdentifierType pureobjc.AnyObject](id objc.ID) *NSTableViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType] {
+func NSTableViewDiffableDataSourceFromID[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject](id objc.ID) *NSTableViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSTableViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

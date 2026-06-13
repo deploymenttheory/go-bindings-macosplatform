@@ -6,7 +6,7 @@ package cloudkit
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginependingzonesave
@@ -26,7 +26,7 @@ func CKSyncEnginePendingZoneSaveFromID(id objc.ID) *CKSyncEnginePendingZoneSave 
 	}
 	o := &CKSyncEnginePendingZoneSave{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

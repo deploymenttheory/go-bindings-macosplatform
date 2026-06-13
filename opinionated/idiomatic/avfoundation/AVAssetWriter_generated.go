@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -35,7 +35,7 @@ func NewAssetWriterWithURLFileTypeError(outputURL string, outputFileType *founda
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:fileType:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)).Ptr(), outputFileType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &AssetWriter{inner: raw.AVAssetWriterFromID(_id)}, nil
 }

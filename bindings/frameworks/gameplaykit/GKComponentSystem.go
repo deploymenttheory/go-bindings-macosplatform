@@ -7,13 +7,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A component system is a homogeneous collection of components that are intended to be called at the same time. The system is homogeneous, meaning it only allows members of the same class into the system.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem
-type GKComponentSystem[ComponentType pureobjc.AnyObject] struct {
+type GKComponentSystem[ComponentType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -31,13 +31,13 @@ var (
 	_gKComponentSystemSelComponents = objc.RegisterName("components")
 )
 
-func GKComponentSystemFromID[ComponentType pureobjc.AnyObject](id objc.ID) *GKComponentSystem[ComponentType] {
+func GKComponentSystemFromID[ComponentType purego.AnyObject](id objc.ID) *GKComponentSystem[ComponentType] {
 	if id == 0 {
 		return nil
 	}
 	o := &GKComponentSystem[ComponentType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

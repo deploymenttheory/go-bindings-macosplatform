@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // An object that contains a phone number that the data detection system matches. The DataDetection framework returns a phone number match in a `DDMatchPhoneNumber` object, which contains a phone number, and optionally a label that categorizes the phone number.
@@ -29,7 +29,7 @@ func DDMatchPhoneNumberFromID(id objc.ID) *DDMatchPhoneNumber {
 	}
 	o := &DDMatchPhoneNumber{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

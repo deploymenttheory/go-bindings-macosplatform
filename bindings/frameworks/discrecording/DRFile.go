@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class		DRFile @abstract	Represents a file to be created on the disc. @discussion A file can be either a pointer to an exiting file (residing on a hard drive for example) or can be created at burn time from data passed into the file object as requested. DRFiles can only exist inside of virtual @link //apple_ref/occ/cl/DRFolder DRFolder @/link objects.
@@ -37,7 +37,7 @@ func DRFileFromID(id objc.ID) *DRFile {
 	}
 	o := &DRFile{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

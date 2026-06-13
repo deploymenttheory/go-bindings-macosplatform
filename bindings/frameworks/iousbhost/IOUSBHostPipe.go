@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class       IOUSBHostPipe @brief       The IOUSBHostIOSource representing a USB endpoint @discussion  This class provides functionality to transfer data across USB.
@@ -52,7 +52,7 @@ func IOUSBHostPipeFromID(id objc.ID) *IOUSBHostPipe {
 	}
 	o := &IOUSBHostPipe{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -61,7 +61,7 @@ func (o *IOUSBHostPipe) AdjustPipeWithDescriptorsError(descriptors *IOUSBHostIOS
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelAdjustPipeWithDescriptorsError, descriptors, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -71,7 +71,7 @@ func (o *IOUSBHostPipe) SetIdleTimeoutError(idleTimeout float64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSetIdleTimeoutError, idleTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -81,7 +81,7 @@ func (o *IOUSBHostPipe) ClearStallWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelClearStallWithError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -91,7 +91,7 @@ func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredCompletionTimeoutE
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendControlRequestDataBytesTransferredCompletionTimeoutError, request, data.Ptr(), bytesTransferred, completionTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -101,7 +101,7 @@ func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredError(request unsa
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendControlRequestDataBytesTransferredError, request, data.Ptr(), bytesTransferred, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -111,7 +111,7 @@ func (o *IOUSBHostPipe) SendControlRequestError(request unsafe.Pointer) (bool, e
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendControlRequestError, request, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -160,7 +160,7 @@ func (o *IOUSBHostPipe) AbortWithOptionError(option IOUSBHostAbortOption) (bool,
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelAbortWithOptionError, option, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -170,7 +170,7 @@ func (o *IOUSBHostPipe) AbortWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelAbortWithError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -180,7 +180,7 @@ func (o *IOUSBHostPipe) SendIORequestWithDataBytesTransferredCompletionTimeoutEr
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendIORequestWithDataBytesTransferredCompletionTimeoutError, data.Ptr(), bytesTransferred, completionTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -203,7 +203,7 @@ func (o *IOUSBHostPipe) SendIORequestWithDataFrameListFrameListCountFirstFrameNu
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendIORequestWithDataFrameListFrameListCountFirstFrameNumberError, data.Ptr(), frameList, frameListCount, firstFrameNumber, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -226,7 +226,7 @@ func (o *IOUSBHostPipe) SendIORequestWithDataTransactionListTransactionListCount
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsError, data.Ptr(), transactionList, transactionListCount, firstFrameNumber, options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -249,7 +249,7 @@ func (o *IOUSBHostPipe) EnableStreamsWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelEnableStreamsWithError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -259,7 +259,7 @@ func (o *IOUSBHostPipe) DisableStreamsWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelDisableStreamsWithError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -269,7 +269,7 @@ func (o *IOUSBHostPipe) CopyStreamWithStreamIDError(streamID uint) (*IOUSBHostSt
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostPipeSelCopyStreamWithStreamIDError, streamID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return IOUSBHostStreamFromID(_ret), nil
 }

@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlanimatedmatrix4x4
@@ -34,7 +34,7 @@ func MDLAnimatedMatrix4x4FromID(id objc.ID) *MDLAnimatedMatrix4x4 {
 	}
 	o := &MDLAnimatedMatrix4x4{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

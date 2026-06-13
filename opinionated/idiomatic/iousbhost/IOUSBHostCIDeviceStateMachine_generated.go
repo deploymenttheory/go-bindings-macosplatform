@@ -6,7 +6,7 @@ package iousbhost
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -25,7 +25,7 @@ func NewHostCIDeviceStateMachineWithInterfaceCommandError(interface_ *raw.IOUSBH
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:command:error:"), interface_.Ptr(), command, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &HostCIDeviceStateMachine{inner: raw.IOUSBHostCIDeviceStateMachineFromID(_id)}, nil
 }

@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // GKNoise is the object used to manipulate and combine noise in continuous 3D space.  It takes a GKNoiseSource as input. To extract and use a portion of the noise within the 3D space use the GKNoiseMap class. @see GKNoiseSource @see GKNoiseMap
@@ -56,7 +56,7 @@ func GKNoiseFromID(id objc.ID) *GKNoise {
 	}
 	o := &GKNoise{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

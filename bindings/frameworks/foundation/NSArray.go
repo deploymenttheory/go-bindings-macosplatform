@@ -8,11 +8,11 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsarray
-type NSArray[ObjectType pureobjc.AnyObject] struct {
+type NSArray[ObjectType purego.AnyObject] struct {
 	NSObject
 }
 
@@ -89,13 +89,13 @@ var (
 	_nSArraySelFilteredArrayUsingPredicate = objc.RegisterName("filteredArrayUsingPredicate:")
 )
 
-func NSArrayFromID[ObjectType pureobjc.AnyObject](id objc.ID) *NSArray[ObjectType] {
+func NSArrayFromID[ObjectType purego.AnyObject](id objc.ID) *NSArray[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSArray[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -236,7 +236,7 @@ func (o *NSArray[ObjectType]) WriteToURLError(url *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSArraySelWriteToURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -400,7 +400,7 @@ func (o *NSArray[ObjectType]) InitWithContentsOfURLError(url *NSURL) (*NSArray[O
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSArrayFromID[ObjectType](_ret), nil
 }
@@ -410,7 +410,7 @@ func NSArrayArrayWithContentsOfURLError(url *NSURL) (*NSArray[objc.ID], error) {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSArrayFromID[objc.ID](_ret), nil
 }

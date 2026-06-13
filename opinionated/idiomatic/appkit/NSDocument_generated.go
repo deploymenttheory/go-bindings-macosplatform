@@ -8,7 +8,7 @@ import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -33,7 +33,7 @@ func NewDocumentWithTypeError(typeName string) (*Document, error) {
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:error:"), foundation.NSStringStringWithUTF8String(typeName).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Document{inner: raw.NSDocumentFromID(_id)}, nil
 }
@@ -44,7 +44,7 @@ func NewDocumentWithContentsOfURLOfTypeError(url string, typeName string) (*Docu
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:ofType:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), foundation.NSStringStringWithUTF8String(typeName).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Document{inner: raw.NSDocumentFromID(_id)}, nil
 }
@@ -55,7 +55,7 @@ func NewDocumentForURLWithContentsOfURLOfTypeError(urlOrNil string, contentsURL 
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForURL:withContentsOfURL:ofType:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(urlOrNil)).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentsURL)).Ptr(), foundation.NSStringStringWithUTF8String(typeName).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Document{inner: raw.NSDocumentFromID(_id)}, nil
 }
@@ -187,7 +187,7 @@ func (x *Document) SaveToURLOfTypeForSaveOperation(ctx context.Context, url stri
 	_ch := make(chan error, 1)
 	x.inner.SaveToURLOfTypeForSaveOperationCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), saveOperation, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -211,7 +211,7 @@ func (x *Document) AutosaveWithImplicitCancellability(ctx context.Context, autos
 	_ch := make(chan error, 1)
 	x.inner.AutosaveWithImplicitCancellabilityCompletionHandler(autosavingIsImplicitlyCancellable, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -243,7 +243,7 @@ func (x *Document) MoveToURL(ctx context.Context, url string) error {
 	_ch := make(chan error, 1)
 	x.inner.MoveToURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -261,7 +261,7 @@ func (x *Document) Lock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.LockWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -279,7 +279,7 @@ func (x *Document) Unlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.UnlockWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -297,7 +297,7 @@ func (x *Document) SavePresentedItemChanges(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SavePresentedItemChangesWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -315,7 +315,7 @@ func (x *Document) AccommodatePresentedItemDeletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.AccommodatePresentedItemDeletionWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

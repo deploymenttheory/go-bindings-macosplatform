@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class		DRFolder @abstract	Represents a folder to be created on the burned disc. @discussion	DRFolders can be either a &ldquo;real&rdquo; folder pointing to an existing folder (residing on a hard drive for example) or can be a &ldquo;virtual&rdquo; folder which exists only on the resulting burned disc. A DRFolder pointing to an existing folder cannot have it's contents changed - only those files/folders which are children of the actual folder on disk will be included on the resulting disc. Virtual folders are entirely created programatically and any virtual folder structure can exist and be burned to disc. It is possible to convert a real folder to a virtual folder using the @link //apple_ref/occ/intm/DRFolder/makeVirtual makeVirtual @/link method.
@@ -36,7 +36,7 @@ func DRFolderFromID(id objc.ID) *DRFolder {
 	}
 	o := &DRFolder{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

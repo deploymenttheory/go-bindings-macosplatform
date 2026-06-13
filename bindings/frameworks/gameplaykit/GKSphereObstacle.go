@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // An obstacle with an impassible radius in 3D space For use with GKAgent3D.  Using this with a GKAgent2D is no different than using GKCircleObstacle.
@@ -34,7 +34,7 @@ func GKSphereObstacleFromID(id objc.ID) *GKSphereObstacle {
 	}
 	o := &GKSphereObstacle{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

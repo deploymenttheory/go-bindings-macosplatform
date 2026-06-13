@@ -8,7 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -38,7 +38,7 @@ func (x *TurnBasedMatch) DeclineInvite(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.DeclineInviteWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -56,7 +56,7 @@ func (x *TurnBasedMatch) Remove(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.RemoveWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -74,7 +74,7 @@ func (x *TurnBasedMatch) EndTurnWithNextParticipantsTurnTimeoutMatchData(ctx con
 	_ch := make(chan error, 1)
 	x.inner.EndTurnWithNextParticipantsTurnTimeoutMatchDataCompletionHandler(nextParticipants, timeout, matchData, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -92,7 +92,7 @@ func (x *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTim
 	_ch := make(chan error, 1)
 	x.inner.ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchDataCompletionHandler(matchOutcome, nextParticipants, timeout, matchData, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -110,7 +110,7 @@ func (x *TurnBasedMatch) ParticipantQuitOutOfTurnWithOutcome(ctx context.Context
 	_ch := make(chan error, 1)
 	x.inner.ParticipantQuitOutOfTurnWithOutcomeWithCompletionHandler(matchOutcome, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -128,7 +128,7 @@ func (x *TurnBasedMatch) EndMatchInTurnWithMatchData(ctx context.Context, matchD
 	_ch := make(chan error, 1)
 	x.inner.EndMatchInTurnWithMatchDataCompletionHandler(matchData, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -146,7 +146,7 @@ func (x *TurnBasedMatch) EndMatchInTurnWithMatchDataScoresAchievements(ctx conte
 	_ch := make(chan error, 1)
 	x.inner.EndMatchInTurnWithMatchDataScoresAchievementsCompletionHandler(matchData, scores, achievements, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -164,7 +164,7 @@ func (x *TurnBasedMatch) EndMatchInTurnWithMatchDataLeaderboardScoresAchievement
 	_ch := make(chan error, 1)
 	x.inner.EndMatchInTurnWithMatchDataLeaderboardScoresAchievementsCompletionHandler(matchData, scores, achievements, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -182,7 +182,7 @@ func (x *TurnBasedMatch) SaveCurrentTurnWithMatchData(ctx context.Context, match
 	_ch := make(chan error, 1)
 	x.inner.SaveCurrentTurnWithMatchDataCompletionHandler(matchData, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -200,7 +200,7 @@ func (x *TurnBasedMatch) SaveMergedMatchDataWithResolvedExchanges(ctx context.Co
 	_ch := make(chan error, 1)
 	x.inner.SaveMergedMatchDataWithResolvedExchangesCompletionHandler(matchData, exchanges, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -218,7 +218,7 @@ func (x *TurnBasedMatch) SendReminderToParticipantsLocalizableMessageKeyArgument
 	_ch := make(chan error, 1)
 	x.inner.SendReminderToParticipantsLocalizableMessageKeyArgumentsCompletionHandler(participants, foundation.NSStringStringWithUTF8String(key), arguments, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -236,7 +236,7 @@ func (x *TurnBasedMatch) EndTurnWithNextParticipantMatchData(ctx context.Context
 	_ch := make(chan error, 1)
 	x.inner.EndTurnWithNextParticipantMatchDataCompletionHandler(nextParticipant, matchData, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -254,7 +254,7 @@ func (x *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantMatchDat
 	_ch := make(chan error, 1)
 	x.inner.ParticipantQuitInTurnWithOutcomeNextParticipantMatchDataCompletionHandler(matchOutcome, nextParticipant, matchData, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

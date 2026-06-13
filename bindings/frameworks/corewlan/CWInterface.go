@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/corewlan/cwinterface
@@ -64,7 +64,7 @@ func CWInterfaceFromID(id objc.ID) *CWInterface {
 	}
 	o := &CWInterface{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -221,7 +221,7 @@ func (o *CWInterface) SetPowerError(power bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWInterfaceSelSetPowerError, power, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -231,7 +231,7 @@ func (o *CWInterface) SetWLANChannelError(channel *CWChannel) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWInterfaceSelSetWLANChannelError, channel.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -241,7 +241,7 @@ func (o *CWInterface) SetPairwiseMasterKeyError(key *foundation.NSData) (bool, e
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWInterfaceSelSetPairwiseMasterKeyError, key.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -251,7 +251,7 @@ func (o *CWInterface) SetWEPKeyFlagsIndexError(key *foundation.NSData, flags CWC
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWInterfaceSelSetWEPKeyFlagsIndexError, key.Ptr(), flags, index, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -262,7 +262,7 @@ func (o *CWInterface) ScanForNetworksWithSSIDError(ssid *foundation.NSData) (*fo
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelScanForNetworksWithSSIDError, ssid.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSSetFromID[*CWNetwork](_ret), nil
 }
@@ -273,7 +273,7 @@ func (o *CWInterface) ScanForNetworksWithSSIDIncludeHiddenError(ssid *foundation
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelScanForNetworksWithSSIDIncludeHiddenError, ssid.Ptr(), includeHidden, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSSetFromID[*CWNetwork](_ret), nil
 }
@@ -284,7 +284,7 @@ func (o *CWInterface) ScanForNetworksWithNameError(networkName *foundation.NSStr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelScanForNetworksWithNameError, networkName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSSetFromID[*CWNetwork](_ret), nil
 }
@@ -295,7 +295,7 @@ func (o *CWInterface) ScanForNetworksWithNameIncludeHiddenError(networkName *fou
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWInterfaceSelScanForNetworksWithNameIncludeHiddenError, networkName.Ptr(), includeHidden, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSSetFromID[*CWNetwork](_ret), nil
 }
@@ -305,7 +305,7 @@ func (o *CWInterface) AssociateToNetworkPasswordError(network *CWNetwork, passwo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWInterfaceSelAssociateToNetworkPasswordError, network.Ptr(), password.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -320,7 +320,7 @@ func (o *CWInterface) AssociateToEnterpriseNetworkIdentityUsernamePasswordError(
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWInterfaceSelAssociateToEnterpriseNetworkIdentityUsernamePasswordError, network.Ptr(), identity, username.Ptr(), password.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -331,7 +331,7 @@ func (o *CWInterface) StartIBSSModeWithSSIDSecurityChannelPasswordError(ssidData
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWInterfaceSelStartIBSSModeWithSSIDSecurityChannelPasswordError, ssidData.Ptr(), security, channel, password.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -341,7 +341,7 @@ func (o *CWInterface) CommitConfigurationAuthorizationError(configuration *CWCon
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWInterfaceSelCommitConfigurationAuthorizationError, configuration.Ptr(), authorization.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

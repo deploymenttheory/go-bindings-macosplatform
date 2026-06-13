@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class 		DRTrack @abstract	The DRTrack class represents a track on the burned disc. @discussion <h3>About tracks</h3> A DRTrack provides data to the for the burn and contains a description of the track on disc (length, block type, data format, etc). Data is provided for the burn in a real-time thread. It is up to the track to provide this data in a timely manner, otherwise a burn underrun can occur and ruin a disc. <h3>Data Production</h3> DRTracks do not typically store or cache the data to be written to disk, instead the data is streamed to the disc from some data producer as it's needed. This is accomplished through an object associated with the track when the track is created called the <i>track producer</i>. A track producer is a class you create that implements the @link DRTrackDataProduction DRTrackDataProduction @/link informal protocol. This protocol defines all of the methods that a track object will call during a burn to obtain data. <h3>Track Properties</h3> A DRTrack object contains several properties which define the track for the burn. These properties are stored in an NSDictionary and are accessed through the @link //apple_ref/occ/instm/DRTrack/properties properties @/link and @link //apple_ref/occ/instm/DRTrack/setProperties: setProperties: @/link methods. There are several properties that are required to be present and if they are not, will cause the burn to fail. These are: <ul> <li>@link DRTrackLengthKey DRTrackLengthKey @/link	Length of the track</li> <li>@link DRBlockSizeKey DRBlockSizeKey @/link	Size in bytes of each track block</li> <li>@link DRBlockTypeKey DRBlockTypeKey @/link	Type of each track block</li> <li>@link DRDataFormKey DRDataFormKey @/link		Data form of each block in the track</li> <li>@link DRSessionFormatKey DRSessionFormatKey @/link Session format of the track</li> <li>@link DRTrackModeKey DRTrackModeKey @/link	Track mode of the track</li> </ul> The possible values of these properties are defined in the Mt. Fuji (IFF-8090i) specification for CD/DVD devices. It's up to you to understand the possible values and meanings of each. All other keys contained in the properties dictionary are optional and can be omitted.
@@ -39,7 +39,7 @@ func DRTrackFromID(id objc.ID) *DRTrack {
 	}
 	o := &DRTrack{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

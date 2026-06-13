@@ -8,11 +8,11 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsorderedset
-type NSOrderedSet[ObjectType pureobjc.AnyObject] struct {
+type NSOrderedSet[ObjectType purego.AnyObject] struct {
 	NSObject
 }
 
@@ -80,13 +80,13 @@ var (
 	_nSOrderedSetSelFilteredOrderedSetUsingPredicate = objc.RegisterName("filteredOrderedSetUsingPredicate:")
 )
 
-func NSOrderedSetFromID[ObjectType pureobjc.AnyObject](id objc.ID) *NSOrderedSet[ObjectType] {
+func NSOrderedSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSOrderedSet[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSOrderedSet[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

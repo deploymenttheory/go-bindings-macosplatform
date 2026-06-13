@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A class that describes the random operation.
@@ -46,7 +46,7 @@ func MPSGraphRandomOpDescriptorFromID(id objc.ID) *MPSGraphRandomOpDescriptor {
 	}
 	o := &MPSGraphRandomOpDescriptor{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

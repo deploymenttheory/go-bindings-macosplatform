@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/opendirectory/odconfiguration
@@ -77,7 +77,7 @@ func ODConfigurationFromID(id objc.ID) *ODConfiguration {
 	}
 	o := &ODConfiguration{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -107,7 +107,7 @@ func (o *ODConfiguration) SaveUsingAuthorizationError(authorization *securityfou
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDConfigurationSelSaveUsingAuthorizationError, authorization.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -117,7 +117,7 @@ func (o *ODConfiguration) AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJ
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDConfigurationSelAddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError, trustType.Ptr(), account.Ptr(), accountPassword.Ptr(), username.Ptr(), password.Ptr(), join, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -127,7 +127,7 @@ func (o *ODConfiguration) RemoveTrustUsingUsernamePasswordDeleteTrustAccountErro
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDConfigurationSelRemoveTrustUsingUsernamePasswordDeleteTrustAccountError, username.Ptr(), password.Ptr(), deleteAccount, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

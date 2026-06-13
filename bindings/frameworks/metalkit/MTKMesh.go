@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/metalkit/mtkmesh
@@ -37,7 +37,7 @@ func MTKMeshFromID(id objc.ID) *MTKMesh {
 	}
 	o := &MTKMesh{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -47,7 +47,7 @@ func (o *MTKMesh) InitWithMeshDeviceError(mesh *modelio.MDLMesh, device metal.MT
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKMeshSelInitWithMeshDeviceError, mesh.Ptr(), device, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTKMeshFromID(_ret), nil
 }
@@ -57,7 +57,7 @@ func MTKMeshNewMeshesFromAssetDeviceSourceMeshesError(asset *modelio.MDLAsset, d
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTKMesh), _mTKMeshSelNewMeshesFromAssetDeviceSourceMeshesError, asset.Ptr(), device, sourceMeshes, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*MTKMesh](_ret), nil
 }

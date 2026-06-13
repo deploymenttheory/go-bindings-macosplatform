@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/audiovideobridging/avb17221aecpavcmessage
@@ -27,7 +27,7 @@ func AVB17221AECPAVCMessageFromID(id objc.ID) *AVB17221AECPAVCMessage {
 	}
 	o := &AVB17221AECPAVCMessage{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

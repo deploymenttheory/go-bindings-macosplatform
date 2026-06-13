@@ -10,8 +10,8 @@ import "C"
 import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/oslog"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/blocks"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/tel"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
 	"unsafe"
 )
 

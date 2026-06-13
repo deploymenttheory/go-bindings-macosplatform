@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation
@@ -37,7 +37,7 @@ func VNHumanBodyPose3DObservationFromID(id objc.ID) *VNHumanBodyPose3DObservatio
 	}
 	o := &VNHumanBodyPose3DObservation{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -46,7 +46,7 @@ func (o *VNHumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(j
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *VNHumanBodyRecognizedPoint3D]](o.Ptr(), _vNHumanBodyPose3DObservationSelRecognizedPointsForJointsGroupNameError, jointsGroupName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -56,7 +56,7 @@ func (o *VNHumanBodyPose3DObservation) RecognizedPointForJointNameError(jointNam
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanBodyPose3DObservationSelRecognizedPointForJointNameError, jointName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return VNHumanBodyRecognizedPoint3DFromID(_ret), nil
 }
@@ -67,7 +67,7 @@ func (o *VNHumanBodyPose3DObservation) PointInImageForJointNameError(jointName *
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanBodyPose3DObservationSelPointInImageForJointNameError, jointName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return VNPointFromID(_ret), nil
 }
@@ -84,7 +84,7 @@ func (o *VNHumanBodyPose3DObservation) GetCameraRelativePositionForJointNameErro
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNHumanBodyPose3DObservationSelGetCameraRelativePositionForJointNameError, modelPositionOut, jointName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

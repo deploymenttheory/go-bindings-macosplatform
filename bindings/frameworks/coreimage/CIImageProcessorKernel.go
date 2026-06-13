@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel
@@ -39,7 +39,7 @@ func CIImageProcessorKernelFromID(id objc.ID) *CIImageProcessorKernel {
 	}
 	o := &CIImageProcessorKernel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -48,7 +48,7 @@ func CIImageProcessorKernelProcessWithInputsArgumentsOutputError(inputs *foundat
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelProcessWithInputsArgumentsOutputError, inputs.Ptr(), arguments, output, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -78,7 +78,7 @@ func CIImageProcessorKernelApplyWithExtentInputsArgumentsError(extent corefounda
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelApplyWithExtentInputsArgumentsError, extent, inputs.Ptr(), arguments, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CIImageFromID(_ret), nil
 }
@@ -106,7 +106,7 @@ func CIImageProcessorKernelProcessWithInputsArgumentsOutputsError(inputs *founda
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelProcessWithInputsArgumentsOutputsError, inputs.Ptr(), arguments, outputs.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -123,7 +123,7 @@ func CIImageProcessorKernelApplyWithExtentsInputsArgumentsError(extents *foundat
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelApplyWithExtentsInputsArgumentsError, extents.Ptr(), inputs.Ptr(), arguments, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*CIImage](_ret), nil
 }

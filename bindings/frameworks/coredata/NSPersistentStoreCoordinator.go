@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator
@@ -65,7 +65,7 @@ func NSPersistentStoreCoordinatorFromID(id objc.ID) *NSPersistentStoreCoordinato
 	}
 	o := &NSPersistentStoreCoordinator{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -97,7 +97,7 @@ func (o *NSPersistentStoreCoordinator) AddPersistentStoreWithTypeConfigurationUR
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelAddPersistentStoreWithTypeConfigurationURLOptionsError, storeType.Ptr(), configuration.Ptr(), storeURL.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSPersistentStoreFromID(_ret), nil
 }
@@ -120,7 +120,7 @@ func (o *NSPersistentStoreCoordinator) RemovePersistentStoreError(store *NSPersi
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelRemovePersistentStoreError, store.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -144,7 +144,7 @@ func (o *NSPersistentStoreCoordinator) ExecuteRequestWithContextError(request *N
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelExecuteRequestWithContextError, request.Ptr(), context_.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -157,7 +157,7 @@ func NSPersistentStoreCoordinatorMetadataForPersistentStoreOfTypeURLOptionsError
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelMetadataForPersistentStoreOfTypeURLOptionsError, storeType.Ptr(), url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -166,7 +166,7 @@ func NSPersistentStoreCoordinatorSetMetadataForPersistentStoreOfTypeURLOptionsEr
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelSetMetadataForPersistentStoreOfTypeURLOptionsError, metadata, storeType.Ptr(), url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -176,7 +176,7 @@ func NSPersistentStoreCoordinatorCachedModelForPersistentStoreAtURLOptionsError(
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelCachedModelForPersistentStoreAtURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSManagedObjectModelFromID(_ret), nil
 }
@@ -193,7 +193,7 @@ func (o *NSPersistentStoreCoordinator) ImportStoreWithIdentifierFromExternalReco
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError, storeIdentifier.Ptr(), externalRecordsURL.Ptr(), destinationURL.Ptr(), options, storeType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSPersistentStoreFromID(_ret), nil
 }
@@ -204,7 +204,7 @@ func (o *NSPersistentStoreCoordinator) MigratePersistentStoreToURLOptionsWithTyp
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelMigratePersistentStoreToURLOptionsWithTypeError, store.Ptr(), uRL.Ptr(), options, storeType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSPersistentStoreFromID(_ret), nil
 }
@@ -213,7 +213,7 @@ func (o *NSPersistentStoreCoordinator) DestroyPersistentStoreAtURLWithTypeOption
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelDestroyPersistentStoreAtURLWithTypeOptionsError, url.Ptr(), storeType.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -222,7 +222,7 @@ func (o *NSPersistentStoreCoordinator) ReplacePersistentStoreAtURLDestinationOpt
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreTypeError, destinationURL.Ptr(), destinationOptions, sourceURL.Ptr(), sourceOptions, storeType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -259,7 +259,7 @@ func (o *NSPersistentStoreCoordinator) FinishDeferredLightweightMigration() (boo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelFinishDeferredLightweightMigration, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -268,7 +268,7 @@ func (o *NSPersistentStoreCoordinator) FinishDeferredLightweightMigrationTask() 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelFinishDeferredLightweightMigrationTask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -284,7 +284,7 @@ func NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURLError(url *fou
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelMetadataForPersistentStoreWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -310,7 +310,7 @@ func NSPersistentStoreCoordinatorMetadataForPersistentStoreOfTypeURLError(storeT
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelMetadataForPersistentStoreOfTypeURLError, storeType.Ptr(), url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -320,7 +320,7 @@ func NSPersistentStoreCoordinatorSetMetadataForPersistentStoreOfTypeURLError(met
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelSetMetadataForPersistentStoreOfTypeURLError, metadata, storeType.Ptr(), url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -330,7 +330,7 @@ func NSPersistentStoreCoordinatorRemoveUbiquitousContentAndPersistentStoreAtURLO
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelRemoveUbiquitousContentAndPersistentStoreAtURLOptionsError, storeURL.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

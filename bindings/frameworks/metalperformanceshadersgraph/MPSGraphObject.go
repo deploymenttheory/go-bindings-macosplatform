@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // The common base class for all Metal Performance Shaders Graph objects. Only the child classes should be used.
@@ -25,7 +25,7 @@ func MPSGraphObjectFromID(id objc.ID) *MPSGraphObject {
 	}
 	o := &MPSGraphObject{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

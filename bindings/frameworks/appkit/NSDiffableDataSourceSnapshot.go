@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdiffabledatasourcesnapshot
-type NSDiffableDataSourceSnapshot[SectionIdentifierType pureobjc.AnyObject, ItemIdentifierType pureobjc.AnyObject] struct {
+type NSDiffableDataSourceSnapshot[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -44,13 +44,13 @@ var (
 	_nSDiffableDataSourceSnapshotSelItemIdentifiers = objc.RegisterName("itemIdentifiers")
 )
 
-func NSDiffableDataSourceSnapshotFromID[SectionIdentifierType pureobjc.AnyObject, ItemIdentifierType pureobjc.AnyObject](id objc.ID) *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType] {
+func NSDiffableDataSourceSnapshotFromID[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject](id objc.ID) *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

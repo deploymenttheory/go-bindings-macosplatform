@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/audiovideobridging/avb17221aecpaddressaccesstlv
@@ -31,7 +31,7 @@ func AVB17221AECPAddressAccessTLVFromID(id objc.ID) *AVB17221AECPAddressAccessTL
 	}
 	o := &AVB17221AECPAddressAccessTLV{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

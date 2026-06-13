@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/backgroundassets/badownloadmanager
@@ -37,7 +37,7 @@ func BADownloadManagerFromID(id objc.ID) *BADownloadManager {
 	}
 	o := &BADownloadManager{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -47,7 +47,7 @@ func (o *BADownloadManager) FetchCurrentDownloads() (*foundation.NSArray[*BADown
 	_ret := objc.Send[objc.ID](o.Ptr(), _bADownloadManagerSelFetchCurrentDownloads, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*BADownload](_ret), nil
 }
@@ -72,7 +72,7 @@ func (o *BADownloadManager) ScheduleDownloadError(download *BADownload) (bool, e
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _bADownloadManagerSelScheduleDownloadError, download.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -106,7 +106,7 @@ func (o *BADownloadManager) StartForegroundDownloadError(download *BADownload) (
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _bADownloadManagerSelStartForegroundDownloadError, download.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -116,7 +116,7 @@ func (o *BADownloadManager) CancelDownloadError(download *BADownload) (bool, err
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _bADownloadManagerSelCancelDownloadError, download.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

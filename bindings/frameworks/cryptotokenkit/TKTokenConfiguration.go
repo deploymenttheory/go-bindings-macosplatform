@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokenconfiguration
@@ -34,7 +34,7 @@ func TKTokenConfigurationFromID(id objc.ID) *TKTokenConfiguration {
 	}
 	o := &TKTokenConfiguration{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -44,7 +44,7 @@ func (o *TKTokenConfiguration) KeyForObjectIDError(objectID objc.ID) (*TKTokenKe
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenConfigurationSelKeyForObjectIDError, objectID, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return TKTokenKeychainKeyFromID(_ret), nil
 }
@@ -55,7 +55,7 @@ func (o *TKTokenConfiguration) CertificateForObjectIDError(objectID objc.ID) (*T
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenConfigurationSelCertificateForObjectIDError, objectID, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return TKTokenKeychainCertificateFromID(_ret), nil
 }

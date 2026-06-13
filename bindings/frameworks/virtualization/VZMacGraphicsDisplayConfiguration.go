@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplayconfiguration
@@ -34,7 +34,7 @@ func VZMacGraphicsDisplayConfigurationFromID(id objc.ID) *VZMacGraphicsDisplayCo
 	}
 	o := &VZMacGraphicsDisplayConfiguration{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

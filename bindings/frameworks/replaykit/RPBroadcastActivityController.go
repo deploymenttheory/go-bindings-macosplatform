@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class RPBroadcastActivityController @abstract Controller object that allows clients to present the macOS broadcast picker and returns the RPBroadcastController object that controls broadcast functionality.
@@ -34,7 +34,7 @@ func RPBroadcastActivityControllerFromID(id objc.ID) *RPBroadcastActivityControl
 	}
 	o := &RPBroadcastActivityController{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

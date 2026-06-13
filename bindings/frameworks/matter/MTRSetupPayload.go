@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrsetuppayload
@@ -65,7 +65,7 @@ func MTRSetupPayloadFromID(id objc.ID) *MTRSetupPayload {
 	}
 	o := &MTRSetupPayload{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -252,7 +252,7 @@ func MTRSetupPayloadSetupPayloadWithOnboardingPayloadError(onboardingPayload *fo
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRSetupPayload), _mTRSetupPayloadSelSetupPayloadWithOnboardingPayloadError, onboardingPayload.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTRSetupPayloadFromID(_ret), nil
 }
@@ -262,7 +262,7 @@ func (o *MTRSetupPayload) QrCodeString2() (*foundation.NSString, error) {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelQrCodeString, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSStringFromID(_ret), nil
 }
@@ -272,7 +272,7 @@ func (o *MTRSetupPayload) GetAllOptionalVendorData() (*foundation.NSArray[*MTROp
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSetupPayloadSelGetAllOptionalVendorData, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*MTROptionalQRCodeInfo](_ret), nil
 }

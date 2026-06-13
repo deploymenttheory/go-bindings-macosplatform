@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsndarrayunarygradientkernel
@@ -30,7 +30,7 @@ func MPSNDArrayUnaryGradientKernelFromID(id objc.ID) *MPSNDArrayUnaryGradientKer
 	}
 	o := &MPSNDArrayUnaryGradientKernel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

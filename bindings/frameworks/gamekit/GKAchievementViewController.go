@@ -6,7 +6,7 @@ package gamekit
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkachievementviewcontroller
@@ -27,7 +27,7 @@ func GKAchievementViewControllerFromID(id objc.ID) *GKAchievementViewController 
 	}
 	o := &GKAchievementViewController{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

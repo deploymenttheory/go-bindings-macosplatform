@@ -6,11 +6,11 @@ package foundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmeasurement
-type NSMeasurement[UnitType pureobjc.AnyObject] struct {
+type NSMeasurement[UnitType purego.AnyObject] struct {
 	NSObject
 }
 
@@ -25,13 +25,13 @@ var (
 	_nSMeasurementSelDoubleValue = objc.RegisterName("doubleValue")
 )
 
-func NSMeasurementFromID[UnitType pureobjc.AnyObject](id objc.ID) *NSMeasurement[UnitType] {
+func NSMeasurementFromID[UnitType purego.AnyObject](id objc.ID) *NSMeasurement[UnitType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSMeasurement[UnitType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

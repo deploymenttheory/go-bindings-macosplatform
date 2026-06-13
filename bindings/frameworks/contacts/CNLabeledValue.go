@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnlabeledvalue
-type CNLabeledValue[ValueType pureobjc.AnyObject] struct {
+type CNLabeledValue[ValueType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -28,13 +28,13 @@ var (
 	_cNLabeledValueSelValue = objc.RegisterName("value")
 )
 
-func CNLabeledValueFromID[ValueType pureobjc.AnyObject](id objc.ID) *CNLabeledValue[ValueType] {
+func CNLabeledValueFromID[ValueType purego.AnyObject](id objc.ID) *CNLabeledValue[ValueType] {
 	if id == 0 {
 		return nil
 	}
 	o := &CNLabeledValue[ValueType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

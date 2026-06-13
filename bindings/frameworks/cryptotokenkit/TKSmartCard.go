@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcard
@@ -50,7 +50,7 @@ func TKSmartCardFromID(id objc.ID) *TKSmartCard {
 	}
 	o := &TKSmartCard{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -183,7 +183,7 @@ func (o *TKSmartCard) SendInsP1P2DataLeSwError(ins uint8, p1 uint8, p2 uint8, re
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSelSendInsP1P2DataLeSwError, ins, p1, p2, requestData.Ptr(), le.Ptr(), sw, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDataFromID(_ret), nil
 }

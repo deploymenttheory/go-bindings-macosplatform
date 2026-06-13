@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxmlnode
@@ -76,7 +76,7 @@ func NSXMLNodeFromID(id objc.ID) *NSXMLNode {
 	}
 	o := &NSXMLNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -236,7 +236,7 @@ func (o *NSXMLNode) NodesForXPathError(xpath *NSString) (*NSArray[*NSXMLNode], e
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelNodesForXPathError, xpath.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSArrayFromID[*NSXMLNode](_ret), nil
 }
@@ -246,7 +246,7 @@ func (o *NSXMLNode) ObjectsForXQueryConstantsError(xquery *NSString, constants *
 	var _nsErr uintptr
 	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSXMLNodeSelObjectsForXQueryConstantsError, xquery.Ptr(), constants, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -255,7 +255,7 @@ func (o *NSXMLNode) ObjectsForXQueryError(xquery *NSString) (*NSArray[objc.ID], 
 	var _nsErr uintptr
 	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSXMLNodeSelObjectsForXQueryError, xquery.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

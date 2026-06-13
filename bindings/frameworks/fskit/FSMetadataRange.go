@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A range that describes contiguous metadata segments on disk. This type represents a range that begins at `startOffset` and ends at `startOffset + segmentLength * segmentCount`. Each segment in the range represents a single block in the resource's buffer cache. For example, given an `FSMetadataRange` with the following properties: * `startOffset = 0` * `segmentLength = 512` * `segmentCount = 8` The range represents eight segments: from 0 to 511, then from 512 to 1023, and so on until a final segment of 3584 to 4095. Ensure that each metadata segment represents a range that's already present in the resource's buffer cache. Similarly, ensure that each segment's offset and length matches the offset and length of the corresponding block in the buffer cache.
@@ -32,7 +32,7 @@ func FSMetadataRangeFromID(id objc.ID) *FSMetadataRange {
 	}
 	o := &FSMetadataRange{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

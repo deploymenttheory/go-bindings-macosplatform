@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Frame-specific information required to render a frame in a rendering session.
@@ -36,7 +36,7 @@ func CNRenderingSessionFrameAttributesFromID(id objc.ID) *CNRenderingSessionFram
 	}
 	o := &CNRenderingSessionFrameAttributes{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

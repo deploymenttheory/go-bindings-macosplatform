@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiofile
@@ -43,7 +43,7 @@ func AVAudioFileFromID(id objc.ID) *AVAudioFile {
 	}
 	o := &AVAudioFile{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -60,7 +60,7 @@ func (o *AVAudioFile) InitForReadingError(fileURL *foundation.NSURL) (*AVAudioFi
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForReadingError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAudioFileFromID(_ret), nil
 }
@@ -71,7 +71,7 @@ func (o *AVAudioFile) InitForReadingCommonFormatInterleavedError(fileURL *founda
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForReadingCommonFormatInterleavedError, fileURL.Ptr(), format, interleaved, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAudioFileFromID(_ret), nil
 }
@@ -82,7 +82,7 @@ func (o *AVAudioFile) InitForWritingSettingsError(fileURL *foundation.NSURL, set
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForWritingSettingsError, fileURL.Ptr(), settings, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAudioFileFromID(_ret), nil
 }
@@ -93,7 +93,7 @@ func (o *AVAudioFile) InitForWritingSettingsCommonFormatInterleavedError(fileURL
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForWritingSettingsCommonFormatInterleavedError, fileURL.Ptr(), settings, format, interleaved, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVAudioFileFromID(_ret), nil
 }
@@ -108,7 +108,7 @@ func (o *AVAudioFile) ReadIntoBufferError(buffer *AVAudioPCMBuffer) (bool, error
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioFileSelReadIntoBufferError, buffer.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -118,7 +118,7 @@ func (o *AVAudioFile) ReadIntoBufferFrameCountError(buffer *AVAudioPCMBuffer, fr
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioFileSelReadIntoBufferFrameCountError, buffer.Ptr(), frames, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -128,7 +128,7 @@ func (o *AVAudioFile) WriteFromBufferError(buffer *AVAudioPCMBuffer) (bool, erro
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioFileSelWriteFromBufferError, buffer.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

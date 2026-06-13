@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioengine
@@ -70,7 +70,7 @@ func AVAudioEngineFromID(id objc.ID) *AVAudioEngine {
 	}
 	o := &AVAudioEngine{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -136,7 +136,7 @@ func (o *AVAudioEngine) StartAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioEngineSelStartAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -175,7 +175,7 @@ func (o *AVAudioEngine) EnableManualRenderingModeFormatMaximumFrameCountError(mo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioEngineSelEnableManualRenderingModeFormatMaximumFrameCountError, mode, pcmFormat.Ptr(), maximumFrameCount, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -190,7 +190,7 @@ func (o *AVAudioEngine) RenderOfflineToBufferError(numberOfFrames uint32, buffer
 	var _nsErr uintptr
 	_ret := objc.Send[AVAudioEngineManualRenderingStatus](o.Ptr(), _aVAudioEngineSelRenderOfflineToBufferError, numberOfFrames, buffer.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

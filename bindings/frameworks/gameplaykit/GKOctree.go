@@ -9,13 +9,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A tree data structure where each level has 8 children that subdivide a given space into the eight octants. Stores arbitrary NSObject elements via points and boxes.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkoctree
-type GKOctree[ElementType pureobjc.AnyObject] struct {
+type GKOctree[ElementType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -31,13 +31,13 @@ var (
 	_gKOctreeSelRemoveElementWithNode = objc.RegisterName("removeElement:withNode:")
 )
 
-func GKOctreeFromID[ElementType pureobjc.AnyObject](id objc.ID) *GKOctree[ElementType] {
+func GKOctreeFromID[ElementType purego.AnyObject](id objc.ID) *GKOctree[ElementType] {
 	if id == 0 {
 		return nil
 	}
 	o := &GKOctree[ElementType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

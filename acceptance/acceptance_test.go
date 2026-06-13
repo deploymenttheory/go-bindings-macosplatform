@@ -14,7 +14,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/pipeline"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/pipeline"
 )
 
 const (

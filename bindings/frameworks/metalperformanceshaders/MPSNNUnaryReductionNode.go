@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @abstract  A node for a unary MPSNNReduce node. @discussion This is an abstract base class that does not correspond with any particular MPSCNNKernel. Please make one of the MPSNNReduction subclasses instead.
@@ -32,7 +32,7 @@ func MPSNNUnaryReductionNodeFromID(id objc.ID) *MPSNNUnaryReductionNode {
 	}
 	o := &MPSNNUnaryReductionNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class			DRBurnProgressPanel @abstract 		Manages a panel that displays progress while burning data to media. @discussion		A DRBurnProgressPanel object manages a panel that displays and updates burn progress. The burn panel is responsible for begining the burn. The burn is begun and a progress panel is displayed on screen by calling @link //apple_ref/occ/instm/DRBurnProgressPanel/beginProgressSheetForBurn:layout:modalForWindow: beginProgressSheetForBurn:layout:modalForWindow: @/link if a sheet interface is desired, or @link //apple_ref/occ/instm/DRBurnProgressPanel/beginProgressPanelForBurn:layout: beginProgressPanelForBurn:layout: @/link for a non-modal panel. A DRBurnProgressPanel sends a @link //apple_ref/occ/instm/NSObject/burnProgressPanel:burnDidFinish: burnProgressPanel:burnDidFinish: @/link message to it's delegate when the burn completes. This method allows the delegate to take over end-of-burn handling from the burn progress panel to customize error dialogs or user notification.
@@ -36,7 +36,7 @@ func DRBurnProgressPanelFromID(id objc.ID) *DRBurnProgressPanel {
 	}
 	o := &DRBurnProgressPanel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -7,7 +7,7 @@ package coreml
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,7 +26,7 @@ func NewMultiArrayWithShapeDataTypeError(shape *foundation.NSArray[*foundation.N
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:error:"), shape.Ptr(), dataType, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &MultiArray{inner: raw.MLMultiArrayFromID(_id)}, nil
 }
@@ -44,7 +44,7 @@ func NewMultiArrayWithDataPointerShapeDataTypeStridesDeallocatorError(dataPointe
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataPointer:shape:dataType:strides:deallocator:error:"), dataPointer, shape.Ptr(), dataType, strides.Ptr(), deallocator, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &MultiArray{inner: raw.MLMultiArrayFromID(_id)}, nil
 }

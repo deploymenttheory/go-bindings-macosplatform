@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontactvcardserialization
@@ -30,7 +30,7 @@ func CNContactVCardSerializationFromID(id objc.ID) *CNContactVCardSerialization 
 	}
 	o := &CNContactVCardSerialization{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -46,7 +46,7 @@ func CNContactVCardSerializationDataWithContactsError(contacts *foundation.NSArr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactVCardSerialization), _cNContactVCardSerializationSelDataWithContactsError, contacts.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDataFromID(_ret), nil
 }
@@ -57,7 +57,7 @@ func CNContactVCardSerializationContactsWithDataError(data *foundation.NSData) (
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactVCardSerialization), _cNContactVCardSerializationSelContactsWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*CNContact](_ret), nil
 }

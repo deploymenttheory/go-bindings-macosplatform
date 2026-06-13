@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsregularexpression
@@ -41,7 +41,7 @@ func NSRegularExpressionFromID(id objc.ID) *NSRegularExpression {
 	}
 	o := &NSRegularExpression{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -50,7 +50,7 @@ func NSRegularExpressionRegularExpressionWithPatternOptionsError(pattern *NSStri
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRegularExpression), _nSRegularExpressionSelRegularExpressionWithPatternOptionsError, pattern.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSRegularExpressionFromID(_ret), nil
 }
@@ -60,7 +60,7 @@ func (o *NSRegularExpression) InitWithPatternOptionsError(pattern *NSString, opt
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelInitWithPatternOptionsError, pattern.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSRegularExpressionFromID(_ret), nil
 }

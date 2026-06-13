@@ -6,7 +6,7 @@ package gameplaykit
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Coherent noise is smoothly-changing, semi-random noise.  A given input always produces the same output. A small change in input produces a small change in output.  A large change in input produces a random change in output. This class is not intended to be instantiated.
@@ -34,7 +34,7 @@ func GKCoherentNoiseSourceFromID(id objc.ID) *GKCoherentNoiseSource {
 	}
 	o := &GKCoherentNoiseSource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

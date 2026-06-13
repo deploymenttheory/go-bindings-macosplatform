@@ -6,11 +6,11 @@ package foundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsorderedcollectionchange
-type NSOrderedCollectionChange[ObjectType pureobjc.AnyObject] struct {
+type NSOrderedCollectionChange[ObjectType purego.AnyObject] struct {
 	NSObject
 }
 
@@ -26,13 +26,13 @@ var (
 	_nSOrderedCollectionChangeSelAssociatedIndex = objc.RegisterName("associatedIndex")
 )
 
-func NSOrderedCollectionChangeFromID[ObjectType pureobjc.AnyObject](id objc.ID) *NSOrderedCollectionChange[ObjectType] {
+func NSOrderedCollectionChangeFromID[ObjectType purego.AnyObject](id objc.ID) *NSOrderedCollectionChange[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSOrderedCollectionChange[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -6,7 +6,7 @@ package foundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class NSXMLDTDNode @abstract The nodes that are exclusive to a DTD @discussion Every DTD node has a name. Object value is defined as follows:<ul> <li><b>Entity declaration</b> - the string that that entity resolves to eg "&lt;"</li> <li><b>Attribute declaration</b> - the default value, if any</li> <li><b>Element declaration</b> - the validation string</li> <li><b>Notation declaration</b> - no objectValue</li></ul>
@@ -38,7 +38,7 @@ func NSXMLDTDNodeFromID(id objc.ID) *NSXMLDTDNode {
 	}
 	o := &NSXMLDTDNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

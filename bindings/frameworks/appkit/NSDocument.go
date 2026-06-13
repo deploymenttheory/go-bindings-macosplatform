@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdocument
@@ -204,7 +204,7 @@ func NSDocumentFromID(id objc.ID) *NSDocument {
 	}
 	o := &NSDocument{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -219,7 +219,7 @@ func (o *NSDocument) InitWithTypeError(typeName *foundation.NSString) (*NSDocume
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDocumentFromID(_ret), nil
 }
@@ -234,7 +234,7 @@ func (o *NSDocument) InitWithContentsOfURLOfTypeError(url *foundation.NSURL, typ
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDocumentFromID(_ret), nil
 }
@@ -244,7 +244,7 @@ func (o *NSDocument) InitForURLWithContentsOfURLOfTypeError(urlOrNil *foundation
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitForURLWithContentsOfURLOfTypeError, urlOrNil.Ptr(), contentsURL.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDocumentFromID(_ret), nil
 }
@@ -312,7 +312,7 @@ func (o *NSDocument) RevertToContentsOfURLOfTypeError(url *foundation.NSURL, typ
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelRevertToContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -321,7 +321,7 @@ func (o *NSDocument) ReadFromURLOfTypeError(url *foundation.NSURL, typeName *fou
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelReadFromURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -330,7 +330,7 @@ func (o *NSDocument) ReadFromFileWrapperOfTypeError(fileWrapper *foundation.NSFi
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelReadFromFileWrapperOfTypeError, fileWrapper.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -339,7 +339,7 @@ func (o *NSDocument) ReadFromDataOfTypeError(data *foundation.NSData, typeName *
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelReadFromDataOfTypeError, data.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -348,7 +348,7 @@ func (o *NSDocument) WriteToURLOfTypeError(url *foundation.NSURL, typeName *foun
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteToURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -358,7 +358,7 @@ func (o *NSDocument) FileWrapperOfTypeError(typeName *foundation.NSString) (*fou
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileWrapperOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSFileWrapperFromID(_ret), nil
 }
@@ -368,7 +368,7 @@ func (o *NSDocument) DataOfTypeError(typeName *foundation.NSString) (*foundation
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDataOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDataFromID(_ret), nil
 }
@@ -381,7 +381,7 @@ func (o *NSDocument) WriteSafelyToURLOfTypeForSaveOperationError(url *foundation
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteSafelyToURLOfTypeForSaveOperationError, url.Ptr(), typeName.Ptr(), saveOperation, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -390,7 +390,7 @@ func (o *NSDocument) WriteToURLOfTypeForSaveOperationOriginalContentsURLError(ur
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteToURLOfTypeForSaveOperationOriginalContentsURLError, url.Ptr(), typeName.Ptr(), saveOperation, absoluteOriginalContentsURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -399,7 +399,7 @@ func (o *NSDocument) FileAttributesToWriteToURLOfTypeForSaveOperationOriginalCon
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSDocumentSelFileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError, url.Ptr(), typeName.Ptr(), saveOperation, absoluteOriginalContentsURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -453,7 +453,7 @@ func (o *NSDocument) CheckAutosavingSafetyAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelCheckAutosavingSafetyAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -513,7 +513,7 @@ func (o *NSDocument) DuplicateAndReturnError() (*NSDocument, error) {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDuplicateAndReturnError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDocumentFromID(_ret), nil
 }
@@ -635,7 +635,7 @@ func (o *NSDocument) PrintOperationWithSettingsError(printSettings *foundation.N
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPrintOperationWithSettingsError, printSettings, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSPrintOperationFromID(_ret), nil
 }
@@ -1062,7 +1062,7 @@ func (o *NSDocument) SaveToURLOfTypeForSaveOperationError(url *foundation.NSURL,
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelSaveToURLOfTypeForSaveOperationError, url.Ptr(), typeName.Ptr(), saveOperation, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

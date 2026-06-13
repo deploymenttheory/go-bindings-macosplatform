@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auaudiounitv2bridge
@@ -26,7 +26,7 @@ func AUAudioUnitV2BridgeFromID(id objc.ID) *AUAudioUnitV2Bridge {
 	}
 	o := &AUAudioUnitV2Bridge{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

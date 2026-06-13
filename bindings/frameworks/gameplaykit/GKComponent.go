@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A component is the data and logic for one part of an object in an entity-component system. Entities have many components but components are associated with only a single entity. Components across entities are best arranged in ComponentSystems, which are homogeneous collections of components that the game logic updates in a deterministic order. @see GKComponentSystem
@@ -31,7 +31,7 @@ func GKComponentFromID(id objc.ID) *GKComponent {
 	}
 	o := &GKComponent{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

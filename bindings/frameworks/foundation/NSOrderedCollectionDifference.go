@@ -6,11 +6,11 @@ package foundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsorderedcollectiondifference
-type NSOrderedCollectionDifference[ObjectType pureobjc.AnyObject] struct {
+type NSOrderedCollectionDifference[ObjectType purego.AnyObject] struct {
 	NSObject
 }
 
@@ -26,13 +26,13 @@ var (
 	_nSOrderedCollectionDifferenceSelHasChanges = objc.RegisterName("hasChanges")
 )
 
-func NSOrderedCollectionDifferenceFromID[ObjectType pureobjc.AnyObject](id objc.ID) *NSOrderedCollectionDifference[ObjectType] {
+func NSOrderedCollectionDifferenceFromID[ObjectType purego.AnyObject](id objc.ID) *NSOrderedCollectionDifference[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSOrderedCollectionDifference[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

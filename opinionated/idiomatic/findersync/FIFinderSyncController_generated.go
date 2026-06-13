@@ -8,7 +8,7 @@ import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/findersync"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -51,7 +51,7 @@ func (x *FinderSyncController) SetLastUsedDateForItemWithURLCompletion(ctx conte
 	_ch := make(chan error, 1)
 	x.inner.SetLastUsedDateForItemWithURLCompletion(lastUsedDate, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(itemURL)), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -69,7 +69,7 @@ func (x *FinderSyncController) SetTagDataForItemWithURLCompletion(ctx context.Co
 	_ch := make(chan error, 1)
 	x.inner.SetTagDataForItemWithURLCompletion(tagData, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(itemURL)), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

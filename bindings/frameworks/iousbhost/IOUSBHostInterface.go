@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class       IOUSBHostInterface @brief       The IOUSBHostObject representing a USB interface @discussion  This class provides functionality to send control requests to the default control endpoint, as well as create IOUSBHostPipe objects to transfer data.
@@ -37,7 +37,7 @@ func IOUSBHostInterfaceFromID(id objc.ID) *IOUSBHostInterface {
 	}
 	o := &IOUSBHostInterface{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -69,7 +69,7 @@ func (o *IOUSBHostInterface) SetIdleTimeoutError(idleTimeout float64) (bool, err
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostInterfaceSelSetIdleTimeoutError, idleTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -79,7 +79,7 @@ func (o *IOUSBHostInterface) SelectAlternateSettingError(alternateSetting uint) 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostInterfaceSelSelectAlternateSettingError, alternateSetting, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -89,7 +89,7 @@ func (o *IOUSBHostInterface) CopyPipeWithAddressError(address uint) (*IOUSBHostP
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostInterfaceSelCopyPipeWithAddressError, address, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return IOUSBHostPipeFromID(_ret), nil
 }

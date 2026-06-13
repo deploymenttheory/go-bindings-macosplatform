@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // An object that contains a flight number that the data detection system matches. The DataDetection framework returns a flight number match in a `DDMatchFlightNumber` object, which contains an airline name and flight number.
@@ -29,7 +29,7 @@ func DDMatchFlightNumberFromID(id objc.ID) *DDMatchFlightNumber {
 	}
 	o := &DDMatchFlightNumber{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

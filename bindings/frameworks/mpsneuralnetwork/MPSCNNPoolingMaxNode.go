@@ -6,7 +6,7 @@ package mpsneuralnetwork
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @abstract  A node representing a MPSCNNPoolingMax kernel @discussion The default edge mode is MPSImageEdgeModeClamp
@@ -24,7 +24,7 @@ func MPSCNNPoolingMaxNodeFromID(id objc.ID) *MPSCNNPoolingMaxNode {
 	}
 	o := &MPSCNNPoolingMaxNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

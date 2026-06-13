@@ -7,7 +7,7 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -32,7 +32,7 @@ func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (*LinuxRo
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:error:"), foundation.NSStringStringWithUTF8String(path).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &LinuxRosettaUnixSocketCachingOptions{inner: raw.VZLinuxRosettaUnixSocketCachingOptionsFromID(_id)}, nil
 }

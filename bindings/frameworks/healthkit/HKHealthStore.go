@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore
@@ -63,7 +63,7 @@ func HKHealthStoreFromID(id objc.ID) *HKHealthStore {
 	}
 	o := &HKHealthStore{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -233,7 +233,7 @@ func (o *HKHealthStore) DateOfBirthWithError() (*foundation.NSDate, error) {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelDateOfBirthWithError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDateFromID(_ret), nil
 }
@@ -244,7 +244,7 @@ func (o *HKHealthStore) DateOfBirthComponentsWithError() (*foundation.NSDateComp
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelDateOfBirthComponentsWithError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDateComponentsFromID(_ret), nil
 }
@@ -255,7 +255,7 @@ func (o *HKHealthStore) BiologicalSexWithError() (*HKBiologicalSexObject, error)
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelBiologicalSexWithError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return HKBiologicalSexObjectFromID(_ret), nil
 }
@@ -266,7 +266,7 @@ func (o *HKHealthStore) BloodTypeWithError() (*HKBloodTypeObject, error) {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelBloodTypeWithError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return HKBloodTypeObjectFromID(_ret), nil
 }
@@ -277,7 +277,7 @@ func (o *HKHealthStore) FitzpatrickSkinTypeWithError() (*HKFitzpatrickSkinTypeOb
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelFitzpatrickSkinTypeWithError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return HKFitzpatrickSkinTypeObjectFromID(_ret), nil
 }
@@ -288,7 +288,7 @@ func (o *HKHealthStore) WheelchairUseWithError() (*HKWheelchairUseObject, error)
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelWheelchairUseWithError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return HKWheelchairUseObjectFromID(_ret), nil
 }
@@ -299,7 +299,7 @@ func (o *HKHealthStore) ActivityMoveModeWithError() (*HKActivityMoveModeObject, 
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelActivityMoveModeWithError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return HKActivityMoveModeObjectFromID(_ret), nil
 }

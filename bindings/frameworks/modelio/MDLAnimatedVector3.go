@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlanimatedvector3
@@ -34,7 +34,7 @@ func MDLAnimatedVector3FromID(id objc.ID) *MDLAnimatedVector3 {
 	}
 	o := &MDLAnimatedVector3{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

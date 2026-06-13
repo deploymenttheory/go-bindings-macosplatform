@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/vision/vninstancemaskobservation
@@ -32,7 +32,7 @@ func VNInstanceMaskObservationFromID(id objc.ID) *VNInstanceMaskObservation {
 	}
 	o := &VNInstanceMaskObservation{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -41,7 +41,7 @@ func (o *VNInstanceMaskObservation) GenerateMaskForInstancesError(instances *fou
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _vNInstanceMaskObservationSelGenerateMaskForInstancesError, instances.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -51,7 +51,7 @@ func (o *VNInstanceMaskObservation) GenerateMaskedImageOfInstancesFromRequestHan
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _vNInstanceMaskObservationSelGenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError, instances.Ptr(), requestHandler.Ptr(), cropResult, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -61,7 +61,7 @@ func (o *VNInstanceMaskObservation) GenerateScaledMaskForImageForInstancesFromRe
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _vNInstanceMaskObservationSelGenerateScaledMaskForImageForInstancesFromRequestHandlerError, instances.Ptr(), requestHandler.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

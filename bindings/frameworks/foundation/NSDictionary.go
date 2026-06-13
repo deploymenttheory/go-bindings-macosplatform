@@ -8,11 +8,11 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdictionary
-type NSDictionary[KeyType pureobjc.AnyObject, ObjectType pureobjc.AnyObject] struct {
+type NSDictionary[KeyType purego.AnyObject, ObjectType purego.AnyObject] struct {
 	NSObject
 }
 
@@ -80,13 +80,13 @@ var (
 	_nSDictionarySelFileGroupOwnerAccountID = objc.RegisterName("fileGroupOwnerAccountID")
 )
 
-func NSDictionaryFromID[KeyType pureobjc.AnyObject, ObjectType pureobjc.AnyObject](id objc.ID) *NSDictionary[KeyType, ObjectType] {
+func NSDictionaryFromID[KeyType purego.AnyObject, ObjectType purego.AnyObject](id objc.ID) *NSDictionary[KeyType, ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSDictionary[KeyType, ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -163,7 +163,7 @@ func (o *NSDictionary[KeyType, ObjectType]) WriteToURLError(url *NSURL) (bool, e
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDictionarySelWriteToURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -346,7 +346,7 @@ func (o *NSDictionary[KeyType, ObjectType]) InitWithContentsOfURLError(url *NSUR
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelInitWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDictionaryFromID[*NSString, ObjectType](_ret), nil
 }
@@ -356,7 +356,7 @@ func NSDictionaryDictionaryWithContentsOfURLError(url *NSURL) (*NSDictionary[*NS
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDictionary), _nSDictionarySelDictionaryWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDictionaryFromID[*NSString, objc.ID](_ret), nil
 }

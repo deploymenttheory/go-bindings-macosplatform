@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avsamplebuffergenerator
@@ -33,7 +33,7 @@ func AVSampleBufferGeneratorFromID(id objc.ID) *AVSampleBufferGenerator {
 	}
 	o := &AVSampleBufferGenerator{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -49,7 +49,7 @@ func (o *AVSampleBufferGenerator) CreateSampleBufferForRequestError(request *AVS
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVSampleBufferGeneratorSelCreateSampleBufferForRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -72,7 +72,7 @@ func (o *AVSampleBufferGenerator) CreateSampleBufferForRequestAddingToBatchError
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVSampleBufferGeneratorSelCreateSampleBufferForRequestAddingToBatchError, request.Ptr(), batch.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

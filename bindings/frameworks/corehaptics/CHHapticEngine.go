@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/corehaptics/chhapticengine
@@ -55,7 +55,7 @@ func CHHapticEngineFromID(id objc.ID) *CHHapticEngine {
 	}
 	o := &CHHapticEngine{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -71,7 +71,7 @@ func (o *CHHapticEngine) InitAndReturnError() (*CHHapticEngine, error) {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEngineSelInitAndReturnError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CHHapticEngineFromID(_ret), nil
 }
@@ -82,7 +82,7 @@ func (o *CHHapticEngine) InitWithAudioSessionError(audioSession objc.ID) (*CHHap
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEngineSelInitWithAudioSessionError, audioSession, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CHHapticEngineFromID(_ret), nil
 }
@@ -104,7 +104,7 @@ func (o *CHHapticEngine) StartAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cHHapticEngineSelStartAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -138,7 +138,7 @@ func (o *CHHapticEngine) CreatePlayerWithPatternError(pattern *CHHapticPattern) 
 	var _nsErr uintptr
 	_ret := objc.Send[CHHapticPatternPlayer](o.Ptr(), _cHHapticEngineSelCreatePlayerWithPatternError, pattern.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -148,7 +148,7 @@ func (o *CHHapticEngine) CreateAdvancedPlayerWithPatternError(pattern *CHHapticP
 	var _nsErr uintptr
 	_ret := objc.Send[CHHapticAdvancedPatternPlayer](o.Ptr(), _cHHapticEngineSelCreateAdvancedPlayerWithPatternError, pattern.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -158,7 +158,7 @@ func (o *CHHapticEngine) RegisterAudioResourceOptionsError(resourceURL *foundati
 	var _nsErr uintptr
 	_ret := objc.Send[uint](o.Ptr(), _cHHapticEngineSelRegisterAudioResourceOptionsError, resourceURL.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -168,7 +168,7 @@ func (o *CHHapticEngine) UnregisterAudioResourceError(resourceID uint) (bool, er
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cHHapticEngineSelUnregisterAudioResourceError, resourceID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -178,7 +178,7 @@ func (o *CHHapticEngine) PlayPatternFromURLError(fileURL *foundation.NSURL) (boo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cHHapticEngineSelPlayPatternFromURLError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -188,7 +188,7 @@ func (o *CHHapticEngine) PlayPatternFromDataError(data *foundation.NSData) (bool
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cHHapticEngineSelPlayPatternFromDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

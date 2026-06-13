@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Represents the state and its associated properties of the directory Use the ``state`` property to determine the validity of the other properties
@@ -33,7 +33,7 @@ func GSSyncedDirectoryStateFromID(id objc.ID) *GSSyncedDirectoryState {
 	}
 	o := &GSSyncedDirectoryState{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @brief Builds authentication requirements that can be used as fallbacks for  biometric authentication
@@ -29,7 +29,7 @@ func LABiometryFallbackRequirementFromID(id objc.ID) *LABiometryFallbackRequirem
 	}
 	o := &LABiometryFallbackRequirement{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -13,7 +13,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/meta"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 )
 
 // SignatureChange records one declaration whose signature changed between trees.
@@ -91,7 +91,7 @@ func (r *Report) IsEmpty() bool {
 // Compare diffs two metadata sets, keyed by framework name. Same-name
 // duplicates within a set (a framework shipped both top-level and inside an
 // umbrella) collapse to the top-level entry, mirroring the loader.
-func Compare(oldFrameworks, newFrameworks []*meta.FrameworkMeta) *Report {
+func Compare(oldFrameworks, newFrameworks []*macosplatformmetadata.FrameworkMeta) *Report {
 	oldByName := dedupeByName(oldFrameworks)
 	newByName := dedupeByName(newFrameworks)
 
@@ -125,8 +125,8 @@ func Compare(oldFrameworks, newFrameworks []*meta.FrameworkMeta) *Report {
 	return report
 }
 
-func dedupeByName(frameworks []*meta.FrameworkMeta) map[string]*meta.FrameworkMeta {
-	byName := make(map[string]*meta.FrameworkMeta, len(frameworks))
+func dedupeByName(frameworks []*macosplatformmetadata.FrameworkMeta) map[string]*macosplatformmetadata.FrameworkMeta {
+	byName := make(map[string]*macosplatformmetadata.FrameworkMeta, len(frameworks))
 	for _, framework := range frameworks {
 		prev, exists := byName[framework.Framework]
 		if !exists || (prev.ParentFramework != "" && framework.ParentFramework == "") {
@@ -136,7 +136,7 @@ func dedupeByName(frameworks []*meta.FrameworkMeta) map[string]*meta.FrameworkMe
 	return byName
 }
 
-func majoritySDK(frameworks []*meta.FrameworkMeta) string {
+func majoritySDK(frameworks []*macosplatformmetadata.FrameworkMeta) string {
 	counts := map[string]int{}
 	for _, framework := range frameworks {
 		counts[framework.SDKVersion]++
@@ -150,7 +150,7 @@ func majoritySDK(frameworks []*meta.FrameworkMeta) string {
 	return best
 }
 
-func compareFramework(oldFramework, newFramework *meta.FrameworkMeta) *FrameworkDiff {
+func compareFramework(oldFramework, newFramework *macosplatformmetadata.FrameworkMeta) *FrameworkDiff {
 	diff := &FrameworkDiff{Framework: newFramework.Framework}
 
 	diff.ClassesAdded, diff.ClassesRemoved = keyDiff(
@@ -243,7 +243,7 @@ func compareFramework(oldFramework, newFramework *meta.FrameworkMeta) *Framework
 
 // methodKey identifies a method within a class: class methods are prefixed
 // "+", instance methods "-", matching ObjC convention.
-func methodKey(method meta.Method) string {
+func methodKey(method macosplatformmetadata.Method) string {
 	if method.IsClassMethod {
 		return "+" + method.Selector
 	}
@@ -251,7 +251,7 @@ func methodKey(method meta.Method) string {
 }
 
 // methodSignature renders a comparable signature string for change detection.
-func methodSignature(method meta.Method) string {
+func methodSignature(method macosplatformmetadata.Method) string {
 	params := make([]string, len(method.Params))
 	for i, param := range method.Params {
 		params[i] = param.ObjCType
@@ -259,8 +259,8 @@ func methodSignature(method meta.Method) string {
 	return "(" + strings.Join(params, ", ") + ") → " + method.Return.ObjCType
 }
 
-func compareMethods(className string, oldMethods, newMethods []meta.Method, diff *FrameworkDiff) {
-	oldByKey := map[string]meta.Method{}
+func compareMethods(className string, oldMethods, newMethods []macosplatformmetadata.Method, diff *FrameworkDiff) {
+	oldByKey := map[string]macosplatformmetadata.Method{}
 	for _, method := range oldMethods {
 		oldByKey[methodKey(method)] = method
 	}
@@ -287,7 +287,7 @@ func compareMethods(className string, oldMethods, newMethods []meta.Method, diff
 	}
 }
 
-func functionSignature(function meta.Function) string {
+func functionSignature(function macosplatformmetadata.Function) string {
 	params := make([]string, len(function.Params))
 	for i, param := range function.Params {
 		params[i] = param.ObjCType
@@ -298,7 +298,7 @@ func functionSignature(function meta.Function) string {
 // compareFunctions compares per-name signature multisets. C functions can be
 // overloaded (clang's overloadable attribute — e.g. vecLib's SparseCleanup has
 // 34 variants), so a name maps to a set of signatures, not one.
-func compareFunctions(oldFunctions, newFunctions []meta.Function, diff *FrameworkDiff) {
+func compareFunctions(oldFunctions, newFunctions []macosplatformmetadata.Function, diff *FrameworkDiff) {
 	oldSigs := map[string][]string{}
 	for _, function := range oldFunctions {
 		oldSigs[function.Name] = append(oldSigs[function.Name], functionSignature(function))
@@ -344,7 +344,7 @@ func equalStringSlices(a, b []string) bool {
 	return true
 }
 
-func compareExterns(oldExterns, newExterns []meta.Extern, diff *FrameworkDiff) {
+func compareExterns(oldExterns, newExterns []macosplatformmetadata.Extern, diff *FrameworkDiff) {
 	oldNames := map[string]bool{}
 	for _, extern := range oldExterns {
 		oldNames[extern.Name] = true

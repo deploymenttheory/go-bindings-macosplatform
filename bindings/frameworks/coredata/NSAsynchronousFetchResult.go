@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsasynchronousfetchresult
-type NSAsynchronousFetchResult[ResultType pureobjc.AnyObject] struct {
+type NSAsynchronousFetchResult[ResultType purego.AnyObject] struct {
 	NSPersistentStoreAsynchronousResult
 }
 
@@ -21,13 +21,13 @@ var (
 	_nSAsynchronousFetchResultSelFinalResult = objc.RegisterName("finalResult")
 )
 
-func NSAsynchronousFetchResultFromID[ResultType pureobjc.AnyObject](id objc.ID) *NSAsynchronousFetchResult[ResultType] {
+func NSAsynchronousFetchResultFromID[ResultType purego.AnyObject](id objc.ID) *NSAsynchronousFetchResult[ResultType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSAsynchronousFetchResult[ResultType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

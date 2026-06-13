@@ -206,7 +206,7 @@ now := foundation.NSDateDate()
 str := foundation.NSStringFromID(id) // nil if id == 0
 ```
 
-> `FromID` registers a *releasing* finalizer but does **not** retain — retain first (`pureobjc.Retain` inside the module, or `id.Send(objc.RegisterName("retain"))`) if you don't own a +1 reference.
+> `FromID` registers a *releasing* finalizer but does **not** retain — retain first (`purego.Retain(id)`) if you don't own a +1 reference.
 
 **Generic containers:** Generic Objective-C containers use Go generics:
 
@@ -258,7 +258,7 @@ sequenceDiagram
 
     Note over W,ObjC: method returns an object
     W->>ObjC: [obj retain]
-    W->>Go: pureobjc.Track → runtime.SetFinalizer(wrapper, release)
+    W->>Go: purego.Track → runtime.SetFinalizer(wrapper, release)
 
     Note over Go: wrapper unreachable
     Go->>W: finalizer fires
@@ -282,7 +282,7 @@ iface := vmnet.VmnetStartInterface(desc, queue,
 
 Block signatures whose components cannot cross purego's callback ABI (struct-by-value arguments, protocol interfaces, float returns) degrade to an `objc.Block` parameter instead — construct the block yourself with `objc.NewBlock` for those. Every degradation is recorded in the committed diagnostics baseline.
 
-The CGo C-library packages use generated block trampolines (`internal/blocks`) for the same effect — you still just pass a Go closure.
+The CGo C-library packages use generated block trampolines (`bindings/runtime/blocks`) for the same effect — you still just pass a Go closure.
 
 ### Error Handling
 
@@ -445,24 +445,27 @@ go-bindings-macosplatform/
 │   │   ├── foundation/
 │   │   ├── appkit/
 │   │   └── …
-│   └── libraries/         # Generated CGo packages for Apple C libraries (11)
-│       ├── endpointsecurity/
-│       ├── xpc/
-│       ├── dispatch/
-│       └── …
+│   ├── libraries/         # Generated CGo packages for Apple C libraries (11)
+│   │   ├── endpointsecurity/
+│   │   ├── xpc/
+│   │   ├── dispatch/
+│   │   └── …
+│   └── runtime/           # Public runtime — imported by generated code AND by consumers
+│       ├── purego/        # purego runtime: Track/Retain/Release, GoString, NSErrorToError + ObjC dispatch re-exports (+ objcerrors/)
+│       ├── cgo/           # CGo runtime: retain/release, RunOnMainThread, exceptions
+│       ├── tel/           # OTel tracing wrapper for CGo library calls
+│       ├── blocks/        # CGo block trampoline runtime
+│       └── callbacks/     # CGo method/callback trampoline runtime
 ├── opinionated/
 │   ├── idiomatic/         # Fully generated fluent layer (one package per framework)
 │   ├── library/           # Hand-crafted quality-of-life helpers (never regenerated)
 │   └── custom/            # Custom hand-crafted packages
 ├── internal/
-│   ├── meta/              # FrameworkMeta model + JSON I/O
+│   ├── macosplatformmetadata/  # Canonical scanned-SDK model + .gometa.json I/O (shared by scanner + both pipelines + QA)
 │   ├── scanner/           # Clang AST dump, metadata extraction, raw header parsing, C library registry
-│   ├── purecg/            # purego pipeline: loader, typemap, naming, emitters (frameworks + idiomatic)
-│   ├── pureobjc/          # purego runtime: Track/Retain/Release, GoString, NSErrorToError, structured ObjC errors
-│   ├── codegen/           # CGo pipeline: loader, typemap, emitters (C libraries)
-│   ├── objc/              # CGo runtime: retain/release, RunOnMainThread, exceptions (used by bindings/libraries)
-│   ├── tel/               # OTel tracing wrapper for CGo library calls
-│   ├── blocks/            # CGo block trampoline runtime (MakeBlock_*, goCallBlock_* exports)
+│   ├── codegen/
+│   │   ├── frameworks/    # purego pipeline: loader, typemap, naming, emitters (frameworks + idiomatic)
+│   │   └── libraries/     # CGo pipeline: loader, typemap, naming, emitters (C libraries)
 │   ├── validate/ metadiff/ diagnostics/ overrides/  # Metadata QA machinery
 │   └── swift/             # Swift-only framework support (.swiftinterface parser + stub emit)
 ├── example/ weave/        # In-repo example applications built on the bindings
@@ -482,26 +485,28 @@ go-bindings-macosplatform/
 | Bridge | purego (`objc.Send`, `dlopen` at init) | CGo (`.h`/`.m` bridge files, `-fno-objc-arc`) |
 | Build requirements | Pure Go — no Xcode/Clang | CGo — Clang at build time |
 | Method signatures | No `context.Context`; direct values | `ctx context.Context` first arg |
-| Telemetry | None (zero-overhead dispatch) | OTel span per call via `internal/tel` |
+| Telemetry | None (zero-overhead dispatch) | OTel span per call via `bindings/runtime/tel` |
 | ObjC exceptions | Not intercepted | Caught and re-raised as Go panics |
-| Blocks | `objc.NewBlock` adapters from Go closures | Generated trampolines (`internal/blocks`) |
+| Blocks | `purego.NewBlock` adapters from Go closures | Generated trampolines (`bindings/runtime/blocks`) |
 
 ### Runtime Layer
 
-`internal/pureobjc` is the runtime imported by every generated framework package:
+The runtime lives under `bindings/runtime/` — public packages imported both by the generated code and by your own application code (so consumers only ever import `bindings/…`). `bindings/runtime/purego` is imported by every generated framework package:
 
 | Function | Purpose |
 | --- | --- |
-| `pureobjc.Track(wrapper)` | Registers a Go finalizer that releases the object when the wrapper is GC'd |
-| `pureobjc.Retain(id)` / `Release(id)` | Explicit reference-count control |
-| `pureobjc.GoString(id)` | Converts an `NSString` id to a Go `string` |
-| `pureobjc.NSString(s)` | Converts a Go `string` to an autoreleased `NSString` id |
-| `pureobjc.NSErrorToError(id)` | Converts an `NSError` to a structured Go error (domain, code, reason, recovery, underlying) |
-| `pureobjc.GoCString(ptr)` | Reads a null-terminated C string address (used by block adapters) |
+| `purego.Track(wrapper)` | Registers a Go finalizer that releases the object when the wrapper is GC'd |
+| `purego.Retain(id)` / `Release(id)` | Explicit reference-count control |
+| `purego.GoString(id)` | Converts an `NSString` id to a Go `string` |
+| `purego.NSString(s)` | Converts a Go `string` to an autoreleased `NSString` id |
+| `purego.NSErrorToError(id)` | Converts an `NSError` to a structured Go error (domain, code, reason, recovery, underlying) |
+| `purego.GoCString(ptr)` | Reads a null-terminated C string address (used by block adapters) |
+
+`bindings/runtime/purego` also re-exports the ObjC dynamic-dispatch surface (`ID`, `SEL`, `Send`, `RegisterName`, `RegisterClass`, `NewBlock`, …) so consumers performing raw message-sends never need to import the underlying `ebitengine/purego` directly.
 
 Each generated package also carries a small `<pkg>_runtime.go`: a `sync.Once`-guarded `dlopen` of the framework dylib, per-symbol function registration with failure tracking, and the public `SymbolAvailable(symbol string) bool` probe.
 
-The CGo library packages use `internal/objc` (retain/release, `RunOnMainThread`, string conversion, exception extraction) and `internal/tel` (OTel `Call`/`RaiseIfException`/`NSErrorToError`) instead — any app that wires up an OTel exporter automatically gets a distributed trace of every C-library call.
+The CGo library packages use `bindings/runtime/cgo` (retain/release, `RunOnMainThread`, string conversion, exception extraction) and `bindings/runtime/tel` (OTel `Call`/`RaiseIfException`/`NSErrorToError`) instead — any app that wires up an OTel exporter automatically gets a distributed trace of every C-library call.
 
 ### Generated Package Structure
 
@@ -628,7 +633,7 @@ Use `go run ./cmd/generate/ list` to see the exact set available in the SDK inst
 
 **Sparse doc comments** — Most Apple SDK headers do not use structured doc comment syntax (`///` or `/*!`). Only declarations immediately preceded by such comments receive a doc annotation.
 
-**`internal/` packages** — `internal/pureobjc`, `internal/objc`, `internal/tel`, and `internal/blocks` are not importable by code outside this module. Generated `bindings/` and `opinionated/` packages expose the necessary runtime behaviour. Tools that live inside the module (like the in-repo example apps) may import `internal/` packages directly.
+**Importing only `bindings/…`** — Everything an external module needs is public under `bindings/`: the generated `bindings/frameworks/` and `bindings/libraries/` packages plus the shared runtime under `bindings/runtime/` (`purego`, `cgo`, `tel`, `blocks`, `callbacks`). The generator itself (`internal/codegen/…`), the scanner, and the scanned-metadata model (`internal/macosplatformmetadata`) remain in `internal/` and are not importable from outside this module — only in-repo tooling uses them.
 
 ---
 

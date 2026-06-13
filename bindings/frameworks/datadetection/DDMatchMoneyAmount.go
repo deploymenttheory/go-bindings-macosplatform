@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // An object that contains an amount of money that the data detection system matches. The DataDetection framework returns a match for an amount of money in a `DDMatchMoneyAmount` object, which contains an amount of money and an ISO currency code.
@@ -29,7 +29,7 @@ func DDMatchMoneyAmountFromID(id objc.ID) *DDMatchMoneyAmount {
 	}
 	o := &DDMatchMoneyAmount{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

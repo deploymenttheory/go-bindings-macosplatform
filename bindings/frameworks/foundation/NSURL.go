@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurl
@@ -108,7 +108,7 @@ func NSURLFromID(id objc.ID) *NSURL {
 	}
 	o := &NSURL{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -261,7 +261,7 @@ func (o *NSURL) GetResourceValueForKeyError(value **ObjcObject, key *NSString) (
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelGetResourceValueForKeyError, value, key.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -270,7 +270,7 @@ func (o *NSURL) ResourceValuesForKeysError(keys *NSArray[*NSString]) (*NSDiction
 	var _nsErr uintptr
 	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSURLSelResourceValuesForKeysError, keys.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -279,7 +279,7 @@ func (o *NSURL) SetResourceValueForKeyError(value objc.ID, key *NSString) (bool,
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelSetResourceValueForKeyError, value, key.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -288,7 +288,7 @@ func (o *NSURL) SetResourceValuesError(keyedValues *NSDictionary[*NSString, objc
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelSetResourceValuesError, keyedValues, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -310,7 +310,7 @@ func (o *NSURL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToU
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelBookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError, options, keys.Ptr(), relativeURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -320,7 +320,7 @@ func (o *NSURL) InitByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsSta
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError, bookmarkData.Ptr(), options, relativeURL.Ptr(), isStale, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSURLFromID(_ret), nil
 }
@@ -330,7 +330,7 @@ func NSURLURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError, bookmarkData.Ptr(), options, relativeURL.Ptr(), isStale, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSURLFromID(_ret), nil
 }
@@ -344,7 +344,7 @@ func NSURLWriteBookmarkDataToURLOptionsError(bookmarkData *NSData, bookmarkFileU
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSURL), _nSURLSelWriteBookmarkDataToURLOptionsError, bookmarkData.Ptr(), bookmarkFileURL.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -354,7 +354,7 @@ func NSURLBookmarkDataWithContentsOfURLError(bookmarkFileURL *NSURL) (*NSData, e
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelBookmarkDataWithContentsOfURLError, bookmarkFileURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -364,7 +364,7 @@ func NSURLURLByResolvingAliasFileAtURLOptionsError(url *NSURL, options NSURLBook
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLByResolvingAliasFileAtURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSURLFromID(_ret), nil
 }
@@ -508,7 +508,7 @@ func (o *NSURL) GetPromisedItemResourceValueForKeyError(value **ObjcObject, key 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelGetPromisedItemResourceValueForKeyError, value, key.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -517,7 +517,7 @@ func (o *NSURL) PromisedItemResourceValuesForKeysError(keys *NSArray[*NSString])
 	var _nsErr uintptr
 	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSURLSelPromisedItemResourceValuesForKeysError, keys.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -526,7 +526,7 @@ func (o *NSURL) CheckPromisedItemIsReachableAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelCheckPromisedItemIsReachableAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -559,7 +559,7 @@ func (o *NSURL) CheckResourceIsReachableAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelCheckResourceIsReachableAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -33,7 +33,7 @@ func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsConten
 	_ch := make(chan error, 1)
 	x.inner.SaveBestRepresentationForRequestToFileAtURLAsContentTypeCompletionHandler(request, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), contentType, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -51,7 +51,7 @@ func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithCont
 	_ch := make(chan error, 1)
 	x.inner.SaveBestRepresentationForRequestToFileAtURLWithContentTypeCompletionHandler(request, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), foundation.NSStringStringWithUTF8String(contentType), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsincrementalstore
@@ -36,7 +36,7 @@ func NSIncrementalStoreFromID(id objc.ID) *NSIncrementalStore {
 	}
 	o := &NSIncrementalStore{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -44,7 +44,7 @@ func (o *NSIncrementalStore) ExecuteRequestWithContextError(request *NSPersisten
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelExecuteRequestWithContextError, request.Ptr(), context_.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -53,7 +53,7 @@ func (o *NSIncrementalStore) NewValuesForObjectWithIDWithContextError(objectID *
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelNewValuesForObjectWithIDWithContextError, objectID.Ptr(), context_.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSIncrementalStoreNodeFromID(_ret), nil
 }
@@ -62,7 +62,7 @@ func (o *NSIncrementalStore) NewValueForRelationshipForObjectWithIDWithContextEr
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelNewValueForRelationshipForObjectWithIDWithContextError, relationship.Ptr(), objectID.Ptr(), context_.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -77,7 +77,7 @@ func (o *NSIncrementalStore) ObtainPermanentIDsForObjectsError(array *foundation
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelObtainPermanentIDsForObjectsError, array.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*NSManagedObjectID](_ret), nil
 }

@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixlogsoftmaxgradient
@@ -23,7 +23,7 @@ func MPSMatrixLogSoftMaxGradientFromID(id objc.ID) *MPSMatrixLogSoftMaxGradient 
 	}
 	o := &MPSMatrixLogSoftMaxGradient{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -8,7 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -46,7 +46,7 @@ func (x *VirtualMachine) Start(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StartWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -64,7 +64,7 @@ func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *raw.VZVi
 	_ch := make(chan error, 1)
 	x.inner.StartWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -82,7 +82,7 @@ func (x *VirtualMachine) Stop(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StopWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -100,7 +100,7 @@ func (x *VirtualMachine) Pause(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.PauseWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -118,7 +118,7 @@ func (x *VirtualMachine) Resume(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.ResumeWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -136,7 +136,7 @@ func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFil
 	_ch := make(chan error, 1)
 	x.inner.RestoreMachineStateFromURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(saveFileURL)), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -154,7 +154,7 @@ func (x *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL 
 	_ch := make(chan error, 1)
 	x.inner.SaveMachineStateToURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(saveFileURL)), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

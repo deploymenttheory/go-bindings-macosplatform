@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // An object that contains a web link that the data detection system matches. The DataDetection framework returns a link match in a `DDMatchLink` object, which contains a <doc://com.apple.documentation/documentation/foundation/url> (Swift) or <doc://com.apple.documentation/documentation/foundation/nsurl> (Objective-C).
@@ -28,7 +28,7 @@ func DDMatchLinkFromID(id objc.ID) *DDMatchLink {
 	}
 	o := &DDMatchLink{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

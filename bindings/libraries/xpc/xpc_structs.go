@@ -5,7 +5,7 @@
 package xpc
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
@@ -33,7 +33,7 @@ func NewXpc_type_t(ptr unsafe.Pointer) *Xpc_type_t {
 		return nil
 	}
 	o := &Xpc_type_t{ptr: ptr}
-	objc.Track(o, o.Ptr)
+	cgo.Track(o, o.Ptr)
 	return o
 }
 

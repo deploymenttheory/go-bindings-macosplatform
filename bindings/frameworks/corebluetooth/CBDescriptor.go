@@ -6,7 +6,7 @@ package corebluetooth
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbdescriptor
@@ -26,7 +26,7 @@ func CBDescriptorFromID(id objc.ID) *CBDescriptor {
 	}
 	o := &CBDescriptor{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

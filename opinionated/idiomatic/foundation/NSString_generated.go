@@ -7,7 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -102,7 +102,7 @@ func NewStringWithValidatedFormatValidFormatSpecifiersError(format string, valid
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:error:"), foundation.NSStringStringWithUTF8String(format).Ptr(), foundation.NSStringStringWithUTF8String(validFormatSpecifiers).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
@@ -113,7 +113,7 @@ func NewStringWithValidatedFormatValidFormatSpecifiersLocaleError(format string,
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:locale:error:"), foundation.NSStringStringWithUTF8String(format).Ptr(), foundation.NSStringStringWithUTF8String(validFormatSpecifiers).Ptr(), locale, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
@@ -124,7 +124,7 @@ func NewStringWithValidatedFormatValidFormatSpecifiersArgumentsError(format stri
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:arguments:error:"), foundation.NSStringStringWithUTF8String(format).Ptr(), foundation.NSStringStringWithUTF8String(validFormatSpecifiers).Ptr(), argList, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
@@ -135,7 +135,7 @@ func NewStringWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError(forma
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:locale:arguments:error:"), foundation.NSStringStringWithUTF8String(format).Ptr(), foundation.NSStringStringWithUTF8String(validFormatSpecifiers).Ptr(), locale, argList, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
@@ -181,7 +181,7 @@ func NewStringWithContentsOfURLEncodingError(url string, enc uint) (*String, err
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:encoding:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
@@ -192,7 +192,7 @@ func NewStringWithContentsOfFileEncodingError(path string, enc uint) (*String, e
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:encoding:error:"), foundation.NSStringStringWithUTF8String(path).Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
@@ -203,7 +203,7 @@ func NewStringWithContentsOfURLUsedEncodingError(url string, enc string) (*Strin
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:usedEncoding:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), foundation.NSStringStringWithUTF8String(enc).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
@@ -214,7 +214,7 @@ func NewStringWithContentsOfFileUsedEncodingError(path string, enc string) (*Str
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:usedEncoding:error:"), foundation.NSStringStringWithUTF8String(path).Ptr(), foundation.NSStringStringWithUTF8String(enc).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }

@@ -6,32 +6,32 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/meta"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 )
 
-func sampleFramework() *meta.FrameworkMeta {
-	return &meta.FrameworkMeta{
+func sampleFramework() *macosplatformmetadata.FrameworkMeta {
+	return &macosplatformmetadata.FrameworkMeta{
 		Framework:  "Foo",
 		SDKVersion: "26.5",
 		Arch:       "arm64",
-		Classes: map[string]meta.Class{
+		Classes: map[string]macosplatformmetadata.Class{
 			"FooThing": {
-				Methods: []meta.Method{
-					{Selector: "doIt:", Params: []meta.Param{{Name: "value", ObjCType: "NSInteger"}},
-						Return: meta.ReturnType{ObjCType: "void"}},
-					{Selector: "broken", Return: meta.ReturnType{ObjCType: "FooRef"}},
-					{Selector: "make", IsClassMethod: true, Return: meta.ReturnType{ObjCType: "instancetype"}},
+				Methods: []macosplatformmetadata.Method{
+					{Selector: "doIt:", Params: []macosplatformmetadata.Param{{Name: "value", ObjCType: "NSInteger"}},
+						Return: macosplatformmetadata.ReturnType{ObjCType: "void"}},
+					{Selector: "broken", Return: macosplatformmetadata.ReturnType{ObjCType: "FooRef"}},
+					{Selector: "make", IsClassMethod: true, Return: macosplatformmetadata.ReturnType{ObjCType: "instancetype"}},
 				},
 			},
 			"FooGone": {},
 		},
-		Enums: map[string]meta.Enum{
-			"FooOptions": {GoType: "uint64", Members: []meta.EnumMember{{Name: "FooA", Value: "1"}}},
+		Enums: map[string]macosplatformmetadata.Enum{
+			"FooOptions": {GoType: "uint64", Members: []macosplatformmetadata.EnumMember{{Name: "FooA", Value: "1"}}},
 		},
-		Functions: []meta.Function{
-			{Name: "FooCreate", Params: []meta.Param{{Name: "flags", ObjCType: "int"}},
-				Return: meta.ReturnType{ObjCType: "void *"}},
-			{Name: "FooDoomed", Return: meta.ReturnType{ObjCType: "void"}},
+		Functions: []macosplatformmetadata.Function{
+			{Name: "FooCreate", Params: []macosplatformmetadata.Param{{Name: "flags", ObjCType: "int"}},
+				Return: macosplatformmetadata.ReturnType{ObjCType: "void *"}},
+			{Name: "FooDoomed", Return: macosplatformmetadata.ReturnType{ObjCType: "void"}},
 		},
 	}
 }

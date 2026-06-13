@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -28,7 +28,7 @@ func NewMutableMovieWithURLOptionsError(uRL string, options *foundation.NSDictio
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &MutableMovie{inner: raw.AVMutableMovieFromID(_id)}, nil
 }
@@ -39,7 +39,7 @@ func NewMutableMovieWithDataOptionsError(data *foundation.NSData, options *found
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:error:"), data.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &MutableMovie{inner: raw.AVMutableMovieFromID(_id)}, nil
 }
@@ -50,7 +50,7 @@ func NewMutableMovieWithSettingsFromMovieOptionsError(movie *raw.AVMovie, option
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettingsFromMovie:options:error:"), movie.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &MutableMovie{inner: raw.AVMutableMovieFromID(_id)}, nil
 }

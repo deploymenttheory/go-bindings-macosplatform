@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsattributedstring
@@ -51,7 +51,7 @@ func NSAttributedStringFromID(id objc.ID) *NSAttributedString {
 	}
 	o := &NSAttributedString{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -128,7 +128,7 @@ func (o *NSAttributedString) InitWithContentsOfMarkdownFileAtURLOptionsBaseURLEr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithContentsOfMarkdownFileAtURLOptionsBaseURLError, markdownFile.Ptr(), options.Ptr(), baseURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSAttributedStringFromID(_ret), nil
 }
@@ -138,7 +138,7 @@ func (o *NSAttributedString) InitWithMarkdownOptionsBaseURLError(markdown *NSDat
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithMarkdownOptionsBaseURLError, markdown.Ptr(), options.Ptr(), baseURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSAttributedStringFromID(_ret), nil
 }
@@ -148,7 +148,7 @@ func (o *NSAttributedString) InitWithMarkdownStringOptionsBaseURLError(markdownS
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithMarkdownStringOptionsBaseURLError, markdownString.Ptr(), options.Ptr(), baseURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSAttributedStringFromID(_ret), nil
 }

@@ -7,7 +7,7 @@ package corehaptics
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,7 +26,7 @@ func NewHapticPatternWithEventsParametersError(events *foundation.NSArray[*raw.C
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEvents:parameters:error:"), events.Ptr(), parameters.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
 }
@@ -37,7 +37,7 @@ func NewHapticPatternWithEventsParameterCurvesError(events *foundation.NSArray[*
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEvents:parameterCurves:error:"), events.Ptr(), parameterCurves.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
 }
@@ -48,7 +48,7 @@ func NewHapticPatternWithDictionaryError(patternDict *foundation.NSDictionary[*f
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), patternDict.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
 }
@@ -59,7 +59,7 @@ func NewHapticPatternWithContentsOfURLError(ahapURL string) (*HapticPattern, err
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(ahapURL)).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
 }

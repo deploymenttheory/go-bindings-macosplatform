@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounitmidiinstrument
@@ -39,7 +39,7 @@ func AVAudioUnitMIDIInstrumentFromID(id objc.ID) *AVAudioUnitMIDIInstrument {
 	}
 	o := &AVAudioUnitMIDIInstrument{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

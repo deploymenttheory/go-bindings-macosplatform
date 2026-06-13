@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Represents focus & detection information at a particular time. Indicates where to focus (disparity) and what to focus on (detection) at a particular time in the movie. It also provides access to all known detections that can be focused on at that time. Utility methods support looking up a detection by detectionID or detectionGroupID. Frames are obtained from the cinematic script using `frame(at:tolerance:)` or `frames(in:)`.
@@ -34,7 +34,7 @@ func CNScriptFrameFromID(id objc.ID) *CNScriptFrame {
 	}
 	o := &CNScriptFrame{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class SFAuthorization @abstract SFAuthorization APIs are used for implementing access control in applications and daemons. It has NSCoder support for proxied objects SFAuthorization is a wrapper for using the Authorization API.
@@ -40,7 +40,7 @@ func SFAuthorizationFromID(id objc.ID) *SFAuthorization {
 	}
 	o := &SFAuthorization{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -84,7 +84,7 @@ func (o *SFAuthorization) ObtainWithRightFlagsError(rightName string, flags secu
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationSelObtainWithRightFlagsError, rightName, flags, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -94,7 +94,7 @@ func (o *SFAuthorization) ObtainWithRightsFlagsEnvironmentAuthorizedRightsError(
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationSelObtainWithRightsFlagsEnvironmentAuthorizedRightsError, rights, flags, environment, authorizedRights, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

@@ -9,8 +9,8 @@ import "C"
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/objc"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/tel"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
 	"unsafe"
 )
 
@@ -95,7 +95,7 @@ func Xar_header_get(ctx context.Context, x *Xar_t) Xar_header {
 		return Xar_header{}
 	}
 	_result := *(*Xar_header)(unsafe.Pointer(_ptr))
-	objc.FreePtr(_ptr)
+	cgo.FreePtr(_ptr)
 	return _result
 }
 

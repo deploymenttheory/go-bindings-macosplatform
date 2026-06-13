@@ -7,7 +7,7 @@ package glkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,7 +26,7 @@ func NewMeshWithMeshError(mesh *modelio.MDLMesh) (*Mesh, error) {
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMesh:error:"), mesh.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &Mesh{inner: raw.GLKMeshFromID(_id)}, nil
 }

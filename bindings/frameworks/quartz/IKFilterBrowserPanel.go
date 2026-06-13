@@ -8,7 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class		IKFilterBrowserPanel @abstract   The IKFilterBrowserPanel provides the shared IKFilterBrowser with its runtime model. @discussion  See information in the introduction.
@@ -30,7 +30,7 @@ func IKFilterBrowserPanelFromID(id objc.ID) *IKFilterBrowserPanel {
 	}
 	o := &IKFilterBrowserPanel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

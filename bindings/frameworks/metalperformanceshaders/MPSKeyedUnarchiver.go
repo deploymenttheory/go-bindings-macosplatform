@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpskeyedunarchiver
@@ -36,7 +36,7 @@ func MPSKeyedUnarchiverFromID(id objc.ID) *MPSKeyedUnarchiver {
 	}
 	o := &MPSKeyedUnarchiver{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -44,7 +44,7 @@ func MPSKeyedUnarchiverUnarchivedObjectOfClassesFromDataDeviceError(classes *fou
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSKeyedUnarchiver), _mPSKeyedUnarchiverSelUnarchivedObjectOfClassesFromDataDeviceError, classes, data.Ptr(), device, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -53,7 +53,7 @@ func MPSKeyedUnarchiverUnarchivedObjectOfClassFromDataDeviceError(cls objc.Class
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSKeyedUnarchiver), _mPSKeyedUnarchiverSelUnarchivedObjectOfClassFromDataDeviceError, cls, data.Ptr(), device, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -63,7 +63,7 @@ func (o *MPSKeyedUnarchiver) InitForReadingFromDataDeviceError(data *foundation.
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSKeyedUnarchiverSelInitForReadingFromDataDeviceError, data.Ptr(), device, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MPSKeyedUnarchiverFromID(_ret), nil
 }

@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnfetchresult
-type CNFetchResult[ValueType pureobjc.AnyObject] struct {
+type CNFetchResult[ValueType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -21,13 +21,13 @@ var (
 	_cNFetchResultSelCurrentHistoryToken = objc.RegisterName("currentHistoryToken")
 )
 
-func CNFetchResultFromID[ValueType pureobjc.AnyObject](id objc.ID) *CNFetchResult[ValueType] {
+func CNFetchResultFromID[ValueType purego.AnyObject](id objc.ID) *CNFetchResult[ValueType] {
 	if id == 0 {
 		return nil
 	}
 	o := &CNFetchResult[ValueType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

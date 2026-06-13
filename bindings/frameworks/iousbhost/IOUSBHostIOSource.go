@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class   IOUSBHostIOSource @brief   The abstract class IOUSBHostPipe and IOUSBHostStream derive from. @details Defines common methods that are shared between IOUSBHostPipe and IOUSBHostStream.
@@ -30,7 +30,7 @@ func IOUSBHostIOSourceFromID(id objc.ID) *IOUSBHostIOSource {
 	}
 	o := &IOUSBHostIOSource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

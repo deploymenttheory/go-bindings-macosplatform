@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A Camera node is a full fledged SKNode that can have actions and physics applied to it. It also uses the standard SKNode transform system so modifying the camera node's position is how you translate the camera's viewport. Applying a scale to the node would zoom the viewport in or out etc. As an added benefit you can now rotate the viewport by applying a zRotation to the camera node, just as you would with any other SKNode. The camera viewport is centered on the camera's position. It uses the scene's frame and scale mode along with the node transforms to determine the size, origin and rotation of the viewport. There are some convenience functions included for testing if nodes are contained within the camera viewport. It can be used to determine if objects are no longer visible on the display. In order to use a camera; set it on the scene that contains the camera. @see SKScene.camera
@@ -29,7 +29,7 @@ func SKCameraNodeFromID(id objc.ID) *SKCameraNode {
 	}
 	o := &SKCameraNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

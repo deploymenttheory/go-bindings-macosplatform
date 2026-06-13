@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // The object you use to observe changes to the current configuration. Use this class to start and stop observing the current configuration. For example, you can opt to disable private browsing in your web browser’s view controller when ``STScreenTimeConfiguration/enforcesChildRestrictions`` is `true`.
@@ -31,7 +31,7 @@ func STScreenTimeConfigurationObserverFromID(id objc.ID) *STScreenTimeConfigurat
 	}
 	o := &STScreenTimeConfigurationObserver{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class       ODNode @abstract    This class is used to work with OpenDirectory nodes. @discussion  OpenDirectory uses nodes to represent different sources of directory information, via the local disk, LDAP, etc.
@@ -57,7 +57,7 @@ func ODNodeFromID(id objc.ID) *ODNode {
 	}
 	o := &ODNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -67,7 +67,7 @@ func ODNodeNodeWithSessionTypeError(inSession *ODSession, inType uint32) (*ODNod
 	_ret := objc.Send[objc.ID](objc.ID(_clsODNode), _oDNodeSelNodeWithSessionTypeError, inSession.Ptr(), inType, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ODNodeFromID(_ret), nil
 }
@@ -78,7 +78,7 @@ func ODNodeNodeWithSessionNameError(inSession *ODSession, inName *foundation.NSS
 	_ret := objc.Send[objc.ID](objc.ID(_clsODNode), _oDNodeSelNodeWithSessionNameError, inSession.Ptr(), inName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ODNodeFromID(_ret), nil
 }
@@ -89,7 +89,7 @@ func (o *ODNode) InitWithSessionTypeError(inSession *ODSession, inType uint32) (
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelInitWithSessionTypeError, inSession.Ptr(), inType, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ODNodeFromID(_ret), nil
 }
@@ -100,7 +100,7 @@ func (o *ODNode) InitWithSessionNameError(inSession *ODSession, inName *foundati
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelInitWithSessionNameError, inSession.Ptr(), inName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ODNodeFromID(_ret), nil
 }
@@ -110,7 +110,7 @@ func (o *ODNode) SubnodeNamesAndReturnError() (*foundation.NSArray[objc.ID], err
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDNodeSelSubnodeNamesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -120,7 +120,7 @@ func (o *ODNode) UnreachableSubnodeNamesAndReturnError() (*foundation.NSArray[ob
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDNodeSelUnreachableSubnodeNamesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -130,7 +130,7 @@ func (o *ODNode) NodeDetailsForKeysError(inKeys *foundation.NSArray[objc.ID]) (*
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDNodeSelNodeDetailsForKeysError, inKeys, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -140,7 +140,7 @@ func (o *ODNode) SupportedRecordTypesAndReturnError() (*foundation.NSArray[objc.
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDNodeSelSupportedRecordTypesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -150,7 +150,7 @@ func (o *ODNode) SupportedAttributesForRecordTypeError(inRecordType *foundation.
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDNodeSelSupportedAttributesForRecordTypeError, inRecordType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -160,7 +160,7 @@ func (o *ODNode) SetCredentialsWithRecordTypeRecordNamePasswordError(inRecordTyp
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDNodeSelSetCredentialsWithRecordTypeRecordNamePasswordError, inRecordType.Ptr(), inRecordName.Ptr(), inPassword.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -170,7 +170,7 @@ func (o *ODNode) SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationIte
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDNodeSelSetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError, inRecordType.Ptr(), inType.Ptr(), inItems, outItems, outContext, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -181,7 +181,7 @@ func (o *ODNode) SetCredentialsUsingKerberosCacheError(inCacheName *foundation.N
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDNodeSelSetCredentialsUsingKerberosCacheError, inCacheName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -192,7 +192,7 @@ func (o *ODNode) CreateRecordWithRecordTypeNameAttributesError(inRecordType *fou
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelCreateRecordWithRecordTypeNameAttributesError, inRecordType.Ptr(), inRecordName.Ptr(), inAttributes, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ODRecordFromID(_ret), nil
 }
@@ -203,7 +203,7 @@ func (o *ODNode) RecordWithRecordTypeNameAttributesError(inRecordType *foundatio
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelRecordWithRecordTypeNameAttributesError, inRecordType.Ptr(), inRecordName.Ptr(), inAttributes, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return ODRecordFromID(_ret), nil
 }
@@ -214,7 +214,7 @@ func (o *ODNode) CustomCallSendDataError(inCustomCode int, inSendData *foundatio
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelCustomCallSendDataError, inCustomCode, inSendData.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDataFromID(_ret), nil
 }
@@ -224,7 +224,7 @@ func (o *ODNode) CustomFunctionPayloadError(function *foundation.NSString, paylo
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDNodeSelCustomFunctionPayloadError, function.Ptr(), payload, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -234,7 +234,7 @@ func (o *ODNode) PoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, obj
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDNodeSelPoliciesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -244,7 +244,7 @@ func (o *ODNode) SupportedPoliciesAndReturnError() (*foundation.NSDictionary[obj
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDNodeSelSupportedPoliciesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -254,7 +254,7 @@ func (o *ODNode) SetPoliciesError(policies *foundation.NSDictionary[objc.ID, obj
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDNodeSelSetPoliciesError, policies, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -264,7 +264,7 @@ func (o *ODNode) SetPolicyValueError(policy *foundation.NSString, value objc.ID)
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDNodeSelSetPolicyValueError, policy.Ptr(), value, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -274,7 +274,7 @@ func (o *ODNode) RemovePolicyError(policy *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDNodeSelRemovePolicyError, policy.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -284,7 +284,7 @@ func (o *ODNode) AddAccountPolicyToCategoryError(policy *foundation.NSDictionary
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDNodeSelAddAccountPolicyToCategoryError, policy, category.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -294,7 +294,7 @@ func (o *ODNode) RemoveAccountPolicyFromCategoryError(policy *foundation.NSDicti
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDNodeSelRemoveAccountPolicyFromCategoryError, policy, category.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -304,7 +304,7 @@ func (o *ODNode) SetAccountPoliciesError(policies *foundation.NSDictionary[objc.
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDNodeSelSetAccountPoliciesError, policies, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -314,7 +314,7 @@ func (o *ODNode) AccountPoliciesAndReturnError() (*foundation.NSDictionary[objc.
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDNodeSelAccountPoliciesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -324,7 +324,7 @@ func (o *ODNode) PasswordContentCheckForRecordNameError(password *foundation.NSS
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDNodeSelPasswordContentCheckForRecordNameError, password.Ptr(), recordName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

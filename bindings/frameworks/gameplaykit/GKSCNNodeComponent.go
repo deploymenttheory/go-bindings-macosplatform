@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A component that encapsulates a SceneKit node.
@@ -30,7 +30,7 @@ func GKSCNNodeComponentFromID(id objc.ID) *GKSCNNodeComponent {
 	}
 	o := &GKSCNNodeComponent{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

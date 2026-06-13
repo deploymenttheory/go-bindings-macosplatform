@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/shazamkit/shsignature
@@ -31,7 +31,7 @@ func SHSignatureFromID(id objc.ID) *SHSignature {
 	}
 	o := &SHSignature{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -41,7 +41,7 @@ func SHSignatureSignatureWithDataRepresentationError(dataRepresentation *foundat
 	_ret := objc.Send[objc.ID](objc.ID(_clsSHSignature), _sHSignatureSelSignatureWithDataRepresentationError, dataRepresentation.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return SHSignatureFromID(_ret), nil
 }
@@ -52,7 +52,7 @@ func (o *SHSignature) InitWithDataRepresentationError(dataRepresentation *founda
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHSignatureSelInitWithDataRepresentationError, dataRepresentation.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return SHSignatureFromID(_ret), nil
 }

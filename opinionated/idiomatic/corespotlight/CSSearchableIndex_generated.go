@@ -8,7 +8,7 @@ import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -46,7 +46,7 @@ func (x *SearchableIndex) IndexSearchableItems(ctx context.Context, items *found
 	_ch := make(chan error, 1)
 	x.inner.IndexSearchableItemsCompletionHandler(items, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -64,7 +64,7 @@ func (x *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Conte
 	_ch := make(chan error, 1)
 	x.inner.DeleteSearchableItemsWithIdentifiersCompletionHandler(identifiers, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -82,7 +82,7 @@ func (x *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context
 	_ch := make(chan error, 1)
 	x.inner.DeleteSearchableItemsWithDomainIdentifiersCompletionHandler(domainIdentifiers, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -100,7 +100,7 @@ func (x *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.DeleteAllSearchableItemsWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -118,7 +118,7 @@ func (x *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx
 	_ch := make(chan error, 1)
 	x.inner.EndIndexBatchWithExpectedClientStateNewClientStateCompletionHandler(expectedClientState, newClientState, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -136,7 +136,7 @@ func (x *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clie
 	_ch := make(chan error, 1)
 	x.inner.EndIndexBatchWithClientStateCompletionHandler(clientState, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

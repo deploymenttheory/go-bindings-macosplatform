@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A 2D specalization of an agent that moves on a 2-axis logical coordinate system. This coordinate system does not need to match the visual coordinate system of the delegate. One simple case of that is isometric 2D content where the game model is on a flat 2D plane but the visuals are displayed on an angle where one of the logical axes are used for simulated depth as well as some translation in the display plane.
@@ -33,7 +33,7 @@ func GKAgent2DFromID(id objc.ID) *GKAgent2D {
 	}
 	o := &GKAgent2D{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

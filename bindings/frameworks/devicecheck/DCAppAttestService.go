@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A service that you use to validate the instance of your app running on a device. Use the ``DeviceCheck/DCAppAttestService/sharedService`` instance of the ``DeviceCheck/DCAppAttestService`` class to assert the legitimacy of a particular instance of your app to your server. After ensuring service availability by reading the ``DeviceCheck/DCAppAttestService/supported`` property, you use the service to: - Create a cryptographic key in the Secure Enclave by calling the ``DeviceCheck/DCAppAttestService/generateKeyWithCompletionHandler:`` method. - Ask Apple to certify the key by calling the ``DeviceCheck/DCAppAttestService/attestKey:clientDataHash:completionHandler:`` method. - Prepare an assertion of your app’s integrity to accompany any or all server requests using the ``DeviceCheck/DCAppAttestService/generateAssertion:clientDataHash:completionHandler:`` method. For more information about how to support App Attest in your app, see <doc:establishing-your-app-s-integrity>. For information about the complementary procedures you implement on your server, see <doc:validating-apps-that-connect-to-your-server>. - Note: To use the App Attest service, your app must have an app ID that you register on the [Apple Developer](https://developer.apple.com/account/) website.
@@ -34,7 +34,7 @@ func DCAppAttestServiceFromID(id objc.ID) *DCAppAttestService {
 	}
 	o := &DCAppAttestService{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

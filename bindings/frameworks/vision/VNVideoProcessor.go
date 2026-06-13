@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/vision/vnvideoprocessor
@@ -35,7 +35,7 @@ func VNVideoProcessorFromID(id objc.ID) *VNVideoProcessor {
 	}
 	o := &VNVideoProcessor{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -51,7 +51,7 @@ func (o *VNVideoProcessor) AddRequestProcessingOptionsError(request *VNRequest, 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNVideoProcessorSelAddRequestProcessingOptionsError, request.Ptr(), processingOptions.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -61,7 +61,7 @@ func (o *VNVideoProcessor) AddRequestWithProcessingOptionsError(request *VNReque
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNVideoProcessorSelAddRequestWithProcessingOptionsError, request.Ptr(), processingOptions, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -71,7 +71,7 @@ func (o *VNVideoProcessor) RemoveRequestError(request *VNRequest) (bool, error) 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNVideoProcessorSelRemoveRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -81,7 +81,7 @@ func (o *VNVideoProcessor) AnalyzeTimeRangeError(timeRange coremedia.CMTimeRange
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNVideoProcessorSelAnalyzeTimeRangeError, timeRange, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -91,7 +91,7 @@ func (o *VNVideoProcessor) AnalyzeWithTimeRangeError(timeRange coremedia.CMTimeR
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNVideoProcessorSelAnalyzeWithTimeRangeError, timeRange, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidiplayer
@@ -38,7 +38,7 @@ func AVMIDIPlayerFromID(id objc.ID) *AVMIDIPlayer {
 	}
 	o := &AVMIDIPlayer{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -48,7 +48,7 @@ func (o *AVMIDIPlayer) InitWithContentsOfURLSoundBankURLError(inURL *foundation.
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIPlayerSelInitWithContentsOfURLSoundBankURLError, inURL.Ptr(), bankURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVMIDIPlayerFromID(_ret), nil
 }
@@ -59,7 +59,7 @@ func (o *AVMIDIPlayer) InitWithDataSoundBankURLError(data *foundation.NSData, ba
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIPlayerSelInitWithDataSoundBankURLError, data.Ptr(), bankURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVMIDIPlayerFromID(_ret), nil
 }

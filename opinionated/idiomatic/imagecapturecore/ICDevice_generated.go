@@ -8,7 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -38,7 +38,7 @@ func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, op
 	_ch := make(chan error, 1)
 	x.inner.RequestOpenSessionWithOptionsCompletion(options, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -56,7 +56,7 @@ func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, o
 	_ch := make(chan error, 1)
 	x.inner.RequestCloseSessionWithOptionsCompletion(options, func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -74,7 +74,7 @@ func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.RequestEjectWithCompletion(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

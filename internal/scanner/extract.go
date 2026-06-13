@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/meta"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 )
 
 // sdkRelativePath converts an absolute SDK header path to a short relative form.
@@ -51,7 +51,7 @@ func frameworkNameFromPath(path string) string {
 // imports the other framework. This information is used by the cycle-breaker in
 // the code generator to distinguish intentional cross-framework edges from
 // incidental ones discovered only via type-token scanning.
-func trackDeclaredImport(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) {
+func trackDeclaredImport(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
 	if node.Loc == nil {
 		return
 	}
@@ -108,7 +108,7 @@ func nodeFileLine(node *ASTNode, fallbackFile string) (string, int) {
 
 // Extract walks the Clang AST root node and produces a FrameworkMeta
 // containing only declarations that originate from the named framework's headers.
-func Extract(root *ASTNode, sdkPath, frameworkName, sdkVersion, arch string) *meta.FrameworkMeta {
+func Extract(root *ASTNode, sdkPath, frameworkName, sdkVersion, arch string) *macosplatformmetadata.FrameworkMeta {
 	filter := newFilter(sdkPath, frameworkName)
 	f := &filter
 
@@ -120,16 +120,16 @@ func Extract(root *ASTNode, sdkPath, frameworkName, sdkVersion, arch string) *me
 		parentFramework, canonicalName = SubFrameworkParts(frameworkName)
 	}
 
-	framework := &meta.FrameworkMeta{
+	framework := &macosplatformmetadata.FrameworkMeta{
 		Framework:       canonicalName,
 		ParentFramework: parentFramework,
 		SDKVersion:      sdkVersion,
 		Arch:            arch,
-		Classes:    make(map[string]meta.Class),
-		Protocols:  make(map[string]meta.Protocol),
-		Enums:      make(map[string]meta.Enum),
-		Structs:    make(map[string]meta.Struct),
-		BlockTypes: make(map[string]meta.BlockType),
+		Classes:    make(map[string]macosplatformmetadata.Class),
+		Protocols:  make(map[string]macosplatformmetadata.Protocol),
+		Enums:      make(map[string]macosplatformmetadata.Enum),
+		Structs:    make(map[string]macosplatformmetadata.Struct),
+		BlockTypes: make(map[string]macosplatformmetadata.BlockType),
 		Typedefs:   make(map[string]string),
 	}
 
@@ -296,7 +296,7 @@ func Extract(root *ASTNode, sdkPath, frameworkName, sdkVersion, arch string) *me
 }
 
 // isMetadataEmpty reports whether a FrameworkMeta captured no API surface.
-func isMetadataEmpty(framework *meta.FrameworkMeta) bool {
+func isMetadataEmpty(framework *macosplatformmetadata.FrameworkMeta) bool {
 	return len(framework.Classes) == 0 &&
 		len(framework.Protocols) == 0 &&
 		len(framework.Enums) == 0 &&
@@ -308,7 +308,7 @@ func isMetadataEmpty(framework *meta.FrameworkMeta) bool {
 
 // --- Classes ---
 
-func scanClass(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) {
+func scanClass(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
 	// Skip @class Foo; forward declarations. Three forms exist in the Clang AST:
 	//
 	//  Form 1 — pure forward declaration: Clang omits the inner field entirely
@@ -415,7 +415,7 @@ func scanClass(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter)
 	framework.Classes[node.Name] = cls
 }
 
-func scanCategory(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) {
+func scanCategory(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
 	// Categories extend an existing class. The target class is in node.Interface.
 	className := ""
 	if node.Interface != nil {
@@ -436,9 +436,9 @@ func scanCategory(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilt
 		// types, so these are recorded as ForeignExtensions and emitted as
 		// package-level functions by the code generator.
 		if framework.ForeignExtensions == nil {
-			framework.ForeignExtensions = make(map[string][]meta.Method)
+			framework.ForeignExtensions = make(map[string][]macosplatformmetadata.Method)
 		}
-		var methods []meta.Method
+		var methods []macosplatformmetadata.Method
 		for i := range node.Inner {
 			child := &node.Inner[i]
 			if child.Kind == "ObjCMethodDecl" {
@@ -474,9 +474,9 @@ func scanCategory(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilt
 
 // --- Protocols ---
 
-func scanProtocol(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) {
+func scanProtocol(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
 	absFile, line := nodeFileLine(node, f.currentFile)
-	proto := meta.Protocol{
+	proto := macosplatformmetadata.Protocol{
 		Availability: scanAvailability(node, absFile, line),
 	}
 	for _, p := range node.Protocols {
@@ -499,15 +499,15 @@ func scanProtocol(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilt
 
 // --- Methods ---
 
-func scanMethod(node *ASTNode, absFile, sdkPath string, classGenericParams []string) (meta.Method, bool) {
+func scanMethod(node *ASTNode, absFile, sdkPath string, classGenericParams []string) (macosplatformmetadata.Method, bool) {
 	if node.IsImplicit {
-		return meta.Method{}, false
+		return macosplatformmetadata.Method{}, false
 	}
 	line := 0
 	if node.Loc != nil {
 		line = node.Loc.ResolvedLine()
 	}
-	m := meta.Method{
+	m := macosplatformmetadata.Method{
 		Selector:             node.Name,
 		IsClassMethod:        !node.IsInstance, // Clang: instance=true → instance method; absent/false → class method
 		IsVariadic:           node.IsVariadic,
@@ -548,12 +548,12 @@ func scanMethod(node *ASTNode, absFile, sdkPath string, classGenericParams []str
 	return m, true
 }
 
-func makeParam(node *ASTNode) meta.Param {
+func makeParam(node *ASTNode) macosplatformmetadata.Param {
 	qt := ""
 	if node.Type != nil {
 		qt = bestQualType(node.Type)
 	}
-	return meta.Param{
+	return macosplatformmetadata.Param{
 		Name:       node.Name,
 		ObjCType:   qt,
 		IsBlock:    isBlockType(qt),
@@ -604,9 +604,9 @@ func bestQualType(t *ASTType) string {
 	return qt
 }
 
-func makeReturnType(t *ASTType, method *ASTNode, classGenericParams []string) meta.ReturnType {
+func makeReturnType(t *ASTType, method *ASTNode, classGenericParams []string) macosplatformmetadata.ReturnType {
 	qt := bestQualType(t)
-	r := meta.ReturnType{
+	r := macosplatformmetadata.ReturnType{
 		ObjCType:       qt,
 		IsInstancetype: qt == "instancetype",
 		IsNullable:     strings.Contains(qt, "_Nullable") || strings.Contains(qt, "__nullable"),
@@ -648,9 +648,9 @@ func makeReturnType(t *ASTType, method *ASTNode, classGenericParams []string) me
 
 // --- Properties ---
 
-func scanProperty(node *ASTNode, absFile, sdkPath string) (meta.Property, bool) {
+func scanProperty(node *ASTNode, absFile, sdkPath string) (macosplatformmetadata.Property, bool) {
 	if node.IsImplicit {
-		return meta.Property{}, false
+		return macosplatformmetadata.Property{}, false
 	}
 	qt := ""
 	if node.Type != nil {
@@ -680,7 +680,7 @@ func scanProperty(node *ASTNode, absFile, sdkPath string) (meta.Property, bool) 
 	if node.Loc != nil {
 		line = node.Loc.ResolvedLine()
 	}
-	return meta.Property{
+	return macosplatformmetadata.Property{
 		Name:         node.Name,
 		ObjCType:     qt,
 		IsReadOnly:   readonly,
@@ -700,7 +700,7 @@ func scanProperty(node *ASTNode, absFile, sdkPath string) (meta.Property, bool) 
 // accessor methods as implicit nodes whose AST loc carries only a byte offset (no
 // line number), so lineAvailability returns empty for them. The property node has
 // the correct line number and availability, so we propagate it here.
-func propagatePropertyUnavailability(cls *meta.Class) {
+func propagatePropertyUnavailability(cls *macosplatformmetadata.Class) {
 	// Build lookup maps: getter selector → property, setter selector → property.
 	getters := make(map[string]int, len(cls.Properties)) // selector → index in Properties
 	setters := make(map[string]int, len(cls.Properties))
@@ -739,7 +739,7 @@ func propagatePropertyUnavailability(cls *meta.Class) {
 
 // --- Enums ---
 
-func scanEnum(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) {
+func scanEnum(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
 	if node.Name == "" {
 		// anonymous enum — members go into a top-level const block with no type
 		// We still capture them under a synthetic key based on first member.
@@ -747,7 +747,7 @@ func scanEnum(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) 
 		return
 	}
 	absFile, line := nodeFileLine(node, f.currentFile)
-	e := meta.Enum{
+	e := macosplatformmetadata.Enum{
 		Availability: scanAvailability(node, absFile, line),
 		SDKFile:      sdkRelativePath(f.sdkPath, absFile),
 		SDKLine:      line,
@@ -769,7 +769,7 @@ func scanEnum(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) 
 			if child.Loc != nil {
 				memberLine = child.Loc.ResolvedLine()
 			}
-			member := meta.EnumMember{
+			member := macosplatformmetadata.EnumMember{
 				Name:         child.Name,
 				Availability: scanAvailability(child, absFile, memberLine),
 				Doc:          docForNode(absFile, memberLine),
@@ -797,20 +797,20 @@ func scanEnum(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) 
 	framework.Enums[node.Name] = e
 }
 
-func scanAnonymousEnum(node *ASTNode, framework *meta.FrameworkMeta) {
+func scanAnonymousEnum(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta) {
 	// Collect members into a synthetic "anonymous" group named after first member.
 	// Auto-increment implicit member values exactly like the named-enum path:
 	// Clang only emits an initializer when the source explicitly provides one,
 	// so without this counter every implicit member would fall through to "0",
 	// breaking standalone anonymous enums (no typedef twin to compare against).
-	var members []meta.EnumMember
+	var members []macosplatformmetadata.EnumMember
 	var nextVal int64
 	for i := range node.Inner {
 		child := &node.Inner[i]
 		if child.Kind != "EnumConstantDecl" {
 			continue
 		}
-		member := meta.EnumMember{
+		member := macosplatformmetadata.EnumMember{
 			Name:         child.Name,
 			Availability: scanAvailability(child, "", 0),
 		}
@@ -832,7 +832,7 @@ func scanAnonymousEnum(node *ASTNode, framework *meta.FrameworkMeta) {
 		return
 	}
 	key := "_anon_" + members[0].Name
-	framework.Enums[key] = meta.Enum{
+	framework.Enums[key] = macosplatformmetadata.Enum{
 		GoType:  "int64",
 		Members: members,
 		IsAnon:  true,
@@ -867,7 +867,7 @@ func scanEnumValue(node *ASTNode) string {
 
 // --- Structs ---
 
-func scanStruct(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) {
+func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
 	if node.Name == "" || node.TagUsed == "union" {
 		return
 	}
@@ -884,7 +884,7 @@ func scanStruct(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter
 		}
 	}
 	absFile, line := nodeFileLine(node, f.currentFile)
-	s := meta.Struct{
+	s := macosplatformmetadata.Struct{
 		Availability: scanAvailability(node, absFile, line),
 		SDKFile:      sdkRelativePath(f.sdkPath, absFile),
 		SDKLine:      line,
@@ -902,7 +902,7 @@ func scanStruct(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter
 			if child.Type != nil {
 				qt = child.Type.QualType
 			}
-			s.Fields = append(s.Fields, meta.StructField{
+			s.Fields = append(s.Fields, macosplatformmetadata.StructField{
 				Name:     child.Name,
 				ObjCType: qt,
 				GoType:   "", // filled by typemapper
@@ -921,12 +921,12 @@ func scanStruct(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter
 
 // --- Functions ---
 
-func scanFunction(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) {
+func scanFunction(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
 	if node.IsImplicit {
 		return
 	}
 	absFile, line := nodeFileLine(node, f.currentFile)
-	fn := meta.Function{
+	fn := macosplatformmetadata.Function{
 		Name:         node.Name,
 		IsVariadic:   node.IsVariadic,
 		Availability: scanAvailability(node, absFile, line),
@@ -938,13 +938,13 @@ func scanFunction(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilt
 	switch {
 	case node.ReturnType != nil:
 		// ObjCMethodDecl nodes carry a distinct returnType field.
-		fn.Return = meta.ReturnType{ObjCType: node.ReturnType.QualType}
+		fn.Return = macosplatformmetadata.ReturnType{ObjCType: node.ReturnType.QualType}
 	case node.Type != nil:
 		// Plain C FunctionDecl: Clang folds the full function signature into
 		// type.qualType (e.g. "CFIndex (CFArrayRef)"). Extract the return type
 		// as the portion before the first opening parenthesis.
 		if ret := parseFuncReturnType(node.Type.QualType); ret != "" && ret != "void" {
-			fn.Return = meta.ReturnType{ObjCType: ret}
+			fn.Return = macosplatformmetadata.ReturnType{ObjCType: ret}
 		}
 	}
 	for i := range node.Inner {
@@ -969,7 +969,7 @@ func parseFuncReturnType(qualType string) string {
 
 // --- Externs ---
 
-func scanExtern(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) {
+func scanExtern(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
 	if node.StorageClass != "extern" {
 		return
 	}
@@ -978,7 +978,7 @@ func scanExtern(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter
 		qt = node.Type.QualType
 	}
 	absFile, line := nodeFileLine(node, f.currentFile)
-	framework.Externs = append(framework.Externs, meta.Extern{
+	framework.Externs = append(framework.Externs, macosplatformmetadata.Extern{
 		Name:         node.Name,
 		ObjCType:     qt,
 		Availability: scanAvailability(node, absFile, line),
@@ -990,7 +990,7 @@ func scanExtern(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter
 
 // --- Typedefs ---
 
-func scanTypedef(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilter) {
+func scanTypedef(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
 	if node.Type == nil {
 		return
 	}
@@ -1021,8 +1021,8 @@ func scanTypedef(node *ASTNode, framework *meta.FrameworkMeta, f *frameworkFilte
 // Clang that emits platform/version fields), then falls back to parsing the
 // raw SDK header source — necessary for Apple clang ≥ 21 where AvailabilityAttr
 // JSON nodes carry only range information with no platform/version fields.
-func scanAvailability(node *ASTNode, absFile string, lineNo int) meta.Availability {
-	var av meta.Availability
+func scanAvailability(node *ASTNode, absFile string, lineNo int) macosplatformmetadata.Availability {
+	var av macosplatformmetadata.Availability
 	// Try the top-level Availability array (populated by some Clang versions).
 	for i := range node.Availability {
 		attr := &node.Availability[i]

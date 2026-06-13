@@ -7,11 +7,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewdiffabledatasource
-type NSCollectionViewDiffableDataSource[SectionIdentifierType pureobjc.AnyObject, ItemIdentifierType pureobjc.AnyObject] struct {
+type NSCollectionViewDiffableDataSource[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -26,13 +26,13 @@ var (
 	_nSCollectionViewDiffableDataSourceSelSetSupplementaryViewProvider = objc.RegisterName("setSupplementaryViewProvider:")
 )
 
-func NSCollectionViewDiffableDataSourceFromID[SectionIdentifierType pureobjc.AnyObject, ItemIdentifierType pureobjc.AnyObject](id objc.ID) *NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType] {
+func NSCollectionViewDiffableDataSourceFromID[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject](id objc.ID) *NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSCollectionViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

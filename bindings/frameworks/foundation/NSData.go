@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdata
@@ -67,7 +67,7 @@ func NSDataFromID(id objc.ID) *NSData {
 	}
 	o := &NSData{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -114,7 +114,7 @@ func (o *NSData) WriteToFileOptionsError(path *NSString, writeOptionsMask NSData
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDataSelWriteToFileOptionsError, path.Ptr(), writeOptionsMask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -123,7 +123,7 @@ func (o *NSData) WriteToURLOptionsError(url *NSURL, writeOptionsMask NSDataWriti
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDataSelWriteToURLOptionsError, url.Ptr(), writeOptionsMask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -166,7 +166,7 @@ func NSDataDataWithContentsOfFileOptionsError(path *NSString, readOptionsMask NS
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfFileOptionsError, path.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -176,7 +176,7 @@ func NSDataDataWithContentsOfURLOptionsError(url *NSURL, readOptionsMask NSDataR
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfURLOptionsError, url.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -229,7 +229,7 @@ func (o *NSData) InitWithContentsOfFileOptionsError(path *NSString, readOptionsM
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfFileOptionsError, path.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -239,7 +239,7 @@ func (o *NSData) InitWithContentsOfURLOptionsError(url *NSURL, readOptionsMask N
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfURLOptionsError, url.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -297,7 +297,7 @@ func (o *NSData) DecompressedDataUsingAlgorithmError(algorithm NSDataCompression
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelDecompressedDataUsingAlgorithmError, algorithm, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -307,7 +307,7 @@ func (o *NSData) CompressedDataUsingAlgorithmError(algorithm NSDataCompressionAl
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelCompressedDataUsingAlgorithmError, algorithm, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }

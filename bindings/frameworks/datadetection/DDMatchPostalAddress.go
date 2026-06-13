@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // An object that contains a postal address that the data detection system matches. The DataDetection framework returns a postal address match in a `DDMatchPostalAddress` object, which optionally contains the matching parts of a postal address: street, city, state, postal code, and country.
@@ -32,7 +32,7 @@ func DDMatchPostalAddressFromID(id objc.ID) *DDMatchPostalAddress {
 	}
 	o := &DDMatchPostalAddress{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // The individual node(s) that make up a GKOctree. Used as a hint for faster removal via [GKOctree removeData:WithNode:]
@@ -28,7 +28,7 @@ func GKOctreeNodeFromID(id objc.ID) *GKOctreeNode {
 	}
 	o := &GKOctreeNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

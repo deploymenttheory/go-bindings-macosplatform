@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkwebextensionmatchpattern
@@ -44,7 +44,7 @@ func WKWebExtensionMatchPatternFromID(id objc.ID) *WKWebExtensionMatchPattern {
 	}
 	o := &WKWebExtensionMatchPattern{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -87,7 +87,7 @@ func (o *WKWebExtensionMatchPattern) InitWithStringError(string_ *foundation.NSS
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelInitWithStringError, string_.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return WKWebExtensionMatchPatternFromID(_ret), nil
 }
@@ -98,7 +98,7 @@ func (o *WKWebExtensionMatchPattern) InitWithSchemeHostPathError(scheme *foundat
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelInitWithSchemeHostPathError, scheme.Ptr(), host.Ptr(), path.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return WKWebExtensionMatchPatternFromID(_ret), nil
 }

@@ -6,7 +6,7 @@ package intents
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/intents/incallrecordtypeoptionsresolutionresult
@@ -26,7 +26,7 @@ func INCallRecordTypeOptionsResolutionResultFromID(id objc.ID) *INCallRecordType
 	}
 	o := &INCallRecordTypeOptionsResolutionResult{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -5,7 +5,7 @@
 package xar
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
@@ -44,7 +44,7 @@ func NewXar_file_t(ptr unsafe.Pointer) *Xar_file_t {
 		return nil
 	}
 	o := &Xar_file_t{ptr: ptr}
-	objc.Track(o, o.Ptr)
+	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -64,7 +64,7 @@ func NewXar_iter_t(ptr unsafe.Pointer) *Xar_iter_t {
 		return nil
 	}
 	o := &Xar_iter_t{ptr: ptr}
-	objc.Track(o, o.Ptr)
+	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -84,7 +84,7 @@ func NewXar_signature_t(ptr unsafe.Pointer) *Xar_signature_t {
 		return nil
 	}
 	o := &Xar_signature_t{ptr: ptr}
-	objc.Track(o, o.Ptr)
+	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -104,7 +104,7 @@ func NewXar_subdoc_t(ptr unsafe.Pointer) *Xar_subdoc_t {
 		return nil
 	}
 	o := &Xar_subdoc_t{ptr: ptr}
-	objc.Track(o, o.Ptr)
+	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -124,7 +124,7 @@ func NewXar_t(ptr unsafe.Pointer) *Xar_t {
 		return nil
 	}
 	o := &Xar_t{ptr: ptr}
-	objc.Track(o, o.Ptr)
+	cgo.Track(o, o.Ptr)
 	return o
 }
 

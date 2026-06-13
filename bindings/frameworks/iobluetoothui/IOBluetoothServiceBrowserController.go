@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class IOBluetoothServiceBrowserController @abstract A NSWindowController subclass to display a window to search for and perform SDP queries on bluetooth devices within range. @discussion This NSWindowController subclass will bring up a generic Bluetooth search and SDP browsing window allowing the user to find devices within range, perform SDP queries on a particular device, and select a SDP service to connect to.  The client application can provide NSArrays of valid service UUIDs to allow, and an NSArray of valid device types to allow.  The device type filter is not yet implemented.
@@ -55,7 +55,7 @@ func IOBluetoothServiceBrowserControllerFromID(id objc.ID) *IOBluetoothServiceBr
 	}
 	o := &IOBluetoothServiceBrowserController{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

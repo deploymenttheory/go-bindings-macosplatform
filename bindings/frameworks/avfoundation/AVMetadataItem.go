@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetadataitem
@@ -55,7 +55,7 @@ func AVMetadataItemFromID(id objc.ID) *AVMetadataItem {
 	}
 	o := &AVMetadataItem{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -137,7 +137,7 @@ func (o *AVMetadataItem) StatusOfValueForKeyError(key *foundation.NSString) (AVK
 	var _nsErr uintptr
 	_ret := objc.Send[AVKeyValueStatus](o.Ptr(), _aVMetadataItemSelStatusOfValueForKeyError, key.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

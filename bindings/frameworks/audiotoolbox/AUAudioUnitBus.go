@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus
@@ -47,7 +47,7 @@ func AUAudioUnitBusFromID(id objc.ID) *AUAudioUnitBus {
 	}
 	o := &AUAudioUnitBus{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -56,7 +56,7 @@ func (o *AUAudioUnitBus) SetFormatError(format *avfaudio.AVAudioFormat) (bool, e
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitBusSelSetFormatError, format.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -140,7 +140,7 @@ func (o *AUAudioUnitBus) InitWithFormatError(format *avfaudio.AVAudioFormat) (*A
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusSelInitWithFormatError, format.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AUAudioUnitBusFromID(_ret), nil
 }

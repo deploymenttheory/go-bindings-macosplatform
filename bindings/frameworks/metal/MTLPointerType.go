@@ -6,7 +6,7 @@ package metal
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlpointertype
@@ -31,7 +31,7 @@ func MTLPointerTypeFromID(id objc.ID) *MTLPointerType {
 	}
 	o := &MTLPointerType{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

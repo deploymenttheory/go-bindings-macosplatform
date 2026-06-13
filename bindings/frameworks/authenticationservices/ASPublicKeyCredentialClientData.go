@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // This object represents the client data for a public key credential request, as defined in the WebAuthentication standard.
@@ -36,7 +36,7 @@ func ASPublicKeyCredentialClientDataFromID(id objc.ID) *ASPublicKeyCredentialCli
 	}
 	o := &ASPublicKeyCredentialClientData{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

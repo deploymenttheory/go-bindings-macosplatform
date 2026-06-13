@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auaudiounit
@@ -134,7 +134,7 @@ func AUAudioUnitFromID(id objc.ID) *AUAudioUnit {
 	}
 	o := &AUAudioUnit{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -144,7 +144,7 @@ func (o *AUAudioUnit) InitWithComponentDescriptionOptionsError(componentDescript
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelInitWithComponentDescriptionOptionsError, componentDescription, options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AUAudioUnitFromID(_ret), nil
 }
@@ -155,7 +155,7 @@ func (o *AUAudioUnit) InitWithComponentDescriptionError(componentDescription Aud
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelInitWithComponentDescriptionError, componentDescription, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AUAudioUnitFromID(_ret), nil
 }
@@ -180,7 +180,7 @@ func (o *AUAudioUnit) AllocateRenderResourcesAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelAllocateRenderResourcesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -224,7 +224,7 @@ func (o *AUAudioUnit) SaveUserPresetError(userPreset *AUAudioUnitPreset) (bool, 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelSaveUserPresetError, userPreset.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -234,7 +234,7 @@ func (o *AUAudioUnit) DeleteUserPresetError(userPreset *AUAudioUnitPreset) (bool
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelDeleteUserPresetError, userPreset.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -244,7 +244,7 @@ func (o *AUAudioUnit) PresetStateForError(userPreset *AUAudioUnitPreset) (*found
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aUAudioUnitSelPresetStateForError, userPreset.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -260,7 +260,7 @@ func (o *AUAudioUnit) EnableProfileCableOnChannelError(profile objc.ID, cable ui
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelEnableProfileCableOnChannelError, profile, cable, channel, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -270,7 +270,7 @@ func (o *AUAudioUnit) DisableProfileCableOnChannelError(profile objc.ID, cable u
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelDisableProfileCableOnChannelError, profile, cable, channel, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -664,7 +664,7 @@ func (o *AUAudioUnit) SetDeviceIDError(deviceID uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelSetDeviceIDError, deviceID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -674,7 +674,7 @@ func (o *AUAudioUnit) StartHardwareAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelStartHardwareAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

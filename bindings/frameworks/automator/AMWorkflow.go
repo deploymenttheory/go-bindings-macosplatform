@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/automator/amworkflow
@@ -42,7 +42,7 @@ func AMWorkflowFromID(id objc.ID) *AMWorkflow {
 	}
 	o := &AMWorkflow{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -50,7 +50,7 @@ func AMWorkflowRunWorkflowAtURLWithInputError(fileURL *foundation.NSURL, input o
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAMWorkflow), _aMWorkflowSelRunWorkflowAtURLWithInputError, fileURL.Ptr(), input, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -66,7 +66,7 @@ func (o *AMWorkflow) InitWithContentsOfURLError(fileURL *foundation.NSURL) (*AMW
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowSelInitWithContentsOfURLError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AMWorkflowFromID(_ret), nil
 }
@@ -75,7 +75,7 @@ func (o *AMWorkflow) WriteToURLError(fileURL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aMWorkflowSelWriteToURLError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

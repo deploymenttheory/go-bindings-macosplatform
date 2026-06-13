@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gksession
@@ -50,7 +50,7 @@ func GKSessionFromID(id objc.ID) *GKSession {
 	}
 	o := &GKSession{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -73,7 +73,7 @@ func (o *GKSession) SendDataToPeersWithDataModeError(data *foundation.NSData, pe
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _gKSessionSelSendDataToPeersWithDataModeError, data.Ptr(), peers, mode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -84,7 +84,7 @@ func (o *GKSession) SendDataToAllPeersWithDataModeError(data *foundation.NSData,
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _gKSessionSelSendDataToAllPeersWithDataModeError, data.Ptr(), mode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -109,7 +109,7 @@ func (o *GKSession) AcceptConnectionFromPeerError(peerID *foundation.NSString) (
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _gKSessionSelAcceptConnectionFromPeerError, peerID.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

@@ -6,11 +6,11 @@ package foundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscountedset
-type NSCountedSet[ObjectType pureobjc.AnyObject] struct {
+type NSCountedSet[ObjectType purego.AnyObject] struct {
 	NSMutableSet[ObjectType]
 }
 
@@ -22,13 +22,13 @@ var (
 	_nSCountedSetSelCountForObject = objc.RegisterName("countForObject:")
 )
 
-func NSCountedSetFromID[ObjectType pureobjc.AnyObject](id objc.ID) *NSCountedSet[ObjectType] {
+func NSCountedSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSCountedSet[ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSCountedSet[ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

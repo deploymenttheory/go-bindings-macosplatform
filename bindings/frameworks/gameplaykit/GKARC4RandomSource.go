@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A deterministic pseudo-random source that generates random numbers based on an arc4 algorithm. This is a deterministic random source suitable for creating reliable gameplay mechanics. While deterministic, this is not a cryptographic random source, however it may be useful for obfuscation of gameplay data in manner similar to a stream cipher.
@@ -32,7 +32,7 @@ func GKARC4RandomSourceFromID(id objc.ID) *GKARC4RandomSource {
 	}
 	o := &GKARC4RandomSource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

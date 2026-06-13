@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfilehandle
@@ -71,7 +71,7 @@ func NSFileHandleFromID(id objc.ID) *NSFileHandle {
 	}
 	o := &NSFileHandle{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -92,7 +92,7 @@ func (o *NSFileHandle) ReadDataToEndOfFileAndReturnError() (*NSData, error) {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataToEndOfFileAndReturnError, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -102,7 +102,7 @@ func (o *NSFileHandle) ReadDataUpToLengthError(length uint) (*NSData, error) {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataUpToLengthError, length, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -111,7 +111,7 @@ func (o *NSFileHandle) WriteDataError(data *NSData) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelWriteDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -120,7 +120,7 @@ func (o *NSFileHandle) GetOffsetError(offsetInFile *uint64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelGetOffsetError, offsetInFile, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -129,7 +129,7 @@ func (o *NSFileHandle) SeekToEndReturningOffsetError(offsetInFile *uint64) (bool
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelSeekToEndReturningOffsetError, offsetInFile, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -138,7 +138,7 @@ func (o *NSFileHandle) SeekToOffsetError(offset uint64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelSeekToOffsetError, offset, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -147,7 +147,7 @@ func (o *NSFileHandle) TruncateAtOffsetError(offset uint64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelTruncateAtOffsetError, offset, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -156,7 +156,7 @@ func (o *NSFileHandle) SynchronizeAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelSynchronizeAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -165,7 +165,7 @@ func (o *NSFileHandle) CloseAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelCloseAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -199,7 +199,7 @@ func NSFileHandleFileHandleForReadingFromURLError(url *NSURL) (*NSFileHandle, er
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForReadingFromURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSFileHandleFromID(_ret), nil
 }
@@ -209,7 +209,7 @@ func NSFileHandleFileHandleForWritingToURLError(url *NSURL) (*NSFileHandle, erro
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForWritingToURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSFileHandleFromID(_ret), nil
 }
@@ -219,7 +219,7 @@ func NSFileHandleFileHandleForUpdatingURLError(url *NSURL) (*NSFileHandle, error
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForUpdatingURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSFileHandleFromID(_ret), nil
 }

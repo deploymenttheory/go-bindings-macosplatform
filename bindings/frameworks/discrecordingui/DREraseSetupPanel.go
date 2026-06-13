@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class			DREraseSetupPanel @abstract		Manages a panel that allows users to specify the parameters of an erase. @discussion		This class supports choosing the device to use and what sort of erase to perform. When the panel is closed by the user choosing to erase the media in the device, the device is exclusively held by the application for its own use to prevent possible bad or corrupt media from causing problem for the rest of the system. This means that if the erase object obtained from the panel is not used to do an erase, the device will remain unavailable to other applications until the exclusive access is released.
@@ -30,7 +30,7 @@ func DREraseSetupPanelFromID(id objc.ID) *DREraseSetupPanel {
 	}
 	o := &DREraseSetupPanel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

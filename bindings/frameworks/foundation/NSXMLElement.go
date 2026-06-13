@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class NSXMLElement @abstract An XML element @discussion Note: Trying to add a document, namespace, attribute, or node with a parent throws an exception. To add a node with a parent first detach or create a copy of it.
@@ -57,7 +57,7 @@ func NSXMLElementFromID(id objc.ID) *NSXMLElement {
 	}
 	o := &NSXMLElement{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -88,7 +88,7 @@ func (o *NSXMLElement) InitWithXMLStringError(string_ *NSString) (*NSXMLElement,
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelInitWithXMLStringError, string_.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSXMLElementFromID(_ret), nil
 }

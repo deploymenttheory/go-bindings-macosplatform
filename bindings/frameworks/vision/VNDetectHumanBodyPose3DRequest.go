@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetecthumanbodypose3drequest
@@ -31,7 +31,7 @@ func VNDetectHumanBodyPose3DRequestFromID(id objc.ID) *VNDetectHumanBodyPose3DRe
 	}
 	o := &VNDetectHumanBodyPose3DRequest{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -64,7 +64,7 @@ func (o *VNDetectHumanBodyPose3DRequest) SupportedJointNamesAndReturnError() (*f
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectHumanBodyPose3DRequestSelSupportedJointNamesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -74,7 +74,7 @@ func (o *VNDetectHumanBodyPose3DRequest) SupportedJointsGroupNamesAndReturnError
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectHumanBodyPose3DRequestSelSupportedJointsGroupNamesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

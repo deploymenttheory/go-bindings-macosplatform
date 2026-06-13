@@ -6,7 +6,7 @@ package mpsneuralnetwork
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @abstract   A node representing a MPSCNNNeuronHardSigmoid kernel @discussion For each pixel, applies the following function: @code f(x) = clamp((a * x) + b, 0, 1) @endcode
@@ -30,7 +30,7 @@ func MPSCNNNeuronHardSigmoidNodeFromID(id objc.ID) *MPSCNNNeuronHardSigmoidNode 
 	}
 	o := &MPSCNNNeuronHardSigmoidNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

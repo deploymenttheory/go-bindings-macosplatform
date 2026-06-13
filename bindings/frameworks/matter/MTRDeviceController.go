@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrdevicecontroller
@@ -79,7 +79,7 @@ func MTRDeviceControllerFromID(id objc.ID) *MTRDeviceController {
 	}
 	o := &MTRDeviceController{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -89,7 +89,7 @@ func (o *MTRDeviceController) InitWithParametersError(parameters *MTRDeviceContr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelInitWithParametersError, parameters.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTRDeviceControllerFromID(_ret), nil
 }
@@ -99,7 +99,7 @@ func (o *MTRDeviceController) SetupCommissioningSessionWithPayloadNewNodeIDError
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelSetupCommissioningSessionWithPayloadNewNodeIDError, payload.Ptr(), newNodeID.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -109,7 +109,7 @@ func (o *MTRDeviceController) SetupCommissioningSessionWithDiscoveredDevicePaylo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelSetupCommissioningSessionWithDiscoveredDevicePayloadNewNodeIDError, discoveredDevice.Ptr(), payload.Ptr(), newNodeID.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -119,7 +119,7 @@ func (o *MTRDeviceController) CommissionNodeWithIDCommissioningParamsError(nodeI
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelCommissionNodeWithIDCommissioningParamsError, nodeID.Ptr(), commissioningParams.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -129,7 +129,7 @@ func (o *MTRDeviceController) ContinueCommissioningDeviceIgnoreAttestationFailur
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelContinueCommissioningDeviceIgnoreAttestationFailureError, opaqueDeviceHandle, ignoreAttestationFailure, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -139,7 +139,7 @@ func (o *MTRDeviceController) CancelCommissioningForNodeIDError(nodeID *foundati
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelCancelCommissioningForNodeIDError, nodeID.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -150,7 +150,7 @@ func (o *MTRDeviceController) DeviceBeingCommissionedWithNodeIDError(nodeID *fou
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelDeviceBeingCommissionedWithNodeIDError, nodeID.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTRBaseDeviceFromID(_ret), nil
 }
@@ -227,7 +227,7 @@ func MTRDeviceControllerComputePASEVerifierForSetupPasscodeIterationsSaltError(s
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelComputePASEVerifierForSetupPasscodeIterationsSaltError, setupPasscode.Ptr(), iterations.Ptr(), salt.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDataFromID(_ret), nil
 }
@@ -310,7 +310,7 @@ func (o *MTRDeviceController) PairDeviceDiscriminatorSetupPINCodeError(deviceID 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelPairDeviceDiscriminatorSetupPINCodeError, deviceID, discriminator, setupPINCode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -319,7 +319,7 @@ func (o *MTRDeviceController) PairDeviceAddressPortSetupPINCodeError(deviceID ui
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelPairDeviceAddressPortSetupPINCodeError, deviceID, address.Ptr(), port, setupPINCode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -328,7 +328,7 @@ func (o *MTRDeviceController) PairDeviceOnboardingPayloadError(deviceID uint64, 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelPairDeviceOnboardingPayloadError, deviceID, onboardingPayload.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -337,7 +337,7 @@ func (o *MTRDeviceController) CommissionDeviceCommissioningParamsError(deviceId 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelCommissionDeviceCommissioningParamsError, deviceId, commissioningParams.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -346,7 +346,7 @@ func (o *MTRDeviceController) StopDevicePairingError(deviceID uint64) (bool, err
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelStopDevicePairingError, deviceID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -356,7 +356,7 @@ func (o *MTRDeviceController) GetDeviceBeingCommissionedError(deviceId uint64) (
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelGetDeviceBeingCommissionedError, deviceId, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTRBaseDeviceFromID(_ret), nil
 }
@@ -365,7 +365,7 @@ func (o *MTRDeviceController) OpenPairingWindowDurationError(deviceID uint64, du
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTRDeviceControllerSelOpenPairingWindowDurationError, deviceID, duration, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -375,7 +375,7 @@ func (o *MTRDeviceController) OpenPairingWindowWithPINDurationDiscriminatorSetup
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelOpenPairingWindowWithPINDurationDiscriminatorSetupPINError, deviceID, duration, discriminator, setupPIN, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSStringFromID(_ret), nil
 }

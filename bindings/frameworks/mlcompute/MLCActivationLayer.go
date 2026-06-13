@@ -6,7 +6,7 @@ package mlcompute
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcactivationlayer
@@ -54,7 +54,7 @@ func MLCActivationLayerFromID(id objc.ID) *MLCActivationLayer {
 	}
 	o := &MLCActivationLayer{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

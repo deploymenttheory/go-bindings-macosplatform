@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avportraiteffectsmatte
@@ -34,7 +34,7 @@ func AVPortraitEffectsMatteFromID(id objc.ID) *AVPortraitEffectsMatte {
 	}
 	o := &AVPortraitEffectsMatte{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -44,7 +44,7 @@ func AVPortraitEffectsMattePortraitEffectsMatteFromDictionaryRepresentationError
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPortraitEffectsMatte), _aVPortraitEffectsMatteSelPortraitEffectsMatteFromDictionaryRepresentationError, imageSourceAuxDataInfoDictionary, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVPortraitEffectsMatteFromID(_ret), nil
 }
@@ -62,7 +62,7 @@ func (o *AVPortraitEffectsMatte) PortraitEffectsMatteByReplacingPortraitEffectsM
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPortraitEffectsMatteSelPortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError, pixelBuffer, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AVPortraitEffectsMatteFromID(_ret), nil
 }

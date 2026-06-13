@@ -13,7 +13,7 @@ import (
 
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // ── VirtualMachine state ───────────────────────────────────────────────────
@@ -141,7 +141,7 @@ func LoadMacOSRestoreImage(ctx context.Context, path string) (*MacOSRestoreImage
 	nsURL := foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(path))
 	raw.VZMacOSRestoreImageLoadFileURLCompletionHandler(nsURL, func(img *raw.VZMacOSRestoreImage, errPtr unsafe.Pointer) {
 		if errPtr != nil {
-			ch <- result{err: pureobjc.NSErrorToError(objc.ID(uintptr(errPtr)))}
+			ch <- result{err: purego.NSErrorToError(objc.ID(uintptr(errPtr)))}
 			return
 		}
 		ch <- result{img: img}

@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmethodsignature
@@ -33,7 +33,7 @@ func NSMethodSignatureFromID(id objc.ID) *NSMethodSignature {
 	}
 	o := &NSMethodSignature{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -45,7 +45,7 @@ func NSMethodSignatureSignatureWithObjCTypes(types string) *NSMethodSignature {
 
 func (o *NSMethodSignature) GetArgumentTypeAtIndex(idx uint) string {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMethodSignatureSelGetArgumentTypeAtIndex, idx)
-	return pureobjc.GoString(_ret)
+	return purego.GoString(_ret)
 }
 
 func (o *NSMethodSignature) IsOneway() bool {

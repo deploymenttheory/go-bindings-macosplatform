@@ -7,23 +7,23 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/nsdictionary
-type NSDictionary[KeyType pureobjc.AnyObject, ObjectType pureobjc.AnyObject] struct {
+type NSDictionary[KeyType purego.AnyObject, ObjectType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
 var _clsNSDictionary = _objcClass("NSDictionary")
 
-func NSDictionaryFromID[KeyType pureobjc.AnyObject, ObjectType pureobjc.AnyObject](id objc.ID) *NSDictionary[KeyType, ObjectType] {
+func NSDictionaryFromID[KeyType purego.AnyObject, ObjectType purego.AnyObject](id objc.ID) *NSDictionary[KeyType, ObjectType] {
 	if id == 0 {
 		return nil
 	}
 	o := &NSDictionary[KeyType, ObjectType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

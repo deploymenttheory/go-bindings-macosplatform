@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class		DRSetupPanel @discussion	This class is the base class for setup panels in the DiscRecordingUI framework. It provides a base framework for handling device selection, media ejection and confirming or cancelling the panel.
@@ -42,7 +42,7 @@ func DRSetupPanelFromID(id objc.ID) *DRSetupPanel {
 	}
 	o := &DRSetupPanel{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

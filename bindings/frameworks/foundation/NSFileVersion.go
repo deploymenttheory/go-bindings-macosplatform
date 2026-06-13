@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfileversion
@@ -49,7 +49,7 @@ func NSFileVersionFromID(id objc.ID) *NSFileVersion {
 	}
 	o := &NSFileVersion{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -96,7 +96,7 @@ func NSFileVersionAddVersionOfItemAtURLWithContentsOfURLOptionsError(url *NSURL,
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelAddVersionOfItemAtURLWithContentsOfURLOptionsError, url.Ptr(), contentsURL.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSFileVersionFromID(_ret), nil
 }
@@ -112,7 +112,7 @@ func (o *NSFileVersion) ReplaceItemAtURLOptionsError(url *NSURL, options NSFileV
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelReplaceItemAtURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSURLFromID(_ret), nil
 }
@@ -121,7 +121,7 @@ func (o *NSFileVersion) RemoveAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileVersionSelRemoveAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -130,7 +130,7 @@ func NSFileVersionRemoveOtherVersionsOfItemAtURLError(url *NSURL) (bool, error) 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSFileVersion), _nSFileVersionSelRemoveOtherVersionsOfItemAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

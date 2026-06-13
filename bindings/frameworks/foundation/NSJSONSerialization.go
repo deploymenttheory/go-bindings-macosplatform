@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsjsonserialization
@@ -31,7 +31,7 @@ func NSJSONSerializationFromID(id objc.ID) *NSJSONSerialization {
 	}
 	o := &NSJSONSerialization{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -45,7 +45,7 @@ func NSJSONSerializationDataWithJSONObjectOptionsError(obj objc.ID, opt NSJSONWr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSJSONSerialization), _nSJSONSerializationSelDataWithJSONObjectOptionsError, obj, opt, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSDataFromID(_ret), nil
 }
@@ -54,7 +54,7 @@ func NSJSONSerializationJSONObjectWithDataOptionsError(data *NSData, opt NSJSONR
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSJSONSerialization), _nSJSONSerializationSelJSONObjectWithDataOptionsError, data.Ptr(), opt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -63,7 +63,7 @@ func NSJSONSerializationWriteJSONObjectToStreamOptionsError(obj objc.ID, stream 
 	var _nsErr uintptr
 	_ret := objc.Send[int](objc.ID(_clsNSJSONSerialization), _nSJSONSerializationSelWriteJSONObjectToStreamOptionsError, obj, stream.Ptr(), opt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -72,7 +72,7 @@ func NSJSONSerializationJSONObjectWithStreamOptionsError(stream *NSInputStream, 
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSJSONSerialization), _nSJSONSerializationSelJSONObjectWithStreamOptionsError, stream.Ptr(), opt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

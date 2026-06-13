@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/vision/vnsequencerequesthandler
@@ -42,7 +42,7 @@ func VNSequenceRequestHandlerFromID(id objc.ID) *VNSequenceRequestHandler {
 	}
 	o := &VNSequenceRequestHandler{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -58,7 +58,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnCVPixelBufferError(requests 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnCVPixelBufferError, requests.Ptr(), pixelBuffer, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -68,7 +68,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnCVPixelBufferOrientationErro
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnCVPixelBufferOrientationError, requests.Ptr(), pixelBuffer, orientation, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -78,7 +78,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnCGImageError(requests *found
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnCGImageError, requests.Ptr(), image, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -88,7 +88,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnCGImageOrientationError(requ
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnCGImageOrientationError, requests.Ptr(), image, orientation, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -98,7 +98,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnCIImageError(requests *found
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnCIImageError, requests.Ptr(), image.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -108,7 +108,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnCIImageOrientationError(requ
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnCIImageOrientationError, requests.Ptr(), image.Ptr(), orientation, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -118,7 +118,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnImageURLError(requests *foun
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnImageURLError, requests.Ptr(), imageURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -128,7 +128,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnImageURLOrientationError(req
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnImageURLOrientationError, requests.Ptr(), imageURL.Ptr(), orientation, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -138,7 +138,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnImageDataError(requests *fou
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnImageDataError, requests.Ptr(), imageData.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -148,7 +148,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnImageDataOrientationError(re
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnImageDataOrientationError, requests.Ptr(), imageData.Ptr(), orientation, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -158,7 +158,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnCMSampleBufferError(requests
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnCMSampleBufferError, requests.Ptr(), sampleBuffer, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -168,7 +168,7 @@ func (o *VNSequenceRequestHandler) PerformRequestsOnCMSampleBufferOrientationErr
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNSequenceRequestHandlerSelPerformRequestsOnCMSampleBufferOrientationError, requests.Ptr(), sampleBuffer, orientation, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

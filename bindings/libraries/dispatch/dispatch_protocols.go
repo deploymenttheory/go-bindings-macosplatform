@@ -5,97 +5,97 @@
 package dispatch
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
 var _ unsafe.Pointer   // suppress unused import
-var _ objc.Object = nil // suppress unused import
+var _ cgo.Object = nil // suppress unused import
 
 // OS_dispatch_data corresponds to the Objective-C @protocol OS_dispatch_data.
 type OS_dispatch_data interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_object
 }
 
 // OS_dispatch_group corresponds to the Objective-C @protocol OS_dispatch_group.
 type OS_dispatch_group interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_object
 }
 
 // OS_dispatch_io corresponds to the Objective-C @protocol OS_dispatch_io.
 type OS_dispatch_io interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_object
 }
 
 // OS_dispatch_object corresponds to the Objective-C @protocol OS_dispatch_object.
 type OS_dispatch_object interface {
-	objc.Object
+	cgo.Object
 }
 
 // OS_dispatch_queue corresponds to the Objective-C @protocol OS_dispatch_queue.
 type OS_dispatch_queue interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_object
 }
 
 // OS_dispatch_queue_attr corresponds to the Objective-C @protocol OS_dispatch_queue_attr.
 type OS_dispatch_queue_attr interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_object
 }
 
 // Introduced: macOS 10.14
 // OS_dispatch_queue_concurrent corresponds to the Objective-C @protocol OS_dispatch_queue_concurrent.
 type OS_dispatch_queue_concurrent interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_queue
 }
 
 // OS_dispatch_queue_global corresponds to the Objective-C @protocol OS_dispatch_queue_global.
 type OS_dispatch_queue_global interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_queue
 }
 
 // OS_dispatch_queue_main corresponds to the Objective-C @protocol OS_dispatch_queue_main.
 type OS_dispatch_queue_main interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_queue_serial
 }
 
 // Introduced: macOS 10.14
 // OS_dispatch_queue_serial corresponds to the Objective-C @protocol OS_dispatch_queue_serial.
 type OS_dispatch_queue_serial interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_queue
 }
 
 // Introduced: macOS 14.0
 // OS_dispatch_queue_serial_executor corresponds to the Objective-C @protocol OS_dispatch_queue_serial_executor.
 type OS_dispatch_queue_serial_executor interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_queue
 }
 
 // OS_dispatch_semaphore corresponds to the Objective-C @protocol OS_dispatch_semaphore.
 type OS_dispatch_semaphore interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_object
 }
 
 // OS_dispatch_source corresponds to the Objective-C @protocol OS_dispatch_source.
 type OS_dispatch_source interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_object
 }
 
 // Introduced: macOS 10.14
 // OS_dispatch_workloop corresponds to the Objective-C @protocol OS_dispatch_workloop.
 type OS_dispatch_workloop interface {
-	objc.Object
+	cgo.Object
 	OS_dispatch_queue
 }
 

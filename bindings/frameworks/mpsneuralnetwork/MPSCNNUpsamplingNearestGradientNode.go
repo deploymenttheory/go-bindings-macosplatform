@@ -6,7 +6,7 @@ package mpsneuralnetwork
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Node representing a MPSCNNUpsamplingNearest kernel
@@ -30,7 +30,7 @@ func MPSCNNUpsamplingNearestGradientNodeFromID(id objc.ID) *MPSCNNUpsamplingNear
 	}
 	o := &MPSCNNUpsamplingNearestGradientNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

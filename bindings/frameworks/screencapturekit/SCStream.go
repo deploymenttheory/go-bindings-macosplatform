@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scstream
@@ -37,7 +37,7 @@ func SCStreamFromID(id objc.ID) *SCStream {
 	}
 	o := &SCStream{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -53,7 +53,7 @@ func (o *SCStream) AddStreamOutputTypeSampleHandlerQueueError(output SCStreamOut
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sCStreamSelAddStreamOutputTypeSampleHandlerQueueError, output, type_, sampleHandlerQueue.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -62,7 +62,7 @@ func (o *SCStream) RemoveStreamOutputTypeError(output SCStreamOutput, type_ SCSt
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sCStreamSelRemoveStreamOutputTypeError, output, type_, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -120,7 +120,7 @@ func (o *SCStream) AddRecordingOutputError(recordingOutput *SCRecordingOutput) (
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sCStreamSelAddRecordingOutputError, recordingOutput.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -130,7 +130,7 @@ func (o *SCStream) RemoveRecordingOutputError(recordingOutput *SCRecordingOutput
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sCStreamSelRemoveRecordingOutputError, recordingOutput.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

@@ -6,7 +6,7 @@ package mpsneuralnetwork
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/mpsneuralnetwork/mpsnnreductioncolumnmeannode
@@ -22,7 +22,7 @@ func MPSNNReductionColumnMeanNodeFromID(id objc.ID) *MPSNNReductionColumnMeanNod
 	}
 	o := &MPSNNReductionColumnMeanNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

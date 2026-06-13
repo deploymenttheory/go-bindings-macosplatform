@@ -9,13 +9,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A collection of GKGraphNodes that are governed by a mesh formed by the space between a set of GKPolygonObstacles
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkmeshgraph
-type GKMeshGraph[NodeType pureobjc.AnyObject] struct {
+type GKMeshGraph[NodeType purego.AnyObject] struct {
 	GKGraph
 }
 
@@ -38,13 +38,13 @@ var (
 	_gKMeshGraphSelTriangleCount = objc.RegisterName("triangleCount")
 )
 
-func GKMeshGraphFromID[NodeType pureobjc.AnyObject](id objc.ID) *GKMeshGraph[NodeType] {
+func GKMeshGraphFromID[NodeType purego.AnyObject](id objc.ID) *GKMeshGraph[NodeType] {
 	if id == 0 {
 		return nil
 	}
 	o := &GKMeshGraph[NodeType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -39,7 +39,7 @@ func (x *LocalPlayer) SetDefaultLeaderboardCategoryID(ctx context.Context, categ
 	_ch := make(chan error, 1)
 	x.inner.SetDefaultLeaderboardCategoryIDCompletionHandler(foundation.NSStringStringWithUTF8String(categoryID), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -57,7 +57,7 @@ func (x *LocalPlayer) Authenticate(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.AuthenticateWithCompletionHandler(func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -75,7 +75,7 @@ func (x *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, leade
 	_ch := make(chan error, 1)
 	x.inner.SetDefaultLeaderboardIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(leaderboardIdentifier), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}
@@ -106,7 +106,7 @@ func (x *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string)
 	_ch := make(chan error, 1)
 	x.inner.DeleteSavedGamesWithNameCompletionHandler(foundation.NSStringStringWithUTF8String(name), func(_p0 unsafe.Pointer) {
 		if uintptr(_p0) != 0 {
-			_ch <- pureobjc.NSErrorToError(objc.ID(uintptr(_p0)))
+			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		} else {
 			_ch <- nil
 		}

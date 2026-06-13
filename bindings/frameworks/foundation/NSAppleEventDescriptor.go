@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ae"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsappleeventdescriptor
@@ -82,7 +82,7 @@ func NSAppleEventDescriptorFromID(id objc.ID) *NSAppleEventDescriptor {
 	}
 	o := &NSAppleEventDescriptor{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -259,7 +259,7 @@ func (o *NSAppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions NS
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelSendEventWithOptionsTimeoutError, sendOptions, timeoutInSeconds, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSAppleEventDescriptorFromID(_ret), nil
 }

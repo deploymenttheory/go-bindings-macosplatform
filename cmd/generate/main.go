@@ -26,10 +26,10 @@ import (
 	"strings"
 	"sync"
 
-	cgopipeline  "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/pipeline"
-	purepipeline "github.com/deploymenttheory/go-bindings-macosplatform/internal/purecg/pipeline"
+	cgopipeline  "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/pipeline"
+	purepipeline "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/pipeline"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/diagnostics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/meta"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/metadiff"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/scanner"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/validate"
@@ -391,10 +391,10 @@ func runDiff(args []string) {
 }
 
 // readMetaTree loads every .gometa.json under dir (arm64 preferred).
-func readMetaTree(dir string) []*meta.FrameworkMeta {
-	var frameworks []*meta.FrameworkMeta
+func readMetaTree(dir string) []*macosplatformmetadata.FrameworkMeta {
+	var frameworks []*macosplatformmetadata.FrameworkMeta
 	for _, p := range collectMetaPaths(dir) {
-		framework, err := meta.Read(p)
+		framework, err := macosplatformmetadata.Read(p)
 		if err != nil {
 			log.Fatalf("loading metadata: %v", err)
 		}
@@ -523,7 +523,7 @@ func doScan(framework, sdk, sdkVersion, metaDir, arch string, parallel int, verb
 					metaSubdir = "libraries"
 				}
 				fwMetaDir := filepath.Join(metaDir, metaSubdir, strings.ToLower(fw))
-				if err := meta.Write(framework, fwMetaDir); err != nil {
+				if err := macosplatformmetadata.Write(framework, fwMetaDir); err != nil {
 					log.Fatalf("writing metadata for %s: %v", fw, err)
 				}
 

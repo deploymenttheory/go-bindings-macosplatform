@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @abstract   A node representing a MPSCNNNeuronReLUN kernel @discussion For each pixel, applies the following function: @code f(x) = min((x >= 0 ? x : a * x), b) @endcode
@@ -31,7 +31,7 @@ func MPSCNNNeuronReLUNNodeFromID(id objc.ID) *MPSCNNNeuronReLUNNode {
 	}
 	o := &MPSCNNNeuronReLUNNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

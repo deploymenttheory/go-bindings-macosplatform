@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class   IOUSBHostObject @brief   The Abstract class IOUSBHostDevice and IOUSBHostInterface derive from. @details Defines common methods that are shared between IOUSBHostDevice and IOUSBHostInterface including instance management.
@@ -57,7 +57,7 @@ func IOUSBHostObjectFromID(id objc.ID) *IOUSBHostObject {
 	}
 	o := &IOUSBHostObject{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -110,7 +110,7 @@ func (o *IOUSBHostObject) SendDeviceRequestDataBytesTransferredCompletionTimeout
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostObjectSelSendDeviceRequestDataBytesTransferredCompletionTimeoutError, request, data.Ptr(), bytesTransferred, completionTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -120,7 +120,7 @@ func (o *IOUSBHostObject) SendDeviceRequestDataBytesTransferredError(request uns
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostObjectSelSendDeviceRequestDataBytesTransferredError, request, data.Ptr(), bytesTransferred, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -130,7 +130,7 @@ func (o *IOUSBHostObject) SendDeviceRequestError(request unsafe.Pointer) (bool, 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostObjectSelSendDeviceRequestError, request, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -179,7 +179,7 @@ func (o *IOUSBHostObject) AbortDeviceRequestsWithOptionError(option IOUSBHostAbo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostObjectSelAbortDeviceRequestsWithOptionError, option, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -189,7 +189,7 @@ func (o *IOUSBHostObject) AbortDeviceRequestsWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostObjectSelAbortDeviceRequestsWithError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -199,7 +199,7 @@ func (o *IOUSBHostObject) DescriptorWithTypeLengthIndexLanguageIDRequestTypeRequ
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostObjectSelDescriptorWithTypeLengthIndexLanguageIDRequestTypeRequestRecipientError, type_, length, index, languageID, requestType, requestRecipient, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -209,7 +209,7 @@ func (o *IOUSBHostObject) DescriptorWithTypeLengthIndexLanguageIDError(type_ uns
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostObjectSelDescriptorWithTypeLengthIndexLanguageIDError, type_, length, index, languageID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -219,7 +219,7 @@ func (o *IOUSBHostObject) DescriptorWithTypeLengthError(type_ unsafe.Pointer, le
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostObjectSelDescriptorWithTypeLengthError, type_, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -229,7 +229,7 @@ func (o *IOUSBHostObject) ConfigurationDescriptorWithIndexError(index uint) (uns
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostObjectSelConfigurationDescriptorWithIndexError, index, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -239,7 +239,7 @@ func (o *IOUSBHostObject) ConfigurationDescriptorWithConfigurationValueError(con
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostObjectSelConfigurationDescriptorWithConfigurationValueError, configurationValue, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -250,7 +250,7 @@ func (o *IOUSBHostObject) StringWithIndexLanguageIDError(index uint, languageID 
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelStringWithIndexLanguageIDError, index, languageID, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSStringFromID(_ret), nil
 }
@@ -261,7 +261,7 @@ func (o *IOUSBHostObject) StringWithIndexError(index uint) (*foundation.NSString
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelStringWithIndexError, index, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSStringFromID(_ret), nil
 }
@@ -277,7 +277,7 @@ func (o *IOUSBHostObject) CurrentMicroframeWithTimeError(time_ *uint64) (uint64,
 	var _nsErr uintptr
 	_ret := objc.Send[uint64](o.Ptr(), _iOUSBHostObjectSelCurrentMicroframeWithTimeError, time_, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -287,7 +287,7 @@ func (o *IOUSBHostObject) ReferenceMicroframeWithTimeError(time_ *uint64) (uint6
 	var _nsErr uintptr
 	_ret := objc.Send[uint64](o.Ptr(), _iOUSBHostObjectSelReferenceMicroframeWithTimeError, time_, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -298,7 +298,7 @@ func (o *IOUSBHostObject) IoDataWithCapacityError(capacity uint) (*foundation.NS
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelIoDataWithCapacityError, capacity, unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSMutableDataFromID(_ret), nil
 }

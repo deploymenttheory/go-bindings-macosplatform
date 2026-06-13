@@ -9,13 +9,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // An R-tree is a data structure that partitions axis aligned bounding rectangles into groups spatially. When a group goes to large, it is split according to its split strategy into two new groups. Fast queries can be made on these partition bounding rectangles.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkrtree
-type GKRTree[ElementType pureobjc.AnyObject] struct {
+type GKRTree[ElementType purego.AnyObject] struct {
 	foundation.NSObject
 }
 
@@ -30,13 +30,13 @@ var (
 	_gKRTreeSelSetQueryReserve = objc.RegisterName("setQueryReserve:")
 )
 
-func GKRTreeFromID[ElementType pureobjc.AnyObject](id objc.ID) *GKRTree[ElementType] {
+func GKRTreeFromID[ElementType purego.AnyObject](id objc.ID) *GKRTree[ElementType] {
 	if id == 0 {
 		return nil
 	}
 	o := &GKRTree[ElementType]{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/vision/vntrackingrequest
@@ -33,7 +33,7 @@ func VNTrackingRequestFromID(id objc.ID) *VNTrackingRequest {
 	}
 	o := &VNTrackingRequest{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -42,7 +42,7 @@ func (o *VNTrackingRequest) SupportedNumberOfTrackersAndReturnError() (uint, err
 	var _nsErr uintptr
 	_ret := objc.Send[uint](o.Ptr(), _vNTrackingRequestSelSupportedNumberOfTrackersAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/audiovideobridging/avb17221acmpinterface
@@ -34,7 +34,7 @@ func AVB17221ACMPInterfaceFromID(id objc.ID) *AVB17221ACMPInterface {
 	}
 	o := &AVB17221ACMPInterface{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -68,7 +68,7 @@ func (o *AVB17221ACMPInterface) SendACMPResponseMessageError(message *AVB17221AC
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVB17221ACMPInterfaceSelSendACMPResponseMessageError, message.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

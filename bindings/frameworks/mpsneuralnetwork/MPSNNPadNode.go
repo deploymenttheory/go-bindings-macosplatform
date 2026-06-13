@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class         MPSNNPadNode @abstract      A node for a MPSNNPad kernel @discussion    You should not use this node to zero pad your data in the XY-plane. This node copies the input image and therefore should only be used in special circumstances where the normal padding operation, defined for most filters and nodes through @ref MPSNNPadding, cannot achieve the necessary padding. Therefore use this node only when you need one of the special edge modes: @ref MPSImageEdgeModeConstant, @ref MPSImageEdgeModeMirror, @ref MPSImageEdgeModeMirrorWithEdge or, if you need padding in the feature-channel dimesion. In other cases use to @ref MPSNNPadding to get best performance.
@@ -31,7 +31,7 @@ func MPSNNPadNodeFromID(id objc.ID) *MPSNNPadNode {
 	}
 	o := &MPSNNPadNode{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

@@ -10,7 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/soundanalysis/snaudiostreamanalyzer
@@ -34,7 +34,7 @@ func SNAudioStreamAnalyzerFromID(id objc.ID) *SNAudioStreamAnalyzer {
 	}
 	o := &SNAudioStreamAnalyzer{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -50,7 +50,7 @@ func (o *SNAudioStreamAnalyzer) AddRequestWithObserverError(request SNRequest, o
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sNAudioStreamAnalyzerSelAddRequestWithObserverError, request, observer, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

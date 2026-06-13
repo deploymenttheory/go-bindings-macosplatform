@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @class       ODRecord @abstract    This class is used to read, update and modify records within the directory @discussion  This class is used to read, update and modify records within the directory.  outError is optional parameter, nil can be passed if error details are not needed.
@@ -65,7 +65,7 @@ func ODRecordFromID(id objc.ID) *ODRecord {
 	}
 	o := &ODRecord{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -74,7 +74,7 @@ func (o *ODRecord) SetNodeCredentialsPasswordError(inUsername *foundation.NSStri
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelSetNodeCredentialsPasswordError, inUsername.Ptr(), inPassword.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -84,7 +84,7 @@ func (o *ODRecord) SetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticat
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelSetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError, inRecordType.Ptr(), inType.Ptr(), inItems, outItems, outContext, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -95,7 +95,7 @@ func (o *ODRecord) SetNodeCredentialsUsingKerberosCacheError(inCacheName *founda
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelSetNodeCredentialsUsingKerberosCacheError, inCacheName.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -105,7 +105,7 @@ func (o *ODRecord) PasswordPolicyAndReturnError() (*foundation.NSDictionary[objc
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDRecordSelPasswordPolicyAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -115,7 +115,7 @@ func (o *ODRecord) VerifyPasswordError(inPassword *foundation.NSString) (bool, e
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelVerifyPasswordError, inPassword.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -125,7 +125,7 @@ func (o *ODRecord) VerifyExtendedWithAuthenticationTypeAuthenticationItemsContin
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelVerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError, inType.Ptr(), inItems, outItems, outContext, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -135,7 +135,7 @@ func (o *ODRecord) ChangePasswordToPasswordError(oldPassword *foundation.NSStrin
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelChangePasswordToPasswordError, oldPassword.Ptr(), newPassword.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -145,7 +145,7 @@ func (o *ODRecord) SynchronizeAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelSynchronizeAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -155,7 +155,7 @@ func (o *ODRecord) RecordDetailsForAttributesError(inAttributes *foundation.NSAr
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDRecordSelRecordDetailsForAttributesError, inAttributes, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -165,7 +165,7 @@ func (o *ODRecord) ValuesForAttributeError(inAttribute *foundation.NSString) (*f
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDRecordSelValuesForAttributeError, inAttribute.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -175,7 +175,7 @@ func (o *ODRecord) SetValueForAttributeError(inValueOrValues objc.ID, inAttribut
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelSetValueForAttributeError, inValueOrValues, inAttribute.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -185,7 +185,7 @@ func (o *ODRecord) RemoveValuesForAttributeError(inAttribute *foundation.NSStrin
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelRemoveValuesForAttributeError, inAttribute.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -195,7 +195,7 @@ func (o *ODRecord) AddValueToAttributeError(inValue objc.ID, inAttribute *founda
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelAddValueToAttributeError, inValue, inAttribute.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -205,7 +205,7 @@ func (o *ODRecord) RemoveValueFromAttributeError(inValue objc.ID, inAttribute *f
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelRemoveValueFromAttributeError, inValue, inAttribute.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -215,7 +215,7 @@ func (o *ODRecord) DeleteRecordAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelDeleteRecordAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -225,7 +225,7 @@ func (o *ODRecord) PoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, o
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDRecordSelPoliciesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -235,7 +235,7 @@ func (o *ODRecord) EffectivePoliciesAndReturnError() (*foundation.NSDictionary[o
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDRecordSelEffectivePoliciesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -245,7 +245,7 @@ func (o *ODRecord) SupportedPoliciesAndReturnError() (*foundation.NSDictionary[o
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDRecordSelSupportedPoliciesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -255,7 +255,7 @@ func (o *ODRecord) SetPoliciesError(policies *foundation.NSDictionary[objc.ID, o
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelSetPoliciesError, policies, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -265,7 +265,7 @@ func (o *ODRecord) SetPolicyValueError(policy *foundation.NSString, value objc.I
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelSetPolicyValueError, policy.Ptr(), value, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -275,7 +275,7 @@ func (o *ODRecord) RemovePolicyError(policy *foundation.NSString) (bool, error) 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelRemovePolicyError, policy.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -285,7 +285,7 @@ func (o *ODRecord) AddAccountPolicyToCategoryError(policy *foundation.NSDictiona
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelAddAccountPolicyToCategoryError, policy, category.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -295,7 +295,7 @@ func (o *ODRecord) RemoveAccountPolicyFromCategoryError(policy *foundation.NSDic
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelRemoveAccountPolicyFromCategoryError, policy, category.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -305,7 +305,7 @@ func (o *ODRecord) SetAccountPoliciesError(policies *foundation.NSDictionary[obj
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelSetAccountPoliciesError, policies, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -315,7 +315,7 @@ func (o *ODRecord) AccountPoliciesAndReturnError() (*foundation.NSDictionary[obj
 	var _nsErr uintptr
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDRecordSelAccountPoliciesAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -325,7 +325,7 @@ func (o *ODRecord) AuthenticationAllowedAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelAuthenticationAllowedAndReturnError, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -335,7 +335,7 @@ func (o *ODRecord) PasswordChangeAllowedError(newPassword *foundation.NSString) 
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelPasswordChangeAllowedError, newPassword.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -383,7 +383,7 @@ func (o *ODRecord) AddMemberRecordError(inRecord *ODRecord) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelAddMemberRecordError, inRecord.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -393,7 +393,7 @@ func (o *ODRecord) RemoveMemberRecordError(inRecord *ODRecord) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelRemoveMemberRecordError, inRecord.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -403,7 +403,7 @@ func (o *ODRecord) IsMemberRecordError(inRecord *ODRecord) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _oDRecordSelIsMemberRecordError, inRecord.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

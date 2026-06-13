@@ -7,7 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,7 +26,7 @@ func NewWKWebExtensionMatchPatternWithStringError(string_ string) (*WKWebExtensi
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:error:"), foundation.NSStringStringWithUTF8String(string_).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &WKWebExtensionMatchPattern{inner: raw.WKWebExtensionMatchPatternFromID(_id)}, nil
 }
@@ -37,7 +37,7 @@ func NewWKWebExtensionMatchPatternWithSchemeHostPathError(scheme string, host st
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScheme:host:path:error:"), foundation.NSStringStringWithUTF8String(scheme).Ptr(), foundation.NSStringStringWithUTF8String(host).Ptr(), foundation.NSStringStringWithUTF8String(path).Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return &WKWebExtensionMatchPattern{inner: raw.WKWebExtensionMatchPatternFromID(_id)}, nil
 }

@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/foundation/nskeyedunarchiver
@@ -45,7 +45,7 @@ func NSKeyedUnarchiverFromID(id objc.ID) *NSKeyedUnarchiver {
 	}
 	o := &NSKeyedUnarchiver{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -55,7 +55,7 @@ func (o *NSKeyedUnarchiver) InitForReadingFromDataError(data *NSData) (*NSKeyedU
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedUnarchiverSelInitForReadingFromDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSKeyedUnarchiverFromID(_ret), nil
 }
@@ -65,7 +65,7 @@ func NSKeyedUnarchiverUnarchivedObjectOfClassFromDataError(cls objc.Class, data 
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedObjectOfClassFromDataError, cls, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -75,7 +75,7 @@ func NSKeyedUnarchiverUnarchivedArrayOfObjectsOfClassFromDataError(cls objc.Clas
 	var _nsErr uintptr
 	_ret := objc.Send[*NSArray[objc.ID]](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedArrayOfObjectsOfClassFromDataError, cls, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -85,7 +85,7 @@ func NSKeyedUnarchiverUnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataE
 	var _nsErr uintptr
 	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataError, keyCls, valueCls, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -95,7 +95,7 @@ func NSKeyedUnarchiverUnarchivedObjectOfClassesFromDataError(classes *NSSet[objc
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedObjectOfClassesFromDataError, classes, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -105,7 +105,7 @@ func NSKeyedUnarchiverUnarchivedArrayOfObjectsOfClassesFromDataError(classes *NS
 	var _nsErr uintptr
 	_ret := objc.Send[*NSArray[objc.ID]](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedArrayOfObjectsOfClassesFromDataError, classes, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -115,7 +115,7 @@ func NSKeyedUnarchiverUnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromD
 	var _nsErr uintptr
 	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError, keyClasses, valueClasses, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -145,7 +145,7 @@ func NSKeyedUnarchiverUnarchiveTopLevelObjectWithDataError(data *NSData) (objc.I
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchiveTopLevelObjectWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

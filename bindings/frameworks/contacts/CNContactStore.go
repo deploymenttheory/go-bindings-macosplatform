@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontactstore
@@ -40,7 +40,7 @@ func CNContactStoreFromID(id objc.ID) *CNContactStore {
 	}
 	o := &CNContactStore{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -68,7 +68,7 @@ func (o *CNContactStore) UnifiedContactsMatchingPredicateKeysToFetchError(predic
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelUnifiedContactsMatchingPredicateKeysToFetchError, predicate.Ptr(), keys.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*CNContact](_ret), nil
 }
@@ -79,7 +79,7 @@ func (o *CNContactStore) UnifiedContactWithIdentifierKeysToFetchError(identifier
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelUnifiedContactWithIdentifierKeysToFetchError, identifier.Ptr(), keys.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CNContactFromID(_ret), nil
 }
@@ -90,7 +90,7 @@ func (o *CNContactStore) UnifiedMeContactWithKeysToFetchError(keys *foundation.N
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelUnifiedMeContactWithKeysToFetchError, keys.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CNContactFromID(_ret), nil
 }
@@ -100,7 +100,7 @@ func (o *CNContactStore) EnumeratorForContactFetchRequestError(request *CNContac
 	var _nsErr uintptr
 	_ret := objc.Send[*CNFetchResult[objc.ID]](o.Ptr(), _cNContactStoreSelEnumeratorForContactFetchRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -110,7 +110,7 @@ func (o *CNContactStore) EnumeratorForChangeHistoryFetchRequestError(request *CN
 	var _nsErr uintptr
 	_ret := objc.Send[*CNFetchResult[objc.ID]](o.Ptr(), _cNContactStoreSelEnumeratorForChangeHistoryFetchRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
@@ -137,7 +137,7 @@ func (o *CNContactStore) GroupsMatchingPredicateError(predicate *foundation.NSPr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelGroupsMatchingPredicateError, predicate.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*CNGroup](_ret), nil
 }
@@ -148,7 +148,7 @@ func (o *CNContactStore) ContainersMatchingPredicateError(predicate *foundation.
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelContainersMatchingPredicateError, predicate.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*CNContainer](_ret), nil
 }
@@ -158,7 +158,7 @@ func (o *CNContactStore) ExecuteSaveRequestError(saveRequest *CNSaveRequest) (bo
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cNContactStoreSelExecuteSaveRequestError, saveRequest.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return false, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

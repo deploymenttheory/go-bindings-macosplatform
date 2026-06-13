@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @brief NSAccessibilityCustomRotorSearchParameters is a container for search parameters. It should be examined to determine the next matching NSAccessibilityCustomRotorItemResult.
@@ -33,7 +33,7 @@ func NSAccessibilityCustomRotorSearchParametersFromID(id objc.ID) *NSAccessibili
 	}
 	o := &NSAccessibilityCustomRotorSearchParameters{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

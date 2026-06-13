@@ -6,7 +6,7 @@ package gameplaykit
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Billow noise is similar to Perlin noise, with more rounded shapes and clearly-defined transitions beween values.
@@ -30,7 +30,7 @@ func GKBillowNoiseSourceFromID(id objc.ID) *GKBillowNoiseSource {
 	}
 	o := &GKBillowNoiseSource{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 

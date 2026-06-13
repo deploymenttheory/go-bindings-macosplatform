@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Apple documentation: https://developer.apple.com/documentation/automator/amaction
@@ -55,7 +55,7 @@ func AMActionFromID(id objc.ID) *AMAction {
 	}
 	o := &AMAction{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
@@ -70,7 +70,7 @@ func (o *AMAction) InitWithContentsOfURLError(fileURL *foundation.NSURL) (*AMAct
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMActionSelInitWithContentsOfURLError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
 	if _nsErr != 0 {
-		return nil, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return AMActionFromID(_ret), nil
 }
@@ -84,7 +84,7 @@ func (o *AMAction) RunWithInputError(input objc.ID) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMActionSelRunWithInputError, input, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return 0, pureobjc.NSErrorToError(objc.ID(_nsErr))
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }

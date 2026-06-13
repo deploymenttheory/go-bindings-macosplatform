@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/pureobjc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // @brief NSAccessibilityCustomRotorItemResults are the objects returned to assistive technologies that match a search parameter criteria.
@@ -35,7 +35,7 @@ func NSAccessibilityCustomRotorItemResultFromID(id objc.ID) *NSAccessibilityCust
 	}
 	o := &NSAccessibilityCustomRotorItemResult{}
 	o.InitPtr(id)
-	pureobjc.Track(o)
+	purego.Track(o)
 	return o
 }
 
