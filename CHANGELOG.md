@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.2.1...v0.3.0) (2026-06-17)
+
+
+### Features
+
+* added collections and delegates to idiomatic codegen ([c3cc892](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/c3cc89263d51925b1783d591b7a22dc6dd41bd6c))
+* added collections and delegates to idiomatic codegen ([9235b43](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/9235b436a8759ffd07be07e4e1f97b2b452bed90))
+* added keychain example and refinement to code gen comments ([ad80c4d](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/ad80c4df246523fa26702894b06233fd1d19b950))
+* enhance keychain example with comprehensive CRUD operations across item classes ([3d253f6](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/3d253f696fce632dba941f7ff9a8e0413937aca2))
+* regen ([9415eda](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/9415eda6c536145ec1f38ded568e78f5aa04ac23))
+
 ## [0.2.1](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.2.0...v0.2.1) (2026-06-13)
 
 
