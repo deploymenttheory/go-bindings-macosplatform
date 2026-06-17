@@ -35,6 +35,12 @@ func NewUnitElectricCurrent() *UnitElectricCurrent {
 	return &UnitElectricCurrent{inner: raw.NSUnitElectricCurrentFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitElectricCurrent) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricCurrent {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitElectricCurrent) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitElectricCurrent) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitElectricCurrent) asObject() *raw.NSObject { return &x.inner.NSDimen
 // UnitElectricCurrentable is the interface implemented by [UnitElectricCurrent], for mocking and DI.
 type UnitElectricCurrentable interface {
 	Unwrap() *raw.NSUnitElectricCurrent
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricCurrent
 }
 
 var _ UnitElectricCurrentable = (*UnitElectricCurrent)(nil)

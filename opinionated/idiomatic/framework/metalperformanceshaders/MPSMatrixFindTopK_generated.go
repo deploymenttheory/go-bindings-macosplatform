@@ -72,6 +72,42 @@ func (x *MatrixFindTopK) WithNumberOfTopKValues(numberOfTopKValues uint) *Matrix
 	return x
 }
 
+// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixFindTopK) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixFindTopK {
+	x.inner.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixFindTopK) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFindTopK {
+	x.inner.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixFindTopK) WithBatchStart(batchStart uint) *MatrixFindTopK {
+	x.inner.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixFindTopK) WithBatchSize(batchSize uint) *MatrixFindTopK {
+	x.inner.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixFindTopK) WithOptions(options mpscore.MPSKernelOptions) *MatrixFindTopK {
+	x.inner.MPSMatrixUnaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixFindTopK) WithLabel(label string) *MatrixFindTopK {
+	x.inner.MPSMatrixUnaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix calls the underlying EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix.
 func (x *MatrixFindTopK) EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, resultIndexMatrix *mpscore.MPSMatrix, resultValueMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix(commandBuffer, inputMatrix, resultIndexMatrix, resultValueMatrix)
@@ -137,6 +173,12 @@ type MatrixFindTopKable interface {
 	WithSourceColumns(sourceColumns uint) *MatrixFindTopK
 	WithIndexOffset(indexOffset uint) *MatrixFindTopK
 	WithNumberOfTopKValues(numberOfTopKValues uint) *MatrixFindTopK
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixFindTopK
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFindTopK
+	WithBatchStart(batchStart uint) *MatrixFindTopK
+	WithBatchSize(batchSize uint) *MatrixFindTopK
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixFindTopK
+	WithLabel(label string) *MatrixFindTopK
 	EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, resultIndexMatrix *mpscore.MPSMatrix, resultValueMatrix *mpscore.MPSMatrix)
 	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixFindTopK
 	SourceRows() uint

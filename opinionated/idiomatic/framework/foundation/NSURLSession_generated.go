@@ -44,6 +44,12 @@ func (x *URLSession) WithSessionDescription(sessionDescription string) *URLSessi
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLSession) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSession {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // FinishTasksAndInvalidate calls the underlying FinishTasksAndInvalidate.
 func (x *URLSession) FinishTasksAndInvalidate() {
 	x.inner.FinishTasksAndInvalidate()
@@ -349,6 +355,7 @@ func (x *URLSession) asObject() *raw.NSObject { return &x.inner.NSObject }
 type URLSessionable interface {
 	Unwrap() *raw.NSURLSession
 	WithSessionDescription(sessionDescription string) *URLSession
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSession
 	FinishTasksAndInvalidate()
 	InvalidateAndCancel()
 	Reset(ctx context.Context) error

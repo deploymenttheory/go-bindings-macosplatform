@@ -47,6 +47,66 @@ func NewCNNPoolingL2NormWithCoderDevice(aDecoder *foundation.NSCoder, device met
 	return &CNNPoolingL2Norm{inner: raw.MPSCNNPoolingL2NormFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNPoolingL2Norm) WithOffset(offset mpscore.MPSOffset) *CNNPoolingL2Norm {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNPoolingL2Norm) WithClipRect(clipRect metal.MTLRegion) *CNNPoolingL2Norm {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingL2Norm) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingL2Norm {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingL2Norm) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNPoolingL2Norm {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNPoolingL2Norm) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNPoolingL2Norm {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNPoolingL2Norm) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNPoolingL2Norm {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNPoolingL2Norm) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNPoolingL2Norm {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNPoolingL2Norm) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingL2Norm {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNPoolingL2Norm) WithOptions(options mpscore.MPSKernelOptions) *CNNPoolingL2Norm {
+	x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNPoolingL2Norm) WithLabel(label string) *CNNPoolingL2Norm {
+	x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNPoolingL2Norm) asCNNPooling() *mpsneuralnetwork.MPSCNNPooling { return &x.inner.MPSCNNPooling }
 
 func (x *CNNPoolingL2Norm) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
@@ -56,6 +116,16 @@ func (x *CNNPoolingL2Norm) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCN
 // CNNPoolingL2Normable is the interface implemented by [CNNPoolingL2Norm], for mocking and DI.
 type CNNPoolingL2Normable interface {
 	Unwrap() *raw.MPSCNNPoolingL2Norm
+	WithOffset(offset mpscore.MPSOffset) *CNNPoolingL2Norm
+	WithClipRect(clipRect metal.MTLRegion) *CNNPoolingL2Norm
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingL2Norm
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNPoolingL2Norm
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNPoolingL2Norm
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNPoolingL2Norm
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNPoolingL2Norm
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingL2Norm
+	WithOptions(options mpscore.MPSKernelOptions) *CNNPoolingL2Norm
+	WithLabel(label string) *CNNPoolingL2Norm
 }
 
 var _ CNNPoolingL2Normable = (*CNNPoolingL2Norm)(nil)

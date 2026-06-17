@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,42 @@ func NewImageReduceRowMaxWithDevice(device metal.MTLDevice) *ImageReduceRowMax {
 	return &ImageReduceRowMax{inner: raw.MPSImageReduceRowMaxFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *ImageReduceRowMax) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMax {
+	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceRowMax) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMax {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceRowMax) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMax {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceRowMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMax {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageReduceRowMax) WithOptions(options mpscore.MPSKernelOptions) *ImageReduceRowMax {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageReduceRowMax) WithLabel(label string) *ImageReduceRowMax {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageReduceRowMax) asImageReduceUnary() *mpsimage.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
 
 func (x *ImageReduceRowMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
@@ -48,6 +85,12 @@ func (x *ImageReduceRowMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSI
 // ImageReduceRowMaxable is the interface implemented by [ImageReduceRowMax], for mocking and DI.
 type ImageReduceRowMaxable interface {
 	Unwrap() *raw.MPSImageReduceRowMax
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMax
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMax
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMax
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMax
+	WithOptions(options mpscore.MPSKernelOptions) *ImageReduceRowMax
+	WithLabel(label string) *ImageReduceRowMax
 }
 
 var _ ImageReduceRowMaxable = (*ImageReduceRowMax)(nil)

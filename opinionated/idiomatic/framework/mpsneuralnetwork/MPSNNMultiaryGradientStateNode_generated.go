@@ -35,11 +35,32 @@ func NewNNMultiaryGradientStateNode() *NNMultiaryGradientStateNode {
 	return &NNMultiaryGradientStateNode{inner: raw.MPSNNMultiaryGradientStateNodeFromID(_id)}
 }
 
+// WithHandle sets the handle property and returns the receiver for chaining.
+func (x *NNMultiaryGradientStateNode) WithHandle(handle raw.MPSHandle) *NNMultiaryGradientStateNode {
+	x.inner.MPSNNStateNode.SetHandle(handle)
+	return x
+}
+
+// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+func (x *NNMultiaryGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNMultiaryGradientStateNode {
+	x.inner.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	return x
+}
+
+// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+func (x *NNMultiaryGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNMultiaryGradientStateNode {
+	x.inner.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	return x
+}
+
 func (x *NNMultiaryGradientStateNode) asNNStateNode() *raw.MPSNNStateNode { return &x.inner.MPSNNStateNode }
 
 // NNMultiaryGradientStateNodeable is the interface implemented by [NNMultiaryGradientStateNode], for mocking and DI.
 type NNMultiaryGradientStateNodeable interface {
 	Unwrap() *raw.MPSNNMultiaryGradientStateNode
+	WithHandle(handle raw.MPSHandle) *NNMultiaryGradientStateNode
+	WithExportFromGraph(exportFromGraph bool) *NNMultiaryGradientStateNode
+	WithSynchronizeResource(synchronizeResource bool) *NNMultiaryGradientStateNode
 }
 
 var _ NNMultiaryGradientStateNodeable = (*NNMultiaryGradientStateNode)(nil)

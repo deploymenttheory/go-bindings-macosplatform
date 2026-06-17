@@ -37,6 +37,12 @@ func NewArchiverForWritingWithMutableData(mdata *raw.NSMutableData) *Archiver {
 	return &Archiver{inner: raw.NSArchiverFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Archiver) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Archiver {
+	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // EncodeClassNameIntoClassName calls the underlying EncodeClassNameIntoClassName.
 func (x *Archiver) EncodeClassNameIntoClassName(trueName string, inArchiveName string) {
 	x.inner.EncodeClassNameIntoClassName(foundation.NSStringStringWithUTF8String(trueName), foundation.NSStringStringWithUTF8String(inArchiveName))
@@ -72,6 +78,7 @@ func (x *Archiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
 // Archiverable is the interface implemented by [Archiver], for mocking and DI.
 type Archiverable interface {
 	Unwrap() *raw.NSArchiver
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Archiver
 	EncodeClassNameIntoClassName(trueName string, inArchiveName string)
 	ClassNameEncodedForTrueClassName(trueName string) *String
 	ReplaceObjectWithObject(object objc.ID, newObject objc.ID)

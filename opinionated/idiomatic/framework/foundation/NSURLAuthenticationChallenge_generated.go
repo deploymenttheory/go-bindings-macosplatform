@@ -44,6 +44,12 @@ func NewURLAuthenticationChallengeWithAuthenticationChallengeSender(challenge *r
 	return &URLAuthenticationChallenge{inner: raw.NSURLAuthenticationChallengeFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLAuthenticationChallenge) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLAuthenticationChallenge {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ProtectionSpace calls the underlying ProtectionSpace.
 func (x *URLAuthenticationChallenge) ProtectionSpace() *URLProtectionSpace {
 	_r := x.inner.ProtectionSpace()
@@ -91,6 +97,7 @@ func (x *URLAuthenticationChallenge) asObject() *raw.NSObject { return &x.inner.
 // URLAuthenticationChallengeable is the interface implemented by [URLAuthenticationChallenge], for mocking and DI.
 type URLAuthenticationChallengeable interface {
 	Unwrap() *raw.NSURLAuthenticationChallenge
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLAuthenticationChallenge
 	ProtectionSpace() *URLProtectionSpace
 	ProposedCredential() *URLCredential
 	PreviousFailureCount() int

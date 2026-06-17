@@ -54,6 +54,30 @@ func NewNNOptimizerStochasticGradientDescentWithDeviceMomentumScaleUseNestrovMom
 	return &NNOptimizerStochasticGradientDescent{inner: raw.MPSNNOptimizerStochasticGradientDescentFromID(_id)}
 }
 
+// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+func (x *NNOptimizerStochasticGradientDescent) WithLearningRate(learningRate float32) *NNOptimizerStochasticGradientDescent {
+	x.inner.MPSNNOptimizer.SetLearningRate(learningRate)
+	return x
+}
+
+// WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
+func (x *NNOptimizerStochasticGradientDescent) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerStochasticGradientDescent {
+	x.inner.MPSNNOptimizer.SetApplyGradientClipping(applyGradientClipping)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNOptimizerStochasticGradientDescent) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerStochasticGradientDescent {
+	x.inner.MPSNNOptimizer.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNOptimizerStochasticGradientDescent) WithLabel(label string) *NNOptimizerStochasticGradientDescent {
+	x.inner.MPSNNOptimizer.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector.
 func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputMomentumVector, resultValuesVector)
@@ -101,6 +125,10 @@ func (x *NNOptimizerStochasticGradientDescent) asKernel() *mpscore.MPSKernel { r
 // NNOptimizerStochasticGradientDescentable is the interface implemented by [NNOptimizerStochasticGradientDescent], for mocking and DI.
 type NNOptimizerStochasticGradientDescentable interface {
 	Unwrap() *raw.MPSNNOptimizerStochasticGradientDescent
+	WithLearningRate(learningRate float32) *NNOptimizerStochasticGradientDescent
+	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerStochasticGradientDescent
+	WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerStochasticGradientDescent
+	WithLabel(label string) *NNOptimizerStochasticGradientDescent
 	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)
 	EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputMomentumMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix)
 	EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, convolutionSourceState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState)

@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -33,6 +34,18 @@ func ConvolutionLayerFromID(id objc.ID) *ConvolutionLayer {
 func NewConvolutionLayer() *ConvolutionLayer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCConvolutionLayer")), objc.RegisterName("new"))
 	return &ConvolutionLayer{inner: raw.MLCConvolutionLayerFromID(_id)}
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ConvolutionLayer) WithLabel(label string) *ConvolutionLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *ConvolutionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConvolutionLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
 }
 
 // Descriptor calls the underlying Descriptor.
@@ -85,6 +98,8 @@ func (x *ConvolutionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // ConvolutionLayerable is the interface implemented by [ConvolutionLayer], for mocking and DI.
 type ConvolutionLayerable interface {
 	Unwrap() *raw.MLCConvolutionLayer
+	WithLabel(label string) *ConvolutionLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConvolutionLayer
 	Descriptor() *ConvolutionDescriptor
 	Weights() *Tensor
 	Biases() *Tensor

@@ -38,6 +38,18 @@ func NewMultiPolygonWithPolygons(polygons *foundation.NSArray[*raw.MKPolygon]) *
 	return &MultiPolygon{inner: raw.MKMultiPolygonFromID(_id)}
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *MultiPolygon) WithTitle(title string) *MultiPolygon {
+	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *MultiPolygon) WithSubtitle(subtitle string) *MultiPolygon {
+	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
 // Polygons returns the collection as a Go slice.
 func (x *MultiPolygon) Polygons() []*raw.MKPolygon {
 	arr := x.inner.Polygons()
@@ -54,6 +66,8 @@ func (x *MultiPolygon) asShape() *raw.MKShape { return &x.inner.MKShape }
 // MultiPolygonable is the interface implemented by [MultiPolygon], for mocking and DI.
 type MultiPolygonable interface {
 	Unwrap() *raw.MKMultiPolygon
+	WithTitle(title string) *MultiPolygon
+	WithSubtitle(subtitle string) *MultiPolygon
 	Polygons() []*raw.MKPolygon
 }
 

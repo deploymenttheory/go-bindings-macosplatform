@@ -59,6 +59,12 @@ func (x *AudioUnitDelay) WithWetDryMix(wetDryMix float32) *AudioUnitDelay {
 	return x
 }
 
+// WithBypass sets the bypass property and returns the receiver for chaining.
+func (x *AudioUnitDelay) WithBypass(bypass bool) *AudioUnitDelay {
+	x.inner.AVAudioUnitEffect.SetBypass(bypass)
+	return x
+}
+
 // DelayTime calls the underlying DelayTime.
 func (x *AudioUnitDelay) DelayTime() float64 {
 	return x.inner.DelayTime()
@@ -112,6 +118,7 @@ type AudioUnitDelayable interface {
 	WithFeedback(feedback float32) *AudioUnitDelay
 	WithLowPassCutoff(lowPassCutoff float32) *AudioUnitDelay
 	WithWetDryMix(wetDryMix float32) *AudioUnitDelay
+	WithBypass(bypass bool) *AudioUnitDelay
 	DelayTime() float64
 	SetDelayTime(delayTime float64)
 	Feedback() float32

@@ -43,6 +43,12 @@ func NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject(obj1 *raw.N
 	return &SpecifierTest{inner: raw.NSSpecifierTestFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *SpecifierTest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SpecifierTest {
+	x.inner.NSScriptWhoseTest.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *SpecifierTest) asScriptWhoseTest() *raw.NSScriptWhoseTest { return &x.inner.NSScriptWhoseTest }
 
 func (x *SpecifierTest) asObject() *raw.NSObject { return &x.inner.NSScriptWhoseTest.NSObject }
@@ -50,6 +56,7 @@ func (x *SpecifierTest) asObject() *raw.NSObject { return &x.inner.NSScriptWhose
 // SpecifierTestable is the interface implemented by [SpecifierTest], for mocking and DI.
 type SpecifierTestable interface {
 	Unwrap() *raw.NSSpecifierTest
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SpecifierTest
 }
 
 var _ SpecifierTestable = (*SpecifierTest)(nil)

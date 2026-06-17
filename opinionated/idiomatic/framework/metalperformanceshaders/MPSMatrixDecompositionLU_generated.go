@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,42 @@ func NewMatrixDecompositionLUWithDeviceRowsColumns(device metal.MTLDevice, rows 
 	return &MatrixDecompositionLU{inner: raw.MPSMatrixDecompositionLUFromID(_id)}
 }
 
+// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixDecompositionLU) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
+	x.inner.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixDecompositionLU) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
+	x.inner.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixDecompositionLU) WithBatchStart(batchStart uint) *MatrixDecompositionLU {
+	x.inner.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixDecompositionLU) WithBatchSize(batchSize uint) *MatrixDecompositionLU {
+	x.inner.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixDecompositionLU) WithOptions(options mpscore.MPSKernelOptions) *MatrixDecompositionLU {
+	x.inner.MPSMatrixUnaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixDecompositionLU) WithLabel(label string) *MatrixDecompositionLU {
+	x.inner.MPSMatrixUnaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus calls the underlying EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus.
 func (x *MatrixDecompositionLU) EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, status metal.MTLBuffer) {
 	x.inner.EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer, sourceMatrix, resultMatrix, pivotIndices, status)
@@ -51,6 +88,12 @@ func (x *MatrixDecompositionLU) asKernel() *mpscore.MPSKernel { return &x.inner.
 // MatrixDecompositionLUable is the interface implemented by [MatrixDecompositionLU], for mocking and DI.
 type MatrixDecompositionLUable interface {
 	Unwrap() *raw.MPSMatrixDecompositionLU
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU
+	WithBatchStart(batchStart uint) *MatrixDecompositionLU
+	WithBatchSize(batchSize uint) *MatrixDecompositionLU
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixDecompositionLU
+	WithLabel(label string) *MatrixDecompositionLU
 	EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, status metal.MTLBuffer)
 }
 

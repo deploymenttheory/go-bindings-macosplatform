@@ -36,6 +36,30 @@ func NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed(frequency float6
 	return &RidgedNoiseSource{inner: raw.GKRidgedNoiseSourceFromID(_id)}
 }
 
+// WithFrequency sets the frequency property and returns the receiver for chaining.
+func (x *RidgedNoiseSource) WithFrequency(frequency float64) *RidgedNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetFrequency(frequency)
+	return x
+}
+
+// WithOctaveCount sets the octaveCount property and returns the receiver for chaining.
+func (x *RidgedNoiseSource) WithOctaveCount(octaveCount int) *RidgedNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetOctaveCount(octaveCount)
+	return x
+}
+
+// WithLacunarity sets the lacunarity property and returns the receiver for chaining.
+func (x *RidgedNoiseSource) WithLacunarity(lacunarity float64) *RidgedNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetLacunarity(lacunarity)
+	return x
+}
+
+// WithSeed sets the seed property and returns the receiver for chaining.
+func (x *RidgedNoiseSource) WithSeed(seed int32) *RidgedNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetSeed(seed)
+	return x
+}
+
 func (x *RidgedNoiseSource) asCoherentNoiseSource() *raw.GKCoherentNoiseSource { return &x.inner.GKCoherentNoiseSource }
 
 func (x *RidgedNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKCoherentNoiseSource.GKNoiseSource }
@@ -43,6 +67,10 @@ func (x *RidgedNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner
 // RidgedNoiseSourceable is the interface implemented by [RidgedNoiseSource], for mocking and DI.
 type RidgedNoiseSourceable interface {
 	Unwrap() *raw.GKRidgedNoiseSource
+	WithFrequency(frequency float64) *RidgedNoiseSource
+	WithOctaveCount(octaveCount int) *RidgedNoiseSource
+	WithLacunarity(lacunarity float64) *RidgedNoiseSource
+	WithSeed(seed int32) *RidgedNoiseSource
 }
 
 var _ RidgedNoiseSourceable = (*RidgedNoiseSource)(nil)

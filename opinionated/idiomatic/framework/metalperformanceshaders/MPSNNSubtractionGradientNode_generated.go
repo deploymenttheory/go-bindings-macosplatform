@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,66 @@ func NewNNSubtractionGradientNode() *NNSubtractionGradientNode {
 	return &NNSubtractionGradientNode{inner: raw.MPSNNSubtractionGradientNodeFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *NNSubtractionGradientNode) WithPrimaryScale(primaryScale float32) *NNSubtractionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *NNSubtractionGradientNode) WithSecondaryScale(secondaryScale float32) *NNSubtractionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *NNSubtractionGradientNode) WithBias(bias float32) *NNSubtractionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetBias(bias)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNSubtractionGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNSubtractionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNSubtractionGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNSubtractionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNSubtractionGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNSubtractionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *NNSubtractionGradientNode) WithMinimumValue(minimumValue float32) *NNSubtractionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *NNSubtractionGradientNode) WithMaximumValue(maximumValue float32) *NNSubtractionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNSubtractionGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNSubtractionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNSubtractionGradientNode) WithLabel(label string) *NNSubtractionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNSubtractionGradientNode) asNNArithmeticGradientNode() *mpsneuralnetwork.MPSNNArithmeticGradientNode { return &x.inner.MPSNNArithmeticGradientNode }
 
 func (x *NNSubtractionGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode }
@@ -45,6 +106,16 @@ func (x *NNSubtractionGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilt
 // NNSubtractionGradientNodeable is the interface implemented by [NNSubtractionGradientNode], for mocking and DI.
 type NNSubtractionGradientNodeable interface {
 	Unwrap() *raw.MPSNNSubtractionGradientNode
+	WithPrimaryScale(primaryScale float32) *NNSubtractionGradientNode
+	WithSecondaryScale(secondaryScale float32) *NNSubtractionGradientNode
+	WithBias(bias float32) *NNSubtractionGradientNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNSubtractionGradientNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNSubtractionGradientNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNSubtractionGradientNode
+	WithMinimumValue(minimumValue float32) *NNSubtractionGradientNode
+	WithMaximumValue(maximumValue float32) *NNSubtractionGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNSubtractionGradientNode
+	WithLabel(label string) *NNSubtractionGradientNode
 }
 
 var _ NNSubtractionGradientNodeable = (*NNSubtractionGradientNode)(nil)

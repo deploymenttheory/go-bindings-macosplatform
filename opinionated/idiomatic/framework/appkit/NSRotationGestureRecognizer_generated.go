@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,6 +48,90 @@ func (x *RotationGestureRecognizer) WithRotationInDegrees(rotationInDegrees floa
 	return x
 }
 
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithTarget(target objc.ID) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithAction(action objc.SEL) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAction(action)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithState(state raw.NSGestureRecognizerState) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetState(state)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelegate(delegate)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithEnabled(enabled bool) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetEnabled(enabled)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
+	return x
+}
+
+// WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
+	return x
+}
+
+// WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
+	return x
+}
+
+// WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysKeyEvents(delaysKeyEvents)
+	return x
+}
+
+// WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysMagnificationEvents(delaysMagnificationEvents)
+	return x
+}
+
+// WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysRotationEvents(delaysRotationEvents)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithName(name string) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *RotationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
 // Rotation calls the underlying Rotation.
 func (x *RotationGestureRecognizer) Rotation() float64 {
 	return x.inner.Rotation()
@@ -74,6 +159,20 @@ type RotationGestureRecognizerable interface {
 	Unwrap() *raw.NSRotationGestureRecognizer
 	WithRotation(rotation float64) *RotationGestureRecognizer
 	WithRotationInDegrees(rotationInDegrees float64) *RotationGestureRecognizer
+	WithTarget(target objc.ID) *RotationGestureRecognizer
+	WithAction(action objc.SEL) *RotationGestureRecognizer
+	WithState(state raw.NSGestureRecognizerState) *RotationGestureRecognizer
+	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *RotationGestureRecognizer
+	WithEnabled(enabled bool) *RotationGestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RotationGestureRecognizer
+	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *RotationGestureRecognizer
+	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *RotationGestureRecognizer
+	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *RotationGestureRecognizer
+	WithDelaysKeyEvents(delaysKeyEvents bool) *RotationGestureRecognizer
+	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *RotationGestureRecognizer
+	WithDelaysRotationEvents(delaysRotationEvents bool) *RotationGestureRecognizer
+	WithName(name string) *RotationGestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RotationGestureRecognizer
 	Rotation() float64
 	SetRotation(rotation float64)
 	RotationInDegrees() float64

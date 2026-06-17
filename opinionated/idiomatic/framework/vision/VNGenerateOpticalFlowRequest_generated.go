@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -53,6 +54,30 @@ func (x *GenerateOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput boo
 	return x
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *GenerateOpticalFlowRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateOpticalFlowRequest {
+	x.inner.VNTargetedImageRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *GenerateOpticalFlowRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateOpticalFlowRequest {
+	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *GenerateOpticalFlowRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateOpticalFlowRequest {
+	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *GenerateOpticalFlowRequest) WithRevision(revision uint) *GenerateOpticalFlowRequest {
+	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // ComputationAccuracy calls the underlying ComputationAccuracy.
 func (x *GenerateOpticalFlowRequest) ComputationAccuracy() raw.VNGenerateOpticalFlowRequestComputationAccuracy {
 	return x.inner.ComputationAccuracy()
@@ -95,6 +120,10 @@ type GenerateOpticalFlowRequestable interface {
 	WithComputationAccuracy(computationAccuracy raw.VNGenerateOpticalFlowRequestComputationAccuracy) *GenerateOpticalFlowRequest
 	WithOutputPixelFormat(outputPixelFormat uint) *GenerateOpticalFlowRequest
 	WithKeepNetworkOutput(keepNetworkOutput bool) *GenerateOpticalFlowRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateOpticalFlowRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateOpticalFlowRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *GenerateOpticalFlowRequest
+	WithRevision(revision uint) *GenerateOpticalFlowRequest
 	ComputationAccuracy() raw.VNGenerateOpticalFlowRequestComputationAccuracy
 	SetComputationAccuracy(computationAccuracy raw.VNGenerateOpticalFlowRequestComputationAccuracy)
 	OutputPixelFormat() uint

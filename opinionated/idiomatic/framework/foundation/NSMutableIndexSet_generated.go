@@ -35,6 +35,12 @@ func NewMutableIndexSet() *MutableIndexSet {
 	return &MutableIndexSet{inner: raw.NSMutableIndexSetFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MutableIndexSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableIndexSet {
+	x.inner.NSIndexSet.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddIndexes calls the underlying AddIndexes.
 func (x *MutableIndexSet) AddIndexes(indexSet *raw.NSIndexSet) {
 	x.inner.AddIndexes(indexSet)
@@ -82,6 +88,7 @@ func (x *MutableIndexSet) asObject() *raw.NSObject { return &x.inner.NSIndexSet.
 // MutableIndexSetable is the interface implemented by [MutableIndexSet], for mocking and DI.
 type MutableIndexSetable interface {
 	Unwrap() *raw.NSMutableIndexSet
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableIndexSet
 	AddIndexes(indexSet *raw.NSIndexSet)
 	RemoveIndexes(indexSet *raw.NSIndexSet)
 	RemoveAllIndexes()

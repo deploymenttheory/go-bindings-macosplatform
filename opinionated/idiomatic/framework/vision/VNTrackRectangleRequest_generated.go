@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -44,6 +45,48 @@ func NewTrackRectangleRequestWithRectangleObservationCompletionHandler(observati
 	return &TrackRectangleRequest{inner: raw.VNTrackRectangleRequestFromID(_id)}
 }
 
+// WithInputObservation sets the inputObservation property and returns the receiver for chaining.
+func (x *TrackRectangleRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackRectangleRequest {
+	x.inner.VNTrackingRequest.SetInputObservation(inputObservation.asDetectedObjectObservation())
+	return x
+}
+
+// WithTrackingLevel sets the trackingLevel property and returns the receiver for chaining.
+func (x *TrackRectangleRequest) WithTrackingLevel(trackingLevel raw.VNRequestTrackingLevel) *TrackRectangleRequest {
+	x.inner.VNTrackingRequest.SetTrackingLevel(trackingLevel)
+	return x
+}
+
+// WithLastFrame sets the lastFrame property and returns the receiver for chaining.
+func (x *TrackRectangleRequest) WithLastFrame(lastFrame bool) *TrackRectangleRequest {
+	x.inner.VNTrackingRequest.SetLastFrame(lastFrame)
+	return x
+}
+
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *TrackRectangleRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackRectangleRequest {
+	x.inner.VNTrackingRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *TrackRectangleRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackRectangleRequest {
+	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *TrackRectangleRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackRectangleRequest {
+	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *TrackRectangleRequest) WithRevision(revision uint) *TrackRectangleRequest {
+	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *TrackRectangleRequest) asTrackingRequest() *raw.VNTrackingRequest { return &x.inner.VNTrackingRequest }
 
 func (x *TrackRectangleRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNTrackingRequest.VNImageBasedRequest }
@@ -53,6 +96,13 @@ func (x *TrackRectangleRequest) asRequest() *raw.VNRequest { return &x.inner.VNT
 // TrackRectangleRequestable is the interface implemented by [TrackRectangleRequest], for mocking and DI.
 type TrackRectangleRequestable interface {
 	Unwrap() *raw.VNTrackRectangleRequest
+	WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackRectangleRequest
+	WithTrackingLevel(trackingLevel raw.VNRequestTrackingLevel) *TrackRectangleRequest
+	WithLastFrame(lastFrame bool) *TrackRectangleRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackRectangleRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackRectangleRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *TrackRectangleRequest
+	WithRevision(revision uint) *TrackRectangleRequest
 }
 
 var _ TrackRectangleRequestable = (*TrackRectangleRequest)(nil)

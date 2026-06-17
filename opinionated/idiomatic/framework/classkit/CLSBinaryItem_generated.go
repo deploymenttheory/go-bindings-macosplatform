@@ -43,6 +43,12 @@ func (x *BinaryItem) WithValue(value bool) *BinaryItem {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *BinaryItem) WithTitle(title string) *BinaryItem {
+	x.inner.CLSActivityItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
 // Value calls the underlying Value.
 func (x *BinaryItem) Value() bool {
 	return x.inner.Value()
@@ -66,6 +72,7 @@ func (x *BinaryItem) asObject() *raw.CLSObject { return &x.inner.CLSActivityItem
 type BinaryItemable interface {
 	Unwrap() *raw.CLSBinaryItem
 	WithValue(value bool) *BinaryItem
+	WithTitle(title string) *BinaryItem
 	Value() bool
 	SetValue(value bool)
 	ValueType() raw.CLSBinaryValueType

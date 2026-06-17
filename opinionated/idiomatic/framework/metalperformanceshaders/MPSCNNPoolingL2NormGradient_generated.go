@@ -47,6 +47,132 @@ func NewCNNPoolingL2NormGradientWithCoderDevice(aDecoder *foundation.NSCoder, de
 	return &CNNPoolingL2NormGradient{inner: raw.MPSCNNPoolingL2NormGradientFromID(_id)}
 }
 
+// WithSourceSize sets the sourceSize property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithSourceSize(sourceSize metal.MTLSize) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.SetSourceSize(sourceSize)
+	return x
+}
+
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithKernelOffsetX(kernelOffsetX int) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithKernelOffsetY(kernelOffsetY int) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithClipRect(clipRect metal.MTLRegion) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradient) WithLabel(label string) *CNNPoolingL2NormGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNPoolingL2NormGradient) asCNNPoolingGradient() *mpsneuralnetwork.MPSCNNPoolingGradient { return &x.inner.MPSCNNPoolingGradient }
 
 func (x *CNNPoolingL2NormGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel }
@@ -58,6 +184,27 @@ func (x *CNNPoolingL2NormGradient) asKernel() *mpscore.MPSKernel { return &x.inn
 // CNNPoolingL2NormGradientable is the interface implemented by [CNNPoolingL2NormGradient], for mocking and DI.
 type CNNPoolingL2NormGradientable interface {
 	Unwrap() *raw.MPSCNNPoolingL2NormGradient
+	WithSourceSize(sourceSize metal.MTLSize) *CNNPoolingL2NormGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNPoolingL2NormGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNPoolingL2NormGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNPoolingL2NormGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNPoolingL2NormGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNPoolingL2NormGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingL2NormGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNPoolingL2NormGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNPoolingL2NormGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNPoolingL2NormGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNPoolingL2NormGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNPoolingL2NormGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNPoolingL2NormGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNPoolingL2NormGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNPoolingL2NormGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNPoolingL2NormGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNPoolingL2NormGradient
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNPoolingL2NormGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingL2NormGradient
+	WithOptions(options mpscore.MPSKernelOptions) *CNNPoolingL2NormGradient
+	WithLabel(label string) *CNNPoolingL2NormGradient
 }
 
 var _ CNNPoolingL2NormGradientable = (*CNNPoolingL2NormGradient)(nil)

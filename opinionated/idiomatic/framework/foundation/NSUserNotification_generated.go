@@ -144,6 +144,12 @@ func (x *UserNotification) WithAdditionalActions(items ...*raw.NSUserNotificatio
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UserNotification) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotification {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Title calls the underlying Title.
 func (x *UserNotification) Title() *String {
 	_r := x.inner.Title()
@@ -417,6 +423,7 @@ type UserNotificationable interface {
 	WithHasReplyButton(hasReplyButton bool) *UserNotification
 	WithResponsePlaceholder(responsePlaceholder string) *UserNotification
 	WithAdditionalActions(items ...*raw.NSUserNotificationAction) *UserNotification
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotification
 	Title() *String
 	SetTitle(title string)
 	Subtitle() *String

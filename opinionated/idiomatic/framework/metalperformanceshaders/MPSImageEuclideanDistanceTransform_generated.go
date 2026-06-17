@@ -53,6 +53,36 @@ func (x *ImageEuclideanDistanceTransform) WithSearchLimitRadius(searchLimitRadiu
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageEuclideanDistanceTransform) WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageEuclideanDistanceTransform) WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageEuclideanDistanceTransform) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageEuclideanDistanceTransform {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageEuclideanDistanceTransform) WithOptions(options mpscore.MPSKernelOptions) *ImageEuclideanDistanceTransform {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageEuclideanDistanceTransform) WithLabel(label string) *ImageEuclideanDistanceTransform {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // SearchLimitRadius calls the underlying SearchLimitRadius.
 func (x *ImageEuclideanDistanceTransform) SearchLimitRadius() float32 {
 	return x.inner.SearchLimitRadius()
@@ -71,6 +101,11 @@ func (x *ImageEuclideanDistanceTransform) asKernel() *mpscore.MPSKernel { return
 type ImageEuclideanDistanceTransformable interface {
 	Unwrap() *raw.MPSImageEuclideanDistanceTransform
 	WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform
+	WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform
+	WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageEuclideanDistanceTransform
+	WithOptions(options mpscore.MPSKernelOptions) *ImageEuclideanDistanceTransform
+	WithLabel(label string) *ImageEuclideanDistanceTransform
 	SearchLimitRadius() float32
 	SetSearchLimitRadius(searchLimitRadius float32)
 }

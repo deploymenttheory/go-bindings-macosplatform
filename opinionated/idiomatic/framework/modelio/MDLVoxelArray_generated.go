@@ -71,6 +71,36 @@ func (x *VoxelArray) WithShellFieldExteriorThickness(shellFieldExteriorThickness
 	return x
 }
 
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *VoxelArray) WithParent(parent ObjectProvider) *VoxelArray {
+	x.inner.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *VoxelArray) WithInstance(instance ObjectProvider) *VoxelArray {
+	x.inner.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *VoxelArray) WithTransform(transform raw.MDLTransformComponent) *VoxelArray {
+	x.inner.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *VoxelArray) WithChildren(children raw.MDLObjectContainerComponent) *VoxelArray {
+	x.inner.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *VoxelArray) WithHidden(hidden bool) *VoxelArray {
+	x.inner.MDLObject.SetHidden(hidden)
+	return x
+}
+
 // VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell calls the underlying VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell.
 func (x *VoxelArray) VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index unsafe.Pointer, allowAnyX bool, allowAnyY bool, allowAnyZ bool, allowAnyShell bool) bool {
 	return x.inner.VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index, allowAnyX, allowAnyY, allowAnyZ, allowAnyShell)
@@ -215,6 +245,11 @@ type VoxelArrayable interface {
 	Unwrap() *raw.MDLVoxelArray
 	WithShellFieldInteriorThickness(shellFieldInteriorThickness float32) *VoxelArray
 	WithShellFieldExteriorThickness(shellFieldExteriorThickness float32) *VoxelArray
+	WithParent(parent ObjectProvider) *VoxelArray
+	WithInstance(instance ObjectProvider) *VoxelArray
+	WithTransform(transform raw.MDLTransformComponent) *VoxelArray
+	WithChildren(children raw.MDLObjectContainerComponent) *VoxelArray
+	WithHidden(hidden bool) *VoxelArray
 	VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index unsafe.Pointer, allowAnyX bool, allowAnyY bool, allowAnyZ bool, allowAnyShell bool) bool
 	VoxelsWithinExtent(extent raw.MDLVoxelIndexExtent) *foundation.NSData
 	VoxelIndices() *foundation.NSData

@@ -35,6 +35,12 @@ func NewUnitLength() *UnitLength {
 	return &UnitLength{inner: raw.NSUnitLengthFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitLength) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitLength {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitLength) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitLength) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitLength) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUn
 // UnitLengthable is the interface implemented by [UnitLength], for mocking and DI.
 type UnitLengthable interface {
 	Unwrap() *raw.NSUnitLength
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitLength
 }
 
 var _ UnitLengthable = (*UnitLength)(nil)

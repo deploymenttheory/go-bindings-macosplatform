@@ -47,6 +47,18 @@ func NewImageFindKeypointsWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &ImageFindKeypoints{inner: raw.MPSImageFindKeypointsFromID(_id)}
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageFindKeypoints) WithOptions(options mpscore.MPSKernelOptions) *ImageFindKeypoints {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageFindKeypoints) WithLabel(label string) *ImageFindKeypoints {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset calls the underlying EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset.
 func (x *ImageFindKeypoints) EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, regions *metal.MTLRegion, numberOfRegions uint, keypointCountBuffer metal.MTLBuffer, keypointCountBufferOffset uint, keypointDataBuffer metal.MTLBuffer, keypointDataBufferOffset uint) {
 	x.inner.EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer, source, regions, numberOfRegions, keypointCountBuffer, keypointCountBufferOffset, keypointDataBuffer, keypointDataBufferOffset)
@@ -62,6 +74,8 @@ func (x *ImageFindKeypoints) asKernel() *mpscore.MPSKernel { return &x.inner.MPS
 // ImageFindKeypointsable is the interface implemented by [ImageFindKeypoints], for mocking and DI.
 type ImageFindKeypointsable interface {
 	Unwrap() *raw.MPSImageFindKeypoints
+	WithOptions(options mpscore.MPSKernelOptions) *ImageFindKeypoints
+	WithLabel(label string) *ImageFindKeypoints
 	EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, regions *metal.MTLRegion, numberOfRegions uint, keypointCountBuffer metal.MTLBuffer, keypointCountBufferOffset uint, keypointDataBuffer metal.MTLBuffer, keypointDataBufferOffset uint)
 	KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo
 }

@@ -36,6 +36,12 @@ func NewMetadataQueryResultGroup() *MetadataQueryResultGroup {
 	return &MetadataQueryResultGroup{inner: raw.NSMetadataQueryResultGroupFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MetadataQueryResultGroup) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQueryResultGroup {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ResultAtIndex calls the underlying ResultAtIndex.
 func (x *MetadataQueryResultGroup) ResultAtIndex(idx uint) objc.ID {
 	return x.inner.ResultAtIndex(idx)
@@ -81,6 +87,7 @@ func (x *MetadataQueryResultGroup) asObject() *raw.NSObject { return &x.inner.NS
 // MetadataQueryResultGroupable is the interface implemented by [MetadataQueryResultGroup], for mocking and DI.
 type MetadataQueryResultGroupable interface {
 	Unwrap() *raw.NSMetadataQueryResultGroup
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQueryResultGroup
 	ResultAtIndex(idx uint) objc.ID
 	Attribute() *String
 	Value() objc.ID

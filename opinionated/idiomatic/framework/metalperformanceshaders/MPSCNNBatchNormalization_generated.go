@@ -61,6 +61,66 @@ func (x *CNNBatchNormalization) WithEpsilon(epsilon float32) *CNNBatchNormalizat
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNBatchNormalization) WithOffset(offset mpscore.MPSOffset) *CNNBatchNormalization {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNBatchNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNBatchNormalization {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNBatchNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBatchNormalization {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNBatchNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBatchNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNBatchNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBatchNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNBatchNormalization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBatchNormalization {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNBatchNormalization) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNBatchNormalization {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNBatchNormalization) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBatchNormalization {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNBatchNormalization) WithOptions(options mpscore.MPSKernelOptions) *CNNBatchNormalization {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNBatchNormalization) WithLabel(label string) *CNNBatchNormalization {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage calls the underlying EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage.
 func (x *CNNBatchNormalization) EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationImage *mpscore.MPSImage) {
 	x.inner.EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage(commandBuffer, sourceImage, batchNormalizationState, destinationImage)
@@ -129,6 +189,16 @@ func (x *CNNBatchNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.
 type CNNBatchNormalizationable interface {
 	Unwrap() *raw.MPSCNNBatchNormalization
 	WithEpsilon(epsilon float32) *CNNBatchNormalization
+	WithOffset(offset mpscore.MPSOffset) *CNNBatchNormalization
+	WithClipRect(clipRect metal.MTLRegion) *CNNBatchNormalization
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBatchNormalization
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBatchNormalization
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBatchNormalization
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBatchNormalization
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNBatchNormalization
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBatchNormalization
+	WithOptions(options mpscore.MPSKernelOptions) *CNNBatchNormalization
+	WithLabel(label string) *CNNBatchNormalization
 	EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationImage *mpscore.MPSImage)
 	EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationImages unsafe.Pointer)
 	TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNBatchNormalizationState

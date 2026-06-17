@@ -50,6 +50,12 @@ func NewLogicalTestNotTestWithTest(subTest *raw.NSScriptWhoseTest) *LogicalTest 
 	return &LogicalTest{inner: raw.NSLogicalTestFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *LogicalTest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LogicalTest {
+	x.inner.NSScriptWhoseTest.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *LogicalTest) asScriptWhoseTest() *raw.NSScriptWhoseTest { return &x.inner.NSScriptWhoseTest }
 
 func (x *LogicalTest) asObject() *raw.NSObject { return &x.inner.NSScriptWhoseTest.NSObject }
@@ -57,6 +63,7 @@ func (x *LogicalTest) asObject() *raw.NSObject { return &x.inner.NSScriptWhoseTe
 // LogicalTestable is the interface implemented by [LogicalTest], for mocking and DI.
 type LogicalTestable interface {
 	Unwrap() *raw.NSLogicalTest
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LogicalTest
 }
 
 var _ LogicalTestable = (*LogicalTest)(nil)

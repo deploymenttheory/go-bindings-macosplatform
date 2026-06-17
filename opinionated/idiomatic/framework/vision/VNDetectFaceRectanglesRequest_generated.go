@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewDetectFaceRectanglesRequest() *DetectFaceRectanglesRequest {
 	return &DetectFaceRectanglesRequest{inner: raw.VNDetectFaceRectanglesRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectFaceRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceRectanglesRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectFaceRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceRectanglesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectFaceRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceRectanglesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectFaceRectanglesRequest) WithRevision(revision uint) *DetectFaceRectanglesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *DetectFaceRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectFaceRectanglesRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
@@ -42,6 +67,10 @@ func (x *DetectFaceRectanglesRequest) asRequest() *raw.VNRequest { return &x.inn
 // DetectFaceRectanglesRequestable is the interface implemented by [DetectFaceRectanglesRequest], for mocking and DI.
 type DetectFaceRectanglesRequestable interface {
 	Unwrap() *raw.VNDetectFaceRectanglesRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceRectanglesRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceRectanglesRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceRectanglesRequest
+	WithRevision(revision uint) *DetectFaceRectanglesRequest
 }
 
 var _ DetectFaceRectanglesRequestable = (*DetectFaceRectanglesRequest)(nil)

@@ -110,6 +110,18 @@ func (x *NNBinaryArithmeticNode) WithMaximumValue(maximumValue float32) *NNBinar
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNBinaryArithmeticNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNBinaryArithmeticNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNBinaryArithmeticNode) WithLabel(label string) *NNBinaryArithmeticNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // GradientClass calls the underlying GradientClass.
 func (x *NNBinaryArithmeticNode) GradientClass() objc.Class {
 	return x.inner.GradientClass()
@@ -243,6 +255,8 @@ type NNBinaryArithmeticNodeable interface {
 	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNBinaryArithmeticNode
 	WithMinimumValue(minimumValue float32) *NNBinaryArithmeticNode
 	WithMaximumValue(maximumValue float32) *NNBinaryArithmeticNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNBinaryArithmeticNode
+	WithLabel(label string) *NNBinaryArithmeticNode
 	GradientClass() objc.Class
 	PrimaryScale() float32
 	SetPrimaryScale(primaryScale float32)

@@ -91,6 +91,54 @@ func (x *DOMHTMLElement) WithIdName(idName string) *DOMHTMLElement {
 	return x
 }
 
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLElement) WithScrollLeft(scrollLeft int) *DOMHTMLElement {
+	x.inner.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLElement) WithScrollTop(scrollTop int) *DOMHTMLElement {
+	x.inner.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLElement) WithInnerHTML(innerHTML string) *DOMHTMLElement {
+	x.inner.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLElement) WithOuterHTML(outerHTML string) *DOMHTMLElement {
+	x.inner.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLElement) WithClassName(className string) *DOMHTMLElement {
+	x.inner.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLElement) WithNodeValue(nodeValue string) *DOMHTMLElement {
+	x.inner.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLElement) WithPrefix(prefix string) *DOMHTMLElement {
+	x.inner.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLElement) WithTextContent(textContent string) *DOMHTMLElement {
+	x.inner.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Click calls the underlying Click.
 func (x *DOMHTMLElement) Click() {
 	x.inner.Click()
@@ -249,6 +297,14 @@ type DOMHTMLElementable interface {
 	WithOuterText(outerText string) *DOMHTMLElement
 	WithContentEditable(contentEditable string) *DOMHTMLElement
 	WithIdName(idName string) *DOMHTMLElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLElement
+	WithScrollTop(scrollTop int) *DOMHTMLElement
+	WithInnerHTML(innerHTML string) *DOMHTMLElement
+	WithOuterHTML(outerHTML string) *DOMHTMLElement
+	WithClassName(className string) *DOMHTMLElement
+	WithNodeValue(nodeValue string) *DOMHTMLElement
+	WithPrefix(prefix string) *DOMHTMLElement
+	WithTextContent(textContent string) *DOMHTMLElement
 	Click()
 	Title() string
 	SetTitle(title string)

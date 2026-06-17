@@ -6,6 +6,7 @@ package mpsndarray
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,12 @@ func NewArrayLUTDequantizeWithDevice(device metal.MTLDevice) *ArrayLUTDequantize
 	return &ArrayLUTDequantize{inner: raw.MPSNDArrayLUTDequantizeFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayLUTDequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 func (x *ArrayLUTDequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *ArrayLUTDequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
@@ -44,6 +51,7 @@ func (x *ArrayLUTDequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
 // ArrayLUTDequantizeable is the interface implemented by [ArrayLUTDequantize], for mocking and DI.
 type ArrayLUTDequantizeable interface {
 	Unwrap() *raw.MPSNDArrayLUTDequantize
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayLUTDequantize
 }
 
 var _ ArrayLUTDequantizeable = (*ArrayLUTDequantize)(nil)

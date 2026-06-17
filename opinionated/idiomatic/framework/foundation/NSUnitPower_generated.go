@@ -35,6 +35,12 @@ func NewUnitPower() *UnitPower {
 	return &UnitPower{inner: raw.NSUnitPowerFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitPower) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitPower {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitPower) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitPower) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitPower) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUni
 // UnitPowerable is the interface implemented by [UnitPower], for mocking and DI.
 type UnitPowerable interface {
 	Unwrap() *raw.NSUnitPower
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitPower
 }
 
 var _ UnitPowerable = (*UnitPower)(nil)

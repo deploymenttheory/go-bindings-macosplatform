@@ -5,8 +5,10 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PaymentRequestShippingMethodUpdate wraps [raw.PKPaymentRequestShippingMethodUpdate] with a fluent Go API.
@@ -35,11 +37,90 @@ func NewPaymentRequestShippingMethodUpdate() *PaymentRequestShippingMethodUpdate
 	return &PaymentRequestShippingMethodUpdate{inner: raw.PKPaymentRequestShippingMethodUpdateFromID(_id)}
 }
 
+// WithStatus sets the status property and returns the receiver for chaining.
+func (x *PaymentRequestShippingMethodUpdate) WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate {
+	x.inner.PKPaymentRequestUpdate.SetStatus(status)
+	return x
+}
+
+// WithPaymentSummaryItems sets the collection, converting the Go slice to an NSArray.
+func (x *PaymentRequestShippingMethodUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingMethodUpdate {
+	if len(items) == 0 {
+		x.inner.PKPaymentRequestUpdate.SetPaymentSummaryItems(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asPaymentSummaryItem().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PKPaymentRequestUpdate.SetPaymentSummaryItems(_arr)
+	return x
+}
+
+// WithShippingMethods sets the collection, converting the Go slice to an NSArray.
+func (x *PaymentRequestShippingMethodUpdate) WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestShippingMethodUpdate {
+	if len(items) == 0 {
+		x.inner.PKPaymentRequestUpdate.SetShippingMethods(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.PKShippingMethod](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PKPaymentRequestUpdate.SetShippingMethods(_arr)
+	return x
+}
+
+// WithMultiTokenContexts sets the collection, converting the Go slice to an NSArray.
+func (x *PaymentRequestShippingMethodUpdate) WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestShippingMethodUpdate {
+	if len(items) == 0 {
+		x.inner.PKPaymentRequestUpdate.SetMultiTokenContexts(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.PKPaymentTokenContext](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PKPaymentRequestUpdate.SetMultiTokenContexts(_arr)
+	return x
+}
+
+// WithRecurringPaymentRequest sets the recurringPaymentRequest property and returns the receiver for chaining.
+func (x *PaymentRequestShippingMethodUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) *PaymentRequestShippingMethodUpdate {
+	x.inner.PKPaymentRequestUpdate.SetRecurringPaymentRequest(recurringPaymentRequest)
+	return x
+}
+
+// WithAutomaticReloadPaymentRequest sets the automaticReloadPaymentRequest property and returns the receiver for chaining.
+func (x *PaymentRequestShippingMethodUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) *PaymentRequestShippingMethodUpdate {
+	x.inner.PKPaymentRequestUpdate.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest)
+	return x
+}
+
+// WithDeferredPaymentRequest sets the deferredPaymentRequest property and returns the receiver for chaining.
+func (x *PaymentRequestShippingMethodUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) *PaymentRequestShippingMethodUpdate {
+	x.inner.PKPaymentRequestUpdate.SetDeferredPaymentRequest(deferredPaymentRequest)
+	return x
+}
+
 func (x *PaymentRequestShippingMethodUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate { return &x.inner.PKPaymentRequestUpdate }
 
 // PaymentRequestShippingMethodUpdateable is the interface implemented by [PaymentRequestShippingMethodUpdate], for mocking and DI.
 type PaymentRequestShippingMethodUpdateable interface {
 	Unwrap() *raw.PKPaymentRequestShippingMethodUpdate
+	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate
+	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingMethodUpdate
+	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestShippingMethodUpdate
+	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestShippingMethodUpdate
+	WithRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) *PaymentRequestShippingMethodUpdate
+	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) *PaymentRequestShippingMethodUpdate
+	WithDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) *PaymentRequestShippingMethodUpdate
 }
 
 var _ PaymentRequestShippingMethodUpdateable = (*PaymentRequestShippingMethodUpdate)(nil)

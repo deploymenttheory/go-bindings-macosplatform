@@ -411,6 +411,19 @@ func emitClassFile(
 	providerMethods, providerImports := buildProviderMethods(
 		cls, className, goTypeName, fw, m, rawPkgAlias, abstractBases)
 
+	// Flatten inherited With* setters onto the subclass wrapper. A wrapper is
+	// otherwise built from only its own class's properties, so anything configured
+	// through an inherited setter (e.g. VZNetworkDeviceConfiguration.attachment on
+	// a VZVirtio… subclass) is missing — the gap that forced consumers back to the
+	// raw bindings. Walk the superclass chain within this framework and re-emit the
+	// base classes' fluent setters on the subclass; they dispatch through x.inner,
+	// which has the underlying setter via raw struct embedding. Subclass-own and
+	// nearer-ancestor setters win on name collision. Only setters are flattened:
+	// flattening arbitrary methods reintroduces base/override arity clashes through
+	// embedding and out-of-package return types.
+	withMethods = append(withMethods,
+		buildInheritedSetters(cls, className, fw, m, rawPkgAlias, trialNames, prefix, abstractBases, withMethods)...)
+
 	// Drop anything a hand-authored file in this package already declares, so the
 	// human's version wins (no duplicate-method compile error).
 	if len(handFuncs) > 0 {
@@ -543,6 +556,61 @@ func emitClassFile(
 	}
 
 	return nil
+}
+
+// buildInheritedSetters walks cls's superclass chain within fw and returns the
+// With* setters inherited from those base classes, so a subclass wrapper exposes
+// them too (calling through x.inner, which has the underlying setter via raw
+// struct embedding). Setters whose Go name already appears on the subclass
+// (ownWith) or on a nearer ancestor are dropped, so subclass and nearer ancestor
+// win. The walk stops at the first superclass not defined in fw (e.g. a
+// cross-framework base such as NSObject).
+func buildInheritedSetters(
+	cls meta.Class,
+	className string,
+	fw *meta.FrameworkMeta,
+	m *typemap.Mapper,
+	rawPkgAlias string,
+	trialNames trialNameMap,
+	prefix string,
+	abstractBases abstractBaseIndex,
+	ownWith []withEntry,
+) []withEntry {
+	seen := make(map[string]bool, len(ownWith))
+	for _, we := range ownWith {
+		seen[we.goName] = true
+	}
+
+	var inherited []withEntry
+	for super := cls.Super; super != ""; {
+		anc, ok := fw.Classes[super]
+		if !ok || anc.Availability.IsUnavailable {
+			break
+		}
+		// Dispatch through the explicit embedded-base path (e.g. x.inner.NSView)
+		// rather than relying on Go's promotion of x.inner's methods, which is
+		// ambiguous when an intermediate class redeclares the setter's Go name.
+		chain := ancestorEmbedChain(className, super, fw)
+		innerExpr := "x.inner"
+		if len(chain) > 0 {
+			innerExpr += "." + strings.Join(chain, ".")
+		}
+		ancCtx := typemap.Context{
+			ClassName:     super,
+			Framework:     fw.Framework,
+			GenericParams: anc.GenericParams,
+		}
+		for _, we := range buildWithSetters(anc, "", fw, ancCtx, m, rawPkgAlias, trialNames, prefix, abstractBases) {
+			if seen[we.goName] {
+				continue
+			}
+			seen[we.goName] = true
+			we.innerExpr = innerExpr
+			inherited = append(inherited, we)
+		}
+		super = anc.Super
+	}
+	return inherited
 }
 
 // buildConstructors assembles the constructor entries for a class: one per
@@ -1041,7 +1109,9 @@ type withEntry struct {
 	arrayFromID        string // FromID call matching the raw setter param, e.g. "foundation.NSArrayFromID[objc.ID]"
 	arrayClass         string // ObjC class to instantiate: "NSArray" or "NSMutableArray"
 	providerMethodName string // non-empty when elem is an abstract base; e.g. "asNetworkDeviceConfiguration"
-	extraImports       map[string]string
+	innerExpr          string // receiver expression for the raw setter ("" = "x.inner"); a flattened
+	//                            inherited setter uses the explicit embed path, e.g. "x.inner.NSView".
+	extraImports map[string]string
 }
 
 type withParam struct {
@@ -1228,6 +1298,10 @@ func buildWithSetter(
 }
 
 func writeWithMethod(w io.Writer, typeName string, we withEntry) {
+	inner := we.innerExpr
+	if inner == "" {
+		inner = "x.inner"
+	}
 	if we.isNSArray {
 		// Variadic signature.
 		loopExpr := "_v.Ptr()"
@@ -1250,7 +1324,8 @@ func writeWithMethod(w io.Writer, typeName string, we withEntry) {
 		)
 		fmt.Fprintf(
 			w,
-			"\tif len(items) == 0 {\n\t\tx.inner.%s(nil)\n\t\treturn x\n\t}\n",
+			"\tif len(items) == 0 {\n\t\t%s.%s(nil)\n\t\treturn x\n\t}\n",
+			inner,
 			we.rawSetterGoName,
 		)
 		fmt.Fprintf(w, "\t_ptrs := make([]objc.ID, len(items))\n")
@@ -1259,7 +1334,7 @@ func writeWithMethod(w io.Writer, typeName string, we withEntry) {
 		fmt.Fprintf(w, "\t\tobjc.Send[objc.ID](objc.ID(objc.GetClass(%q)),\n", we.arrayClass)
 		fmt.Fprintf(w, "\t\t\tobjc.RegisterName(\"arrayWithObjects:count:\"),\n")
 		fmt.Fprintf(w, "\t\t\tunsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))\n")
-		fmt.Fprintf(w, "\tx.inner.%s(_arr)\n", we.rawSetterGoName)
+		fmt.Fprintf(w, "\t%s.%s(_arr)\n", inner, we.rawSetterGoName)
 		fmt.Fprintf(w, "\treturn x\n}\n\n")
 		return
 	}
@@ -1274,7 +1349,7 @@ func writeWithMethod(w io.Writer, typeName string, we withEntry) {
 		pn,
 	)
 	fmt.Fprintf(w, "func (x *%s) %s(%s %s) *%s {\n", typeName, we.goName, pn, pt, typeName)
-	fmt.Fprintf(w, "\tx.inner.%s(%s)\n", we.rawSetterGoName, we.param.rawExpr)
+	fmt.Fprintf(w, "\t%s.%s(%s)\n", inner, we.rawSetterGoName, we.param.rawExpr)
 	fmt.Fprintf(w, "\treturn x\n}\n\n")
 }
 

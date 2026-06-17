@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewImageRegistrationRequest() *ImageRegistrationRequest {
 	return &ImageRegistrationRequest{inner: raw.VNImageRegistrationRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *ImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageRegistrationRequest {
+	x.inner.VNTargetedImageRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *ImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageRegistrationRequest {
+	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *ImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *ImageRegistrationRequest {
+	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *ImageRegistrationRequest) WithRevision(revision uint) *ImageRegistrationRequest {
+	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *ImageRegistrationRequest) asImageRegistrationRequest() *raw.VNImageRegistrationRequest { return x.inner }
 
 func (x *ImageRegistrationRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest { return &x.inner.VNTargetedImageRequest }
@@ -46,6 +71,10 @@ func (x *ImageRegistrationRequest) asRequest() *raw.VNRequest { return &x.inner.
 // ImageRegistrationRequestable is the interface implemented by [ImageRegistrationRequest], for mocking and DI.
 type ImageRegistrationRequestable interface {
 	Unwrap() *raw.VNImageRegistrationRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageRegistrationRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageRegistrationRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *ImageRegistrationRequest
+	WithRevision(revision uint) *ImageRegistrationRequest
 }
 
 var _ ImageRegistrationRequestable = (*ImageRegistrationRequest)(nil)

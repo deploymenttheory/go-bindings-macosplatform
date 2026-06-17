@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -34,6 +35,54 @@ func URLSessionDownloadTaskFromID(id objc.ID) *URLSessionDownloadTask {
 func NewURLSessionDownloadTask() *URLSessionDownloadTask {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLSessionDownloadTask")), objc.RegisterName("new"))
 	return &URLSessionDownloadTask{inner: raw.NSURLSessionDownloadTaskFromID(_id)}
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *URLSessionDownloadTask) WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionDownloadTask {
+	x.inner.NSURLSessionTask.SetDelegate(delegate)
+	return x
+}
+
+// WithEarliestBeginDate sets the earliestBeginDate property and returns the receiver for chaining.
+func (x *URLSessionDownloadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDownloadTask {
+	x.inner.NSURLSessionTask.SetEarliestBeginDate(earliestBeginDate.asDate())
+	return x
+}
+
+// WithCountOfBytesClientExpectsToSend sets the countOfBytesClientExpectsToSend property and returns the receiver for chaining.
+func (x *URLSessionDownloadTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDownloadTask {
+	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend)
+	return x
+}
+
+// WithCountOfBytesClientExpectsToReceive sets the countOfBytesClientExpectsToReceive property and returns the receiver for chaining.
+func (x *URLSessionDownloadTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDownloadTask {
+	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive)
+	return x
+}
+
+// WithTaskDescription sets the taskDescription property and returns the receiver for chaining.
+func (x *URLSessionDownloadTask) WithTaskDescription(taskDescription string) *URLSessionDownloadTask {
+	x.inner.NSURLSessionTask.SetTaskDescription(foundation.NSStringStringWithUTF8String(taskDescription))
+	return x
+}
+
+// WithPriority sets the priority property and returns the receiver for chaining.
+func (x *URLSessionDownloadTask) WithPriority(priority float32) *URLSessionDownloadTask {
+	x.inner.NSURLSessionTask.SetPriority(priority)
+	return x
+}
+
+// WithPrefersIncrementalDelivery sets the prefersIncrementalDelivery property and returns the receiver for chaining.
+func (x *URLSessionDownloadTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDownloadTask {
+	x.inner.NSURLSessionTask.SetPrefersIncrementalDelivery(prefersIncrementalDelivery)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLSessionDownloadTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionDownloadTask {
+	x.inner.NSURLSessionTask.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
 }
 
 // CancelByProducingResumeData blocks until the operation completes or ctx is cancelled.
@@ -66,6 +115,14 @@ func (x *URLSessionDownloadTask) asObject() *raw.NSObject { return &x.inner.NSUR
 // URLSessionDownloadTaskable is the interface implemented by [URLSessionDownloadTask], for mocking and DI.
 type URLSessionDownloadTaskable interface {
 	Unwrap() *raw.NSURLSessionDownloadTask
+	WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionDownloadTask
+	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDownloadTask
+	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDownloadTask
+	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDownloadTask
+	WithTaskDescription(taskDescription string) *URLSessionDownloadTask
+	WithPriority(priority float32) *URLSessionDownloadTask
+	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDownloadTask
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionDownloadTask
 	CancelByProducingResumeData(ctx context.Context) (*Data, error)
 }
 

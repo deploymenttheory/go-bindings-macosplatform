@@ -6,8 +6,13 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TableCellView wraps [raw.NSTableCellView] with a fluent Go API.
@@ -63,6 +68,340 @@ func (x *TableCellView) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyl
 // WithRowSizeStyle sets the rowSizeStyle property and returns the receiver for chaining.
 func (x *TableCellView) WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *TableCellView {
 	x.inner.SetRowSizeStyle(rowSizeStyle)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *TableCellView) WithSubviews(items ...ViewProvider) *TableCellView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *TableCellView) WithHidden(hidden bool) *TableCellView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *TableCellView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableCellView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *TableCellView) WithAutoresizesSubviews(autoresizesSubviews bool) *TableCellView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *TableCellView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableCellView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *TableCellView) WithFrame(frame corefoundation.CGRect) *TableCellView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *TableCellView) WithFrameRotation(frameRotation float64) *TableCellView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *TableCellView) WithFrameCenterRotation(frameCenterRotation float64) *TableCellView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *TableCellView) WithBoundsRotation(boundsRotation float64) *TableCellView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *TableCellView) WithBounds(bounds corefoundation.CGRect) *TableCellView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *TableCellView) WithCanDrawConcurrently(canDrawConcurrently bool) *TableCellView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *TableCellView) WithNeedsDisplay(needsDisplay bool) *TableCellView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *TableCellView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableCellView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *TableCellView) WithWantsRestingTouches(wantsRestingTouches bool) *TableCellView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *TableCellView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableCellView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *TableCellView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableCellView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *TableCellView) WithWantsLayer(wantsLayer bool) *TableCellView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *TableCellView) WithLayer(layer *quartzcore.CALayer) *TableCellView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *TableCellView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableCellView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *TableCellView) WithNeedsLayout(needsLayout bool) *TableCellView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *TableCellView) WithAlphaValue(alphaValue float64) *TableCellView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *TableCellView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableCellView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *TableCellView) WithBackgroundFilters(items ...*coreimage.CIFilter) *TableCellView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *TableCellView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TableCellView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *TableCellView) WithContentFilters(items ...*coreimage.CIFilter) *TableCellView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *TableCellView) WithShadow(shadow *raw.NSShadow) *TableCellView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *TableCellView) WithClipsToBounds(clipsToBounds bool) *TableCellView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *TableCellView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableCellView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *TableCellView) WithToolTip(toolTip string) *TableCellView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *TableCellView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableCellView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *TableCellView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableCellView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *TableCellView) WithNextKeyView(nextKeyView ViewProvider) *TableCellView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *TableCellView) WithFocusRingType(focusRingType raw.NSFocusRingType) *TableCellView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *TableCellView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TableCellView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *TableCellView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableCellView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *TableCellView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableCellView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *TableCellView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableCellView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *TableCellView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableCellView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *TableCellView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableCellView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *TableCellView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableCellView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *TableCellView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableCellView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *TableCellView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableCellView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *TableCellView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableCellView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *TableCellView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableCellView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *TableCellView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableCellView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *TableCellView) WithNextResponder(nextResponder ResponderProvider) *TableCellView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *TableCellView) WithMenu(menu *raw.NSMenu) *TableCellView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *TableCellView) WithUserActivity(userActivity *foundation.NSUserActivity) *TableCellView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *TableCellView) WithTouchBar(touchBar *raw.NSTouchBar) *TableCellView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -147,6 +486,55 @@ type TableCellViewable interface {
 	WithImageView(imageView *raw.NSImageView) *TableCellView
 	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TableCellView
 	WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *TableCellView
+	WithSubviews(items ...ViewProvider) *TableCellView
+	WithHidden(hidden bool) *TableCellView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableCellView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *TableCellView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableCellView
+	WithFrame(frame corefoundation.CGRect) *TableCellView
+	WithFrameRotation(frameRotation float64) *TableCellView
+	WithFrameCenterRotation(frameCenterRotation float64) *TableCellView
+	WithBoundsRotation(boundsRotation float64) *TableCellView
+	WithBounds(bounds corefoundation.CGRect) *TableCellView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *TableCellView
+	WithNeedsDisplay(needsDisplay bool) *TableCellView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableCellView
+	WithWantsRestingTouches(wantsRestingTouches bool) *TableCellView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableCellView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableCellView
+	WithWantsLayer(wantsLayer bool) *TableCellView
+	WithLayer(layer *quartzcore.CALayer) *TableCellView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableCellView
+	WithNeedsLayout(needsLayout bool) *TableCellView
+	WithAlphaValue(alphaValue float64) *TableCellView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableCellView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *TableCellView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TableCellView
+	WithContentFilters(items ...*coreimage.CIFilter) *TableCellView
+	WithShadow(shadow *raw.NSShadow) *TableCellView
+	WithClipsToBounds(clipsToBounds bool) *TableCellView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableCellView
+	WithToolTip(toolTip string) *TableCellView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableCellView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableCellView
+	WithNextKeyView(nextKeyView ViewProvider) *TableCellView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *TableCellView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *TableCellView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableCellView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableCellView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableCellView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableCellView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableCellView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableCellView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableCellView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableCellView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableCellView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableCellView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableCellView
+	WithNextResponder(nextResponder ResponderProvider) *TableCellView
+	WithMenu(menu *raw.NSMenu) *TableCellView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *TableCellView
+	WithTouchBar(touchBar *raw.NSTouchBar) *TableCellView
 	ObjectValue() objc.ID
 	SetObjectValue(objectValue objc.ID)
 	TextField() *TextField

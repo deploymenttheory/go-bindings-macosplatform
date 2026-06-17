@@ -55,6 +55,22 @@ func (x *UMPMutableEndpoint) WithMutableFunctionBlocks(items ...*raw.MIDIUMPMuta
 	return x
 }
 
+// WithFunctionBlocks sets the collection, converting the Go slice to an NSArray.
+func (x *UMPMutableEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UMPMutableEndpoint {
+	if len(items) == 0 {
+		x.inner.MIDIUMPEndpoint.SetFunctionBlocks(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asUMPFunctionBlock().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.MIDIUMPFunctionBlock](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MIDIUMPEndpoint.SetFunctionBlocks(_arr)
+	return x
+}
+
 // SetNameError calls the underlying SetNameError.
 func (x *UMPMutableEndpoint) SetNameError(name string) (bool, error) {
 	return x.inner.SetNameError(foundation.NSStringStringWithUTF8String(name))
@@ -97,6 +113,7 @@ func (x *UMPMutableEndpoint) asUMPEndpoint() *raw.MIDIUMPEndpoint { return &x.in
 type UMPMutableEndpointable interface {
 	Unwrap() *raw.MIDIUMPMutableEndpoint
 	WithMutableFunctionBlocks(items ...*raw.MIDIUMPMutableFunctionBlock) *UMPMutableEndpoint
+	WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UMPMutableEndpoint
 	SetNameError(name string) (bool, error)
 	RegisterFunctionBlocksMarkAsStaticError(functionBlocks *foundation.NSArray[*raw.MIDIUMPMutableFunctionBlock], markAsStatic bool) (bool, error)
 	SetEnabledError(isEnabled bool) (bool, error)

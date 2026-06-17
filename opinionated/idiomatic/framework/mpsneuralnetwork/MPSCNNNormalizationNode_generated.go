@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -54,6 +55,18 @@ func (x *CNNNormalizationNode) WithDelta(delta float32) *CNNNormalizationNode {
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNNormalizationNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNormalizationNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNormalizationNode) WithLabel(label string) *CNNNormalizationNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Alpha calls the underlying Alpha.
 func (x *CNNNormalizationNode) Alpha() float32 {
 	return x.inner.Alpha()
@@ -94,6 +107,8 @@ type CNNNormalizationNodeable interface {
 	WithAlpha(alpha float32) *CNNNormalizationNode
 	WithBeta(beta float32) *CNNNormalizationNode
 	WithDelta(delta float32) *CNNNormalizationNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNormalizationNode
+	WithLabel(label string) *CNNNormalizationNode
 	Alpha() float32
 	SetAlpha(alpha float32)
 	Beta() float32

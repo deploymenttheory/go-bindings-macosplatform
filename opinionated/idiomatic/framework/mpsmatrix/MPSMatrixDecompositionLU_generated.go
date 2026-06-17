@@ -38,6 +38,30 @@ func NewMatrixDecompositionLUWithDeviceRowsColumns(device metal.MTLDevice, rows 
 	return &MatrixDecompositionLU{inner: raw.MPSMatrixDecompositionLUFromID(_id)}
 }
 
+// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixDecompositionLU) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
+	x.inner.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixDecompositionLU) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
+	x.inner.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixDecompositionLU) WithBatchStart(batchStart uint) *MatrixDecompositionLU {
+	x.inner.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixDecompositionLU) WithBatchSize(batchSize uint) *MatrixDecompositionLU {
+	x.inner.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
 // EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus calls the underlying EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus.
 func (x *MatrixDecompositionLU) EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, status metal.MTLBuffer) {
 	x.inner.EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer, sourceMatrix, resultMatrix, pivotIndices, status)
@@ -48,6 +72,10 @@ func (x *MatrixDecompositionLU) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel 
 // MatrixDecompositionLUable is the interface implemented by [MatrixDecompositionLU], for mocking and DI.
 type MatrixDecompositionLUable interface {
 	Unwrap() *raw.MPSMatrixDecompositionLU
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU
+	WithBatchStart(batchStart uint) *MatrixDecompositionLU
+	WithBatchSize(batchSize uint) *MatrixDecompositionLU
 	EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, status metal.MTLBuffer)
 }
 

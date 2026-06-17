@@ -50,6 +50,30 @@ func (x *MicroGamepadSnapshot) WithSnapshotData(snapshotData *foundation.NSData)
 	return x
 }
 
+// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
+func (x *MicroGamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *MicroGamepadSnapshot {
+	x.inner.GCMicroGamepad.SetValueChangedHandler(valueChangedHandler)
+	return x
+}
+
+// WithReportsAbsoluteDpadValues sets the reportsAbsoluteDpadValues property and returns the receiver for chaining.
+func (x *MicroGamepadSnapshot) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepadSnapshot {
+	x.inner.GCMicroGamepad.SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues)
+	return x
+}
+
+// WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
+func (x *MicroGamepadSnapshot) WithAllowsRotation(allowsRotation bool) *MicroGamepadSnapshot {
+	x.inner.GCMicroGamepad.SetAllowsRotation(allowsRotation)
+	return x
+}
+
+// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
+func (x *MicroGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepadSnapshot {
+	x.inner.GCMicroGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+	return x
+}
+
 // SnapshotData calls the underlying SnapshotData.
 func (x *MicroGamepadSnapshot) SnapshotData() *foundation.NSData {
 	return x.inner.SnapshotData()
@@ -68,6 +92,10 @@ func (x *MicroGamepadSnapshot) asPhysicalInputProfile() *raw.GCPhysicalInputProf
 type MicroGamepadSnapshotable interface {
 	Unwrap() *raw.GCMicroGamepadSnapshot
 	WithSnapshotData(snapshotData *foundation.NSData) *MicroGamepadSnapshot
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *MicroGamepadSnapshot
+	WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepadSnapshot
+	WithAllowsRotation(allowsRotation bool) *MicroGamepadSnapshot
+	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepadSnapshot
 	SnapshotData() *foundation.NSData
 	SetSnapshotData(snapshotData *foundation.NSData)
 }

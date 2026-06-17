@@ -36,6 +36,24 @@ func NewNNArithmeticGradientStateNode() *NNArithmeticGradientStateNode {
 	return &NNArithmeticGradientStateNode{inner: raw.MPSNNArithmeticGradientStateNodeFromID(_id)}
 }
 
+// WithHandle sets the handle property and returns the receiver for chaining.
+func (x *NNArithmeticGradientStateNode) WithHandle(handle mpsneuralnetwork.MPSHandle) *NNArithmeticGradientStateNode {
+	x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode.SetHandle(handle)
+	return x
+}
+
+// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+func (x *NNArithmeticGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNArithmeticGradientStateNode {
+	x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	return x
+}
+
+// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+func (x *NNArithmeticGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNArithmeticGradientStateNode {
+	x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	return x
+}
+
 func (x *NNArithmeticGradientStateNode) asNNBinaryGradientStateNode() *mpsneuralnetwork.MPSNNBinaryGradientStateNode { return &x.inner.MPSNNBinaryGradientStateNode }
 
 func (x *NNArithmeticGradientStateNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode { return &x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode }
@@ -43,6 +61,9 @@ func (x *NNArithmeticGradientStateNode) asNNStateNode() *mpsneuralnetwork.MPSNNS
 // NNArithmeticGradientStateNodeable is the interface implemented by [NNArithmeticGradientStateNode], for mocking and DI.
 type NNArithmeticGradientStateNodeable interface {
 	Unwrap() *raw.MPSNNArithmeticGradientStateNode
+	WithHandle(handle mpsneuralnetwork.MPSHandle) *NNArithmeticGradientStateNode
+	WithExportFromGraph(exportFromGraph bool) *NNArithmeticGradientStateNode
+	WithSynchronizeResource(synchronizeResource bool) *NNArithmeticGradientStateNode
 }
 
 var _ NNArithmeticGradientStateNodeable = (*NNArithmeticGradientStateNode)(nil)

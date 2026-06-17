@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,42 @@ func NewMatrixDecompositionCholeskyWithDeviceLowerOrder(device metal.MTLDevice, 
 	return &MatrixDecompositionCholesky{inner: raw.MPSMatrixDecompositionCholeskyFromID(_id)}
 }
 
+// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixDecompositionCholesky) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionCholesky {
+	x.inner.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixDecompositionCholesky) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionCholesky {
+	x.inner.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixDecompositionCholesky) WithBatchStart(batchStart uint) *MatrixDecompositionCholesky {
+	x.inner.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixDecompositionCholesky) WithBatchSize(batchSize uint) *MatrixDecompositionCholesky {
+	x.inner.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixDecompositionCholesky) WithOptions(options mpscore.MPSKernelOptions) *MatrixDecompositionCholesky {
+	x.inner.MPSMatrixUnaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixDecompositionCholesky) WithLabel(label string) *MatrixDecompositionCholesky {
+	x.inner.MPSMatrixUnaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceMatrixResultMatrixStatus calls the underlying EncodeToCommandBufferSourceMatrixResultMatrixStatus.
 func (x *MatrixDecompositionCholesky) EncodeToCommandBufferSourceMatrixResultMatrixStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, status metal.MTLBuffer) {
 	x.inner.EncodeToCommandBufferSourceMatrixResultMatrixStatus(commandBuffer, sourceMatrix, resultMatrix, status)
@@ -51,6 +88,12 @@ func (x *MatrixDecompositionCholesky) asKernel() *mpscore.MPSKernel { return &x.
 // MatrixDecompositionCholeskyable is the interface implemented by [MatrixDecompositionCholesky], for mocking and DI.
 type MatrixDecompositionCholeskyable interface {
 	Unwrap() *raw.MPSMatrixDecompositionCholesky
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionCholesky
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionCholesky
+	WithBatchStart(batchStart uint) *MatrixDecompositionCholesky
+	WithBatchSize(batchSize uint) *MatrixDecompositionCholesky
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixDecompositionCholesky
+	WithLabel(label string) *MatrixDecompositionCholesky
 	EncodeToCommandBufferSourceMatrixResultMatrixStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, status metal.MTLBuffer)
 }
 

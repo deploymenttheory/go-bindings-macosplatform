@@ -60,6 +60,24 @@ func (x *RecurringPaymentSummaryItem) WithEndDate(endDate *foundation.NSDate) *R
 	return x
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *RecurringPaymentSummaryItem) WithLabel(label string) *RecurringPaymentSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithAmount sets the amount property and returns the receiver for chaining.
+func (x *RecurringPaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *RecurringPaymentSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetAmount(amount)
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *RecurringPaymentSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *RecurringPaymentSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetType(type_)
+	return x
+}
+
 // StartDate calls the underlying StartDate.
 func (x *RecurringPaymentSummaryItem) StartDate() *foundation.NSDate {
 	return x.inner.StartDate()
@@ -109,6 +127,9 @@ type RecurringPaymentSummaryItemable interface {
 	WithIntervalUnit(intervalUnit foundation.NSCalendarUnit) *RecurringPaymentSummaryItem
 	WithIntervalCount(intervalCount int) *RecurringPaymentSummaryItem
 	WithEndDate(endDate *foundation.NSDate) *RecurringPaymentSummaryItem
+	WithLabel(label string) *RecurringPaymentSummaryItem
+	WithAmount(amount *foundation.NSDecimalNumber) *RecurringPaymentSummaryItem
+	WithType(type_ raw.PKPaymentSummaryItemType) *RecurringPaymentSummaryItem
 	StartDate() *foundation.NSDate
 	SetStartDate(startDate *foundation.NSDate)
 	IntervalUnit() foundation.NSCalendarUnit

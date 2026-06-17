@@ -56,6 +56,54 @@ func (x *RelativeSpecifier) WithBaseSpecifier(baseSpecifier ScriptObjectSpecifie
 	return x
 }
 
+// WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
+func (x *RelativeSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
+func (x *RelativeSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
+func (x *RelativeSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RelativeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
+	return x
+}
+
+// WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
+func (x *RelativeSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RelativeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
+	return x
+}
+
+// WithKey sets the key property and returns the receiver for chaining.
+func (x *RelativeSpecifier) WithKey(key string) *RelativeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
+	return x
+}
+
+// WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
+func (x *RelativeSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *RelativeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+	return x
+}
+
+// WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
+func (x *RelativeSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *RelativeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *RelativeSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeSpecifier {
+	x.inner.NSScriptObjectSpecifier.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // RelativePosition calls the underlying RelativePosition.
 func (x *RelativeSpecifier) RelativePosition() raw.NSRelativePosition {
 	return x.inner.RelativePosition()
@@ -89,6 +137,14 @@ type RelativeSpecifierable interface {
 	Unwrap() *raw.NSRelativeSpecifier
 	WithRelativePosition(relativePosition raw.NSRelativePosition) *RelativeSpecifier
 	WithBaseSpecifier(baseSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier
+	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier
+	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier
+	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RelativeSpecifier
+	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RelativeSpecifier
+	WithKey(key string) *RelativeSpecifier
+	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *RelativeSpecifier
+	WithEvaluationErrorNumber(evaluationErrorNumber int) *RelativeSpecifier
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeSpecifier
 	RelativePosition() raw.NSRelativePosition
 	SetRelativePosition(relativePosition raw.NSRelativePosition)
 	BaseSpecifier() *ScriptObjectSpecifier

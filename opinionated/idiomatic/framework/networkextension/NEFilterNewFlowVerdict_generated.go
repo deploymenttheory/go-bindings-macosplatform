@@ -41,6 +41,12 @@ func (x *NEFilterNewFlowVerdict) WithStatisticsReportFrequency(statisticsReportF
 	return x
 }
 
+// WithShouldReport sets the shouldReport property and returns the receiver for chaining.
+func (x *NEFilterNewFlowVerdict) WithShouldReport(shouldReport bool) *NEFilterNewFlowVerdict {
+	x.inner.NEFilterVerdict.SetShouldReport(shouldReport)
+	return x
+}
+
 // StatisticsReportFrequency calls the underlying StatisticsReportFrequency.
 func (x *NEFilterNewFlowVerdict) StatisticsReportFrequency() raw.NEFilterReportFrequency {
 	return x.inner.StatisticsReportFrequency()
@@ -57,6 +63,7 @@ func (x *NEFilterNewFlowVerdict) asNEFilterVerdict() *raw.NEFilterVerdict { retu
 type NEFilterNewFlowVerdictable interface {
 	Unwrap() *raw.NEFilterNewFlowVerdict
 	WithStatisticsReportFrequency(statisticsReportFrequency raw.NEFilterReportFrequency) *NEFilterNewFlowVerdict
+	WithShouldReport(shouldReport bool) *NEFilterNewFlowVerdict
 	StatisticsReportFrequency() raw.NEFilterReportFrequency
 	SetStatisticsReportFrequency(statisticsReportFrequency raw.NEFilterReportFrequency)
 }

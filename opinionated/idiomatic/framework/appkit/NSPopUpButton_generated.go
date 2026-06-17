@@ -7,9 +7,12 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PopUpButton wraps [raw.NSPopUpButton] with a fluent Go API.
@@ -66,6 +69,640 @@ func (x *PopUpButton) WithUsesItemFromMenu(usesItemFromMenu bool) *PopUpButton {
 // WithAltersStateOfSelectedItem sets the altersStateOfSelectedItem property and returns the receiver for chaining.
 func (x *PopUpButton) WithAltersStateOfSelectedItem(altersStateOfSelectedItem bool) *PopUpButton {
 	x.inner.SetAltersStateOfSelectedItem(altersStateOfSelectedItem)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *PopUpButton) WithTitle(title string) *PopUpButton {
+	x.inner.NSButton.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
+func (x *PopUpButton) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *PopUpButton {
+	x.inner.NSButton.SetAttributedTitle(attributedTitle)
+	return x
+}
+
+// WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
+func (x *PopUpButton) WithAlternateTitle(alternateTitle string) *PopUpButton {
+	x.inner.NSButton.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+	return x
+}
+
+// WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
+func (x *PopUpButton) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *PopUpButton {
+	x.inner.NSButton.SetAttributedAlternateTitle(attributedAlternateTitle)
+	return x
+}
+
+// WithHasDestructiveAction sets the hasDestructiveAction property and returns the receiver for chaining.
+func (x *PopUpButton) WithHasDestructiveAction(hasDestructiveAction bool) *PopUpButton {
+	x.inner.NSButton.SetHasDestructiveAction(hasDestructiveAction)
+	return x
+}
+
+// WithSound sets the sound property and returns the receiver for chaining.
+func (x *PopUpButton) WithSound(sound *raw.NSSound) *PopUpButton {
+	x.inner.NSButton.SetSound(sound)
+	return x
+}
+
+// WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
+func (x *PopUpButton) WithSpringLoaded(springLoaded bool) *PopUpButton {
+	x.inner.NSButton.SetSpringLoaded(springLoaded)
+	return x
+}
+
+// WithMaxAcceleratorLevel sets the maxAcceleratorLevel property and returns the receiver for chaining.
+func (x *PopUpButton) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *PopUpButton {
+	x.inner.NSButton.SetMaxAcceleratorLevel(maxAcceleratorLevel)
+	return x
+}
+
+// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
+func (x *PopUpButton) WithBezelStyle(bezelStyle raw.NSBezelStyle) *PopUpButton {
+	x.inner.NSButton.SetBezelStyle(bezelStyle)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *PopUpButton) WithBordered(bordered bool) *PopUpButton {
+	x.inner.NSButton.SetBordered(bordered)
+	return x
+}
+
+// WithTransparent sets the transparent property and returns the receiver for chaining.
+func (x *PopUpButton) WithTransparent(transparent bool) *PopUpButton {
+	x.inner.NSButton.SetTransparent(transparent)
+	return x
+}
+
+// WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
+func (x *PopUpButton) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButton {
+	x.inner.NSButton.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
+	return x
+}
+
+// WithBezelColor sets the bezelColor property and returns the receiver for chaining.
+func (x *PopUpButton) WithBezelColor(bezelColor *raw.NSColor) *PopUpButton {
+	x.inner.NSButton.SetBezelColor(bezelColor)
+	return x
+}
+
+// WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
+func (x *PopUpButton) WithContentTintColor(contentTintColor *raw.NSColor) *PopUpButton {
+	x.inner.NSButton.SetContentTintColor(contentTintColor)
+	return x
+}
+
+// WithTintProminence sets the tintProminence property and returns the receiver for chaining.
+func (x *PopUpButton) WithTintProminence(tintProminence raw.NSTintProminence) *PopUpButton {
+	x.inner.NSButton.SetTintProminence(tintProminence)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *PopUpButton) WithImage(image *raw.NSImage) *PopUpButton {
+	x.inner.NSButton.SetImage(image)
+	return x
+}
+
+// WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
+func (x *PopUpButton) WithAlternateImage(alternateImage *raw.NSImage) *PopUpButton {
+	x.inner.NSButton.SetAlternateImage(alternateImage)
+	return x
+}
+
+// WithImagePosition sets the imagePosition property and returns the receiver for chaining.
+func (x *PopUpButton) WithImagePosition(imagePosition raw.NSCellImagePosition) *PopUpButton {
+	x.inner.NSButton.SetImagePosition(imagePosition)
+	return x
+}
+
+// WithImageScaling sets the imageScaling property and returns the receiver for chaining.
+func (x *PopUpButton) WithImageScaling(imageScaling raw.NSImageScaling) *PopUpButton {
+	x.inner.NSButton.SetImageScaling(imageScaling)
+	return x
+}
+
+// WithImageHugsTitle sets the imageHugsTitle property and returns the receiver for chaining.
+func (x *PopUpButton) WithImageHugsTitle(imageHugsTitle bool) *PopUpButton {
+	x.inner.NSButton.SetImageHugsTitle(imageHugsTitle)
+	return x
+}
+
+// WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
+func (x *PopUpButton) WithSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) *PopUpButton {
+	x.inner.NSButton.SetSymbolConfiguration(symbolConfiguration)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *PopUpButton) WithState(state int) *PopUpButton {
+	x.inner.NSButton.SetState(state)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *PopUpButton) WithAllowsMixedState(allowsMixedState bool) *PopUpButton {
+	x.inner.NSButton.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
+func (x *PopUpButton) WithKeyEquivalent(keyEquivalent string) *PopUpButton {
+	x.inner.NSButton.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
+	return x
+}
+
+// WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
+func (x *PopUpButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *PopUpButton {
+	x.inner.NSButton.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+	return x
+}
+
+// WithBorderShape sets the borderShape property and returns the receiver for chaining.
+func (x *PopUpButton) WithBorderShape(borderShape raw.NSControlBorderShape) *PopUpButton {
+	x.inner.NSButton.SetBorderShape(borderShape)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *PopUpButton) WithTarget(target objc.ID) *PopUpButton {
+	x.inner.NSButton.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *PopUpButton) WithAction(action objc.SEL) *PopUpButton {
+	x.inner.NSButton.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *PopUpButton) WithTag(tag int) *PopUpButton {
+	x.inner.NSButton.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *PopUpButton) WithIgnoresMultiClick(ignoresMultiClick bool) *PopUpButton {
+	x.inner.NSButton.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *PopUpButton) WithContinuous(continuous bool) *PopUpButton {
+	x.inner.NSButton.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *PopUpButton) WithEnabled(enabled bool) *PopUpButton {
+	x.inner.NSButton.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *PopUpButton) WithRefusesFirstResponder(refusesFirstResponder bool) *PopUpButton {
+	x.inner.NSButton.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *PopUpButton) WithHighlighted(highlighted bool) *PopUpButton {
+	x.inner.NSButton.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *PopUpButton) WithControlSize(controlSize raw.NSControlSize) *PopUpButton {
+	x.inner.NSButton.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *PopUpButton) WithFormatter(formatter *foundation.NSFormatter) *PopUpButton {
+	x.inner.NSButton.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *PopUpButton) WithObjectValue(objectValue objc.ID) *PopUpButton {
+	x.inner.NSButton.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *PopUpButton) WithStringValue(stringValue string) *PopUpButton {
+	x.inner.NSButton.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *PopUpButton) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PopUpButton {
+	x.inner.NSButton.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *PopUpButton) WithIntValue(intValue int) *PopUpButton {
+	x.inner.NSButton.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *PopUpButton) WithIntegerValue(integerValue int) *PopUpButton {
+	x.inner.NSButton.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *PopUpButton) WithFloatValue(floatValue float32) *PopUpButton {
+	x.inner.NSButton.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *PopUpButton) WithDoubleValue(doubleValue float64) *PopUpButton {
+	x.inner.NSButton.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *PopUpButton) WithFont(font *raw.NSFont) *PopUpButton {
+	x.inner.NSButton.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *PopUpButton) WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButton {
+	x.inner.NSButton.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *PopUpButton) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PopUpButton {
+	x.inner.NSButton.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *PopUpButton) WithAlignment(alignment raw.NSTextAlignment) *PopUpButton {
+	x.inner.NSButton.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *PopUpButton) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PopUpButton {
+	x.inner.NSButton.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *PopUpButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PopUpButton {
+	x.inner.NSButton.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *PopUpButton) WithCell(cell CellProvider) *PopUpButton {
+	x.inner.NSButton.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *PopUpButton) WithSubviews(items ...ViewProvider) *PopUpButton {
+	if len(items) == 0 {
+		x.inner.NSButton.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSButton.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *PopUpButton) WithHidden(hidden bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *PopUpButton) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *PopUpButton) WithAutoresizesSubviews(autoresizesSubviews bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *PopUpButton) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *PopUpButton) WithFrame(frame corefoundation.CGRect) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *PopUpButton) WithFrameRotation(frameRotation float64) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *PopUpButton) WithFrameCenterRotation(frameCenterRotation float64) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *PopUpButton) WithBoundsRotation(boundsRotation float64) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *PopUpButton) WithBounds(bounds corefoundation.CGRect) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *PopUpButton) WithCanDrawConcurrently(canDrawConcurrently bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *PopUpButton) WithNeedsDisplay(needsDisplay bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *PopUpButton) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *PopUpButton) WithWantsRestingTouches(wantsRestingTouches bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *PopUpButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *PopUpButton) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *PopUpButton) WithWantsLayer(wantsLayer bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *PopUpButton) WithLayer(layer *quartzcore.CALayer) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *PopUpButton) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *PopUpButton) WithNeedsLayout(needsLayout bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *PopUpButton) WithAlphaValue(alphaValue float64) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *PopUpButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *PopUpButton) WithBackgroundFilters(items ...*coreimage.CIFilter) *PopUpButton {
+	if len(items) == 0 {
+		x.inner.NSButton.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSButton.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *PopUpButton) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *PopUpButton) WithContentFilters(items ...*coreimage.CIFilter) *PopUpButton {
+	if len(items) == 0 {
+		x.inner.NSButton.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSButton.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *PopUpButton) WithShadow(shadow *raw.NSShadow) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *PopUpButton) WithClipsToBounds(clipsToBounds bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *PopUpButton) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *PopUpButton) WithToolTip(toolTip string) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *PopUpButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *PopUpButton) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *PopUpButton) WithNextKeyView(nextKeyView ViewProvider) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *PopUpButton) WithFocusRingType(focusRingType raw.NSFocusRingType) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *PopUpButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *PopUpButton {
+	if len(items) == 0 {
+		x.inner.NSButton.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSButton.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *PopUpButton) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *PopUpButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *PopUpButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *PopUpButton) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *PopUpButton) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *PopUpButton) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *PopUpButton) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *PopUpButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *PopUpButton) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *PopUpButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *PopUpButton) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *PopUpButton) WithNextResponder(nextResponder ResponderProvider) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *PopUpButton) WithMenu(menu *raw.NSMenu) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *PopUpButton) WithUserActivity(userActivity *foundation.NSUserActivity) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *PopUpButton) WithTouchBar(touchBar *raw.NSTouchBar) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -301,6 +938,105 @@ type PopUpButtonable interface {
 	WithPreferredEdge(preferredEdge foundation.NSRectEdge) *PopUpButton
 	WithUsesItemFromMenu(usesItemFromMenu bool) *PopUpButton
 	WithAltersStateOfSelectedItem(altersStateOfSelectedItem bool) *PopUpButton
+	WithTitle(title string) *PopUpButton
+	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *PopUpButton
+	WithAlternateTitle(alternateTitle string) *PopUpButton
+	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *PopUpButton
+	WithHasDestructiveAction(hasDestructiveAction bool) *PopUpButton
+	WithSound(sound *raw.NSSound) *PopUpButton
+	WithSpringLoaded(springLoaded bool) *PopUpButton
+	WithMaxAcceleratorLevel(maxAcceleratorLevel int) *PopUpButton
+	WithBezelStyle(bezelStyle raw.NSBezelStyle) *PopUpButton
+	WithBordered(bordered bool) *PopUpButton
+	WithTransparent(transparent bool) *PopUpButton
+	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButton
+	WithBezelColor(bezelColor *raw.NSColor) *PopUpButton
+	WithContentTintColor(contentTintColor *raw.NSColor) *PopUpButton
+	WithTintProminence(tintProminence raw.NSTintProminence) *PopUpButton
+	WithImage(image *raw.NSImage) *PopUpButton
+	WithAlternateImage(alternateImage *raw.NSImage) *PopUpButton
+	WithImagePosition(imagePosition raw.NSCellImagePosition) *PopUpButton
+	WithImageScaling(imageScaling raw.NSImageScaling) *PopUpButton
+	WithImageHugsTitle(imageHugsTitle bool) *PopUpButton
+	WithSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) *PopUpButton
+	WithState(state int) *PopUpButton
+	WithAllowsMixedState(allowsMixedState bool) *PopUpButton
+	WithKeyEquivalent(keyEquivalent string) *PopUpButton
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *PopUpButton
+	WithBorderShape(borderShape raw.NSControlBorderShape) *PopUpButton
+	WithTarget(target objc.ID) *PopUpButton
+	WithAction(action objc.SEL) *PopUpButton
+	WithTag(tag int) *PopUpButton
+	WithIgnoresMultiClick(ignoresMultiClick bool) *PopUpButton
+	WithContinuous(continuous bool) *PopUpButton
+	WithEnabled(enabled bool) *PopUpButton
+	WithRefusesFirstResponder(refusesFirstResponder bool) *PopUpButton
+	WithHighlighted(highlighted bool) *PopUpButton
+	WithControlSize(controlSize raw.NSControlSize) *PopUpButton
+	WithFormatter(formatter *foundation.NSFormatter) *PopUpButton
+	WithObjectValue(objectValue objc.ID) *PopUpButton
+	WithStringValue(stringValue string) *PopUpButton
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PopUpButton
+	WithIntValue(intValue int) *PopUpButton
+	WithIntegerValue(integerValue int) *PopUpButton
+	WithFloatValue(floatValue float32) *PopUpButton
+	WithDoubleValue(doubleValue float64) *PopUpButton
+	WithFont(font *raw.NSFont) *PopUpButton
+	WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButton
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PopUpButton
+	WithAlignment(alignment raw.NSTextAlignment) *PopUpButton
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PopUpButton
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PopUpButton
+	WithCell(cell CellProvider) *PopUpButton
+	WithSubviews(items ...ViewProvider) *PopUpButton
+	WithHidden(hidden bool) *PopUpButton
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PopUpButton
+	WithAutoresizesSubviews(autoresizesSubviews bool) *PopUpButton
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *PopUpButton
+	WithFrame(frame corefoundation.CGRect) *PopUpButton
+	WithFrameRotation(frameRotation float64) *PopUpButton
+	WithFrameCenterRotation(frameCenterRotation float64) *PopUpButton
+	WithBoundsRotation(boundsRotation float64) *PopUpButton
+	WithBounds(bounds corefoundation.CGRect) *PopUpButton
+	WithCanDrawConcurrently(canDrawConcurrently bool) *PopUpButton
+	WithNeedsDisplay(needsDisplay bool) *PopUpButton
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *PopUpButton
+	WithWantsRestingTouches(wantsRestingTouches bool) *PopUpButton
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *PopUpButton
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *PopUpButton
+	WithWantsLayer(wantsLayer bool) *PopUpButton
+	WithLayer(layer *quartzcore.CALayer) *PopUpButton
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PopUpButton
+	WithNeedsLayout(needsLayout bool) *PopUpButton
+	WithAlphaValue(alphaValue float64) *PopUpButton
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PopUpButton
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *PopUpButton
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PopUpButton
+	WithContentFilters(items ...*coreimage.CIFilter) *PopUpButton
+	WithShadow(shadow *raw.NSShadow) *PopUpButton
+	WithClipsToBounds(clipsToBounds bool) *PopUpButton
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PopUpButton
+	WithToolTip(toolTip string) *PopUpButton
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PopUpButton
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PopUpButton
+	WithNextKeyView(nextKeyView ViewProvider) *PopUpButton
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *PopUpButton
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *PopUpButton
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PopUpButton
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PopUpButton
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PopUpButton
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *PopUpButton
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PopUpButton
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PopUpButton
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PopUpButton
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PopUpButton
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PopUpButton
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PopUpButton
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PopUpButton
+	WithNextResponder(nextResponder ResponderProvider) *PopUpButton
+	WithMenu(menu *raw.NSMenu) *PopUpButton
+	WithUserActivity(userActivity *foundation.NSUserActivity) *PopUpButton
+	WithTouchBar(touchBar *raw.NSTouchBar) *PopUpButton
 	AddItemWithTitle(title string)
 	AddItemsWithTitles(itemTitles *foundation.NSArray[*foundation.NSString])
 	InsertItemWithTitleAtIndex(title string, index int)

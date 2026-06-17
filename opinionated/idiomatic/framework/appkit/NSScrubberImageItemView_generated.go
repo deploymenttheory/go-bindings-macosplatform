@@ -6,7 +6,12 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ScrubberImageItemView wraps [raw.NSScrubberImageItemView] with a fluent Go API.
@@ -44,6 +49,352 @@ func (x *ScrubberImageItemView) WithImage(image *raw.NSImage) *ScrubberImageItem
 // WithImageAlignment sets the imageAlignment property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithImageAlignment(imageAlignment raw.NSImageAlignment) *ScrubberImageItemView {
 	x.inner.SetImageAlignment(imageAlignment)
+	return x
+}
+
+// WithSelected sets the selected property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithSelected(selected bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.SetSelected(selected)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithHighlighted(highlighted bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.SetHighlighted(highlighted)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *ScrubberImageItemView) WithSubviews(items ...ViewProvider) *ScrubberImageItemView {
+	if len(items) == 0 {
+		x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithHidden(hidden bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithFrame(frame corefoundation.CGRect) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithFrameRotation(frameRotation float64) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithFrameCenterRotation(frameCenterRotation float64) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithBoundsRotation(boundsRotation float64) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithBounds(bounds corefoundation.CGRect) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithNeedsDisplay(needsDisplay bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithWantsLayer(wantsLayer bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithLayer(layer *quartzcore.CALayer) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithNeedsLayout(needsLayout bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithAlphaValue(alphaValue float64) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ScrubberImageItemView) WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrubberImageItemView {
+	if len(items) == 0 {
+		x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ScrubberImageItemView) WithContentFilters(items ...*coreimage.CIFilter) *ScrubberImageItemView {
+	if len(items) == 0 {
+		x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithShadow(shadow *raw.NSShadow) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithClipsToBounds(clipsToBounds bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithToolTip(toolTip string) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *ScrubberImageItemView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberImageItemView {
+	if len(items) == 0 {
+		x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithNextResponder(nextResponder ResponderProvider) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithMenu(menu *raw.NSMenu) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithUserActivity(userActivity *foundation.NSUserActivity) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *ScrubberImageItemView) WithTouchBar(touchBar *raw.NSTouchBar) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -93,6 +444,57 @@ type ScrubberImageItemViewable interface {
 	Unwrap() *raw.NSScrubberImageItemView
 	WithImage(image *raw.NSImage) *ScrubberImageItemView
 	WithImageAlignment(imageAlignment raw.NSImageAlignment) *ScrubberImageItemView
+	WithSelected(selected bool) *ScrubberImageItemView
+	WithHighlighted(highlighted bool) *ScrubberImageItemView
+	WithSubviews(items ...ViewProvider) *ScrubberImageItemView
+	WithHidden(hidden bool) *ScrubberImageItemView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberImageItemView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberImageItemView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrubberImageItemView
+	WithFrame(frame corefoundation.CGRect) *ScrubberImageItemView
+	WithFrameRotation(frameRotation float64) *ScrubberImageItemView
+	WithFrameCenterRotation(frameCenterRotation float64) *ScrubberImageItemView
+	WithBoundsRotation(boundsRotation float64) *ScrubberImageItemView
+	WithBounds(bounds corefoundation.CGRect) *ScrubberImageItemView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberImageItemView
+	WithNeedsDisplay(needsDisplay bool) *ScrubberImageItemView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberImageItemView
+	WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberImageItemView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrubberImageItemView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrubberImageItemView
+	WithWantsLayer(wantsLayer bool) *ScrubberImageItemView
+	WithLayer(layer *quartzcore.CALayer) *ScrubberImageItemView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberImageItemView
+	WithNeedsLayout(needsLayout bool) *ScrubberImageItemView
+	WithAlphaValue(alphaValue float64) *ScrubberImageItemView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberImageItemView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrubberImageItemView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrubberImageItemView
+	WithContentFilters(items ...*coreimage.CIFilter) *ScrubberImageItemView
+	WithShadow(shadow *raw.NSShadow) *ScrubberImageItemView
+	WithClipsToBounds(clipsToBounds bool) *ScrubberImageItemView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberImageItemView
+	WithToolTip(toolTip string) *ScrubberImageItemView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrubberImageItemView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberImageItemView
+	WithNextKeyView(nextKeyView ViewProvider) *ScrubberImageItemView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrubberImageItemView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberImageItemView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberImageItemView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberImageItemView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberImageItemView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrubberImageItemView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberImageItemView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberImageItemView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberImageItemView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberImageItemView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberImageItemView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberImageItemView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrubberImageItemView
+	WithNextResponder(nextResponder ResponderProvider) *ScrubberImageItemView
+	WithMenu(menu *raw.NSMenu) *ScrubberImageItemView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *ScrubberImageItemView
+	WithTouchBar(touchBar *raw.NSTouchBar) *ScrubberImageItemView
 	ImageView() *ImageView
 	Image() *Image
 	SetImage(image *raw.NSImage)

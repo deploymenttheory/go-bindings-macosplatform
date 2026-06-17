@@ -36,6 +36,12 @@ func NewPositionalSpecifierWithPositionObjectSpecifier(position raw.NSInsertionP
 	return &PositionalSpecifier{inner: raw.NSPositionalSpecifierFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PositionalSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PositionalSpecifier {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SetInsertionClassDescription calls the underlying SetInsertionClassDescription.
 func (x *PositionalSpecifier) SetInsertionClassDescription(classDescription *raw.NSScriptClassDescription) {
 	x.inner.SetInsertionClassDescription(classDescription)
@@ -80,6 +86,7 @@ func (x *PositionalSpecifier) asObject() *raw.NSObject { return &x.inner.NSObjec
 // PositionalSpecifierable is the interface implemented by [PositionalSpecifier], for mocking and DI.
 type PositionalSpecifierable interface {
 	Unwrap() *raw.NSPositionalSpecifier
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PositionalSpecifier
 	SetInsertionClassDescription(classDescription *raw.NSScriptClassDescription)
 	Evaluate()
 	Position() raw.NSInsertionPosition

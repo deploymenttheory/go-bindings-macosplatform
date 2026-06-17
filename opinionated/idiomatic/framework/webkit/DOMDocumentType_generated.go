@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -34,6 +35,24 @@ func DOMDocumentTypeFromID(id objc.ID) *DOMDocumentType {
 func NewDOMDocumentType() *DOMDocumentType {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMDocumentType")), objc.RegisterName("new"))
 	return &DOMDocumentType{inner: raw.DOMDocumentTypeFromID(_id)}
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMDocumentType) WithNodeValue(nodeValue string) *DOMDocumentType {
+	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMDocumentType) WithPrefix(prefix string) *DOMDocumentType {
+	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMDocumentType) WithTextContent(textContent string) *DOMDocumentType {
+	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
 }
 
 // Name calls the underlying Name.
@@ -99,6 +118,9 @@ func (x *DOMDocumentType) asWebScriptObject() *raw.WebScriptObject { return &x.i
 // DOMDocumentTypeable is the interface implemented by [DOMDocumentType], for mocking and DI.
 type DOMDocumentTypeable interface {
 	Unwrap() *raw.DOMDocumentType
+	WithNodeValue(nodeValue string) *DOMDocumentType
+	WithPrefix(prefix string) *DOMDocumentType
+	WithTextContent(textContent string) *DOMDocumentType
 	Name() string
 	Entities() *DOMNamedNodeMap
 	Notations() *DOMNamedNodeMap

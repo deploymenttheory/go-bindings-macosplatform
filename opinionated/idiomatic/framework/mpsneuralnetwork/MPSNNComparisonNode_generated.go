@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +42,84 @@ func (x *NNComparisonNode) WithComparisonType(comparisonType raw.MPSNNComparison
 	return x
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithPrimaryScale(primaryScale float32) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithSecondaryScale(secondaryScale float32) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithBias(bias float32) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithMinimumValue(minimumValue float32) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithMaximumValue(maximumValue float32) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNComparisonNode) WithLabel(label string) *NNComparisonNode {
+	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ComparisonType calls the underlying ComparisonType.
 func (x *NNComparisonNode) ComparisonType() raw.MPSNNComparisonType {
 	return x.inner.ComparisonType()
@@ -59,6 +138,19 @@ func (x *NNComparisonNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inn
 type NNComparisonNodeable interface {
 	Unwrap() *raw.MPSNNComparisonNode
 	WithComparisonType(comparisonType raw.MPSNNComparisonType) *NNComparisonNode
+	WithPrimaryScale(primaryScale float32) *NNComparisonNode
+	WithSecondaryScale(secondaryScale float32) *NNComparisonNode
+	WithBias(bias float32) *NNComparisonNode
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNComparisonNode
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNComparisonNode
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNComparisonNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNComparisonNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNComparisonNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNComparisonNode
+	WithMinimumValue(minimumValue float32) *NNComparisonNode
+	WithMaximumValue(maximumValue float32) *NNComparisonNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNComparisonNode
+	WithLabel(label string) *NNComparisonNode
 	ComparisonType() raw.MPSNNComparisonType
 	SetComparisonType(comparisonType raw.MPSNNComparisonType)
 }

@@ -50,6 +50,18 @@ func (x *GamepadSnapshot) WithSnapshotData(snapshotData *foundation.NSData) *Gam
 	return x
 }
 
+// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
+func (x *GamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) *GamepadSnapshot {
+	x.inner.GCGamepad.SetValueChangedHandler(valueChangedHandler)
+	return x
+}
+
+// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
+func (x *GamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *GamepadSnapshot {
+	x.inner.GCGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+	return x
+}
+
 // SnapshotData calls the underlying SnapshotData.
 func (x *GamepadSnapshot) SnapshotData() *foundation.NSData {
 	return x.inner.SnapshotData()
@@ -68,6 +80,8 @@ func (x *GamepadSnapshot) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
 type GamepadSnapshotable interface {
 	Unwrap() *raw.GCGamepadSnapshot
 	WithSnapshotData(snapshotData *foundation.NSData) *GamepadSnapshot
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) *GamepadSnapshot
+	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *GamepadSnapshot
 	SnapshotData() *foundation.NSData
 	SetSnapshotData(snapshotData *foundation.NSData)
 }

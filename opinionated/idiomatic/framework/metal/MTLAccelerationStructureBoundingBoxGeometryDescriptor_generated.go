@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -59,6 +60,54 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxCoun
 	return x
 }
 
+// WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetOpaque(opaque)
+	return x
+}
+
+// WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithLabel(label string) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataBuffer(primitiveDataBuffer)
+	return x
+}
+
+// WithPrimitiveDataBufferOffset sets the primitiveDataBufferOffset property and returns the receiver for chaining.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataBufferOffset(primitiveDataBufferOffset)
+	return x
+}
+
+// WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataStride(primitiveDataStride)
+	return x
+}
+
+// WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataElementSize(primitiveDataElementSize)
+	return x
+}
+
 // BoundingBoxBuffer calls the underlying BoundingBoxBuffer.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxBuffer() raw.MTLBuffer {
 	return x.inner.BoundingBoxBuffer()
@@ -108,6 +157,14 @@ type AccelerationStructureBoundingBoxGeometryDescriptorable interface {
 	WithBoundingBoxBufferOffset(boundingBoxBufferOffset uint) *AccelerationStructureBoundingBoxGeometryDescriptor
 	WithBoundingBoxStride(boundingBoxStride uint) *AccelerationStructureBoundingBoxGeometryDescriptor
 	WithBoundingBoxCount(boundingBoxCount uint) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithOpaque(opaque bool) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithLabel(label string) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureBoundingBoxGeometryDescriptor
 	BoundingBoxBuffer() raw.MTLBuffer
 	SetBoundingBoxBuffer(boundingBoxBuffer raw.MTLBuffer)
 	BoundingBoxBufferOffset() uint

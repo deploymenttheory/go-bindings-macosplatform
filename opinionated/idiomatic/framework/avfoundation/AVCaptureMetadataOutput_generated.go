@@ -61,6 +61,12 @@ func (x *CaptureMetadataOutput) WithRectOfInterest(rectOfInterest corefoundation
 	return x
 }
 
+// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+func (x *CaptureMetadataOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureMetadataOutput {
+	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	return x
+}
+
 // SetMetadataObjectsDelegateQueue calls the underlying SetMetadataObjectsDelegateQueue.
 func (x *CaptureMetadataOutput) SetMetadataObjectsDelegateQueue(objectsDelegate raw.AVCaptureMetadataOutputObjectsDelegate, objectsCallbackQueue *foundation.NSObject) {
 	x.inner.SetMetadataObjectsDelegateQueue(objectsDelegate, objectsCallbackQueue)
@@ -131,6 +137,7 @@ type CaptureMetadataOutputable interface {
 	Unwrap() *raw.AVCaptureMetadataOutput
 	WithMetadataObjectTypes(items ...*foundation.NSString) *CaptureMetadataOutput
 	WithRectOfInterest(rectOfInterest corefoundation.CGRect) *CaptureMetadataOutput
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureMetadataOutput
 	SetMetadataObjectsDelegateQueue(objectsDelegate raw.AVCaptureMetadataOutputObjectsDelegate, objectsCallbackQueue *foundation.NSObject)
 	MetadataObjectsDelegate() raw.AVCaptureMetadataOutputObjectsDelegate
 	MetadataObjectsCallbackQueue() *foundation.NSObject

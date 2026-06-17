@@ -7,7 +7,11 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TableHeaderView wraps [raw.NSTableHeaderView] with a fluent Go API.
@@ -39,6 +43,340 @@ func NewTableHeaderView() *TableHeaderView {
 // WithTableView sets the tableView property and returns the receiver for chaining.
 func (x *TableHeaderView) WithTableView(tableView TableViewProvider) *TableHeaderView {
 	x.inner.SetTableView(tableView.asTableView())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *TableHeaderView) WithSubviews(items ...ViewProvider) *TableHeaderView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *TableHeaderView) WithHidden(hidden bool) *TableHeaderView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *TableHeaderView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableHeaderView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *TableHeaderView) WithAutoresizesSubviews(autoresizesSubviews bool) *TableHeaderView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *TableHeaderView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableHeaderView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *TableHeaderView) WithFrame(frame corefoundation.CGRect) *TableHeaderView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *TableHeaderView) WithFrameRotation(frameRotation float64) *TableHeaderView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *TableHeaderView) WithFrameCenterRotation(frameCenterRotation float64) *TableHeaderView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *TableHeaderView) WithBoundsRotation(boundsRotation float64) *TableHeaderView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *TableHeaderView) WithBounds(bounds corefoundation.CGRect) *TableHeaderView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *TableHeaderView) WithCanDrawConcurrently(canDrawConcurrently bool) *TableHeaderView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *TableHeaderView) WithNeedsDisplay(needsDisplay bool) *TableHeaderView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *TableHeaderView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableHeaderView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *TableHeaderView) WithWantsRestingTouches(wantsRestingTouches bool) *TableHeaderView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *TableHeaderView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableHeaderView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *TableHeaderView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableHeaderView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *TableHeaderView) WithWantsLayer(wantsLayer bool) *TableHeaderView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *TableHeaderView) WithLayer(layer *quartzcore.CALayer) *TableHeaderView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *TableHeaderView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableHeaderView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *TableHeaderView) WithNeedsLayout(needsLayout bool) *TableHeaderView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *TableHeaderView) WithAlphaValue(alphaValue float64) *TableHeaderView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *TableHeaderView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableHeaderView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *TableHeaderView) WithBackgroundFilters(items ...*coreimage.CIFilter) *TableHeaderView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *TableHeaderView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TableHeaderView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *TableHeaderView) WithContentFilters(items ...*coreimage.CIFilter) *TableHeaderView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *TableHeaderView) WithShadow(shadow *raw.NSShadow) *TableHeaderView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *TableHeaderView) WithClipsToBounds(clipsToBounds bool) *TableHeaderView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *TableHeaderView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableHeaderView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *TableHeaderView) WithToolTip(toolTip string) *TableHeaderView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *TableHeaderView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableHeaderView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *TableHeaderView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableHeaderView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *TableHeaderView) WithNextKeyView(nextKeyView ViewProvider) *TableHeaderView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *TableHeaderView) WithFocusRingType(focusRingType raw.NSFocusRingType) *TableHeaderView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *TableHeaderView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TableHeaderView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *TableHeaderView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableHeaderView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *TableHeaderView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableHeaderView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *TableHeaderView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableHeaderView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *TableHeaderView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableHeaderView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *TableHeaderView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableHeaderView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *TableHeaderView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableHeaderView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *TableHeaderView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableHeaderView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *TableHeaderView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableHeaderView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *TableHeaderView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableHeaderView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *TableHeaderView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableHeaderView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *TableHeaderView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableHeaderView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *TableHeaderView) WithNextResponder(nextResponder ResponderProvider) *TableHeaderView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *TableHeaderView) WithMenu(menu *raw.NSMenu) *TableHeaderView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *TableHeaderView) WithUserActivity(userActivity *foundation.NSUserActivity) *TableHeaderView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *TableHeaderView) WithTouchBar(touchBar *raw.NSTouchBar) *TableHeaderView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -89,6 +427,55 @@ func (x *TableHeaderView) asResponder() *raw.NSResponder { return &x.inner.NSVie
 type TableHeaderViewable interface {
 	Unwrap() *raw.NSTableHeaderView
 	WithTableView(tableView TableViewProvider) *TableHeaderView
+	WithSubviews(items ...ViewProvider) *TableHeaderView
+	WithHidden(hidden bool) *TableHeaderView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableHeaderView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *TableHeaderView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableHeaderView
+	WithFrame(frame corefoundation.CGRect) *TableHeaderView
+	WithFrameRotation(frameRotation float64) *TableHeaderView
+	WithFrameCenterRotation(frameCenterRotation float64) *TableHeaderView
+	WithBoundsRotation(boundsRotation float64) *TableHeaderView
+	WithBounds(bounds corefoundation.CGRect) *TableHeaderView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *TableHeaderView
+	WithNeedsDisplay(needsDisplay bool) *TableHeaderView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableHeaderView
+	WithWantsRestingTouches(wantsRestingTouches bool) *TableHeaderView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableHeaderView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableHeaderView
+	WithWantsLayer(wantsLayer bool) *TableHeaderView
+	WithLayer(layer *quartzcore.CALayer) *TableHeaderView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableHeaderView
+	WithNeedsLayout(needsLayout bool) *TableHeaderView
+	WithAlphaValue(alphaValue float64) *TableHeaderView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableHeaderView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *TableHeaderView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TableHeaderView
+	WithContentFilters(items ...*coreimage.CIFilter) *TableHeaderView
+	WithShadow(shadow *raw.NSShadow) *TableHeaderView
+	WithClipsToBounds(clipsToBounds bool) *TableHeaderView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableHeaderView
+	WithToolTip(toolTip string) *TableHeaderView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableHeaderView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableHeaderView
+	WithNextKeyView(nextKeyView ViewProvider) *TableHeaderView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *TableHeaderView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *TableHeaderView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableHeaderView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableHeaderView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableHeaderView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableHeaderView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableHeaderView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableHeaderView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableHeaderView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableHeaderView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableHeaderView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableHeaderView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableHeaderView
+	WithNextResponder(nextResponder ResponderProvider) *TableHeaderView
+	WithMenu(menu *raw.NSMenu) *TableHeaderView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *TableHeaderView
+	WithTouchBar(touchBar *raw.NSTouchBar) *TableHeaderView
 	HeaderRectOfColumn(column int) corefoundation.CGRect
 	ColumnAtPoint(point corefoundation.CGPoint) int
 	TableView() *TableView

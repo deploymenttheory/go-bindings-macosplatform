@@ -59,6 +59,24 @@ func (x *AvoidOccluderConstraint) WithBias(bias float64) *AvoidOccluderConstrain
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *AvoidOccluderConstraint) WithEnabled(enabled bool) *AvoidOccluderConstraint {
+	x.inner.SCNConstraint.SetEnabled(enabled)
+	return x
+}
+
+// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+func (x *AvoidOccluderConstraint) WithInfluenceFactor(influenceFactor float64) *AvoidOccluderConstraint {
+	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	return x
+}
+
+// WithIncremental sets the incremental property and returns the receiver for chaining.
+func (x *AvoidOccluderConstraint) WithIncremental(incremental bool) *AvoidOccluderConstraint {
+	x.inner.SCNConstraint.SetIncremental(incremental)
+	return x
+}
+
 // Delegate calls the underlying Delegate.
 func (x *AvoidOccluderConstraint) Delegate() raw.SCNAvoidOccluderConstraintDelegate {
 	return x.inner.Delegate()
@@ -112,6 +130,9 @@ type AvoidOccluderConstraintable interface {
 	WithTarget(target NodeProvider) *AvoidOccluderConstraint
 	WithOccluderCategoryBitMask(occluderCategoryBitMask uint) *AvoidOccluderConstraint
 	WithBias(bias float64) *AvoidOccluderConstraint
+	WithEnabled(enabled bool) *AvoidOccluderConstraint
+	WithInfluenceFactor(influenceFactor float64) *AvoidOccluderConstraint
+	WithIncremental(incremental bool) *AvoidOccluderConstraint
 	Delegate() raw.SCNAvoidOccluderConstraintDelegate
 	SetDelegate(delegate raw.SCNAvoidOccluderConstraintDelegate)
 	Target() *Node

@@ -49,6 +49,12 @@ func NewMutableSetWithCapacity(numItems uint) *MutableSet {
 	return &MutableSet{inner: raw.NSMutableSetFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MutableSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableSet {
+	x.inner.NSSet.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddObject calls the underlying AddObject.
 func (x *MutableSet) AddObject(object objc.ID) {
 	x.inner.AddObject(object)
@@ -103,6 +109,7 @@ func (x *MutableSet) asObject() *raw.NSObject { return &x.inner.NSSet.NSObject }
 // MutableSetable is the interface implemented by [MutableSet], for mocking and DI.
 type MutableSetable interface {
 	Unwrap() *raw.NSMutableSet[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableSet
 	AddObject(object objc.ID)
 	RemoveObject(object objc.ID)
 	AddObjectsFromArray(array *raw.NSArray[objc.ID])

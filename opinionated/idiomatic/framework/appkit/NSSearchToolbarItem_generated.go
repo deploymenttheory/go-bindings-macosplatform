@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,138 @@ func (x *SearchToolbarItem) WithResignsFirstResponderWithCancel(resignsFirstResp
 // WithPreferredWidthForSearchField sets the preferredWidthForSearchField property and returns the receiver for chaining.
 func (x *SearchToolbarItem) WithPreferredWidthForSearchField(preferredWidthForSearchField float64) *SearchToolbarItem {
 	x.inner.SetPreferredWidthForSearchField(preferredWidthForSearchField)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithLabel(label string) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithPaletteLabel sets the paletteLabel property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithPaletteLabel(paletteLabel string) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetPaletteLabel(foundation.NSStringStringWithUTF8String(paletteLabel))
+	return x
+}
+
+// WithPossibleLabels sets the possibleLabels property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetPossibleLabels(possibleLabels)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithToolTip(toolTip string) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithTag(tag int) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetTag(tag)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithTarget(target objc.ID) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithAction(action objc.SEL) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetAction(action)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithEnabled(enabled bool) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetEnabled(enabled)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithImage(image *raw.NSImage) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetImage(image)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithTitle(title string) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithBordered(bordered bool) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetBordered(bordered)
+	return x
+}
+
+// WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithStyle(style raw.NSToolbarItemStyle) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetStyle(style)
+	return x
+}
+
+// WithNavigational sets the navigational property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithNavigational(navigational bool) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetNavigational(navigational)
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithView(view ViewProvider) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetView(view.asView())
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithHidden(hidden bool) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetHidden(hidden)
+	return x
+}
+
+// WithMinSize sets the minSize property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithMinSize(minSize corefoundation.CGSize) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetMinSize(minSize)
+	return x
+}
+
+// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetMaxSize(maxSize)
+	return x
+}
+
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithVisibilityPriority(visibilityPriority int) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
+// WithBadge sets the badge property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithBadge(badge *raw.NSItemBadge) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetBadge(badge)
+	return x
+}
+
+// WithAutovalidates sets the autovalidates property and returns the receiver for chaining.
+func (x *SearchToolbarItem) WithAutovalidates(autovalidates bool) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetAutovalidates(autovalidates)
 	return x
 }
 
@@ -105,6 +239,28 @@ type SearchToolbarItemable interface {
 	WithSearchField(searchField *raw.NSSearchField) *SearchToolbarItem
 	WithResignsFirstResponderWithCancel(resignsFirstResponderWithCancel bool) *SearchToolbarItem
 	WithPreferredWidthForSearchField(preferredWidthForSearchField float64) *SearchToolbarItem
+	WithLabel(label string) *SearchToolbarItem
+	WithPaletteLabel(paletteLabel string) *SearchToolbarItem
+	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *SearchToolbarItem
+	WithToolTip(toolTip string) *SearchToolbarItem
+	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *SearchToolbarItem
+	WithTag(tag int) *SearchToolbarItem
+	WithTarget(target objc.ID) *SearchToolbarItem
+	WithAction(action objc.SEL) *SearchToolbarItem
+	WithEnabled(enabled bool) *SearchToolbarItem
+	WithImage(image *raw.NSImage) *SearchToolbarItem
+	WithTitle(title string) *SearchToolbarItem
+	WithBordered(bordered bool) *SearchToolbarItem
+	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *SearchToolbarItem
+	WithStyle(style raw.NSToolbarItemStyle) *SearchToolbarItem
+	WithNavigational(navigational bool) *SearchToolbarItem
+	WithView(view ViewProvider) *SearchToolbarItem
+	WithHidden(hidden bool) *SearchToolbarItem
+	WithMinSize(minSize corefoundation.CGSize) *SearchToolbarItem
+	WithMaxSize(maxSize corefoundation.CGSize) *SearchToolbarItem
+	WithVisibilityPriority(visibilityPriority int) *SearchToolbarItem
+	WithBadge(badge *raw.NSItemBadge) *SearchToolbarItem
+	WithAutovalidates(autovalidates bool) *SearchToolbarItem
 	BeginSearchInteraction()
 	EndSearchInteraction()
 	SearchField() *SearchField

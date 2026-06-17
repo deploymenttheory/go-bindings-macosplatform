@@ -73,6 +73,36 @@ func (x *CaptureMovieFileOutput) WithSpatialVideoCaptureEnabled(spatialVideoCapt
 	return x
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *CaptureMovieFileOutput) WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureMovieFileOutput {
+	x.inner.AVCaptureFileOutput.SetDelegate(delegate)
+	return x
+}
+
+// WithMaxRecordedDuration sets the maxRecordedDuration property and returns the receiver for chaining.
+func (x *CaptureMovieFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureMovieFileOutput {
+	x.inner.AVCaptureFileOutput.SetMaxRecordedDuration(maxRecordedDuration)
+	return x
+}
+
+// WithMaxRecordedFileSize sets the maxRecordedFileSize property and returns the receiver for chaining.
+func (x *CaptureMovieFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureMovieFileOutput {
+	x.inner.AVCaptureFileOutput.SetMaxRecordedFileSize(maxRecordedFileSize)
+	return x
+}
+
+// WithMinFreeDiskSpaceLimit sets the minFreeDiskSpaceLimit property and returns the receiver for chaining.
+func (x *CaptureMovieFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureMovieFileOutput {
+	x.inner.AVCaptureFileOutput.SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit)
+	return x
+}
+
+// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+func (x *CaptureMovieFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureMovieFileOutput {
+	x.inner.AVCaptureFileOutput.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	return x
+}
+
 // OutputSettingsForConnection calls the underlying OutputSettingsForConnection.
 func (x *CaptureMovieFileOutput) OutputSettingsForConnection(connection *raw.AVCaptureConnection) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.OutputSettingsForConnection(connection)
@@ -160,6 +190,11 @@ type CaptureMovieFileOutputable interface {
 	WithMetadata(items ...MetadataItemProvider) *CaptureMovieFileOutput
 	WithPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled bool) *CaptureMovieFileOutput
 	WithSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool) *CaptureMovieFileOutput
+	WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureMovieFileOutput
+	WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureMovieFileOutput
+	WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureMovieFileOutput
+	WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureMovieFileOutput
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureMovieFileOutput
 	OutputSettingsForConnection(connection *raw.AVCaptureConnection) *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetOutputSettingsForConnection(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], connection *raw.AVCaptureConnection)
 	SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions)

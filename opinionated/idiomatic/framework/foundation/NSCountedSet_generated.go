@@ -50,6 +50,12 @@ func NewCountedSetWithSet(set *raw.NSSet[objc.ID]) *CountedSet {
 	return &CountedSet{inner: raw.NSCountedSetFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *CountedSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CountedSet {
+	x.inner.NSMutableSet.NSSet.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CountForObject calls the underlying CountForObject.
 func (x *CountedSet) CountForObject(object objc.ID) uint {
 	return x.inner.CountForObject(object)
@@ -64,6 +70,7 @@ func (x *CountedSet) asObject() *raw.NSObject { return &x.inner.NSMutableSet.NSS
 // CountedSetable is the interface implemented by [CountedSet], for mocking and DI.
 type CountedSetable interface {
 	Unwrap() *raw.NSCountedSet[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CountedSet
 	CountForObject(object objc.ID) uint
 }
 

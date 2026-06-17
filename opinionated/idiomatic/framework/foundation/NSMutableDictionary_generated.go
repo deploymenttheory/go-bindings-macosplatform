@@ -64,6 +64,12 @@ func NewMutableDictionaryWithContentsOfURL(url string) *MutableDictionary {
 	return &MutableDictionary{inner: raw.NSMutableDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MutableDictionary) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableDictionary {
+	x.inner.NSDictionary.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // RemoveObjectForKey calls the underlying RemoveObjectForKey.
 func (x *MutableDictionary) RemoveObjectForKey(aKey objc.ID) {
 	x.inner.RemoveObjectForKey(aKey)
@@ -113,6 +119,7 @@ func (x *MutableDictionary) Set(key, value objc.ID) *MutableDictionary {
 // MutableDictionaryable is the interface implemented by [MutableDictionary], for mocking and DI.
 type MutableDictionaryable interface {
 	Unwrap() *raw.NSMutableDictionary[objc.ID, objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableDictionary
 	RemoveObjectForKey(aKey objc.ID)
 	SetObjectForKey(anObject objc.ID, aKey raw.NSCopying)
 	AddEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID])

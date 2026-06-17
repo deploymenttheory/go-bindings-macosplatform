@@ -86,6 +86,12 @@ func (x *ScriptCommand) WithScriptErrorString(scriptErrorString string) *ScriptC
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ScriptCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptCommand {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // PerformDefaultImplementation calls the underlying PerformDefaultImplementation.
 func (x *ScriptCommand) PerformDefaultImplementation() objc.ID {
 	return x.inner.PerformDefaultImplementation()
@@ -239,6 +245,7 @@ type ScriptCommandable interface {
 	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *ScriptCommand
 	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *ScriptCommand
 	WithScriptErrorString(scriptErrorString string) *ScriptCommand
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptCommand
 	PerformDefaultImplementation() objc.ID
 	ExecuteCommand() objc.ID
 	SuspendExecution()

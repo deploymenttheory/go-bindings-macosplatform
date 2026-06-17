@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,90 @@ func NewImageAddWithDevice(device metal.MTLDevice) *ImageAdd {
 	return &ImageAdd{inner: raw.MPSImageAddFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *ImageAdd) WithPrimaryScale(primaryScale float32) *ImageAdd {
+	x.inner.MPSImageArithmetic.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *ImageAdd) WithSecondaryScale(secondaryScale float32) *ImageAdd {
+	x.inner.MPSImageArithmetic.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *ImageAdd) WithBias(bias float32) *ImageAdd {
+	x.inner.MPSImageArithmetic.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInPixels sets the primaryStrideInPixels property and returns the receiver for chaining.
+func (x *ImageAdd) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageAdd {
+	x.inner.MPSImageArithmetic.SetPrimaryStrideInPixels(primaryStrideInPixels)
+	return x
+}
+
+// WithSecondaryStrideInPixels sets the secondaryStrideInPixels property and returns the receiver for chaining.
+func (x *ImageAdd) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageAdd {
+	x.inner.MPSImageArithmetic.SetSecondaryStrideInPixels(secondaryStrideInPixels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *ImageAdd) WithMinimumValue(minimumValue float32) *ImageAdd {
+	x.inner.MPSImageArithmetic.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *ImageAdd) WithMaximumValue(maximumValue float32) *ImageAdd {
+	x.inner.MPSImageArithmetic.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *ImageAdd) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageAdd {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *ImageAdd) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageAdd {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *ImageAdd) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageAdd {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *ImageAdd) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageAdd {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageAdd) WithClipRect(clipRect metal.MTLRegion) *ImageAdd {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageAdd) WithOptions(options mpscore.MPSKernelOptions) *ImageAdd {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageAdd) WithLabel(label string) *ImageAdd {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageAdd) asImageArithmetic() *mpsimage.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
 
 func (x *ImageAdd) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
@@ -48,6 +133,20 @@ func (x *ImageAdd) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageArith
 // ImageAddable is the interface implemented by [ImageAdd], for mocking and DI.
 type ImageAddable interface {
 	Unwrap() *raw.MPSImageAdd
+	WithPrimaryScale(primaryScale float32) *ImageAdd
+	WithSecondaryScale(secondaryScale float32) *ImageAdd
+	WithBias(bias float32) *ImageAdd
+	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageAdd
+	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageAdd
+	WithMinimumValue(minimumValue float32) *ImageAdd
+	WithMaximumValue(maximumValue float32) *ImageAdd
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageAdd
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageAdd
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageAdd
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageAdd
+	WithClipRect(clipRect metal.MTLRegion) *ImageAdd
+	WithOptions(options mpscore.MPSKernelOptions) *ImageAdd
+	WithLabel(label string) *ImageAdd
 }
 
 var _ ImageAddable = (*ImageAdd)(nil)

@@ -47,6 +47,66 @@ func NewNNSliceWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDev
 	return &NNSlice{inner: raw.MPSNNSliceFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNSlice) WithOffset(offset mpscore.MPSOffset) *NNSlice {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNSlice) WithClipRect(clipRect metal.MTLRegion) *NNSlice {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNSlice) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNSlice {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNSlice) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNSlice {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNSlice) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNSlice {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNSlice) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNSlice {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNSlice) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNSlice {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNSlice) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNSlice {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNSlice) WithOptions(options mpscore.MPSKernelOptions) *NNSlice {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNSlice) WithLabel(label string) *NNSlice {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNSlice) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 func (x *NNSlice) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
@@ -54,6 +114,16 @@ func (x *NNSlice) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.M
 // NNSliceable is the interface implemented by [NNSlice], for mocking and DI.
 type NNSliceable interface {
 	Unwrap() *raw.MPSNNSlice
+	WithOffset(offset mpscore.MPSOffset) *NNSlice
+	WithClipRect(clipRect metal.MTLRegion) *NNSlice
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNSlice
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNSlice
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNSlice
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNSlice
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNSlice
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNSlice
+	WithOptions(options mpscore.MPSKernelOptions) *NNSlice
+	WithLabel(label string) *NNSlice
 }
 
 var _ NNSliceable = (*NNSlice)(nil)

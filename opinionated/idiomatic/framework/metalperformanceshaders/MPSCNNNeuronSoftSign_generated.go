@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,66 @@ func NewCNNNeuronSoftSignWithDevice(device metal.MTLDevice) *CNNNeuronSoftSign {
 	return &CNNNeuronSoftSign{inner: raw.MPSCNNNeuronSoftSignFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSign) WithOffset(offset mpscore.MPSOffset) *CNNNeuronSoftSign {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSign) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronSoftSign {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSign) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronSoftSign {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSign) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronSoftSign {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSign) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronSoftSign {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSign) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronSoftSign {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSign) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronSoftSign {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSign) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronSoftSign {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSign) WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronSoftSign {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSign) WithLabel(label string) *CNNNeuronSoftSign {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronSoftSign) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
 func (x *CNNNeuronSoftSign) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
@@ -48,6 +109,16 @@ func (x *CNNNeuronSoftSign) asKernel() *mpscore.MPSKernel { return &x.inner.MPSC
 // CNNNeuronSoftSignable is the interface implemented by [CNNNeuronSoftSign], for mocking and DI.
 type CNNNeuronSoftSignable interface {
 	Unwrap() *raw.MPSCNNNeuronSoftSign
+	WithOffset(offset mpscore.MPSOffset) *CNNNeuronSoftSign
+	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronSoftSign
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronSoftSign
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronSoftSign
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronSoftSign
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronSoftSign
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronSoftSign
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronSoftSign
+	WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronSoftSign
+	WithLabel(label string) *CNNNeuronSoftSign
 }
 
 var _ CNNNeuronSoftSignable = (*CNNNeuronSoftSign)(nil)

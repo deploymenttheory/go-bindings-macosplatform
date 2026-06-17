@@ -111,6 +111,18 @@ func (x *SkyCubeTexture) WithSaturation(saturation float32) *SkyCubeTexture {
 	return x
 }
 
+// WithIsCube sets the isCube property and returns the receiver for chaining.
+func (x *SkyCubeTexture) WithIsCube(isCube bool) *SkyCubeTexture {
+	x.inner.MDLTexture.SetIsCube(isCube)
+	return x
+}
+
+// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+func (x *SkyCubeTexture) WithHasAlphaValues(hasAlphaValues bool) *SkyCubeTexture {
+	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	return x
+}
+
 // UpdateTexture calls the underlying UpdateTexture.
 func (x *SkyCubeTexture) UpdateTexture() {
 	x.inner.UpdateTexture()
@@ -262,6 +274,8 @@ type SkyCubeTextureable interface {
 	WithBrightness(brightness float32) *SkyCubeTexture
 	WithContrast(contrast float32) *SkyCubeTexture
 	WithSaturation(saturation float32) *SkyCubeTexture
+	WithIsCube(isCube bool) *SkyCubeTexture
+	WithHasAlphaValues(hasAlphaValues bool) *SkyCubeTexture
 	UpdateTexture()
 	Turbidity() float32
 	SetTurbidity(turbidity float32)

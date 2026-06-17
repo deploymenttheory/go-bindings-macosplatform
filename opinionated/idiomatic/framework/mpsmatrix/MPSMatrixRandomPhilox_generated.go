@@ -60,11 +60,25 @@ func NewMatrixRandomPhiloxWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(_id)}
 }
 
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixRandomPhilox) WithBatchStart(batchStart uint) *MatrixRandomPhilox {
+	x.inner.MPSMatrixRandom.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixRandomPhilox) WithBatchSize(batchSize uint) *MatrixRandomPhilox {
+	x.inner.MPSMatrixRandom.SetBatchSize(batchSize)
+	return x
+}
+
 func (x *MatrixRandomPhilox) asMatrixRandom() *raw.MPSMatrixRandom { return &x.inner.MPSMatrixRandom }
 
 // MatrixRandomPhiloxable is the interface implemented by [MatrixRandomPhilox], for mocking and DI.
 type MatrixRandomPhiloxable interface {
 	Unwrap() *raw.MPSMatrixRandomPhilox
+	WithBatchStart(batchStart uint) *MatrixRandomPhilox
+	WithBatchSize(batchSize uint) *MatrixRandomPhilox
 }
 
 var _ MatrixRandomPhiloxable = (*MatrixRandomPhilox)(nil)

@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -63,6 +64,48 @@ func (x *PhysicallyPlausibleLight) WithAttenuationStartDistance(attenuationStart
 // WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithAttenuationEndDistance(attenuationEndDistance float32) *PhysicallyPlausibleLight {
 	x.inner.SetAttenuationEndDistance(attenuationEndDistance)
+	return x
+}
+
+// WithLightType sets the lightType property and returns the receiver for chaining.
+func (x *PhysicallyPlausibleLight) WithLightType(lightType raw.MDLLightType) *PhysicallyPlausibleLight {
+	x.inner.MDLLight.SetLightType(lightType)
+	return x
+}
+
+// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+func (x *PhysicallyPlausibleLight) WithColorSpace(colorSpace string) *PhysicallyPlausibleLight {
+	x.inner.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
+	return x
+}
+
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *PhysicallyPlausibleLight) WithParent(parent ObjectProvider) *PhysicallyPlausibleLight {
+	x.inner.MDLLight.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *PhysicallyPlausibleLight) WithInstance(instance ObjectProvider) *PhysicallyPlausibleLight {
+	x.inner.MDLLight.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *PhysicallyPlausibleLight) WithTransform(transform raw.MDLTransformComponent) *PhysicallyPlausibleLight {
+	x.inner.MDLLight.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *PhysicallyPlausibleLight) WithChildren(children raw.MDLObjectContainerComponent) *PhysicallyPlausibleLight {
+	x.inner.MDLLight.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *PhysicallyPlausibleLight) WithHidden(hidden bool) *PhysicallyPlausibleLight {
+	x.inner.MDLLight.MDLObject.SetHidden(hidden)
 	return x
 }
 
@@ -145,6 +188,13 @@ type PhysicallyPlausibleLightable interface {
 	WithOuterConeAngle(outerConeAngle float32) *PhysicallyPlausibleLight
 	WithAttenuationStartDistance(attenuationStartDistance float32) *PhysicallyPlausibleLight
 	WithAttenuationEndDistance(attenuationEndDistance float32) *PhysicallyPlausibleLight
+	WithLightType(lightType raw.MDLLightType) *PhysicallyPlausibleLight
+	WithColorSpace(colorSpace string) *PhysicallyPlausibleLight
+	WithParent(parent ObjectProvider) *PhysicallyPlausibleLight
+	WithInstance(instance ObjectProvider) *PhysicallyPlausibleLight
+	WithTransform(transform raw.MDLTransformComponent) *PhysicallyPlausibleLight
+	WithChildren(children raw.MDLObjectContainerComponent) *PhysicallyPlausibleLight
+	WithHidden(hidden bool) *PhysicallyPlausibleLight
 	SetColorByTemperature(temperature float32)
 	Color() unsafe.Pointer
 	SetColor(color unsafe.Pointer)

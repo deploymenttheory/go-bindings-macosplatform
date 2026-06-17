@@ -68,6 +68,24 @@ func (x *DOMElement) WithClassName(className string) *DOMElement {
 	return x
 }
 
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMElement) WithNodeValue(nodeValue string) *DOMElement {
+	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMElement) WithPrefix(prefix string) *DOMElement {
+	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMElement) WithTextContent(textContent string) *DOMElement {
+	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // GetAttribute calls the underlying GetAttribute.
 func (x *DOMElement) GetAttribute(name string) string {
 	_r := x.inner.GetAttribute(foundation.NSStringStringWithUTF8String(name))
@@ -489,6 +507,9 @@ type DOMElementable interface {
 	WithInnerHTML(innerHTML string) *DOMElement
 	WithOuterHTML(outerHTML string) *DOMElement
 	WithClassName(className string) *DOMElement
+	WithNodeValue(nodeValue string) *DOMElement
+	WithPrefix(prefix string) *DOMElement
+	WithTextContent(textContent string) *DOMElement
 	GetAttribute(name string) string
 	SetAttributeValue(name string, value string)
 	RemoveAttribute(name string)

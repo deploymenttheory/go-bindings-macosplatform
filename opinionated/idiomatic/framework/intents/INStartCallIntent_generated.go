@@ -38,6 +38,18 @@ func NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestina
 	return &StartCallIntent{inner: raw.INStartCallIntentFromID(_id)}
 }
 
+// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+func (x *StartCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *StartCallIntent {
+	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	return x
+}
+
+// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+func (x *StartCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *StartCallIntent {
+	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	return x
+}
+
 // CallRecordFilter calls the underlying CallRecordFilter.
 func (x *StartCallIntent) CallRecordFilter() *CallRecordFilter {
 	_r := x.inner.CallRecordFilter()
@@ -87,6 +99,8 @@ func (x *StartCallIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
 // StartCallIntentable is the interface implemented by [StartCallIntent], for mocking and DI.
 type StartCallIntentable interface {
 	Unwrap() *raw.INStartCallIntent
+	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *StartCallIntent
+	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *StartCallIntent
 	CallRecordFilter() *CallRecordFilter
 	CallRecordToCallBack() *CallRecord
 	AudioRoute() raw.INCallAudioRoute

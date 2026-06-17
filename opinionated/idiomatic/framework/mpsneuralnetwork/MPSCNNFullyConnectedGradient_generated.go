@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,126 @@ func NewCNNFullyConnectedGradientWithCoderDevice(aDecoder *foundation.NSCoder, d
 	return &CNNFullyConnectedGradient{inner: raw.MPSCNNFullyConnectedGradientFromID(_id)}
 }
 
+// WithGradientOption sets the gradientOption property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.SetGradientOption(gradientOption)
+	return x
+}
+
+// WithSerializeWeightsAndBiases sets the serializeWeightsAndBiases property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithSerializeWeightsAndBiases(serializeWeightsAndBiases bool) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.SetSerializeWeightsAndBiases(serializeWeightsAndBiases)
+	return x
+}
+
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithKernelOffsetX(kernelOffsetX int) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithKernelOffsetY(kernelOffsetY int) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithClipRect(clipRect metal.MTLRegion) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithPadding(padding raw.MPSNNPadding) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNFullyConnectedGradient) asCNNConvolutionGradient() *raw.MPSCNNConvolutionGradient { return &x.inner.MPSCNNConvolutionGradient }
 
 func (x *CNNFullyConnectedGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel }
@@ -54,6 +175,26 @@ func (x *CNNFullyConnectedGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel 
 // CNNFullyConnectedGradientable is the interface implemented by [CNNFullyConnectedGradient], for mocking and DI.
 type CNNFullyConnectedGradientable interface {
 	Unwrap() *raw.MPSCNNFullyConnectedGradient
+	WithGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) *CNNFullyConnectedGradient
+	WithSerializeWeightsAndBiases(serializeWeightsAndBiases bool) *CNNFullyConnectedGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNFullyConnectedGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNFullyConnectedGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNFullyConnectedGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNFullyConnectedGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNFullyConnectedGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNFullyConnectedGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNFullyConnectedGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNFullyConnectedGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNFullyConnectedGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNFullyConnectedGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNFullyConnectedGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNFullyConnectedGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNFullyConnectedGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNFullyConnectedGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNFullyConnectedGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNFullyConnectedGradient
+	WithPadding(padding raw.MPSNNPadding) *CNNFullyConnectedGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNFullyConnectedGradient
 }
 
 var _ CNNFullyConnectedGradientable = (*CNNFullyConnectedGradient)(nil)

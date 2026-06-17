@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,6 +49,138 @@ func (x *TrackingSeparatorToolbarItem) WithDividerIndex(dividerIndex int) *Track
 	return x
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithLabel(label string) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithPaletteLabel sets the paletteLabel property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithPaletteLabel(paletteLabel string) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetPaletteLabel(foundation.NSStringStringWithUTF8String(paletteLabel))
+	return x
+}
+
+// WithPossibleLabels sets the possibleLabels property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetPossibleLabels(possibleLabels)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithToolTip(toolTip string) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithTag(tag int) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetTag(tag)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithTarget(target objc.ID) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithAction(action objc.SEL) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetAction(action)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithEnabled(enabled bool) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetEnabled(enabled)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithImage(image *raw.NSImage) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetImage(image)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithTitle(title string) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithBordered(bordered bool) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetBordered(bordered)
+	return x
+}
+
+// WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithStyle(style raw.NSToolbarItemStyle) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetStyle(style)
+	return x
+}
+
+// WithNavigational sets the navigational property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithNavigational(navigational bool) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetNavigational(navigational)
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithView(view ViewProvider) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetView(view.asView())
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithHidden(hidden bool) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetHidden(hidden)
+	return x
+}
+
+// WithMinSize sets the minSize property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithMinSize(minSize corefoundation.CGSize) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetMinSize(minSize)
+	return x
+}
+
+// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetMaxSize(maxSize)
+	return x
+}
+
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithVisibilityPriority(visibilityPriority int) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
+// WithBadge sets the badge property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithBadge(badge *raw.NSItemBadge) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetBadge(badge)
+	return x
+}
+
+// WithAutovalidates sets the autovalidates property and returns the receiver for chaining.
+func (x *TrackingSeparatorToolbarItem) WithAutovalidates(autovalidates bool) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetAutovalidates(autovalidates)
+	return x
+}
+
 // SplitView calls the underlying SplitView.
 func (x *TrackingSeparatorToolbarItem) SplitView() *SplitView {
 	_r := x.inner.SplitView()
@@ -78,6 +212,28 @@ type TrackingSeparatorToolbarItemable interface {
 	Unwrap() *raw.NSTrackingSeparatorToolbarItem
 	WithSplitView(splitView *raw.NSSplitView) *TrackingSeparatorToolbarItem
 	WithDividerIndex(dividerIndex int) *TrackingSeparatorToolbarItem
+	WithLabel(label string) *TrackingSeparatorToolbarItem
+	WithPaletteLabel(paletteLabel string) *TrackingSeparatorToolbarItem
+	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *TrackingSeparatorToolbarItem
+	WithToolTip(toolTip string) *TrackingSeparatorToolbarItem
+	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *TrackingSeparatorToolbarItem
+	WithTag(tag int) *TrackingSeparatorToolbarItem
+	WithTarget(target objc.ID) *TrackingSeparatorToolbarItem
+	WithAction(action objc.SEL) *TrackingSeparatorToolbarItem
+	WithEnabled(enabled bool) *TrackingSeparatorToolbarItem
+	WithImage(image *raw.NSImage) *TrackingSeparatorToolbarItem
+	WithTitle(title string) *TrackingSeparatorToolbarItem
+	WithBordered(bordered bool) *TrackingSeparatorToolbarItem
+	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *TrackingSeparatorToolbarItem
+	WithStyle(style raw.NSToolbarItemStyle) *TrackingSeparatorToolbarItem
+	WithNavigational(navigational bool) *TrackingSeparatorToolbarItem
+	WithView(view ViewProvider) *TrackingSeparatorToolbarItem
+	WithHidden(hidden bool) *TrackingSeparatorToolbarItem
+	WithMinSize(minSize corefoundation.CGSize) *TrackingSeparatorToolbarItem
+	WithMaxSize(maxSize corefoundation.CGSize) *TrackingSeparatorToolbarItem
+	WithVisibilityPriority(visibilityPriority int) *TrackingSeparatorToolbarItem
+	WithBadge(badge *raw.NSItemBadge) *TrackingSeparatorToolbarItem
+	WithAutovalidates(autovalidates bool) *TrackingSeparatorToolbarItem
 	SplitView() *SplitView
 	SetSplitView(splitView *raw.NSSplitView)
 	DividerIndex() int

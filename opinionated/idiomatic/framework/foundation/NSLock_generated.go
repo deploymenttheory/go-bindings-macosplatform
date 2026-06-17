@@ -42,6 +42,12 @@ func (x *Lock) WithName(name string) *Lock {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Lock) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Lock {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // TryLock calls the underlying TryLock.
 func (x *Lock) TryLock() bool {
 	return x.inner.TryLock()
@@ -72,6 +78,7 @@ func (x *Lock) asObject() *raw.NSObject { return &x.inner.NSObject }
 type Lockable interface {
 	Unwrap() *raw.NSLock
 	WithName(name string) *Lock
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Lock
 	TryLock() bool
 	LockBeforeDate(limit *raw.NSDate) bool
 	Name() *String

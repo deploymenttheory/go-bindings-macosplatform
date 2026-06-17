@@ -5,8 +5,12 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CircleRenderer wraps [raw.MKCircleRenderer] with a fluent Go API.
@@ -48,6 +52,76 @@ func (x *CircleRenderer) WithStrokeEnd(strokeEnd float64) *CircleRenderer {
 	return x
 }
 
+// WithFillColor sets the fillColor property and returns the receiver for chaining.
+func (x *CircleRenderer) WithFillColor(fillColor *appkit.NSColor) *CircleRenderer {
+	x.inner.MKOverlayPathRenderer.SetFillColor(fillColor)
+	return x
+}
+
+// WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
+func (x *CircleRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *CircleRenderer {
+	x.inner.MKOverlayPathRenderer.SetStrokeColor(strokeColor)
+	return x
+}
+
+// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+func (x *CircleRenderer) WithLineWidth(lineWidth float64) *CircleRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineWidth(lineWidth)
+	return x
+}
+
+// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
+func (x *CircleRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *CircleRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineJoin(lineJoin)
+	return x
+}
+
+// WithLineCap sets the lineCap property and returns the receiver for chaining.
+func (x *CircleRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *CircleRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineCap(lineCap)
+	return x
+}
+
+// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
+func (x *CircleRenderer) WithMiterLimit(miterLimit float64) *CircleRenderer {
+	x.inner.MKOverlayPathRenderer.SetMiterLimit(miterLimit)
+	return x
+}
+
+// WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
+func (x *CircleRenderer) WithLineDashPhase(lineDashPhase float64) *CircleRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineDashPhase(lineDashPhase)
+	return x
+}
+
+// WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
+func (x *CircleRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *CircleRenderer {
+	if len(items) == 0 {
+		x.inner.MKOverlayPathRenderer.SetLineDashPattern(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MKOverlayPathRenderer.SetLineDashPattern(_arr)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *CircleRenderer) WithShouldRasterize(shouldRasterize bool) *CircleRenderer {
+	x.inner.MKOverlayPathRenderer.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *CircleRenderer) WithAlpha(alpha float64) *CircleRenderer {
+	x.inner.MKOverlayPathRenderer.MKOverlayRenderer.SetAlpha(alpha)
+	return x
+}
+
 // Circle calls the underlying Circle.
 func (x *CircleRenderer) Circle() *Circle {
 	_r := x.inner.Circle()
@@ -86,6 +160,16 @@ type CircleRendererable interface {
 	Unwrap() *raw.MKCircleRenderer
 	WithStrokeStart(strokeStart float64) *CircleRenderer
 	WithStrokeEnd(strokeEnd float64) *CircleRenderer
+	WithFillColor(fillColor *appkit.NSColor) *CircleRenderer
+	WithStrokeColor(strokeColor *appkit.NSColor) *CircleRenderer
+	WithLineWidth(lineWidth float64) *CircleRenderer
+	WithLineJoin(lineJoin coregraphics.CGLineJoin) *CircleRenderer
+	WithLineCap(lineCap coregraphics.CGLineCap) *CircleRenderer
+	WithMiterLimit(miterLimit float64) *CircleRenderer
+	WithLineDashPhase(lineDashPhase float64) *CircleRenderer
+	WithLineDashPattern(items ...*foundation.NSNumber) *CircleRenderer
+	WithShouldRasterize(shouldRasterize bool) *CircleRenderer
+	WithAlpha(alpha float64) *CircleRenderer
 	Circle() *Circle
 	StrokeStart() float64
 	SetStrokeStart(strokeStart float64)

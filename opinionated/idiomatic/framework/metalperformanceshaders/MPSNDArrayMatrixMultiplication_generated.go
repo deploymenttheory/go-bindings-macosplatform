@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
@@ -49,6 +50,24 @@ func (x *NDArrayMatrixMultiplication) WithBeta(beta float64) *NDArrayMatrixMulti
 	return x
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayMatrixMultiplication) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMatrixMultiplication {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayMatrixMultiplication) WithOptions(options mpscore.MPSKernelOptions) *NDArrayMatrixMultiplication {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayMatrixMultiplication) WithLabel(label string) *NDArrayMatrixMultiplication {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Alpha calls the underlying Alpha.
 func (x *NDArrayMatrixMultiplication) Alpha() float64 {
 	return x.inner.Alpha()
@@ -80,6 +99,9 @@ type NDArrayMatrixMultiplicationable interface {
 	Unwrap() *raw.MPSNDArrayMatrixMultiplication
 	WithAlpha(alpha float64) *NDArrayMatrixMultiplication
 	WithBeta(beta float64) *NDArrayMatrixMultiplication
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMatrixMultiplication
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayMatrixMultiplication
+	WithLabel(label string) *NDArrayMatrixMultiplication
 	Alpha() float64
 	SetAlpha(alpha float64)
 	Beta() float64

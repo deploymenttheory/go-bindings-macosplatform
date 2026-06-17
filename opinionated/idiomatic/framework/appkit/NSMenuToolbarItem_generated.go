@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,6 +49,138 @@ func (x *MenuToolbarItem) WithShowsIndicator(showsIndicator bool) *MenuToolbarIt
 	return x
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithLabel(label string) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithPaletteLabel sets the paletteLabel property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithPaletteLabel(paletteLabel string) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetPaletteLabel(foundation.NSStringStringWithUTF8String(paletteLabel))
+	return x
+}
+
+// WithPossibleLabels sets the possibleLabels property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetPossibleLabels(possibleLabels)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithToolTip(toolTip string) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithTag(tag int) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetTag(tag)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithTarget(target objc.ID) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithAction(action objc.SEL) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetAction(action)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithEnabled(enabled bool) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetEnabled(enabled)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithImage(image *raw.NSImage) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetImage(image)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithTitle(title string) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithBordered(bordered bool) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetBordered(bordered)
+	return x
+}
+
+// WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithStyle(style raw.NSToolbarItemStyle) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetStyle(style)
+	return x
+}
+
+// WithNavigational sets the navigational property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithNavigational(navigational bool) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetNavigational(navigational)
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithView(view ViewProvider) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetView(view.asView())
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithHidden(hidden bool) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetHidden(hidden)
+	return x
+}
+
+// WithMinSize sets the minSize property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithMinSize(minSize corefoundation.CGSize) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetMinSize(minSize)
+	return x
+}
+
+// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetMaxSize(maxSize)
+	return x
+}
+
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithVisibilityPriority(visibilityPriority int) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
+// WithBadge sets the badge property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithBadge(badge *raw.NSItemBadge) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetBadge(badge)
+	return x
+}
+
+// WithAutovalidates sets the autovalidates property and returns the receiver for chaining.
+func (x *MenuToolbarItem) WithAutovalidates(autovalidates bool) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetAutovalidates(autovalidates)
+	return x
+}
+
 // Menu calls the underlying Menu.
 func (x *MenuToolbarItem) Menu() *Menu {
 	_r := x.inner.Menu()
@@ -78,6 +212,28 @@ type MenuToolbarItemable interface {
 	Unwrap() *raw.NSMenuToolbarItem
 	WithMenu(menu *raw.NSMenu) *MenuToolbarItem
 	WithShowsIndicator(showsIndicator bool) *MenuToolbarItem
+	WithLabel(label string) *MenuToolbarItem
+	WithPaletteLabel(paletteLabel string) *MenuToolbarItem
+	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *MenuToolbarItem
+	WithToolTip(toolTip string) *MenuToolbarItem
+	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *MenuToolbarItem
+	WithTag(tag int) *MenuToolbarItem
+	WithTarget(target objc.ID) *MenuToolbarItem
+	WithAction(action objc.SEL) *MenuToolbarItem
+	WithEnabled(enabled bool) *MenuToolbarItem
+	WithImage(image *raw.NSImage) *MenuToolbarItem
+	WithTitle(title string) *MenuToolbarItem
+	WithBordered(bordered bool) *MenuToolbarItem
+	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *MenuToolbarItem
+	WithStyle(style raw.NSToolbarItemStyle) *MenuToolbarItem
+	WithNavigational(navigational bool) *MenuToolbarItem
+	WithView(view ViewProvider) *MenuToolbarItem
+	WithHidden(hidden bool) *MenuToolbarItem
+	WithMinSize(minSize corefoundation.CGSize) *MenuToolbarItem
+	WithMaxSize(maxSize corefoundation.CGSize) *MenuToolbarItem
+	WithVisibilityPriority(visibilityPriority int) *MenuToolbarItem
+	WithBadge(badge *raw.NSItemBadge) *MenuToolbarItem
+	WithAutovalidates(autovalidates bool) *MenuToolbarItem
 	Menu() *Menu
 	SetMenu(menu *raw.NSMenu)
 	ShowsIndicator() bool

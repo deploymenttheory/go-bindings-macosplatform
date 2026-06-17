@@ -139,6 +139,332 @@ func (x *EmitterLayer) WithSeed(seed uint) *EmitterLayer {
 	return x
 }
 
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *EmitterLayer) WithBounds(bounds corefoundation.CGRect) *EmitterLayer {
+	x.inner.CALayer.SetBounds(bounds)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *EmitterLayer) WithPosition(position corefoundation.CGPoint) *EmitterLayer {
+	x.inner.CALayer.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *EmitterLayer) WithZPosition(zPosition float64) *EmitterLayer {
+	x.inner.CALayer.SetZPosition(zPosition)
+	return x
+}
+
+// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
+func (x *EmitterLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *EmitterLayer {
+	x.inner.CALayer.SetAnchorPoint(anchorPoint)
+	return x
+}
+
+// WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
+func (x *EmitterLayer) WithAnchorPointZ(anchorPointZ float64) *EmitterLayer {
+	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *EmitterLayer) WithTransform(transform raw.CATransform3D) *EmitterLayer {
+	x.inner.CALayer.SetTransform(transform)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *EmitterLayer) WithFrame(frame corefoundation.CGRect) *EmitterLayer {
+	x.inner.CALayer.SetFrame(frame)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *EmitterLayer) WithHidden(hidden bool) *EmitterLayer {
+	x.inner.CALayer.SetHidden(hidden)
+	return x
+}
+
+// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
+func (x *EmitterLayer) WithDoubleSided(doubleSided bool) *EmitterLayer {
+	x.inner.CALayer.SetDoubleSided(doubleSided)
+	return x
+}
+
+// WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
+func (x *EmitterLayer) WithGeometryFlipped(geometryFlipped bool) *EmitterLayer {
+	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
+	return x
+}
+
+// WithSublayers sets the collection, converting the Go slice to an NSArray.
+func (x *EmitterLayer) WithSublayers(items ...LayerProvider) *EmitterLayer {
+	if len(items) == 0 {
+		x.inner.CALayer.SetSublayers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.CALayer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CALayer.SetSublayers(_arr)
+	return x
+}
+
+// WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
+func (x *EmitterLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *EmitterLayer {
+	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
+	return x
+}
+
+// WithMask sets the mask property and returns the receiver for chaining.
+func (x *EmitterLayer) WithMask(mask LayerProvider) *EmitterLayer {
+	x.inner.CALayer.SetMask(mask.asLayer())
+	return x
+}
+
+// WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
+func (x *EmitterLayer) WithMasksToBounds(masksToBounds bool) *EmitterLayer {
+	x.inner.CALayer.SetMasksToBounds(masksToBounds)
+	return x
+}
+
+// WithContents sets the contents property and returns the receiver for chaining.
+func (x *EmitterLayer) WithContents(contents objc.ID) *EmitterLayer {
+	x.inner.CALayer.SetContents(contents)
+	return x
+}
+
+// WithContentsRect sets the contentsRect property and returns the receiver for chaining.
+func (x *EmitterLayer) WithContentsRect(contentsRect corefoundation.CGRect) *EmitterLayer {
+	x.inner.CALayer.SetContentsRect(contentsRect)
+	return x
+}
+
+// WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
+func (x *EmitterLayer) WithContentsGravity(contentsGravity *foundation.NSString) *EmitterLayer {
+	x.inner.CALayer.SetContentsGravity(contentsGravity)
+	return x
+}
+
+// WithContentsScale sets the contentsScale property and returns the receiver for chaining.
+func (x *EmitterLayer) WithContentsScale(contentsScale float64) *EmitterLayer {
+	x.inner.CALayer.SetContentsScale(contentsScale)
+	return x
+}
+
+// WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
+func (x *EmitterLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *EmitterLayer {
+	x.inner.CALayer.SetContentsCenter(contentsCenter)
+	return x
+}
+
+// WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
+func (x *EmitterLayer) WithContentsFormat(contentsFormat *foundation.NSString) *EmitterLayer {
+	x.inner.CALayer.SetContentsFormat(contentsFormat)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeContent sets the wantsExtendedDynamicRangeContent property and returns the receiver for chaining.
+func (x *EmitterLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *EmitterLayer {
+	x.inner.CALayer.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
+	return x
+}
+
+// WithToneMapMode sets the toneMapMode property and returns the receiver for chaining.
+func (x *EmitterLayer) WithToneMapMode(toneMapMode *foundation.NSString) *EmitterLayer {
+	x.inner.CALayer.SetToneMapMode(toneMapMode)
+	return x
+}
+
+// WithPreferredDynamicRange sets the preferredDynamicRange property and returns the receiver for chaining.
+func (x *EmitterLayer) WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *EmitterLayer {
+	x.inner.CALayer.SetPreferredDynamicRange(preferredDynamicRange)
+	return x
+}
+
+// WithContentsHeadroom sets the contentsHeadroom property and returns the receiver for chaining.
+func (x *EmitterLayer) WithContentsHeadroom(contentsHeadroom float64) *EmitterLayer {
+	x.inner.CALayer.SetContentsHeadroom(contentsHeadroom)
+	return x
+}
+
+// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
+func (x *EmitterLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *EmitterLayer {
+	x.inner.CALayer.SetMinificationFilter(minificationFilter)
+	return x
+}
+
+// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
+func (x *EmitterLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *EmitterLayer {
+	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
+	return x
+}
+
+// WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
+func (x *EmitterLayer) WithMinificationFilterBias(minificationFilterBias float32) *EmitterLayer {
+	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *EmitterLayer) WithOpaque(opaque bool) *EmitterLayer {
+	x.inner.CALayer.SetOpaque(opaque)
+	return x
+}
+
+// WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
+func (x *EmitterLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *EmitterLayer {
+	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
+	return x
+}
+
+// WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
+func (x *EmitterLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *EmitterLayer {
+	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
+	return x
+}
+
+// WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
+func (x *EmitterLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *EmitterLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+	return x
+}
+
+// WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
+func (x *EmitterLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *EmitterLayer {
+	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
+	return x
+}
+
+// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+func (x *EmitterLayer) WithCornerRadius(cornerRadius float64) *EmitterLayer {
+	x.inner.CALayer.SetCornerRadius(cornerRadius)
+	return x
+}
+
+// WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
+func (x *EmitterLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *EmitterLayer {
+	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+	return x
+}
+
+// WithCornerCurve sets the cornerCurve property and returns the receiver for chaining.
+func (x *EmitterLayer) WithCornerCurve(cornerCurve *foundation.NSString) *EmitterLayer {
+	x.inner.CALayer.SetCornerCurve(cornerCurve)
+	return x
+}
+
+// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
+func (x *EmitterLayer) WithBorderWidth(borderWidth float64) *EmitterLayer {
+	x.inner.CALayer.SetBorderWidth(borderWidth)
+	return x
+}
+
+// WithOpacity sets the opacity property and returns the receiver for chaining.
+func (x *EmitterLayer) WithOpacity(opacity float32) *EmitterLayer {
+	x.inner.CALayer.SetOpacity(opacity)
+	return x
+}
+
+// WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
+func (x *EmitterLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *EmitterLayer {
+	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *EmitterLayer) WithCompositingFilter(compositingFilter objc.ID) *EmitterLayer {
+	x.inner.CALayer.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *EmitterLayer) WithShouldRasterize(shouldRasterize bool) *EmitterLayer {
+	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
+func (x *EmitterLayer) WithRasterizationScale(rasterizationScale float64) *EmitterLayer {
+	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
+	return x
+}
+
+// WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
+func (x *EmitterLayer) WithShadowOpacity(shadowOpacity float32) *EmitterLayer {
+	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
+	return x
+}
+
+// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
+func (x *EmitterLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *EmitterLayer {
+	x.inner.CALayer.SetShadowOffset(shadowOffset)
+	return x
+}
+
+// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
+func (x *EmitterLayer) WithShadowRadius(shadowRadius float64) *EmitterLayer {
+	x.inner.CALayer.SetShadowRadius(shadowRadius)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *EmitterLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *EmitterLayer {
+	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
+func (x *EmitterLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *EmitterLayer {
+	x.inner.CALayer.SetLayoutManager(layoutManager)
+	return x
+}
+
+// WithActions sets the actions property and returns the receiver for chaining.
+func (x *EmitterLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *EmitterLayer {
+	x.inner.CALayer.SetActions(actions)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *EmitterLayer) WithName(name string) *EmitterLayer {
+	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *EmitterLayer) WithDelegate(delegate raw.CALayerDelegate) *EmitterLayer {
+	x.inner.CALayer.SetDelegate(delegate)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *EmitterLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *EmitterLayer {
+	x.inner.CALayer.SetStyle(style)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *EmitterLayer) WithConstraints(items ...*raw.CAConstraint) *EmitterLayer {
+	if len(items) == 0 {
+		x.inner.CALayer.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CALayer.SetConstraints(_arr)
+	return x
+}
+
 // EmitterCells returns the collection as a Go slice.
 func (x *EmitterLayer) EmitterCells() []*raw.CAEmitterCell {
 	arr := x.inner.EmitterCells()
@@ -327,6 +653,57 @@ type EmitterLayerable interface {
 	WithScale(scale float32) *EmitterLayer
 	WithSpin(spin float32) *EmitterLayer
 	WithSeed(seed uint) *EmitterLayer
+	WithBounds(bounds corefoundation.CGRect) *EmitterLayer
+	WithPosition(position corefoundation.CGPoint) *EmitterLayer
+	WithZPosition(zPosition float64) *EmitterLayer
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *EmitterLayer
+	WithAnchorPointZ(anchorPointZ float64) *EmitterLayer
+	WithTransform(transform raw.CATransform3D) *EmitterLayer
+	WithFrame(frame corefoundation.CGRect) *EmitterLayer
+	WithHidden(hidden bool) *EmitterLayer
+	WithDoubleSided(doubleSided bool) *EmitterLayer
+	WithGeometryFlipped(geometryFlipped bool) *EmitterLayer
+	WithSublayers(items ...LayerProvider) *EmitterLayer
+	WithSublayerTransform(sublayerTransform raw.CATransform3D) *EmitterLayer
+	WithMask(mask LayerProvider) *EmitterLayer
+	WithMasksToBounds(masksToBounds bool) *EmitterLayer
+	WithContents(contents objc.ID) *EmitterLayer
+	WithContentsRect(contentsRect corefoundation.CGRect) *EmitterLayer
+	WithContentsGravity(contentsGravity *foundation.NSString) *EmitterLayer
+	WithContentsScale(contentsScale float64) *EmitterLayer
+	WithContentsCenter(contentsCenter corefoundation.CGRect) *EmitterLayer
+	WithContentsFormat(contentsFormat *foundation.NSString) *EmitterLayer
+	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *EmitterLayer
+	WithToneMapMode(toneMapMode *foundation.NSString) *EmitterLayer
+	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *EmitterLayer
+	WithContentsHeadroom(contentsHeadroom float64) *EmitterLayer
+	WithMinificationFilter(minificationFilter *foundation.NSString) *EmitterLayer
+	WithMagnificationFilter(magnificationFilter *foundation.NSString) *EmitterLayer
+	WithMinificationFilterBias(minificationFilterBias float32) *EmitterLayer
+	WithOpaque(opaque bool) *EmitterLayer
+	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *EmitterLayer
+	WithDrawsAsynchronously(drawsAsynchronously bool) *EmitterLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *EmitterLayer
+	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *EmitterLayer
+	WithCornerRadius(cornerRadius float64) *EmitterLayer
+	WithMaskedCorners(maskedCorners raw.CACornerMask) *EmitterLayer
+	WithCornerCurve(cornerCurve *foundation.NSString) *EmitterLayer
+	WithBorderWidth(borderWidth float64) *EmitterLayer
+	WithOpacity(opacity float32) *EmitterLayer
+	WithAllowsGroupOpacity(allowsGroupOpacity bool) *EmitterLayer
+	WithCompositingFilter(compositingFilter objc.ID) *EmitterLayer
+	WithShouldRasterize(shouldRasterize bool) *EmitterLayer
+	WithRasterizationScale(rasterizationScale float64) *EmitterLayer
+	WithShadowOpacity(shadowOpacity float32) *EmitterLayer
+	WithShadowOffset(shadowOffset corefoundation.CGSize) *EmitterLayer
+	WithShadowRadius(shadowRadius float64) *EmitterLayer
+	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *EmitterLayer
+	WithLayoutManager(layoutManager raw.CALayoutManager) *EmitterLayer
+	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *EmitterLayer
+	WithName(name string) *EmitterLayer
+	WithDelegate(delegate raw.CALayerDelegate) *EmitterLayer
+	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *EmitterLayer
+	WithConstraints(items ...*raw.CAConstraint) *EmitterLayer
 	EmitterCells() []*raw.CAEmitterCell
 	SetEmitterCells(emitterCells *foundation.NSArray[*raw.CAEmitterCell])
 	BirthRate() float32

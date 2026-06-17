@@ -42,6 +42,12 @@ func (x *Condition) WithName(name string) *Condition {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Condition) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Condition {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Wait calls the underlying Wait.
 func (x *Condition) Wait() {
 	x.inner.Wait()
@@ -82,6 +88,7 @@ func (x *Condition) asObject() *raw.NSObject { return &x.inner.NSObject }
 type Conditionable interface {
 	Unwrap() *raw.NSCondition
 	WithName(name string) *Condition
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Condition
 	Wait()
 	WaitUntilDate(limit *raw.NSDate) bool
 	Signal()

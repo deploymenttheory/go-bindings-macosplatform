@@ -47,6 +47,18 @@ func NewMatrixCopyWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTL
 	return &MatrixCopy{inner: raw.MPSMatrixCopyFromID(_id)}
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixCopy) WithOptions(options mpscore.MPSKernelOptions) *MatrixCopy {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixCopy) WithLabel(label string) *MatrixCopy {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferCopyDescriptor calls the underlying EncodeToCommandBufferCopyDescriptor.
 func (x *MatrixCopy) EncodeToCommandBufferCopyDescriptor(commandBuffer metal.MTLCommandBuffer, copyDescriptor *mpsmatrix.MPSMatrixCopyDescriptor) {
 	x.inner.EncodeToCommandBufferCopyDescriptor(commandBuffer, copyDescriptor)
@@ -82,6 +94,8 @@ func (x *MatrixCopy) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 // MatrixCopyable is the interface implemented by [MatrixCopy], for mocking and DI.
 type MatrixCopyable interface {
 	Unwrap() *raw.MPSMatrixCopy
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixCopy
+	WithLabel(label string) *MatrixCopy
 	EncodeToCommandBufferCopyDescriptor(commandBuffer metal.MTLCommandBuffer, copyDescriptor *mpsmatrix.MPSMatrixCopyDescriptor)
 	EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset(commandBuffer metal.MTLCommandBuffer, copyDescriptor *mpsmatrix.MPSMatrixCopyDescriptor, rowPermuteIndices *mpscore.MPSVector, rowPermuteOffset uint, columnPermuteIndices *mpscore.MPSVector, columnPermuteOffset uint)
 	CopyRows() uint

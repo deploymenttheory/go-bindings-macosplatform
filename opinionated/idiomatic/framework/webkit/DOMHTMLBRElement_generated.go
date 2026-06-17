@@ -43,6 +43,108 @@ func (x *DOMHTMLBRElement) WithClear(clear string) *DOMHTMLBRElement {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithTitle(title string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithLang(lang string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithDir(dir string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithTabIndex(tabIndex int) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithAccessKey(accessKey string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithInnerText(innerText string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithOuterText(outerText string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithContentEditable(contentEditable string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithIdName(idName string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithScrollLeft(scrollLeft int) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithScrollTop(scrollTop int) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithInnerHTML(innerHTML string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithOuterHTML(outerHTML string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithClassName(className string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithNodeValue(nodeValue string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithPrefix(prefix string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLBRElement) WithTextContent(textContent string) *DOMHTMLBRElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Clear calls the underlying Clear.
 func (x *DOMHTMLBRElement) Clear() string {
 	_r := x.inner.Clear()
@@ -71,6 +173,23 @@ func (x *DOMHTMLBRElement) asWebScriptObject() *raw.WebScriptObject { return &x.
 type DOMHTMLBRElementable interface {
 	Unwrap() *raw.DOMHTMLBRElement
 	WithClear(clear string) *DOMHTMLBRElement
+	WithTitle(title string) *DOMHTMLBRElement
+	WithLang(lang string) *DOMHTMLBRElement
+	WithDir(dir string) *DOMHTMLBRElement
+	WithTabIndex(tabIndex int) *DOMHTMLBRElement
+	WithAccessKey(accessKey string) *DOMHTMLBRElement
+	WithInnerText(innerText string) *DOMHTMLBRElement
+	WithOuterText(outerText string) *DOMHTMLBRElement
+	WithContentEditable(contentEditable string) *DOMHTMLBRElement
+	WithIdName(idName string) *DOMHTMLBRElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLBRElement
+	WithScrollTop(scrollTop int) *DOMHTMLBRElement
+	WithInnerHTML(innerHTML string) *DOMHTMLBRElement
+	WithOuterHTML(outerHTML string) *DOMHTMLBRElement
+	WithClassName(className string) *DOMHTMLBRElement
+	WithNodeValue(nodeValue string) *DOMHTMLBRElement
+	WithPrefix(prefix string) *DOMHTMLBRElement
+	WithTextContent(textContent string) *DOMHTMLBRElement
 	Clear() string
 	SetClear(clear string)
 }

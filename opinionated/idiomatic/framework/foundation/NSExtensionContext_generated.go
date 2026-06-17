@@ -37,6 +37,12 @@ func NewExtensionContext() *ExtensionContext {
 	return &ExtensionContext{inner: raw.NSExtensionContextFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ExtensionContext) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ExtensionContext {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CompleteRequestReturningItemsCompletionHandler calls the underlying CompleteRequestReturningItemsCompletionHandler.
 func (x *ExtensionContext) CompleteRequestReturningItemsCompletionHandler(items *raw.NSArray[objc.ID], completionHandler func(bool)) {
 	x.inner.CompleteRequestReturningItemsCompletionHandler(items, completionHandler)
@@ -62,6 +68,7 @@ func (x *ExtensionContext) asObject() *raw.NSObject { return &x.inner.NSObject }
 // ExtensionContextable is the interface implemented by [ExtensionContext], for mocking and DI.
 type ExtensionContextable interface {
 	Unwrap() *raw.NSExtensionContext
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ExtensionContext
 	CompleteRequestReturningItemsCompletionHandler(items *raw.NSArray[objc.ID], completionHandler func(bool))
 	CancelRequestWithError(error_ unsafe.Pointer)
 	OpenURLCompletionHandler(uRL string, completionHandler func(bool))

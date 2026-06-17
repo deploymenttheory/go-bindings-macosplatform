@@ -6,6 +6,7 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -42,6 +43,24 @@ func (x *ImageReduceUnary) WithClipRectSource(clipRectSource metal.MTLRegion) *I
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceUnary) WithOffset(offset mpscore.MPSOffset) *ImageReduceUnary {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceUnary) WithClipRect(clipRect metal.MTLRegion) *ImageReduceUnary {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceUnary) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceUnary {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // ClipRectSource calls the underlying ClipRectSource.
 func (x *ImageReduceUnary) ClipRectSource() metal.MTLRegion {
 	return x.inner.ClipRectSource()
@@ -60,6 +79,9 @@ func (x *ImageReduceUnary) asUnaryImageKernel() *raw.MPSUnaryImageKernel { retur
 type ImageReduceUnaryable interface {
 	Unwrap() *raw.MPSImageReduceUnary
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceUnary
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceUnary
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceUnary
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceUnary
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }

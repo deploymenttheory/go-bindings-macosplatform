@@ -72,6 +72,66 @@ func (x *NNForwardLoss) WithDelta(delta float32) *NNForwardLoss {
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNForwardLoss) WithOffset(offset mpscore.MPSOffset) *NNForwardLoss {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNForwardLoss) WithClipRect(clipRect metal.MTLRegion) *NNForwardLoss {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNForwardLoss) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNForwardLoss {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNForwardLoss) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNForwardLoss {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNForwardLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNForwardLoss {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNForwardLoss) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNForwardLoss {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNForwardLoss) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNForwardLoss {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNForwardLoss) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNForwardLoss {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNForwardLoss) WithOptions(options mpscore.MPSKernelOptions) *NNForwardLoss {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNForwardLoss) WithLabel(label string) *NNForwardLoss {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages calls the underlying EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages.
 func (x *NNForwardLoss) EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer) {
 	x.inner.EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages(commandBuffer, sourceImages, labels, weights, destinationStates, destinationImages)
@@ -153,6 +213,16 @@ type NNForwardLossable interface {
 	WithLabelSmoothing(labelSmoothing float32) *NNForwardLoss
 	WithEpsilon(epsilon float32) *NNForwardLoss
 	WithDelta(delta float32) *NNForwardLoss
+	WithOffset(offset mpscore.MPSOffset) *NNForwardLoss
+	WithClipRect(clipRect metal.MTLRegion) *NNForwardLoss
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNForwardLoss
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNForwardLoss
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNForwardLoss
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNForwardLoss
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNForwardLoss
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNForwardLoss
+	WithOptions(options mpscore.MPSKernelOptions) *NNForwardLoss
+	WithLabel(label string) *NNForwardLoss
 	EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer)
 	EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationStateIsTemporary(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, outStates unsafe.Pointer, isTemporary bool) unsafe.Pointer
 	LossType() mpsneuralnetwork.MPSCNNLossType

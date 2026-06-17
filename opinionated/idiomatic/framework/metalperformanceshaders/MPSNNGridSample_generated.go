@@ -53,6 +53,114 @@ func (x *NNGridSample) WithUseGridValueAsInputCoordinate(useGridValueAsInputCoor
 	return x
 }
 
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *NNGridSample) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *NNGridSample) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNGridSample) WithClipRect(clipRect metal.MTLRegion) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNGridSample) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNGridSample) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNGridSample) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNGridSample) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNGridSample) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *NNGridSample) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *NNGridSample) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNGridSample) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNGridSample) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNGridSample) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNGridSample) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNGridSample) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNGridSample) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNGridSample) WithOptions(options mpscore.MPSKernelOptions) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNGridSample) WithLabel(label string) *NNGridSample {
+	x.inner.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // UseGridValueAsInputCoordinate calls the underlying UseGridValueAsInputCoordinate.
 func (x *NNGridSample) UseGridValueAsInputCoordinate() bool {
 	return x.inner.UseGridValueAsInputCoordinate()
@@ -71,6 +179,24 @@ func (x *NNGridSample) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNBin
 type NNGridSampleable interface {
 	Unwrap() *raw.MPSNNGridSample
 	WithUseGridValueAsInputCoordinate(useGridValueAsInputCoordinate bool) *NNGridSample
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNGridSample
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNGridSample
+	WithClipRect(clipRect metal.MTLRegion) *NNGridSample
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNGridSample
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNGridSample
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNGridSample
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNGridSample
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNGridSample
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNGridSample
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNGridSample
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNGridSample
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNGridSample
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNGridSample
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNGridSample
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNGridSample
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGridSample
+	WithOptions(options mpscore.MPSKernelOptions) *NNGridSample
+	WithLabel(label string) *NNGridSample
 	UseGridValueAsInputCoordinate() bool
 	SetUseGridValueAsInputCoordinate(useGridValueAsInputCoordinate bool)
 }

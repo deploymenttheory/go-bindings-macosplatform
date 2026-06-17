@@ -92,6 +92,18 @@ func (x *NNArithmeticGradientNode) WithMaximumValue(maximumValue float32) *NNAri
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNArithmeticGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNArithmeticGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNArithmeticGradientNode) WithLabel(label string) *NNArithmeticGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // PrimaryScale calls the underlying PrimaryScale.
 func (x *NNArithmeticGradientNode) PrimaryScale() float32 {
 	return x.inner.PrimaryScale()
@@ -194,6 +206,8 @@ type NNArithmeticGradientNodeable interface {
 	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNArithmeticGradientNode
 	WithMinimumValue(minimumValue float32) *NNArithmeticGradientNode
 	WithMaximumValue(maximumValue float32) *NNArithmeticGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNArithmeticGradientNode
+	WithLabel(label string) *NNArithmeticGradientNode
 	PrimaryScale() float32
 	SetPrimaryScale(primaryScale float32)
 	SecondaryScale() float32

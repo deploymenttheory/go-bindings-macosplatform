@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterSimpleStructResponseParams() *MTRTestClusterCluster
 	return &MTRTestClusterClusterSimpleStructResponseParams{inner: raw.MTRTestClusterClusterSimpleStructResponseParamsFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStructResponseParams) WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterSimpleStructResponseParams {
+	x.inner.MTRUnitTestingClusterSimpleStructResponseParams.SetArg1(arg1.asMTRUnitTestingClusterSimpleStruct())
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStructResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterSimpleStructResponseParams {
+	x.inner.MTRUnitTestingClusterSimpleStructResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterSimpleStructResponseParams) asMTRUnitTestingClusterSimpleStructResponseParams() *raw.MTRUnitTestingClusterSimpleStructResponseParams { return &x.inner.MTRUnitTestingClusterSimpleStructResponseParams }
 
 // MTRTestClusterClusterSimpleStructResponseParamsable is the interface implemented by [MTRTestClusterClusterSimpleStructResponseParams], for mocking and DI.
 type MTRTestClusterClusterSimpleStructResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterSimpleStructResponseParams
+	WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterSimpleStructResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterSimpleStructResponseParams
 }
 
 var _ MTRTestClusterClusterSimpleStructResponseParamsable = (*MTRTestClusterClusterSimpleStructResponseParams)(nil)

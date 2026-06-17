@@ -56,6 +56,12 @@ func NewDateIntervalWithStartDateEndDate(startDate *raw.NSDate, endDate *raw.NSD
 	return &DateInterval{inner: raw.NSDateIntervalFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DateInterval) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateInterval {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Compare calls the underlying Compare.
 func (x *DateInterval) Compare(dateInterval *raw.NSDateInterval) raw.NSComparisonResult {
 	return x.inner.Compare(dateInterval)
@@ -113,6 +119,7 @@ func (x *DateInterval) asObject() *raw.NSObject { return &x.inner.NSObject }
 // DateIntervalable is the interface implemented by [DateInterval], for mocking and DI.
 type DateIntervalable interface {
 	Unwrap() *raw.NSDateInterval
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateInterval
 	Compare(dateInterval *raw.NSDateInterval) raw.NSComparisonResult
 	IsEqualToDateInterval(dateInterval *raw.NSDateInterval) bool
 	IntersectsDateInterval(dateInterval *raw.NSDateInterval) bool

@@ -43,6 +43,12 @@ func (x *ConditionLock) WithName(name string) *ConditionLock {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ConditionLock) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ConditionLock {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // LockWhenCondition calls the underlying LockWhenCondition.
 func (x *ConditionLock) LockWhenCondition(condition int) {
 	x.inner.LockWhenCondition(condition)
@@ -98,6 +104,7 @@ func (x *ConditionLock) asObject() *raw.NSObject { return &x.inner.NSObject }
 type ConditionLockable interface {
 	Unwrap() *raw.NSConditionLock
 	WithName(name string) *ConditionLock
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ConditionLock
 	LockWhenCondition(condition int)
 	TryLock() bool
 	TryLockWhenCondition(condition int) bool

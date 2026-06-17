@@ -65,6 +65,24 @@ func (x *LookAtConstraint) WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAt
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *LookAtConstraint) WithEnabled(enabled bool) *LookAtConstraint {
+	x.inner.SCNConstraint.SetEnabled(enabled)
+	return x
+}
+
+// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+func (x *LookAtConstraint) WithInfluenceFactor(influenceFactor float64) *LookAtConstraint {
+	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	return x
+}
+
+// WithIncremental sets the incremental property and returns the receiver for chaining.
+func (x *LookAtConstraint) WithIncremental(incremental bool) *LookAtConstraint {
+	x.inner.SCNConstraint.SetIncremental(incremental)
+	return x
+}
+
 // Target calls the underlying Target.
 func (x *LookAtConstraint) Target() *Node {
 	_r := x.inner.Target()
@@ -129,6 +147,9 @@ type LookAtConstraintable interface {
 	WithLocalFront(localFront raw.SCNVector3) *LookAtConstraint
 	WithWorldUp(worldUp raw.SCNVector3) *LookAtConstraint
 	WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAtConstraint
+	WithEnabled(enabled bool) *LookAtConstraint
+	WithInfluenceFactor(influenceFactor float64) *LookAtConstraint
+	WithIncremental(incremental bool) *LookAtConstraint
 	Target() *Node
 	SetTarget(target *raw.SCNNode)
 	TargetOffset() raw.SCNVector3

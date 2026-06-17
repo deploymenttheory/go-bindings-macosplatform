@@ -43,6 +43,12 @@ func NewIndexPathWithIndex(index uint) *IndexPath {
 	return &IndexPath{inner: raw.NSIndexPathFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *IndexPath) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *IndexPath {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // IndexPathByAddingIndex calls the underlying IndexPathByAddingIndex.
 func (x *IndexPath) IndexPathByAddingIndex(index uint) *IndexPath {
 	_r := x.inner.IndexPathByAddingIndex(index)
@@ -91,6 +97,7 @@ func (x *IndexPath) asObject() *raw.NSObject { return &x.inner.NSObject }
 // IndexPathable is the interface implemented by [IndexPath], for mocking and DI.
 type IndexPathable interface {
 	Unwrap() *raw.NSIndexPath
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *IndexPath
 	IndexPathByAddingIndex(index uint) *IndexPath
 	IndexPathByRemovingLastIndex() *IndexPath
 	IndexAtPosition(position uint) uint

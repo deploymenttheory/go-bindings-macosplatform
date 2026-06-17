@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +52,24 @@ func (x *ImageStatisticsMeanAndVariance) WithClipRectSource(clipRectSource metal
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageStatisticsMeanAndVariance) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMeanAndVariance {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageStatisticsMeanAndVariance) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMeanAndVariance {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageStatisticsMeanAndVariance) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMeanAndVariance {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // ClipRectSource calls the underlying ClipRectSource.
 func (x *ImageStatisticsMeanAndVariance) ClipRectSource() metal.MTLRegion {
 	return x.inner.ClipRectSource()
@@ -67,6 +86,9 @@ func (x *ImageStatisticsMeanAndVariance) asUnaryImageKernel() *raw.MPSUnaryImage
 type ImageStatisticsMeanAndVarianceable interface {
 	Unwrap() *raw.MPSImageStatisticsMeanAndVariance
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMeanAndVariance
+	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMeanAndVariance
+	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMeanAndVariance
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMeanAndVariance
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }

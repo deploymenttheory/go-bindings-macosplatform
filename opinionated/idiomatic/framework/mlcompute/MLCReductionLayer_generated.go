@@ -37,6 +37,18 @@ func NewReductionLayer() *ReductionLayer {
 	return &ReductionLayer{inner: raw.MLCReductionLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ReductionLayer) WithLabel(label string) *ReductionLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *ReductionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReductionLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // ReductionType calls the underlying ReductionType.
 func (x *ReductionLayer) ReductionType() raw.MLCReductionType {
 	return x.inner.ReductionType()
@@ -63,6 +75,8 @@ func (x *ReductionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // ReductionLayerable is the interface implemented by [ReductionLayer], for mocking and DI.
 type ReductionLayerable interface {
 	Unwrap() *raw.MLCReductionLayer
+	WithLabel(label string) *ReductionLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReductionLayer
 	ReductionType() raw.MLCReductionType
 	Dimension() uint
 	Dimensions() []*foundation.NSNumber

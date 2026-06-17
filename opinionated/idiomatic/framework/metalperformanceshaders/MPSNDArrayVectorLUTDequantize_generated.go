@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -45,6 +46,24 @@ func (x *NDArrayVectorLUTDequantize) WithVectorAxis(vectorAxis uint) *NDArrayVec
 	return x
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayVectorLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayVectorLUTDequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayVectorLUTDequantize) WithOptions(options mpscore.MPSKernelOptions) *NDArrayVectorLUTDequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayVectorLUTDequantize) WithLabel(label string) *NDArrayVectorLUTDequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // VectorAxis calls the underlying VectorAxis.
 func (x *NDArrayVectorLUTDequantize) VectorAxis() uint {
 	return x.inner.VectorAxis()
@@ -65,6 +84,9 @@ func (x *NDArrayVectorLUTDequantize) asKernel() *mpscore.MPSKernel { return &x.i
 type NDArrayVectorLUTDequantizeable interface {
 	Unwrap() *raw.MPSNDArrayVectorLUTDequantize
 	WithVectorAxis(vectorAxis uint) *NDArrayVectorLUTDequantize
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayVectorLUTDequantize
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayVectorLUTDequantize
+	WithLabel(label string) *NDArrayVectorLUTDequantize
 	VectorAxis() uint
 	SetVectorAxis(vectorAxis uint)
 }

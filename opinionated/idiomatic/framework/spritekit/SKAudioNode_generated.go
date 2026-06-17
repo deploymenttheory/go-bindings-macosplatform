@@ -6,9 +6,11 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AudioNode wraps [raw.SKAudioNode] with a fluent Go API.
@@ -77,6 +79,166 @@ func (x *AudioNode) WithPositional(positional bool) *AudioNode {
 	return x
 }
 
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *AudioNode) WithPosition(position corefoundation.CGPoint) *AudioNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *AudioNode) WithZPosition(zPosition float64) *AudioNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *AudioNode) WithZRotation(zRotation float64) *AudioNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *AudioNode) WithXScale(xScale float64) *AudioNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *AudioNode) WithYScale(yScale float64) *AudioNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *AudioNode) WithSpeed(speed float64) *AudioNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *AudioNode) WithAlpha(alpha float64) *AudioNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *AudioNode) WithPaused(paused bool) *AudioNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *AudioNode) WithHidden(hidden bool) *AudioNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *AudioNode) WithUserInteractionEnabled(userInteractionEnabled bool) *AudioNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *AudioNode) WithName(name string) *AudioNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *AudioNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *AudioNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *AudioNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *AudioNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *AudioNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *AudioNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *AudioNode) WithConstraints(items ...*raw.SKConstraint) *AudioNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *AudioNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *AudioNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *AudioNode) WithAccessibilityElement(accessibilityElement bool) *AudioNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *AudioNode) WithAccessibilityRole(accessibilityRole string) *AudioNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *AudioNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *AudioNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *AudioNode) WithAccessibilitySubrole(accessibilitySubrole string) *AudioNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *AudioNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *AudioNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *AudioNode) WithAccessibilityParent(accessibilityParent objc.ID) *AudioNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *AudioNode) WithAccessibilityHelp(accessibilityHelp string) *AudioNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *AudioNode) WithAccessibilityLabel(accessibilityLabel string) *AudioNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *AudioNode) WithAccessibilityEnabled(accessibilityEnabled bool) *AudioNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	return x
+}
+
 // AvAudioNode calls the underlying AvAudioNode.
 func (x *AudioNode) AvAudioNode() *avfaudio.AVAudioNode {
 	return x.inner.AvAudioNode()
@@ -115,6 +277,31 @@ type AudioNodeable interface {
 	WithAvAudioNode(avAudioNode *avfaudio.AVAudioNode) *AudioNode
 	WithAutoplayLooped(autoplayLooped bool) *AudioNode
 	WithPositional(positional bool) *AudioNode
+	WithPosition(position corefoundation.CGPoint) *AudioNode
+	WithZPosition(zPosition float64) *AudioNode
+	WithZRotation(zRotation float64) *AudioNode
+	WithXScale(xScale float64) *AudioNode
+	WithYScale(yScale float64) *AudioNode
+	WithSpeed(speed float64) *AudioNode
+	WithAlpha(alpha float64) *AudioNode
+	WithPaused(paused bool) *AudioNode
+	WithHidden(hidden bool) *AudioNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *AudioNode
+	WithName(name string) *AudioNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *AudioNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *AudioNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *AudioNode
+	WithConstraints(items ...*raw.SKConstraint) *AudioNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *AudioNode
+	WithAccessibilityElement(accessibilityElement bool) *AudioNode
+	WithAccessibilityRole(accessibilityRole string) *AudioNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *AudioNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *AudioNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *AudioNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *AudioNode
+	WithAccessibilityHelp(accessibilityHelp string) *AudioNode
+	WithAccessibilityLabel(accessibilityLabel string) *AudioNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *AudioNode
 	AvAudioNode() *avfaudio.AVAudioNode
 	SetAvAudioNode(avAudioNode *avfaudio.AVAudioNode)
 	AutoplayLooped() bool

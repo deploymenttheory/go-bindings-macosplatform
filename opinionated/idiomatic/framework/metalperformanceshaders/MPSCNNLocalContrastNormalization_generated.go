@@ -83,6 +83,66 @@ func (x *CNNLocalContrastNormalization) WithPs(ps float32) *CNNLocalContrastNorm
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalization) WithOffset(offset mpscore.MPSOffset) *CNNLocalContrastNormalization {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalization {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLocalContrastNormalization {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLocalContrastNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLocalContrastNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLocalContrastNormalization {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalization) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNLocalContrastNormalization {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalization) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLocalContrastNormalization {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalization) WithOptions(options mpscore.MPSKernelOptions) *CNNLocalContrastNormalization {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalization) WithLabel(label string) *CNNLocalContrastNormalization {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Alpha calls the underlying Alpha.
 func (x *CNNLocalContrastNormalization) Alpha() float32 {
 	return x.inner.Alpha()
@@ -156,6 +216,16 @@ type CNNLocalContrastNormalizationable interface {
 	WithP0(p0 float32) *CNNLocalContrastNormalization
 	WithPm(pm float32) *CNNLocalContrastNormalization
 	WithPs(ps float32) *CNNLocalContrastNormalization
+	WithOffset(offset mpscore.MPSOffset) *CNNLocalContrastNormalization
+	WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalization
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLocalContrastNormalization
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLocalContrastNormalization
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLocalContrastNormalization
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLocalContrastNormalization
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNLocalContrastNormalization
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLocalContrastNormalization
+	WithOptions(options mpscore.MPSKernelOptions) *CNNLocalContrastNormalization
+	WithLabel(label string) *CNNLocalContrastNormalization
 	Alpha() float32
 	SetAlpha(alpha float32)
 	Beta() float32

@@ -44,6 +44,12 @@ func NewMTRXPCDeviceControllerParametersWithXPConnectionBlockUniqueIdentifier(xp
 	return &MTRXPCDeviceControllerParameters{inner: raw.MTRXPCDeviceControllerParametersFromID(_id)}
 }
 
+// WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
+func (x *MTRXPCDeviceControllerParameters) WithStartSuspended(startSuspended bool) *MTRXPCDeviceControllerParameters {
+	x.inner.MTRDeviceControllerAbstractParameters.SetStartSuspended(startSuspended)
+	return x
+}
+
 // UniqueIdentifier calls the underlying UniqueIdentifier.
 func (x *MTRXPCDeviceControllerParameters) UniqueIdentifier() *foundation.NSUUID {
 	return x.inner.UniqueIdentifier()
@@ -59,6 +65,7 @@ func (x *MTRXPCDeviceControllerParameters) asMTRDeviceControllerAbstractParamete
 // MTRXPCDeviceControllerParametersable is the interface implemented by [MTRXPCDeviceControllerParameters], for mocking and DI.
 type MTRXPCDeviceControllerParametersable interface {
 	Unwrap() *raw.MTRXPCDeviceControllerParameters
+	WithStartSuspended(startSuspended bool) *MTRXPCDeviceControllerParameters
 	UniqueIdentifier() *foundation.NSUUID
 	XpcConnectionBlock() objc.Block
 }

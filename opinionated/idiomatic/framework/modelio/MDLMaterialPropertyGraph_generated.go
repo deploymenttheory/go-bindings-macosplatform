@@ -38,6 +38,12 @@ func NewMaterialPropertyGraphWithNodesConnections(nodes *foundation.NSArray[*raw
 	return &MaterialPropertyGraph{inner: raw.MDLMaterialPropertyGraphFromID(_id)}
 }
 
+// WithEvaluationFunction sets the evaluationFunction property and returns the receiver for chaining.
+func (x *MaterialPropertyGraph) WithEvaluationFunction(evaluationFunction func(*raw.MDLMaterialPropertyNode)) *MaterialPropertyGraph {
+	x.inner.MDLMaterialPropertyNode.SetEvaluationFunction(evaluationFunction)
+	return x
+}
+
 // Evaluate calls the underlying Evaluate.
 func (x *MaterialPropertyGraph) Evaluate() {
 	x.inner.Evaluate()
@@ -70,6 +76,7 @@ func (x *MaterialPropertyGraph) asMaterialPropertyNode() *raw.MDLMaterialPropert
 // MaterialPropertyGraphable is the interface implemented by [MaterialPropertyGraph], for mocking and DI.
 type MaterialPropertyGraphable interface {
 	Unwrap() *raw.MDLMaterialPropertyGraph
+	WithEvaluationFunction(evaluationFunction func(*raw.MDLMaterialPropertyNode)) *MaterialPropertyGraph
 	Evaluate()
 	Nodes() []*raw.MDLMaterialPropertyNode
 	Connections() []*raw.MDLMaterialPropertyConnection

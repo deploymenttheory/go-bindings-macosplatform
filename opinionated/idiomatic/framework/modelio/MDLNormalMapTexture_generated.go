@@ -37,11 +37,25 @@ func NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast(s
 	return &NormalMapTexture{inner: raw.MDLNormalMapTextureFromID(_id)}
 }
 
+// WithIsCube sets the isCube property and returns the receiver for chaining.
+func (x *NormalMapTexture) WithIsCube(isCube bool) *NormalMapTexture {
+	x.inner.MDLTexture.SetIsCube(isCube)
+	return x
+}
+
+// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+func (x *NormalMapTexture) WithHasAlphaValues(hasAlphaValues bool) *NormalMapTexture {
+	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	return x
+}
+
 func (x *NormalMapTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
 // NormalMapTextureable is the interface implemented by [NormalMapTexture], for mocking and DI.
 type NormalMapTextureable interface {
 	Unwrap() *raw.MDLNormalMapTexture
+	WithIsCube(isCube bool) *NormalMapTexture
+	WithHasAlphaValues(hasAlphaValues bool) *NormalMapTexture
 }
 
 var _ NormalMapTextureable = (*NormalMapTexture)(nil)

@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,66 @@ func NewCNNNeuronLogarithmWithDeviceABC(device metal.MTLDevice, a float32, b flo
 	return &CNNNeuronLogarithm{inner: raw.MPSCNNNeuronLogarithmFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithm) WithOffset(offset mpscore.MPSOffset) *CNNNeuronLogarithm {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithm) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronLogarithm {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithm) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronLogarithm {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithm) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronLogarithm {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithm) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronLogarithm {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithm) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronLogarithm {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithm) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronLogarithm {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithm) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronLogarithm {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithm) WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronLogarithm {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithm) WithLabel(label string) *CNNNeuronLogarithm {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronLogarithm) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
 func (x *CNNNeuronLogarithm) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
@@ -48,6 +109,16 @@ func (x *CNNNeuronLogarithm) asKernel() *mpscore.MPSKernel { return &x.inner.MPS
 // CNNNeuronLogarithmable is the interface implemented by [CNNNeuronLogarithm], for mocking and DI.
 type CNNNeuronLogarithmable interface {
 	Unwrap() *raw.MPSCNNNeuronLogarithm
+	WithOffset(offset mpscore.MPSOffset) *CNNNeuronLogarithm
+	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronLogarithm
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronLogarithm
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronLogarithm
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronLogarithm
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronLogarithm
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronLogarithm
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronLogarithm
+	WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronLogarithm
+	WithLabel(label string) *CNNNeuronLogarithm
 }
 
 var _ CNNNeuronLogarithmable = (*CNNNeuronLogarithm)(nil)

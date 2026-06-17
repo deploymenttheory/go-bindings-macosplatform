@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,48 @@ func NewMatrixSolveCholeskyWithDeviceUpperOrderNumberOfRightHandSides(device met
 	return &MatrixSolveCholesky{inner: raw.MPSMatrixSolveCholeskyFromID(_id)}
 }
 
+// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSolveCholesky) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky {
+	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSolveCholesky) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky {
+	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSolveCholesky) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky {
+	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixSolveCholesky) WithBatchStart(batchStart uint) *MatrixSolveCholesky {
+	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixSolveCholesky) WithBatchSize(batchSize uint) *MatrixSolveCholesky {
+	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixSolveCholesky) WithOptions(options mpscore.MPSKernelOptions) *MatrixSolveCholesky {
+	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixSolveCholesky) WithLabel(label string) *MatrixSolveCholesky {
+	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix calls the underlying EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix.
 func (x *MatrixSolveCholesky) EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, solutionMatrix)
@@ -51,6 +94,13 @@ func (x *MatrixSolveCholesky) asKernel() *mpscore.MPSKernel { return &x.inner.MP
 // MatrixSolveCholeskyable is the interface implemented by [MatrixSolveCholesky], for mocking and DI.
 type MatrixSolveCholeskyable interface {
 	Unwrap() *raw.MPSMatrixSolveCholesky
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky
+	WithBatchStart(batchStart uint) *MatrixSolveCholesky
+	WithBatchSize(batchSize uint) *MatrixSolveCholesky
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixSolveCholesky
+	WithLabel(label string) *MatrixSolveCholesky
 	EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix)
 }
 

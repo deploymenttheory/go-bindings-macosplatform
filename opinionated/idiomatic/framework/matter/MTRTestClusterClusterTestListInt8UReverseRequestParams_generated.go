@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestListInt8UReverseRequestParams() *MTRTestCluster
 	return &MTRTestClusterClusterTestListInt8UReverseRequestParams{inner: raw.MTRTestClusterClusterTestListInt8UReverseRequestParamsFromID(_id)}
 }
 
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestListInt8UReverseRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UReverseRequestParams {
+	x.inner.MTRUnitTestingClusterTestListInt8UReverseRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestListInt8UReverseRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UReverseRequestParams {
+	x.inner.MTRUnitTestingClusterTestListInt8UReverseRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestListInt8UReverseRequestParams) asMTRUnitTestingClusterTestListInt8UReverseRequestParams() *raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams { return &x.inner.MTRUnitTestingClusterTestListInt8UReverseRequestParams }
 
 // MTRTestClusterClusterTestListInt8UReverseRequestParamsable is the interface implemented by [MTRTestClusterClusterTestListInt8UReverseRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestListInt8UReverseRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestListInt8UReverseRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UReverseRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UReverseRequestParams
 }
 
 var _ MTRTestClusterClusterTestListInt8UReverseRequestParamsable = (*MTRTestClusterClusterTestListInt8UReverseRequestParams)(nil)

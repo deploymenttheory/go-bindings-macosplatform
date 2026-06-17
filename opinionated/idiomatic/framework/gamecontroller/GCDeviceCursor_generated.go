@@ -5,6 +5,7 @@
 package gamecontroller
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,42 @@ func NewDeviceCursor() *DeviceCursor {
 	return &DeviceCursor{inner: raw.GCDeviceCursorFromID(_id)}
 }
 
+// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
+func (x *DeviceCursor) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *DeviceCursor {
+	x.inner.GCControllerDirectionPad.SetValueChangedHandler(valueChangedHandler)
+	return x
+}
+
+// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
+func (x *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *DeviceCursor {
+	x.inner.GCControllerDirectionPad.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+	return x
+}
+
+// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+func (x *DeviceCursor) WithSfSymbolsName(sfSymbolsName string) *DeviceCursor {
+	x.inner.GCControllerDirectionPad.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	return x
+}
+
+// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+func (x *DeviceCursor) WithLocalizedName(localizedName string) *DeviceCursor {
+	x.inner.GCControllerDirectionPad.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	return x
+}
+
+// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+func (x *DeviceCursor) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DeviceCursor {
+	x.inner.GCControllerDirectionPad.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	return x
+}
+
+// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+func (x *DeviceCursor) WithUnmappedLocalizedName(unmappedLocalizedName string) *DeviceCursor {
+	x.inner.GCControllerDirectionPad.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+	return x
+}
+
 func (x *DeviceCursor) asControllerDirectionPad() *raw.GCControllerDirectionPad { return &x.inner.GCControllerDirectionPad }
 
 func (x *DeviceCursor) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerDirectionPad.GCControllerElement }
@@ -42,6 +79,12 @@ func (x *DeviceCursor) asControllerElement() *raw.GCControllerElement { return &
 // DeviceCursorable is the interface implemented by [DeviceCursor], for mocking and DI.
 type DeviceCursorable interface {
 	Unwrap() *raw.GCDeviceCursor
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *DeviceCursor
+	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *DeviceCursor
+	WithSfSymbolsName(sfSymbolsName string) *DeviceCursor
+	WithLocalizedName(localizedName string) *DeviceCursor
+	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DeviceCursor
+	WithUnmappedLocalizedName(unmappedLocalizedName string) *DeviceCursor
 }
 
 var _ DeviceCursorable = (*DeviceCursor)(nil)

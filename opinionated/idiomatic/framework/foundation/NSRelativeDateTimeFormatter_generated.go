@@ -65,6 +65,12 @@ func (x *RelativeDateTimeFormatter) WithLocale(locale *raw.NSLocale) *RelativeDa
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *RelativeDateTimeFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeDateTimeFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // LocalizedStringFromDateComponents calls the underlying LocalizedStringFromDateComponents.
 func (x *RelativeDateTimeFormatter) LocalizedStringFromDateComponents(dateComponents *raw.NSDateComponents) *String {
 	_r := x.inner.LocalizedStringFromDateComponents(dateComponents)
@@ -162,6 +168,7 @@ type RelativeDateTimeFormatterable interface {
 	WithFormattingContext(formattingContext raw.NSFormattingContext) *RelativeDateTimeFormatter
 	WithCalendar(calendar *raw.NSCalendar) *RelativeDateTimeFormatter
 	WithLocale(locale *raw.NSLocale) *RelativeDateTimeFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeDateTimeFormatter
 	LocalizedStringFromDateComponents(dateComponents *raw.NSDateComponents) *String
 	LocalizedStringFromTimeInterval(timeInterval float64) *String
 	LocalizedStringForDateRelativeToDate(date *raw.NSDate, referenceDate *raw.NSDate) *String

@@ -61,6 +61,36 @@ func NewImagePyramidWithCoderDevice(aDecoder *foundation.NSCoder, device metal.M
 	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImagePyramid) WithOffset(offset mpscore.MPSOffset) *ImagePyramid {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImagePyramid) WithClipRect(clipRect metal.MTLRegion) *ImagePyramid {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImagePyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImagePyramid {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImagePyramid) WithOptions(options mpscore.MPSKernelOptions) *ImagePyramid {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImagePyramid) WithLabel(label string) *ImagePyramid {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImagePyramid) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -78,6 +108,11 @@ func (x *ImagePyramid) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryI
 // ImagePyramidable is the interface implemented by [ImagePyramid], for mocking and DI.
 type ImagePyramidable interface {
 	Unwrap() *raw.MPSImagePyramid
+	WithOffset(offset mpscore.MPSOffset) *ImagePyramid
+	WithClipRect(clipRect metal.MTLRegion) *ImagePyramid
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImagePyramid
+	WithOptions(options mpscore.MPSKernelOptions) *ImagePyramid
+	WithLabel(label string) *ImagePyramid
 	KernelHeight() uint
 	KernelWidth() uint
 }

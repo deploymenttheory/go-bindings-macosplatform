@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewDetectDocumentSegmentationRequest() *DetectDocumentSegmentationRequest {
 	return &DetectDocumentSegmentationRequest{inner: raw.VNDetectDocumentSegmentationRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectDocumentSegmentationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectDocumentSegmentationRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectDocumentSegmentationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectDocumentSegmentationRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectDocumentSegmentationRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectDocumentSegmentationRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectDocumentSegmentationRequest) WithRevision(revision uint) *DetectDocumentSegmentationRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *DetectDocumentSegmentationRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectDocumentSegmentationRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
@@ -42,6 +67,10 @@ func (x *DetectDocumentSegmentationRequest) asRequest() *raw.VNRequest { return 
 // DetectDocumentSegmentationRequestable is the interface implemented by [DetectDocumentSegmentationRequest], for mocking and DI.
 type DetectDocumentSegmentationRequestable interface {
 	Unwrap() *raw.VNDetectDocumentSegmentationRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectDocumentSegmentationRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectDocumentSegmentationRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectDocumentSegmentationRequest
+	WithRevision(revision uint) *DetectDocumentSegmentationRequest
 }
 
 var _ DetectDocumentSegmentationRequestable = (*DetectDocumentSegmentationRequest)(nil)

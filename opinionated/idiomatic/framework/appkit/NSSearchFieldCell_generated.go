@@ -105,6 +105,328 @@ func (x *SearchFieldCell) WithSendsSearchStringImmediately(sendsSearchStringImme
 	return x
 }
 
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithBackgroundColor(backgroundColor *raw.NSColor) *SearchFieldCell {
+	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithDrawsBackground(drawsBackground bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.SetDrawsBackground(drawsBackground)
+	return x
+}
+
+// WithTextColor sets the textColor property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithTextColor(textColor *raw.NSColor) *SearchFieldCell {
+	x.inner.NSTextFieldCell.SetTextColor(textColor)
+	return x
+}
+
+// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SearchFieldCell {
+	x.inner.NSTextFieldCell.SetBezelStyle(bezelStyle)
+	return x
+}
+
+// WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithPlaceholderString(placeholderString string) *SearchFieldCell {
+	x.inner.NSTextFieldCell.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	return x
+}
+
+// WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SearchFieldCell {
+	x.inner.NSTextFieldCell.SetPlaceholderAttributedString(placeholderAttributedString)
+	return x
+}
+
+// WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
+func (x *SearchFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSString) *SearchFieldCell {
+	if len(items) == 0 {
+		x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(_arr)
+	return x
+}
+
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithControlView(controlView ViewProvider) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithType(type_ raw.NSCellType) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithState(state int) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithTarget(target objc.ID) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithAction(action objc.SEL) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithTag(tag int) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithTitle(title string) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithEnabled(enabled bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithContinuous(continuous bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithEditable(editable bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithSelectable(selectable bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithBordered(bordered bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithBezeled(bezeled bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithScrollable(scrollable bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithHighlighted(highlighted bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithAlignment(alignment raw.NSTextAlignment) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithWraps(wraps bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithFont(font *raw.NSFont) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithFormatter(formatter *foundation.NSFormatter) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithObjectValue(objectValue objc.ID) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithStringValue(stringValue string) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithIntValue(intValue int) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithFloatValue(floatValue float32) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithDoubleValue(doubleValue float64) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithIntegerValue(integerValue int) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithImage(image *raw.NSImage) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithControlSize(controlSize raw.NSControlSize) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithRepresentedObject(representedObject objc.ID) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithMenu(menu *raw.NSMenu) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithAllowsUndo(allowsUndo bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithImportsGraphics(importsGraphics bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithAllowsMixedState(allowsMixedState bool) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *SearchFieldCell) WithControlTint(controlTint raw.NSControlTint) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // ResetSearchButtonCell calls the underlying ResetSearchButtonCell.
 func (x *SearchFieldCell) ResetSearchButtonCell() {
 	x.inner.ResetSearchButtonCell()
@@ -249,6 +571,58 @@ type SearchFieldCellable interface {
 	WithRecentSearches(items ...*foundation.NSString) *SearchFieldCell
 	WithRecentsAutosaveName(recentsAutosaveName *foundation.NSString) *SearchFieldCell
 	WithSendsSearchStringImmediately(sendsSearchStringImmediately bool) *SearchFieldCell
+	WithBackgroundColor(backgroundColor *raw.NSColor) *SearchFieldCell
+	WithDrawsBackground(drawsBackground bool) *SearchFieldCell
+	WithTextColor(textColor *raw.NSColor) *SearchFieldCell
+	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SearchFieldCell
+	WithPlaceholderString(placeholderString string) *SearchFieldCell
+	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SearchFieldCell
+	WithAllowedInputSourceLocales(items ...*foundation.NSString) *SearchFieldCell
+	WithControlView(controlView ViewProvider) *SearchFieldCell
+	WithType(type_ raw.NSCellType) *SearchFieldCell
+	WithState(state int) *SearchFieldCell
+	WithTarget(target objc.ID) *SearchFieldCell
+	WithAction(action objc.SEL) *SearchFieldCell
+	WithTag(tag int) *SearchFieldCell
+	WithTitle(title string) *SearchFieldCell
+	WithEnabled(enabled bool) *SearchFieldCell
+	WithContinuous(continuous bool) *SearchFieldCell
+	WithEditable(editable bool) *SearchFieldCell
+	WithSelectable(selectable bool) *SearchFieldCell
+	WithBordered(bordered bool) *SearchFieldCell
+	WithBezeled(bezeled bool) *SearchFieldCell
+	WithScrollable(scrollable bool) *SearchFieldCell
+	WithHighlighted(highlighted bool) *SearchFieldCell
+	WithAlignment(alignment raw.NSTextAlignment) *SearchFieldCell
+	WithWraps(wraps bool) *SearchFieldCell
+	WithFont(font *raw.NSFont) *SearchFieldCell
+	WithFormatter(formatter *foundation.NSFormatter) *SearchFieldCell
+	WithObjectValue(objectValue objc.ID) *SearchFieldCell
+	WithStringValue(stringValue string) *SearchFieldCell
+	WithIntValue(intValue int) *SearchFieldCell
+	WithFloatValue(floatValue float32) *SearchFieldCell
+	WithDoubleValue(doubleValue float64) *SearchFieldCell
+	WithIntegerValue(integerValue int) *SearchFieldCell
+	WithImage(image *raw.NSImage) *SearchFieldCell
+	WithControlSize(controlSize raw.NSControlSize) *SearchFieldCell
+	WithRepresentedObject(representedObject objc.ID) *SearchFieldCell
+	WithMenu(menu *raw.NSMenu) *SearchFieldCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SearchFieldCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SearchFieldCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SearchFieldCell
+	WithAllowsUndo(allowsUndo bool) *SearchFieldCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SearchFieldCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SearchFieldCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *SearchFieldCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *SearchFieldCell
+	WithShowsFirstResponder(showsFirstResponder bool) *SearchFieldCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *SearchFieldCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SearchFieldCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SearchFieldCell
+	WithImportsGraphics(importsGraphics bool) *SearchFieldCell
+	WithAllowsMixedState(allowsMixedState bool) *SearchFieldCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SearchFieldCell
+	WithControlTint(controlTint raw.NSControlTint) *SearchFieldCell
 	ResetSearchButtonCell()
 	ResetCancelButtonCell()
 	SearchTextRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect

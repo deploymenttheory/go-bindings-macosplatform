@@ -60,6 +60,138 @@ func (x *StereoscopicCamera) WithOverlap(overlap float32) *StereoscopicCamera {
 	return x
 }
 
+// WithProjection sets the projection property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithProjection(projection raw.MDLCameraProjection) *StereoscopicCamera {
+	x.inner.MDLCamera.SetProjection(projection)
+	return x
+}
+
+// WithNearVisibilityDistance sets the nearVisibilityDistance property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithNearVisibilityDistance(nearVisibilityDistance float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetNearVisibilityDistance(nearVisibilityDistance)
+	return x
+}
+
+// WithFarVisibilityDistance sets the farVisibilityDistance property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithFarVisibilityDistance(farVisibilityDistance float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetFarVisibilityDistance(farVisibilityDistance)
+	return x
+}
+
+// WithWorldToMetersConversionScale sets the worldToMetersConversionScale property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetWorldToMetersConversionScale(worldToMetersConversionScale)
+	return x
+}
+
+// WithBarrelDistortion sets the barrelDistortion property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithBarrelDistortion(barrelDistortion float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetBarrelDistortion(barrelDistortion)
+	return x
+}
+
+// WithFisheyeDistortion sets the fisheyeDistortion property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithFisheyeDistortion(fisheyeDistortion float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetFisheyeDistortion(fisheyeDistortion)
+	return x
+}
+
+// WithOpticalVignetting sets the opticalVignetting property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithOpticalVignetting(opticalVignetting float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetOpticalVignetting(opticalVignetting)
+	return x
+}
+
+// WithChromaticAberration sets the chromaticAberration property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithChromaticAberration(chromaticAberration float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetChromaticAberration(chromaticAberration)
+	return x
+}
+
+// WithFocalLength sets the focalLength property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithFocalLength(focalLength float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetFocalLength(focalLength)
+	return x
+}
+
+// WithFocusDistance sets the focusDistance property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithFocusDistance(focusDistance float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetFocusDistance(focusDistance)
+	return x
+}
+
+// WithFieldOfView sets the fieldOfView property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithFieldOfView(fieldOfView float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetFieldOfView(fieldOfView)
+	return x
+}
+
+// WithFStop sets the fStop property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithFStop(fStop float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetFStop(fStop)
+	return x
+}
+
+// WithApertureBladeCount sets the apertureBladeCount property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithApertureBladeCount(apertureBladeCount uint) *StereoscopicCamera {
+	x.inner.MDLCamera.SetApertureBladeCount(apertureBladeCount)
+	return x
+}
+
+// WithMaximumCircleOfConfusion sets the maximumCircleOfConfusion property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetMaximumCircleOfConfusion(maximumCircleOfConfusion)
+	return x
+}
+
+// WithShutterOpenInterval sets the shutterOpenInterval property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithShutterOpenInterval(shutterOpenInterval float64) *StereoscopicCamera {
+	x.inner.MDLCamera.SetShutterOpenInterval(shutterOpenInterval)
+	return x
+}
+
+// WithSensorVerticalAperture sets the sensorVerticalAperture property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithSensorVerticalAperture(sensorVerticalAperture float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetSensorVerticalAperture(sensorVerticalAperture)
+	return x
+}
+
+// WithSensorAspect sets the sensorAspect property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithSensorAspect(sensorAspect float32) *StereoscopicCamera {
+	x.inner.MDLCamera.SetSensorAspect(sensorAspect)
+	return x
+}
+
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithParent(parent ObjectProvider) *StereoscopicCamera {
+	x.inner.MDLCamera.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithInstance(instance ObjectProvider) *StereoscopicCamera {
+	x.inner.MDLCamera.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithTransform(transform raw.MDLTransformComponent) *StereoscopicCamera {
+	x.inner.MDLCamera.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithChildren(children raw.MDLObjectContainerComponent) *StereoscopicCamera {
+	x.inner.MDLCamera.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *StereoscopicCamera) WithHidden(hidden bool) *StereoscopicCamera {
+	x.inner.MDLCamera.MDLObject.SetHidden(hidden)
+	return x
+}
+
 // InterPupillaryDistance calls the underlying InterPupillaryDistance.
 func (x *StereoscopicCamera) InterPupillaryDistance() float32 {
 	return x.inner.InterPupillaryDistance()
@@ -131,6 +263,28 @@ type StereoscopicCameraable interface {
 	WithLeftVergence(leftVergence float32) *StereoscopicCamera
 	WithRightVergence(rightVergence float32) *StereoscopicCamera
 	WithOverlap(overlap float32) *StereoscopicCamera
+	WithProjection(projection raw.MDLCameraProjection) *StereoscopicCamera
+	WithNearVisibilityDistance(nearVisibilityDistance float32) *StereoscopicCamera
+	WithFarVisibilityDistance(farVisibilityDistance float32) *StereoscopicCamera
+	WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *StereoscopicCamera
+	WithBarrelDistortion(barrelDistortion float32) *StereoscopicCamera
+	WithFisheyeDistortion(fisheyeDistortion float32) *StereoscopicCamera
+	WithOpticalVignetting(opticalVignetting float32) *StereoscopicCamera
+	WithChromaticAberration(chromaticAberration float32) *StereoscopicCamera
+	WithFocalLength(focalLength float32) *StereoscopicCamera
+	WithFocusDistance(focusDistance float32) *StereoscopicCamera
+	WithFieldOfView(fieldOfView float32) *StereoscopicCamera
+	WithFStop(fStop float32) *StereoscopicCamera
+	WithApertureBladeCount(apertureBladeCount uint) *StereoscopicCamera
+	WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *StereoscopicCamera
+	WithShutterOpenInterval(shutterOpenInterval float64) *StereoscopicCamera
+	WithSensorVerticalAperture(sensorVerticalAperture float32) *StereoscopicCamera
+	WithSensorAspect(sensorAspect float32) *StereoscopicCamera
+	WithParent(parent ObjectProvider) *StereoscopicCamera
+	WithInstance(instance ObjectProvider) *StereoscopicCamera
+	WithTransform(transform raw.MDLTransformComponent) *StereoscopicCamera
+	WithChildren(children raw.MDLObjectContainerComponent) *StereoscopicCamera
+	WithHidden(hidden bool) *StereoscopicCamera
 	InterPupillaryDistance() float32
 	SetInterPupillaryDistance(interPupillaryDistance float32)
 	LeftVergence() float32

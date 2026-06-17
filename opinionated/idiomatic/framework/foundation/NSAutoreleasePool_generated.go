@@ -35,6 +35,12 @@ func NewAutoreleasePool() *AutoreleasePool {
 	return &AutoreleasePool{inner: raw.NSAutoreleasePoolFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *AutoreleasePool) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AutoreleasePool {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddObject calls the underlying AddObject.
 func (x *AutoreleasePool) AddObject(anObject objc.ID) {
 	x.inner.AddObject(anObject)
@@ -50,6 +56,7 @@ func (x *AutoreleasePool) asObject() *raw.NSObject { return &x.inner.NSObject }
 // AutoreleasePoolable is the interface implemented by [AutoreleasePool], for mocking and DI.
 type AutoreleasePoolable interface {
 	Unwrap() *raw.NSAutoreleasePool
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AutoreleasePool
 	AddObject(anObject objc.ID)
 	Drain()
 }

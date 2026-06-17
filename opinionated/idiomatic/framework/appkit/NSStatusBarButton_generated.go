@@ -6,7 +6,12 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // StatusBarButton wraps [raw.NSStatusBarButton] with a fluent Go API.
@@ -41,6 +46,640 @@ func (x *StatusBarButton) WithAppearsDisabled(appearsDisabled bool) *StatusBarBu
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *StatusBarButton) WithTitle(title string) *StatusBarButton {
+	x.inner.NSButton.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *StatusBarButton {
+	x.inner.NSButton.SetAttributedTitle(attributedTitle)
+	return x
+}
+
+// WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAlternateTitle(alternateTitle string) *StatusBarButton {
+	x.inner.NSButton.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+	return x
+}
+
+// WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *StatusBarButton {
+	x.inner.NSButton.SetAttributedAlternateTitle(attributedAlternateTitle)
+	return x
+}
+
+// WithHasDestructiveAction sets the hasDestructiveAction property and returns the receiver for chaining.
+func (x *StatusBarButton) WithHasDestructiveAction(hasDestructiveAction bool) *StatusBarButton {
+	x.inner.NSButton.SetHasDestructiveAction(hasDestructiveAction)
+	return x
+}
+
+// WithSound sets the sound property and returns the receiver for chaining.
+func (x *StatusBarButton) WithSound(sound *raw.NSSound) *StatusBarButton {
+	x.inner.NSButton.SetSound(sound)
+	return x
+}
+
+// WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
+func (x *StatusBarButton) WithSpringLoaded(springLoaded bool) *StatusBarButton {
+	x.inner.NSButton.SetSpringLoaded(springLoaded)
+	return x
+}
+
+// WithMaxAcceleratorLevel sets the maxAcceleratorLevel property and returns the receiver for chaining.
+func (x *StatusBarButton) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *StatusBarButton {
+	x.inner.NSButton.SetMaxAcceleratorLevel(maxAcceleratorLevel)
+	return x
+}
+
+// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
+func (x *StatusBarButton) WithBezelStyle(bezelStyle raw.NSBezelStyle) *StatusBarButton {
+	x.inner.NSButton.SetBezelStyle(bezelStyle)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *StatusBarButton) WithBordered(bordered bool) *StatusBarButton {
+	x.inner.NSButton.SetBordered(bordered)
+	return x
+}
+
+// WithTransparent sets the transparent property and returns the receiver for chaining.
+func (x *StatusBarButton) WithTransparent(transparent bool) *StatusBarButton {
+	x.inner.NSButton.SetTransparent(transparent)
+	return x
+}
+
+// WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
+func (x *StatusBarButton) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *StatusBarButton {
+	x.inner.NSButton.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
+	return x
+}
+
+// WithBezelColor sets the bezelColor property and returns the receiver for chaining.
+func (x *StatusBarButton) WithBezelColor(bezelColor *raw.NSColor) *StatusBarButton {
+	x.inner.NSButton.SetBezelColor(bezelColor)
+	return x
+}
+
+// WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
+func (x *StatusBarButton) WithContentTintColor(contentTintColor *raw.NSColor) *StatusBarButton {
+	x.inner.NSButton.SetContentTintColor(contentTintColor)
+	return x
+}
+
+// WithTintProminence sets the tintProminence property and returns the receiver for chaining.
+func (x *StatusBarButton) WithTintProminence(tintProminence raw.NSTintProminence) *StatusBarButton {
+	x.inner.NSButton.SetTintProminence(tintProminence)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *StatusBarButton) WithImage(image *raw.NSImage) *StatusBarButton {
+	x.inner.NSButton.SetImage(image)
+	return x
+}
+
+// WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAlternateImage(alternateImage *raw.NSImage) *StatusBarButton {
+	x.inner.NSButton.SetAlternateImage(alternateImage)
+	return x
+}
+
+// WithImagePosition sets the imagePosition property and returns the receiver for chaining.
+func (x *StatusBarButton) WithImagePosition(imagePosition raw.NSCellImagePosition) *StatusBarButton {
+	x.inner.NSButton.SetImagePosition(imagePosition)
+	return x
+}
+
+// WithImageScaling sets the imageScaling property and returns the receiver for chaining.
+func (x *StatusBarButton) WithImageScaling(imageScaling raw.NSImageScaling) *StatusBarButton {
+	x.inner.NSButton.SetImageScaling(imageScaling)
+	return x
+}
+
+// WithImageHugsTitle sets the imageHugsTitle property and returns the receiver for chaining.
+func (x *StatusBarButton) WithImageHugsTitle(imageHugsTitle bool) *StatusBarButton {
+	x.inner.NSButton.SetImageHugsTitle(imageHugsTitle)
+	return x
+}
+
+// WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
+func (x *StatusBarButton) WithSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) *StatusBarButton {
+	x.inner.NSButton.SetSymbolConfiguration(symbolConfiguration)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *StatusBarButton) WithState(state int) *StatusBarButton {
+	x.inner.NSButton.SetState(state)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAllowsMixedState(allowsMixedState bool) *StatusBarButton {
+	x.inner.NSButton.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
+func (x *StatusBarButton) WithKeyEquivalent(keyEquivalent string) *StatusBarButton {
+	x.inner.NSButton.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
+	return x
+}
+
+// WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
+func (x *StatusBarButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *StatusBarButton {
+	x.inner.NSButton.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+	return x
+}
+
+// WithBorderShape sets the borderShape property and returns the receiver for chaining.
+func (x *StatusBarButton) WithBorderShape(borderShape raw.NSControlBorderShape) *StatusBarButton {
+	x.inner.NSButton.SetBorderShape(borderShape)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *StatusBarButton) WithTarget(target objc.ID) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAction(action objc.SEL) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *StatusBarButton) WithTag(tag int) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *StatusBarButton) WithIgnoresMultiClick(ignoresMultiClick bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *StatusBarButton) WithContinuous(continuous bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *StatusBarButton) WithEnabled(enabled bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *StatusBarButton) WithRefusesFirstResponder(refusesFirstResponder bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *StatusBarButton) WithHighlighted(highlighted bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *StatusBarButton) WithControlSize(controlSize raw.NSControlSize) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *StatusBarButton) WithFormatter(formatter *foundation.NSFormatter) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *StatusBarButton) WithObjectValue(objectValue objc.ID) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *StatusBarButton) WithStringValue(stringValue string) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *StatusBarButton) WithIntValue(intValue int) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *StatusBarButton) WithIntegerValue(integerValue int) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *StatusBarButton) WithFloatValue(floatValue float32) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *StatusBarButton) WithDoubleValue(doubleValue float64) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *StatusBarButton) WithFont(font *raw.NSFont) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *StatusBarButton) WithUsesSingleLineMode(usesSingleLineMode bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *StatusBarButton) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAlignment(alignment raw.NSTextAlignment) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *StatusBarButton) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *StatusBarButton) WithCell(cell CellProvider) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *StatusBarButton) WithSubviews(items ...ViewProvider) *StatusBarButton {
+	if len(items) == 0 {
+		x.inner.NSButton.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSButton.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *StatusBarButton) WithHidden(hidden bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *StatusBarButton) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAutoresizesSubviews(autoresizesSubviews bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *StatusBarButton) WithFrame(frame corefoundation.CGRect) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *StatusBarButton) WithFrameRotation(frameRotation float64) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *StatusBarButton) WithFrameCenterRotation(frameCenterRotation float64) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *StatusBarButton) WithBoundsRotation(boundsRotation float64) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *StatusBarButton) WithBounds(bounds corefoundation.CGRect) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *StatusBarButton) WithCanDrawConcurrently(canDrawConcurrently bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *StatusBarButton) WithNeedsDisplay(needsDisplay bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAcceptsTouchEvents(acceptsTouchEvents bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *StatusBarButton) WithWantsRestingTouches(wantsRestingTouches bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *StatusBarButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *StatusBarButton) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *StatusBarButton) WithWantsLayer(wantsLayer bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *StatusBarButton) WithLayer(layer *quartzcore.CALayer) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *StatusBarButton) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *StatusBarButton) WithNeedsLayout(needsLayout bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAlphaValue(alphaValue float64) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *StatusBarButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *StatusBarButton) WithBackgroundFilters(items ...*coreimage.CIFilter) *StatusBarButton {
+	if len(items) == 0 {
+		x.inner.NSButton.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSButton.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *StatusBarButton) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *StatusBarButton) WithContentFilters(items ...*coreimage.CIFilter) *StatusBarButton {
+	if len(items) == 0 {
+		x.inner.NSButton.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSButton.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *StatusBarButton) WithShadow(shadow *raw.NSShadow) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *StatusBarButton) WithClipsToBounds(clipsToBounds bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *StatusBarButton) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *StatusBarButton) WithToolTip(toolTip string) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *StatusBarButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *StatusBarButton) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *StatusBarButton) WithNextKeyView(nextKeyView ViewProvider) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *StatusBarButton) WithFocusRingType(focusRingType raw.NSFocusRingType) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *StatusBarButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *StatusBarButton {
+	if len(items) == 0 {
+		x.inner.NSButton.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSButton.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *StatusBarButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *StatusBarButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *StatusBarButton) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *StatusBarButton) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *StatusBarButton) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *StatusBarButton) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *StatusBarButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *StatusBarButton) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *StatusBarButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *StatusBarButton) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *StatusBarButton) WithNextResponder(nextResponder ResponderProvider) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *StatusBarButton) WithMenu(menu *raw.NSMenu) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *StatusBarButton) WithUserActivity(userActivity *foundation.NSUserActivity) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *StatusBarButton) WithTouchBar(touchBar *raw.NSTouchBar) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+	return x
+}
+
 // AppearsDisabled calls the underlying AppearsDisabled.
 func (x *StatusBarButton) AppearsDisabled() bool {
 	return x.inner.AppearsDisabled()
@@ -63,6 +702,105 @@ func (x *StatusBarButton) asResponder() *raw.NSResponder { return &x.inner.NSBut
 type StatusBarButtonable interface {
 	Unwrap() *raw.NSStatusBarButton
 	WithAppearsDisabled(appearsDisabled bool) *StatusBarButton
+	WithTitle(title string) *StatusBarButton
+	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *StatusBarButton
+	WithAlternateTitle(alternateTitle string) *StatusBarButton
+	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *StatusBarButton
+	WithHasDestructiveAction(hasDestructiveAction bool) *StatusBarButton
+	WithSound(sound *raw.NSSound) *StatusBarButton
+	WithSpringLoaded(springLoaded bool) *StatusBarButton
+	WithMaxAcceleratorLevel(maxAcceleratorLevel int) *StatusBarButton
+	WithBezelStyle(bezelStyle raw.NSBezelStyle) *StatusBarButton
+	WithBordered(bordered bool) *StatusBarButton
+	WithTransparent(transparent bool) *StatusBarButton
+	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *StatusBarButton
+	WithBezelColor(bezelColor *raw.NSColor) *StatusBarButton
+	WithContentTintColor(contentTintColor *raw.NSColor) *StatusBarButton
+	WithTintProminence(tintProminence raw.NSTintProminence) *StatusBarButton
+	WithImage(image *raw.NSImage) *StatusBarButton
+	WithAlternateImage(alternateImage *raw.NSImage) *StatusBarButton
+	WithImagePosition(imagePosition raw.NSCellImagePosition) *StatusBarButton
+	WithImageScaling(imageScaling raw.NSImageScaling) *StatusBarButton
+	WithImageHugsTitle(imageHugsTitle bool) *StatusBarButton
+	WithSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) *StatusBarButton
+	WithState(state int) *StatusBarButton
+	WithAllowsMixedState(allowsMixedState bool) *StatusBarButton
+	WithKeyEquivalent(keyEquivalent string) *StatusBarButton
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *StatusBarButton
+	WithBorderShape(borderShape raw.NSControlBorderShape) *StatusBarButton
+	WithTarget(target objc.ID) *StatusBarButton
+	WithAction(action objc.SEL) *StatusBarButton
+	WithTag(tag int) *StatusBarButton
+	WithIgnoresMultiClick(ignoresMultiClick bool) *StatusBarButton
+	WithContinuous(continuous bool) *StatusBarButton
+	WithEnabled(enabled bool) *StatusBarButton
+	WithRefusesFirstResponder(refusesFirstResponder bool) *StatusBarButton
+	WithHighlighted(highlighted bool) *StatusBarButton
+	WithControlSize(controlSize raw.NSControlSize) *StatusBarButton
+	WithFormatter(formatter *foundation.NSFormatter) *StatusBarButton
+	WithObjectValue(objectValue objc.ID) *StatusBarButton
+	WithStringValue(stringValue string) *StatusBarButton
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *StatusBarButton
+	WithIntValue(intValue int) *StatusBarButton
+	WithIntegerValue(integerValue int) *StatusBarButton
+	WithFloatValue(floatValue float32) *StatusBarButton
+	WithDoubleValue(doubleValue float64) *StatusBarButton
+	WithFont(font *raw.NSFont) *StatusBarButton
+	WithUsesSingleLineMode(usesSingleLineMode bool) *StatusBarButton
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *StatusBarButton
+	WithAlignment(alignment raw.NSTextAlignment) *StatusBarButton
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *StatusBarButton
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *StatusBarButton
+	WithCell(cell CellProvider) *StatusBarButton
+	WithSubviews(items ...ViewProvider) *StatusBarButton
+	WithHidden(hidden bool) *StatusBarButton
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StatusBarButton
+	WithAutoresizesSubviews(autoresizesSubviews bool) *StatusBarButton
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *StatusBarButton
+	WithFrame(frame corefoundation.CGRect) *StatusBarButton
+	WithFrameRotation(frameRotation float64) *StatusBarButton
+	WithFrameCenterRotation(frameCenterRotation float64) *StatusBarButton
+	WithBoundsRotation(boundsRotation float64) *StatusBarButton
+	WithBounds(bounds corefoundation.CGRect) *StatusBarButton
+	WithCanDrawConcurrently(canDrawConcurrently bool) *StatusBarButton
+	WithNeedsDisplay(needsDisplay bool) *StatusBarButton
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *StatusBarButton
+	WithWantsRestingTouches(wantsRestingTouches bool) *StatusBarButton
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *StatusBarButton
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *StatusBarButton
+	WithWantsLayer(wantsLayer bool) *StatusBarButton
+	WithLayer(layer *quartzcore.CALayer) *StatusBarButton
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StatusBarButton
+	WithNeedsLayout(needsLayout bool) *StatusBarButton
+	WithAlphaValue(alphaValue float64) *StatusBarButton
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *StatusBarButton
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *StatusBarButton
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *StatusBarButton
+	WithContentFilters(items ...*coreimage.CIFilter) *StatusBarButton
+	WithShadow(shadow *raw.NSShadow) *StatusBarButton
+	WithClipsToBounds(clipsToBounds bool) *StatusBarButton
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StatusBarButton
+	WithToolTip(toolTip string) *StatusBarButton
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StatusBarButton
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StatusBarButton
+	WithNextKeyView(nextKeyView ViewProvider) *StatusBarButton
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *StatusBarButton
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *StatusBarButton
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *StatusBarButton
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StatusBarButton
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StatusBarButton
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *StatusBarButton
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *StatusBarButton
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *StatusBarButton
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *StatusBarButton
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StatusBarButton
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *StatusBarButton
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *StatusBarButton
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *StatusBarButton
+	WithNextResponder(nextResponder ResponderProvider) *StatusBarButton
+	WithMenu(menu *raw.NSMenu) *StatusBarButton
+	WithUserActivity(userActivity *foundation.NSUserActivity) *StatusBarButton
+	WithTouchBar(touchBar *raw.NSTouchBar) *StatusBarButton
 	AppearsDisabled() bool
 	SetAppearsDisabled(appearsDisabled bool)
 }

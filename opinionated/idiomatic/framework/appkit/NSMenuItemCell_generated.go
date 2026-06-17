@@ -63,6 +63,384 @@ func (x *MenuItemCell) WithNeedsDisplay(needsDisplay bool) *MenuItemCell {
 	return x
 }
 
+// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
+func (x *MenuItemCell) WithBezelStyle(bezelStyle raw.NSBezelStyle) *MenuItemCell {
+	x.inner.NSButtonCell.SetBezelStyle(bezelStyle)
+	return x
+}
+
+// WithHighlightsBy sets the highlightsBy property and returns the receiver for chaining.
+func (x *MenuItemCell) WithHighlightsBy(highlightsBy raw.NSCellStyleMask) *MenuItemCell {
+	x.inner.NSButtonCell.SetHighlightsBy(highlightsBy)
+	return x
+}
+
+// WithShowsStateBy sets the showsStateBy property and returns the receiver for chaining.
+func (x *MenuItemCell) WithShowsStateBy(showsStateBy raw.NSCellStyleMask) *MenuItemCell {
+	x.inner.NSButtonCell.SetShowsStateBy(showsStateBy)
+	return x
+}
+
+// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
+func (x *MenuItemCell) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *MenuItemCell {
+	x.inner.NSButtonCell.SetAttributedTitle(attributedTitle)
+	return x
+}
+
+// WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
+func (x *MenuItemCell) WithAlternateTitle(alternateTitle string) *MenuItemCell {
+	x.inner.NSButtonCell.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+	return x
+}
+
+// WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
+func (x *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *MenuItemCell {
+	x.inner.NSButtonCell.SetAttributedAlternateTitle(attributedAlternateTitle)
+	return x
+}
+
+// WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
+func (x *MenuItemCell) WithAlternateImage(alternateImage *raw.NSImage) *MenuItemCell {
+	x.inner.NSButtonCell.SetAlternateImage(alternateImage)
+	return x
+}
+
+// WithImagePosition sets the imagePosition property and returns the receiver for chaining.
+func (x *MenuItemCell) WithImagePosition(imagePosition raw.NSCellImagePosition) *MenuItemCell {
+	x.inner.NSButtonCell.SetImagePosition(imagePosition)
+	return x
+}
+
+// WithImageScaling sets the imageScaling property and returns the receiver for chaining.
+func (x *MenuItemCell) WithImageScaling(imageScaling raw.NSImageScaling) *MenuItemCell {
+	x.inner.NSButtonCell.SetImageScaling(imageScaling)
+	return x
+}
+
+// WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
+func (x *MenuItemCell) WithKeyEquivalent(keyEquivalent string) *MenuItemCell {
+	x.inner.NSButtonCell.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
+	return x
+}
+
+// WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
+func (x *MenuItemCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *MenuItemCell {
+	x.inner.NSButtonCell.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+	return x
+}
+
+// WithTransparent sets the transparent property and returns the receiver for chaining.
+func (x *MenuItemCell) WithTransparent(transparent bool) *MenuItemCell {
+	x.inner.NSButtonCell.SetTransparent(transparent)
+	return x
+}
+
+// WithImageDimsWhenDisabled sets the imageDimsWhenDisabled property and returns the receiver for chaining.
+func (x *MenuItemCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell {
+	x.inner.NSButtonCell.SetImageDimsWhenDisabled(imageDimsWhenDisabled)
+	return x
+}
+
+// WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
+func (x *MenuItemCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell {
+	x.inner.NSButtonCell.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
+	return x
+}
+
+// WithSound sets the sound property and returns the receiver for chaining.
+func (x *MenuItemCell) WithSound(sound *raw.NSSound) *MenuItemCell {
+	x.inner.NSButtonCell.SetSound(sound)
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *MenuItemCell) WithBackgroundColor(backgroundColor *raw.NSColor) *MenuItemCell {
+	x.inner.NSButtonCell.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithGradientType sets the gradientType property and returns the receiver for chaining.
+func (x *MenuItemCell) WithGradientType(gradientType raw.NSGradientType) *MenuItemCell {
+	x.inner.NSButtonCell.SetGradientType(gradientType)
+	return x
+}
+
+// WithKeyEquivalentFont sets the keyEquivalentFont property and returns the receiver for chaining.
+func (x *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *MenuItemCell {
+	x.inner.NSButtonCell.SetKeyEquivalentFont(keyEquivalentFont)
+	return x
+}
+
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *MenuItemCell) WithControlView(controlView ViewProvider) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *MenuItemCell) WithType(type_ raw.NSCellType) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *MenuItemCell) WithState(state int) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *MenuItemCell) WithTarget(target objc.ID) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *MenuItemCell) WithAction(action objc.SEL) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *MenuItemCell) WithTag(tag int) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *MenuItemCell) WithTitle(title string) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *MenuItemCell) WithEnabled(enabled bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *MenuItemCell) WithContinuous(continuous bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *MenuItemCell) WithEditable(editable bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *MenuItemCell) WithSelectable(selectable bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *MenuItemCell) WithBordered(bordered bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *MenuItemCell) WithBezeled(bezeled bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *MenuItemCell) WithScrollable(scrollable bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *MenuItemCell) WithHighlighted(highlighted bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *MenuItemCell) WithAlignment(alignment raw.NSTextAlignment) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *MenuItemCell) WithWraps(wraps bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *MenuItemCell) WithFont(font *raw.NSFont) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *MenuItemCell) WithFormatter(formatter *foundation.NSFormatter) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *MenuItemCell) WithObjectValue(objectValue objc.ID) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *MenuItemCell) WithStringValue(stringValue string) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *MenuItemCell) WithIntValue(intValue int) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *MenuItemCell) WithFloatValue(floatValue float32) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *MenuItemCell) WithDoubleValue(doubleValue float64) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *MenuItemCell) WithIntegerValue(integerValue int) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *MenuItemCell) WithImage(image *raw.NSImage) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *MenuItemCell) WithControlSize(controlSize raw.NSControlSize) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *MenuItemCell) WithRepresentedObject(representedObject objc.ID) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *MenuItemCell) WithMenu(menu *raw.NSMenu) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *MenuItemCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *MenuItemCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *MenuItemCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *MenuItemCell) WithAllowsUndo(allowsUndo bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *MenuItemCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *MenuItemCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *MenuItemCell) WithUsesSingleLineMode(usesSingleLineMode bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *MenuItemCell) WithRefusesFirstResponder(refusesFirstResponder bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *MenuItemCell) WithShowsFirstResponder(showsFirstResponder bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *MenuItemCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *MenuItemCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *MenuItemCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *MenuItemCell) WithImportsGraphics(importsGraphics bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *MenuItemCell) WithAllowsMixedState(allowsMixedState bool) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *MenuItemCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *MenuItemCell) WithControlTint(controlTint raw.NSControlTint) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // CalcSize calls the underlying CalcSize.
 func (x *MenuItemCell) CalcSize() {
 	x.inner.CalcSize()
@@ -176,6 +554,69 @@ type MenuItemCellable interface {
 	WithMenuItem(menuItem *raw.NSMenuItem) *MenuItemCell
 	WithNeedsSizing(needsSizing bool) *MenuItemCell
 	WithNeedsDisplay(needsDisplay bool) *MenuItemCell
+	WithBezelStyle(bezelStyle raw.NSBezelStyle) *MenuItemCell
+	WithHighlightsBy(highlightsBy raw.NSCellStyleMask) *MenuItemCell
+	WithShowsStateBy(showsStateBy raw.NSCellStyleMask) *MenuItemCell
+	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *MenuItemCell
+	WithAlternateTitle(alternateTitle string) *MenuItemCell
+	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *MenuItemCell
+	WithAlternateImage(alternateImage *raw.NSImage) *MenuItemCell
+	WithImagePosition(imagePosition raw.NSCellImagePosition) *MenuItemCell
+	WithImageScaling(imageScaling raw.NSImageScaling) *MenuItemCell
+	WithKeyEquivalent(keyEquivalent string) *MenuItemCell
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *MenuItemCell
+	WithTransparent(transparent bool) *MenuItemCell
+	WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell
+	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell
+	WithSound(sound *raw.NSSound) *MenuItemCell
+	WithBackgroundColor(backgroundColor *raw.NSColor) *MenuItemCell
+	WithGradientType(gradientType raw.NSGradientType) *MenuItemCell
+	WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *MenuItemCell
+	WithControlView(controlView ViewProvider) *MenuItemCell
+	WithType(type_ raw.NSCellType) *MenuItemCell
+	WithState(state int) *MenuItemCell
+	WithTarget(target objc.ID) *MenuItemCell
+	WithAction(action objc.SEL) *MenuItemCell
+	WithTag(tag int) *MenuItemCell
+	WithTitle(title string) *MenuItemCell
+	WithEnabled(enabled bool) *MenuItemCell
+	WithContinuous(continuous bool) *MenuItemCell
+	WithEditable(editable bool) *MenuItemCell
+	WithSelectable(selectable bool) *MenuItemCell
+	WithBordered(bordered bool) *MenuItemCell
+	WithBezeled(bezeled bool) *MenuItemCell
+	WithScrollable(scrollable bool) *MenuItemCell
+	WithHighlighted(highlighted bool) *MenuItemCell
+	WithAlignment(alignment raw.NSTextAlignment) *MenuItemCell
+	WithWraps(wraps bool) *MenuItemCell
+	WithFont(font *raw.NSFont) *MenuItemCell
+	WithFormatter(formatter *foundation.NSFormatter) *MenuItemCell
+	WithObjectValue(objectValue objc.ID) *MenuItemCell
+	WithStringValue(stringValue string) *MenuItemCell
+	WithIntValue(intValue int) *MenuItemCell
+	WithFloatValue(floatValue float32) *MenuItemCell
+	WithDoubleValue(doubleValue float64) *MenuItemCell
+	WithIntegerValue(integerValue int) *MenuItemCell
+	WithImage(image *raw.NSImage) *MenuItemCell
+	WithControlSize(controlSize raw.NSControlSize) *MenuItemCell
+	WithRepresentedObject(representedObject objc.ID) *MenuItemCell
+	WithMenu(menu *raw.NSMenu) *MenuItemCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *MenuItemCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *MenuItemCell
+	WithAllowsUndo(allowsUndo bool) *MenuItemCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *MenuItemCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *MenuItemCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *MenuItemCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *MenuItemCell
+	WithShowsFirstResponder(showsFirstResponder bool) *MenuItemCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *MenuItemCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *MenuItemCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *MenuItemCell
+	WithImportsGraphics(importsGraphics bool) *MenuItemCell
+	WithAllowsMixedState(allowsMixedState bool) *MenuItemCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *MenuItemCell
+	WithControlTint(controlTint raw.NSControlTint) *MenuItemCell
 	CalcSize()
 	StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect
 	KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect

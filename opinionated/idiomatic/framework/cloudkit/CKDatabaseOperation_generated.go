@@ -41,6 +41,54 @@ func (x *DatabaseOperation) WithDatabase(database *raw.CKDatabase) *DatabaseOper
 	return x
 }
 
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *DatabaseOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *DatabaseOperation {
+	x.inner.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *DatabaseOperation) WithGroup(group *raw.CKOperationGroup) *DatabaseOperation {
+	x.inner.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *DatabaseOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DatabaseOperation {
+	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *DatabaseOperation) WithContainer(container *raw.CKContainer) *DatabaseOperation {
+	x.inner.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *DatabaseOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DatabaseOperation {
+	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *DatabaseOperation) WithLongLived(longLived bool) *DatabaseOperation {
+	x.inner.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *DatabaseOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DatabaseOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *DatabaseOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DatabaseOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // Database calls the underlying Database.
 func (x *DatabaseOperation) Database() *Database {
 	_r := x.inner.Database()
@@ -63,6 +111,14 @@ func (x *DatabaseOperation) asOperation() *raw.CKOperation { return &x.inner.CKO
 type DatabaseOperationable interface {
 	Unwrap() *raw.CKDatabaseOperation
 	WithDatabase(database *raw.CKDatabase) *DatabaseOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *DatabaseOperation
+	WithGroup(group *raw.CKOperationGroup) *DatabaseOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DatabaseOperation
+	WithContainer(container *raw.CKContainer) *DatabaseOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *DatabaseOperation
+	WithLongLived(longLived bool) *DatabaseOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DatabaseOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DatabaseOperation
 	Database() *Database
 	SetDatabase(database *raw.CKDatabase)
 }

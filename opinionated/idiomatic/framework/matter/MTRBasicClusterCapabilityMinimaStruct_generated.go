@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRBasicClusterCapabilityMinimaStruct() *MTRBasicClusterCapabilityMinima
 	return &MTRBasicClusterCapabilityMinimaStruct{inner: raw.MTRBasicClusterCapabilityMinimaStructFromID(_id)}
 }
 
+// WithCaseSessionsPerFabric sets the caseSessionsPerFabric property and returns the receiver for chaining.
+func (x *MTRBasicClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric *foundation.NSNumber) *MTRBasicClusterCapabilityMinimaStruct {
+	x.inner.MTRBasicInformationClusterCapabilityMinimaStruct.SetCaseSessionsPerFabric(caseSessionsPerFabric)
+	return x
+}
+
+// WithSubscriptionsPerFabric sets the subscriptionsPerFabric property and returns the receiver for chaining.
+func (x *MTRBasicClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric *foundation.NSNumber) *MTRBasicClusterCapabilityMinimaStruct {
+	x.inner.MTRBasicInformationClusterCapabilityMinimaStruct.SetSubscriptionsPerFabric(subscriptionsPerFabric)
+	return x
+}
+
 func (x *MTRBasicClusterCapabilityMinimaStruct) asMTRBasicInformationClusterCapabilityMinimaStruct() *raw.MTRBasicInformationClusterCapabilityMinimaStruct { return &x.inner.MTRBasicInformationClusterCapabilityMinimaStruct }
 
 // MTRBasicClusterCapabilityMinimaStructable is the interface implemented by [MTRBasicClusterCapabilityMinimaStruct], for mocking and DI.
 type MTRBasicClusterCapabilityMinimaStructable interface {
 	Unwrap() *raw.MTRBasicClusterCapabilityMinimaStruct
+	WithCaseSessionsPerFabric(caseSessionsPerFabric *foundation.NSNumber) *MTRBasicClusterCapabilityMinimaStruct
+	WithSubscriptionsPerFabric(subscriptionsPerFabric *foundation.NSNumber) *MTRBasicClusterCapabilityMinimaStruct
 }
 
 var _ MTRBasicClusterCapabilityMinimaStructable = (*MTRBasicClusterCapabilityMinimaStruct)(nil)

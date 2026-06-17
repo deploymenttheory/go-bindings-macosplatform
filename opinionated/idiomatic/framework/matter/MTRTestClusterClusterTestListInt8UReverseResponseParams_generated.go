@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,18 @@ func NewMTRTestClusterClusterTestListInt8UReverseResponseParams() *MTRTestCluste
 	return &MTRTestClusterClusterTestListInt8UReverseResponseParams{inner: raw.MTRTestClusterClusterTestListInt8UReverseResponseParamsFromID(_id)}
 }
 
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UReverseResponseParams {
+	x.inner.MTRUnitTestingClusterTestListInt8UReverseResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) asMTRUnitTestingClusterTestListInt8UReverseResponseParams() *raw.MTRUnitTestingClusterTestListInt8UReverseResponseParams { return &x.inner.MTRUnitTestingClusterTestListInt8UReverseResponseParams }
 
 // MTRTestClusterClusterTestListInt8UReverseResponseParamsable is the interface implemented by [MTRTestClusterClusterTestListInt8UReverseResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestListInt8UReverseResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestListInt8UReverseResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UReverseResponseParams
 }
 
 var _ MTRTestClusterClusterTestListInt8UReverseResponseParamsable = (*MTRTestClusterClusterTestListInt8UReverseResponseParams)(nil)

@@ -38,6 +38,36 @@ func NewSkeletonWithNameJointPaths(name string, jointPaths *foundation.NSArray[*
 	return &Skeleton{inner: raw.MDLSkeletonFromID(_id)}
 }
 
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *Skeleton) WithParent(parent ObjectProvider) *Skeleton {
+	x.inner.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *Skeleton) WithInstance(instance ObjectProvider) *Skeleton {
+	x.inner.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *Skeleton) WithTransform(transform raw.MDLTransformComponent) *Skeleton {
+	x.inner.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *Skeleton) WithChildren(children raw.MDLObjectContainerComponent) *Skeleton {
+	x.inner.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Skeleton) WithHidden(hidden bool) *Skeleton {
+	x.inner.MDLObject.SetHidden(hidden)
+	return x
+}
+
 // JointPaths returns the collection as a Go slice.
 func (x *Skeleton) JointPaths() []string {
 	arr := x.inner.JointPaths()
@@ -72,6 +102,11 @@ func (x *Skeleton) asObject() *raw.MDLObject { return &x.inner.MDLObject }
 // Skeletonable is the interface implemented by [Skeleton], for mocking and DI.
 type Skeletonable interface {
 	Unwrap() *raw.MDLSkeleton
+	WithParent(parent ObjectProvider) *Skeleton
+	WithInstance(instance ObjectProvider) *Skeleton
+	WithTransform(transform raw.MDLTransformComponent) *Skeleton
+	WithChildren(children raw.MDLObjectContainerComponent) *Skeleton
+	WithHidden(hidden bool) *Skeleton
 	JointPaths() []string
 	JointBindTransforms() *Matrix4x4Array
 	JointRestTransforms() *Matrix4x4Array

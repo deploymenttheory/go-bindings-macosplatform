@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +61,36 @@ func (x *CaptureAudioFileOutput) WithAudioSettings(audioSettings *foundation.NSD
 	return x
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *CaptureAudioFileOutput) WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureAudioFileOutput {
+	x.inner.AVCaptureFileOutput.SetDelegate(delegate)
+	return x
+}
+
+// WithMaxRecordedDuration sets the maxRecordedDuration property and returns the receiver for chaining.
+func (x *CaptureAudioFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureAudioFileOutput {
+	x.inner.AVCaptureFileOutput.SetMaxRecordedDuration(maxRecordedDuration)
+	return x
+}
+
+// WithMaxRecordedFileSize sets the maxRecordedFileSize property and returns the receiver for chaining.
+func (x *CaptureAudioFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureAudioFileOutput {
+	x.inner.AVCaptureFileOutput.SetMaxRecordedFileSize(maxRecordedFileSize)
+	return x
+}
+
+// WithMinFreeDiskSpaceLimit sets the minFreeDiskSpaceLimit property and returns the receiver for chaining.
+func (x *CaptureAudioFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureAudioFileOutput {
+	x.inner.AVCaptureFileOutput.SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit)
+	return x
+}
+
+// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+func (x *CaptureAudioFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioFileOutput {
+	x.inner.AVCaptureFileOutput.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	return x
+}
+
 // StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate calls the underlying StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate.
 func (x *CaptureAudioFileOutput) StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(outputFileURL string, fileType *foundation.NSString, delegate raw.AVCaptureFileOutputRecordingDelegate) {
 	x.inner.StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputFileURL)), fileType, delegate)
@@ -100,6 +131,11 @@ type CaptureAudioFileOutputable interface {
 	Unwrap() *raw.AVCaptureAudioFileOutput
 	WithMetadata(items ...MetadataItemProvider) *CaptureAudioFileOutput
 	WithAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureAudioFileOutput
+	WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureAudioFileOutput
+	WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureAudioFileOutput
+	WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureAudioFileOutput
+	WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureAudioFileOutput
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioFileOutput
 	StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(outputFileURL string, fileType *foundation.NSString, delegate raw.AVCaptureFileOutputRecordingDelegate)
 	Metadata() []*raw.AVMetadataItem
 	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])

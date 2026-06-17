@@ -6,8 +6,12 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Form wraps [raw.NSForm] with a fluent Go API.
@@ -34,6 +38,586 @@ func FormFromID(id objc.ID) *Form {
 func NewForm() *Form {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSForm")), objc.RegisterName("new"))
 	return &Form{inner: raw.NSFormFromID(_id)}
+}
+
+// WithPrototype sets the prototype property and returns the receiver for chaining.
+func (x *Form) WithPrototype(prototype CellProvider) *Form {
+	x.inner.NSMatrix.SetPrototype(prototype.asCell())
+	return x
+}
+
+// WithMode sets the mode property and returns the receiver for chaining.
+func (x *Form) WithMode(mode raw.NSMatrixMode) *Form {
+	x.inner.NSMatrix.SetMode(mode)
+	return x
+}
+
+// WithAllowsEmptySelection sets the allowsEmptySelection property and returns the receiver for chaining.
+func (x *Form) WithAllowsEmptySelection(allowsEmptySelection bool) *Form {
+	x.inner.NSMatrix.SetAllowsEmptySelection(allowsEmptySelection)
+	return x
+}
+
+// WithSelectionByRect sets the selectionByRect property and returns the receiver for chaining.
+func (x *Form) WithSelectionByRect(selectionByRect bool) *Form {
+	x.inner.NSMatrix.SetSelectionByRect(selectionByRect)
+	return x
+}
+
+// WithCellSize sets the cellSize property and returns the receiver for chaining.
+func (x *Form) WithCellSize(cellSize corefoundation.CGSize) *Form {
+	x.inner.NSMatrix.SetCellSize(cellSize)
+	return x
+}
+
+// WithIntercellSpacing sets the intercellSpacing property and returns the receiver for chaining.
+func (x *Form) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Form {
+	x.inner.NSMatrix.SetIntercellSpacing(intercellSpacing)
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *Form) WithBackgroundColor(backgroundColor *raw.NSColor) *Form {
+	x.inner.NSMatrix.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithCellBackgroundColor sets the cellBackgroundColor property and returns the receiver for chaining.
+func (x *Form) WithCellBackgroundColor(cellBackgroundColor *raw.NSColor) *Form {
+	x.inner.NSMatrix.SetCellBackgroundColor(cellBackgroundColor)
+	return x
+}
+
+// WithDrawsCellBackground sets the drawsCellBackground property and returns the receiver for chaining.
+func (x *Form) WithDrawsCellBackground(drawsCellBackground bool) *Form {
+	x.inner.NSMatrix.SetDrawsCellBackground(drawsCellBackground)
+	return x
+}
+
+// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+func (x *Form) WithDrawsBackground(drawsBackground bool) *Form {
+	x.inner.NSMatrix.SetDrawsBackground(drawsBackground)
+	return x
+}
+
+// WithDoubleAction sets the doubleAction property and returns the receiver for chaining.
+func (x *Form) WithDoubleAction(doubleAction objc.SEL) *Form {
+	x.inner.NSMatrix.SetDoubleAction(doubleAction)
+	return x
+}
+
+// WithAutosizesCells sets the autosizesCells property and returns the receiver for chaining.
+func (x *Form) WithAutosizesCells(autosizesCells bool) *Form {
+	x.inner.NSMatrix.SetAutosizesCells(autosizesCells)
+	return x
+}
+
+// WithAutoscroll sets the autoscroll property and returns the receiver for chaining.
+func (x *Form) WithAutoscroll(autoscroll bool) *Form {
+	x.inner.NSMatrix.SetAutoscroll(autoscroll)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *Form) WithDelegate(delegate raw.NSMatrixDelegate) *Form {
+	x.inner.NSMatrix.SetDelegate(delegate)
+	return x
+}
+
+// WithAutorecalculatesCellSize sets the autorecalculatesCellSize property and returns the receiver for chaining.
+func (x *Form) WithAutorecalculatesCellSize(autorecalculatesCellSize bool) *Form {
+	x.inner.NSMatrix.SetAutorecalculatesCellSize(autorecalculatesCellSize)
+	return x
+}
+
+// WithTabKeyTraversesCells sets the tabKeyTraversesCells property and returns the receiver for chaining.
+func (x *Form) WithTabKeyTraversesCells(tabKeyTraversesCells bool) *Form {
+	x.inner.NSMatrix.SetTabKeyTraversesCells(tabKeyTraversesCells)
+	return x
+}
+
+// WithKeyCell sets the keyCell property and returns the receiver for chaining.
+func (x *Form) WithKeyCell(keyCell CellProvider) *Form {
+	x.inner.NSMatrix.SetKeyCell(keyCell.asCell())
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *Form) WithTarget(target objc.ID) *Form {
+	x.inner.NSMatrix.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *Form) WithAction(action objc.SEL) *Form {
+	x.inner.NSMatrix.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *Form) WithTag(tag int) *Form {
+	x.inner.NSMatrix.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *Form) WithIgnoresMultiClick(ignoresMultiClick bool) *Form {
+	x.inner.NSMatrix.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *Form) WithContinuous(continuous bool) *Form {
+	x.inner.NSMatrix.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *Form) WithEnabled(enabled bool) *Form {
+	x.inner.NSMatrix.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *Form) WithRefusesFirstResponder(refusesFirstResponder bool) *Form {
+	x.inner.NSMatrix.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *Form) WithHighlighted(highlighted bool) *Form {
+	x.inner.NSMatrix.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *Form) WithControlSize(controlSize raw.NSControlSize) *Form {
+	x.inner.NSMatrix.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *Form) WithFormatter(formatter *foundation.NSFormatter) *Form {
+	x.inner.NSMatrix.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *Form) WithObjectValue(objectValue objc.ID) *Form {
+	x.inner.NSMatrix.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *Form) WithStringValue(stringValue string) *Form {
+	x.inner.NSMatrix.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *Form) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Form {
+	x.inner.NSMatrix.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *Form) WithIntValue(intValue int) *Form {
+	x.inner.NSMatrix.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *Form) WithIntegerValue(integerValue int) *Form {
+	x.inner.NSMatrix.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *Form) WithFloatValue(floatValue float32) *Form {
+	x.inner.NSMatrix.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *Form) WithDoubleValue(doubleValue float64) *Form {
+	x.inner.NSMatrix.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *Form) WithFont(font *raw.NSFont) *Form {
+	x.inner.NSMatrix.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *Form) WithUsesSingleLineMode(usesSingleLineMode bool) *Form {
+	x.inner.NSMatrix.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *Form) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Form {
+	x.inner.NSMatrix.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *Form) WithAlignment(alignment raw.NSTextAlignment) *Form {
+	x.inner.NSMatrix.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *Form) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Form {
+	x.inner.NSMatrix.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *Form) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Form {
+	x.inner.NSMatrix.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *Form) WithCell(cell CellProvider) *Form {
+	x.inner.NSMatrix.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *Form) WithSubviews(items ...ViewProvider) *Form {
+	if len(items) == 0 {
+		x.inner.NSMatrix.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSMatrix.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Form) WithHidden(hidden bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *Form) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *Form) WithAutoresizesSubviews(autoresizesSubviews bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *Form) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *Form) WithFrame(frame corefoundation.CGRect) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *Form) WithFrameRotation(frameRotation float64) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *Form) WithFrameCenterRotation(frameCenterRotation float64) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *Form) WithBoundsRotation(boundsRotation float64) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *Form) WithBounds(bounds corefoundation.CGRect) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *Form) WithCanDrawConcurrently(canDrawConcurrently bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *Form) WithNeedsDisplay(needsDisplay bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *Form) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *Form) WithWantsRestingTouches(wantsRestingTouches bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *Form) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *Form) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *Form) WithWantsLayer(wantsLayer bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *Form) WithLayer(layer *quartzcore.CALayer) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *Form) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *Form) WithNeedsLayout(needsLayout bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *Form) WithAlphaValue(alphaValue float64) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *Form) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Form) WithBackgroundFilters(items ...*coreimage.CIFilter) *Form {
+	if len(items) == 0 {
+		x.inner.NSMatrix.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSMatrix.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *Form) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Form) WithContentFilters(items ...*coreimage.CIFilter) *Form {
+	if len(items) == 0 {
+		x.inner.NSMatrix.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSMatrix.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *Form) WithShadow(shadow *raw.NSShadow) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *Form) WithClipsToBounds(clipsToBounds bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *Form) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *Form) WithToolTip(toolTip string) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *Form) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *Form) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *Form) WithNextKeyView(nextKeyView ViewProvider) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *Form) WithFocusRingType(focusRingType raw.NSFocusRingType) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *Form) WithGestureRecognizers(items ...GestureRecognizerProvider) *Form {
+	if len(items) == 0 {
+		x.inner.NSMatrix.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSMatrix.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *Form) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *Form) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *Form) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *Form) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *Form) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *Form) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Form) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Form) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *Form) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *Form) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *Form) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Form) WithNextResponder(nextResponder ResponderProvider) *Form {
+	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Form) WithMenu(menu *raw.NSMenu) *Form {
+	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Form) WithUserActivity(userActivity *foundation.NSUserActivity) *Form {
+	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Form) WithTouchBar(touchBar *raw.NSTouchBar) *Form {
+	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+	return x
 }
 
 // IndexOfSelectedItem calls the underlying IndexOfSelectedItem.
@@ -155,6 +739,96 @@ func (x *Form) asResponder() *raw.NSResponder { return &x.inner.NSMatrix.NSContr
 // Formable is the interface implemented by [Form], for mocking and DI.
 type Formable interface {
 	Unwrap() *raw.NSForm
+	WithPrototype(prototype CellProvider) *Form
+	WithMode(mode raw.NSMatrixMode) *Form
+	WithAllowsEmptySelection(allowsEmptySelection bool) *Form
+	WithSelectionByRect(selectionByRect bool) *Form
+	WithCellSize(cellSize corefoundation.CGSize) *Form
+	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Form
+	WithBackgroundColor(backgroundColor *raw.NSColor) *Form
+	WithCellBackgroundColor(cellBackgroundColor *raw.NSColor) *Form
+	WithDrawsCellBackground(drawsCellBackground bool) *Form
+	WithDrawsBackground(drawsBackground bool) *Form
+	WithDoubleAction(doubleAction objc.SEL) *Form
+	WithAutosizesCells(autosizesCells bool) *Form
+	WithAutoscroll(autoscroll bool) *Form
+	WithDelegate(delegate raw.NSMatrixDelegate) *Form
+	WithAutorecalculatesCellSize(autorecalculatesCellSize bool) *Form
+	WithTabKeyTraversesCells(tabKeyTraversesCells bool) *Form
+	WithKeyCell(keyCell CellProvider) *Form
+	WithTarget(target objc.ID) *Form
+	WithAction(action objc.SEL) *Form
+	WithTag(tag int) *Form
+	WithIgnoresMultiClick(ignoresMultiClick bool) *Form
+	WithContinuous(continuous bool) *Form
+	WithEnabled(enabled bool) *Form
+	WithRefusesFirstResponder(refusesFirstResponder bool) *Form
+	WithHighlighted(highlighted bool) *Form
+	WithControlSize(controlSize raw.NSControlSize) *Form
+	WithFormatter(formatter *foundation.NSFormatter) *Form
+	WithObjectValue(objectValue objc.ID) *Form
+	WithStringValue(stringValue string) *Form
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Form
+	WithIntValue(intValue int) *Form
+	WithIntegerValue(integerValue int) *Form
+	WithFloatValue(floatValue float32) *Form
+	WithDoubleValue(doubleValue float64) *Form
+	WithFont(font *raw.NSFont) *Form
+	WithUsesSingleLineMode(usesSingleLineMode bool) *Form
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Form
+	WithAlignment(alignment raw.NSTextAlignment) *Form
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Form
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Form
+	WithCell(cell CellProvider) *Form
+	WithSubviews(items ...ViewProvider) *Form
+	WithHidden(hidden bool) *Form
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Form
+	WithAutoresizesSubviews(autoresizesSubviews bool) *Form
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Form
+	WithFrame(frame corefoundation.CGRect) *Form
+	WithFrameRotation(frameRotation float64) *Form
+	WithFrameCenterRotation(frameCenterRotation float64) *Form
+	WithBoundsRotation(boundsRotation float64) *Form
+	WithBounds(bounds corefoundation.CGRect) *Form
+	WithCanDrawConcurrently(canDrawConcurrently bool) *Form
+	WithNeedsDisplay(needsDisplay bool) *Form
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Form
+	WithWantsRestingTouches(wantsRestingTouches bool) *Form
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Form
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Form
+	WithWantsLayer(wantsLayer bool) *Form
+	WithLayer(layer *quartzcore.CALayer) *Form
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Form
+	WithNeedsLayout(needsLayout bool) *Form
+	WithAlphaValue(alphaValue float64) *Form
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Form
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *Form
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Form
+	WithContentFilters(items ...*coreimage.CIFilter) *Form
+	WithShadow(shadow *raw.NSShadow) *Form
+	WithClipsToBounds(clipsToBounds bool) *Form
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Form
+	WithToolTip(toolTip string) *Form
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Form
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Form
+	WithNextKeyView(nextKeyView ViewProvider) *Form
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *Form
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *Form
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Form
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Form
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Form
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Form
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Form
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Form
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Form
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Form
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Form
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Form
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Form
+	WithNextResponder(nextResponder ResponderProvider) *Form
+	WithMenu(menu *raw.NSMenu) *Form
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Form
+	WithTouchBar(touchBar *raw.NSTouchBar) *Form
 	IndexOfSelectedItem() int
 	SetEntryWidth(width float64)
 	SetInterlineSpacing(spacing float64)

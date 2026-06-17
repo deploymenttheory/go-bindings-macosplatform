@@ -44,6 +44,18 @@ func NewDOMMouseEventMouseEvent(type_ string, canBubble bool, cancelable bool, v
 	return &DOMMouseEvent{inner: raw.DOMMouseEventFromID(_id)}
 }
 
+// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+func (x *DOMMouseEvent) WithReturnValue(returnValue bool) *DOMMouseEvent {
+	x.inner.DOMUIEvent.DOMEvent.SetReturnValue(returnValue)
+	return x
+}
+
+// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+func (x *DOMMouseEvent) WithCancelBubble(cancelBubble bool) *DOMMouseEvent {
+	x.inner.DOMUIEvent.DOMEvent.SetCancelBubble(cancelBubble)
+	return x
+}
+
 // ScreenX calls the underlying ScreenX.
 func (x *DOMMouseEvent) ScreenX() int {
 	return x.inner.ScreenX()
@@ -145,6 +157,8 @@ func (x *DOMMouseEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inn
 // DOMMouseEventable is the interface implemented by [DOMMouseEvent], for mocking and DI.
 type DOMMouseEventable interface {
 	Unwrap() *raw.DOMMouseEvent
+	WithReturnValue(returnValue bool) *DOMMouseEvent
+	WithCancelBubble(cancelBubble bool) *DOMMouseEvent
 	ScreenX() int
 	ScreenY() int
 	ClientX() int

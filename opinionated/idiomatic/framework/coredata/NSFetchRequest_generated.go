@@ -155,6 +155,22 @@ func (x *FetchRequest) WithHavingPredicate(havingPredicate *foundation.NSPredica
 	return x
 }
 
+// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+func (x *FetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *FetchRequest {
+	if len(items) == 0 {
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
+	return x
+}
+
 // Execute calls the underlying Execute.
 func (x *FetchRequest) Execute() (*foundation.NSArray[objc.ID], error) {
 	return x.inner.Execute()
@@ -375,6 +391,7 @@ type FetchRequestable interface {
 	WithFetchBatchSize(fetchBatchSize uint) *FetchRequest
 	WithShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool) *FetchRequest
 	WithHavingPredicate(havingPredicate *foundation.NSPredicate) *FetchRequest
+	WithAffectedStores(items ...PersistentStoreProvider) *FetchRequest
 	Execute() (*foundation.NSArray[objc.ID], error)
 	Entity() *EntityDescription
 	SetEntity(entity *raw.NSEntityDescription)

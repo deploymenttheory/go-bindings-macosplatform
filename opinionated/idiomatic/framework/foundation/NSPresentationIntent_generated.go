@@ -36,6 +36,12 @@ func NewPresentationIntent() *PresentationIntent {
 	return &PresentationIntent{inner: raw.NSPresentationIntentFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PresentationIntent) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PresentationIntent {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // IsEquivalentToPresentationIntent calls the underlying IsEquivalentToPresentationIntent.
 func (x *PresentationIntent) IsEquivalentToPresentationIntent(other *raw.NSPresentationIntent) bool {
 	return x.inner.IsEquivalentToPresentationIntent(other)
@@ -115,6 +121,7 @@ func (x *PresentationIntent) asObject() *raw.NSObject { return &x.inner.NSObject
 // PresentationIntentable is the interface implemented by [PresentationIntent], for mocking and DI.
 type PresentationIntentable interface {
 	Unwrap() *raw.NSPresentationIntent
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PresentationIntent
 	IsEquivalentToPresentationIntent(other *raw.NSPresentationIntent) bool
 	IntentKind() raw.NSPresentationIntentKind
 	ParentIntent() *PresentationIntent

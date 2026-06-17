@@ -44,6 +44,12 @@ func (x *HTTPCookieStorage) WithCookieAcceptPolicy(cookieAcceptPolicy raw.NSHTTP
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *HTTPCookieStorage) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPCookieStorage {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SetCookie calls the underlying SetCookie.
 func (x *HTTPCookieStorage) SetCookie(cookie *raw.NSHTTPCookie) {
 	x.inner.SetCookie(cookie)
@@ -127,6 +133,7 @@ func (x *HTTPCookieStorage) asObject() *raw.NSObject { return &x.inner.NSObject 
 type HTTPCookieStorageable interface {
 	Unwrap() *raw.NSHTTPCookieStorage
 	WithCookieAcceptPolicy(cookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy) *HTTPCookieStorage
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPCookieStorage
 	SetCookie(cookie *raw.NSHTTPCookie)
 	DeleteCookie(cookie *raw.NSHTTPCookie)
 	RemoveCookiesSinceDate(date *raw.NSDate)

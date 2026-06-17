@@ -67,6 +67,30 @@ func (x *Transition) WithFilter(filter objc.ID) *Transition {
 	return x
 }
 
+// WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
+func (x *Transition) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *Transition {
+	x.inner.CAAnimation.SetTimingFunction(timingFunction)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *Transition) WithDelegate(delegate raw.CAAnimationDelegate) *Transition {
+	x.inner.CAAnimation.SetDelegate(delegate)
+	return x
+}
+
+// WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
+func (x *Transition) WithRemovedOnCompletion(removedOnCompletion bool) *Transition {
+	x.inner.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)
+	return x
+}
+
+// WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
+func (x *Transition) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *Transition {
+	x.inner.CAAnimation.SetPreferredFrameRateRange(preferredFrameRateRange)
+	return x
+}
+
 // Type calls the underlying Type.
 func (x *Transition) Type() string {
 	_r := x.inner.Type()
@@ -135,6 +159,10 @@ type Transitionable interface {
 	WithStartProgress(startProgress float32) *Transition
 	WithEndProgress(endProgress float32) *Transition
 	WithFilter(filter objc.ID) *Transition
+	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *Transition
+	WithDelegate(delegate raw.CAAnimationDelegate) *Transition
+	WithRemovedOnCompletion(removedOnCompletion bool) *Transition
+	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *Transition
 	Type() string
 	SetType(type_ *foundation.NSString)
 	Subtype() string

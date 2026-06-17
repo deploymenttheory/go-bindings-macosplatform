@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -37,6 +38,18 @@ func NewCNNConvolutionTransposeGradientState() *CNNConvolutionTransposeGradientS
 	return &CNNConvolutionTransposeGradientState{inner: raw.MPSCNNConvolutionTransposeGradientStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradientState) WithReadCount(readCount uint) *CNNConvolutionTransposeGradientState {
+	x.inner.MPSCNNConvolutionGradientState.MPSNNGradientState.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradientState) WithLabel(label string) *CNNConvolutionTransposeGradientState {
+	x.inner.MPSCNNConvolutionGradientState.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ConvolutionTranspose calls the underlying ConvolutionTranspose.
 func (x *CNNConvolutionTransposeGradientState) ConvolutionTranspose() *mpsneuralnetwork.MPSCNNConvolutionTranspose {
 	return x.inner.ConvolutionTranspose()
@@ -51,6 +64,8 @@ func (x *CNNConvolutionTransposeGradientState) asState() *mpscore.MPSState { ret
 // CNNConvolutionTransposeGradientStateable is the interface implemented by [CNNConvolutionTransposeGradientState], for mocking and DI.
 type CNNConvolutionTransposeGradientStateable interface {
 	Unwrap() *raw.MPSCNNConvolutionTransposeGradientState
+	WithReadCount(readCount uint) *CNNConvolutionTransposeGradientState
+	WithLabel(label string) *CNNConvolutionTransposeGradientState
 	ConvolutionTranspose() *mpsneuralnetwork.MPSCNNConvolutionTranspose
 }
 

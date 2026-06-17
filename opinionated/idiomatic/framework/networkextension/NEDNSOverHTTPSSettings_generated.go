@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NEDNSOverHTTPSSettings wraps [raw.NEDNSOverHTTPSSettings] with a fluent Go API.
@@ -48,6 +49,56 @@ func (x *NEDNSOverHTTPSSettings) WithIdentityReference(identityReference *founda
 	return x
 }
 
+// WithSearchDomains sets the collection, converting the Go slice to an NSArray.
+func (x *NEDNSOverHTTPSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings {
+	if len(items) == 0 {
+		x.inner.NEDNSSettings.SetSearchDomains(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NEDNSSettings.SetSearchDomains(_arr)
+	return x
+}
+
+// WithDomainName sets the domainName property and returns the receiver for chaining.
+func (x *NEDNSOverHTTPSSettings) WithDomainName(domainName string) *NEDNSOverHTTPSSettings {
+	x.inner.NEDNSSettings.SetDomainName(foundation.NSStringStringWithUTF8String(domainName))
+	return x
+}
+
+// WithMatchDomains sets the collection, converting the Go slice to an NSArray.
+func (x *NEDNSOverHTTPSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings {
+	if len(items) == 0 {
+		x.inner.NEDNSSettings.SetMatchDomains(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NEDNSSettings.SetMatchDomains(_arr)
+	return x
+}
+
+// WithMatchDomainsNoSearch sets the matchDomainsNoSearch property and returns the receiver for chaining.
+func (x *NEDNSOverHTTPSSettings) WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverHTTPSSettings {
+	x.inner.NEDNSSettings.SetMatchDomainsNoSearch(matchDomainsNoSearch)
+	return x
+}
+
+// WithAllowFailover sets the allowFailover property and returns the receiver for chaining.
+func (x *NEDNSOverHTTPSSettings) WithAllowFailover(allowFailover bool) *NEDNSOverHTTPSSettings {
+	x.inner.NEDNSSettings.SetAllowFailover(allowFailover)
+	return x
+}
+
 // ServerURL calls the underlying ServerURL.
 func (x *NEDNSOverHTTPSSettings) ServerURL() *foundation.NSURL {
 	return x.inner.ServerURL()
@@ -75,6 +126,11 @@ type NEDNSOverHTTPSSettingsable interface {
 	Unwrap() *raw.NEDNSOverHTTPSSettings
 	WithServerURL(serverURL string) *NEDNSOverHTTPSSettings
 	WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverHTTPSSettings
+	WithSearchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings
+	WithDomainName(domainName string) *NEDNSOverHTTPSSettings
+	WithMatchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings
+	WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverHTTPSSettings
+	WithAllowFailover(allowFailover bool) *NEDNSOverHTTPSSettings
 	ServerURL() *foundation.NSURL
 	SetServerURL(serverURL string)
 	IdentityReference() *foundation.NSData

@@ -54,6 +54,102 @@ func (x *CompositeAttributeDescription) WithElements(items ...AttributeDescripti
 	return x
 }
 
+// WithAttributeType sets the attributeType property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithAttributeType(attributeType raw.NSAttributeType) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.SetAttributeType(attributeType)
+	return x
+}
+
+// WithAttributeValueClassName sets the attributeValueClassName property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithAttributeValueClassName(attributeValueClassName string) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.SetAttributeValueClassName(foundation.NSStringStringWithUTF8String(attributeValueClassName))
+	return x
+}
+
+// WithDefaultValue sets the defaultValue property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithDefaultValue(defaultValue objc.ID) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.SetDefaultValue(defaultValue)
+	return x
+}
+
+// WithValueTransformerName sets the valueTransformerName property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithValueTransformerName(valueTransformerName string) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.SetValueTransformerName(foundation.NSStringStringWithUTF8String(valueTransformerName))
+	return x
+}
+
+// WithAllowsExternalBinaryDataStorage sets the allowsExternalBinaryDataStorage property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.SetAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage)
+	return x
+}
+
+// WithPreservesValueInHistoryOnDeletion sets the preservesValueInHistoryOnDeletion property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.SetPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion)
+	return x
+}
+
+// WithAllowsCloudEncryption sets the allowsCloudEncryption property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption bool) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.SetAllowsCloudEncryption(allowsCloudEncryption)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithName(name string) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithOptional sets the optional property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithOptional(optional bool) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetOptional(optional)
+	return x
+}
+
+// WithTransient sets the transient property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithTransient(transient bool) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetTransient(transient)
+	return x
+}
+
+// WithUserInfo sets the userInfo property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetUserInfo(userInfo)
+	return x
+}
+
+// WithIndexed sets the indexed property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithIndexed(indexed bool) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetIndexed(indexed)
+	return x
+}
+
+// WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithVersionHashModifier(versionHashModifier string) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
+	return x
+}
+
+// WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
+	return x
+}
+
+// WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
+	return x
+}
+
+// WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
+func (x *CompositeAttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
+	return x
+}
+
 // Elements returns the collection as a Go slice.
 func (x *CompositeAttributeDescription) Elements() []*raw.NSAttributeDescription {
 	arr := x.inner.Elements()
@@ -78,6 +174,22 @@ func (x *CompositeAttributeDescription) asPropertyDescription() *raw.NSPropertyD
 type CompositeAttributeDescriptionable interface {
 	Unwrap() *raw.NSCompositeAttributeDescription
 	WithElements(items ...AttributeDescriptionProvider) *CompositeAttributeDescription
+	WithAttributeType(attributeType raw.NSAttributeType) *CompositeAttributeDescription
+	WithAttributeValueClassName(attributeValueClassName string) *CompositeAttributeDescription
+	WithDefaultValue(defaultValue objc.ID) *CompositeAttributeDescription
+	WithValueTransformerName(valueTransformerName string) *CompositeAttributeDescription
+	WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *CompositeAttributeDescription
+	WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *CompositeAttributeDescription
+	WithAllowsCloudEncryption(allowsCloudEncryption bool) *CompositeAttributeDescription
+	WithName(name string) *CompositeAttributeDescription
+	WithOptional(optional bool) *CompositeAttributeDescription
+	WithTransient(transient bool) *CompositeAttributeDescription
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *CompositeAttributeDescription
+	WithIndexed(indexed bool) *CompositeAttributeDescription
+	WithVersionHashModifier(versionHashModifier string) *CompositeAttributeDescription
+	WithIndexedBySpotlight(indexedBySpotlight bool) *CompositeAttributeDescription
+	WithStoredInExternalRecord(storedInExternalRecord bool) *CompositeAttributeDescription
+	WithRenamingIdentifier(renamingIdentifier string) *CompositeAttributeDescription
 	Elements() []*raw.NSAttributeDescription
 	SetElements(elements *foundation.NSArray[*raw.NSAttributeDescription])
 }

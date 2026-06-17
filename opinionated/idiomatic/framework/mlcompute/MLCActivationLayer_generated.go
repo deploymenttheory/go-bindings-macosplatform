@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewActivationLayer() *ActivationLayer {
 	return &ActivationLayer{inner: raw.MLCActivationLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ActivationLayer) WithLabel(label string) *ActivationLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *ActivationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ActivationLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Descriptor calls the underlying Descriptor.
 func (x *ActivationLayer) Descriptor() *ActivationDescriptor {
 	_r := x.inner.Descriptor()
@@ -49,6 +62,8 @@ func (x *ActivationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // ActivationLayerable is the interface implemented by [ActivationLayer], for mocking and DI.
 type ActivationLayerable interface {
 	Unwrap() *raw.MLCActivationLayer
+	WithLabel(label string) *ActivationLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ActivationLayer
 	Descriptor() *ActivationDescriptor
 }
 

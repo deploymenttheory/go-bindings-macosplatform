@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNFullyConnectedGradientNodeWithSourceGradientSourceImageConvolutionGra
 	return &CNNFullyConnectedGradientNode{inner: raw.MPSCNNFullyConnectedGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNFullyConnectedGradientNode {
+	x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNFullyConnectedGradientNode) WithLabel(label string) *CNNFullyConnectedGradientNode {
+	x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNFullyConnectedGradientNode) asCNNConvolutionGradientNode() *mpsneuralnetwork.MPSCNNConvolutionGradientNode { return &x.inner.MPSCNNConvolutionGradientNode }
 
 func (x *CNNFullyConnectedGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode }
@@ -46,6 +59,8 @@ func (x *CNNFullyConnectedGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNN
 // CNNFullyConnectedGradientNodeable is the interface implemented by [CNNFullyConnectedGradientNode], for mocking and DI.
 type CNNFullyConnectedGradientNodeable interface {
 	Unwrap() *raw.MPSCNNFullyConnectedGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNFullyConnectedGradientNode
+	WithLabel(label string) *CNNFullyConnectedGradientNode
 }
 
 var _ CNNFullyConnectedGradientNodeable = (*CNNFullyConnectedGradientNode)(nil)

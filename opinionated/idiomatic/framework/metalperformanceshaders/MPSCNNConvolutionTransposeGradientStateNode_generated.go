@@ -36,6 +36,24 @@ func NewCNNConvolutionTransposeGradientStateNode() *CNNConvolutionTransposeGradi
 	return &CNNConvolutionTransposeGradientStateNode{inner: raw.MPSCNNConvolutionTransposeGradientStateNodeFromID(_id)}
 }
 
+// WithHandle sets the handle property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradientStateNode) WithHandle(handle mpsneuralnetwork.MPSHandle) *CNNConvolutionTransposeGradientStateNode {
+	x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode.MPSNNStateNode.SetHandle(handle)
+	return x
+}
+
+// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradientStateNode) WithExportFromGraph(exportFromGraph bool) *CNNConvolutionTransposeGradientStateNode {
+	x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	return x
+}
+
+// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionTransposeGradientStateNode {
+	x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	return x
+}
+
 func (x *CNNConvolutionTransposeGradientStateNode) asCNNConvolutionGradientStateNode() *mpsneuralnetwork.MPSCNNConvolutionGradientStateNode { return &x.inner.MPSCNNConvolutionGradientStateNode }
 
 func (x *CNNConvolutionTransposeGradientStateNode) asNNGradientStateNode() *mpsneuralnetwork.MPSNNGradientStateNode { return &x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode }
@@ -45,6 +63,9 @@ func (x *CNNConvolutionTransposeGradientStateNode) asNNStateNode() *mpsneuralnet
 // CNNConvolutionTransposeGradientStateNodeable is the interface implemented by [CNNConvolutionTransposeGradientStateNode], for mocking and DI.
 type CNNConvolutionTransposeGradientStateNodeable interface {
 	Unwrap() *raw.MPSCNNConvolutionTransposeGradientStateNode
+	WithHandle(handle mpsneuralnetwork.MPSHandle) *CNNConvolutionTransposeGradientStateNode
+	WithExportFromGraph(exportFromGraph bool) *CNNConvolutionTransposeGradientStateNode
+	WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionTransposeGradientStateNode
 }
 
 var _ CNNConvolutionTransposeGradientStateNodeable = (*CNNConvolutionTransposeGradientStateNode)(nil)

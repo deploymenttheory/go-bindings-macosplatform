@@ -35,6 +35,12 @@ func NewDirectoryEnumerator() *DirectoryEnumerator {
 	return &DirectoryEnumerator{inner: raw.NSDirectoryEnumeratorFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DirectoryEnumerator) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DirectoryEnumerator {
+	x.inner.NSEnumerator.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SkipDescendents calls the underlying SkipDescendents.
 func (x *DirectoryEnumerator) SkipDescendents() {
 	x.inner.SkipDescendents()
@@ -72,6 +78,7 @@ func (x *DirectoryEnumerator) asObject() *raw.NSObject { return &x.inner.NSEnume
 // DirectoryEnumeratorable is the interface implemented by [DirectoryEnumerator], for mocking and DI.
 type DirectoryEnumeratorable interface {
 	Unwrap() *raw.NSDirectoryEnumerator[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DirectoryEnumerator
 	SkipDescendents()
 	SkipDescendants()
 	FileAttributes() *raw.NSDictionary[*raw.NSString, objc.ID]

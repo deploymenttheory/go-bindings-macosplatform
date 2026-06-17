@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRMediaPlaybackClusterPlaybackPosition() *MTRMediaPlaybackClusterPlayba
 	return &MTRMediaPlaybackClusterPlaybackPosition{inner: raw.MTRMediaPlaybackClusterPlaybackPositionFromID(_id)}
 }
 
+// WithUpdatedAt sets the updatedAt property and returns the receiver for chaining.
+func (x *MTRMediaPlaybackClusterPlaybackPosition) WithUpdatedAt(updatedAt *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackPosition {
+	x.inner.MTRMediaPlaybackClusterPlaybackPositionStruct.SetUpdatedAt(updatedAt)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *MTRMediaPlaybackClusterPlaybackPosition) WithPosition(position *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackPosition {
+	x.inner.MTRMediaPlaybackClusterPlaybackPositionStruct.SetPosition(position)
+	return x
+}
+
 func (x *MTRMediaPlaybackClusterPlaybackPosition) asMTRMediaPlaybackClusterPlaybackPositionStruct() *raw.MTRMediaPlaybackClusterPlaybackPositionStruct { return &x.inner.MTRMediaPlaybackClusterPlaybackPositionStruct }
 
 // MTRMediaPlaybackClusterPlaybackPositionable is the interface implemented by [MTRMediaPlaybackClusterPlaybackPosition], for mocking and DI.
 type MTRMediaPlaybackClusterPlaybackPositionable interface {
 	Unwrap() *raw.MTRMediaPlaybackClusterPlaybackPosition
+	WithUpdatedAt(updatedAt *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackPosition
+	WithPosition(position *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackPosition
 }
 
 var _ MTRMediaPlaybackClusterPlaybackPositionable = (*MTRMediaPlaybackClusterPlaybackPosition)(nil)

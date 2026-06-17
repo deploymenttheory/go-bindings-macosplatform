@@ -38,6 +38,18 @@ func NewAnswerCallIntentWithAudioRouteCallIdentifier(audioRoute raw.INCallAudioR
 	return &AnswerCallIntent{inner: raw.INAnswerCallIntentFromID(_id)}
 }
 
+// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+func (x *AnswerCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *AnswerCallIntent {
+	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	return x
+}
+
+// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+func (x *AnswerCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *AnswerCallIntent {
+	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	return x
+}
+
 // AudioRoute calls the underlying AudioRoute.
 func (x *AnswerCallIntent) AudioRoute() raw.INCallAudioRoute {
 	return x.inner.AudioRoute()
@@ -57,6 +69,8 @@ func (x *AnswerCallIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
 // AnswerCallIntentable is the interface implemented by [AnswerCallIntent], for mocking and DI.
 type AnswerCallIntentable interface {
 	Unwrap() *raw.INAnswerCallIntent
+	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *AnswerCallIntent
+	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *AnswerCallIntent
 	AudioRoute() raw.INCallAudioRoute
 	CallIdentifier() string
 }

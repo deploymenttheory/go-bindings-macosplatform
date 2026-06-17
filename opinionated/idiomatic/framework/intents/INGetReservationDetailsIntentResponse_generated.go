@@ -55,6 +55,12 @@ func (x *GetReservationDetailsIntentResponse) WithReservations(items ...Reservat
 	return x
 }
 
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *GetReservationDetailsIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse {
+	x.inner.INIntentResponse.SetUserActivity(userActivity)
+	return x
+}
+
 // Code calls the underlying Code.
 func (x *GetReservationDetailsIntentResponse) Code() raw.INGetReservationDetailsIntentResponseCode {
 	return x.inner.Code()
@@ -82,6 +88,7 @@ func (x *GetReservationDetailsIntentResponse) asIntentResponse() *raw.INIntentRe
 type GetReservationDetailsIntentResponseable interface {
 	Unwrap() *raw.INGetReservationDetailsIntentResponse
 	WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse
+	WithUserActivity(userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse
 	Code() raw.INGetReservationDetailsIntentResponseCode
 	Reservations() []*raw.INReservation
 	SetReservations(reservations *foundation.NSArray[*raw.INReservation])

@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -34,6 +35,18 @@ func MultiheadAttentionLayerFromID(id objc.ID) *MultiheadAttentionLayer {
 func NewMultiheadAttentionLayer() *MultiheadAttentionLayer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCMultiheadAttentionLayer")), objc.RegisterName("new"))
 	return &MultiheadAttentionLayer{inner: raw.MLCMultiheadAttentionLayerFromID(_id)}
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MultiheadAttentionLayer) WithLabel(label string) *MultiheadAttentionLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *MultiheadAttentionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
 }
 
 // Descriptor calls the underlying Descriptor.
@@ -105,6 +118,8 @@ func (x *MultiheadAttentionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCL
 // MultiheadAttentionLayerable is the interface implemented by [MultiheadAttentionLayer], for mocking and DI.
 type MultiheadAttentionLayerable interface {
 	Unwrap() *raw.MLCMultiheadAttentionLayer
+	WithLabel(label string) *MultiheadAttentionLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer
 	Descriptor() *MultiheadAttentionDescriptor
 	Weights() []*raw.MLCTensor
 	Biases() []*raw.MLCTensor

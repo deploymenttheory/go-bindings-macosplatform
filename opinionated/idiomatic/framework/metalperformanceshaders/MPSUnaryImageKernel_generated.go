@@ -65,6 +65,18 @@ func (x *UnaryImageKernel) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *Unar
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *UnaryImageKernel) WithOptions(options mpscore.MPSKernelOptions) *UnaryImageKernel {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *UnaryImageKernel) WithLabel(label string) *UnaryImageKernel {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator calls the underlying EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator.
 func (x *UnaryImageKernel) EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, texture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool {
 	return x.inner.EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer, texture, copyAllocator)
@@ -123,6 +135,8 @@ type UnaryImageKernelable interface {
 	WithOffset(offset mpscore.MPSOffset) *UnaryImageKernel
 	WithClipRect(clipRect metal.MTLRegion) *UnaryImageKernel
 	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *UnaryImageKernel
+	WithOptions(options mpscore.MPSKernelOptions) *UnaryImageKernel
+	WithLabel(label string) *UnaryImageKernel
 	EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, texture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool
 	EncodeToCommandBufferSourceTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture)
 	EncodeToCommandBufferSourceImageDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage)

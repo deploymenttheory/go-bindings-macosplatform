@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SpriteNode wraps [raw.SKSpriteNode] with a fluent Go API.
@@ -136,6 +137,166 @@ func (x *SpriteNode) WithSize(size corefoundation.CGSize) *SpriteNode {
 // WithShader sets the shader property and returns the receiver for chaining.
 func (x *SpriteNode) WithShader(shader *raw.SKShader) *SpriteNode {
 	x.inner.SetShader(shader)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *SpriteNode) WithPosition(position corefoundation.CGPoint) *SpriteNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *SpriteNode) WithZPosition(zPosition float64) *SpriteNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *SpriteNode) WithZRotation(zRotation float64) *SpriteNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *SpriteNode) WithXScale(xScale float64) *SpriteNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *SpriteNode) WithYScale(yScale float64) *SpriteNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *SpriteNode) WithSpeed(speed float64) *SpriteNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *SpriteNode) WithAlpha(alpha float64) *SpriteNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *SpriteNode) WithPaused(paused bool) *SpriteNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *SpriteNode) WithHidden(hidden bool) *SpriteNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *SpriteNode) WithUserInteractionEnabled(userInteractionEnabled bool) *SpriteNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *SpriteNode) WithName(name string) *SpriteNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *SpriteNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *SpriteNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *SpriteNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *SpriteNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *SpriteNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *SpriteNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *SpriteNode) WithConstraints(items ...*raw.SKConstraint) *SpriteNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *SpriteNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *SpriteNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *SpriteNode) WithAccessibilityElement(accessibilityElement bool) *SpriteNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *SpriteNode) WithAccessibilityRole(accessibilityRole string) *SpriteNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *SpriteNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SpriteNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *SpriteNode) WithAccessibilitySubrole(accessibilitySubrole string) *SpriteNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *SpriteNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SpriteNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *SpriteNode) WithAccessibilityParent(accessibilityParent objc.ID) *SpriteNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *SpriteNode) WithAccessibilityHelp(accessibilityHelp string) *SpriteNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *SpriteNode) WithAccessibilityLabel(accessibilityLabel string) *SpriteNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *SpriteNode) WithAccessibilityEnabled(accessibilityEnabled bool) *SpriteNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
@@ -293,6 +454,31 @@ type SpriteNodeable interface {
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *SpriteNode
 	WithSize(size corefoundation.CGSize) *SpriteNode
 	WithShader(shader *raw.SKShader) *SpriteNode
+	WithPosition(position corefoundation.CGPoint) *SpriteNode
+	WithZPosition(zPosition float64) *SpriteNode
+	WithZRotation(zRotation float64) *SpriteNode
+	WithXScale(xScale float64) *SpriteNode
+	WithYScale(yScale float64) *SpriteNode
+	WithSpeed(speed float64) *SpriteNode
+	WithAlpha(alpha float64) *SpriteNode
+	WithPaused(paused bool) *SpriteNode
+	WithHidden(hidden bool) *SpriteNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *SpriteNode
+	WithName(name string) *SpriteNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *SpriteNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *SpriteNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *SpriteNode
+	WithConstraints(items ...*raw.SKConstraint) *SpriteNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *SpriteNode
+	WithAccessibilityElement(accessibilityElement bool) *SpriteNode
+	WithAccessibilityRole(accessibilityRole string) *SpriteNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SpriteNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *SpriteNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SpriteNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *SpriteNode
+	WithAccessibilityHelp(accessibilityHelp string) *SpriteNode
+	WithAccessibilityLabel(accessibilityLabel string) *SpriteNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *SpriteNode
 	ScaleToSize(size corefoundation.CGSize)
 	Texture() *Texture
 	SetTexture(texture *raw.SKTexture)

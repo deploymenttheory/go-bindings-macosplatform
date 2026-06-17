@@ -105,6 +105,12 @@ func NewDictionaryWithContentsOfURLError(url string) (*Dictionary, error) {
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}, nil
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Dictionary) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Dictionary {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *Dictionary) ObjectForKey(aKey objc.ID) objc.ID {
 	return x.inner.ObjectForKey(aKey)
@@ -362,6 +368,7 @@ func (x *Dictionary) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Dictionaryable is the interface implemented by [Dictionary], for mocking and DI.
 type Dictionaryable interface {
 	Unwrap() *raw.NSDictionary[objc.ID, objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Dictionary
 	ObjectForKey(aKey objc.ID) objc.ID
 	KeyEnumerator() *raw.NSEnumerator[objc.ID]
 	Count() uint

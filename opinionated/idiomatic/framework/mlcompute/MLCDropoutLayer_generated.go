@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewDropoutLayer() *DropoutLayer {
 	return &DropoutLayer{inner: raw.MLCDropoutLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *DropoutLayer) WithLabel(label string) *DropoutLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *DropoutLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *DropoutLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Rate calls the underlying Rate.
 func (x *DropoutLayer) Rate() float32 {
 	return x.inner.Rate()
@@ -50,6 +63,8 @@ func (x *DropoutLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // DropoutLayerable is the interface implemented by [DropoutLayer], for mocking and DI.
 type DropoutLayerable interface {
 	Unwrap() *raw.MLCDropoutLayer
+	WithLabel(label string) *DropoutLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *DropoutLayer
 	Rate() float32
 	Seed() uint
 }

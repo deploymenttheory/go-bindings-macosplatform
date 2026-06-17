@@ -36,11 +36,32 @@ func NewNNLabelsNode() *NNLabelsNode {
 	return &NNLabelsNode{inner: raw.MPSNNLabelsNodeFromID(_id)}
 }
 
+// WithHandle sets the handle property and returns the receiver for chaining.
+func (x *NNLabelsNode) WithHandle(handle mpsneuralnetwork.MPSHandle) *NNLabelsNode {
+	x.inner.MPSNNStateNode.SetHandle(handle)
+	return x
+}
+
+// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+func (x *NNLabelsNode) WithExportFromGraph(exportFromGraph bool) *NNLabelsNode {
+	x.inner.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	return x
+}
+
+// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+func (x *NNLabelsNode) WithSynchronizeResource(synchronizeResource bool) *NNLabelsNode {
+	x.inner.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	return x
+}
+
 func (x *NNLabelsNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode { return &x.inner.MPSNNStateNode }
 
 // NNLabelsNodeable is the interface implemented by [NNLabelsNode], for mocking and DI.
 type NNLabelsNodeable interface {
 	Unwrap() *raw.MPSNNLabelsNode
+	WithHandle(handle mpsneuralnetwork.MPSHandle) *NNLabelsNode
+	WithExportFromGraph(exportFromGraph bool) *NNLabelsNode
+	WithSynchronizeResource(synchronizeResource bool) *NNLabelsNode
 }
 
 var _ NNLabelsNodeable = (*NNLabelsNode)(nil)

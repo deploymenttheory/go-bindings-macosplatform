@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,24 @@ func NewNNReductionSpatialMeanNode() *NNReductionSpatialMeanNode {
 	return &NNReductionSpatialMeanNode{inner: raw.MPSNNReductionSpatialMeanNodeFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReductionSpatialMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionSpatialMeanNode {
+	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionSpatialMeanNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionSpatialMeanNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionSpatialMeanNode) WithLabel(label string) *NNReductionSpatialMeanNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReductionSpatialMeanNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
 
 func (x *NNReductionSpatialMeanNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
@@ -42,6 +62,9 @@ func (x *NNReductionSpatialMeanNode) asNNFilterNode() *raw.MPSNNFilterNode { ret
 // NNReductionSpatialMeanNodeable is the interface implemented by [NNReductionSpatialMeanNode], for mocking and DI.
 type NNReductionSpatialMeanNodeable interface {
 	Unwrap() *raw.MPSNNReductionSpatialMeanNode
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionSpatialMeanNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionSpatialMeanNode
+	WithLabel(label string) *NNReductionSpatialMeanNode
 }
 
 var _ NNReductionSpatialMeanNodeable = (*NNReductionSpatialMeanNode)(nil)

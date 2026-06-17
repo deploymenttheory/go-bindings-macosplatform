@@ -38,6 +38,36 @@ func NewMatrixSolveLUWithDeviceTransposeOrderNumberOfRightHandSides(device metal
 	return &MatrixSolveLU{inner: raw.MPSMatrixSolveLUFromID(_id)}
 }
 
+// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSolveLU) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
+	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSolveLU) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
+	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSolveLU) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
+	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixSolveLU) WithBatchStart(batchStart uint) *MatrixSolveLU {
+	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixSolveLU) WithBatchSize(batchSize uint) *MatrixSolveLU {
+	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
 // EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix calls the underlying EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix.
 func (x *MatrixSolveLU) EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, pivotIndices, solutionMatrix)
@@ -48,6 +78,11 @@ func (x *MatrixSolveLU) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel { retu
 // MatrixSolveLUable is the interface implemented by [MatrixSolveLU], for mocking and DI.
 type MatrixSolveLUable interface {
 	Unwrap() *raw.MPSMatrixSolveLU
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveLU
+	WithBatchStart(batchStart uint) *MatrixSolveLU
+	WithBatchSize(batchSize uint) *MatrixSolveLU
 	EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix)
 }
 

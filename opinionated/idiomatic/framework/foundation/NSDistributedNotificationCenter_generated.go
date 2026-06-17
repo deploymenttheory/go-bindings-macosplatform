@@ -42,6 +42,12 @@ func (x *DistributedNotificationCenter) WithSuspended(suspended bool) *Distribut
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DistributedNotificationCenter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DistributedNotificationCenter {
+	x.inner.NSNotificationCenter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddObserverSelectorNameObjectSuspensionBehavior calls the underlying AddObserverSelectorNameObjectSuspensionBehavior.
 func (x *DistributedNotificationCenter) AddObserverSelectorNameObjectSuspensionBehavior(observer objc.ID, selector objc.SEL, name *raw.NSString, object string, suspensionBehavior raw.NSNotificationSuspensionBehavior) {
 	x.inner.AddObserverSelectorNameObjectSuspensionBehavior(observer, selector, name, foundation.NSStringStringWithUTF8String(object), suspensionBehavior)
@@ -75,6 +81,7 @@ func (x *DistributedNotificationCenter) asObject() *raw.NSObject { return &x.inn
 type DistributedNotificationCenterable interface {
 	Unwrap() *raw.NSDistributedNotificationCenter
 	WithSuspended(suspended bool) *DistributedNotificationCenter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DistributedNotificationCenter
 	AddObserverSelectorNameObjectSuspensionBehavior(observer objc.ID, selector objc.SEL, name *raw.NSString, object string, suspensionBehavior raw.NSNotificationSuspensionBehavior)
 	PostNotificationNameObjectUserInfoDeliverImmediately(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], deliverImmediately bool)
 	PostNotificationNameObjectUserInfoOptions(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], options raw.NSDistributedNotificationOptions)

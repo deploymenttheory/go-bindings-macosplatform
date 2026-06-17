@@ -37,6 +37,18 @@ func NewSplitLayer() *SplitLayer {
 	return &SplitLayer{inner: raw.MLCSplitLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *SplitLayer) WithLabel(label string) *SplitLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *SplitLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SplitLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Dimension calls the underlying Dimension.
 func (x *SplitLayer) Dimension() uint {
 	return x.inner.Dimension()
@@ -63,6 +75,8 @@ func (x *SplitLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // SplitLayerable is the interface implemented by [SplitLayer], for mocking and DI.
 type SplitLayerable interface {
 	Unwrap() *raw.MLCSplitLayer
+	WithLabel(label string) *SplitLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SplitLayer
 	Dimension() uint
 	SplitCount() uint
 	SplitSectionLengths() []*foundation.NSNumber

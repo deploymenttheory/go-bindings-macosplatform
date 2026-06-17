@@ -35,6 +35,12 @@ func NewUnitElectricCharge() *UnitElectricCharge {
 	return &UnitElectricCharge{inner: raw.NSUnitElectricChargeFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitElectricCharge) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricCharge {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitElectricCharge) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitElectricCharge) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitElectricCharge) asObject() *raw.NSObject { return &x.inner.NSDimens
 // UnitElectricChargeable is the interface implemented by [UnitElectricCharge], for mocking and DI.
 type UnitElectricChargeable interface {
 	Unwrap() *raw.NSUnitElectricCharge
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricCharge
 }
 
 var _ UnitElectricChargeable = (*UnitElectricCharge)(nil)

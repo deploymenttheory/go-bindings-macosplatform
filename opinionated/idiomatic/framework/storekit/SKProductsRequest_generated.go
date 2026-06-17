@@ -37,11 +37,18 @@ func NewProductsRequestWithProductIdentifiers(productIdentifiers *foundation.NSS
 	return &ProductsRequest{inner: raw.SKProductsRequestFromID(_id)}
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *ProductsRequest) WithDelegate(delegate raw.SKRequestDelegate) *ProductsRequest {
+	x.inner.SKRequest.SetDelegate(delegate)
+	return x
+}
+
 func (x *ProductsRequest) asRequest() *raw.SKRequest { return &x.inner.SKRequest }
 
 // ProductsRequestable is the interface implemented by [ProductsRequest], for mocking and DI.
 type ProductsRequestable interface {
 	Unwrap() *raw.SKProductsRequest
+	WithDelegate(delegate raw.SKRequestDelegate) *ProductsRequest
 }
 
 var _ ProductsRequestable = (*ProductsRequest)(nil)

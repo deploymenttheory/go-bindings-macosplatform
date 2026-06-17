@@ -79,6 +79,66 @@ func (x *NNPad) WithFillValue(fillValue float32) *NNPad {
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNPad) WithOffset(offset mpscore.MPSOffset) *NNPad {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNPad) WithClipRect(clipRect metal.MTLRegion) *NNPad {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNPad) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNPad {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNPad) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNPad {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNPad) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNPad {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNPad) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNPad {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNPad) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNPad {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNPad) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNPad {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNPad) WithOptions(options mpscore.MPSKernelOptions) *NNPad {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNPad) WithLabel(label string) *NNPad {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // PaddingSizeBefore calls the underlying PaddingSizeBefore.
 func (x *NNPad) PaddingSizeBefore() mpscore.MPSImageCoordinate {
 	return x.inner.PaddingSizeBefore()
@@ -119,6 +179,16 @@ type NNPadable interface {
 	WithPaddingSizeBefore(paddingSizeBefore mpscore.MPSImageCoordinate) *NNPad
 	WithPaddingSizeAfter(paddingSizeAfter mpscore.MPSImageCoordinate) *NNPad
 	WithFillValue(fillValue float32) *NNPad
+	WithOffset(offset mpscore.MPSOffset) *NNPad
+	WithClipRect(clipRect metal.MTLRegion) *NNPad
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNPad
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNPad
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNPad
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNPad
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNPad
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNPad
+	WithOptions(options mpscore.MPSKernelOptions) *NNPad
+	WithLabel(label string) *NNPad
 	PaddingSizeBefore() mpscore.MPSImageCoordinate
 	SetPaddingSizeBefore(paddingSizeBefore mpscore.MPSImageCoordinate)
 	PaddingSizeAfter() mpscore.MPSImageCoordinate

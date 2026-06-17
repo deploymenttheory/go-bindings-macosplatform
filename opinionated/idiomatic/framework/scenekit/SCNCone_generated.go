@@ -5,8 +5,10 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Cone wraps [raw.SCNCone] with a fluent Go API.
@@ -62,6 +64,80 @@ func (x *Cone) WithRadialSegmentCount(radialSegmentCount int) *Cone {
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Cone) WithHeightSegmentCount(heightSegmentCount int) *Cone {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Cone) WithName(name string) *Cone {
+	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithMaterials sets the collection, converting the Go slice to an NSArray.
+func (x *Cone) WithMaterials(items ...*raw.SCNMaterial) *Cone {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetMaterials(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetMaterials(_arr)
+	return x
+}
+
+// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+func (x *Cone) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Cone {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+	return x
+}
+
+// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
+func (x *Cone) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cone {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+	return x
+}
+
+// WithTessellator sets the tessellator property and returns the receiver for chaining.
+func (x *Cone) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Cone {
+	x.inner.SCNGeometry.SetTessellator(tessellator)
+	return x
+}
+
+// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
+func (x *Cone) WithSubdivisionLevel(subdivisionLevel uint) *Cone {
+	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+	return x
+}
+
+// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+func (x *Cone) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cone {
+	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	return x
+}
+
+// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+func (x *Cone) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Cone {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+	return x
+}
+
+// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+func (x *Cone) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Cone {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
 	return x
 }
 
@@ -125,6 +201,15 @@ type Coneable interface {
 	WithHeight(height float64) *Cone
 	WithRadialSegmentCount(radialSegmentCount int) *Cone
 	WithHeightSegmentCount(heightSegmentCount int) *Cone
+	WithName(name string) *Cone
+	WithMaterials(items ...*raw.SCNMaterial) *Cone
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Cone
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cone
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Cone
+	WithSubdivisionLevel(subdivisionLevel uint) *Cone
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cone
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Cone
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Cone
 	TopRadius() float64
 	SetTopRadius(topRadius float64)
 	BottomRadius() float64

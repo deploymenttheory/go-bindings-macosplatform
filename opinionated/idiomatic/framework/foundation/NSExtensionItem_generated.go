@@ -71,6 +71,12 @@ func (x *ExtensionItem) WithUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ExtensionItem) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ExtensionItem {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AttributedTitle calls the underlying AttributedTitle.
 func (x *ExtensionItem) AttributedTitle() *AttributedString {
 	_r := x.inner.AttributedTitle()
@@ -134,6 +140,7 @@ type ExtensionItemable interface {
 	WithAttributedContentText(attributedContentText AttributedStringProvider) *ExtensionItem
 	WithAttachments(items ...*raw.NSItemProvider) *ExtensionItem
 	WithUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID]) *ExtensionItem
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ExtensionItem
 	AttributedTitle() *AttributedString
 	SetAttributedTitle(attributedTitle *raw.NSAttributedString)
 	AttributedContentText() *AttributedString

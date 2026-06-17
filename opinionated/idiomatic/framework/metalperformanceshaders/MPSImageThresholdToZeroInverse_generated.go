@@ -47,6 +47,36 @@ func NewImageThresholdToZeroInverseWithCoderDevice(aDecoder *foundation.NSCoder,
 	return &ImageThresholdToZeroInverse{inner: raw.MPSImageThresholdToZeroInverseFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageThresholdToZeroInverse) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZeroInverse {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageThresholdToZeroInverse) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZeroInverse {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageThresholdToZeroInverse) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdToZeroInverse {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageThresholdToZeroInverse) WithOptions(options mpscore.MPSKernelOptions) *ImageThresholdToZeroInverse {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageThresholdToZeroInverse) WithLabel(label string) *ImageThresholdToZeroInverse {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ThresholdValue calls the underlying ThresholdValue.
 func (x *ImageThresholdToZeroInverse) ThresholdValue() float32 {
 	return x.inner.ThresholdValue()
@@ -64,6 +94,11 @@ func (x *ImageThresholdToZeroInverse) asKernel() *mpscore.MPSKernel { return &x.
 // ImageThresholdToZeroInverseable is the interface implemented by [ImageThresholdToZeroInverse], for mocking and DI.
 type ImageThresholdToZeroInverseable interface {
 	Unwrap() *raw.MPSImageThresholdToZeroInverse
+	WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZeroInverse
+	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZeroInverse
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdToZeroInverse
+	WithOptions(options mpscore.MPSKernelOptions) *ImageThresholdToZeroInverse
+	WithLabel(label string) *ImageThresholdToZeroInverse
 	ThresholdValue() float32
 	Transform() *float32
 }

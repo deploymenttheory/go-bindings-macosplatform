@@ -7,7 +7,12 @@ package appkit
 import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TextInsertionIndicator wraps [raw.NSTextInsertionIndicator] with a fluent Go API.
@@ -57,6 +62,340 @@ func (x *TextInsertionIndicator) WithAutomaticModeOptions(automaticModeOptions r
 // WithEffectsViewInserter sets the effectsViewInserter property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithEffectsViewInserter(effectsViewInserter func(*raw.NSView)) *TextInsertionIndicator {
 	x.inner.SetEffectsViewInserter(effectsViewInserter)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *TextInsertionIndicator) WithSubviews(items ...ViewProvider) *TextInsertionIndicator {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithHidden(hidden bool) *TextInsertionIndicator {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextInsertionIndicator {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *TextInsertionIndicator {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TextInsertionIndicator {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithFrame(frame corefoundation.CGRect) *TextInsertionIndicator {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithFrameRotation(frameRotation float64) *TextInsertionIndicator {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithFrameCenterRotation(frameCenterRotation float64) *TextInsertionIndicator {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithBoundsRotation(boundsRotation float64) *TextInsertionIndicator {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithBounds(bounds corefoundation.CGRect) *TextInsertionIndicator {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *TextInsertionIndicator {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithNeedsDisplay(needsDisplay bool) *TextInsertionIndicator {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextInsertionIndicator {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *TextInsertionIndicator {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TextInsertionIndicator {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TextInsertionIndicator {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithWantsLayer(wantsLayer bool) *TextInsertionIndicator {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithLayer(layer *quartzcore.CALayer) *TextInsertionIndicator {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextInsertionIndicator {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithNeedsLayout(needsLayout bool) *TextInsertionIndicator {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithAlphaValue(alphaValue float64) *TextInsertionIndicator {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextInsertionIndicator {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *TextInsertionIndicator) WithBackgroundFilters(items ...*coreimage.CIFilter) *TextInsertionIndicator {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TextInsertionIndicator {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *TextInsertionIndicator) WithContentFilters(items ...*coreimage.CIFilter) *TextInsertionIndicator {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithShadow(shadow *raw.NSShadow) *TextInsertionIndicator {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithClipsToBounds(clipsToBounds bool) *TextInsertionIndicator {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextInsertionIndicator {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithToolTip(toolTip string) *TextInsertionIndicator {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextInsertionIndicator {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextInsertionIndicator {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithNextKeyView(nextKeyView ViewProvider) *TextInsertionIndicator {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithFocusRingType(focusRingType raw.NSFocusRingType) *TextInsertionIndicator {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *TextInsertionIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *TextInsertionIndicator {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextInsertionIndicator {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextInsertionIndicator {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextInsertionIndicator {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TextInsertionIndicator {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextInsertionIndicator {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextInsertionIndicator {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextInsertionIndicator {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextInsertionIndicator {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextInsertionIndicator {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextInsertionIndicator {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TextInsertionIndicator {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithNextResponder(nextResponder ResponderProvider) *TextInsertionIndicator {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithMenu(menu *raw.NSMenu) *TextInsertionIndicator {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithUserActivity(userActivity *foundation.NSUserActivity) *TextInsertionIndicator {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *TextInsertionIndicator) WithTouchBar(touchBar *raw.NSTouchBar) *TextInsertionIndicator {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -133,6 +472,55 @@ type TextInsertionIndicatorable interface {
 	WithColor(color *raw.NSColor) *TextInsertionIndicator
 	WithAutomaticModeOptions(automaticModeOptions raw.NSTextInsertionIndicatorAutomaticModeOptions) *TextInsertionIndicator
 	WithEffectsViewInserter(effectsViewInserter func(*raw.NSView)) *TextInsertionIndicator
+	WithSubviews(items ...ViewProvider) *TextInsertionIndicator
+	WithHidden(hidden bool) *TextInsertionIndicator
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextInsertionIndicator
+	WithAutoresizesSubviews(autoresizesSubviews bool) *TextInsertionIndicator
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TextInsertionIndicator
+	WithFrame(frame corefoundation.CGRect) *TextInsertionIndicator
+	WithFrameRotation(frameRotation float64) *TextInsertionIndicator
+	WithFrameCenterRotation(frameCenterRotation float64) *TextInsertionIndicator
+	WithBoundsRotation(boundsRotation float64) *TextInsertionIndicator
+	WithBounds(bounds corefoundation.CGRect) *TextInsertionIndicator
+	WithCanDrawConcurrently(canDrawConcurrently bool) *TextInsertionIndicator
+	WithNeedsDisplay(needsDisplay bool) *TextInsertionIndicator
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextInsertionIndicator
+	WithWantsRestingTouches(wantsRestingTouches bool) *TextInsertionIndicator
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TextInsertionIndicator
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TextInsertionIndicator
+	WithWantsLayer(wantsLayer bool) *TextInsertionIndicator
+	WithLayer(layer *quartzcore.CALayer) *TextInsertionIndicator
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextInsertionIndicator
+	WithNeedsLayout(needsLayout bool) *TextInsertionIndicator
+	WithAlphaValue(alphaValue float64) *TextInsertionIndicator
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextInsertionIndicator
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *TextInsertionIndicator
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TextInsertionIndicator
+	WithContentFilters(items ...*coreimage.CIFilter) *TextInsertionIndicator
+	WithShadow(shadow *raw.NSShadow) *TextInsertionIndicator
+	WithClipsToBounds(clipsToBounds bool) *TextInsertionIndicator
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextInsertionIndicator
+	WithToolTip(toolTip string) *TextInsertionIndicator
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextInsertionIndicator
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextInsertionIndicator
+	WithNextKeyView(nextKeyView ViewProvider) *TextInsertionIndicator
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *TextInsertionIndicator
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *TextInsertionIndicator
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextInsertionIndicator
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextInsertionIndicator
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextInsertionIndicator
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TextInsertionIndicator
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextInsertionIndicator
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextInsertionIndicator
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextInsertionIndicator
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextInsertionIndicator
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextInsertionIndicator
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextInsertionIndicator
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TextInsertionIndicator
+	WithNextResponder(nextResponder ResponderProvider) *TextInsertionIndicator
+	WithMenu(menu *raw.NSMenu) *TextInsertionIndicator
+	WithUserActivity(userActivity *foundation.NSUserActivity) *TextInsertionIndicator
+	WithTouchBar(touchBar *raw.NSTouchBar) *TextInsertionIndicator
 	DisplayMode() raw.NSTextInsertionIndicatorDisplayMode
 	SetDisplayMode(displayMode raw.NSTextInsertionIndicatorDisplayMode)
 	Color() *Color

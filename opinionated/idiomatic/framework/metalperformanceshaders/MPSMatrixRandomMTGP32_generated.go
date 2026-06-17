@@ -61,6 +61,30 @@ func NewMatrixRandomMTGP32WithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(_id)}
 }
 
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixRandomMTGP32) WithBatchStart(batchStart uint) *MatrixRandomMTGP32 {
+	x.inner.MPSMatrixRandom.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixRandomMTGP32) WithBatchSize(batchSize uint) *MatrixRandomMTGP32 {
+	x.inner.MPSMatrixRandom.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixRandomMTGP32) WithOptions(options mpscore.MPSKernelOptions) *MatrixRandomMTGP32 {
+	x.inner.MPSMatrixRandom.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixRandomMTGP32) WithLabel(label string) *MatrixRandomMTGP32 {
+	x.inner.MPSMatrixRandom.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // SynchronizeStateOnCommandBuffer calls the underlying SynchronizeStateOnCommandBuffer.
 func (x *MatrixRandomMTGP32) SynchronizeStateOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
 	x.inner.SynchronizeStateOnCommandBuffer(commandBuffer)
@@ -73,6 +97,10 @@ func (x *MatrixRandomMTGP32) asKernel() *mpscore.MPSKernel { return &x.inner.MPS
 // MatrixRandomMTGP32able is the interface implemented by [MatrixRandomMTGP32], for mocking and DI.
 type MatrixRandomMTGP32able interface {
 	Unwrap() *raw.MPSMatrixRandomMTGP32
+	WithBatchStart(batchStart uint) *MatrixRandomMTGP32
+	WithBatchSize(batchSize uint) *MatrixRandomMTGP32
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixRandomMTGP32
+	WithLabel(label string) *MatrixRandomMTGP32
 	SynchronizeStateOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
 }
 

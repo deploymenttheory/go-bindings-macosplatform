@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,12 @@ func NewDOMCSSFontFaceRule() *DOMCSSFontFaceRule {
 	return &DOMCSSFontFaceRule{inner: raw.DOMCSSFontFaceRuleFromID(_id)}
 }
 
+// WithCssText sets the cssText property and returns the receiver for chaining.
+func (x *DOMCSSFontFaceRule) WithCssText(cssText string) *DOMCSSFontFaceRule {
+	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	return x
+}
+
 // Style calls the underlying Style.
 func (x *DOMCSSFontFaceRule) Style() *DOMCSSStyleDeclaration {
 	_r := x.inner.Style()
@@ -53,6 +60,7 @@ func (x *DOMCSSFontFaceRule) asWebScriptObject() *raw.WebScriptObject { return &
 // DOMCSSFontFaceRuleable is the interface implemented by [DOMCSSFontFaceRule], for mocking and DI.
 type DOMCSSFontFaceRuleable interface {
 	Unwrap() *raw.DOMCSSFontFaceRule
+	WithCssText(cssText string) *DOMCSSFontFaceRule
 	Style() *DOMCSSStyleDeclaration
 }
 

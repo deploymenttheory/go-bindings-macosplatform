@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewComparisonLayer() *ComparisonLayer {
 	return &ComparisonLayer{inner: raw.MLCComparisonLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ComparisonLayer) WithLabel(label string) *ComparisonLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *ComparisonLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ComparisonLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Operation calls the underlying Operation.
 func (x *ComparisonLayer) Operation() raw.MLCComparisonOperation {
 	return x.inner.Operation()
@@ -45,6 +58,8 @@ func (x *ComparisonLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // ComparisonLayerable is the interface implemented by [ComparisonLayer], for mocking and DI.
 type ComparisonLayerable interface {
 	Unwrap() *raw.MLCComparisonLayer
+	WithLabel(label string) *ComparisonLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ComparisonLayer
 	Operation() raw.MLCComparisonOperation
 }
 

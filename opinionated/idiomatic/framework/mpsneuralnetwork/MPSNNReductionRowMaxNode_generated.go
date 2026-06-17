@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,24 @@ func NewNNReductionRowMaxNode() *NNReductionRowMaxNode {
 	return &NNReductionRowMaxNode{inner: raw.MPSNNReductionRowMaxNodeFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReductionRowMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMaxNode {
+	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionRowMaxNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionRowMaxNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionRowMaxNode) WithLabel(label string) *NNReductionRowMaxNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReductionRowMaxNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
 
 func (x *NNReductionRowMaxNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
@@ -42,6 +62,9 @@ func (x *NNReductionRowMaxNode) asNNFilterNode() *raw.MPSNNFilterNode { return &
 // NNReductionRowMaxNodeable is the interface implemented by [NNReductionRowMaxNode], for mocking and DI.
 type NNReductionRowMaxNodeable interface {
 	Unwrap() *raw.MPSNNReductionRowMaxNode
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMaxNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionRowMaxNode
+	WithLabel(label string) *NNReductionRowMaxNode
 }
 
 var _ NNReductionRowMaxNodeable = (*NNReductionRowMaxNode)(nil)

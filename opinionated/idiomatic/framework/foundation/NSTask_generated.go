@@ -109,6 +109,12 @@ func (x *Task) WithQualityOfService(qualityOfService raw.NSQualityOfService) *Ta
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Task) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Task {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // LaunchAndReturnError returns any validation error.
 func (x *Task) LaunchAndReturnError() error {
 	_, err := x.inner.LaunchAndReturnError()
@@ -336,6 +342,7 @@ type Taskable interface {
 	WithStandardError(standardError objc.ID) *Task
 	WithTerminationHandler(terminationHandler func(*raw.NSTask)) *Task
 	WithQualityOfService(qualityOfService raw.NSQualityOfService) *Task
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Task
 	LaunchAndReturnError() error
 	Interrupt()
 	Terminate()

@@ -58,6 +58,30 @@ func (x *MatrixSoftMax) WithSourceColumns(sourceColumns uint) *MatrixSoftMax {
 	return x
 }
 
+// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSoftMax) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMax {
+	x.inner.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSoftMax) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSoftMax {
+	x.inner.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixSoftMax) WithBatchStart(batchStart uint) *MatrixSoftMax {
+	x.inner.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixSoftMax) WithBatchSize(batchSize uint) *MatrixSoftMax {
+	x.inner.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
 // EncodeToCommandBufferInputMatrixResultMatrix calls the underlying EncodeToCommandBufferInputMatrixResultMatrix.
 func (x *MatrixSoftMax) EncodeToCommandBufferInputMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferInputMatrixResultMatrix(commandBuffer, inputMatrix, resultMatrix)
@@ -92,6 +116,10 @@ type MatrixSoftMaxable interface {
 	Unwrap() *raw.MPSMatrixSoftMax
 	WithSourceRows(sourceRows uint) *MatrixSoftMax
 	WithSourceColumns(sourceColumns uint) *MatrixSoftMax
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMax
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSoftMax
+	WithBatchStart(batchStart uint) *MatrixSoftMax
+	WithBatchSize(batchSize uint) *MatrixSoftMax
 	EncodeToCommandBufferInputMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix)
 	SourceRows() uint
 	SetSourceRows(sourceRows uint)

@@ -55,6 +55,12 @@ func (x *Timer) WithTolerance(tolerance float64) *Timer {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Timer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Timer {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Fire calls the underlying Fire.
 func (x *Timer) Fire() {
 	x.inner.Fire()
@@ -111,6 +117,7 @@ type Timerable interface {
 	Unwrap() *raw.NSTimer
 	WithFireDate(fireDate DateProvider) *Timer
 	WithTolerance(tolerance float64) *Timer
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Timer
 	Fire()
 	Invalidate()
 	FireDate() *Date

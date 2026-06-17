@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewGeodesicPolyline() *GeodesicPolyline {
 	return &GeodesicPolyline{inner: raw.MKGeodesicPolylineFromID(_id)}
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *GeodesicPolyline) WithTitle(title string) *GeodesicPolyline {
+	x.inner.MKPolyline.MKMultiPoint.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *GeodesicPolyline) WithSubtitle(subtitle string) *GeodesicPolyline {
+	x.inner.MKPolyline.MKMultiPoint.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
 func (x *GeodesicPolyline) asPolyline() *raw.MKPolyline { return &x.inner.MKPolyline }
 
 func (x *GeodesicPolyline) asMultiPoint() *raw.MKMultiPoint { return &x.inner.MKPolyline.MKMultiPoint }
@@ -44,6 +57,8 @@ func (x *GeodesicPolyline) asShape() *raw.MKShape { return &x.inner.MKPolyline.M
 // GeodesicPolylineable is the interface implemented by [GeodesicPolyline], for mocking and DI.
 type GeodesicPolylineable interface {
 	Unwrap() *raw.MKGeodesicPolyline
+	WithTitle(title string) *GeodesicPolyline
+	WithSubtitle(subtitle string) *GeodesicPolyline
 }
 
 var _ GeodesicPolylineable = (*GeodesicPolyline)(nil)

@@ -35,11 +35,18 @@ func NewVirtioConsoleDeviceSerialPortConfiguration() *VirtioConsoleDeviceSerialP
 	return &VirtioConsoleDeviceSerialPortConfiguration{inner: raw.VZVirtioConsoleDeviceSerialPortConfigurationFromID(_id)}
 }
 
+// WithAttachment sets the attachment property and returns the receiver for chaining.
+func (x *VirtioConsoleDeviceSerialPortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsoleDeviceSerialPortConfiguration {
+	x.inner.VZSerialPortConfiguration.SetAttachment(attachment.asSerialPortAttachment())
+	return x
+}
+
 func (x *VirtioConsoleDeviceSerialPortConfiguration) asSerialPortConfiguration() *raw.VZSerialPortConfiguration { return &x.inner.VZSerialPortConfiguration }
 
 // VirtioConsoleDeviceSerialPortConfigurationable is the interface implemented by [VirtioConsoleDeviceSerialPortConfiguration], for mocking and DI.
 type VirtioConsoleDeviceSerialPortConfigurationable interface {
 	Unwrap() *raw.VZVirtioConsoleDeviceSerialPortConfiguration
+	WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsoleDeviceSerialPortConfiguration
 }
 
 var _ VirtioConsoleDeviceSerialPortConfigurationable = (*VirtioConsoleDeviceSerialPortConfiguration)(nil)

@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewPoolingLayer() *PoolingLayer {
 	return &PoolingLayer{inner: raw.MLCPoolingLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *PoolingLayer) WithLabel(label string) *PoolingLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *PoolingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PoolingLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Descriptor calls the underlying Descriptor.
 func (x *PoolingLayer) Descriptor() *PoolingDescriptor {
 	_r := x.inner.Descriptor()
@@ -49,6 +62,8 @@ func (x *PoolingLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // PoolingLayerable is the interface implemented by [PoolingLayer], for mocking and DI.
 type PoolingLayerable interface {
 	Unwrap() *raw.MLCPoolingLayer
+	WithLabel(label string) *PoolingLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *PoolingLayer
 	Descriptor() *PoolingDescriptor
 }
 

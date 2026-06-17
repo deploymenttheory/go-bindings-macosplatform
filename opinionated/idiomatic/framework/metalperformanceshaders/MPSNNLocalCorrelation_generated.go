@@ -78,6 +78,126 @@ func (x *NNLocalCorrelation) WithStrideInY(strideInY uint) *NNLocalCorrelation {
 	return x
 }
 
+// WithPrimarySourceClipRect sets the primarySourceClipRect property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.SetPrimarySourceClipRect(primarySourceClipRect)
+	return x
+}
+
+// WithSecondarySourceClipRect sets the secondarySourceClipRect property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.SetSecondarySourceClipRect(secondarySourceClipRect)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithClipRect(clipRect metal.MTLRegion) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithOptions(options mpscore.MPSKernelOptions) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNLocalCorrelation) WithLabel(label string) *NNLocalCorrelation {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // WindowInX calls the underlying WindowInX.
 func (x *NNLocalCorrelation) WindowInX() uint {
 	return x.inner.WindowInX()
@@ -131,6 +251,26 @@ type NNLocalCorrelationable interface {
 	WithWindowInY(windowInY uint) *NNLocalCorrelation
 	WithStrideInX(strideInX uint) *NNLocalCorrelation
 	WithStrideInY(strideInY uint) *NNLocalCorrelation
+	WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNLocalCorrelation
+	WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNLocalCorrelation
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNLocalCorrelation
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNLocalCorrelation
+	WithClipRect(clipRect metal.MTLRegion) *NNLocalCorrelation
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNLocalCorrelation
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNLocalCorrelation
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNLocalCorrelation
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNLocalCorrelation
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNLocalCorrelation
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNLocalCorrelation
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNLocalCorrelation
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNLocalCorrelation
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNLocalCorrelation
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNLocalCorrelation
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNLocalCorrelation
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNLocalCorrelation
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNLocalCorrelation
+	WithOptions(options mpscore.MPSKernelOptions) *NNLocalCorrelation
+	WithLabel(label string) *NNLocalCorrelation
 	WindowInX() uint
 	SetWindowInX(windowInX uint)
 	WindowInY() uint

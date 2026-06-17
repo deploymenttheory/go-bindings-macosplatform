@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNPoolingGradientNodeWithSourceGradientSourceImageGradientStateKernelWi
 	return &CNNPoolingGradientNode{inner: raw.MPSCNNPoolingGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNPoolingGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNPoolingGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNPoolingGradientNode) WithLabel(label string) *CNNPoolingGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelWidth calls the underlying KernelWidth.
 func (x *CNNPoolingGradientNode) KernelWidth() uint {
 	return x.inner.KernelWidth()
@@ -64,6 +77,8 @@ func (x *CNNPoolingGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterN
 // CNNPoolingGradientNodeable is the interface implemented by [CNNPoolingGradientNode], for mocking and DI.
 type CNNPoolingGradientNodeable interface {
 	Unwrap() *raw.MPSCNNPoolingGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNPoolingGradientNode
+	WithLabel(label string) *CNNPoolingGradientNode
 	KernelWidth() uint
 	KernelHeight() uint
 	StrideInPixelsX() uint

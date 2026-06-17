@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,84 @@ func NewNNSubtractionNode() *NNSubtractionNode {
 	return &NNSubtractionNode{inner: raw.MPSNNSubtractionNodeFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithPrimaryScale(primaryScale float32) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithSecondaryScale(secondaryScale float32) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithBias(bias float32) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithMinimumValue(minimumValue float32) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithMaximumValue(maximumValue float32) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNSubtractionNode) WithLabel(label string) *NNSubtractionNode {
+	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNSubtractionNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode { return &x.inner.MPSNNBinaryArithmeticNode }
 
 func (x *NNSubtractionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
@@ -43,6 +122,19 @@ func (x *NNSubtractionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
 // NNSubtractionNodeable is the interface implemented by [NNSubtractionNode], for mocking and DI.
 type NNSubtractionNodeable interface {
 	Unwrap() *raw.MPSNNSubtractionNode
+	WithPrimaryScale(primaryScale float32) *NNSubtractionNode
+	WithSecondaryScale(secondaryScale float32) *NNSubtractionNode
+	WithBias(bias float32) *NNSubtractionNode
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNSubtractionNode
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNSubtractionNode
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNSubtractionNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNSubtractionNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNSubtractionNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNSubtractionNode
+	WithMinimumValue(minimumValue float32) *NNSubtractionNode
+	WithMaximumValue(maximumValue float32) *NNSubtractionNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNSubtractionNode
+	WithLabel(label string) *NNSubtractionNode
 }
 
 var _ NNSubtractionNodeable = (*NNSubtractionNode)(nil)

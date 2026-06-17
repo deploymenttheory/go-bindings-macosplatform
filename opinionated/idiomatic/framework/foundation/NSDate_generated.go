@@ -78,6 +78,12 @@ func NewDateWithString(description string) *Date {
 	return &Date{inner: raw.NSDateFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Date) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Date {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // TimeIntervalSinceReferenceDate calls the underlying TimeIntervalSinceReferenceDate.
 func (x *Date) TimeIntervalSinceReferenceDate() float64 {
 	return x.inner.TimeIntervalSinceReferenceDate()
@@ -174,6 +180,7 @@ func (x *Date) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Dateable is the interface implemented by [Date], for mocking and DI.
 type Dateable interface {
 	Unwrap() *raw.NSDate
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Date
 	TimeIntervalSinceReferenceDate() float64
 	TimeIntervalSinceDate(anotherDate *raw.NSDate) float64
 	AddTimeInterval(seconds float64) objc.ID

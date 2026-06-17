@@ -37,6 +37,12 @@ func NewScriptSuiteRegistry() *ScriptSuiteRegistry {
 	return &ScriptSuiteRegistry{inner: raw.NSScriptSuiteRegistryFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ScriptSuiteRegistry) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptSuiteRegistry {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // LoadSuitesFromBundle calls the underlying LoadSuitesFromBundle.
 func (x *ScriptSuiteRegistry) LoadSuitesFromBundle(bundle *raw.NSBundle) {
 	x.inner.LoadSuitesFromBundle(bundle)
@@ -133,6 +139,7 @@ func (x *ScriptSuiteRegistry) asObject() *raw.NSObject { return &x.inner.NSObjec
 // ScriptSuiteRegistryable is the interface implemented by [ScriptSuiteRegistry], for mocking and DI.
 type ScriptSuiteRegistryable interface {
 	Unwrap() *raw.NSScriptSuiteRegistry
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptSuiteRegistry
 	LoadSuitesFromBundle(bundle *raw.NSBundle)
 	LoadSuiteWithDictionaryFromBundle(suiteDeclaration *raw.NSDictionary[objc.ID, objc.ID], bundle *raw.NSBundle)
 	RegisterClassDescription(classDescription *raw.NSScriptClassDescription)

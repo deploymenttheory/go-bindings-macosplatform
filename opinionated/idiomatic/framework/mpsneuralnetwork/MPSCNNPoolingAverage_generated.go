@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -57,6 +58,54 @@ func (x *CNNPoolingAverage) WithZeroPadSizeY(zeroPadSizeY uint) *CNNPoolingAvera
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNPoolingAverage) WithOffset(offset mpscore.MPSOffset) *CNNPoolingAverage {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNPoolingAverage) WithClipRect(clipRect metal.MTLRegion) *CNNPoolingAverage {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingAverage) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingAverage {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingAverage) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNPoolingAverage {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNPoolingAverage) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNPoolingAverage {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNPoolingAverage) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNPoolingAverage {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNPoolingAverage) WithPadding(padding raw.MPSNNPadding) *CNNPoolingAverage {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNPoolingAverage) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingAverage {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // ZeroPadSizeX calls the underlying ZeroPadSizeX.
 func (x *CNNPoolingAverage) ZeroPadSizeX() uint {
 	return x.inner.ZeroPadSizeX()
@@ -86,6 +135,14 @@ type CNNPoolingAverageable interface {
 	Unwrap() *raw.MPSCNNPoolingAverage
 	WithZeroPadSizeX(zeroPadSizeX uint) *CNNPoolingAverage
 	WithZeroPadSizeY(zeroPadSizeY uint) *CNNPoolingAverage
+	WithOffset(offset mpscore.MPSOffset) *CNNPoolingAverage
+	WithClipRect(clipRect metal.MTLRegion) *CNNPoolingAverage
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingAverage
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNPoolingAverage
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNPoolingAverage
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNPoolingAverage
+	WithPadding(padding raw.MPSNNPadding) *CNNPoolingAverage
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingAverage
 	ZeroPadSizeX() uint
 	SetZeroPadSizeX(zeroPadSizeX uint)
 	ZeroPadSizeY() uint

@@ -35,6 +35,12 @@ func NewMetadataQueryAttributeValueTuple() *MetadataQueryAttributeValueTuple {
 	return &MetadataQueryAttributeValueTuple{inner: raw.NSMetadataQueryAttributeValueTupleFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MetadataQueryAttributeValueTuple) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQueryAttributeValueTuple {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Attribute calls the underlying Attribute.
 func (x *MetadataQueryAttributeValueTuple) Attribute() *String {
 	_r := x.inner.Attribute()
@@ -59,6 +65,7 @@ func (x *MetadataQueryAttributeValueTuple) asObject() *raw.NSObject { return &x.
 // MetadataQueryAttributeValueTupleable is the interface implemented by [MetadataQueryAttributeValueTuple], for mocking and DI.
 type MetadataQueryAttributeValueTupleable interface {
 	Unwrap() *raw.NSMetadataQueryAttributeValueTuple
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQueryAttributeValueTuple
 	Attribute() *String
 	Value() objc.ID
 	Count() uint

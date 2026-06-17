@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,66 @@ func NewCNNUpsamplingNearestWithDeviceIntegerScaleFactorXIntegerScaleFactorY(dev
 	return &CNNUpsamplingNearest{inner: raw.MPSCNNUpsamplingNearestFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearest) WithOffset(offset mpscore.MPSOffset) *CNNUpsamplingNearest {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearest) WithClipRect(clipRect metal.MTLRegion) *CNNUpsamplingNearest {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearest) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsamplingNearest {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearest) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsamplingNearest {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearest) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsamplingNearest {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearest) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingNearest {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearest) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingNearest {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearest) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsamplingNearest {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearest) WithOptions(options mpscore.MPSKernelOptions) *CNNUpsamplingNearest {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearest) WithLabel(label string) *CNNUpsamplingNearest {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNUpsamplingNearest) asCNNUpsampling() *mpsneuralnetwork.MPSCNNUpsampling { return &x.inner.MPSCNNUpsampling }
 
 func (x *CNNUpsamplingNearest) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNUpsampling.MPSCNNKernel }
@@ -48,6 +109,16 @@ func (x *CNNUpsamplingNearest) asKernel() *mpscore.MPSKernel { return &x.inner.M
 // CNNUpsamplingNearestable is the interface implemented by [CNNUpsamplingNearest], for mocking and DI.
 type CNNUpsamplingNearestable interface {
 	Unwrap() *raw.MPSCNNUpsamplingNearest
+	WithOffset(offset mpscore.MPSOffset) *CNNUpsamplingNearest
+	WithClipRect(clipRect metal.MTLRegion) *CNNUpsamplingNearest
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsamplingNearest
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsamplingNearest
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsamplingNearest
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingNearest
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingNearest
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsamplingNearest
+	WithOptions(options mpscore.MPSKernelOptions) *CNNUpsamplingNearest
+	WithLabel(label string) *CNNUpsamplingNearest
 }
 
 var _ CNNUpsamplingNearestable = (*CNNUpsamplingNearest)(nil)

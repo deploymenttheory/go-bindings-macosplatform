@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,66 @@ func NewCNNNeuronHardSigmoidWithDeviceAB(device metal.MTLDevice, a float32, b fl
 	return &CNNNeuronHardSigmoid{inner: raw.MPSCNNNeuronHardSigmoidFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNNeuronHardSigmoid) WithOffset(offset mpscore.MPSOffset) *CNNNeuronHardSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNNeuronHardSigmoid) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronHardSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronHardSigmoid) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronHardSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronHardSigmoid) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronHardSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNNeuronHardSigmoid) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronHardSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNNeuronHardSigmoid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronHardSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNNeuronHardSigmoid) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronHardSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNNeuronHardSigmoid) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronHardSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNNeuronHardSigmoid) WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronHardSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronHardSigmoid) WithLabel(label string) *CNNNeuronHardSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronHardSigmoid) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
 func (x *CNNNeuronHardSigmoid) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
@@ -48,6 +109,16 @@ func (x *CNNNeuronHardSigmoid) asKernel() *mpscore.MPSKernel { return &x.inner.M
 // CNNNeuronHardSigmoidable is the interface implemented by [CNNNeuronHardSigmoid], for mocking and DI.
 type CNNNeuronHardSigmoidable interface {
 	Unwrap() *raw.MPSCNNNeuronHardSigmoid
+	WithOffset(offset mpscore.MPSOffset) *CNNNeuronHardSigmoid
+	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronHardSigmoid
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronHardSigmoid
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronHardSigmoid
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronHardSigmoid
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronHardSigmoid
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronHardSigmoid
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronHardSigmoid
+	WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronHardSigmoid
+	WithLabel(label string) *CNNNeuronHardSigmoid
 }
 
 var _ CNNNeuronHardSigmoidable = (*CNNNeuronHardSigmoid)(nil)

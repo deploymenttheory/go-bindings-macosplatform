@@ -36,6 +36,12 @@ func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel uint, messageT
 	return &MIDIControlChangeEvent{inner: raw.AVMIDIControlChangeEventFromID(_id)}
 }
 
+// WithChannel sets the channel property and returns the receiver for chaining.
+func (x *MIDIControlChangeEvent) WithChannel(channel uint) *MIDIControlChangeEvent {
+	x.inner.AVMIDIChannelEvent.SetChannel(channel)
+	return x
+}
+
 // MessageType calls the underlying MessageType.
 func (x *MIDIControlChangeEvent) MessageType() raw.AVMIDIControlChangeMessageType {
 	return x.inner.MessageType()
@@ -53,6 +59,7 @@ func (x *MIDIControlChangeEvent) asMusicEvent() *raw.AVMusicEvent { return &x.in
 // MIDIControlChangeEventable is the interface implemented by [MIDIControlChangeEvent], for mocking and DI.
 type MIDIControlChangeEventable interface {
 	Unwrap() *raw.AVMIDIControlChangeEvent
+	WithChannel(channel uint) *MIDIControlChangeEvent
 	MessageType() raw.AVMIDIControlChangeMessageType
 	Value() uint
 }

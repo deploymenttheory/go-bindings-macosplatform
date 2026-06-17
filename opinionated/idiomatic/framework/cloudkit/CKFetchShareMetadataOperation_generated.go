@@ -96,6 +96,54 @@ func (x *FetchShareMetadataOperation) WithFetchShareMetadataCompletionBlock(fetc
 	return x
 }
 
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *FetchShareMetadataOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *FetchShareMetadataOperation) WithGroup(group *raw.CKOperationGroup) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *FetchShareMetadataOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *FetchShareMetadataOperation) WithContainer(container *raw.CKContainer) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *FetchShareMetadataOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *FetchShareMetadataOperation) WithLongLived(longLived bool) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *FetchShareMetadataOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *FetchShareMetadataOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // ShareURLs returns the collection as a Go slice.
 func (x *FetchShareMetadataOperation) ShareURLs() []*foundation.NSURL {
 	arr := x.inner.ShareURLs()
@@ -181,6 +229,14 @@ type FetchShareMetadataOperationable interface {
 	WithRootRecordDesiredKeys(items ...*foundation.NSString) *FetchShareMetadataOperation
 	WithPerShareMetadataBlock(perShareMetadataBlock func(*foundation.NSURL, *raw.CKShareMetadata, unsafe.Pointer)) *FetchShareMetadataOperation
 	WithFetchShareMetadataCompletionBlock(fetchShareMetadataCompletionBlock func(unsafe.Pointer)) *FetchShareMetadataOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchShareMetadataOperation
+	WithGroup(group *raw.CKOperationGroup) *FetchShareMetadataOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareMetadataOperation
+	WithContainer(container *raw.CKContainer) *FetchShareMetadataOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareMetadataOperation
+	WithLongLived(longLived bool) *FetchShareMetadataOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareMetadataOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareMetadataOperation
 	ShareURLs() []*foundation.NSURL
 	SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL])
 	ShouldFetchRootRecord() bool

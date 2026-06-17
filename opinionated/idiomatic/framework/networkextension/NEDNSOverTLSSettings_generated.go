@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NEDNSOverTLSSettings wraps [raw.NEDNSOverTLSSettings] with a fluent Go API.
@@ -49,6 +50,56 @@ func (x *NEDNSOverTLSSettings) WithIdentityReference(identityReference *foundati
 	return x
 }
 
+// WithSearchDomains sets the collection, converting the Go slice to an NSArray.
+func (x *NEDNSOverTLSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings {
+	if len(items) == 0 {
+		x.inner.NEDNSSettings.SetSearchDomains(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NEDNSSettings.SetSearchDomains(_arr)
+	return x
+}
+
+// WithDomainName sets the domainName property and returns the receiver for chaining.
+func (x *NEDNSOverTLSSettings) WithDomainName(domainName string) *NEDNSOverTLSSettings {
+	x.inner.NEDNSSettings.SetDomainName(foundation.NSStringStringWithUTF8String(domainName))
+	return x
+}
+
+// WithMatchDomains sets the collection, converting the Go slice to an NSArray.
+func (x *NEDNSOverTLSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings {
+	if len(items) == 0 {
+		x.inner.NEDNSSettings.SetMatchDomains(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NEDNSSettings.SetMatchDomains(_arr)
+	return x
+}
+
+// WithMatchDomainsNoSearch sets the matchDomainsNoSearch property and returns the receiver for chaining.
+func (x *NEDNSOverTLSSettings) WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverTLSSettings {
+	x.inner.NEDNSSettings.SetMatchDomainsNoSearch(matchDomainsNoSearch)
+	return x
+}
+
+// WithAllowFailover sets the allowFailover property and returns the receiver for chaining.
+func (x *NEDNSOverTLSSettings) WithAllowFailover(allowFailover bool) *NEDNSOverTLSSettings {
+	x.inner.NEDNSSettings.SetAllowFailover(allowFailover)
+	return x
+}
+
 // ServerName calls the underlying ServerName.
 func (x *NEDNSOverTLSSettings) ServerName() string {
 	_r := x.inner.ServerName()
@@ -80,6 +131,11 @@ type NEDNSOverTLSSettingsable interface {
 	Unwrap() *raw.NEDNSOverTLSSettings
 	WithServerName(serverName string) *NEDNSOverTLSSettings
 	WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverTLSSettings
+	WithSearchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings
+	WithDomainName(domainName string) *NEDNSOverTLSSettings
+	WithMatchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings
+	WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverTLSSettings
+	WithAllowFailover(allowFailover bool) *NEDNSOverTLSSettings
 	ServerName() string
 	SetServerName(serverName string)
 	IdentityReference() *foundation.NSData

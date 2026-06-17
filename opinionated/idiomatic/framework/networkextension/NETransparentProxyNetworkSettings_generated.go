@@ -70,6 +70,18 @@ func (x *NETransparentProxyNetworkSettings) WithExcludedNetworkRules(items ...*r
 	return x
 }
 
+// WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
+func (x *NETransparentProxyNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETransparentProxyNetworkSettings {
+	x.inner.NETunnelNetworkSettings.SetDNSSettings(dNSSettings.asNEDNSSettings())
+	return x
+}
+
+// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
+func (x *NETransparentProxyNetworkSettings) WithProxySettings(proxySettings *raw.NEProxySettings) *NETransparentProxyNetworkSettings {
+	x.inner.NETunnelNetworkSettings.SetProxySettings(proxySettings)
+	return x
+}
+
 // IncludedNetworkRules returns the collection as a Go slice.
 func (x *NETransparentProxyNetworkSettings) IncludedNetworkRules() []*raw.NENetworkRule {
 	arr := x.inner.IncludedNetworkRules()
@@ -109,6 +121,8 @@ type NETransparentProxyNetworkSettingsable interface {
 	Unwrap() *raw.NETransparentProxyNetworkSettings
 	WithIncludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings
 	WithExcludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings
+	WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETransparentProxyNetworkSettings
+	WithProxySettings(proxySettings *raw.NEProxySettings) *NETransparentProxyNetworkSettings
 	IncludedNetworkRules() []*raw.NENetworkRule
 	SetIncludedNetworkRules(includedNetworkRules *foundation.NSArray[*raw.NENetworkRule])
 	ExcludedNetworkRules() []*raw.NENetworkRule

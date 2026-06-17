@@ -6,10 +6,12 @@ package mapkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // GradientPolylineRenderer wraps [raw.MKGradientPolylineRenderer] with a fluent Go API.
@@ -36,6 +38,88 @@ func GradientPolylineRendererFromID(id objc.ID) *GradientPolylineRenderer {
 func NewGradientPolylineRenderer() *GradientPolylineRenderer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKGradientPolylineRenderer")), objc.RegisterName("new"))
 	return &GradientPolylineRenderer{inner: raw.MKGradientPolylineRendererFromID(_id)}
+}
+
+// WithStrokeStart sets the strokeStart property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithStrokeStart(strokeStart float64) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.SetStrokeStart(strokeStart)
+	return x
+}
+
+// WithStrokeEnd sets the strokeEnd property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithStrokeEnd(strokeEnd float64) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.SetStrokeEnd(strokeEnd)
+	return x
+}
+
+// WithFillColor sets the fillColor property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithFillColor(fillColor *appkit.NSColor) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetFillColor(fillColor)
+	return x
+}
+
+// WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetStrokeColor(strokeColor)
+	return x
+}
+
+// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithLineWidth(lineWidth float64) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetLineWidth(lineWidth)
+	return x
+}
+
+// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetLineJoin(lineJoin)
+	return x
+}
+
+// WithLineCap sets the lineCap property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetLineCap(lineCap)
+	return x
+}
+
+// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithMiterLimit(miterLimit float64) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetMiterLimit(miterLimit)
+	return x
+}
+
+// WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithLineDashPhase(lineDashPhase float64) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetLineDashPhase(lineDashPhase)
+	return x
+}
+
+// WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
+func (x *GradientPolylineRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *GradientPolylineRenderer {
+	if len(items) == 0 {
+		x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetLineDashPattern(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetLineDashPattern(_arr)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *GradientPolylineRenderer) WithAlpha(alpha float64) *GradientPolylineRenderer {
+	x.inner.MKPolylineRenderer.MKOverlayPathRenderer.MKOverlayRenderer.SetAlpha(alpha)
+	return x
 }
 
 // SetColorsAtLocations calls the underlying SetColorsAtLocations.
@@ -74,6 +158,18 @@ func (x *GradientPolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { 
 // GradientPolylineRendererable is the interface implemented by [GradientPolylineRenderer], for mocking and DI.
 type GradientPolylineRendererable interface {
 	Unwrap() *raw.MKGradientPolylineRenderer
+	WithStrokeStart(strokeStart float64) *GradientPolylineRenderer
+	WithStrokeEnd(strokeEnd float64) *GradientPolylineRenderer
+	WithFillColor(fillColor *appkit.NSColor) *GradientPolylineRenderer
+	WithStrokeColor(strokeColor *appkit.NSColor) *GradientPolylineRenderer
+	WithLineWidth(lineWidth float64) *GradientPolylineRenderer
+	WithLineJoin(lineJoin coregraphics.CGLineJoin) *GradientPolylineRenderer
+	WithLineCap(lineCap coregraphics.CGLineCap) *GradientPolylineRenderer
+	WithMiterLimit(miterLimit float64) *GradientPolylineRenderer
+	WithLineDashPhase(lineDashPhase float64) *GradientPolylineRenderer
+	WithLineDashPattern(items ...*foundation.NSNumber) *GradientPolylineRenderer
+	WithShouldRasterize(shouldRasterize bool) *GradientPolylineRenderer
+	WithAlpha(alpha float64) *GradientPolylineRenderer
 	SetColorsAtLocations(colors *foundation.NSArray[*appkit.NSColor], locations *foundation.NSArray[*foundation.NSNumber])
 	Locations() []*foundation.NSNumber
 	Colors() []*appkit.NSColor

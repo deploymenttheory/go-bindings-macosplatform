@@ -35,6 +35,12 @@ func NewUnitFuelEfficiency() *UnitFuelEfficiency {
 	return &UnitFuelEfficiency{inner: raw.NSUnitFuelEfficiencyFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitFuelEfficiency) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitFuelEfficiency {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitFuelEfficiency) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitFuelEfficiency) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitFuelEfficiency) asObject() *raw.NSObject { return &x.inner.NSDimens
 // UnitFuelEfficiencyable is the interface implemented by [UnitFuelEfficiency], for mocking and DI.
 type UnitFuelEfficiencyable interface {
 	Unwrap() *raw.NSUnitFuelEfficiency
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitFuelEfficiency
 }
 
 var _ UnitFuelEfficiencyable = (*UnitFuelEfficiency)(nil)

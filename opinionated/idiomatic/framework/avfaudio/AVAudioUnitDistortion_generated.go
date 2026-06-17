@@ -47,6 +47,12 @@ func (x *AudioUnitDistortion) WithWetDryMix(wetDryMix float32) *AudioUnitDistort
 	return x
 }
 
+// WithBypass sets the bypass property and returns the receiver for chaining.
+func (x *AudioUnitDistortion) WithBypass(bypass bool) *AudioUnitDistortion {
+	x.inner.AVAudioUnitEffect.SetBypass(bypass)
+	return x
+}
+
 // LoadFactoryPreset calls the underlying LoadFactoryPreset.
 func (x *AudioUnitDistortion) LoadFactoryPreset(preset raw.AVAudioUnitDistortionPreset) {
 	x.inner.LoadFactoryPreset(preset)
@@ -83,6 +89,7 @@ type AudioUnitDistortionable interface {
 	Unwrap() *raw.AVAudioUnitDistortion
 	WithPreGain(preGain float32) *AudioUnitDistortion
 	WithWetDryMix(wetDryMix float32) *AudioUnitDistortion
+	WithBypass(bypass bool) *AudioUnitDistortion
 	LoadFactoryPreset(preset raw.AVAudioUnitDistortionPreset)
 	PreGain() float32
 	SetPreGain(preGain float32)

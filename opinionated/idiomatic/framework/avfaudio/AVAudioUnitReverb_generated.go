@@ -41,6 +41,12 @@ func (x *AudioUnitReverb) WithWetDryMix(wetDryMix float32) *AudioUnitReverb {
 	return x
 }
 
+// WithBypass sets the bypass property and returns the receiver for chaining.
+func (x *AudioUnitReverb) WithBypass(bypass bool) *AudioUnitReverb {
+	x.inner.AVAudioUnitEffect.SetBypass(bypass)
+	return x
+}
+
 // LoadFactoryPreset calls the underlying LoadFactoryPreset.
 func (x *AudioUnitReverb) LoadFactoryPreset(preset raw.AVAudioUnitReverbPreset) {
 	x.inner.LoadFactoryPreset(preset)
@@ -66,6 +72,7 @@ func (x *AudioUnitReverb) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAud
 type AudioUnitReverbable interface {
 	Unwrap() *raw.AVAudioUnitReverb
 	WithWetDryMix(wetDryMix float32) *AudioUnitReverb
+	WithBypass(bypass bool) *AudioUnitReverb
 	LoadFactoryPreset(preset raw.AVAudioUnitReverbPreset)
 	WetDryMix() float32
 	SetWetDryMix(wetDryMix float32)

@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,24 @@ func NewDOMEntityReference() *DOMEntityReference {
 	return &DOMEntityReference{inner: raw.DOMEntityReferenceFromID(_id)}
 }
 
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMEntityReference) WithNodeValue(nodeValue string) *DOMEntityReference {
+	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMEntityReference) WithPrefix(prefix string) *DOMEntityReference {
+	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMEntityReference) WithTextContent(textContent string) *DOMEntityReference {
+	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 func (x *DOMEntityReference) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
 
 func (x *DOMEntityReference) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
@@ -44,6 +63,9 @@ func (x *DOMEntityReference) asWebScriptObject() *raw.WebScriptObject { return &
 // DOMEntityReferenceable is the interface implemented by [DOMEntityReference], for mocking and DI.
 type DOMEntityReferenceable interface {
 	Unwrap() *raw.DOMEntityReference
+	WithNodeValue(nodeValue string) *DOMEntityReference
+	WithPrefix(prefix string) *DOMEntityReference
+	WithTextContent(textContent string) *DOMEntityReference
 }
 
 var _ DOMEntityReferenceable = (*DOMEntityReference)(nil)

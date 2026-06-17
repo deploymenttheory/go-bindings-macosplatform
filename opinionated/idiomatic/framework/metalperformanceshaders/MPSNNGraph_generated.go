@@ -80,6 +80,18 @@ func (x *NNGraph) WithFormat(format mpscore.MPSImageFeatureChannelFormat) *NNGra
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNGraph) WithOptions(options mpscore.MPSKernelOptions) *NNGraph {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNGraph) WithLabel(label string) *NNGraph {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ReloadFromDataSources calls the underlying ReloadFromDataSources.
 func (x *NNGraph) ReloadFromDataSources() {
 	x.inner.ReloadFromDataSources()
@@ -188,6 +200,8 @@ type NNGraphable interface {
 	WithOutputStateIsTemporary(outputStateIsTemporary bool) *NNGraph
 	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGraph
 	WithFormat(format mpscore.MPSImageFeatureChannelFormat) *NNGraph
+	WithOptions(options mpscore.MPSKernelOptions) *NNGraph
+	WithLabel(label string) *NNGraph
 	ReloadFromDataSources()
 	EncodeToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], sourceStates *foundation.NSArray[*mpscore.MPSState], intermediateImages *foundation.NSMutableArray[*mpscore.MPSImage], destinationStates *foundation.NSMutableArray[*mpscore.MPSState]) *mpscore.MPSImage
 	EncodeBatchToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[objc.ID], sourceStates *foundation.NSArray[objc.ID], intermediateImages *foundation.NSMutableArray[objc.ID], destinationStates *foundation.NSMutableArray[objc.ID]) unsafe.Pointer

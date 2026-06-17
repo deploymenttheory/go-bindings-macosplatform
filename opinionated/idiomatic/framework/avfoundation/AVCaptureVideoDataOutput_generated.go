@@ -55,6 +55,12 @@ func (x *CaptureVideoDataOutput) WithPreservesDynamicHDRMetadata(preservesDynami
 	return x
 }
 
+// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+func (x *CaptureVideoDataOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureVideoDataOutput {
+	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	return x
+}
+
 // SetSampleBufferDelegateQueue calls the underlying SetSampleBufferDelegateQueue.
 func (x *CaptureVideoDataOutput) SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureVideoDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject) {
 	x.inner.SetSampleBufferDelegateQueue(sampleBufferDelegate, sampleBufferCallbackQueue)
@@ -160,6 +166,7 @@ type CaptureVideoDataOutputable interface {
 	WithVideoSettings(videoSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureVideoDataOutput
 	WithAlwaysDiscardsLateVideoFrames(alwaysDiscardsLateVideoFrames bool) *CaptureVideoDataOutput
 	WithPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata bool) *CaptureVideoDataOutput
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureVideoDataOutput
 	SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureVideoDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject)
 	RecommendedVideoSettingsForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	AvailableVideoCodecTypesForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSArray[*foundation.NSString]

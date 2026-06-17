@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +38,24 @@ func NewNNReductionRowMeanNode() *NNReductionRowMeanNode {
 	return &NNReductionRowMeanNode{inner: raw.MPSNNReductionRowMeanNodeFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReductionRowMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMeanNode {
+	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionRowMeanNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNReductionRowMeanNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionRowMeanNode) WithLabel(label string) *NNReductionRowMeanNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReductionRowMeanNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
 
 func (x *NNReductionRowMeanNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
@@ -43,6 +63,9 @@ func (x *NNReductionRowMeanNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterN
 // NNReductionRowMeanNodeable is the interface implemented by [NNReductionRowMeanNode], for mocking and DI.
 type NNReductionRowMeanNodeable interface {
 	Unwrap() *raw.MPSNNReductionRowMeanNode
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMeanNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNReductionRowMeanNode
+	WithLabel(label string) *NNReductionRowMeanNode
 }
 
 var _ NNReductionRowMeanNodeable = (*NNReductionRowMeanNode)(nil)

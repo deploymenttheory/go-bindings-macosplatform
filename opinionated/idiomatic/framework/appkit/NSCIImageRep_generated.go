@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,6 +39,54 @@ func NewCIImageRepWithCIImage(image *coreimage.CIImage) *CIImageRep {
 	return &CIImageRep{inner: raw.NSCIImageRepFromID(_id)}
 }
 
+// WithSize sets the size property and returns the receiver for chaining.
+func (x *CIImageRep) WithSize(size corefoundation.CGSize) *CIImageRep {
+	x.inner.NSImageRep.SetSize(size)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *CIImageRep) WithAlpha(alpha bool) *CIImageRep {
+	x.inner.NSImageRep.SetAlpha(alpha)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *CIImageRep) WithOpaque(opaque bool) *CIImageRep {
+	x.inner.NSImageRep.SetOpaque(opaque)
+	return x
+}
+
+// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
+func (x *CIImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *CIImageRep {
+	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+	return x
+}
+
+// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+func (x *CIImageRep) WithBitsPerSample(bitsPerSample int) *CIImageRep {
+	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	return x
+}
+
+// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+func (x *CIImageRep) WithPixelsWide(pixelsWide int) *CIImageRep {
+	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	return x
+}
+
+// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+func (x *CIImageRep) WithPixelsHigh(pixelsHigh int) *CIImageRep {
+	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	return x
+}
+
+// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
+func (x *CIImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CIImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+	return x
+}
+
 // CIImage calls the underlying CIImage.
 func (x *CIImageRep) CIImage() *coreimage.CIImage {
 	return x.inner.CIImage()
@@ -47,6 +97,14 @@ func (x *CIImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
 // CIImageRepable is the interface implemented by [CIImageRep], for mocking and DI.
 type CIImageRepable interface {
 	Unwrap() *raw.NSCIImageRep
+	WithSize(size corefoundation.CGSize) *CIImageRep
+	WithAlpha(alpha bool) *CIImageRep
+	WithOpaque(opaque bool) *CIImageRep
+	WithColorSpaceName(colorSpaceName *foundation.NSString) *CIImageRep
+	WithBitsPerSample(bitsPerSample int) *CIImageRep
+	WithPixelsWide(pixelsWide int) *CIImageRep
+	WithPixelsHigh(pixelsHigh int) *CIImageRep
+	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CIImageRep
 	CIImage() *coreimage.CIImage
 }
 

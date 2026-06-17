@@ -43,6 +43,12 @@ func (x *DOMCSSPageRule) WithSelectorText(selectorText string) *DOMCSSPageRule {
 	return x
 }
 
+// WithCssText sets the cssText property and returns the receiver for chaining.
+func (x *DOMCSSPageRule) WithCssText(cssText string) *DOMCSSPageRule {
+	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	return x
+}
+
 // SelectorText calls the underlying SelectorText.
 func (x *DOMCSSPageRule) SelectorText() string {
 	_r := x.inner.SelectorText()
@@ -76,6 +82,7 @@ func (x *DOMCSSPageRule) asWebScriptObject() *raw.WebScriptObject { return &x.in
 type DOMCSSPageRuleable interface {
 	Unwrap() *raw.DOMCSSPageRule
 	WithSelectorText(selectorText string) *DOMCSSPageRule
+	WithCssText(cssText string) *DOMCSSPageRule
 	SelectorText() string
 	SetSelectorText(selectorText string)
 	Style() *DOMCSSStyleDeclaration

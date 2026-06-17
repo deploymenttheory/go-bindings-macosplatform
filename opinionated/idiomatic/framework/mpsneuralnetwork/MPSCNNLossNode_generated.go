@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewCNNLossNodeWithSourceLossDescriptor(source *raw.MPSNNImageNode, descript
 	return &CNNLossNode{inner: raw.MPSCNNLossNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNLossNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNLossNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNLossNode) WithLabel(label string) *CNNLossNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // InputLabels calls the underlying InputLabels.
 func (x *CNNLossNode) InputLabels() *NNLabelsNode {
 	_r := x.inner.InputLabels()
@@ -50,6 +63,8 @@ func (x *CNNLossNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MP
 // CNNLossNodeable is the interface implemented by [CNNLossNode], for mocking and DI.
 type CNNLossNodeable interface {
 	Unwrap() *raw.MPSCNNLossNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNLossNode
+	WithLabel(label string) *CNNLossNode
 	InputLabels() *NNLabelsNode
 }
 

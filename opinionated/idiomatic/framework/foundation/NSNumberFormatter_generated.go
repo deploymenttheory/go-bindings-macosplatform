@@ -432,6 +432,12 @@ func (x *NumberFormatter) WithRoundingBehavior(roundingBehavior *raw.NSDecimalNu
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *NumberFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NumberFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // GetObjectValueForStringRangeError calls the underlying GetObjectValueForStringRangeError.
 func (x *NumberFormatter) GetObjectValueForStringRangeError(obj **raw.ObjcObject, string_ string, rangep *raw.NSRange) (bool, error) {
 	return x.inner.GetObjectValueForStringRangeError(obj, foundation.NSStringStringWithUTF8String(string_), rangep)
@@ -1328,6 +1334,7 @@ type NumberFormatterable interface {
 	WithAttributedStringForNil(attributedStringForNil AttributedStringProvider) *NumberFormatter
 	WithAttributedStringForNotANumber(attributedStringForNotANumber AttributedStringProvider) *NumberFormatter
 	WithRoundingBehavior(roundingBehavior *raw.NSDecimalNumberHandler) *NumberFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NumberFormatter
 	GetObjectValueForStringRangeError(obj **raw.ObjcObject, string_ string, rangep *raw.NSRange) (bool, error)
 	StringFromNumber(number *raw.NSNumber) *String
 	NumberFromString(string_ string) *Number

@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,126 @@ func NewCNNUpsamplingBilinearGradientWithDeviceIntegerScaleFactorXIntegerScaleFa
 	return &CNNUpsamplingBilinearGradient{inner: raw.MPSCNNUpsamplingBilinearGradientFromID(_id)}
 }
 
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithKernelOffsetX(kernelOffsetX int) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithKernelOffsetY(kernelOffsetY int) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithClipRect(clipRect metal.MTLRegion) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradient) WithLabel(label string) *CNNUpsamplingBilinearGradient {
+	x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNUpsamplingBilinearGradient) asCNNUpsamplingGradient() *mpsneuralnetwork.MPSCNNUpsamplingGradient { return &x.inner.MPSCNNUpsamplingGradient }
 
 func (x *CNNUpsamplingBilinearGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel }
@@ -50,6 +171,26 @@ func (x *CNNUpsamplingBilinearGradient) asKernel() *mpscore.MPSKernel { return &
 // CNNUpsamplingBilinearGradientable is the interface implemented by [CNNUpsamplingBilinearGradient], for mocking and DI.
 type CNNUpsamplingBilinearGradientable interface {
 	Unwrap() *raw.MPSCNNUpsamplingBilinearGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNUpsamplingBilinearGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNUpsamplingBilinearGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNUpsamplingBilinearGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNUpsamplingBilinearGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNUpsamplingBilinearGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsamplingBilinearGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNUpsamplingBilinearGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNUpsamplingBilinearGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNUpsamplingBilinearGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNUpsamplingBilinearGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingBilinearGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingBilinearGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNUpsamplingBilinearGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNUpsamplingBilinearGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNUpsamplingBilinearGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNUpsamplingBilinearGradient
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingBilinearGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsamplingBilinearGradient
+	WithOptions(options mpscore.MPSKernelOptions) *CNNUpsamplingBilinearGradient
+	WithLabel(label string) *CNNUpsamplingBilinearGradient
 }
 
 var _ CNNUpsamplingBilinearGradientable = (*CNNUpsamplingBilinearGradient)(nil)

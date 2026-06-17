@@ -6,6 +6,7 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,30 @@ func NewImageReduceRowMinWithDevice(device metal.MTLDevice) *ImageReduceRowMin {
 	return &ImageReduceRowMin{inner: raw.MPSImageReduceRowMinFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *ImageReduceRowMin) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMin {
+	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceRowMin) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMin {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceRowMin) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMin {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceRowMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMin {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageReduceRowMin) asImageReduceUnary() *raw.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
 
 func (x *ImageReduceRowMin) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
@@ -44,6 +69,10 @@ func (x *ImageReduceRowMin) asUnaryImageKernel() *raw.MPSUnaryImageKernel { retu
 // ImageReduceRowMinable is the interface implemented by [ImageReduceRowMin], for mocking and DI.
 type ImageReduceRowMinable interface {
 	Unwrap() *raw.MPSImageReduceRowMin
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMin
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMin
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMin
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMin
 }
 
 var _ ImageReduceRowMinable = (*ImageReduceRowMin)(nil)

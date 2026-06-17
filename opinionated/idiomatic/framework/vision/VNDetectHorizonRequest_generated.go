@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewDetectHorizonRequest() *DetectHorizonRequest {
 	return &DetectHorizonRequest{inner: raw.VNDetectHorizonRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectHorizonRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHorizonRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectHorizonRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHorizonRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectHorizonRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHorizonRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectHorizonRequest) WithRevision(revision uint) *DetectHorizonRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *DetectHorizonRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectHorizonRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
@@ -42,6 +67,10 @@ func (x *DetectHorizonRequest) asRequest() *raw.VNRequest { return &x.inner.VNIm
 // DetectHorizonRequestable is the interface implemented by [DetectHorizonRequest], for mocking and DI.
 type DetectHorizonRequestable interface {
 	Unwrap() *raw.VNDetectHorizonRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHorizonRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHorizonRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectHorizonRequest
+	WithRevision(revision uint) *DetectHorizonRequest
 }
 
 var _ DetectHorizonRequestable = (*DetectHorizonRequest)(nil)

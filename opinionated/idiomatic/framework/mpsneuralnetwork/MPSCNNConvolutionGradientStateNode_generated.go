@@ -35,6 +35,24 @@ func NewCNNConvolutionGradientStateNode() *CNNConvolutionGradientStateNode {
 	return &CNNConvolutionGradientStateNode{inner: raw.MPSCNNConvolutionGradientStateNodeFromID(_id)}
 }
 
+// WithHandle sets the handle property and returns the receiver for chaining.
+func (x *CNNConvolutionGradientStateNode) WithHandle(handle raw.MPSHandle) *CNNConvolutionGradientStateNode {
+	x.inner.MPSNNGradientStateNode.MPSNNStateNode.SetHandle(handle)
+	return x
+}
+
+// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+func (x *CNNConvolutionGradientStateNode) WithExportFromGraph(exportFromGraph bool) *CNNConvolutionGradientStateNode {
+	x.inner.MPSNNGradientStateNode.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	return x
+}
+
+// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+func (x *CNNConvolutionGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionGradientStateNode {
+	x.inner.MPSNNGradientStateNode.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	return x
+}
+
 func (x *CNNConvolutionGradientStateNode) asCNNConvolutionGradientStateNode() *raw.MPSCNNConvolutionGradientStateNode { return x.inner }
 
 func (x *CNNConvolutionGradientStateNode) asNNGradientStateNode() *raw.MPSNNGradientStateNode { return &x.inner.MPSNNGradientStateNode }
@@ -44,6 +62,9 @@ func (x *CNNConvolutionGradientStateNode) asNNStateNode() *raw.MPSNNStateNode { 
 // CNNConvolutionGradientStateNodeable is the interface implemented by [CNNConvolutionGradientStateNode], for mocking and DI.
 type CNNConvolutionGradientStateNodeable interface {
 	Unwrap() *raw.MPSCNNConvolutionGradientStateNode
+	WithHandle(handle raw.MPSHandle) *CNNConvolutionGradientStateNode
+	WithExportFromGraph(exportFromGraph bool) *CNNConvolutionGradientStateNode
+	WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionGradientStateNode
 }
 
 var _ CNNConvolutionGradientStateNodeable = (*CNNConvolutionGradientStateNode)(nil)

@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,84 @@ func NewNNMultiplicationNode() *NNMultiplicationNode {
 	return &NNMultiplicationNode{inner: raw.MPSNNMultiplicationNodeFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithPrimaryScale(primaryScale float32) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithSecondaryScale(secondaryScale float32) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithBias(bias float32) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithMinimumValue(minimumValue float32) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithMaximumValue(maximumValue float32) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNMultiplicationNode) WithLabel(label string) *NNMultiplicationNode {
+	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNMultiplicationNode) asNNBinaryArithmeticNode() *raw.MPSNNBinaryArithmeticNode { return &x.inner.MPSNNBinaryArithmeticNode }
 
 func (x *NNMultiplicationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
@@ -42,6 +121,19 @@ func (x *NNMultiplicationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x
 // NNMultiplicationNodeable is the interface implemented by [NNMultiplicationNode], for mocking and DI.
 type NNMultiplicationNodeable interface {
 	Unwrap() *raw.MPSNNMultiplicationNode
+	WithPrimaryScale(primaryScale float32) *NNMultiplicationNode
+	WithSecondaryScale(secondaryScale float32) *NNMultiplicationNode
+	WithBias(bias float32) *NNMultiplicationNode
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNMultiplicationNode
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNMultiplicationNode
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNMultiplicationNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNMultiplicationNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNMultiplicationNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNMultiplicationNode
+	WithMinimumValue(minimumValue float32) *NNMultiplicationNode
+	WithMaximumValue(maximumValue float32) *NNMultiplicationNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNMultiplicationNode
+	WithLabel(label string) *NNMultiplicationNode
 }
 
 var _ NNMultiplicationNodeable = (*NNMultiplicationNode)(nil)

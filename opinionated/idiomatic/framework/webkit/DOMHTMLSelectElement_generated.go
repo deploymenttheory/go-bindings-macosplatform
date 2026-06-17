@@ -79,6 +79,108 @@ func (x *DOMHTMLSelectElement) WithValue(value string) *DOMHTMLSelectElement {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithTitle(title string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithLang(lang string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithDir(dir string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithTabIndex(tabIndex int) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithAccessKey(accessKey string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithInnerText(innerText string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithOuterText(outerText string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithContentEditable(contentEditable string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithIdName(idName string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithScrollLeft(scrollLeft int) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithScrollTop(scrollTop int) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithInnerHTML(innerHTML string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithOuterHTML(outerHTML string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithClassName(className string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithNodeValue(nodeValue string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithPrefix(prefix string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLSelectElement) WithTextContent(textContent string) *DOMHTMLSelectElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Item calls the underlying Item.
 func (x *DOMHTMLSelectElement) Item(index uint) *DOMNode {
 	_r := x.inner.Item(index)
@@ -247,6 +349,23 @@ type DOMHTMLSelectElementable interface {
 	WithSize(size int) *DOMHTMLSelectElement
 	WithSelectedIndex(selectedIndex int) *DOMHTMLSelectElement
 	WithValue(value string) *DOMHTMLSelectElement
+	WithTitle(title string) *DOMHTMLSelectElement
+	WithLang(lang string) *DOMHTMLSelectElement
+	WithDir(dir string) *DOMHTMLSelectElement
+	WithTabIndex(tabIndex int) *DOMHTMLSelectElement
+	WithAccessKey(accessKey string) *DOMHTMLSelectElement
+	WithInnerText(innerText string) *DOMHTMLSelectElement
+	WithOuterText(outerText string) *DOMHTMLSelectElement
+	WithContentEditable(contentEditable string) *DOMHTMLSelectElement
+	WithIdName(idName string) *DOMHTMLSelectElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLSelectElement
+	WithScrollTop(scrollTop int) *DOMHTMLSelectElement
+	WithInnerHTML(innerHTML string) *DOMHTMLSelectElement
+	WithOuterHTML(outerHTML string) *DOMHTMLSelectElement
+	WithClassName(className string) *DOMHTMLSelectElement
+	WithNodeValue(nodeValue string) *DOMHTMLSelectElement
+	WithPrefix(prefix string) *DOMHTMLSelectElement
+	WithTextContent(textContent string) *DOMHTMLSelectElement
 	Item(index uint) *DOMNode
 	NamedItem(name string) *DOMNode
 	AddBefore(element *raw.DOMHTMLElement, before *raw.DOMHTMLElement)

@@ -38,11 +38,25 @@ func NewCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius u
 	return &CircularRegion{inner: raw.CLCircularRegionFromID(_id)}
 }
 
+// WithNotifyOnEntry sets the notifyOnEntry property and returns the receiver for chaining.
+func (x *CircularRegion) WithNotifyOnEntry(notifyOnEntry bool) *CircularRegion {
+	x.inner.CLRegion.SetNotifyOnEntry(notifyOnEntry)
+	return x
+}
+
+// WithNotifyOnExit sets the notifyOnExit property and returns the receiver for chaining.
+func (x *CircularRegion) WithNotifyOnExit(notifyOnExit bool) *CircularRegion {
+	x.inner.CLRegion.SetNotifyOnExit(notifyOnExit)
+	return x
+}
+
 func (x *CircularRegion) asRegion() *raw.CLRegion { return &x.inner.CLRegion }
 
 // CircularRegionable is the interface implemented by [CircularRegion], for mocking and DI.
 type CircularRegionable interface {
 	Unwrap() *raw.CLCircularRegion
+	WithNotifyOnEntry(notifyOnEntry bool) *CircularRegion
+	WithNotifyOnExit(notifyOnExit bool) *CircularRegion
 }
 
 var _ CircularRegionable = (*CircularRegion)(nil)

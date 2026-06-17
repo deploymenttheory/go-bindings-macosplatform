@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,18 @@ func NewPolygon() *Polygon {
 	return &Polygon{inner: raw.MKPolygonFromID(_id)}
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *Polygon) WithTitle(title string) *Polygon {
+	x.inner.MKMultiPoint.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *Polygon) WithSubtitle(subtitle string) *Polygon {
+	x.inner.MKMultiPoint.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
 // InteriorPolygons returns the collection as a Go slice.
 func (x *Polygon) InteriorPolygons() []*raw.MKPolygon {
 	arr := x.inner.InteriorPolygons()
@@ -54,6 +67,8 @@ func (x *Polygon) asShape() *raw.MKShape { return &x.inner.MKMultiPoint.MKShape 
 // Polygonable is the interface implemented by [Polygon], for mocking and DI.
 type Polygonable interface {
 	Unwrap() *raw.MKPolygon
+	WithTitle(title string) *Polygon
+	WithSubtitle(subtitle string) *Polygon
 	InteriorPolygons() []*raw.MKPolygon
 }
 

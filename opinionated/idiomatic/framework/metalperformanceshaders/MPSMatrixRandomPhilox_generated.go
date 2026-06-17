@@ -61,6 +61,30 @@ func NewMatrixRandomPhiloxWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(_id)}
 }
 
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixRandomPhilox) WithBatchStart(batchStart uint) *MatrixRandomPhilox {
+	x.inner.MPSMatrixRandom.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixRandomPhilox) WithBatchSize(batchSize uint) *MatrixRandomPhilox {
+	x.inner.MPSMatrixRandom.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixRandomPhilox) WithOptions(options mpscore.MPSKernelOptions) *MatrixRandomPhilox {
+	x.inner.MPSMatrixRandom.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixRandomPhilox) WithLabel(label string) *MatrixRandomPhilox {
+	x.inner.MPSMatrixRandom.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *MatrixRandomPhilox) asMatrixRandom() *mpsmatrix.MPSMatrixRandom { return &x.inner.MPSMatrixRandom }
 
 func (x *MatrixRandomPhilox) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixRandom.MPSKernel }
@@ -68,6 +92,10 @@ func (x *MatrixRandomPhilox) asKernel() *mpscore.MPSKernel { return &x.inner.MPS
 // MatrixRandomPhiloxable is the interface implemented by [MatrixRandomPhilox], for mocking and DI.
 type MatrixRandomPhiloxable interface {
 	Unwrap() *raw.MPSMatrixRandomPhilox
+	WithBatchStart(batchStart uint) *MatrixRandomPhilox
+	WithBatchSize(batchSize uint) *MatrixRandomPhilox
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixRandomPhilox
+	WithLabel(label string) *MatrixRandomPhilox
 }
 
 var _ MatrixRandomPhiloxable = (*MatrixRandomPhilox)(nil)

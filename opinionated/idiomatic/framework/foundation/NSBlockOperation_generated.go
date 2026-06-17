@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -37,6 +38,42 @@ func NewBlockOperation() *BlockOperation {
 	return &BlockOperation{inner: raw.NSBlockOperationFromID(_id)}
 }
 
+// WithQueuePriority sets the queuePriority property and returns the receiver for chaining.
+func (x *BlockOperation) WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *BlockOperation {
+	x.inner.NSOperation.SetQueuePriority(queuePriority)
+	return x
+}
+
+// WithCompletionBlock sets the completionBlock property and returns the receiver for chaining.
+func (x *BlockOperation) WithCompletionBlock(completionBlock func()) *BlockOperation {
+	x.inner.NSOperation.SetCompletionBlock(completionBlock)
+	return x
+}
+
+// WithThreadPriority sets the threadPriority property and returns the receiver for chaining.
+func (x *BlockOperation) WithThreadPriority(threadPriority float64) *BlockOperation {
+	x.inner.NSOperation.SetThreadPriority(threadPriority)
+	return x
+}
+
+// WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
+func (x *BlockOperation) WithQualityOfService(qualityOfService raw.NSQualityOfService) *BlockOperation {
+	x.inner.NSOperation.SetQualityOfService(qualityOfService)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *BlockOperation) WithName(name string) *BlockOperation {
+	x.inner.NSOperation.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *BlockOperation) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *BlockOperation {
+	x.inner.NSOperation.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddExecutionBlock blocks until the operation completes or ctx is cancelled.
 func (x *BlockOperation) AddExecutionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -63,6 +100,12 @@ func (x *BlockOperation) asObject() *raw.NSObject { return &x.inner.NSOperation.
 // BlockOperationable is the interface implemented by [BlockOperation], for mocking and DI.
 type BlockOperationable interface {
 	Unwrap() *raw.NSBlockOperation
+	WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *BlockOperation
+	WithCompletionBlock(completionBlock func()) *BlockOperation
+	WithThreadPriority(threadPriority float64) *BlockOperation
+	WithQualityOfService(qualityOfService raw.NSQualityOfService) *BlockOperation
+	WithName(name string) *BlockOperation
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *BlockOperation
 	AddExecutionBlock(ctx context.Context) error
 	ExecutionBlocks() unsafe.Pointer
 }

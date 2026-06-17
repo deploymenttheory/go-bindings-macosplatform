@@ -6,8 +6,11 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // LightNode wraps [raw.SKLightNode] with a fluent Go API.
@@ -69,6 +72,166 @@ func (x *LightNode) WithFalloff(falloff float64) *LightNode {
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *LightNode) WithCategoryBitMask(categoryBitMask uint32) *LightNode {
 	x.inner.SetCategoryBitMask(categoryBitMask)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *LightNode) WithPosition(position corefoundation.CGPoint) *LightNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *LightNode) WithZPosition(zPosition float64) *LightNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *LightNode) WithZRotation(zRotation float64) *LightNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *LightNode) WithXScale(xScale float64) *LightNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *LightNode) WithYScale(yScale float64) *LightNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *LightNode) WithSpeed(speed float64) *LightNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *LightNode) WithAlpha(alpha float64) *LightNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *LightNode) WithPaused(paused bool) *LightNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *LightNode) WithHidden(hidden bool) *LightNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *LightNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LightNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *LightNode) WithName(name string) *LightNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *LightNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *LightNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *LightNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LightNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *LightNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *LightNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *LightNode) WithConstraints(items ...*raw.SKConstraint) *LightNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *LightNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LightNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *LightNode) WithAccessibilityElement(accessibilityElement bool) *LightNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *LightNode) WithAccessibilityRole(accessibilityRole string) *LightNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *LightNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LightNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *LightNode) WithAccessibilitySubrole(accessibilitySubrole string) *LightNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *LightNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LightNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *LightNode) WithAccessibilityParent(accessibilityParent objc.ID) *LightNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *LightNode) WithAccessibilityHelp(accessibilityHelp string) *LightNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *LightNode) WithAccessibilityLabel(accessibilityLabel string) *LightNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *LightNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LightNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
@@ -143,6 +306,31 @@ type LightNodeable interface {
 	WithShadowColor(shadowColor *appkit.NSColor) *LightNode
 	WithFalloff(falloff float64) *LightNode
 	WithCategoryBitMask(categoryBitMask uint32) *LightNode
+	WithPosition(position corefoundation.CGPoint) *LightNode
+	WithZPosition(zPosition float64) *LightNode
+	WithZRotation(zRotation float64) *LightNode
+	WithXScale(xScale float64) *LightNode
+	WithYScale(yScale float64) *LightNode
+	WithSpeed(speed float64) *LightNode
+	WithAlpha(alpha float64) *LightNode
+	WithPaused(paused bool) *LightNode
+	WithHidden(hidden bool) *LightNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *LightNode
+	WithName(name string) *LightNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *LightNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LightNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *LightNode
+	WithConstraints(items ...*raw.SKConstraint) *LightNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LightNode
+	WithAccessibilityElement(accessibilityElement bool) *LightNode
+	WithAccessibilityRole(accessibilityRole string) *LightNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LightNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *LightNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LightNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *LightNode
+	WithAccessibilityHelp(accessibilityHelp string) *LightNode
+	WithAccessibilityLabel(accessibilityLabel string) *LightNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *LightNode
 	IsEnabled() bool
 	SetEnabled(enabled bool)
 	LightColor() *appkit.NSColor

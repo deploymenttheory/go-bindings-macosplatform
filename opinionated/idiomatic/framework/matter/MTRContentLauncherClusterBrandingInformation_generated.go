@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,53 @@ func NewMTRContentLauncherClusterBrandingInformation() *MTRContentLauncherCluste
 	return &MTRContentLauncherClusterBrandingInformation{inner: raw.MTRContentLauncherClusterBrandingInformationFromID(_id)}
 }
 
+// WithProviderName sets the providerName property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterBrandingInformation) WithProviderName(providerName string) *MTRContentLauncherClusterBrandingInformation {
+	x.inner.MTRContentLauncherClusterBrandingInformationStruct.SetProviderName(foundation.NSStringStringWithUTF8String(providerName))
+	return x
+}
+
+// WithBackground sets the background property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterBrandingInformation) WithBackground(background MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	x.inner.MTRContentLauncherClusterBrandingInformationStruct.SetBackground(background.asMTRContentLauncherClusterStyleInformationStruct())
+	return x
+}
+
+// WithLogo sets the logo property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterBrandingInformation) WithLogo(logo MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	x.inner.MTRContentLauncherClusterBrandingInformationStruct.SetLogo(logo.asMTRContentLauncherClusterStyleInformationStruct())
+	return x
+}
+
+// WithProgressBar sets the progressBar property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterBrandingInformation) WithProgressBar(progressBar MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	x.inner.MTRContentLauncherClusterBrandingInformationStruct.SetProgressBar(progressBar.asMTRContentLauncherClusterStyleInformationStruct())
+	return x
+}
+
+// WithSplash sets the splash property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterBrandingInformation) WithSplash(splash MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	x.inner.MTRContentLauncherClusterBrandingInformationStruct.SetSplash(splash.asMTRContentLauncherClusterStyleInformationStruct())
+	return x
+}
+
+// WithWaterMark sets the waterMark property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterBrandingInformation) WithWaterMark(waterMark MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	x.inner.MTRContentLauncherClusterBrandingInformationStruct.SetWaterMark(waterMark.asMTRContentLauncherClusterStyleInformationStruct())
+	return x
+}
+
 func (x *MTRContentLauncherClusterBrandingInformation) asMTRContentLauncherClusterBrandingInformationStruct() *raw.MTRContentLauncherClusterBrandingInformationStruct { return &x.inner.MTRContentLauncherClusterBrandingInformationStruct }
 
 // MTRContentLauncherClusterBrandingInformationable is the interface implemented by [MTRContentLauncherClusterBrandingInformation], for mocking and DI.
 type MTRContentLauncherClusterBrandingInformationable interface {
 	Unwrap() *raw.MTRContentLauncherClusterBrandingInformation
+	WithProviderName(providerName string) *MTRContentLauncherClusterBrandingInformation
+	WithBackground(background MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation
+	WithLogo(logo MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation
+	WithProgressBar(progressBar MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation
+	WithSplash(splash MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation
+	WithWaterMark(waterMark MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation
 }
 
 var _ MTRContentLauncherClusterBrandingInformationable = (*MTRContentLauncherClusterBrandingInformation)(nil)

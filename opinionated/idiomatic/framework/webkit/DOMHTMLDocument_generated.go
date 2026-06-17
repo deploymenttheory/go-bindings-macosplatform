@@ -79,6 +79,72 @@ func (x *DOMHTMLDocument) WithVlinkColor(vlinkColor string) *DOMHTMLDocument {
 	return x
 }
 
+// WithXmlVersion sets the xmlVersion property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithXmlVersion(xmlVersion string) *DOMHTMLDocument {
+	x.inner.DOMDocument.SetXmlVersion(foundation.NSStringStringWithUTF8String(xmlVersion))
+	return x
+}
+
+// WithXmlStandalone sets the xmlStandalone property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithXmlStandalone(xmlStandalone bool) *DOMHTMLDocument {
+	x.inner.DOMDocument.SetXmlStandalone(xmlStandalone)
+	return x
+}
+
+// WithDocumentURI sets the documentURI property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithDocumentURI(documentURI string) *DOMHTMLDocument {
+	x.inner.DOMDocument.SetDocumentURI(foundation.NSStringStringWithUTF8String(documentURI))
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithTitle(title string) *DOMHTMLDocument {
+	x.inner.DOMDocument.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithCookie sets the cookie property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithCookie(cookie string) *DOMHTMLDocument {
+	x.inner.DOMDocument.SetCookie(foundation.NSStringStringWithUTF8String(cookie))
+	return x
+}
+
+// WithBody sets the body property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithBody(body DOMHTMLElementProvider) *DOMHTMLDocument {
+	x.inner.DOMDocument.SetBody(body.asDOMHTMLElement())
+	return x
+}
+
+// WithCharset sets the charset property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithCharset(charset string) *DOMHTMLDocument {
+	x.inner.DOMDocument.SetCharset(foundation.NSStringStringWithUTF8String(charset))
+	return x
+}
+
+// WithSelectedStylesheetSet sets the selectedStylesheetSet property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithSelectedStylesheetSet(selectedStylesheetSet string) *DOMHTMLDocument {
+	x.inner.DOMDocument.SetSelectedStylesheetSet(foundation.NSStringStringWithUTF8String(selectedStylesheetSet))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithNodeValue(nodeValue string) *DOMHTMLDocument {
+	x.inner.DOMDocument.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithPrefix(prefix string) *DOMHTMLDocument {
+	x.inner.DOMDocument.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLDocument) WithTextContent(textContent string) *DOMHTMLDocument {
+	x.inner.DOMDocument.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Open calls the underlying Open.
 func (x *DOMHTMLDocument) Open() {
 	x.inner.Open()
@@ -294,6 +360,17 @@ type DOMHTMLDocumentable interface {
 	WithAlinkColor(alinkColor string) *DOMHTMLDocument
 	WithLinkColor(linkColor string) *DOMHTMLDocument
 	WithVlinkColor(vlinkColor string) *DOMHTMLDocument
+	WithXmlVersion(xmlVersion string) *DOMHTMLDocument
+	WithXmlStandalone(xmlStandalone bool) *DOMHTMLDocument
+	WithDocumentURI(documentURI string) *DOMHTMLDocument
+	WithTitle(title string) *DOMHTMLDocument
+	WithCookie(cookie string) *DOMHTMLDocument
+	WithBody(body DOMHTMLElementProvider) *DOMHTMLDocument
+	WithCharset(charset string) *DOMHTMLDocument
+	WithSelectedStylesheetSet(selectedStylesheetSet string) *DOMHTMLDocument
+	WithNodeValue(nodeValue string) *DOMHTMLDocument
+	WithPrefix(prefix string) *DOMHTMLDocument
+	WithTextContent(textContent string) *DOMHTMLDocument
 	Open()
 	Close()
 	Write(text string)

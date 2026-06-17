@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
@@ -37,6 +39,36 @@ func NewImageAreaMin() *ImageAreaMin {
 	return &ImageAreaMin{inner: raw.MPSImageAreaMinFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageAreaMin) WithOffset(offset mpscore.MPSOffset) *ImageAreaMin {
+	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageAreaMin) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMin {
+	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageAreaMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMin {
+	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageAreaMin) WithOptions(options mpscore.MPSKernelOptions) *ImageAreaMin {
+	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageAreaMin) WithLabel(label string) *ImageAreaMin {
+	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageAreaMin) asImageAreaMax() *mpsimage.MPSImageAreaMax { return &x.inner.MPSImageAreaMax }
 
 func (x *ImageAreaMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel }
@@ -46,6 +78,11 @@ func (x *ImageAreaMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageA
 // ImageAreaMinable is the interface implemented by [ImageAreaMin], for mocking and DI.
 type ImageAreaMinable interface {
 	Unwrap() *raw.MPSImageAreaMin
+	WithOffset(offset mpscore.MPSOffset) *ImageAreaMin
+	WithClipRect(clipRect metal.MTLRegion) *ImageAreaMin
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMin
+	WithOptions(options mpscore.MPSKernelOptions) *ImageAreaMin
+	WithLabel(label string) *ImageAreaMin
 }
 
 var _ ImageAreaMinable = (*ImageAreaMin)(nil)

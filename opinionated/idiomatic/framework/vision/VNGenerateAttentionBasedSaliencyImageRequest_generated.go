@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewGenerateAttentionBasedSaliencyImageRequest() *GenerateAttentionBasedSali
 	return &GenerateAttentionBasedSaliencyImageRequest{inner: raw.VNGenerateAttentionBasedSaliencyImageRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *GenerateAttentionBasedSaliencyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateAttentionBasedSaliencyImageRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *GenerateAttentionBasedSaliencyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateAttentionBasedSaliencyImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *GenerateAttentionBasedSaliencyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateAttentionBasedSaliencyImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *GenerateAttentionBasedSaliencyImageRequest) WithRevision(revision uint) *GenerateAttentionBasedSaliencyImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *GenerateAttentionBasedSaliencyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *GenerateAttentionBasedSaliencyImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
@@ -42,6 +67,10 @@ func (x *GenerateAttentionBasedSaliencyImageRequest) asRequest() *raw.VNRequest 
 // GenerateAttentionBasedSaliencyImageRequestable is the interface implemented by [GenerateAttentionBasedSaliencyImageRequest], for mocking and DI.
 type GenerateAttentionBasedSaliencyImageRequestable interface {
 	Unwrap() *raw.VNGenerateAttentionBasedSaliencyImageRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateAttentionBasedSaliencyImageRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateAttentionBasedSaliencyImageRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *GenerateAttentionBasedSaliencyImageRequest
+	WithRevision(revision uint) *GenerateAttentionBasedSaliencyImageRequest
 }
 
 var _ GenerateAttentionBasedSaliencyImageRequestable = (*GenerateAttentionBasedSaliencyImageRequest)(nil)

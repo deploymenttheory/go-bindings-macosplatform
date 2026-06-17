@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY
 	return &CNNUpsamplingNearestNode{inner: raw.MPSCNNUpsamplingNearestNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearestNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingNearestNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNUpsamplingNearestNode) WithLabel(label string) *CNNUpsamplingNearestNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ScaleFactorX calls the underlying ScaleFactorX.
 func (x *CNNUpsamplingNearestNode) ScaleFactorX() float64 {
 	return x.inner.ScaleFactorX()
@@ -52,6 +65,8 @@ func (x *CNNUpsamplingNearestNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilte
 // CNNUpsamplingNearestNodeable is the interface implemented by [CNNUpsamplingNearestNode], for mocking and DI.
 type CNNUpsamplingNearestNodeable interface {
 	Unwrap() *raw.MPSCNNUpsamplingNearestNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingNearestNode
+	WithLabel(label string) *CNNUpsamplingNearestNode
 	ScaleFactorX() float64
 	ScaleFactorY() float64
 }

@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,108 @@ func NewDOMHTMLFieldSetElement() *DOMHTMLFieldSetElement {
 	return &DOMHTMLFieldSetElement{inner: raw.DOMHTMLFieldSetElementFromID(_id)}
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithTitle(title string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithLang(lang string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithDir(dir string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithTabIndex(tabIndex int) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithAccessKey(accessKey string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithInnerText(innerText string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithOuterText(outerText string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithContentEditable(contentEditable string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithIdName(idName string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithScrollLeft(scrollLeft int) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithScrollTop(scrollTop int) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithInnerHTML(innerHTML string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithOuterHTML(outerHTML string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithClassName(className string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithNodeValue(nodeValue string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithPrefix(prefix string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLFieldSetElement) WithTextContent(textContent string) *DOMHTMLFieldSetElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Form calls the underlying Form.
 func (x *DOMHTMLFieldSetElement) Form() *DOMHTMLFormElement {
 	_r := x.inner.Form()
@@ -57,6 +160,23 @@ func (x *DOMHTMLFieldSetElement) asWebScriptObject() *raw.WebScriptObject { retu
 // DOMHTMLFieldSetElementable is the interface implemented by [DOMHTMLFieldSetElement], for mocking and DI.
 type DOMHTMLFieldSetElementable interface {
 	Unwrap() *raw.DOMHTMLFieldSetElement
+	WithTitle(title string) *DOMHTMLFieldSetElement
+	WithLang(lang string) *DOMHTMLFieldSetElement
+	WithDir(dir string) *DOMHTMLFieldSetElement
+	WithTabIndex(tabIndex int) *DOMHTMLFieldSetElement
+	WithAccessKey(accessKey string) *DOMHTMLFieldSetElement
+	WithInnerText(innerText string) *DOMHTMLFieldSetElement
+	WithOuterText(outerText string) *DOMHTMLFieldSetElement
+	WithContentEditable(contentEditable string) *DOMHTMLFieldSetElement
+	WithIdName(idName string) *DOMHTMLFieldSetElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLFieldSetElement
+	WithScrollTop(scrollTop int) *DOMHTMLFieldSetElement
+	WithInnerHTML(innerHTML string) *DOMHTMLFieldSetElement
+	WithOuterHTML(outerHTML string) *DOMHTMLFieldSetElement
+	WithClassName(className string) *DOMHTMLFieldSetElement
+	WithNodeValue(nodeValue string) *DOMHTMLFieldSetElement
+	WithPrefix(prefix string) *DOMHTMLFieldSetElement
+	WithTextContent(textContent string) *DOMHTMLFieldSetElement
 	Form() *DOMHTMLFormElement
 }
 

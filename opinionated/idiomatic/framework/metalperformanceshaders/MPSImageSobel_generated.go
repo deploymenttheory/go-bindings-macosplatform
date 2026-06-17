@@ -54,6 +54,36 @@ func NewImageSobelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTL
 	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageSobel) WithOffset(offset mpscore.MPSOffset) *ImageSobel {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageSobel) WithClipRect(clipRect metal.MTLRegion) *ImageSobel {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageSobel) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageSobel {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageSobel) WithOptions(options mpscore.MPSKernelOptions) *ImageSobel {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageSobel) WithLabel(label string) *ImageSobel {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ColorTransform calls the underlying ColorTransform.
 func (x *ImageSobel) ColorTransform() *float32 {
 	return x.inner.ColorTransform()
@@ -66,6 +96,11 @@ func (x *ImageSobel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryIma
 // ImageSobelable is the interface implemented by [ImageSobel], for mocking and DI.
 type ImageSobelable interface {
 	Unwrap() *raw.MPSImageSobel
+	WithOffset(offset mpscore.MPSOffset) *ImageSobel
+	WithClipRect(clipRect metal.MTLRegion) *ImageSobel
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageSobel
+	WithOptions(options mpscore.MPSKernelOptions) *ImageSobel
+	WithLabel(label string) *ImageSobel
 	ColorTransform() *float32
 }
 

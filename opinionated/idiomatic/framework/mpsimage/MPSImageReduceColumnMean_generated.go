@@ -6,6 +6,7 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,30 @@ func NewImageReduceColumnMeanWithDevice(device metal.MTLDevice) *ImageReduceColu
 	return &ImageReduceColumnMean{inner: raw.MPSImageReduceColumnMeanFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *ImageReduceColumnMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMean {
+	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceColumnMean) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceColumnMean) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceColumnMean) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageReduceColumnMean) asImageReduceUnary() *raw.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
 
 func (x *ImageReduceColumnMean) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
@@ -44,6 +69,10 @@ func (x *ImageReduceColumnMean) asUnaryImageKernel() *raw.MPSUnaryImageKernel { 
 // ImageReduceColumnMeanable is the interface implemented by [ImageReduceColumnMean], for mocking and DI.
 type ImageReduceColumnMeanable interface {
 	Unwrap() *raw.MPSImageReduceColumnMean
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMean
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMean
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMean
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnMean
 }
 
 var _ ImageReduceColumnMeanable = (*ImageReduceColumnMean)(nil)

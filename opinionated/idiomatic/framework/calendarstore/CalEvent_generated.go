@@ -67,6 +67,30 @@ func (x *CalEvent) WithEndDate(endDate *foundation.NSDate) *CalEvent {
 	return x
 }
 
+// WithCalendar sets the calendar property and returns the receiver for chaining.
+func (x *CalEvent) WithCalendar(calendar *raw.CalCalendar) *CalEvent {
+	x.inner.CalCalendarItem.SetCalendar(calendar)
+	return x
+}
+
+// WithNotes sets the notes property and returns the receiver for chaining.
+func (x *CalEvent) WithNotes(notes string) *CalEvent {
+	x.inner.CalCalendarItem.SetNotes(foundation.NSStringStringWithUTF8String(notes))
+	return x
+}
+
+// WithUrl sets the url property and returns the receiver for chaining.
+func (x *CalEvent) WithUrl(url string) *CalEvent {
+	x.inner.CalCalendarItem.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *CalEvent) WithTitle(title string) *CalEvent {
+	x.inner.CalCalendarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
 // IsAllDay calls the underlying IsAllDay.
 func (x *CalEvent) IsAllDay() bool {
 	return x.inner.IsAllDay()
@@ -150,6 +174,10 @@ type CalEventable interface {
 	WithRecurrenceRule(recurrenceRule *raw.CalRecurrenceRule) *CalEvent
 	WithStartDate(startDate *foundation.NSDate) *CalEvent
 	WithEndDate(endDate *foundation.NSDate) *CalEvent
+	WithCalendar(calendar *raw.CalCalendar) *CalEvent
+	WithNotes(notes string) *CalEvent
+	WithUrl(url string) *CalEvent
+	WithTitle(title string) *CalEvent
 	IsAllDay() bool
 	SetIsAllDay(isAllDay bool)
 	Location() string

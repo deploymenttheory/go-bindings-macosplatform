@@ -67,6 +67,82 @@ func (x *SplitViewController) WithMinimumThicknessForInlineSidebars(minimumThick
 	return x
 }
 
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *SplitViewController) WithRepresentedObject(representedObject objc.ID) *SplitViewController {
+	x.inner.NSViewController.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *SplitViewController) WithTitle(title string) *SplitViewController {
+	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *SplitViewController) WithView(view ViewProvider) *SplitViewController {
+	x.inner.NSViewController.SetView(view.asView())
+	return x
+}
+
+// WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
+func (x *SplitViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *SplitViewController {
+	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
+	return x
+}
+
+// WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
+func (x *SplitViewController) WithChildViewControllers(items ...ViewControllerProvider) *SplitViewController {
+	if len(items) == 0 {
+		x.inner.NSViewController.SetChildViewControllers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSViewController](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSViewController.SetChildViewControllers(_arr)
+	return x
+}
+
+// WithSourceItemView sets the sourceItemView property and returns the receiver for chaining.
+func (x *SplitViewController) WithSourceItemView(sourceItemView ViewProvider) *SplitViewController {
+	x.inner.NSViewController.SetSourceItemView(sourceItemView.asView())
+	return x
+}
+
+// WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
+func (x *SplitViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *SplitViewController {
+	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *SplitViewController) WithNextResponder(nextResponder ResponderProvider) *SplitViewController {
+	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *SplitViewController) WithMenu(menu *raw.NSMenu) *SplitViewController {
+	x.inner.NSViewController.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *SplitViewController) WithUserActivity(userActivity *foundation.NSUserActivity) *SplitViewController {
+	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *SplitViewController) WithTouchBar(touchBar *raw.NSTouchBar) *SplitViewController {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
+	return x
+}
+
 // AddSplitViewItem calls the underlying AddSplitViewItem.
 func (x *SplitViewController) AddSplitViewItem(splitViewItem *raw.NSSplitViewItem) {
 	x.inner.AddSplitViewItem(splitViewItem)
@@ -181,6 +257,17 @@ type SplitViewControllerable interface {
 	WithSplitView(splitView *raw.NSSplitView) *SplitViewController
 	WithSplitViewItems(items ...*raw.NSSplitViewItem) *SplitViewController
 	WithMinimumThicknessForInlineSidebars(minimumThicknessForInlineSidebars float64) *SplitViewController
+	WithRepresentedObject(representedObject objc.ID) *SplitViewController
+	WithTitle(title string) *SplitViewController
+	WithView(view ViewProvider) *SplitViewController
+	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *SplitViewController
+	WithChildViewControllers(items ...ViewControllerProvider) *SplitViewController
+	WithSourceItemView(sourceItemView ViewProvider) *SplitViewController
+	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *SplitViewController
+	WithNextResponder(nextResponder ResponderProvider) *SplitViewController
+	WithMenu(menu *raw.NSMenu) *SplitViewController
+	WithUserActivity(userActivity *foundation.NSUserActivity) *SplitViewController
+	WithTouchBar(touchBar *raw.NSTouchBar) *SplitViewController
 	AddSplitViewItem(splitViewItem *raw.NSSplitViewItem)
 	InsertSplitViewItemAtIndex(splitViewItem *raw.NSSplitViewItem, index int)
 	RemoveSplitViewItem(splitViewItem *raw.NSSplitViewItem)

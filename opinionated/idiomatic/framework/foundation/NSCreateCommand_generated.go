@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,54 @@ func NewCreateCommand() *CreateCommand {
 	return &CreateCommand{inner: raw.NSCreateCommandFromID(_id)}
 }
 
+// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
+func (x *CreateCommand) WithDirectParameter(directParameter objc.ID) *CreateCommand {
+	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+	return x
+}
+
+// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
+func (x *CreateCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CreateCommand {
+	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithArguments sets the arguments property and returns the receiver for chaining.
+func (x *CreateCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *CreateCommand {
+	x.inner.NSScriptCommand.SetArguments(arguments)
+	return x
+}
+
+// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
+func (x *CreateCommand) WithScriptErrorNumber(scriptErrorNumber int) *CreateCommand {
+	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
+	return x
+}
+
+// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
+func (x *CreateCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *CreateCommand {
+	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor)
+	return x
+}
+
+// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
+func (x *CreateCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *CreateCommand {
+	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor)
+	return x
+}
+
+// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
+func (x *CreateCommand) WithScriptErrorString(scriptErrorString string) *CreateCommand {
+	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *CreateCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CreateCommand {
+	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CreateClassDescription calls the underlying CreateClassDescription.
 func (x *CreateCommand) CreateClassDescription() *ScriptClassDescription {
 	_r := x.inner.CreateClassDescription()
@@ -56,6 +105,14 @@ func (x *CreateCommand) asObject() *raw.NSObject { return &x.inner.NSScriptComma
 // CreateCommandable is the interface implemented by [CreateCommand], for mocking and DI.
 type CreateCommandable interface {
 	Unwrap() *raw.NSCreateCommand
+	WithDirectParameter(directParameter objc.ID) *CreateCommand
+	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CreateCommand
+	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *CreateCommand
+	WithScriptErrorNumber(scriptErrorNumber int) *CreateCommand
+	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *CreateCommand
+	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *CreateCommand
+	WithScriptErrorString(scriptErrorString string) *CreateCommand
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CreateCommand
 	CreateClassDescription() *ScriptClassDescription
 	ResolvedKeyDictionary() *raw.NSDictionary[*raw.NSString, objc.ID]
 }

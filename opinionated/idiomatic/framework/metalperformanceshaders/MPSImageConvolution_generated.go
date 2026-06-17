@@ -53,6 +53,36 @@ func (x *ImageConvolution) WithBias(bias float32) *ImageConvolution {
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageConvolution) WithOffset(offset mpscore.MPSOffset) *ImageConvolution {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageConvolution) WithClipRect(clipRect metal.MTLRegion) *ImageConvolution {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageConvolution) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConvolution {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageConvolution) WithOptions(options mpscore.MPSKernelOptions) *ImageConvolution {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageConvolution) WithLabel(label string) *ImageConvolution {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImageConvolution) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -81,6 +111,11 @@ func (x *ImageConvolution) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUn
 type ImageConvolutionable interface {
 	Unwrap() *raw.MPSImageConvolution
 	WithBias(bias float32) *ImageConvolution
+	WithOffset(offset mpscore.MPSOffset) *ImageConvolution
+	WithClipRect(clipRect metal.MTLRegion) *ImageConvolution
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConvolution
+	WithOptions(options mpscore.MPSKernelOptions) *ImageConvolution
+	WithLabel(label string) *ImageConvolution
 	KernelHeight() uint
 	KernelWidth() uint
 	Bias() float32

@@ -43,6 +43,12 @@ func NewNotificationWithCoder(coder *raw.NSCoder) *Notification {
 	return &Notification{inner: raw.NSNotificationFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Notification) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Notification {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Name calls the underlying Name.
 func (x *Notification) Name() *String {
 	_r := x.inner.Name()
@@ -67,6 +73,7 @@ func (x *Notification) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Notificationable is the interface implemented by [Notification], for mocking and DI.
 type Notificationable interface {
 	Unwrap() *raw.NSNotification
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Notification
 	Name() *String
 	Object() objc.ID
 	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]

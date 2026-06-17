@@ -37,6 +37,42 @@ func NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate(device *raw.IOBluetoo
 	return &IOBluetoothHandsFreeAudioGateway{inner: raw.IOBluetoothHandsFreeAudioGatewayFromID(_id)}
 }
 
+// WithSupportedFeatures sets the supportedFeatures property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeAudioGateway) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeAudioGateway {
+	x.inner.IOBluetoothHandsFree.SetSupportedFeatures(supportedFeatures)
+	return x
+}
+
+// WithInputVolume sets the inputVolume property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeAudioGateway) WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeAudioGateway {
+	x.inner.IOBluetoothHandsFree.SetInputVolume(inputVolume)
+	return x
+}
+
+// WithInputMuted sets the inputMuted property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeAudioGateway) WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeAudioGateway {
+	x.inner.IOBluetoothHandsFree.SetInputMuted(inputMuted)
+	return x
+}
+
+// WithOutputVolume sets the outputVolume property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeAudioGateway) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeAudioGateway {
+	x.inner.IOBluetoothHandsFree.SetOutputVolume(outputVolume)
+	return x
+}
+
+// WithOutputMuted sets the outputMuted property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeAudioGateway) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeAudioGateway {
+	x.inner.IOBluetoothHandsFree.SetOutputMuted(outputMuted)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeAudioGateway) WithDelegate(delegate raw.IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFreeAudioGateway {
+	x.inner.IOBluetoothHandsFree.SetDelegate(delegate)
+	return x
+}
+
 // CreateIndicatorMinMaxCurrentValue calls the underlying CreateIndicatorMinMaxCurrentValue.
 func (x *IOBluetoothHandsFreeAudioGateway) CreateIndicatorMinMaxCurrentValue(indicatorName string, minValue int, maxValue int, currentValue int) {
 	x.inner.CreateIndicatorMinMaxCurrentValue(foundation.NSStringStringWithUTF8String(indicatorName), minValue, maxValue, currentValue)
@@ -67,6 +103,12 @@ func (x *IOBluetoothHandsFreeAudioGateway) asIOBluetoothHandsFree() *raw.IOBluet
 // IOBluetoothHandsFreeAudioGatewayable is the interface implemented by [IOBluetoothHandsFreeAudioGateway], for mocking and DI.
 type IOBluetoothHandsFreeAudioGatewayable interface {
 	Unwrap() *raw.IOBluetoothHandsFreeAudioGateway
+	WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeAudioGateway
+	WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeAudioGateway
+	WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeAudioGateway
+	WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeAudioGateway
+	WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeAudioGateway
+	WithDelegate(delegate raw.IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFreeAudioGateway
 	CreateIndicatorMinMaxCurrentValue(indicatorName string, minValue int, maxValue int, currentValue int)
 	ProcessATCommand(atCommand string)
 	SendOKResponse()

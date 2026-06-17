@@ -36,6 +36,18 @@ func NewDOMWheelEventWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKe
 	return &DOMWheelEvent{inner: raw.DOMWheelEventFromID(_id)}
 }
 
+// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+func (x *DOMWheelEvent) WithReturnValue(returnValue bool) *DOMWheelEvent {
+	x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.SetReturnValue(returnValue)
+	return x
+}
+
+// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+func (x *DOMWheelEvent) WithCancelBubble(cancelBubble bool) *DOMWheelEvent {
+	x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.SetCancelBubble(cancelBubble)
+	return x
+}
+
 // WheelDeltaX calls the underlying WheelDeltaX.
 func (x *DOMWheelEvent) WheelDeltaX() int {
 	return x.inner.WheelDeltaX()
@@ -69,6 +81,8 @@ func (x *DOMWheelEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inn
 // DOMWheelEventable is the interface implemented by [DOMWheelEvent], for mocking and DI.
 type DOMWheelEventable interface {
 	Unwrap() *raw.DOMWheelEvent
+	WithReturnValue(returnValue bool) *DOMWheelEvent
+	WithCancelBubble(cancelBubble bool) *DOMWheelEvent
 	WheelDeltaX() int
 	WheelDeltaY() int
 	WheelDelta() int

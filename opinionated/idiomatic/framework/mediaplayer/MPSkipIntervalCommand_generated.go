@@ -54,6 +54,12 @@ func (x *SkipIntervalCommand) WithPreferredIntervals(items ...*foundation.NSNumb
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *SkipIntervalCommand) WithEnabled(enabled bool) *SkipIntervalCommand {
+	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	return x
+}
+
 // PreferredIntervals returns the collection as a Go slice.
 func (x *SkipIntervalCommand) PreferredIntervals() []*foundation.NSNumber {
 	arr := x.inner.PreferredIntervals()
@@ -76,6 +82,7 @@ func (x *SkipIntervalCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x
 type SkipIntervalCommandable interface {
 	Unwrap() *raw.MPSkipIntervalCommand
 	WithPreferredIntervals(items ...*foundation.NSNumber) *SkipIntervalCommand
+	WithEnabled(enabled bool) *SkipIntervalCommand
 	PreferredIntervals() []*foundation.NSNumber
 	SetPreferredIntervals(preferredIntervals *foundation.NSArray[*foundation.NSNumber])
 }

@@ -52,11 +52,25 @@ func NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncodi
 	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
 }
 
+// WithIsCube sets the isCube property and returns the receiver for chaining.
+func (x *NoiseTexture) WithIsCube(isCube bool) *NoiseTexture {
+	x.inner.MDLTexture.SetIsCube(isCube)
+	return x
+}
+
+// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+func (x *NoiseTexture) WithHasAlphaValues(hasAlphaValues bool) *NoiseTexture {
+	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	return x
+}
+
 func (x *NoiseTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
 // NoiseTextureable is the interface implemented by [NoiseTexture], for mocking and DI.
 type NoiseTextureable interface {
 	Unwrap() *raw.MDLNoiseTexture
+	WithIsCube(isCube bool) *NoiseTexture
+	WithHasAlphaValues(hasAlphaValues bool) *NoiseTexture
 }
 
 var _ NoiseTextureable = (*NoiseTexture)(nil)

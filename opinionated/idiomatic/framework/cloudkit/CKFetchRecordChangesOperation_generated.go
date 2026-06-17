@@ -98,6 +98,60 @@ func (x *FetchRecordChangesOperation) WithFetchRecordChangesCompletionBlock(fetc
 	return x
 }
 
+// WithDatabase sets the database property and returns the receiver for chaining.
+func (x *FetchRecordChangesOperation) WithDatabase(database *raw.CKDatabase) *FetchRecordChangesOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database)
+	return x
+}
+
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *FetchRecordChangesOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchRecordChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *FetchRecordChangesOperation) WithGroup(group *raw.CKOperationGroup) *FetchRecordChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *FetchRecordChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *FetchRecordChangesOperation) WithContainer(container *raw.CKContainer) *FetchRecordChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *FetchRecordChangesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *FetchRecordChangesOperation) WithLongLived(longLived bool) *FetchRecordChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *FetchRecordChangesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *FetchRecordChangesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // RecordZoneID calls the underlying RecordZoneID.
 func (x *FetchRecordChangesOperation) RecordZoneID() *RecordZoneID {
 	_r := x.inner.RecordZoneID()
@@ -237,6 +291,15 @@ type FetchRecordChangesOperationable interface {
 	WithRecordChangedBlock(recordChangedBlock func(*raw.CKRecord)) *FetchRecordChangesOperation
 	WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID)) *FetchRecordChangesOperation
 	WithFetchRecordChangesCompletionBlock(fetchRecordChangesCompletionBlock func(*raw.CKServerChangeToken, *foundation.NSData, unsafe.Pointer)) *FetchRecordChangesOperation
+	WithDatabase(database *raw.CKDatabase) *FetchRecordChangesOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchRecordChangesOperation
+	WithGroup(group *raw.CKOperationGroup) *FetchRecordChangesOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordChangesOperation
+	WithContainer(container *raw.CKContainer) *FetchRecordChangesOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordChangesOperation
+	WithLongLived(longLived bool) *FetchRecordChangesOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordChangesOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordChangesOperation
 	RecordZoneID() *RecordZoneID
 	SetRecordZoneID(recordZoneID *raw.CKRecordZoneID)
 	PreviousServerChangeToken() *ServerChangeToken

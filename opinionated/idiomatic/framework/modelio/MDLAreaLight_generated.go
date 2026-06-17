@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -45,6 +46,78 @@ func (x *AreaLight) WithAreaRadius(areaRadius float32) *AreaLight {
 // WithAspect sets the aspect property and returns the receiver for chaining.
 func (x *AreaLight) WithAspect(aspect float32) *AreaLight {
 	x.inner.SetAspect(aspect)
+	return x
+}
+
+// WithLumens sets the lumens property and returns the receiver for chaining.
+func (x *AreaLight) WithLumens(lumens float32) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.SetLumens(lumens)
+	return x
+}
+
+// WithInnerConeAngle sets the innerConeAngle property and returns the receiver for chaining.
+func (x *AreaLight) WithInnerConeAngle(innerConeAngle float32) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.SetInnerConeAngle(innerConeAngle)
+	return x
+}
+
+// WithOuterConeAngle sets the outerConeAngle property and returns the receiver for chaining.
+func (x *AreaLight) WithOuterConeAngle(outerConeAngle float32) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.SetOuterConeAngle(outerConeAngle)
+	return x
+}
+
+// WithAttenuationStartDistance sets the attenuationStartDistance property and returns the receiver for chaining.
+func (x *AreaLight) WithAttenuationStartDistance(attenuationStartDistance float32) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationStartDistance(attenuationStartDistance)
+	return x
+}
+
+// WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
+func (x *AreaLight) WithAttenuationEndDistance(attenuationEndDistance float32) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationEndDistance(attenuationEndDistance)
+	return x
+}
+
+// WithLightType sets the lightType property and returns the receiver for chaining.
+func (x *AreaLight) WithLightType(lightType raw.MDLLightType) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetLightType(lightType)
+	return x
+}
+
+// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+func (x *AreaLight) WithColorSpace(colorSpace string) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
+	return x
+}
+
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *AreaLight) WithParent(parent ObjectProvider) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *AreaLight) WithInstance(instance ObjectProvider) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *AreaLight) WithTransform(transform raw.MDLTransformComponent) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *AreaLight) WithChildren(children raw.MDLObjectContainerComponent) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *AreaLight) WithHidden(hidden bool) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetHidden(hidden)
 	return x
 }
 
@@ -89,6 +162,18 @@ type AreaLightable interface {
 	Unwrap() *raw.MDLAreaLight
 	WithAreaRadius(areaRadius float32) *AreaLight
 	WithAspect(aspect float32) *AreaLight
+	WithLumens(lumens float32) *AreaLight
+	WithInnerConeAngle(innerConeAngle float32) *AreaLight
+	WithOuterConeAngle(outerConeAngle float32) *AreaLight
+	WithAttenuationStartDistance(attenuationStartDistance float32) *AreaLight
+	WithAttenuationEndDistance(attenuationEndDistance float32) *AreaLight
+	WithLightType(lightType raw.MDLLightType) *AreaLight
+	WithColorSpace(colorSpace string) *AreaLight
+	WithParent(parent ObjectProvider) *AreaLight
+	WithInstance(instance ObjectProvider) *AreaLight
+	WithTransform(transform raw.MDLTransformComponent) *AreaLight
+	WithChildren(children raw.MDLObjectContainerComponent) *AreaLight
+	WithHidden(hidden bool) *AreaLight
 	AreaRadius() float32
 	SetAreaRadius(areaRadius float32)
 	SuperEllipticPower() unsafe.Pointer

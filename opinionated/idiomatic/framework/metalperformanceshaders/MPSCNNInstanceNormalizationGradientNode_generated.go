@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNInstanceNormalizationGradientNodeWithSourceGradientSourceImageGradien
 	return &CNNInstanceNormalizationGradientNode{inner: raw.MPSCNNInstanceNormalizationGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNInstanceNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradientNode) WithLabel(label string) *CNNInstanceNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNInstanceNormalizationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNInstanceNormalizationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
@@ -44,6 +57,8 @@ func (x *CNNInstanceNormalizationGradientNode) asNNFilterNode() *mpsneuralnetwor
 // CNNInstanceNormalizationGradientNodeable is the interface implemented by [CNNInstanceNormalizationGradientNode], for mocking and DI.
 type CNNInstanceNormalizationGradientNodeable interface {
 	Unwrap() *raw.MPSCNNInstanceNormalizationGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNInstanceNormalizationGradientNode
+	WithLabel(label string) *CNNInstanceNormalizationGradientNode
 }
 
 var _ CNNInstanceNormalizationGradientNodeable = (*CNNInstanceNormalizationGradientNode)(nil)

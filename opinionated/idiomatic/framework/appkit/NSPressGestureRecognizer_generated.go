@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,6 +60,90 @@ func (x *PressGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequ
 	return x
 }
 
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithTarget(target objc.ID) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithAction(action objc.SEL) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAction(action)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithState(state raw.NSGestureRecognizerState) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetState(state)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelegate(delegate)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithEnabled(enabled bool) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetEnabled(enabled)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
+	return x
+}
+
+// WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
+	return x
+}
+
+// WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
+	return x
+}
+
+// WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysKeyEvents(delaysKeyEvents)
+	return x
+}
+
+// WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysMagnificationEvents(delaysMagnificationEvents)
+	return x
+}
+
+// WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysRotationEvents(delaysRotationEvents)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithName(name string) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *PressGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
 // ButtonMask calls the underlying ButtonMask.
 func (x *PressGestureRecognizer) ButtonMask() uint {
 	return x.inner.ButtonMask()
@@ -108,6 +193,20 @@ type PressGestureRecognizerable interface {
 	WithMinimumPressDuration(minimumPressDuration float64) *PressGestureRecognizer
 	WithAllowableMovement(allowableMovement float64) *PressGestureRecognizer
 	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PressGestureRecognizer
+	WithTarget(target objc.ID) *PressGestureRecognizer
+	WithAction(action objc.SEL) *PressGestureRecognizer
+	WithState(state raw.NSGestureRecognizerState) *PressGestureRecognizer
+	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *PressGestureRecognizer
+	WithEnabled(enabled bool) *PressGestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PressGestureRecognizer
+	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PressGestureRecognizer
+	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PressGestureRecognizer
+	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PressGestureRecognizer
+	WithDelaysKeyEvents(delaysKeyEvents bool) *PressGestureRecognizer
+	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PressGestureRecognizer
+	WithDelaysRotationEvents(delaysRotationEvents bool) *PressGestureRecognizer
+	WithName(name string) *PressGestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PressGestureRecognizer
 	ButtonMask() uint
 	SetButtonMask(buttonMask uint)
 	MinimumPressDuration() float64

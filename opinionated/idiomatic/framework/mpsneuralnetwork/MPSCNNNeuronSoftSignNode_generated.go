@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewCNNNeuronSoftSignNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeur
 	return &CNNNeuronSoftSignNode{inner: raw.MPSCNNNeuronSoftSignNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSignNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronSoftSignNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronSoftSignNode) WithLabel(label string) *CNNNeuronSoftSignNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronSoftSignNode) asCNNNeuronNode() *raw.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
 
 func (x *CNNNeuronSoftSignNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
@@ -43,6 +56,8 @@ func (x *CNNNeuronSoftSignNode) asNNFilterNode() *raw.MPSNNFilterNode { return &
 // CNNNeuronSoftSignNodeable is the interface implemented by [CNNNeuronSoftSignNode], for mocking and DI.
 type CNNNeuronSoftSignNodeable interface {
 	Unwrap() *raw.MPSCNNNeuronSoftSignNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronSoftSignNode
+	WithLabel(label string) *CNNNeuronSoftSignNode
 }
 
 var _ CNNNeuronSoftSignNodeable = (*CNNNeuronSoftSignNode)(nil)

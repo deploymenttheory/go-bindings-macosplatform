@@ -74,6 +74,12 @@ func (x *StandardMapConfiguration) WithShowsTraffic(showsTraffic bool) *Standard
 	return x
 }
 
+// WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
+func (x *StandardMapConfiguration) WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *StandardMapConfiguration {
+	x.inner.MKMapConfiguration.SetElevationStyle(elevationStyle)
+	return x
+}
+
 // EmphasisStyle calls the underlying EmphasisStyle.
 func (x *StandardMapConfiguration) EmphasisStyle() raw.MKStandardMapEmphasisStyle {
 	return x.inner.EmphasisStyle()
@@ -116,6 +122,7 @@ type StandardMapConfigurationable interface {
 	WithEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle) *StandardMapConfiguration
 	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *StandardMapConfiguration
 	WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration
+	WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *StandardMapConfiguration
 	EmphasisStyle() raw.MKStandardMapEmphasisStyle
 	SetEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle)
 	PointOfInterestFilter() *PointOfInterestFilter

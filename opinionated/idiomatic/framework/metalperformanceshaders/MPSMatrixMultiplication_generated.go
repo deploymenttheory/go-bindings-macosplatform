@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -75,6 +76,18 @@ func (x *MatrixMultiplication) WithBatchSize(batchSize uint) *MatrixMultiplicati
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixMultiplication) WithOptions(options mpscore.MPSKernelOptions) *MatrixMultiplication {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixMultiplication) WithLabel(label string) *MatrixMultiplication {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix calls the underlying EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix.
 func (x *MatrixMultiplication) EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, leftMatrix *mpscore.MPSMatrix, rightMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix(commandBuffer, leftMatrix, rightMatrix, resultMatrix)
@@ -140,6 +153,8 @@ type MatrixMultiplicationable interface {
 	WithRightMatrixOrigin(rightMatrixOrigin metal.MTLOrigin) *MatrixMultiplication
 	WithBatchStart(batchStart uint) *MatrixMultiplication
 	WithBatchSize(batchSize uint) *MatrixMultiplication
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixMultiplication
+	WithLabel(label string) *MatrixMultiplication
 	EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, leftMatrix *mpscore.MPSMatrix, rightMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix)
 	ResultMatrixOrigin() metal.MTLOrigin
 	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)

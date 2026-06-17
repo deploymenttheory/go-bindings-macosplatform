@@ -36,6 +36,30 @@ func NewAssetCreationRequest() *AssetCreationRequest {
 	return &AssetCreationRequest{inner: raw.PHAssetCreationRequestFromID(_id)}
 }
 
+// WithCreationDate sets the creationDate property and returns the receiver for chaining.
+func (x *AssetCreationRequest) WithCreationDate(creationDate *foundation.NSDate) *AssetCreationRequest {
+	x.inner.PHAssetChangeRequest.SetCreationDate(creationDate)
+	return x
+}
+
+// WithFavorite sets the favorite property and returns the receiver for chaining.
+func (x *AssetCreationRequest) WithFavorite(favorite bool) *AssetCreationRequest {
+	x.inner.PHAssetChangeRequest.SetFavorite(favorite)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *AssetCreationRequest) WithHidden(hidden bool) *AssetCreationRequest {
+	x.inner.PHAssetChangeRequest.SetHidden(hidden)
+	return x
+}
+
+// WithContentEditingOutput sets the contentEditingOutput property and returns the receiver for chaining.
+func (x *AssetCreationRequest) WithContentEditingOutput(contentEditingOutput *raw.PHContentEditingOutput) *AssetCreationRequest {
+	x.inner.PHAssetChangeRequest.SetContentEditingOutput(contentEditingOutput)
+	return x
+}
+
 // AddResourceWithTypeFileURLOptions calls the underlying AddResourceWithTypeFileURLOptions.
 func (x *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ raw.PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions) {
 	x.inner.AddResourceWithTypeFileURLOptions(type_, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options)
@@ -53,6 +77,10 @@ func (x *AssetCreationRequest) asChangeRequest() *raw.PHChangeRequest { return &
 // AssetCreationRequestable is the interface implemented by [AssetCreationRequest], for mocking and DI.
 type AssetCreationRequestable interface {
 	Unwrap() *raw.PHAssetCreationRequest
+	WithCreationDate(creationDate *foundation.NSDate) *AssetCreationRequest
+	WithFavorite(favorite bool) *AssetCreationRequest
+	WithHidden(hidden bool) *AssetCreationRequest
+	WithContentEditingOutput(contentEditingOutput *raw.PHContentEditingOutput) *AssetCreationRequest
 	AddResourceWithTypeFileURLOptions(type_ raw.PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions)
 	AddResourceWithTypeDataOptions(type_ raw.PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions)
 }

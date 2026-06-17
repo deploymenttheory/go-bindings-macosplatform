@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -43,6 +44,30 @@ func NewCNNBinaryConvolutionNodeWithSourceWeightsOutputBiasTermsOutputScaleTerms
 	return &CNNBinaryConvolutionNode{inner: raw.MPSCNNBinaryConvolutionNodeFromID(_id)}
 }
 
+// WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
+func (x *CNNBinaryConvolutionNode) WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNBinaryConvolutionNode {
+	x.inner.MPSCNNConvolutionNode.SetTrainingStyle(trainingStyle)
+	return x
+}
+
+// WithAccumulatorPrecision sets the accumulatorPrecision property and returns the receiver for chaining.
+func (x *CNNBinaryConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNBinaryConvolutionNode {
+	x.inner.MPSCNNConvolutionNode.SetAccumulatorPrecision(accumulatorPrecision)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNBinaryConvolutionNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNBinaryConvolutionNode {
+	x.inner.MPSCNNConvolutionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNBinaryConvolutionNode) WithLabel(label string) *CNNBinaryConvolutionNode {
+	x.inner.MPSCNNConvolutionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNBinaryConvolutionNode) asCNNBinaryConvolutionNode() *raw.MPSCNNBinaryConvolutionNode { return x.inner }
 
 func (x *CNNBinaryConvolutionNode) asCNNConvolutionNode() *raw.MPSCNNConvolutionNode { return &x.inner.MPSCNNConvolutionNode }
@@ -52,6 +77,10 @@ func (x *CNNBinaryConvolutionNode) asNNFilterNode() *raw.MPSNNFilterNode { retur
 // CNNBinaryConvolutionNodeable is the interface implemented by [CNNBinaryConvolutionNode], for mocking and DI.
 type CNNBinaryConvolutionNodeable interface {
 	Unwrap() *raw.MPSCNNBinaryConvolutionNode
+	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNBinaryConvolutionNode
+	WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNBinaryConvolutionNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNBinaryConvolutionNode
+	WithLabel(label string) *CNNBinaryConvolutionNode
 }
 
 var _ CNNBinaryConvolutionNodeable = (*CNNBinaryConvolutionNode)(nil)

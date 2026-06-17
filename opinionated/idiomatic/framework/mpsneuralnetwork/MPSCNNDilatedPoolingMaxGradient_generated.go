@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,120 @@ func NewCNNDilatedPoolingMaxGradientWithCoderDevice(aDecoder *foundation.NSCoder
 	return &CNNDilatedPoolingMaxGradient{inner: raw.MPSCNNDilatedPoolingMaxGradientFromID(_id)}
 }
 
+// WithSourceSize sets the sourceSize property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithSourceSize(sourceSize metal.MTLSize) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.SetSourceSize(sourceSize)
+	return x
+}
+
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithKernelOffsetX(kernelOffsetX int) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithKernelOffsetY(kernelOffsetY int) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithClipRect(clipRect metal.MTLRegion) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithPadding(padding raw.MPSNNPadding) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDilatedPoolingMaxGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNDilatedPoolingMaxGradient) asCNNPoolingGradient() *raw.MPSCNNPoolingGradient { return &x.inner.MPSCNNPoolingGradient }
 
 func (x *CNNDilatedPoolingMaxGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel }
@@ -54,6 +169,25 @@ func (x *CNNDilatedPoolingMaxGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKern
 // CNNDilatedPoolingMaxGradientable is the interface implemented by [CNNDilatedPoolingMaxGradient], for mocking and DI.
 type CNNDilatedPoolingMaxGradientable interface {
 	Unwrap() *raw.MPSCNNDilatedPoolingMaxGradient
+	WithSourceSize(sourceSize metal.MTLSize) *CNNDilatedPoolingMaxGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNDilatedPoolingMaxGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNDilatedPoolingMaxGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNDilatedPoolingMaxGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNDilatedPoolingMaxGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNDilatedPoolingMaxGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNDilatedPoolingMaxGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNDilatedPoolingMaxGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDilatedPoolingMaxGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDilatedPoolingMaxGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNDilatedPoolingMaxGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNDilatedPoolingMaxGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNDilatedPoolingMaxGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNDilatedPoolingMaxGradient
+	WithPadding(padding raw.MPSNNPadding) *CNNDilatedPoolingMaxGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDilatedPoolingMaxGradient
 }
 
 var _ CNNDilatedPoolingMaxGradientable = (*CNNDilatedPoolingMaxGradient)(nil)

@@ -36,11 +36,18 @@ func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflow
 	return &DecimalNumberHandler{inner: raw.NSDecimalNumberHandlerFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DecimalNumberHandler) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DecimalNumberHandler {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *DecimalNumberHandler) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // DecimalNumberHandlerable is the interface implemented by [DecimalNumberHandler], for mocking and DI.
 type DecimalNumberHandlerable interface {
 	Unwrap() *raw.NSDecimalNumberHandler
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DecimalNumberHandler
 }
 
 var _ DecimalNumberHandlerable = (*DecimalNumberHandler)(nil)

@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -46,6 +47,18 @@ func (x *NNOptimizer) WithLearningRate(learningRate float32) *NNOptimizer {
 // WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
 func (x *NNOptimizer) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizer {
 	x.inner.SetApplyGradientClipping(applyGradientClipping)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNOptimizer) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizer {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNOptimizer) WithLabel(label string) *NNOptimizer {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
@@ -101,6 +114,8 @@ type NNOptimizerable interface {
 	Unwrap() *raw.MPSNNOptimizer
 	WithLearningRate(learningRate float32) *NNOptimizer
 	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizer
+	WithOptions(options mpscore.MPSKernelOptions) *NNOptimizer
+	WithLabel(label string) *NNOptimizer
 	SetLearningRate(newLearningRate float32)
 	LearningRate() float32
 	GradientRescale() float32

@@ -5,6 +5,7 @@
 package gamecontroller
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,6 +48,36 @@ func (x *ControllerAxisInput) WithValue(value float32) *ControllerAxisInput {
 	return x
 }
 
+// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
+func (x *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerAxisInput {
+	x.inner.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+	return x
+}
+
+// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+func (x *ControllerAxisInput) WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput {
+	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	return x
+}
+
+// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+func (x *ControllerAxisInput) WithLocalizedName(localizedName string) *ControllerAxisInput {
+	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	return x
+}
+
+// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+func (x *ControllerAxisInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerAxisInput {
+	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	return x
+}
+
+// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+func (x *ControllerAxisInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerAxisInput {
+	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+	return x
+}
+
 // SetValue calls the underlying SetValue.
 func (x *ControllerAxisInput) SetValue(value float32) {
 	x.inner.SetValue(value)
@@ -74,6 +105,11 @@ type ControllerAxisInputable interface {
 	Unwrap() *raw.GCControllerAxisInput
 	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerAxisInput, float32)) *ControllerAxisInput
 	WithValue(value float32) *ControllerAxisInput
+	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerAxisInput
+	WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput
+	WithLocalizedName(localizedName string) *ControllerAxisInput
+	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerAxisInput
+	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerAxisInput
 	SetValue(value float32)
 	ValueChangedHandler() objc.Block
 	SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerAxisInput, float32))

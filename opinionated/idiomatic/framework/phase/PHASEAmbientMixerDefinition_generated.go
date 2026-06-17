@@ -46,6 +46,18 @@ func NewAmbientMixerDefinitionWithChannelLayoutOrientation(layout *avfaudio.AVAu
 	return &AmbientMixerDefinition{inner: raw.PHASEAmbientMixerDefinitionFromID(_id)}
 }
 
+// WithGain sets the gain property and returns the receiver for chaining.
+func (x *AmbientMixerDefinition) WithGain(gain float64) *AmbientMixerDefinition {
+	x.inner.PHASEMixerDefinition.SetGain(gain)
+	return x
+}
+
+// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
+func (x *AmbientMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *AmbientMixerDefinition {
+	x.inner.PHASEMixerDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
+	return x
+}
+
 // Orientation calls the underlying Orientation.
 func (x *AmbientMixerDefinition) Orientation() unsafe.Pointer {
 	return x.inner.Orientation()
@@ -63,6 +75,8 @@ func (x *AmbientMixerDefinition) asDefinition() *raw.PHASEDefinition { return &x
 // AmbientMixerDefinitionable is the interface implemented by [AmbientMixerDefinition], for mocking and DI.
 type AmbientMixerDefinitionable interface {
 	Unwrap() *raw.PHASEAmbientMixerDefinition
+	WithGain(gain float64) *AmbientMixerDefinition
+	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *AmbientMixerDefinition
 	Orientation() unsafe.Pointer
 	InputChannelLayout() *avfaudio.AVAudioChannelLayout
 }

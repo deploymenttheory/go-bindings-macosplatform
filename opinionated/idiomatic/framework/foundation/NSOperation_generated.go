@@ -68,6 +68,12 @@ func (x *Operation) WithName(name string) *Operation {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Operation) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Operation {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Start calls the underlying Start.
 func (x *Operation) Start() {
 	x.inner.Start()
@@ -214,6 +220,7 @@ type Operationable interface {
 	WithThreadPriority(threadPriority float64) *Operation
 	WithQualityOfService(qualityOfService raw.NSQualityOfService) *Operation
 	WithName(name string) *Operation
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Operation
 	Start()
 	Main()
 	Cancel()

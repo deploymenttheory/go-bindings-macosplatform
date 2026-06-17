@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTestClusterClusterTestSimpleArgumentRequestParams() *MTRTestClusterCl
 	return &MTRTestClusterClusterTestSimpleArgumentRequestParams{inner: raw.MTRTestClusterClusterTestSimpleArgumentRequestParamsFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestSimpleArgumentRequestParams) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestSimpleArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestSimpleArgumentRequestParams.SetArg1(arg1)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestSimpleArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestSimpleArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestSimpleArgumentRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestSimpleArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestSimpleArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestSimpleArgumentRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestSimpleArgumentRequestParams) asMTRUnitTestingClusterTestSimpleArgumentRequestParams() *raw.MTRUnitTestingClusterTestSimpleArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestSimpleArgumentRequestParams }
 
 // MTRTestClusterClusterTestSimpleArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestSimpleArgumentRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestSimpleArgumentRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestSimpleArgumentRequestParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestSimpleArgumentRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestSimpleArgumentRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestSimpleArgumentRequestParams
 }
 
 var _ MTRTestClusterClusterTestSimpleArgumentRequestParamsable = (*MTRTestClusterClusterTestSimpleArgumentRequestParams)(nil)

@@ -110,6 +110,12 @@ func (x *MetadataQuery) WithOperationQueue(operationQueue *raw.NSOperationQueue)
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MetadataQuery) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQuery {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StartQuery calls the underlying StartQuery.
 func (x *MetadataQuery) StartQuery() bool {
 	return x.inner.StartQuery()
@@ -324,6 +330,7 @@ type MetadataQueryable interface {
 	WithGroupingAttributes(items ...StringProvider) *MetadataQuery
 	WithNotificationBatchingInterval(notificationBatchingInterval float64) *MetadataQuery
 	WithOperationQueue(operationQueue *raw.NSOperationQueue) *MetadataQuery
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQuery
 	StartQuery() bool
 	StopQuery()
 	DisableUpdates()

@@ -59,6 +59,12 @@ func (x *MeasurementFormatter) WithNumberFormatter(numberFormatter *raw.NSNumber
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MeasurementFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MeasurementFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringFromMeasurement calls the underlying StringFromMeasurement.
 func (x *MeasurementFormatter) StringFromMeasurement(measurement *raw.NSMeasurement[objc.ID]) *String {
 	_r := x.inner.StringFromMeasurement(measurement)
@@ -136,6 +142,7 @@ type MeasurementFormatterable interface {
 	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *MeasurementFormatter
 	WithLocale(locale *raw.NSLocale) *MeasurementFormatter
 	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *MeasurementFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MeasurementFormatter
 	StringFromMeasurement(measurement *raw.NSMeasurement[objc.ID]) *String
 	StringFromUnit(unit *raw.NSUnit) *String
 	UnitOptions() raw.NSMeasurementFormatterUnitOptions

@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -45,6 +46,30 @@ func NewDetectHumanBodyPose3DRequestWithCompletionHandler(completionHandler func
 	return &DetectHumanBodyPose3DRequest{inner: raw.VNDetectHumanBodyPose3DRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectHumanBodyPose3DRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanBodyPose3DRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectHumanBodyPose3DRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanBodyPose3DRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectHumanBodyPose3DRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanBodyPose3DRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectHumanBodyPose3DRequest) WithRevision(revision uint) *DetectHumanBodyPose3DRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // SupportedJointNames returns the collection as a Go slice.
 func (x *DetectHumanBodyPose3DRequest) SupportedJointNames() ([]*foundation.NSString, error) {
 	arr, err := x.inner.SupportedJointNamesAndReturnError()
@@ -82,6 +107,10 @@ func (x *DetectHumanBodyPose3DRequest) asRequest() *raw.VNRequest { return &x.in
 // DetectHumanBodyPose3DRequestable is the interface implemented by [DetectHumanBodyPose3DRequest], for mocking and DI.
 type DetectHumanBodyPose3DRequestable interface {
 	Unwrap() *raw.VNDetectHumanBodyPose3DRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanBodyPose3DRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanBodyPose3DRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanBodyPose3DRequest
+	WithRevision(revision uint) *DetectHumanBodyPose3DRequest
 	SupportedJointNames() ([]*foundation.NSString, error)
 	SupportedJointsGroupNames() ([]*foundation.NSString, error)
 }

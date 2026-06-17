@@ -42,6 +42,12 @@ func (x *SpellServer) WithDelegate(delegate raw.NSSpellServerDelegate) *SpellSer
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *SpellServer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SpellServer {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // RegisterLanguageByVendor calls the underlying RegisterLanguageByVendor.
 func (x *SpellServer) RegisterLanguageByVendor(language string, vendor string) bool {
 	return x.inner.RegisterLanguageByVendor(foundation.NSStringStringWithUTF8String(language), foundation.NSStringStringWithUTF8String(vendor))
@@ -73,6 +79,7 @@ func (x *SpellServer) asObject() *raw.NSObject { return &x.inner.NSObject }
 type SpellServerable interface {
 	Unwrap() *raw.NSSpellServer
 	WithDelegate(delegate raw.NSSpellServerDelegate) *SpellServer
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SpellServer
 	RegisterLanguageByVendor(language string, vendor string) bool
 	IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool
 	Run()

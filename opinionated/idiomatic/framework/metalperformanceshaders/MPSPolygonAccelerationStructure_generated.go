@@ -117,6 +117,24 @@ func (x *PolygonAccelerationStructure) WithPolygonBuffers(items ...*mpsrayinters
 	return x
 }
 
+// WithUsage sets the usage property and returns the receiver for chaining.
+func (x *PolygonAccelerationStructure) WithUsage(usage mpsrayintersector.MPSAccelerationStructureUsage) *PolygonAccelerationStructure {
+	x.inner.MPSAccelerationStructure.SetUsage(usage)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *PolygonAccelerationStructure) WithOptions(options mpscore.MPSKernelOptions) *PolygonAccelerationStructure {
+	x.inner.MPSAccelerationStructure.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *PolygonAccelerationStructure) WithLabel(label string) *PolygonAccelerationStructure {
+	x.inner.MPSAccelerationStructure.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // PolygonType calls the underlying PolygonType.
 func (x *PolygonAccelerationStructure) PolygonType() mpsrayintersector.MPSPolygonType {
 	return x.inner.PolygonType()
@@ -251,6 +269,9 @@ type PolygonAccelerationStructureable interface {
 	WithMaskBufferOffset(maskBufferOffset uint) *PolygonAccelerationStructure
 	WithPolygonCount(polygonCount uint) *PolygonAccelerationStructure
 	WithPolygonBuffers(items ...*mpsrayintersector.MPSPolygonBuffer) *PolygonAccelerationStructure
+	WithUsage(usage mpsrayintersector.MPSAccelerationStructureUsage) *PolygonAccelerationStructure
+	WithOptions(options mpscore.MPSKernelOptions) *PolygonAccelerationStructure
+	WithLabel(label string) *PolygonAccelerationStructure
 	PolygonType() mpsrayintersector.MPSPolygonType
 	SetPolygonType(polygonType mpsrayintersector.MPSPolygonType)
 	VertexStride() uint

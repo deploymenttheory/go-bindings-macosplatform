@@ -37,6 +37,18 @@ func NewSliceLayer() *SliceLayer {
 	return &SliceLayer{inner: raw.MLCSliceLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *SliceLayer) WithLabel(label string) *SliceLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *SliceLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SliceLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Start returns the collection as a Go slice.
 func (x *SliceLayer) Start() []*foundation.NSNumber {
 	arr := x.inner.Start()
@@ -75,6 +87,8 @@ func (x *SliceLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // SliceLayerable is the interface implemented by [SliceLayer], for mocking and DI.
 type SliceLayerable interface {
 	Unwrap() *raw.MLCSliceLayer
+	WithLabel(label string) *SliceLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SliceLayer
 	Start() []*foundation.NSNumber
 	End() []*foundation.NSNumber
 	Stride() []*foundation.NSNumber

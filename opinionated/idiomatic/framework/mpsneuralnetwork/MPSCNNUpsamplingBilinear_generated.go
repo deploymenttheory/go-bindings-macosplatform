@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -44,6 +45,54 @@ func NewCNNUpsamplingBilinearWithDeviceIntegerScaleFactorXIntegerScaleFactorYAli
 	return &CNNUpsamplingBilinear{inner: raw.MPSCNNUpsamplingBilinearFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithOffset(offset mpscore.MPSOffset) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithClipRect(clipRect metal.MTLRegion) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithPadding(padding raw.MPSNNPadding) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNUpsamplingBilinear) asCNNUpsampling() *raw.MPSCNNUpsampling { return &x.inner.MPSCNNUpsampling }
 
 func (x *CNNUpsamplingBilinear) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNUpsampling.MPSCNNKernel }
@@ -51,6 +100,14 @@ func (x *CNNUpsamplingBilinear) asCNNKernel() *raw.MPSCNNKernel { return &x.inne
 // CNNUpsamplingBilinearable is the interface implemented by [CNNUpsamplingBilinear], for mocking and DI.
 type CNNUpsamplingBilinearable interface {
 	Unwrap() *raw.MPSCNNUpsamplingBilinear
+	WithOffset(offset mpscore.MPSOffset) *CNNUpsamplingBilinear
+	WithClipRect(clipRect metal.MTLRegion) *CNNUpsamplingBilinear
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsamplingBilinear
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsamplingBilinear
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsamplingBilinear
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingBilinear
+	WithPadding(padding raw.MPSNNPadding) *CNNUpsamplingBilinear
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsamplingBilinear
 }
 
 var _ CNNUpsamplingBilinearable = (*CNNUpsamplingBilinear)(nil)

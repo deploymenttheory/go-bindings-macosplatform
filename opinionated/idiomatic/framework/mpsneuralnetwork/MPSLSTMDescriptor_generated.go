@@ -137,6 +137,36 @@ func (x *LSTMDescriptor) WithCellToOutputNeuronParamC(cellToOutputNeuronParamC f
 	return x
 }
 
+// WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
+func (x *LSTMDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *LSTMDescriptor {
+	x.inner.MPSRNNDescriptor.SetInputFeatureChannels(inputFeatureChannels)
+	return x
+}
+
+// WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
+func (x *LSTMDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *LSTMDescriptor {
+	x.inner.MPSRNNDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
+	return x
+}
+
+// WithUseLayerInputUnitTransformMode sets the useLayerInputUnitTransformMode property and returns the receiver for chaining.
+func (x *LSTMDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *LSTMDescriptor {
+	x.inner.MPSRNNDescriptor.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
+	return x
+}
+
+// WithUseFloat32Weights sets the useFloat32Weights property and returns the receiver for chaining.
+func (x *LSTMDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *LSTMDescriptor {
+	x.inner.MPSRNNDescriptor.SetUseFloat32Weights(useFloat32Weights)
+	return x
+}
+
+// WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
+func (x *LSTMDescriptor) WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *LSTMDescriptor {
+	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(layerSequenceDirection)
+	return x
+}
+
 // MemoryWeightsAreDiagonal calls the underlying MemoryWeightsAreDiagonal.
 func (x *LSTMDescriptor) MemoryWeightsAreDiagonal() bool {
 	return x.inner.MemoryWeightsAreDiagonal()
@@ -329,6 +359,11 @@ type LSTMDescriptorable interface {
 	WithCellToOutputNeuronParamA(cellToOutputNeuronParamA float32) *LSTMDescriptor
 	WithCellToOutputNeuronParamB(cellToOutputNeuronParamB float32) *LSTMDescriptor
 	WithCellToOutputNeuronParamC(cellToOutputNeuronParamC float32) *LSTMDescriptor
+	WithInputFeatureChannels(inputFeatureChannels uint) *LSTMDescriptor
+	WithOutputFeatureChannels(outputFeatureChannels uint) *LSTMDescriptor
+	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *LSTMDescriptor
+	WithUseFloat32Weights(useFloat32Weights bool) *LSTMDescriptor
+	WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *LSTMDescriptor
 	MemoryWeightsAreDiagonal() bool
 	SetMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool)
 	InputGateInputWeights() raw.MPSCNNConvolutionDataSource

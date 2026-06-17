@@ -37,6 +37,12 @@ func NewScriptClassDescriptionWithSuiteNameClassNameDictionary(suiteName string,
 	return &ScriptClassDescription{inner: raw.NSScriptClassDescriptionFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ScriptClassDescription) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptClassDescription {
+	x.inner.NSClassDescription.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // MatchesAppleEventCode calls the underlying MatchesAppleEventCode.
 func (x *ScriptClassDescription) MatchesAppleEventCode(appleEventCode uint) bool {
 	return x.inner.MatchesAppleEventCode(appleEventCode)
@@ -162,6 +168,7 @@ func (x *ScriptClassDescription) asObject() *raw.NSObject { return &x.inner.NSCl
 // ScriptClassDescriptionable is the interface implemented by [ScriptClassDescription], for mocking and DI.
 type ScriptClassDescriptionable interface {
 	Unwrap() *raw.NSScriptClassDescription
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptClassDescription
 	MatchesAppleEventCode(appleEventCode uint) bool
 	SupportsCommand(commandDescription *raw.NSScriptCommandDescription) bool
 	SelectorForCommand(commandDescription *raw.NSScriptCommandDescription) objc.SEL

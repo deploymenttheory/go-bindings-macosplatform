@@ -37,6 +37,18 @@ func NewReshapeLayer() *ReshapeLayer {
 	return &ReshapeLayer{inner: raw.MLCReshapeLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ReshapeLayer) WithLabel(label string) *ReshapeLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *ReshapeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReshapeLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Shape returns the collection as a Go slice.
 func (x *ReshapeLayer) Shape() []*foundation.NSNumber {
 	arr := x.inner.Shape()
@@ -53,6 +65,8 @@ func (x *ReshapeLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // ReshapeLayerable is the interface implemented by [ReshapeLayer], for mocking and DI.
 type ReshapeLayerable interface {
 	Unwrap() *raw.MLCReshapeLayer
+	WithLabel(label string) *ReshapeLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReshapeLayer
 	Shape() []*foundation.NSNumber
 }
 

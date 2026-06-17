@@ -6,6 +6,7 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,30 @@ func NewImageReduceColumnSumWithDevice(device metal.MTLDevice) *ImageReduceColum
 	return &ImageReduceColumnSum{inner: raw.MPSImageReduceColumnSumFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *ImageReduceColumnSum) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnSum {
+	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceColumnSum) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceColumnSum) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceColumnSum) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageReduceColumnSum) asImageReduceUnary() *raw.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
 
 func (x *ImageReduceColumnSum) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
@@ -44,6 +69,10 @@ func (x *ImageReduceColumnSum) asUnaryImageKernel() *raw.MPSUnaryImageKernel { r
 // ImageReduceColumnSumable is the interface implemented by [ImageReduceColumnSum], for mocking and DI.
 type ImageReduceColumnSumable interface {
 	Unwrap() *raw.MPSImageReduceColumnSum
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnSum
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnSum
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnSum
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnSum
 }
 
 var _ ImageReduceColumnSumable = (*ImageReduceColumnSum)(nil)

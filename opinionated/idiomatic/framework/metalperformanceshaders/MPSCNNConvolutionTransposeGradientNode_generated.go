@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNConvolutionTransposeGradientNodeWithSourceGradientSourceImageConvolut
 	return &CNNConvolutionTransposeGradientNode{inner: raw.MPSCNNConvolutionTransposeGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNConvolutionTransposeGradientNode {
+	x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradientNode) WithLabel(label string) *CNNConvolutionTransposeGradientNode {
+	x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNConvolutionTransposeGradientNode) asCNNConvolutionGradientNode() *mpsneuralnetwork.MPSCNNConvolutionGradientNode { return &x.inner.MPSCNNConvolutionGradientNode }
 
 func (x *CNNConvolutionTransposeGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode }
@@ -46,6 +59,8 @@ func (x *CNNConvolutionTransposeGradientNode) asNNFilterNode() *mpsneuralnetwork
 // CNNConvolutionTransposeGradientNodeable is the interface implemented by [CNNConvolutionTransposeGradientNode], for mocking and DI.
 type CNNConvolutionTransposeGradientNodeable interface {
 	Unwrap() *raw.MPSCNNConvolutionTransposeGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNConvolutionTransposeGradientNode
+	WithLabel(label string) *CNNConvolutionTransposeGradientNode
 }
 
 var _ CNNConvolutionTransposeGradientNodeable = (*CNNConvolutionTransposeGradientNode)(nil)

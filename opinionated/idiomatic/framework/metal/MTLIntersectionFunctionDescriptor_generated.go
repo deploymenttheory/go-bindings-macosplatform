@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewIntersectionFunctionDescriptor() *IntersectionFunctionDescriptor {
 	return &IntersectionFunctionDescriptor{inner: raw.MTLIntersectionFunctionDescriptorFromID(_id)}
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *IntersectionFunctionDescriptor) WithName(name string) *IntersectionFunctionDescriptor {
+	x.inner.MTLFunctionDescriptor.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithSpecializedName sets the specializedName property and returns the receiver for chaining.
+func (x *IntersectionFunctionDescriptor) WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor {
+	x.inner.MTLFunctionDescriptor.SetSpecializedName(foundation.NSStringStringWithUTF8String(specializedName))
+	return x
+}
+
+// WithConstantValues sets the constantValues property and returns the receiver for chaining.
+func (x *IntersectionFunctionDescriptor) WithConstantValues(constantValues *raw.MTLFunctionConstantValues) *IntersectionFunctionDescriptor {
+	x.inner.MTLFunctionDescriptor.SetConstantValues(constantValues)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *IntersectionFunctionDescriptor) WithOptions(options raw.MTLFunctionOptions) *IntersectionFunctionDescriptor {
+	x.inner.MTLFunctionDescriptor.SetOptions(options)
+	return x
+}
+
 func (x *IntersectionFunctionDescriptor) asFunctionDescriptor() *raw.MTLFunctionDescriptor { return &x.inner.MTLFunctionDescriptor }
 
 // IntersectionFunctionDescriptorable is the interface implemented by [IntersectionFunctionDescriptor], for mocking and DI.
 type IntersectionFunctionDescriptorable interface {
 	Unwrap() *raw.MTLIntersectionFunctionDescriptor
+	WithName(name string) *IntersectionFunctionDescriptor
+	WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor
+	WithConstantValues(constantValues *raw.MTLFunctionConstantValues) *IntersectionFunctionDescriptor
+	WithOptions(options raw.MTLFunctionOptions) *IntersectionFunctionDescriptor
 }
 
 var _ IntersectionFunctionDescriptorable = (*IntersectionFunctionDescriptor)(nil)

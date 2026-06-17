@@ -73,6 +73,36 @@ func (x *ImageCanny) WithUseFastMode(useFastMode bool) *ImageCanny {
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageCanny) WithOffset(offset mpscore.MPSOffset) *ImageCanny {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageCanny) WithClipRect(clipRect metal.MTLRegion) *ImageCanny {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageCanny) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageCanny {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageCanny) WithOptions(options mpscore.MPSKernelOptions) *ImageCanny {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageCanny) WithLabel(label string) *ImageCanny {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ColorTransform calls the underlying ColorTransform.
 func (x *ImageCanny) ColorTransform() *float32 {
 	return x.inner.ColorTransform()
@@ -123,6 +153,11 @@ type ImageCannyable interface {
 	WithHighThreshold(highThreshold float32) *ImageCanny
 	WithLowThreshold(lowThreshold float32) *ImageCanny
 	WithUseFastMode(useFastMode bool) *ImageCanny
+	WithOffset(offset mpscore.MPSOffset) *ImageCanny
+	WithClipRect(clipRect metal.MTLRegion) *ImageCanny
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageCanny
+	WithOptions(options mpscore.MPSKernelOptions) *ImageCanny
+	WithLabel(label string) *ImageCanny
 	ColorTransform() *float32
 	Sigma() float32
 	HighThreshold() float32

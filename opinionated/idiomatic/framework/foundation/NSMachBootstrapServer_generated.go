@@ -36,6 +36,12 @@ func NewMachBootstrapServer() *MachBootstrapServer {
 	return &MachBootstrapServer{inner: raw.NSMachBootstrapServerFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MachBootstrapServer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MachBootstrapServer {
+	x.inner.NSPortNameServer.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ServicePortWithName calls the underlying ServicePortWithName.
 func (x *MachBootstrapServer) ServicePortWithName(name string) *Port {
 	_r := x.inner.ServicePortWithName(foundation.NSStringStringWithUTF8String(name))
@@ -52,6 +58,7 @@ func (x *MachBootstrapServer) asObject() *raw.NSObject { return &x.inner.NSPortN
 // MachBootstrapServerable is the interface implemented by [MachBootstrapServer], for mocking and DI.
 type MachBootstrapServerable interface {
 	Unwrap() *raw.NSMachBootstrapServer
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MachBootstrapServer
 	ServicePortWithName(name string) *Port
 }
 

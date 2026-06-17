@@ -35,6 +35,12 @@ func NewUnitElectricPotentialDifference() *UnitElectricPotentialDifference {
 	return &UnitElectricPotentialDifference{inner: raw.NSUnitElectricPotentialDifferenceFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitElectricPotentialDifference) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricPotentialDifference {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitElectricPotentialDifference) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitElectricPotentialDifference) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitElectricPotentialDifference) asObject() *raw.NSObject { return &x.i
 // UnitElectricPotentialDifferenceable is the interface implemented by [UnitElectricPotentialDifference], for mocking and DI.
 type UnitElectricPotentialDifferenceable interface {
 	Unwrap() *raw.NSUnitElectricPotentialDifference
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricPotentialDifference
 }
 
 var _ UnitElectricPotentialDifferenceable = (*UnitElectricPotentialDifference)(nil)

@@ -36,6 +36,36 @@ func NewParameterGroup() *ParameterGroup {
 	return &ParameterGroup{inner: raw.AUParameterGroupFromID(_id)}
 }
 
+// WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
+func (x *ParameterGroup) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterGroup {
+	x.inner.AUParameterNode.SetImplementorValueObserver(implementorValueObserver)
+	return x
+}
+
+// WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
+func (x *ParameterGroup) WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterGroup {
+	x.inner.AUParameterNode.SetImplementorValueProvider(implementorValueProvider)
+	return x
+}
+
+// WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
+func (x *ParameterGroup) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterGroup {
+	x.inner.AUParameterNode.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
+	return x
+}
+
+// WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
+func (x *ParameterGroup) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterGroup {
+	x.inner.AUParameterNode.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
+	return x
+}
+
+// WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
+func (x *ParameterGroup) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterGroup {
+	x.inner.AUParameterNode.SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback)
+	return x
+}
+
 // Children returns the collection as a Go slice.
 func (x *ParameterGroup) Children() []*raw.AUParameterNode {
 	arr := x.inner.Children()
@@ -65,6 +95,11 @@ func (x *ParameterGroup) asParameterNode() *raw.AUParameterNode { return &x.inne
 // ParameterGroupable is the interface implemented by [ParameterGroup], for mocking and DI.
 type ParameterGroupable interface {
 	Unwrap() *raw.AUParameterGroup
+	WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterGroup
+	WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterGroup
+	WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterGroup
+	WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterGroup
+	WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterGroup
 	Children() []*raw.AUParameterNode
 	AllParameters() []*raw.AUParameter
 }

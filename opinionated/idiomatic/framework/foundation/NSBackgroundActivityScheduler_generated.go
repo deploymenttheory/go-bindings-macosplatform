@@ -61,6 +61,12 @@ func (x *BackgroundActivityScheduler) WithTolerance(tolerance float64) *Backgrou
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *BackgroundActivityScheduler) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *BackgroundActivityScheduler {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ScheduleWith calls the underlying ScheduleWith.
 func (x *BackgroundActivityScheduler) ScheduleWith(block func(objc.Block)) {
 	x.inner.ScheduleWith(block)
@@ -134,6 +140,7 @@ type BackgroundActivitySchedulerable interface {
 	WithRepeats(repeats bool) *BackgroundActivityScheduler
 	WithInterval(interval float64) *BackgroundActivityScheduler
 	WithTolerance(tolerance float64) *BackgroundActivityScheduler
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *BackgroundActivityScheduler
 	ScheduleWith(block func(objc.Block))
 	Invalidate()
 	Identifier() *String

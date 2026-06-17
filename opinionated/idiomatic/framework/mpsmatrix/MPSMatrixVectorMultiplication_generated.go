@@ -45,6 +45,36 @@ func NewMatrixVectorMultiplicationWithDeviceRowsColumns(device metal.MTLDevice, 
 	return &MatrixVectorMultiplication{inner: raw.MPSMatrixVectorMultiplicationFromID(_id)}
 }
 
+// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixVectorMultiplication) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
+	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixVectorMultiplication) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
+	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixVectorMultiplication) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
+	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixVectorMultiplication) WithBatchStart(batchStart uint) *MatrixVectorMultiplication {
+	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixVectorMultiplication) WithBatchSize(batchSize uint) *MatrixVectorMultiplication {
+	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
 // EncodeToCommandBufferInputMatrixInputVectorResultVector calls the underlying EncodeToCommandBufferInputMatrixInputVectorResultVector.
 func (x *MatrixVectorMultiplication) EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, inputVector *mpscore.MPSVector, resultVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer, inputMatrix, inputVector, resultVector)
@@ -55,6 +85,11 @@ func (x *MatrixVectorMultiplication) asMatrixBinaryKernel() *raw.MPSMatrixBinary
 // MatrixVectorMultiplicationable is the interface implemented by [MatrixVectorMultiplication], for mocking and DI.
 type MatrixVectorMultiplicationable interface {
 	Unwrap() *raw.MPSMatrixVectorMultiplication
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication
+	WithBatchStart(batchStart uint) *MatrixVectorMultiplication
+	WithBatchSize(batchSize uint) *MatrixVectorMultiplication
 	EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, inputVector *mpscore.MPSVector, resultVector *mpscore.MPSVector)
 }
 

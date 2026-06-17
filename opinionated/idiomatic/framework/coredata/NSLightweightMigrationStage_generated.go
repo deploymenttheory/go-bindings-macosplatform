@@ -38,6 +38,12 @@ func NewLightweightMigrationStageWithVersionChecksums(versionChecksums *foundati
 	return &LightweightMigrationStage{inner: raw.NSLightweightMigrationStageFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *LightweightMigrationStage) WithLabel(label string) *LightweightMigrationStage {
+	x.inner.NSMigrationStage.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // VersionChecksums returns the collection as a Go slice.
 func (x *LightweightMigrationStage) VersionChecksums() []string {
 	arr := x.inner.VersionChecksums()
@@ -54,6 +60,7 @@ func (x *LightweightMigrationStage) asMigrationStage() *raw.NSMigrationStage { r
 // LightweightMigrationStageable is the interface implemented by [LightweightMigrationStage], for mocking and DI.
 type LightweightMigrationStageable interface {
 	Unwrap() *raw.NSLightweightMigrationStage
+	WithLabel(label string) *LightweightMigrationStage
 	VersionChecksums() []string
 }
 

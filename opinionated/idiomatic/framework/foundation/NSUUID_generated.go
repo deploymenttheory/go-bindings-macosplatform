@@ -50,6 +50,12 @@ func NewUUIDWithUUIDBytes(bytes_ *uint8) *UUID {
 	return &UUID{inner: raw.NSUUIDFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UUID) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UUID {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // GetUUIDBytes calls the underlying GetUUIDBytes.
 func (x *UUID) GetUUIDBytes(uuid *uint8) {
 	x.inner.GetUUIDBytes(uuid)
@@ -74,6 +80,7 @@ func (x *UUID) asObject() *raw.NSObject { return &x.inner.NSObject }
 // UUIDable is the interface implemented by [UUID], for mocking and DI.
 type UUIDable interface {
 	Unwrap() *raw.NSUUID
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UUID
 	GetUUIDBytes(uuid *uint8)
 	Compare(otherUUID *raw.NSUUID) raw.NSComparisonResult
 	UUIDString() *String

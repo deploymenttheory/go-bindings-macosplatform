@@ -47,6 +47,54 @@ func NewCNNLossWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDev
 	return &CNNLoss{inner: raw.MPSCNNLossFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNLoss) WithOffset(offset mpscore.MPSOffset) *CNNLoss {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNLoss) WithClipRect(clipRect metal.MTLRegion) *CNNLoss {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLoss) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLoss {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLoss) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLoss {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLoss {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNLoss) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLoss {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNLoss) WithPadding(padding raw.MPSNNPadding) *CNNLoss {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNLoss) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLoss {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // EncodeToCommandBufferSourceImageLabelsDestinationImage calls the underlying EncodeToCommandBufferSourceImageLabelsDestinationImage.
 func (x *CNNLoss) EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels, destinationImage *mpscore.MPSImage) {
 	x.inner.EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer, sourceImage, labels, destinationImage)
@@ -112,6 +160,14 @@ func (x *CNNLoss) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel
 // CNNLossable is the interface implemented by [CNNLoss], for mocking and DI.
 type CNNLossable interface {
 	Unwrap() *raw.MPSCNNLoss
+	WithOffset(offset mpscore.MPSOffset) *CNNLoss
+	WithClipRect(clipRect metal.MTLRegion) *CNNLoss
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLoss
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLoss
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLoss
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLoss
+	WithPadding(padding raw.MPSNNPadding) *CNNLoss
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLoss
 	EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels, destinationImage *mpscore.MPSImage)
 	EncodeToCommandBufferSourceImageLabels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels) *mpscore.MPSImage
 	EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer, destinationImage unsafe.Pointer)

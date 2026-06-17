@@ -61,6 +61,108 @@ func (x *DOMHTMLTableSectionElement) WithVAlign(vAlign string) *DOMHTMLTableSect
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithTitle(title string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithLang(lang string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithDir(dir string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithTabIndex(tabIndex int) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithAccessKey(accessKey string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithInnerText(innerText string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithOuterText(outerText string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithContentEditable(contentEditable string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithIdName(idName string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithScrollLeft(scrollLeft int) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithScrollTop(scrollTop int) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithInnerHTML(innerHTML string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithOuterHTML(outerHTML string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithClassName(className string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithNodeValue(nodeValue string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithPrefix(prefix string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLTableSectionElement) WithTextContent(textContent string) *DOMHTMLTableSectionElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // InsertRow calls the underlying InsertRow.
 func (x *DOMHTMLTableSectionElement) InsertRow(index int) *DOMHTMLElement {
 	_r := x.inner.InsertRow(index)
@@ -157,6 +259,23 @@ type DOMHTMLTableSectionElementable interface {
 	WithCh(ch string) *DOMHTMLTableSectionElement
 	WithChOff(chOff string) *DOMHTMLTableSectionElement
 	WithVAlign(vAlign string) *DOMHTMLTableSectionElement
+	WithTitle(title string) *DOMHTMLTableSectionElement
+	WithLang(lang string) *DOMHTMLTableSectionElement
+	WithDir(dir string) *DOMHTMLTableSectionElement
+	WithTabIndex(tabIndex int) *DOMHTMLTableSectionElement
+	WithAccessKey(accessKey string) *DOMHTMLTableSectionElement
+	WithInnerText(innerText string) *DOMHTMLTableSectionElement
+	WithOuterText(outerText string) *DOMHTMLTableSectionElement
+	WithContentEditable(contentEditable string) *DOMHTMLTableSectionElement
+	WithIdName(idName string) *DOMHTMLTableSectionElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLTableSectionElement
+	WithScrollTop(scrollTop int) *DOMHTMLTableSectionElement
+	WithInnerHTML(innerHTML string) *DOMHTMLTableSectionElement
+	WithOuterHTML(outerHTML string) *DOMHTMLTableSectionElement
+	WithClassName(className string) *DOMHTMLTableSectionElement
+	WithNodeValue(nodeValue string) *DOMHTMLTableSectionElement
+	WithPrefix(prefix string) *DOMHTMLTableSectionElement
+	WithTextContent(textContent string) *DOMHTMLTableSectionElement
 	InsertRow(index int) *DOMHTMLElement
 	DeleteRow(index int)
 	Align() string

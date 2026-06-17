@@ -98,6 +98,60 @@ func (x *FetchDatabaseChangesOperation) WithFetchDatabaseChangesCompletionBlock(
 	return x
 }
 
+// WithDatabase sets the database property and returns the receiver for chaining.
+func (x *FetchDatabaseChangesOperation) WithDatabase(database *raw.CKDatabase) *FetchDatabaseChangesOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database)
+	return x
+}
+
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *FetchDatabaseChangesOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchDatabaseChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *FetchDatabaseChangesOperation) WithGroup(group *raw.CKOperationGroup) *FetchDatabaseChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *FetchDatabaseChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchDatabaseChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *FetchDatabaseChangesOperation) WithContainer(container *raw.CKContainer) *FetchDatabaseChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *FetchDatabaseChangesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchDatabaseChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *FetchDatabaseChangesOperation) WithLongLived(longLived bool) *FetchDatabaseChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *FetchDatabaseChangesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchDatabaseChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *FetchDatabaseChangesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchDatabaseChangesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // PreviousServerChangeToken calls the underlying PreviousServerChangeToken.
 func (x *FetchDatabaseChangesOperation) PreviousServerChangeToken() *ServerChangeToken {
 	_r := x.inner.PreviousServerChangeToken()
@@ -298,6 +352,15 @@ type FetchDatabaseChangesOperationable interface {
 	WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation
 	WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(*raw.CKServerChangeToken)) *FetchDatabaseChangesOperation
 	WithFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock func(*raw.CKServerChangeToken, bool, unsafe.Pointer)) *FetchDatabaseChangesOperation
+	WithDatabase(database *raw.CKDatabase) *FetchDatabaseChangesOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchDatabaseChangesOperation
+	WithGroup(group *raw.CKOperationGroup) *FetchDatabaseChangesOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchDatabaseChangesOperation
+	WithContainer(container *raw.CKContainer) *FetchDatabaseChangesOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchDatabaseChangesOperation
+	WithLongLived(longLived bool) *FetchDatabaseChangesOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchDatabaseChangesOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchDatabaseChangesOperation
 	PreviousServerChangeToken() *ServerChangeToken
 	SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken)
 	ResultsLimit() uint

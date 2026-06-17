@@ -74,6 +74,54 @@ func (x *WhoseSpecifier) WithEndSubelementIndex(endSubelementIndex int) *WhoseSp
 	return x
 }
 
+// WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
+func (x *WhoseSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
+func (x *WhoseSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
+func (x *WhoseSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *WhoseSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
+	return x
+}
+
+// WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
+func (x *WhoseSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *WhoseSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
+	return x
+}
+
+// WithKey sets the key property and returns the receiver for chaining.
+func (x *WhoseSpecifier) WithKey(key string) *WhoseSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
+	return x
+}
+
+// WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
+func (x *WhoseSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *WhoseSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+	return x
+}
+
+// WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
+func (x *WhoseSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *WhoseSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *WhoseSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *WhoseSpecifier {
+	x.inner.NSScriptObjectSpecifier.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Test calls the underlying Test.
 func (x *WhoseSpecifier) Test() *ScriptWhoseTest {
 	_r := x.inner.Test()
@@ -140,6 +188,14 @@ type WhoseSpecifierable interface {
 	WithStartSubelementIndex(startSubelementIndex int) *WhoseSpecifier
 	WithEndSubelementIdentifier(endSubelementIdentifier raw.NSWhoseSubelementIdentifier) *WhoseSpecifier
 	WithEndSubelementIndex(endSubelementIndex int) *WhoseSpecifier
+	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier
+	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier
+	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *WhoseSpecifier
+	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *WhoseSpecifier
+	WithKey(key string) *WhoseSpecifier
+	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *WhoseSpecifier
+	WithEvaluationErrorNumber(evaluationErrorNumber int) *WhoseSpecifier
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *WhoseSpecifier
 	Test() *ScriptWhoseTest
 	SetTest(test *raw.NSScriptWhoseTest)
 	StartSubelementIdentifier() raw.NSWhoseSubelementIdentifier

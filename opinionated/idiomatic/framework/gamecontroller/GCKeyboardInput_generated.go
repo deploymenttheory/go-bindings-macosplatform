@@ -41,6 +41,12 @@ func (x *KeyboardInput) WithKeyChangedHandler(keyChangedHandler func(*raw.GCKeyb
 	return x
 }
 
+// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
+func (x *KeyboardInput) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *KeyboardInput {
+	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+	return x
+}
+
 // ButtonForKeyCode calls the underlying ButtonForKeyCode.
 func (x *KeyboardInput) ButtonForKeyCode(code int) *ControllerButtonInput {
 	_r := x.inner.ButtonForKeyCode(code)
@@ -71,6 +77,7 @@ func (x *KeyboardInput) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { r
 type KeyboardInputable interface {
 	Unwrap() *raw.GCKeyboardInput
 	WithKeyChangedHandler(keyChangedHandler func(*raw.GCKeyboardInput, *raw.GCControllerButtonInput, int, bool)) *KeyboardInput
+	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *KeyboardInput
 	ButtonForKeyCode(code int) *ControllerButtonInput
 	KeyChangedHandler() objc.Block
 	SetKeyChangedHandler(keyChangedHandler func(*raw.GCKeyboardInput, *raw.GCControllerButtonInput, int, bool))

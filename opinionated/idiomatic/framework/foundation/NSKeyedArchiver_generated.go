@@ -68,6 +68,12 @@ func (x *KeyedArchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *Key
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *KeyedArchiver) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyedArchiver {
+	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // FinishEncoding calls the underlying FinishEncoding.
 func (x *KeyedArchiver) FinishEncoding() {
 	x.inner.FinishEncoding()
@@ -131,6 +137,7 @@ type KeyedArchiverable interface {
 	WithDelegate(delegate raw.NSKeyedArchiverDelegate) *KeyedArchiver
 	WithOutputFormat(outputFormat raw.NSPropertyListFormat) *KeyedArchiver
 	WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedArchiver
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyedArchiver
 	FinishEncoding()
 	SetClassNameForClass(codedName string, cls objc.Class)
 	ClassNameForClass(cls objc.Class) *String

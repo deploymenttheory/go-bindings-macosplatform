@@ -5,8 +5,11 @@
 package spritekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CropNode wraps [raw.SKCropNode] with a fluent Go API.
@@ -41,6 +44,166 @@ func (x *CropNode) WithMaskNode(maskNode NodeProvider) *CropNode {
 	return x
 }
 
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *CropNode) WithPosition(position corefoundation.CGPoint) *CropNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *CropNode) WithZPosition(zPosition float64) *CropNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *CropNode) WithZRotation(zRotation float64) *CropNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *CropNode) WithXScale(xScale float64) *CropNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *CropNode) WithYScale(yScale float64) *CropNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *CropNode) WithSpeed(speed float64) *CropNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *CropNode) WithAlpha(alpha float64) *CropNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *CropNode) WithPaused(paused bool) *CropNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *CropNode) WithHidden(hidden bool) *CropNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *CropNode) WithUserInteractionEnabled(userInteractionEnabled bool) *CropNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *CropNode) WithName(name string) *CropNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *CropNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *CropNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *CropNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CropNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *CropNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *CropNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *CropNode) WithConstraints(items ...*raw.SKConstraint) *CropNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *CropNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CropNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *CropNode) WithAccessibilityElement(accessibilityElement bool) *CropNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *CropNode) WithAccessibilityRole(accessibilityRole string) *CropNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *CropNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CropNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *CropNode) WithAccessibilitySubrole(accessibilitySubrole string) *CropNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *CropNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CropNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *CropNode) WithAccessibilityParent(accessibilityParent objc.ID) *CropNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *CropNode) WithAccessibilityHelp(accessibilityHelp string) *CropNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *CropNode) WithAccessibilityLabel(accessibilityLabel string) *CropNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *CropNode) WithAccessibilityEnabled(accessibilityEnabled bool) *CropNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	return x
+}
+
 // MaskNode calls the underlying MaskNode.
 func (x *CropNode) MaskNode() *Node {
 	_r := x.inner.MaskNode()
@@ -61,6 +224,31 @@ func (x *CropNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 type CropNodeable interface {
 	Unwrap() *raw.SKCropNode
 	WithMaskNode(maskNode NodeProvider) *CropNode
+	WithPosition(position corefoundation.CGPoint) *CropNode
+	WithZPosition(zPosition float64) *CropNode
+	WithZRotation(zRotation float64) *CropNode
+	WithXScale(xScale float64) *CropNode
+	WithYScale(yScale float64) *CropNode
+	WithSpeed(speed float64) *CropNode
+	WithAlpha(alpha float64) *CropNode
+	WithPaused(paused bool) *CropNode
+	WithHidden(hidden bool) *CropNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *CropNode
+	WithName(name string) *CropNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *CropNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CropNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *CropNode
+	WithConstraints(items ...*raw.SKConstraint) *CropNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CropNode
+	WithAccessibilityElement(accessibilityElement bool) *CropNode
+	WithAccessibilityRole(accessibilityRole string) *CropNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CropNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *CropNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CropNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *CropNode
+	WithAccessibilityHelp(accessibilityHelp string) *CropNode
+	WithAccessibilityLabel(accessibilityLabel string) *CropNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *CropNode
 	MaskNode() *Node
 	SetMaskNode(maskNode *raw.SKNode)
 }

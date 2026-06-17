@@ -6,7 +6,9 @@ package corespotlight
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // UserQueryContext wraps [raw.CSUserQueryContext] with a fluent Go API.
@@ -62,6 +64,50 @@ func (x *UserQueryContext) WithMaxSuggestionCount(maxSuggestionCount int) *UserQ
 // WithMaxRankedResultCount sets the maxRankedResultCount property and returns the receiver for chaining.
 func (x *UserQueryContext) WithMaxRankedResultCount(maxRankedResultCount int) *UserQueryContext {
 	x.inner.SetMaxRankedResultCount(maxRankedResultCount)
+	return x
+}
+
+// WithFetchAttributes sets the collection, converting the Go slice to an NSArray.
+func (x *UserQueryContext) WithFetchAttributes(items ...*foundation.NSString) *UserQueryContext {
+	if len(items) == 0 {
+		x.inner.CSSearchQueryContext.SetFetchAttributes(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CSSearchQueryContext.SetFetchAttributes(_arr)
+	return x
+}
+
+// WithFilterQueries sets the collection, converting the Go slice to an NSArray.
+func (x *UserQueryContext) WithFilterQueries(items ...*foundation.NSString) *UserQueryContext {
+	if len(items) == 0 {
+		x.inner.CSSearchQueryContext.SetFilterQueries(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CSSearchQueryContext.SetFilterQueries(_arr)
+	return x
+}
+
+// WithKeyboardLanguage sets the keyboardLanguage property and returns the receiver for chaining.
+func (x *UserQueryContext) WithKeyboardLanguage(keyboardLanguage string) *UserQueryContext {
+	x.inner.CSSearchQueryContext.SetKeyboardLanguage(foundation.NSStringStringWithUTF8String(keyboardLanguage))
+	return x
+}
+
+// WithSourceOptions sets the sourceOptions property and returns the receiver for chaining.
+func (x *UserQueryContext) WithSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions) *UserQueryContext {
+	x.inner.CSSearchQueryContext.SetSourceOptions(sourceOptions)
 	return x
 }
 
@@ -125,6 +171,10 @@ type UserQueryContextable interface {
 	WithMaxResultCount(maxResultCount int) *UserQueryContext
 	WithMaxSuggestionCount(maxSuggestionCount int) *UserQueryContext
 	WithMaxRankedResultCount(maxRankedResultCount int) *UserQueryContext
+	WithFetchAttributes(items ...*foundation.NSString) *UserQueryContext
+	WithFilterQueries(items ...*foundation.NSString) *UserQueryContext
+	WithKeyboardLanguage(keyboardLanguage string) *UserQueryContext
+	WithSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions) *UserQueryContext
 	EnableRankedResults() bool
 	SetEnableRankedResults(enableRankedResults bool)
 	DisableSemanticSearch() bool

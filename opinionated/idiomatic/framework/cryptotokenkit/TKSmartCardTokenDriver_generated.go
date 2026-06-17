@@ -35,11 +35,18 @@ func NewSmartCardTokenDriver() *SmartCardTokenDriver {
 	return &SmartCardTokenDriver{inner: raw.TKSmartCardTokenDriverFromID(_id)}
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *SmartCardTokenDriver) WithDelegate(delegate raw.TKTokenDriverDelegate) *SmartCardTokenDriver {
+	x.inner.TKTokenDriver.SetDelegate(delegate)
+	return x
+}
+
 func (x *SmartCardTokenDriver) asTokenDriver() *raw.TKTokenDriver { return &x.inner.TKTokenDriver }
 
 // SmartCardTokenDriverable is the interface implemented by [SmartCardTokenDriver], for mocking and DI.
 type SmartCardTokenDriverable interface {
 	Unwrap() *raw.TKSmartCardTokenDriver
+	WithDelegate(delegate raw.TKTokenDriverDelegate) *SmartCardTokenDriver
 }
 
 var _ SmartCardTokenDriverable = (*SmartCardTokenDriver)(nil)

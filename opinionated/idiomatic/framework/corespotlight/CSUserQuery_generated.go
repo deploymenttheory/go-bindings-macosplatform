@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // UserQuery wraps [raw.CSUserQuery] with a fluent Go API.
@@ -41,6 +42,34 @@ func NewUserQueryWithUserQueryStringUserQueryContext(userQueryString string, use
 // WithFoundSuggestionsHandler sets the foundSuggestionsHandler property and returns the receiver for chaining.
 func (x *UserQuery) WithFoundSuggestionsHandler(foundSuggestionsHandler func(*foundation.NSArray[*raw.CSSuggestion])) *UserQuery {
 	x.inner.SetFoundSuggestionsHandler(foundSuggestionsHandler)
+	return x
+}
+
+// WithFoundItemsHandler sets the foundItemsHandler property and returns the receiver for chaining.
+func (x *UserQuery) WithFoundItemsHandler(foundItemsHandler func(*foundation.NSArray[*raw.CSSearchableItem])) *UserQuery {
+	x.inner.CSSearchQuery.SetFoundItemsHandler(foundItemsHandler)
+	return x
+}
+
+// WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
+func (x *UserQuery) WithCompletionHandler(completionHandler func(unsafe.Pointer)) *UserQuery {
+	x.inner.CSSearchQuery.SetCompletionHandler(completionHandler)
+	return x
+}
+
+// WithProtectionClasses sets the collection, converting the Go slice to an NSArray.
+func (x *UserQuery) WithProtectionClasses(items ...*foundation.NSString) *UserQuery {
+	if len(items) == 0 {
+		x.inner.CSSearchQuery.SetProtectionClasses(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CSSearchQuery.SetProtectionClasses(_arr)
 	return x
 }
 
@@ -91,6 +120,9 @@ func (x *UserQuery) asSearchQuery() *raw.CSSearchQuery { return &x.inner.CSSearc
 type UserQueryable interface {
 	Unwrap() *raw.CSUserQuery
 	WithFoundSuggestionsHandler(foundSuggestionsHandler func(*foundation.NSArray[*raw.CSSuggestion])) *UserQuery
+	WithFoundItemsHandler(foundItemsHandler func(*foundation.NSArray[*raw.CSSearchableItem])) *UserQuery
+	WithCompletionHandler(completionHandler func(unsafe.Pointer)) *UserQuery
+	WithProtectionClasses(items ...*foundation.NSString) *UserQuery
 	UserEngagedWithItemVisibleItemsUserInteractionType(item *raw.CSSearchableItem, visibleItems *foundation.NSArray[*raw.CSSearchableItem], userInteractionType raw.CSUserInteraction)
 	UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *raw.CSSuggestion, visibleSuggestions *foundation.NSArray[*raw.CSSuggestion], userInteractionType raw.CSUserInteraction)
 	FoundSuggestionCount() int

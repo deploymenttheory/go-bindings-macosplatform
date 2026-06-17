@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,6 +42,90 @@ func (x *MagnificationGestureRecognizer) WithMagnification(magnification float64
 	return x
 }
 
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithTarget(target objc.ID) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithAction(action objc.SEL) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAction(action)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithState(state raw.NSGestureRecognizerState) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetState(state)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelegate(delegate)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithEnabled(enabled bool) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetEnabled(enabled)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
+	return x
+}
+
+// WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
+	return x
+}
+
+// WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
+	return x
+}
+
+// WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysKeyEvents(delaysKeyEvents)
+	return x
+}
+
+// WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysMagnificationEvents(delaysMagnificationEvents)
+	return x
+}
+
+// WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysRotationEvents(delaysRotationEvents)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithName(name string) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *MagnificationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
 // Magnification calls the underlying Magnification.
 func (x *MagnificationGestureRecognizer) Magnification() float64 {
 	return x.inner.Magnification()
@@ -57,6 +142,20 @@ func (x *MagnificationGestureRecognizer) asGestureRecognizer() *raw.NSGestureRec
 type MagnificationGestureRecognizerable interface {
 	Unwrap() *raw.NSMagnificationGestureRecognizer
 	WithMagnification(magnification float64) *MagnificationGestureRecognizer
+	WithTarget(target objc.ID) *MagnificationGestureRecognizer
+	WithAction(action objc.SEL) *MagnificationGestureRecognizer
+	WithState(state raw.NSGestureRecognizerState) *MagnificationGestureRecognizer
+	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *MagnificationGestureRecognizer
+	WithEnabled(enabled bool) *MagnificationGestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *MagnificationGestureRecognizer
+	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *MagnificationGestureRecognizer
+	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *MagnificationGestureRecognizer
+	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *MagnificationGestureRecognizer
+	WithDelaysKeyEvents(delaysKeyEvents bool) *MagnificationGestureRecognizer
+	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *MagnificationGestureRecognizer
+	WithDelaysRotationEvents(delaysRotationEvents bool) *MagnificationGestureRecognizer
+	WithName(name string) *MagnificationGestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *MagnificationGestureRecognizer
 	Magnification() float64
 	SetMagnification(magnification float64)
 }

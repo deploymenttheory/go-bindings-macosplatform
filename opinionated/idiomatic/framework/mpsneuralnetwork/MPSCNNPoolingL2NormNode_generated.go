@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewCNNPoolingL2NormNode() *CNNPoolingL2NormNode {
 	return &CNNPoolingL2NormNode{inner: raw.MPSCNNPoolingL2NormNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNPoolingL2NormNode {
+	x.inner.MPSCNNPoolingNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormNode) WithLabel(label string) *CNNPoolingL2NormNode {
+	x.inner.MPSCNNPoolingNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNPoolingL2NormNode) asCNNPoolingNode() *raw.MPSCNNPoolingNode { return &x.inner.MPSCNNPoolingNode }
 
 func (x *CNNPoolingL2NormNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode }
@@ -42,6 +55,8 @@ func (x *CNNPoolingL2NormNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x
 // CNNPoolingL2NormNodeable is the interface implemented by [CNNPoolingL2NormNode], for mocking and DI.
 type CNNPoolingL2NormNodeable interface {
 	Unwrap() *raw.MPSCNNPoolingL2NormNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNPoolingL2NormNode
+	WithLabel(label string) *CNNPoolingL2NormNode
 }
 
 var _ CNNPoolingL2NormNodeable = (*CNNPoolingL2NormNode)(nil)

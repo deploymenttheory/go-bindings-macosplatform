@@ -47,6 +47,126 @@ func NewCNNLogSoftMaxGradientWithCoderDevice(aDecoder *foundation.NSCoder, devic
 	return &CNNLogSoftMaxGradient{inner: raw.MPSCNNLogSoftMaxGradientFromID(_id)}
 }
 
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithKernelOffsetX(kernelOffsetX int) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithKernelOffsetY(kernelOffsetY int) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithClipRect(clipRect metal.MTLRegion) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxGradient) WithLabel(label string) *CNNLogSoftMaxGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNLogSoftMaxGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNLogSoftMaxGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
@@ -56,6 +176,26 @@ func (x *CNNLogSoftMaxGradient) asKernel() *mpscore.MPSKernel { return &x.inner.
 // CNNLogSoftMaxGradientable is the interface implemented by [CNNLogSoftMaxGradient], for mocking and DI.
 type CNNLogSoftMaxGradientable interface {
 	Unwrap() *raw.MPSCNNLogSoftMaxGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNLogSoftMaxGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNLogSoftMaxGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNLogSoftMaxGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNLogSoftMaxGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNLogSoftMaxGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLogSoftMaxGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNLogSoftMaxGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNLogSoftMaxGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNLogSoftMaxGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNLogSoftMaxGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNLogSoftMaxGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNLogSoftMaxGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNLogSoftMaxGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNLogSoftMaxGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNLogSoftMaxGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNLogSoftMaxGradient
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNLogSoftMaxGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLogSoftMaxGradient
+	WithOptions(options mpscore.MPSKernelOptions) *CNNLogSoftMaxGradient
+	WithLabel(label string) *CNNLogSoftMaxGradient
 }
 
 var _ CNNLogSoftMaxGradientable = (*CNNLogSoftMaxGradient)(nil)

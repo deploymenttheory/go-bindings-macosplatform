@@ -8,8 +8,11 @@ import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Scrubber wraps [raw.NSScrubber] with a fluent Go API.
@@ -127,6 +130,340 @@ func (x *Scrubber) WithBackgroundColor(backgroundColor *raw.NSColor) *Scrubber {
 // WithBackgroundView sets the backgroundView property and returns the receiver for chaining.
 func (x *Scrubber) WithBackgroundView(backgroundView ViewProvider) *Scrubber {
 	x.inner.SetBackgroundView(backgroundView.asView())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *Scrubber) WithSubviews(items ...ViewProvider) *Scrubber {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Scrubber) WithHidden(hidden bool) *Scrubber {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *Scrubber) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scrubber {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *Scrubber) WithAutoresizesSubviews(autoresizesSubviews bool) *Scrubber {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *Scrubber) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Scrubber {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *Scrubber) WithFrame(frame corefoundation.CGRect) *Scrubber {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *Scrubber) WithFrameRotation(frameRotation float64) *Scrubber {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *Scrubber) WithFrameCenterRotation(frameCenterRotation float64) *Scrubber {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *Scrubber) WithBoundsRotation(boundsRotation float64) *Scrubber {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *Scrubber) WithBounds(bounds corefoundation.CGRect) *Scrubber {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *Scrubber) WithCanDrawConcurrently(canDrawConcurrently bool) *Scrubber {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *Scrubber) WithNeedsDisplay(needsDisplay bool) *Scrubber {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *Scrubber) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scrubber {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *Scrubber) WithWantsRestingTouches(wantsRestingTouches bool) *Scrubber {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *Scrubber) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Scrubber {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *Scrubber) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Scrubber {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *Scrubber) WithWantsLayer(wantsLayer bool) *Scrubber {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *Scrubber) WithLayer(layer *quartzcore.CALayer) *Scrubber {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *Scrubber) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scrubber {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *Scrubber) WithNeedsLayout(needsLayout bool) *Scrubber {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *Scrubber) WithAlphaValue(alphaValue float64) *Scrubber {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *Scrubber) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Scrubber {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Scrubber) WithBackgroundFilters(items ...*coreimage.CIFilter) *Scrubber {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *Scrubber) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Scrubber {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Scrubber) WithContentFilters(items ...*coreimage.CIFilter) *Scrubber {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *Scrubber) WithShadow(shadow *raw.NSShadow) *Scrubber {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *Scrubber) WithClipsToBounds(clipsToBounds bool) *Scrubber {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *Scrubber) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scrubber {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *Scrubber) WithToolTip(toolTip string) *Scrubber {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *Scrubber) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Scrubber {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *Scrubber) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scrubber {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *Scrubber) WithNextKeyView(nextKeyView ViewProvider) *Scrubber {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *Scrubber) WithFocusRingType(focusRingType raw.NSFocusRingType) *Scrubber {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *Scrubber) WithGestureRecognizers(items ...GestureRecognizerProvider) *Scrubber {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *Scrubber) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Scrubber {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *Scrubber) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scrubber {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *Scrubber) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scrubber {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *Scrubber) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Scrubber {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *Scrubber) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scrubber {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *Scrubber) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scrubber {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Scrubber) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scrubber {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Scrubber) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scrubber {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *Scrubber) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scrubber {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *Scrubber) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scrubber {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *Scrubber) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Scrubber {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Scrubber) WithNextResponder(nextResponder ResponderProvider) *Scrubber {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Scrubber) WithMenu(menu *raw.NSMenu) *Scrubber {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Scrubber) WithUserActivity(userActivity *foundation.NSUserActivity) *Scrubber {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Scrubber) WithTouchBar(touchBar *raw.NSTouchBar) *Scrubber {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -393,6 +730,55 @@ type Scrubberable interface {
 	WithShowsAdditionalContentIndicators(showsAdditionalContentIndicators bool) *Scrubber
 	WithBackgroundColor(backgroundColor *raw.NSColor) *Scrubber
 	WithBackgroundView(backgroundView ViewProvider) *Scrubber
+	WithSubviews(items ...ViewProvider) *Scrubber
+	WithHidden(hidden bool) *Scrubber
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scrubber
+	WithAutoresizesSubviews(autoresizesSubviews bool) *Scrubber
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Scrubber
+	WithFrame(frame corefoundation.CGRect) *Scrubber
+	WithFrameRotation(frameRotation float64) *Scrubber
+	WithFrameCenterRotation(frameCenterRotation float64) *Scrubber
+	WithBoundsRotation(boundsRotation float64) *Scrubber
+	WithBounds(bounds corefoundation.CGRect) *Scrubber
+	WithCanDrawConcurrently(canDrawConcurrently bool) *Scrubber
+	WithNeedsDisplay(needsDisplay bool) *Scrubber
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scrubber
+	WithWantsRestingTouches(wantsRestingTouches bool) *Scrubber
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Scrubber
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Scrubber
+	WithWantsLayer(wantsLayer bool) *Scrubber
+	WithLayer(layer *quartzcore.CALayer) *Scrubber
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scrubber
+	WithNeedsLayout(needsLayout bool) *Scrubber
+	WithAlphaValue(alphaValue float64) *Scrubber
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Scrubber
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *Scrubber
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Scrubber
+	WithContentFilters(items ...*coreimage.CIFilter) *Scrubber
+	WithShadow(shadow *raw.NSShadow) *Scrubber
+	WithClipsToBounds(clipsToBounds bool) *Scrubber
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scrubber
+	WithToolTip(toolTip string) *Scrubber
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Scrubber
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scrubber
+	WithNextKeyView(nextKeyView ViewProvider) *Scrubber
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *Scrubber
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *Scrubber
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Scrubber
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scrubber
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scrubber
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Scrubber
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scrubber
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scrubber
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scrubber
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scrubber
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scrubber
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scrubber
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Scrubber
+	WithNextResponder(nextResponder ResponderProvider) *Scrubber
+	WithMenu(menu *raw.NSMenu) *Scrubber
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Scrubber
+	WithTouchBar(touchBar *raw.NSTouchBar) *Scrubber
 	ReloadData()
 	PerformSequentialBatchUpdates(ctx context.Context) error
 	InsertItemsAtIndexes(indexes *foundation.NSIndexSet)

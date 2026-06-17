@@ -44,6 +44,12 @@ func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy raw.
 	return &URLRequest{inner: raw.NSURLRequestFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLRequest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLRequest {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // URL calls the underlying URL.
 func (x *URLRequest) URL() *URL {
 	_r := x.inner.URL()
@@ -184,6 +190,7 @@ func (x *URLRequest) asObject() *raw.NSObject { return &x.inner.NSObject }
 // URLRequestable is the interface implemented by [URLRequest], for mocking and DI.
 type URLRequestable interface {
 	Unwrap() *raw.NSURLRequest
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLRequest
 	URL() *URL
 	CachePolicy() raw.NSURLRequestCachePolicy
 	TimeoutInterval() float64

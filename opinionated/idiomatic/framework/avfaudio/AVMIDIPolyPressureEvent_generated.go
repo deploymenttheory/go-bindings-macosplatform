@@ -48,6 +48,12 @@ func (x *MIDIPolyPressureEvent) WithPressure(pressure uint) *MIDIPolyPressureEve
 	return x
 }
 
+// WithChannel sets the channel property and returns the receiver for chaining.
+func (x *MIDIPolyPressureEvent) WithChannel(channel uint) *MIDIPolyPressureEvent {
+	x.inner.AVMIDIChannelEvent.SetChannel(channel)
+	return x
+}
+
 // Key calls the underlying Key.
 func (x *MIDIPolyPressureEvent) Key() uint {
 	return x.inner.Key()
@@ -77,6 +83,7 @@ type MIDIPolyPressureEventable interface {
 	Unwrap() *raw.AVMIDIPolyPressureEvent
 	WithKey(key uint) *MIDIPolyPressureEvent
 	WithPressure(pressure uint) *MIDIPolyPressureEvent
+	WithChannel(channel uint) *MIDIPolyPressureEvent
 	Key() uint
 	SetKey(key uint)
 	Pressure() uint

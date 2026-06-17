@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,144 @@ func NewCNNDivideWithDevice(device metal.MTLDevice) *CNNDivide {
 	return &CNNDivide{inner: raw.MPSCNNDivideFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *CNNDivide) WithPrimaryScale(primaryScale float32) *CNNDivide {
+	x.inner.MPSCNNArithmetic.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *CNNDivide) WithSecondaryScale(secondaryScale float32) *CNNDivide {
+	x.inner.MPSCNNArithmetic.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *CNNDivide) WithBias(bias float32) *CNNDivide {
+	x.inner.MPSCNNArithmetic.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *CNNDivide) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *CNNDivide) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *CNNDivide) WithMinimumValue(minimumValue float32) *CNNDivide {
+	x.inner.MPSCNNArithmetic.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *CNNDivide) WithMaximumValue(maximumValue float32) *CNNDivide {
+	x.inner.MPSCNNArithmetic.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNDivide) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNDivide) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNDivide) WithClipRect(clipRect metal.MTLRegion) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDivide) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDivide) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDivide) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNDivide) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNDivide) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNDivide) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNDivide) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNDivide) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNDivide) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNDivide) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNDivide) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNDivide) WithPadding(padding raw.MPSNNPadding) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNDivide) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDivide {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNDivide) asCNNArithmetic() *raw.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
 
 func (x *CNNDivide) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
@@ -44,6 +183,29 @@ func (x *CNNDivide) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inne
 // CNNDivideable is the interface implemented by [CNNDivide], for mocking and DI.
 type CNNDivideable interface {
 	Unwrap() *raw.MPSCNNDivide
+	WithPrimaryScale(primaryScale float32) *CNNDivide
+	WithSecondaryScale(secondaryScale float32) *CNNDivide
+	WithBias(bias float32) *CNNDivide
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNDivide
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNDivide
+	WithMinimumValue(minimumValue float32) *CNNDivide
+	WithMaximumValue(maximumValue float32) *CNNDivide
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNDivide
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNDivide
+	WithClipRect(clipRect metal.MTLRegion) *CNNDivide
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDivide
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNDivide
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNDivide
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNDivide
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNDivide
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDivide
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDivide
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNDivide
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNDivide
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNDivide
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNDivide
+	WithPadding(padding raw.MPSNNPadding) *CNNDivide
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDivide
 }
 
 var _ CNNDivideable = (*CNNDivide)(nil)

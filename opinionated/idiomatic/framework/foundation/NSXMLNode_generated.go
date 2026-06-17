@@ -75,6 +75,12 @@ func (x *XMLNode) WithURI(uRI string) *XMLNode {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XMLNode) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLNode {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SetStringValueResolvingEntities calls the underlying SetStringValueResolvingEntities.
 func (x *XMLNode) SetStringValueResolvingEntities(string_ string, resolve bool) {
 	x.inner.SetStringValueResolvingEntities(foundation.NSStringStringWithUTF8String(string_), resolve)
@@ -311,6 +317,7 @@ type XMLNodeable interface {
 	WithObjectValue(objectValue objc.ID) *XMLNode
 	WithStringValue(stringValue string) *XMLNode
 	WithURI(uRI string) *XMLNode
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLNode
 	SetStringValueResolvingEntities(string_ string, resolve bool)
 	ChildAtIndex(index uint) *XMLNode
 	Detach()

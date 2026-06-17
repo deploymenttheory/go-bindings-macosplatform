@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTimedInvokeRequestParams() *MTRTestClusterClusterTi
 	return &MTRTestClusterClusterTimedInvokeRequestParams{inner: raw.MTRTestClusterClusterTimedInvokeRequestParamsFromID(_id)}
 }
 
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTimedInvokeRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTimedInvokeRequestParams {
+	x.inner.MTRUnitTestingClusterTimedInvokeRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTimedInvokeRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTimedInvokeRequestParams {
+	x.inner.MTRUnitTestingClusterTimedInvokeRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTimedInvokeRequestParams) asMTRUnitTestingClusterTimedInvokeRequestParams() *raw.MTRUnitTestingClusterTimedInvokeRequestParams { return &x.inner.MTRUnitTestingClusterTimedInvokeRequestParams }
 
 // MTRTestClusterClusterTimedInvokeRequestParamsable is the interface implemented by [MTRTestClusterClusterTimedInvokeRequestParams], for mocking and DI.
 type MTRTestClusterClusterTimedInvokeRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTimedInvokeRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTimedInvokeRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTimedInvokeRequestParams
 }
 
 var _ MTRTestClusterClusterTimedInvokeRequestParamsable = (*MTRTestClusterClusterTimedInvokeRequestParams)(nil)

@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -36,6 +37,18 @@ func CNNInstanceNormalizationGradientStateFromID(id objc.ID) *CNNInstanceNormali
 func NewCNNInstanceNormalizationGradientState() *CNNInstanceNormalizationGradientState {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNInstanceNormalizationGradientState")), objc.RegisterName("new"))
 	return &CNNInstanceNormalizationGradientState{inner: raw.MPSCNNInstanceNormalizationGradientStateFromID(_id)}
+}
+
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradientState) WithReadCount(readCount uint) *CNNInstanceNormalizationGradientState {
+	x.inner.MPSNNGradientState.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradientState) WithLabel(label string) *CNNInstanceNormalizationGradientState {
+	x.inner.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
 }
 
 // InstanceNormalization calls the underlying InstanceNormalization.
@@ -70,6 +83,8 @@ func (x *CNNInstanceNormalizationGradientState) asState() *mpscore.MPSState { re
 // CNNInstanceNormalizationGradientStateable is the interface implemented by [CNNInstanceNormalizationGradientState], for mocking and DI.
 type CNNInstanceNormalizationGradientStateable interface {
 	Unwrap() *raw.MPSCNNInstanceNormalizationGradientState
+	WithReadCount(readCount uint) *CNNInstanceNormalizationGradientState
+	WithLabel(label string) *CNNInstanceNormalizationGradientState
 	InstanceNormalization() *mpsneuralnetwork.MPSCNNInstanceNormalization
 	Gamma() metal.MTLBuffer
 	Beta() metal.MTLBuffer

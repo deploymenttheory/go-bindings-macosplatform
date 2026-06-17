@@ -37,6 +37,12 @@ func NewDimensionWithSymbolConverter(symbol string, converter *raw.NSUnitConvert
 	return &Dimension{inner: raw.NSDimensionFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Dimension) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Dimension {
+	x.inner.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Converter calls the underlying Converter.
 func (x *Dimension) Converter() *UnitConverter {
 	_r := x.inner.Converter()
@@ -55,6 +61,7 @@ func (x *Dimension) asObject() *raw.NSObject { return &x.inner.NSUnit.NSObject }
 // Dimensionable is the interface implemented by [Dimension], for mocking and DI.
 type Dimensionable interface {
 	Unwrap() *raw.NSDimension
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Dimension
 	Converter() *UnitConverter
 }
 

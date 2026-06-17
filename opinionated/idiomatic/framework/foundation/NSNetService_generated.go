@@ -57,6 +57,12 @@ func (x *NetService) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetService
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *NetService) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NetService {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
 func (x *NetService) ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
 	x.inner.ScheduleInRunLoopForMode(aRunLoop, mode)
@@ -200,6 +206,7 @@ type NetServiceable interface {
 	Unwrap() *raw.NSNetService
 	WithDelegate(delegate raw.NSNetServiceDelegate) *NetService
 	WithIncludesPeerToPeer(includesPeerToPeer bool) *NetService
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NetService
 	ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
 	RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
 	Publish()

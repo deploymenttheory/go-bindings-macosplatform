@@ -50,6 +50,54 @@ func (x *DiscoverAllUserIdentitiesOperation) WithDiscoverAllUserIdentitiesComple
 	return x
 }
 
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *DiscoverAllUserIdentitiesOperation) WithGroup(group *raw.CKOperationGroup) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *DiscoverAllUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *DiscoverAllUserIdentitiesOperation) WithContainer(container *raw.CKContainer) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *DiscoverAllUserIdentitiesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *DiscoverAllUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // UserIdentityDiscoveredBlock calls the underlying UserIdentityDiscoveredBlock.
 func (x *DiscoverAllUserIdentitiesOperation) UserIdentityDiscoveredBlock() objc.Block {
 	return x.inner.UserIdentityDiscoveredBlock()
@@ -108,6 +156,14 @@ type DiscoverAllUserIdentitiesOperationable interface {
 	Unwrap() *raw.CKDiscoverAllUserIdentitiesOperation
 	WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity)) *DiscoverAllUserIdentitiesOperation
 	WithDiscoverAllUserIdentitiesCompletionBlock(discoverAllUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverAllUserIdentitiesOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *DiscoverAllUserIdentitiesOperation
+	WithGroup(group *raw.CKOperationGroup) *DiscoverAllUserIdentitiesOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation
+	WithContainer(container *raw.CKContainer) *DiscoverAllUserIdentitiesOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverAllUserIdentitiesOperation
+	WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverAllUserIdentitiesOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverAllUserIdentitiesOperation
 	UserIdentityDiscoveredBlock() objc.Block
 	SetUserIdentityDiscoveredBlock(ctx context.Context) (*UserIdentity, error)
 	DiscoverAllUserIdentitiesCompletionBlock() objc.Block

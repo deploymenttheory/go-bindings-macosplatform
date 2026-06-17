@@ -74,6 +74,12 @@ func (x *Thread) WithStackSize(stackSize uint) *Thread {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Thread) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Thread {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Cancel calls the underlying Cancel.
 func (x *Thread) Cancel() {
 	x.inner.Cancel()
@@ -167,6 +173,7 @@ type Threadable interface {
 	WithQualityOfService(qualityOfService raw.NSQualityOfService) *Thread
 	WithName(name string) *Thread
 	WithStackSize(stackSize uint) *Thread
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Thread
 	Cancel()
 	Start()
 	Main()

@@ -68,6 +68,12 @@ func (x *OperationQueue) WithUnderlyingQueue(underlyingQueue ObjectProvider) *Op
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *OperationQueue) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OperationQueue {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddOperation calls the underlying AddOperation.
 func (x *OperationQueue) AddOperation(op *raw.NSOperation) {
 	x.inner.AddOperation(op)
@@ -209,6 +215,7 @@ type OperationQueueable interface {
 	WithName(name string) *OperationQueue
 	WithQualityOfService(qualityOfService raw.NSQualityOfService) *OperationQueue
 	WithUnderlyingQueue(underlyingQueue ObjectProvider) *OperationQueue
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OperationQueue
 	AddOperation(op *raw.NSOperation)
 	AddOperationsWaitUntilFinished(ops *raw.NSArray[*raw.NSOperation], wait bool)
 	AddOperationWith(ctx context.Context) error

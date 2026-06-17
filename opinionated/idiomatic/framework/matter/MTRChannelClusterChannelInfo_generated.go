@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,60 @@ func NewMTRChannelClusterChannelInfo() *MTRChannelClusterChannelInfo {
 	return &MTRChannelClusterChannelInfo{inner: raw.MTRChannelClusterChannelInfoFromID(_id)}
 }
 
+// WithMajorNumber sets the majorNumber property and returns the receiver for chaining.
+func (x *MTRChannelClusterChannelInfo) WithMajorNumber(majorNumber *foundation.NSNumber) *MTRChannelClusterChannelInfo {
+	x.inner.MTRChannelClusterChannelInfoStruct.SetMajorNumber(majorNumber)
+	return x
+}
+
+// WithMinorNumber sets the minorNumber property and returns the receiver for chaining.
+func (x *MTRChannelClusterChannelInfo) WithMinorNumber(minorNumber *foundation.NSNumber) *MTRChannelClusterChannelInfo {
+	x.inner.MTRChannelClusterChannelInfoStruct.SetMinorNumber(minorNumber)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *MTRChannelClusterChannelInfo) WithName(name string) *MTRChannelClusterChannelInfo {
+	x.inner.MTRChannelClusterChannelInfoStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithCallSign sets the callSign property and returns the receiver for chaining.
+func (x *MTRChannelClusterChannelInfo) WithCallSign(callSign string) *MTRChannelClusterChannelInfo {
+	x.inner.MTRChannelClusterChannelInfoStruct.SetCallSign(foundation.NSStringStringWithUTF8String(callSign))
+	return x
+}
+
+// WithAffiliateCallSign sets the affiliateCallSign property and returns the receiver for chaining.
+func (x *MTRChannelClusterChannelInfo) WithAffiliateCallSign(affiliateCallSign string) *MTRChannelClusterChannelInfo {
+	x.inner.MTRChannelClusterChannelInfoStruct.SetAffiliateCallSign(foundation.NSStringStringWithUTF8String(affiliateCallSign))
+	return x
+}
+
+// WithIdentifier sets the identifier property and returns the receiver for chaining.
+func (x *MTRChannelClusterChannelInfo) WithIdentifier(identifier string) *MTRChannelClusterChannelInfo {
+	x.inner.MTRChannelClusterChannelInfoStruct.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *MTRChannelClusterChannelInfo) WithType(type_ *foundation.NSNumber) *MTRChannelClusterChannelInfo {
+	x.inner.MTRChannelClusterChannelInfoStruct.SetType(type_)
+	return x
+}
+
 func (x *MTRChannelClusterChannelInfo) asMTRChannelClusterChannelInfoStruct() *raw.MTRChannelClusterChannelInfoStruct { return &x.inner.MTRChannelClusterChannelInfoStruct }
 
 // MTRChannelClusterChannelInfoable is the interface implemented by [MTRChannelClusterChannelInfo], for mocking and DI.
 type MTRChannelClusterChannelInfoable interface {
 	Unwrap() *raw.MTRChannelClusterChannelInfo
+	WithMajorNumber(majorNumber *foundation.NSNumber) *MTRChannelClusterChannelInfo
+	WithMinorNumber(minorNumber *foundation.NSNumber) *MTRChannelClusterChannelInfo
+	WithName(name string) *MTRChannelClusterChannelInfo
+	WithCallSign(callSign string) *MTRChannelClusterChannelInfo
+	WithAffiliateCallSign(affiliateCallSign string) *MTRChannelClusterChannelInfo
+	WithIdentifier(identifier string) *MTRChannelClusterChannelInfo
+	WithType(type_ *foundation.NSNumber) *MTRChannelClusterChannelInfo
 }
 
 var _ MTRChannelClusterChannelInfoable = (*MTRChannelClusterChannelInfo)(nil)

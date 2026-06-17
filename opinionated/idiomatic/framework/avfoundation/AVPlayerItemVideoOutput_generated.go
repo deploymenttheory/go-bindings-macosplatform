@@ -46,6 +46,12 @@ func NewPlayerItemVideoOutputWithOutputSettings(outputSettings *foundation.NSDic
 	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(_id)}
 }
 
+// WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
+func (x *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput {
+	x.inner.AVPlayerItemOutput.SetSuppressesPlayerRendering(suppressesPlayerRendering)
+	return x
+}
+
 // HasNewPixelBufferForItemTime calls the underlying HasNewPixelBufferForItemTime.
 func (x *PlayerItemVideoOutput) HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool {
 	return x.inner.HasNewPixelBufferForItemTime(itemTime)
@@ -81,6 +87,7 @@ func (x *PlayerItemVideoOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { r
 // PlayerItemVideoOutputable is the interface implemented by [PlayerItemVideoOutput], for mocking and DI.
 type PlayerItemVideoOutputable interface {
 	Unwrap() *raw.AVPlayerItemVideoOutput
+	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput
 	HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool
 	CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime coremedia.CMTime, outItemTimeForDisplay *coremedia.CMTime) unsafe.Pointer
 	SetDelegateQueue(delegate raw.AVPlayerItemOutputPullDelegate, delegateQueue *foundation.NSObject)

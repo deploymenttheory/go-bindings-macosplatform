@@ -36,6 +36,18 @@ func NewDOMOverflowEventOverflowEventHorizontalOverflowVerticalOverflow(orient u
 	return &DOMOverflowEvent{inner: raw.DOMOverflowEventFromID(_id)}
 }
 
+// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+func (x *DOMOverflowEvent) WithReturnValue(returnValue bool) *DOMOverflowEvent {
+	x.inner.DOMEvent.SetReturnValue(returnValue)
+	return x
+}
+
+// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+func (x *DOMOverflowEvent) WithCancelBubble(cancelBubble bool) *DOMOverflowEvent {
+	x.inner.DOMEvent.SetCancelBubble(cancelBubble)
+	return x
+}
+
 // Orient calls the underlying Orient.
 func (x *DOMOverflowEvent) Orient() uint16 {
 	return x.inner.Orient()
@@ -60,6 +72,8 @@ func (x *DOMOverflowEvent) asWebScriptObject() *raw.WebScriptObject { return &x.
 // DOMOverflowEventable is the interface implemented by [DOMOverflowEvent], for mocking and DI.
 type DOMOverflowEventable interface {
 	Unwrap() *raw.DOMOverflowEvent
+	WithReturnValue(returnValue bool) *DOMOverflowEvent
+	WithCancelBubble(cancelBubble bool) *DOMOverflowEvent
 	Orient() uint16
 	HorizontalOverflow() bool
 	VerticalOverflow() bool

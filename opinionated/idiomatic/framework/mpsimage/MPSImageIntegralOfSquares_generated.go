@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +37,32 @@ func NewImageIntegralOfSquares() *ImageIntegralOfSquares {
 	return &ImageIntegralOfSquares{inner: raw.MPSImageIntegralOfSquaresFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageIntegralOfSquares) WithOffset(offset mpscore.MPSOffset) *ImageIntegralOfSquares {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageIntegralOfSquares) WithClipRect(clipRect metal.MTLRegion) *ImageIntegralOfSquares {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageIntegralOfSquares) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegralOfSquares {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageIntegralOfSquares) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 // ImageIntegralOfSquaresable is the interface implemented by [ImageIntegralOfSquares], for mocking and DI.
 type ImageIntegralOfSquaresable interface {
 	Unwrap() *raw.MPSImageIntegralOfSquares
+	WithOffset(offset mpscore.MPSOffset) *ImageIntegralOfSquares
+	WithClipRect(clipRect metal.MTLRegion) *ImageIntegralOfSquares
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegralOfSquares
 }
 
 var _ ImageIntegralOfSquaresable = (*ImageIntegralOfSquares)(nil)

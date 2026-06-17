@@ -7,7 +7,9 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -114,6 +116,340 @@ func (x *RulerView) WithMarkers(items ...*raw.NSRulerMarker) *RulerView {
 // WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
 func (x *RulerView) WithAccessoryView(accessoryView ViewProvider) *RulerView {
 	x.inner.SetAccessoryView(accessoryView.asView())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *RulerView) WithSubviews(items ...ViewProvider) *RulerView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *RulerView) WithHidden(hidden bool) *RulerView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *RulerView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RulerView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *RulerView) WithAutoresizesSubviews(autoresizesSubviews bool) *RulerView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *RulerView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *RulerView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *RulerView) WithFrame(frame corefoundation.CGRect) *RulerView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *RulerView) WithFrameRotation(frameRotation float64) *RulerView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *RulerView) WithFrameCenterRotation(frameCenterRotation float64) *RulerView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *RulerView) WithBoundsRotation(boundsRotation float64) *RulerView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *RulerView) WithBounds(bounds corefoundation.CGRect) *RulerView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *RulerView) WithCanDrawConcurrently(canDrawConcurrently bool) *RulerView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *RulerView) WithNeedsDisplay(needsDisplay bool) *RulerView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *RulerView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *RulerView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *RulerView) WithWantsRestingTouches(wantsRestingTouches bool) *RulerView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *RulerView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *RulerView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *RulerView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *RulerView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *RulerView) WithWantsLayer(wantsLayer bool) *RulerView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *RulerView) WithLayer(layer *quartzcore.CALayer) *RulerView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *RulerView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RulerView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *RulerView) WithNeedsLayout(needsLayout bool) *RulerView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *RulerView) WithAlphaValue(alphaValue float64) *RulerView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *RulerView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *RulerView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *RulerView) WithBackgroundFilters(items ...*coreimage.CIFilter) *RulerView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *RulerView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *RulerView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *RulerView) WithContentFilters(items ...*coreimage.CIFilter) *RulerView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *RulerView) WithShadow(shadow *raw.NSShadow) *RulerView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *RulerView) WithClipsToBounds(clipsToBounds bool) *RulerView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *RulerView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RulerView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *RulerView) WithToolTip(toolTip string) *RulerView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *RulerView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *RulerView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *RulerView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RulerView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *RulerView) WithNextKeyView(nextKeyView ViewProvider) *RulerView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *RulerView) WithFocusRingType(focusRingType raw.NSFocusRingType) *RulerView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *RulerView) WithGestureRecognizers(items ...GestureRecognizerProvider) *RulerView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *RulerView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RulerView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *RulerView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RulerView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *RulerView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RulerView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *RulerView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *RulerView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *RulerView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RulerView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *RulerView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RulerView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *RulerView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RulerView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *RulerView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RulerView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *RulerView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RulerView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *RulerView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RulerView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *RulerView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RulerView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *RulerView) WithNextResponder(nextResponder ResponderProvider) *RulerView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *RulerView) WithMenu(menu *raw.NSMenu) *RulerView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *RulerView) WithUserActivity(userActivity *foundation.NSUserActivity) *RulerView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *RulerView) WithTouchBar(touchBar *raw.NSTouchBar) *RulerView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -301,6 +637,55 @@ type RulerViewable interface {
 	WithClientView(clientView ViewProvider) *RulerView
 	WithMarkers(items ...*raw.NSRulerMarker) *RulerView
 	WithAccessoryView(accessoryView ViewProvider) *RulerView
+	WithSubviews(items ...ViewProvider) *RulerView
+	WithHidden(hidden bool) *RulerView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RulerView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *RulerView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *RulerView
+	WithFrame(frame corefoundation.CGRect) *RulerView
+	WithFrameRotation(frameRotation float64) *RulerView
+	WithFrameCenterRotation(frameCenterRotation float64) *RulerView
+	WithBoundsRotation(boundsRotation float64) *RulerView
+	WithBounds(bounds corefoundation.CGRect) *RulerView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *RulerView
+	WithNeedsDisplay(needsDisplay bool) *RulerView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *RulerView
+	WithWantsRestingTouches(wantsRestingTouches bool) *RulerView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *RulerView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *RulerView
+	WithWantsLayer(wantsLayer bool) *RulerView
+	WithLayer(layer *quartzcore.CALayer) *RulerView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RulerView
+	WithNeedsLayout(needsLayout bool) *RulerView
+	WithAlphaValue(alphaValue float64) *RulerView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *RulerView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *RulerView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *RulerView
+	WithContentFilters(items ...*coreimage.CIFilter) *RulerView
+	WithShadow(shadow *raw.NSShadow) *RulerView
+	WithClipsToBounds(clipsToBounds bool) *RulerView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RulerView
+	WithToolTip(toolTip string) *RulerView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *RulerView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RulerView
+	WithNextKeyView(nextKeyView ViewProvider) *RulerView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *RulerView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *RulerView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RulerView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RulerView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RulerView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *RulerView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RulerView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RulerView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RulerView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RulerView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RulerView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RulerView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RulerView
+	WithNextResponder(nextResponder ResponderProvider) *RulerView
+	WithMenu(menu *raw.NSMenu) *RulerView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *RulerView
+	WithTouchBar(touchBar *raw.NSTouchBar) *RulerView
 	AddMarker(marker *raw.NSRulerMarker)
 	RemoveMarker(marker *raw.NSRulerMarker)
 	TrackMarkerWithMouseEvent(marker *raw.NSRulerMarker, event *raw.NSEvent) bool

@@ -41,6 +41,72 @@ func (x *RenderPassColorAttachmentDescriptor) WithClearColor(clearColor raw.MTLC
 	return x
 }
 
+// WithTexture sets the texture property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithTexture(texture raw.MTLTexture) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetTexture(texture)
+	return x
+}
+
+// WithLevel sets the level property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithLevel(level uint) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetLevel(level)
+	return x
+}
+
+// WithSlice sets the slice property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithSlice(slice uint) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetSlice(slice)
+	return x
+}
+
+// WithDepthPlane sets the depthPlane property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithDepthPlane(depthPlane uint) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetDepthPlane(depthPlane)
+	return x
+}
+
+// WithResolveTexture sets the resolveTexture property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithResolveTexture(resolveTexture raw.MTLTexture) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveTexture(resolveTexture)
+	return x
+}
+
+// WithResolveLevel sets the resolveLevel property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithResolveLevel(resolveLevel uint) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveLevel(resolveLevel)
+	return x
+}
+
+// WithResolveSlice sets the resolveSlice property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithResolveSlice(resolveSlice uint) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveSlice(resolveSlice)
+	return x
+}
+
+// WithResolveDepthPlane sets the resolveDepthPlane property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveDepthPlane(resolveDepthPlane)
+	return x
+}
+
+// WithLoadAction sets the loadAction property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetLoadAction(loadAction)
+	return x
+}
+
+// WithStoreAction sets the storeAction property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreAction(storeAction)
+	return x
+}
+
+// WithStoreActionOptions sets the storeActionOptions property and returns the receiver for chaining.
+func (x *RenderPassColorAttachmentDescriptor) WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreActionOptions(storeActionOptions)
+	return x
+}
+
 // ClearColor calls the underlying ClearColor.
 func (x *RenderPassColorAttachmentDescriptor) ClearColor() raw.MTLClearColor {
 	return x.inner.ClearColor()
@@ -57,6 +123,17 @@ func (x *RenderPassColorAttachmentDescriptor) asRenderPassAttachmentDescriptor()
 type RenderPassColorAttachmentDescriptorable interface {
 	Unwrap() *raw.MTLRenderPassColorAttachmentDescriptor
 	WithClearColor(clearColor raw.MTLClearColor) *RenderPassColorAttachmentDescriptor
+	WithTexture(texture raw.MTLTexture) *RenderPassColorAttachmentDescriptor
+	WithLevel(level uint) *RenderPassColorAttachmentDescriptor
+	WithSlice(slice uint) *RenderPassColorAttachmentDescriptor
+	WithDepthPlane(depthPlane uint) *RenderPassColorAttachmentDescriptor
+	WithResolveTexture(resolveTexture raw.MTLTexture) *RenderPassColorAttachmentDescriptor
+	WithResolveLevel(resolveLevel uint) *RenderPassColorAttachmentDescriptor
+	WithResolveSlice(resolveSlice uint) *RenderPassColorAttachmentDescriptor
+	WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassColorAttachmentDescriptor
+	WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassColorAttachmentDescriptor
+	WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassColorAttachmentDescriptor
+	WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassColorAttachmentDescriptor
 	ClearColor() raw.MTLClearColor
 	SetClearColor(clearColor raw.MTLClearColor)
 }

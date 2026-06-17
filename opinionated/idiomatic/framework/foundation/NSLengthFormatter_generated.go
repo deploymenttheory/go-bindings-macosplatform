@@ -53,6 +53,12 @@ func (x *LengthFormatter) WithForPersonHeightUse(forPersonHeightUse bool) *Lengt
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *LengthFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LengthFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringFromValueUnit calls the underlying StringFromValueUnit.
 func (x *LengthFormatter) StringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String {
 	_r := x.inner.StringFromValueUnit(value, unit)
@@ -133,6 +139,7 @@ type LengthFormatterable interface {
 	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *LengthFormatter
 	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *LengthFormatter
 	WithForPersonHeightUse(forPersonHeightUse bool) *LengthFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LengthFormatter
 	StringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String
 	StringFromMeters(numberInMeters float64) *String
 	UnitStringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -43,6 +44,42 @@ func NewInvocationOperationWithInvocation(inv *raw.NSInvocation) *InvocationOper
 	return &InvocationOperation{inner: raw.NSInvocationOperationFromID(_id)}
 }
 
+// WithQueuePriority sets the queuePriority property and returns the receiver for chaining.
+func (x *InvocationOperation) WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *InvocationOperation {
+	x.inner.NSOperation.SetQueuePriority(queuePriority)
+	return x
+}
+
+// WithCompletionBlock sets the completionBlock property and returns the receiver for chaining.
+func (x *InvocationOperation) WithCompletionBlock(completionBlock func()) *InvocationOperation {
+	x.inner.NSOperation.SetCompletionBlock(completionBlock)
+	return x
+}
+
+// WithThreadPriority sets the threadPriority property and returns the receiver for chaining.
+func (x *InvocationOperation) WithThreadPriority(threadPriority float64) *InvocationOperation {
+	x.inner.NSOperation.SetThreadPriority(threadPriority)
+	return x
+}
+
+// WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
+func (x *InvocationOperation) WithQualityOfService(qualityOfService raw.NSQualityOfService) *InvocationOperation {
+	x.inner.NSOperation.SetQualityOfService(qualityOfService)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *InvocationOperation) WithName(name string) *InvocationOperation {
+	x.inner.NSOperation.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *InvocationOperation) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InvocationOperation {
+	x.inner.NSOperation.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Invocation calls the underlying Invocation.
 func (x *InvocationOperation) Invocation() *Invocation {
 	_r := x.inner.Invocation()
@@ -64,6 +101,12 @@ func (x *InvocationOperation) asObject() *raw.NSObject { return &x.inner.NSOpera
 // InvocationOperationable is the interface implemented by [InvocationOperation], for mocking and DI.
 type InvocationOperationable interface {
 	Unwrap() *raw.NSInvocationOperation
+	WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *InvocationOperation
+	WithCompletionBlock(completionBlock func()) *InvocationOperation
+	WithThreadPriority(threadPriority float64) *InvocationOperation
+	WithQualityOfService(qualityOfService raw.NSQualityOfService) *InvocationOperation
+	WithName(name string) *InvocationOperation
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InvocationOperation
 	Invocation() *Invocation
 	Result() objc.ID
 }

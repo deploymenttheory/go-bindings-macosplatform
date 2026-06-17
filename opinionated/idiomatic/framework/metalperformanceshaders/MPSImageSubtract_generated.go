@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,90 @@ func NewImageSubtractWithDevice(device metal.MTLDevice) *ImageSubtract {
 	return &ImageSubtract{inner: raw.MPSImageSubtractFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *ImageSubtract) WithPrimaryScale(primaryScale float32) *ImageSubtract {
+	x.inner.MPSImageArithmetic.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *ImageSubtract) WithSecondaryScale(secondaryScale float32) *ImageSubtract {
+	x.inner.MPSImageArithmetic.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *ImageSubtract) WithBias(bias float32) *ImageSubtract {
+	x.inner.MPSImageArithmetic.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInPixels sets the primaryStrideInPixels property and returns the receiver for chaining.
+func (x *ImageSubtract) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageSubtract {
+	x.inner.MPSImageArithmetic.SetPrimaryStrideInPixels(primaryStrideInPixels)
+	return x
+}
+
+// WithSecondaryStrideInPixels sets the secondaryStrideInPixels property and returns the receiver for chaining.
+func (x *ImageSubtract) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageSubtract {
+	x.inner.MPSImageArithmetic.SetSecondaryStrideInPixels(secondaryStrideInPixels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *ImageSubtract) WithMinimumValue(minimumValue float32) *ImageSubtract {
+	x.inner.MPSImageArithmetic.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *ImageSubtract) WithMaximumValue(maximumValue float32) *ImageSubtract {
+	x.inner.MPSImageArithmetic.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *ImageSubtract) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageSubtract {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *ImageSubtract) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageSubtract {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *ImageSubtract) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageSubtract {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *ImageSubtract) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageSubtract {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageSubtract) WithClipRect(clipRect metal.MTLRegion) *ImageSubtract {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageSubtract) WithOptions(options mpscore.MPSKernelOptions) *ImageSubtract {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageSubtract) WithLabel(label string) *ImageSubtract {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageSubtract) asImageArithmetic() *mpsimage.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
 
 func (x *ImageSubtract) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
@@ -48,6 +133,20 @@ func (x *ImageSubtract) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImage
 // ImageSubtractable is the interface implemented by [ImageSubtract], for mocking and DI.
 type ImageSubtractable interface {
 	Unwrap() *raw.MPSImageSubtract
+	WithPrimaryScale(primaryScale float32) *ImageSubtract
+	WithSecondaryScale(secondaryScale float32) *ImageSubtract
+	WithBias(bias float32) *ImageSubtract
+	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageSubtract
+	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageSubtract
+	WithMinimumValue(minimumValue float32) *ImageSubtract
+	WithMaximumValue(maximumValue float32) *ImageSubtract
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageSubtract
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageSubtract
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageSubtract
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageSubtract
+	WithClipRect(clipRect metal.MTLRegion) *ImageSubtract
+	WithOptions(options mpscore.MPSKernelOptions) *ImageSubtract
+	WithLabel(label string) *ImageSubtract
 }
 
 var _ ImageSubtractable = (*ImageSubtract)(nil)

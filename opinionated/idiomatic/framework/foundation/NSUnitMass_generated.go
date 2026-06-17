@@ -35,6 +35,12 @@ func NewUnitMass() *UnitMass {
 	return &UnitMass{inner: raw.NSUnitMassFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitMass) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitMass {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitMass) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitMass) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitMass) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit
 // UnitMassable is the interface implemented by [UnitMass], for mocking and DI.
 type UnitMassable interface {
 	Unwrap() *raw.NSUnitMass
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitMass
 }
 
 var _ UnitMassable = (*UnitMass)(nil)

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,74 @@ func NewMTROtaSoftwareUpdateProviderClusterQueryImageResponseParams() *MTROtaSof
 	return &MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams{inner: raw.MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsFromID(_id)}
 }
 
+// WithStatus sets the status property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithStatus(status *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams.SetStatus(status)
+	return x
+}
+
+// WithDelayedActionTime sets the delayedActionTime property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithDelayedActionTime(delayedActionTime *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams.SetDelayedActionTime(delayedActionTime)
+	return x
+}
+
+// WithImageURI sets the imageURI property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithImageURI(imageURI string) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams.SetImageURI(foundation.NSStringStringWithUTF8String(imageURI))
+	return x
+}
+
+// WithSoftwareVersion sets the softwareVersion property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams.SetSoftwareVersion(softwareVersion)
+	return x
+}
+
+// WithSoftwareVersionString sets the softwareVersionString property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithSoftwareVersionString(softwareVersionString string) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams.SetSoftwareVersionString(foundation.NSStringStringWithUTF8String(softwareVersionString))
+	return x
+}
+
+// WithUpdateToken sets the updateToken property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithUpdateToken(updateToken *foundation.NSData) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams.SetUpdateToken(updateToken)
+	return x
+}
+
+// WithUserConsentNeeded sets the userConsentNeeded property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithUserConsentNeeded(userConsentNeeded *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams.SetUserConsentNeeded(userConsentNeeded)
+	return x
+}
+
+// WithMetadataForRequestor sets the metadataForRequestor property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithMetadataForRequestor(metadataForRequestor *foundation.NSData) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams.SetMetadataForRequestor(metadataForRequestor)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) asMTROTASoftwareUpdateProviderClusterQueryImageResponseParams() *raw.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams { return &x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams }
 
 // MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams], for mocking and DI.
 type MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsable interface {
 	Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+	WithStatus(status *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+	WithDelayedActionTime(delayedActionTime *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+	WithImageURI(imageURI string) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+	WithSoftwareVersionString(softwareVersionString string) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+	WithUpdateToken(updateToken *foundation.NSData) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+	WithUserConsentNeeded(userConsentNeeded *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+	WithMetadataForRequestor(metadataForRequestor *foundation.NSData) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
 }
 
 var _ MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsable = (*MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams)(nil)

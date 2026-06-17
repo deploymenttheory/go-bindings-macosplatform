@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +52,18 @@ func NewCNNDilatedPoolingMaxNodeWithSourceFilterSize(sourceNode *mpsneuralnetwor
 	return &CNNDilatedPoolingMaxNode{inner: raw.MPSCNNDilatedPoolingMaxNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNDilatedPoolingMaxNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxNode) WithLabel(label string) *CNNDilatedPoolingMaxNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // DilationRateX calls the underlying DilationRateX.
 func (x *CNNDilatedPoolingMaxNode) DilationRateX() uint {
 	return x.inner.DilationRateX()
@@ -66,6 +79,8 @@ func (x *CNNDilatedPoolingMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilte
 // CNNDilatedPoolingMaxNodeable is the interface implemented by [CNNDilatedPoolingMaxNode], for mocking and DI.
 type CNNDilatedPoolingMaxNodeable interface {
 	Unwrap() *raw.MPSCNNDilatedPoolingMaxNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNDilatedPoolingMaxNode
+	WithLabel(label string) *CNNDilatedPoolingMaxNode
 	DilationRateX() uint
 	DilationRateY() uint
 }

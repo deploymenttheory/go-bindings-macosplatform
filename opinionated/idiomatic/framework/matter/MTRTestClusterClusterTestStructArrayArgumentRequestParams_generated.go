@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTRTestClusterClusterTestStructArrayArgumentRequestParams() *MTRTestClus
 	return &MTRTestClusterClusterTestStructArrayArgumentRequestParams{inner: raw.MTRTestClusterClusterTestStructArrayArgumentRequestParamsFromID(_id)}
 }
 
+// WithArg5 sets the arg5 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) WithArg5(arg5 *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestStructArrayArgumentRequestParams.SetArg5(arg5)
+	return x
+}
+
+// WithArg6 sets the arg6 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) WithArg6(arg6 *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestStructArrayArgumentRequestParams.SetArg6(arg6)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestStructArrayArgumentRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestStructArrayArgumentRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestStructArrayArgumentRequestParams) asMTRUnitTestingClusterTestStructArrayArgumentRequestParams() *raw.MTRUnitTestingClusterTestStructArrayArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestStructArrayArgumentRequestParams }
 
 // MTRTestClusterClusterTestStructArrayArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestStructArrayArgumentRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestStructArrayArgumentRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestStructArrayArgumentRequestParams
+	WithArg5(arg5 *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentRequestParams
+	WithArg6(arg6 *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentRequestParams
 }
 
 var _ MTRTestClusterClusterTestStructArrayArgumentRequestParamsable = (*MTRTestClusterClusterTestStructArrayArgumentRequestParams)(nil)

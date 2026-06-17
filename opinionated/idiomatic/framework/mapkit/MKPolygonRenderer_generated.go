@@ -5,8 +5,12 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PolygonRenderer wraps [raw.MKPolygonRenderer] with a fluent Go API.
@@ -48,6 +52,76 @@ func (x *PolygonRenderer) WithStrokeEnd(strokeEnd float64) *PolygonRenderer {
 	return x
 }
 
+// WithFillColor sets the fillColor property and returns the receiver for chaining.
+func (x *PolygonRenderer) WithFillColor(fillColor *appkit.NSColor) *PolygonRenderer {
+	x.inner.MKOverlayPathRenderer.SetFillColor(fillColor)
+	return x
+}
+
+// WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
+func (x *PolygonRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *PolygonRenderer {
+	x.inner.MKOverlayPathRenderer.SetStrokeColor(strokeColor)
+	return x
+}
+
+// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+func (x *PolygonRenderer) WithLineWidth(lineWidth float64) *PolygonRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineWidth(lineWidth)
+	return x
+}
+
+// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
+func (x *PolygonRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *PolygonRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineJoin(lineJoin)
+	return x
+}
+
+// WithLineCap sets the lineCap property and returns the receiver for chaining.
+func (x *PolygonRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *PolygonRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineCap(lineCap)
+	return x
+}
+
+// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
+func (x *PolygonRenderer) WithMiterLimit(miterLimit float64) *PolygonRenderer {
+	x.inner.MKOverlayPathRenderer.SetMiterLimit(miterLimit)
+	return x
+}
+
+// WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
+func (x *PolygonRenderer) WithLineDashPhase(lineDashPhase float64) *PolygonRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineDashPhase(lineDashPhase)
+	return x
+}
+
+// WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
+func (x *PolygonRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *PolygonRenderer {
+	if len(items) == 0 {
+		x.inner.MKOverlayPathRenderer.SetLineDashPattern(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MKOverlayPathRenderer.SetLineDashPattern(_arr)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *PolygonRenderer) WithShouldRasterize(shouldRasterize bool) *PolygonRenderer {
+	x.inner.MKOverlayPathRenderer.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *PolygonRenderer) WithAlpha(alpha float64) *PolygonRenderer {
+	x.inner.MKOverlayPathRenderer.MKOverlayRenderer.SetAlpha(alpha)
+	return x
+}
+
 // Polygon calls the underlying Polygon.
 func (x *PolygonRenderer) Polygon() *Polygon {
 	_r := x.inner.Polygon()
@@ -86,6 +160,16 @@ type PolygonRendererable interface {
 	Unwrap() *raw.MKPolygonRenderer
 	WithStrokeStart(strokeStart float64) *PolygonRenderer
 	WithStrokeEnd(strokeEnd float64) *PolygonRenderer
+	WithFillColor(fillColor *appkit.NSColor) *PolygonRenderer
+	WithStrokeColor(strokeColor *appkit.NSColor) *PolygonRenderer
+	WithLineWidth(lineWidth float64) *PolygonRenderer
+	WithLineJoin(lineJoin coregraphics.CGLineJoin) *PolygonRenderer
+	WithLineCap(lineCap coregraphics.CGLineCap) *PolygonRenderer
+	WithMiterLimit(miterLimit float64) *PolygonRenderer
+	WithLineDashPhase(lineDashPhase float64) *PolygonRenderer
+	WithLineDashPattern(items ...*foundation.NSNumber) *PolygonRenderer
+	WithShouldRasterize(shouldRasterize bool) *PolygonRenderer
+	WithAlpha(alpha float64) *PolygonRenderer
 	Polygon() *Polygon
 	StrokeStart() float64
 	SetStrokeStart(strokeStart float64)

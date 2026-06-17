@@ -5,6 +5,7 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -71,6 +72,332 @@ func (x *TextLayer) WithAlignmentMode(alignmentMode *foundation.NSString) *TextL
 // WithAllowsFontSubpixelQuantization sets the allowsFontSubpixelQuantization property and returns the receiver for chaining.
 func (x *TextLayer) WithAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool) *TextLayer {
 	x.inner.SetAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *TextLayer) WithBounds(bounds corefoundation.CGRect) *TextLayer {
+	x.inner.CALayer.SetBounds(bounds)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *TextLayer) WithPosition(position corefoundation.CGPoint) *TextLayer {
+	x.inner.CALayer.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *TextLayer) WithZPosition(zPosition float64) *TextLayer {
+	x.inner.CALayer.SetZPosition(zPosition)
+	return x
+}
+
+// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
+func (x *TextLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TextLayer {
+	x.inner.CALayer.SetAnchorPoint(anchorPoint)
+	return x
+}
+
+// WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
+func (x *TextLayer) WithAnchorPointZ(anchorPointZ float64) *TextLayer {
+	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *TextLayer) WithTransform(transform raw.CATransform3D) *TextLayer {
+	x.inner.CALayer.SetTransform(transform)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *TextLayer) WithFrame(frame corefoundation.CGRect) *TextLayer {
+	x.inner.CALayer.SetFrame(frame)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *TextLayer) WithHidden(hidden bool) *TextLayer {
+	x.inner.CALayer.SetHidden(hidden)
+	return x
+}
+
+// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
+func (x *TextLayer) WithDoubleSided(doubleSided bool) *TextLayer {
+	x.inner.CALayer.SetDoubleSided(doubleSided)
+	return x
+}
+
+// WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
+func (x *TextLayer) WithGeometryFlipped(geometryFlipped bool) *TextLayer {
+	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
+	return x
+}
+
+// WithSublayers sets the collection, converting the Go slice to an NSArray.
+func (x *TextLayer) WithSublayers(items ...LayerProvider) *TextLayer {
+	if len(items) == 0 {
+		x.inner.CALayer.SetSublayers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.CALayer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CALayer.SetSublayers(_arr)
+	return x
+}
+
+// WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
+func (x *TextLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *TextLayer {
+	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
+	return x
+}
+
+// WithMask sets the mask property and returns the receiver for chaining.
+func (x *TextLayer) WithMask(mask LayerProvider) *TextLayer {
+	x.inner.CALayer.SetMask(mask.asLayer())
+	return x
+}
+
+// WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
+func (x *TextLayer) WithMasksToBounds(masksToBounds bool) *TextLayer {
+	x.inner.CALayer.SetMasksToBounds(masksToBounds)
+	return x
+}
+
+// WithContents sets the contents property and returns the receiver for chaining.
+func (x *TextLayer) WithContents(contents objc.ID) *TextLayer {
+	x.inner.CALayer.SetContents(contents)
+	return x
+}
+
+// WithContentsRect sets the contentsRect property and returns the receiver for chaining.
+func (x *TextLayer) WithContentsRect(contentsRect corefoundation.CGRect) *TextLayer {
+	x.inner.CALayer.SetContentsRect(contentsRect)
+	return x
+}
+
+// WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
+func (x *TextLayer) WithContentsGravity(contentsGravity *foundation.NSString) *TextLayer {
+	x.inner.CALayer.SetContentsGravity(contentsGravity)
+	return x
+}
+
+// WithContentsScale sets the contentsScale property and returns the receiver for chaining.
+func (x *TextLayer) WithContentsScale(contentsScale float64) *TextLayer {
+	x.inner.CALayer.SetContentsScale(contentsScale)
+	return x
+}
+
+// WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
+func (x *TextLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *TextLayer {
+	x.inner.CALayer.SetContentsCenter(contentsCenter)
+	return x
+}
+
+// WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
+func (x *TextLayer) WithContentsFormat(contentsFormat *foundation.NSString) *TextLayer {
+	x.inner.CALayer.SetContentsFormat(contentsFormat)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeContent sets the wantsExtendedDynamicRangeContent property and returns the receiver for chaining.
+func (x *TextLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TextLayer {
+	x.inner.CALayer.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
+	return x
+}
+
+// WithToneMapMode sets the toneMapMode property and returns the receiver for chaining.
+func (x *TextLayer) WithToneMapMode(toneMapMode *foundation.NSString) *TextLayer {
+	x.inner.CALayer.SetToneMapMode(toneMapMode)
+	return x
+}
+
+// WithPreferredDynamicRange sets the preferredDynamicRange property and returns the receiver for chaining.
+func (x *TextLayer) WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *TextLayer {
+	x.inner.CALayer.SetPreferredDynamicRange(preferredDynamicRange)
+	return x
+}
+
+// WithContentsHeadroom sets the contentsHeadroom property and returns the receiver for chaining.
+func (x *TextLayer) WithContentsHeadroom(contentsHeadroom float64) *TextLayer {
+	x.inner.CALayer.SetContentsHeadroom(contentsHeadroom)
+	return x
+}
+
+// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
+func (x *TextLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *TextLayer {
+	x.inner.CALayer.SetMinificationFilter(minificationFilter)
+	return x
+}
+
+// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
+func (x *TextLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *TextLayer {
+	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
+	return x
+}
+
+// WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
+func (x *TextLayer) WithMinificationFilterBias(minificationFilterBias float32) *TextLayer {
+	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *TextLayer) WithOpaque(opaque bool) *TextLayer {
+	x.inner.CALayer.SetOpaque(opaque)
+	return x
+}
+
+// WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
+func (x *TextLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TextLayer {
+	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
+	return x
+}
+
+// WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
+func (x *TextLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *TextLayer {
+	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
+	return x
+}
+
+// WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
+func (x *TextLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *TextLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+	return x
+}
+
+// WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
+func (x *TextLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TextLayer {
+	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
+	return x
+}
+
+// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+func (x *TextLayer) WithCornerRadius(cornerRadius float64) *TextLayer {
+	x.inner.CALayer.SetCornerRadius(cornerRadius)
+	return x
+}
+
+// WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
+func (x *TextLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *TextLayer {
+	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+	return x
+}
+
+// WithCornerCurve sets the cornerCurve property and returns the receiver for chaining.
+func (x *TextLayer) WithCornerCurve(cornerCurve *foundation.NSString) *TextLayer {
+	x.inner.CALayer.SetCornerCurve(cornerCurve)
+	return x
+}
+
+// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
+func (x *TextLayer) WithBorderWidth(borderWidth float64) *TextLayer {
+	x.inner.CALayer.SetBorderWidth(borderWidth)
+	return x
+}
+
+// WithOpacity sets the opacity property and returns the receiver for chaining.
+func (x *TextLayer) WithOpacity(opacity float32) *TextLayer {
+	x.inner.CALayer.SetOpacity(opacity)
+	return x
+}
+
+// WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
+func (x *TextLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *TextLayer {
+	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *TextLayer) WithCompositingFilter(compositingFilter objc.ID) *TextLayer {
+	x.inner.CALayer.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *TextLayer) WithShouldRasterize(shouldRasterize bool) *TextLayer {
+	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
+func (x *TextLayer) WithRasterizationScale(rasterizationScale float64) *TextLayer {
+	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
+	return x
+}
+
+// WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
+func (x *TextLayer) WithShadowOpacity(shadowOpacity float32) *TextLayer {
+	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
+	return x
+}
+
+// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
+func (x *TextLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *TextLayer {
+	x.inner.CALayer.SetShadowOffset(shadowOffset)
+	return x
+}
+
+// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
+func (x *TextLayer) WithShadowRadius(shadowRadius float64) *TextLayer {
+	x.inner.CALayer.SetShadowRadius(shadowRadius)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *TextLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *TextLayer {
+	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
+func (x *TextLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *TextLayer {
+	x.inner.CALayer.SetLayoutManager(layoutManager)
+	return x
+}
+
+// WithActions sets the actions property and returns the receiver for chaining.
+func (x *TextLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TextLayer {
+	x.inner.CALayer.SetActions(actions)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *TextLayer) WithName(name string) *TextLayer {
+	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *TextLayer) WithDelegate(delegate raw.CALayerDelegate) *TextLayer {
+	x.inner.CALayer.SetDelegate(delegate)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *TextLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *TextLayer {
+	x.inner.CALayer.SetStyle(style)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *TextLayer) WithConstraints(items ...*raw.CAConstraint) *TextLayer {
+	if len(items) == 0 {
+		x.inner.CALayer.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CALayer.SetConstraints(_arr)
 	return x
 }
 
@@ -173,6 +500,57 @@ type TextLayerable interface {
 	WithTruncationMode(truncationMode *foundation.NSString) *TextLayer
 	WithAlignmentMode(alignmentMode *foundation.NSString) *TextLayer
 	WithAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool) *TextLayer
+	WithBounds(bounds corefoundation.CGRect) *TextLayer
+	WithPosition(position corefoundation.CGPoint) *TextLayer
+	WithZPosition(zPosition float64) *TextLayer
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TextLayer
+	WithAnchorPointZ(anchorPointZ float64) *TextLayer
+	WithTransform(transform raw.CATransform3D) *TextLayer
+	WithFrame(frame corefoundation.CGRect) *TextLayer
+	WithHidden(hidden bool) *TextLayer
+	WithDoubleSided(doubleSided bool) *TextLayer
+	WithGeometryFlipped(geometryFlipped bool) *TextLayer
+	WithSublayers(items ...LayerProvider) *TextLayer
+	WithSublayerTransform(sublayerTransform raw.CATransform3D) *TextLayer
+	WithMask(mask LayerProvider) *TextLayer
+	WithMasksToBounds(masksToBounds bool) *TextLayer
+	WithContents(contents objc.ID) *TextLayer
+	WithContentsRect(contentsRect corefoundation.CGRect) *TextLayer
+	WithContentsGravity(contentsGravity *foundation.NSString) *TextLayer
+	WithContentsScale(contentsScale float64) *TextLayer
+	WithContentsCenter(contentsCenter corefoundation.CGRect) *TextLayer
+	WithContentsFormat(contentsFormat *foundation.NSString) *TextLayer
+	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TextLayer
+	WithToneMapMode(toneMapMode *foundation.NSString) *TextLayer
+	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *TextLayer
+	WithContentsHeadroom(contentsHeadroom float64) *TextLayer
+	WithMinificationFilter(minificationFilter *foundation.NSString) *TextLayer
+	WithMagnificationFilter(magnificationFilter *foundation.NSString) *TextLayer
+	WithMinificationFilterBias(minificationFilterBias float32) *TextLayer
+	WithOpaque(opaque bool) *TextLayer
+	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TextLayer
+	WithDrawsAsynchronously(drawsAsynchronously bool) *TextLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *TextLayer
+	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TextLayer
+	WithCornerRadius(cornerRadius float64) *TextLayer
+	WithMaskedCorners(maskedCorners raw.CACornerMask) *TextLayer
+	WithCornerCurve(cornerCurve *foundation.NSString) *TextLayer
+	WithBorderWidth(borderWidth float64) *TextLayer
+	WithOpacity(opacity float32) *TextLayer
+	WithAllowsGroupOpacity(allowsGroupOpacity bool) *TextLayer
+	WithCompositingFilter(compositingFilter objc.ID) *TextLayer
+	WithShouldRasterize(shouldRasterize bool) *TextLayer
+	WithRasterizationScale(rasterizationScale float64) *TextLayer
+	WithShadowOpacity(shadowOpacity float32) *TextLayer
+	WithShadowOffset(shadowOffset corefoundation.CGSize) *TextLayer
+	WithShadowRadius(shadowRadius float64) *TextLayer
+	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *TextLayer
+	WithLayoutManager(layoutManager raw.CALayoutManager) *TextLayer
+	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TextLayer
+	WithName(name string) *TextLayer
+	WithDelegate(delegate raw.CALayerDelegate) *TextLayer
+	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *TextLayer
+	WithConstraints(items ...*raw.CAConstraint) *TextLayer
 	String() objc.ID
 	SetString(string_ objc.ID)
 	Font() unsafe.Pointer

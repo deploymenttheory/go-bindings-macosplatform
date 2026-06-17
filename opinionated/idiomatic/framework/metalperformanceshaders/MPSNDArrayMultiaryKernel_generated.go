@@ -47,6 +47,24 @@ func NewNDArrayMultiaryKernelWithCoderDevice(coder *foundation.NSCoder, device m
 	return &NDArrayMultiaryKernel{inner: raw.MPSNDArrayMultiaryKernelFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayMultiaryKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryKernel {
+	x.inner.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayMultiaryKernel) WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryKernel {
+	x.inner.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayMultiaryKernel) WithLabel(label string) *NDArrayMultiaryKernel {
+	x.inner.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceArrays calls the underlying EncodeToCommandBufferSourceArrays.
 func (x *NDArrayMultiaryKernel) EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray {
 	return x.inner.EncodeToCommandBufferSourceArrays(cmdBuf, sourceArrays)
@@ -79,6 +97,9 @@ func (x *NDArrayMultiaryKernel) asKernel() *mpscore.MPSKernel { return &x.inner.
 // NDArrayMultiaryKernelable is the interface implemented by [NDArrayMultiaryKernel], for mocking and DI.
 type NDArrayMultiaryKernelable interface {
 	Unwrap() *raw.MPSNDArrayMultiaryKernel
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryKernel
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryKernel
+	WithLabel(label string) *NDArrayMultiaryKernel
 	EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray
 	EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray)
 	EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray

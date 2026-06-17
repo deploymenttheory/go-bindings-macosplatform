@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,24 @@ func NewNNReductionFeatureChannelsArgumentMinNode() *NNReductionFeatureChannelsA
 	return &NNReductionFeatureChannelsArgumentMinNode{inner: raw.MPSNNReductionFeatureChannelsArgumentMinNodeFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReductionFeatureChannelsArgumentMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsArgumentMinNode {
+	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionFeatureChannelsArgumentMinNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionFeatureChannelsArgumentMinNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionFeatureChannelsArgumentMinNode) WithLabel(label string) *NNReductionFeatureChannelsArgumentMinNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReductionFeatureChannelsArgumentMinNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
 
 func (x *NNReductionFeatureChannelsArgumentMinNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
@@ -42,6 +62,9 @@ func (x *NNReductionFeatureChannelsArgumentMinNode) asNNFilterNode() *raw.MPSNNF
 // NNReductionFeatureChannelsArgumentMinNodeable is the interface implemented by [NNReductionFeatureChannelsArgumentMinNode], for mocking and DI.
 type NNReductionFeatureChannelsArgumentMinNodeable interface {
 	Unwrap() *raw.MPSNNReductionFeatureChannelsArgumentMinNode
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsArgumentMinNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionFeatureChannelsArgumentMinNode
+	WithLabel(label string) *NNReductionFeatureChannelsArgumentMinNode
 }
 
 var _ NNReductionFeatureChannelsArgumentMinNodeable = (*NNReductionFeatureChannelsArgumentMinNode)(nil)

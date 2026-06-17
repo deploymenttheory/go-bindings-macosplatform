@@ -423,6 +423,12 @@ func (x *DateFormatter) WithDoesRelativeDateFormatting(doesRelativeDateFormattin
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DateFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // GetObjectValueForStringRangeError calls the underlying GetObjectValueForStringRangeError.
 func (x *DateFormatter) GetObjectValueForStringRangeError(obj **raw.ObjcObject, string_ string, rangep *raw.NSRange) (bool, error) {
 	return x.inner.GetObjectValueForStringRangeError(obj, foundation.NSStringStringWithUTF8String(string_), rangep)
@@ -981,6 +987,7 @@ type DateFormatterable interface {
 	WithShortStandaloneQuarterSymbols(items ...StringProvider) *DateFormatter
 	WithGregorianStartDate(gregorianStartDate DateProvider) *DateFormatter
 	WithDoesRelativeDateFormatting(doesRelativeDateFormatting bool) *DateFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateFormatter
 	GetObjectValueForStringRangeError(obj **raw.ObjcObject, string_ string, rangep *raw.NSRange) (bool, error)
 	StringFromDate(date *raw.NSDate) *String
 	DateFromString(string_ string) *Date

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTROtaSoftwareUpdateRequestorClusterStateTransitionEvent() *MTROtaSoftwa
 	return &MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent{inner: raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEventFromID(_id)}
 }
 
+// WithPreviousState sets the previousState property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithPreviousState(previousState *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent.SetPreviousState(previousState)
+	return x
+}
+
+// WithNewState sets the newState property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithNewState(newState *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent.SetNewState(newState)
+	return x
+}
+
+// WithReason sets the reason property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithReason(reason *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent.SetReason(reason)
+	return x
+}
+
+// WithTargetSoftwareVersion sets the targetSoftwareVersion property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithTargetSoftwareVersion(targetSoftwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent.SetTargetSoftwareVersion(targetSoftwareVersion)
+	return x
+}
+
 func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) asMTROTASoftwareUpdateRequestorClusterStateTransitionEvent() *raw.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent { return &x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent }
 
 // MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable interface {
 	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
+	WithPreviousState(previousState *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
+	WithNewState(newState *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
+	WithReason(reason *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
+	WithTargetSoftwareVersion(targetSoftwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable = (*MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent)(nil)

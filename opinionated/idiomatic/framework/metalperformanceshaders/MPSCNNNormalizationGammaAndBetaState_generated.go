@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -38,6 +39,18 @@ func NewCNNNormalizationGammaAndBetaStateWithGammaBeta(gamma metal.MTLBuffer, be
 	return &CNNNormalizationGammaAndBetaState{inner: raw.MPSCNNNormalizationGammaAndBetaStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNNormalizationGammaAndBetaState) WithReadCount(readCount uint) *CNNNormalizationGammaAndBetaState {
+	x.inner.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNormalizationGammaAndBetaState) WithLabel(label string) *CNNNormalizationGammaAndBetaState {
+	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Gamma calls the underlying Gamma.
 func (x *CNNNormalizationGammaAndBetaState) Gamma() metal.MTLBuffer {
 	return x.inner.Gamma()
@@ -53,6 +66,8 @@ func (x *CNNNormalizationGammaAndBetaState) asState() *mpscore.MPSState { return
 // CNNNormalizationGammaAndBetaStateable is the interface implemented by [CNNNormalizationGammaAndBetaState], for mocking and DI.
 type CNNNormalizationGammaAndBetaStateable interface {
 	Unwrap() *raw.MPSCNNNormalizationGammaAndBetaState
+	WithReadCount(readCount uint) *CNNNormalizationGammaAndBetaState
+	WithLabel(label string) *CNNNormalizationGammaAndBetaState
 	Gamma() metal.MTLBuffer
 	Beta() metal.MTLBuffer
 }

@@ -71,6 +71,12 @@ func (x *Share) WithAllowsAccessRequests(allowsAccessRequests bool) *Share {
 	return x
 }
 
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *Share) WithParent(parent *raw.CKReference) *Share {
+	x.inner.CKRecord.SetParent(parent)
+	return x
+}
+
 // AddParticipant calls the underlying AddParticipant.
 func (x *Share) AddParticipant(participant *raw.CKShareParticipant) {
 	x.inner.AddParticipant(participant)
@@ -184,6 +190,7 @@ type Shareable interface {
 	Unwrap() *raw.CKShare
 	WithPublicPermission(publicPermission raw.CKShareParticipantPermission) *Share
 	WithAllowsAccessRequests(allowsAccessRequests bool) *Share
+	WithParent(parent *raw.CKReference) *Share
 	AddParticipant(participant *raw.CKShareParticipant)
 	RemoveParticipant(participant *raw.CKShareParticipant)
 	OneTimeURLForParticipantID(participantID string) *foundation.NSURL

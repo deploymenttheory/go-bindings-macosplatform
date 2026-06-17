@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRAccessControlClusterAccessControlEntry() *MTRAccessControlClusterAcce
 	return &MTRAccessControlClusterAccessControlEntry{inner: raw.MTRAccessControlClusterAccessControlEntryFromID(_id)}
 }
 
+// WithPrivilege sets the privilege property and returns the receiver for chaining.
+func (x *MTRAccessControlClusterAccessControlEntry) WithPrivilege(privilege *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntry {
+	x.inner.MTRAccessControlClusterAccessControlEntryStruct.SetPrivilege(privilege)
+	return x
+}
+
+// WithAuthMode sets the authMode property and returns the receiver for chaining.
+func (x *MTRAccessControlClusterAccessControlEntry) WithAuthMode(authMode *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntry {
+	x.inner.MTRAccessControlClusterAccessControlEntryStruct.SetAuthMode(authMode)
+	return x
+}
+
+// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
+func (x *MTRAccessControlClusterAccessControlEntry) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntry {
+	x.inner.MTRAccessControlClusterAccessControlEntryStruct.SetFabricIndex(fabricIndex)
+	return x
+}
+
 func (x *MTRAccessControlClusterAccessControlEntry) asMTRAccessControlClusterAccessControlEntryStruct() *raw.MTRAccessControlClusterAccessControlEntryStruct { return &x.inner.MTRAccessControlClusterAccessControlEntryStruct }
 
 // MTRAccessControlClusterAccessControlEntryable is the interface implemented by [MTRAccessControlClusterAccessControlEntry], for mocking and DI.
 type MTRAccessControlClusterAccessControlEntryable interface {
 	Unwrap() *raw.MTRAccessControlClusterAccessControlEntry
+	WithPrivilege(privilege *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntry
+	WithAuthMode(authMode *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntry
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntry
 }
 
 var _ MTRAccessControlClusterAccessControlEntryable = (*MTRAccessControlClusterAccessControlEntry)(nil)

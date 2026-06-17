@@ -161,6 +161,276 @@ func (x *ButtonCell) WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *Butto
 	return x
 }
 
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *ButtonCell) WithControlView(controlView ViewProvider) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *ButtonCell) WithType(type_ raw.NSCellType) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *ButtonCell) WithState(state int) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *ButtonCell) WithTarget(target objc.ID) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *ButtonCell) WithAction(action objc.SEL) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *ButtonCell) WithTag(tag int) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *ButtonCell) WithTitle(title string) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ButtonCell) WithEnabled(enabled bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *ButtonCell) WithContinuous(continuous bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *ButtonCell) WithEditable(editable bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *ButtonCell) WithSelectable(selectable bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *ButtonCell) WithBordered(bordered bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *ButtonCell) WithBezeled(bezeled bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *ButtonCell) WithScrollable(scrollable bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *ButtonCell) WithHighlighted(highlighted bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *ButtonCell) WithAlignment(alignment raw.NSTextAlignment) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *ButtonCell) WithWraps(wraps bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *ButtonCell) WithFont(font *raw.NSFont) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *ButtonCell) WithFormatter(formatter *foundation.NSFormatter) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *ButtonCell) WithObjectValue(objectValue objc.ID) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *ButtonCell) WithStringValue(stringValue string) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *ButtonCell) WithIntValue(intValue int) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *ButtonCell) WithFloatValue(floatValue float32) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *ButtonCell) WithDoubleValue(doubleValue float64) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *ButtonCell) WithIntegerValue(integerValue int) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *ButtonCell) WithImage(image *raw.NSImage) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *ButtonCell) WithControlSize(controlSize raw.NSControlSize) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *ButtonCell) WithRepresentedObject(representedObject objc.ID) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *ButtonCell) WithMenu(menu *raw.NSMenu) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *ButtonCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *ButtonCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *ButtonCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *ButtonCell) WithAllowsUndo(allowsUndo bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *ButtonCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *ButtonCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *ButtonCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *ButtonCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *ButtonCell) WithShowsFirstResponder(showsFirstResponder bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *ButtonCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *ButtonCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *ButtonCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *ButtonCell) WithImportsGraphics(importsGraphics bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *ButtonCell) WithAllowsMixedState(allowsMixedState bool) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *ButtonCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *ButtonCell) WithControlTint(controlTint raw.NSControlTint) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // SetButtonType calls the underlying SetButtonType.
 func (x *ButtonCell) SetButtonType(type_ raw.NSButtonType) {
 	x.inner.SetButtonType(type_)
@@ -447,6 +717,51 @@ type ButtonCellable interface {
 	WithBackgroundColor(backgroundColor *raw.NSColor) *ButtonCell
 	WithGradientType(gradientType raw.NSGradientType) *ButtonCell
 	WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *ButtonCell
+	WithControlView(controlView ViewProvider) *ButtonCell
+	WithType(type_ raw.NSCellType) *ButtonCell
+	WithState(state int) *ButtonCell
+	WithTarget(target objc.ID) *ButtonCell
+	WithAction(action objc.SEL) *ButtonCell
+	WithTag(tag int) *ButtonCell
+	WithTitle(title string) *ButtonCell
+	WithEnabled(enabled bool) *ButtonCell
+	WithContinuous(continuous bool) *ButtonCell
+	WithEditable(editable bool) *ButtonCell
+	WithSelectable(selectable bool) *ButtonCell
+	WithBordered(bordered bool) *ButtonCell
+	WithBezeled(bezeled bool) *ButtonCell
+	WithScrollable(scrollable bool) *ButtonCell
+	WithHighlighted(highlighted bool) *ButtonCell
+	WithAlignment(alignment raw.NSTextAlignment) *ButtonCell
+	WithWraps(wraps bool) *ButtonCell
+	WithFont(font *raw.NSFont) *ButtonCell
+	WithFormatter(formatter *foundation.NSFormatter) *ButtonCell
+	WithObjectValue(objectValue objc.ID) *ButtonCell
+	WithStringValue(stringValue string) *ButtonCell
+	WithIntValue(intValue int) *ButtonCell
+	WithFloatValue(floatValue float32) *ButtonCell
+	WithDoubleValue(doubleValue float64) *ButtonCell
+	WithIntegerValue(integerValue int) *ButtonCell
+	WithImage(image *raw.NSImage) *ButtonCell
+	WithControlSize(controlSize raw.NSControlSize) *ButtonCell
+	WithRepresentedObject(representedObject objc.ID) *ButtonCell
+	WithMenu(menu *raw.NSMenu) *ButtonCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ButtonCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ButtonCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ButtonCell
+	WithAllowsUndo(allowsUndo bool) *ButtonCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ButtonCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ButtonCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *ButtonCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *ButtonCell
+	WithShowsFirstResponder(showsFirstResponder bool) *ButtonCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *ButtonCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ButtonCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ButtonCell
+	WithImportsGraphics(importsGraphics bool) *ButtonCell
+	WithAllowsMixedState(allowsMixedState bool) *ButtonCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ButtonCell
+	WithControlTint(controlTint raw.NSControlTint) *ButtonCell
 	SetButtonType(type_ raw.NSButtonType)
 	SetPeriodicDelayInterval(delay float32, interval float32)
 	MouseEntered(event *raw.NSEvent)

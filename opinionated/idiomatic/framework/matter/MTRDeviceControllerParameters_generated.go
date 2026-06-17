@@ -88,6 +88,12 @@ func (x *MTRDeviceControllerParameters) WithStorageBehaviorConfiguration(storage
 	return x
 }
 
+// WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
+func (x *MTRDeviceControllerParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerParameters {
+	x.inner.MTRDeviceControllerAbstractParameters.SetStartSuspended(startSuspended)
+	return x
+}
+
 // SetOperationalCertificateIssuerQueue calls the underlying SetOperationalCertificateIssuerQueue.
 func (x *MTRDeviceControllerParameters) SetOperationalCertificateIssuerQueue(operationalCertificateIssuer raw.MTROperationalCertificateIssuer, queue *foundation.NSObject) {
 	x.inner.SetOperationalCertificateIssuerQueue(operationalCertificateIssuer, queue)
@@ -176,6 +182,7 @@ type MTRDeviceControllerParametersable interface {
 	WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerParameters
 	WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerParameters
 	WithStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters
+	WithStartSuspended(startSuspended bool) *MTRDeviceControllerParameters
 	SetOperationalCertificateIssuerQueue(operationalCertificateIssuer raw.MTROperationalCertificateIssuer, queue *foundation.NSObject)
 	SetOTAProviderDelegateQueue(otaProviderDelegate raw.MTROTAProviderDelegate, queue *foundation.NSObject)
 	ProductAttestationAuthorityCertificates() []*foundation.NSData

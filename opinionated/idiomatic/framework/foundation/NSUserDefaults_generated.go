@@ -51,6 +51,12 @@ func NewUserDefaultsWithUser(username string) *UserDefaults {
 	return &UserDefaults{inner: raw.NSUserDefaultsFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UserDefaults) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserDefaults {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *UserDefaults) ObjectForKey(defaultName string) objc.ID {
 	return x.inner.ObjectForKey(foundation.NSStringStringWithUTF8String(defaultName))
@@ -239,6 +245,7 @@ func (x *UserDefaults) asObject() *raw.NSObject { return &x.inner.NSObject }
 // UserDefaultsable is the interface implemented by [UserDefaults], for mocking and DI.
 type UserDefaultsable interface {
 	Unwrap() *raw.NSUserDefaults
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserDefaults
 	ObjectForKey(defaultName string) objc.ID
 	SetObjectForKey(value objc.ID, defaultName string)
 	RemoveObjectForKey(defaultName string)

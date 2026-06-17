@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,42 @@ func NewImageReduceColumnMinWithDevice(device metal.MTLDevice) *ImageReduceColum
 	return &ImageReduceColumnMin{inner: raw.MPSImageReduceColumnMinFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *ImageReduceColumnMin) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMin {
+	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceColumnMin) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMin {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceColumnMin) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMin {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceColumnMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnMin {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageReduceColumnMin) WithOptions(options mpscore.MPSKernelOptions) *ImageReduceColumnMin {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageReduceColumnMin) WithLabel(label string) *ImageReduceColumnMin {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageReduceColumnMin) asImageReduceUnary() *mpsimage.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
 
 func (x *ImageReduceColumnMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
@@ -48,6 +85,12 @@ func (x *ImageReduceColumnMin) asKernel() *mpscore.MPSKernel { return &x.inner.M
 // ImageReduceColumnMinable is the interface implemented by [ImageReduceColumnMin], for mocking and DI.
 type ImageReduceColumnMinable interface {
 	Unwrap() *raw.MPSImageReduceColumnMin
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMin
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMin
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMin
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnMin
+	WithOptions(options mpscore.MPSKernelOptions) *ImageReduceColumnMin
+	WithLabel(label string) *ImageReduceColumnMin
 }
 
 var _ ImageReduceColumnMinable = (*ImageReduceColumnMin)(nil)

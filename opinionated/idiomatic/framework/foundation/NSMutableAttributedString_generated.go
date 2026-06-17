@@ -36,6 +36,12 @@ func NewMutableAttributedString() *MutableAttributedString {
 	return &MutableAttributedString{inner: raw.NSMutableAttributedStringFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MutableAttributedString) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableAttributedString {
+	x.inner.NSAttributedString.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ReplaceCharactersInRangeWithString calls the underlying ReplaceCharactersInRangeWithString.
 func (x *MutableAttributedString) ReplaceCharactersInRangeWithString(range_ raw.NSRange, str string) {
 	x.inner.ReplaceCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(str))
@@ -117,6 +123,7 @@ func (x *MutableAttributedString) asObject() *raw.NSObject { return &x.inner.NSA
 // MutableAttributedStringable is the interface implemented by [MutableAttributedString], for mocking and DI.
 type MutableAttributedStringable interface {
 	Unwrap() *raw.NSMutableAttributedString
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableAttributedString
 	ReplaceCharactersInRangeWithString(range_ raw.NSRange, str string)
 	SetAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange)
 	AddAttributeValueRange(name *raw.NSString, value objc.ID, range_ raw.NSRange)

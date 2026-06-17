@@ -53,6 +53,66 @@ func (x *CNNInstanceNormalization) WithEpsilon(epsilon float32) *CNNInstanceNorm
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithOffset(offset mpscore.MPSOffset) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithOptions(options mpscore.MPSKernelOptions) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithLabel(label string) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ReloadDataSource calls the underlying ReloadDataSource.
 func (x *CNNInstanceNormalization) ReloadDataSource(dataSource mpsneuralnetwork.MPSCNNInstanceNormalizationDataSource) {
 	x.inner.ReloadDataSource(dataSource)
@@ -101,6 +161,16 @@ func (x *CNNInstanceNormalization) asKernel() *mpscore.MPSKernel { return &x.inn
 type CNNInstanceNormalizationable interface {
 	Unwrap() *raw.MPSCNNInstanceNormalization
 	WithEpsilon(epsilon float32) *CNNInstanceNormalization
+	WithOffset(offset mpscore.MPSOffset) *CNNInstanceNormalization
+	WithClipRect(clipRect metal.MTLRegion) *CNNInstanceNormalization
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNInstanceNormalization
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNInstanceNormalization
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNInstanceNormalization
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNInstanceNormalization
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNInstanceNormalization
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNInstanceNormalization
+	WithOptions(options mpscore.MPSKernelOptions) *CNNInstanceNormalization
+	WithLabel(label string) *CNNInstanceNormalization
 	ReloadDataSource(dataSource mpsneuralnetwork.MPSCNNInstanceNormalizationDataSource)
 	ReloadGammaAndBetaFromDataSource()
 	ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)

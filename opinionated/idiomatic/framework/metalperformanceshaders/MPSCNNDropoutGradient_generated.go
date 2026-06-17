@@ -47,6 +47,126 @@ func NewCNNDropoutGradientWithDeviceKeepProbabilitySeedMaskStrideInPixels(device
 	return &CNNDropoutGradient{inner: raw.MPSCNNDropoutGradientFromID(_id)}
 }
 
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithKernelOffsetX(kernelOffsetX int) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithKernelOffsetY(kernelOffsetY int) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithClipRect(clipRect metal.MTLRegion) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNDropoutGradient) WithLabel(label string) *CNNDropoutGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KeepProbability calls the underlying KeepProbability.
 func (x *CNNDropoutGradient) KeepProbability() float32 {
 	return x.inner.KeepProbability()
@@ -71,6 +191,26 @@ func (x *CNNDropoutGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPS
 // CNNDropoutGradientable is the interface implemented by [CNNDropoutGradient], for mocking and DI.
 type CNNDropoutGradientable interface {
 	Unwrap() *raw.MPSCNNDropoutGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNDropoutGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNDropoutGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNDropoutGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNDropoutGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNDropoutGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDropoutGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNDropoutGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNDropoutGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNDropoutGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNDropoutGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDropoutGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDropoutGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNDropoutGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNDropoutGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNDropoutGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNDropoutGradient
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNDropoutGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDropoutGradient
+	WithOptions(options mpscore.MPSKernelOptions) *CNNDropoutGradient
+	WithLabel(label string) *CNNDropoutGradient
 	KeepProbability() float32
 	Seed() uint
 	MaskStrideInPixels() metal.MTLSize

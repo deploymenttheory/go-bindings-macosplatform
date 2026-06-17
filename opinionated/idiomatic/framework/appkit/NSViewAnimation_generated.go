@@ -54,6 +54,58 @@ func (x *ViewAnimation) WithViewAnimations(items ...*foundation.NSDictionary[*fo
 	return x
 }
 
+// WithCurrentProgress sets the currentProgress property and returns the receiver for chaining.
+func (x *ViewAnimation) WithCurrentProgress(currentProgress float32) *ViewAnimation {
+	x.inner.NSAnimation.SetCurrentProgress(currentProgress)
+	return x
+}
+
+// WithDuration sets the duration property and returns the receiver for chaining.
+func (x *ViewAnimation) WithDuration(duration float64) *ViewAnimation {
+	x.inner.NSAnimation.SetDuration(duration)
+	return x
+}
+
+// WithAnimationBlockingMode sets the animationBlockingMode property and returns the receiver for chaining.
+func (x *ViewAnimation) WithAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode) *ViewAnimation {
+	x.inner.NSAnimation.SetAnimationBlockingMode(animationBlockingMode)
+	return x
+}
+
+// WithFrameRate sets the frameRate property and returns the receiver for chaining.
+func (x *ViewAnimation) WithFrameRate(frameRate float32) *ViewAnimation {
+	x.inner.NSAnimation.SetFrameRate(frameRate)
+	return x
+}
+
+// WithAnimationCurve sets the animationCurve property and returns the receiver for chaining.
+func (x *ViewAnimation) WithAnimationCurve(animationCurve raw.NSAnimationCurve) *ViewAnimation {
+	x.inner.NSAnimation.SetAnimationCurve(animationCurve)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *ViewAnimation) WithDelegate(delegate raw.NSAnimationDelegate) *ViewAnimation {
+	x.inner.NSAnimation.SetDelegate(delegate)
+	return x
+}
+
+// WithProgressMarks sets the collection, converting the Go slice to an NSArray.
+func (x *ViewAnimation) WithProgressMarks(items ...*foundation.NSNumber) *ViewAnimation {
+	if len(items) == 0 {
+		x.inner.NSAnimation.SetProgressMarks(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSAnimation.SetProgressMarks(_arr)
+	return x
+}
+
 // ViewAnimations calls the underlying ViewAnimations.
 func (x *ViewAnimation) ViewAnimations() *foundation.NSArray[objc.ID] {
 	return x.inner.ViewAnimations()
@@ -70,6 +122,13 @@ func (x *ViewAnimation) asAnimation() *raw.NSAnimation { return &x.inner.NSAnima
 type ViewAnimationable interface {
 	Unwrap() *raw.NSViewAnimation
 	WithViewAnimations(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *ViewAnimation
+	WithCurrentProgress(currentProgress float32) *ViewAnimation
+	WithDuration(duration float64) *ViewAnimation
+	WithAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode) *ViewAnimation
+	WithFrameRate(frameRate float32) *ViewAnimation
+	WithAnimationCurve(animationCurve raw.NSAnimationCurve) *ViewAnimation
+	WithDelegate(delegate raw.NSAnimationDelegate) *ViewAnimation
+	WithProgressMarks(items ...*foundation.NSNumber) *ViewAnimation
 	ViewAnimations() *foundation.NSArray[objc.ID]
 	SetViewAnimations(viewAnimations *foundation.NSArray[objc.ID])
 }

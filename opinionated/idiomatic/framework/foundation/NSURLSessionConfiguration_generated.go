@@ -211,6 +211,12 @@ func (x *URLSessionConfiguration) WithEnablesEarlyData(enablesEarlyData bool) *U
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLSessionConfiguration) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionConfiguration {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Identifier calls the underlying Identifier.
 func (x *URLSessionConfiguration) Identifier() *String {
 	_r := x.inner.Identifier()
@@ -570,6 +576,7 @@ type URLSessionConfigurationable interface {
 	WithShouldUseExtendedBackgroundIdleMode(shouldUseExtendedBackgroundIdleMode bool) *URLSessionConfiguration
 	WithUsesClassicLoadingMode(usesClassicLoadingMode bool) *URLSessionConfiguration
 	WithEnablesEarlyData(enablesEarlyData bool) *URLSessionConfiguration
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionConfiguration
 	Identifier() *String
 	RequestCachePolicy() raw.NSURLRequestCachePolicy
 	SetRequestCachePolicy(requestCachePolicy raw.NSURLRequestCachePolicy)

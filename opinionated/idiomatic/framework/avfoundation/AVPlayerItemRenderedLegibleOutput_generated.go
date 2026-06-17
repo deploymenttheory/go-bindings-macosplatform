@@ -50,6 +50,12 @@ func (x *PlayerItemRenderedLegibleOutput) WithVideoDisplaySize(videoDisplaySize 
 	return x
 }
 
+// WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
+func (x *PlayerItemRenderedLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemRenderedLegibleOutput {
+	x.inner.AVPlayerItemOutput.SetSuppressesPlayerRendering(suppressesPlayerRendering)
+	return x
+}
+
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *PlayerItemRenderedLegibleOutput) SetDelegateQueue(delegate raw.AVPlayerItemRenderedLegibleOutputPushDelegate, delegateQueue *foundation.NSObject) {
 	x.inner.SetDelegateQueue(delegate, delegateQueue)
@@ -92,6 +98,7 @@ type PlayerItemRenderedLegibleOutputable interface {
 	Unwrap() *raw.AVPlayerItemRenderedLegibleOutput
 	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemRenderedLegibleOutput
 	WithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *PlayerItemRenderedLegibleOutput
+	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemRenderedLegibleOutput
 	SetDelegateQueue(delegate raw.AVPlayerItemRenderedLegibleOutputPushDelegate, delegateQueue *foundation.NSObject)
 	Delegate() raw.AVPlayerItemRenderedLegibleOutputPushDelegate
 	DelegateQueue() *foundation.NSObject

@@ -46,6 +46,12 @@ func NewScriptCommandDescriptionWithCoder(inCoder *raw.NSCoder) *ScriptCommandDe
 	return &ScriptCommandDescription{inner: raw.NSScriptCommandDescriptionFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ScriptCommandDescription) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptCommandDescription {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // TypeForArgumentWithName calls the underlying TypeForArgumentWithName.
 func (x *ScriptCommandDescription) TypeForArgumentWithName(argumentName string) *String {
 	_r := x.inner.TypeForArgumentWithName(foundation.NSStringStringWithUTF8String(argumentName))
@@ -150,6 +156,7 @@ func (x *ScriptCommandDescription) asObject() *raw.NSObject { return &x.inner.NS
 // ScriptCommandDescriptionable is the interface implemented by [ScriptCommandDescription], for mocking and DI.
 type ScriptCommandDescriptionable interface {
 	Unwrap() *raw.NSScriptCommandDescription
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptCommandDescription
 	TypeForArgumentWithName(argumentName string) *String
 	AppleEventCodeForArgumentWithName(argumentName string) uint
 	IsOptionalArgumentWithName(argumentName string) bool

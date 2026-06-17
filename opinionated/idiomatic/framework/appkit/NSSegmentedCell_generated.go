@@ -62,6 +62,276 @@ func (x *SegmentedCell) WithSegmentStyle(segmentStyle raw.NSSegmentStyle) *Segme
 	return x
 }
 
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *SegmentedCell) WithControlView(controlView ViewProvider) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *SegmentedCell) WithType(type_ raw.NSCellType) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *SegmentedCell) WithState(state int) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *SegmentedCell) WithTarget(target objc.ID) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *SegmentedCell) WithAction(action objc.SEL) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *SegmentedCell) WithTag(tag int) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *SegmentedCell) WithTitle(title string) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *SegmentedCell) WithEnabled(enabled bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *SegmentedCell) WithContinuous(continuous bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *SegmentedCell) WithEditable(editable bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *SegmentedCell) WithSelectable(selectable bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *SegmentedCell) WithBordered(bordered bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *SegmentedCell) WithBezeled(bezeled bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *SegmentedCell) WithScrollable(scrollable bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *SegmentedCell) WithHighlighted(highlighted bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *SegmentedCell) WithAlignment(alignment raw.NSTextAlignment) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *SegmentedCell) WithWraps(wraps bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *SegmentedCell) WithFont(font *raw.NSFont) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *SegmentedCell) WithFormatter(formatter *foundation.NSFormatter) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *SegmentedCell) WithObjectValue(objectValue objc.ID) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *SegmentedCell) WithStringValue(stringValue string) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *SegmentedCell) WithIntValue(intValue int) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *SegmentedCell) WithFloatValue(floatValue float32) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *SegmentedCell) WithDoubleValue(doubleValue float64) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *SegmentedCell) WithIntegerValue(integerValue int) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *SegmentedCell) WithImage(image *raw.NSImage) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *SegmentedCell) WithControlSize(controlSize raw.NSControlSize) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *SegmentedCell) WithRepresentedObject(representedObject objc.ID) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *SegmentedCell) WithMenu(menu *raw.NSMenu) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *SegmentedCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *SegmentedCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *SegmentedCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *SegmentedCell) WithAllowsUndo(allowsUndo bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *SegmentedCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *SegmentedCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *SegmentedCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *SegmentedCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *SegmentedCell) WithShowsFirstResponder(showsFirstResponder bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *SegmentedCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *SegmentedCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *SegmentedCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *SegmentedCell) WithImportsGraphics(importsGraphics bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *SegmentedCell) WithAllowsMixedState(allowsMixedState bool) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *SegmentedCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *SegmentedCell) WithControlTint(controlTint raw.NSControlTint) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // SelectSegmentWithTag calls the underlying SelectSegmentWithTag.
 func (x *SegmentedCell) SelectSegmentWithTag(tag int) bool {
 	return x.inner.SelectSegmentWithTag(tag)
@@ -244,6 +514,51 @@ type SegmentedCellable interface {
 	WithSelectedSegment(selectedSegment int) *SegmentedCell
 	WithTrackingMode(trackingMode raw.NSSegmentSwitchTracking) *SegmentedCell
 	WithSegmentStyle(segmentStyle raw.NSSegmentStyle) *SegmentedCell
+	WithControlView(controlView ViewProvider) *SegmentedCell
+	WithType(type_ raw.NSCellType) *SegmentedCell
+	WithState(state int) *SegmentedCell
+	WithTarget(target objc.ID) *SegmentedCell
+	WithAction(action objc.SEL) *SegmentedCell
+	WithTag(tag int) *SegmentedCell
+	WithTitle(title string) *SegmentedCell
+	WithEnabled(enabled bool) *SegmentedCell
+	WithContinuous(continuous bool) *SegmentedCell
+	WithEditable(editable bool) *SegmentedCell
+	WithSelectable(selectable bool) *SegmentedCell
+	WithBordered(bordered bool) *SegmentedCell
+	WithBezeled(bezeled bool) *SegmentedCell
+	WithScrollable(scrollable bool) *SegmentedCell
+	WithHighlighted(highlighted bool) *SegmentedCell
+	WithAlignment(alignment raw.NSTextAlignment) *SegmentedCell
+	WithWraps(wraps bool) *SegmentedCell
+	WithFont(font *raw.NSFont) *SegmentedCell
+	WithFormatter(formatter *foundation.NSFormatter) *SegmentedCell
+	WithObjectValue(objectValue objc.ID) *SegmentedCell
+	WithStringValue(stringValue string) *SegmentedCell
+	WithIntValue(intValue int) *SegmentedCell
+	WithFloatValue(floatValue float32) *SegmentedCell
+	WithDoubleValue(doubleValue float64) *SegmentedCell
+	WithIntegerValue(integerValue int) *SegmentedCell
+	WithImage(image *raw.NSImage) *SegmentedCell
+	WithControlSize(controlSize raw.NSControlSize) *SegmentedCell
+	WithRepresentedObject(representedObject objc.ID) *SegmentedCell
+	WithMenu(menu *raw.NSMenu) *SegmentedCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SegmentedCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SegmentedCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SegmentedCell
+	WithAllowsUndo(allowsUndo bool) *SegmentedCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SegmentedCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SegmentedCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedCell
+	WithShowsFirstResponder(showsFirstResponder bool) *SegmentedCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *SegmentedCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SegmentedCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SegmentedCell
+	WithImportsGraphics(importsGraphics bool) *SegmentedCell
+	WithAllowsMixedState(allowsMixedState bool) *SegmentedCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SegmentedCell
+	WithControlTint(controlTint raw.NSControlTint) *SegmentedCell
 	SelectSegmentWithTag(tag int) bool
 	MakeNextSegmentKey()
 	MakePreviousSegmentKey()

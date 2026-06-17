@@ -35,6 +35,12 @@ func NewMessagePortNameServer() *MessagePortNameServer {
 	return &MessagePortNameServer{inner: raw.NSMessagePortNameServerFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MessagePortNameServer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MessagePortNameServer {
+	x.inner.NSPortNameServer.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *MessagePortNameServer) asPortNameServer() *raw.NSPortNameServer { return &x.inner.NSPortNameServer }
 
 func (x *MessagePortNameServer) asObject() *raw.NSObject { return &x.inner.NSPortNameServer.NSObject }
@@ -42,6 +48,7 @@ func (x *MessagePortNameServer) asObject() *raw.NSObject { return &x.inner.NSPor
 // MessagePortNameServerable is the interface implemented by [MessagePortNameServer], for mocking and DI.
 type MessagePortNameServerable interface {
 	Unwrap() *raw.NSMessagePortNameServer
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MessagePortNameServer
 }
 
 var _ MessagePortNameServerable = (*MessagePortNameServer)(nil)

@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,24 @@ func NewImageMedianWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MT
 	return &ImageMedian{inner: raw.MPSImageMedianFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageMedian) WithOffset(offset mpscore.MPSOffset) *ImageMedian {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageMedian) WithClipRect(clipRect metal.MTLRegion) *ImageMedian {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageMedian) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageMedian {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // KernelDiameter calls the underlying KernelDiameter.
 func (x *ImageMedian) KernelDiameter() uint {
 	return x.inner.KernelDiameter()
@@ -55,6 +74,9 @@ func (x *ImageMedian) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.
 // ImageMedianable is the interface implemented by [ImageMedian], for mocking and DI.
 type ImageMedianable interface {
 	Unwrap() *raw.MPSImageMedian
+	WithOffset(offset mpscore.MPSOffset) *ImageMedian
+	WithClipRect(clipRect metal.MTLRegion) *ImageMedian
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageMedian
 	KernelDiameter() uint
 }
 

@@ -47,6 +47,36 @@ func NewImageGaussianBlurWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &ImageGaussianBlur{inner: raw.MPSImageGaussianBlurFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageGaussianBlur) WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageGaussianBlur) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageGaussianBlur) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianBlur {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageGaussianBlur) WithOptions(options mpscore.MPSKernelOptions) *ImageGaussianBlur {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageGaussianBlur) WithLabel(label string) *ImageGaussianBlur {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Sigma calls the underlying Sigma.
 func (x *ImageGaussianBlur) Sigma() float32 {
 	return x.inner.Sigma()
@@ -59,6 +89,11 @@ func (x *ImageGaussianBlur) asKernel() *mpscore.MPSKernel { return &x.inner.MPSU
 // ImageGaussianBlurable is the interface implemented by [ImageGaussianBlur], for mocking and DI.
 type ImageGaussianBlurable interface {
 	Unwrap() *raw.MPSImageGaussianBlur
+	WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur
+	WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianBlur
+	WithOptions(options mpscore.MPSKernelOptions) *ImageGaussianBlur
+	WithLabel(label string) *ImageGaussianBlur
 	Sigma() float32
 }
 

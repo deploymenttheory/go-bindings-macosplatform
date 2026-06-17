@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewCNNSoftMaxGradientNodeWithSourceGradientSourceImageGradientState(sourceG
 	return &CNNSoftMaxGradientNode{inner: raw.MPSCNNSoftMaxGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNSoftMaxGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNSoftMaxGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNSoftMaxGradientNode) WithLabel(label string) *CNNSoftMaxGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNSoftMaxGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNSoftMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
@@ -43,6 +56,8 @@ func (x *CNNSoftMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return 
 // CNNSoftMaxGradientNodeable is the interface implemented by [CNNSoftMaxGradientNode], for mocking and DI.
 type CNNSoftMaxGradientNodeable interface {
 	Unwrap() *raw.MPSCNNSoftMaxGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNSoftMaxGradientNode
+	WithLabel(label string) *CNNSoftMaxGradientNode
 }
 
 var _ CNNSoftMaxGradientNodeable = (*CNNSoftMaxGradientNode)(nil)

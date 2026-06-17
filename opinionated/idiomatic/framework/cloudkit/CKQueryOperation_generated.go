@@ -111,6 +111,60 @@ func (x *QueryOperation) WithQueryCompletionBlock(queryCompletionBlock func(*raw
 	return x
 }
 
+// WithDatabase sets the database property and returns the receiver for chaining.
+func (x *QueryOperation) WithDatabase(database *raw.CKDatabase) *QueryOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database)
+	return x
+}
+
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *QueryOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *QueryOperation) WithGroup(group *raw.CKOperationGroup) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *QueryOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *QueryOperation) WithContainer(container *raw.CKContainer) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *QueryOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *QueryOperation) WithLongLived(longLived bool) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *QueryOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *QueryOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // Query calls the underlying Query.
 func (x *QueryOperation) Query() *Query {
 	_r := x.inner.Query()
@@ -263,6 +317,15 @@ type QueryOperationable interface {
 	WithRecordFetchedBlock(recordFetchedBlock func(*raw.CKRecord)) *QueryOperation
 	WithRecordMatchedBlock(recordMatchedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *QueryOperation
 	WithQueryCompletionBlock(queryCompletionBlock func(*raw.CKQueryCursor, unsafe.Pointer)) *QueryOperation
+	WithDatabase(database *raw.CKDatabase) *QueryOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *QueryOperation
+	WithGroup(group *raw.CKOperationGroup) *QueryOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *QueryOperation
+	WithContainer(container *raw.CKContainer) *QueryOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *QueryOperation
+	WithLongLived(longLived bool) *QueryOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *QueryOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *QueryOperation
 	Query() *Query
 	SetQuery(query *raw.CKQuery)
 	Cursor() *QueryCursor

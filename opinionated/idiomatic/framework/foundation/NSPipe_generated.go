@@ -35,6 +35,12 @@ func NewPipe() *Pipe {
 	return &Pipe{inner: raw.NSPipeFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Pipe) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Pipe {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // FileHandleForReading calls the underlying FileHandleForReading.
 func (x *Pipe) FileHandleForReading() *FileHandle {
 	_r := x.inner.FileHandleForReading()
@@ -58,6 +64,7 @@ func (x *Pipe) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Pipeable is the interface implemented by [Pipe], for mocking and DI.
 type Pipeable interface {
 	Unwrap() *raw.NSPipe
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Pipe
 	FileHandleForReading() *FileHandle
 	FileHandleForWriting() *FileHandle
 }

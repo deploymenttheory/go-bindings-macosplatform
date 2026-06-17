@@ -6,7 +6,10 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ColorPanel wraps [raw.NSColorPanel] with a fluent Go API.
@@ -68,6 +71,472 @@ func (x *ColorPanel) WithColor(color *raw.NSColor) *ColorPanel {
 // WithMaximumLinearExposure sets the maximumLinearExposure property and returns the receiver for chaining.
 func (x *ColorPanel) WithMaximumLinearExposure(maximumLinearExposure float64) *ColorPanel {
 	x.inner.SetMaximumLinearExposure(maximumLinearExposure)
+	return x
+}
+
+// WithFloatingPanel sets the floatingPanel property and returns the receiver for chaining.
+func (x *ColorPanel) WithFloatingPanel(floatingPanel bool) *ColorPanel {
+	x.inner.NSPanel.SetFloatingPanel(floatingPanel)
+	return x
+}
+
+// WithBecomesKeyOnlyIfNeeded sets the becomesKeyOnlyIfNeeded property and returns the receiver for chaining.
+func (x *ColorPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *ColorPanel {
+	x.inner.NSPanel.SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded)
+	return x
+}
+
+// WithWorksWhenModal sets the worksWhenModal property and returns the receiver for chaining.
+func (x *ColorPanel) WithWorksWhenModal(worksWhenModal bool) *ColorPanel {
+	x.inner.NSPanel.SetWorksWhenModal(worksWhenModal)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *ColorPanel) WithTitle(title string) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *ColorPanel) WithSubtitle(subtitle string) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
+// WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
+func (x *ColorPanel) WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetTitleVisibility(titleVisibility)
+	return x
+}
+
+// WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
+func (x *ColorPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetTitlebarAppearsTransparent(titlebarAppearsTransparent)
+	return x
+}
+
+// WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
+func (x *ColorPanel) WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetToolbarStyle(toolbarStyle)
+	return x
+}
+
+// WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
+func (x *ColorPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *ColorPanel {
+	if len(items) == 0 {
+		x.inner.NSPanel.NSWindow.SetTitlebarAccessoryViewControllers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSTitlebarAccessoryViewController](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPanel.NSWindow.SetTitlebarAccessoryViewControllers(_arr)
+	return x
+}
+
+// WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
+func (x *ColorPanel) WithRepresentedURL(representedURL string) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetRepresentedURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(representedURL)))
+	return x
+}
+
+// WithRepresentedFilename sets the representedFilename property and returns the receiver for chaining.
+func (x *ColorPanel) WithRepresentedFilename(representedFilename string) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetRepresentedFilename(foundation.NSStringStringWithUTF8String(representedFilename))
+	return x
+}
+
+// WithExcludedFromWindowsMenu sets the excludedFromWindowsMenu property and returns the receiver for chaining.
+func (x *ColorPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetExcludedFromWindowsMenu(excludedFromWindowsMenu)
+	return x
+}
+
+// WithContentView sets the contentView property and returns the receiver for chaining.
+func (x *ColorPanel) WithContentView(contentView ViewProvider) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetContentView(contentView.asView())
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *ColorPanel) WithDelegate(delegate raw.NSWindowDelegate) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetDelegate(delegate)
+	return x
+}
+
+// WithStyleMask sets the styleMask property and returns the receiver for chaining.
+func (x *ColorPanel) WithStyleMask(styleMask raw.NSWindowStyleMask) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetStyleMask(styleMask)
+	return x
+}
+
+// WithResizeIncrements sets the resizeIncrements property and returns the receiver for chaining.
+func (x *ColorPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetResizeIncrements(resizeIncrements)
+	return x
+}
+
+// WithAspectRatio sets the aspectRatio property and returns the receiver for chaining.
+func (x *ColorPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetAspectRatio(aspectRatio)
+	return x
+}
+
+// WithContentResizeIncrements sets the contentResizeIncrements property and returns the receiver for chaining.
+func (x *ColorPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetContentResizeIncrements(contentResizeIncrements)
+	return x
+}
+
+// WithContentAspectRatio sets the contentAspectRatio property and returns the receiver for chaining.
+func (x *ColorPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetContentAspectRatio(contentAspectRatio)
+	return x
+}
+
+// WithViewsNeedDisplay sets the viewsNeedDisplay property and returns the receiver for chaining.
+func (x *ColorPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetViewsNeedDisplay(viewsNeedDisplay)
+	return x
+}
+
+// WithPreservesContentDuringLiveResize sets the preservesContentDuringLiveResize property and returns the receiver for chaining.
+func (x *ColorPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize)
+	return x
+}
+
+// WithReleasedWhenClosed sets the releasedWhenClosed property and returns the receiver for chaining.
+func (x *ColorPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetReleasedWhenClosed(releasedWhenClosed)
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *ColorPanel) WithBackgroundColor(backgroundColor *raw.NSColor) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithMovable sets the movable property and returns the receiver for chaining.
+func (x *ColorPanel) WithMovable(movable bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetMovable(movable)
+	return x
+}
+
+// WithMovableByWindowBackground sets the movableByWindowBackground property and returns the receiver for chaining.
+func (x *ColorPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetMovableByWindowBackground(movableByWindowBackground)
+	return x
+}
+
+// WithHidesOnDeactivate sets the hidesOnDeactivate property and returns the receiver for chaining.
+func (x *ColorPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetHidesOnDeactivate(hidesOnDeactivate)
+	return x
+}
+
+// WithCanHide sets the canHide property and returns the receiver for chaining.
+func (x *ColorPanel) WithCanHide(canHide bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetCanHide(canHide)
+	return x
+}
+
+// WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
+func (x *ColorPanel) WithMiniwindowImage(miniwindowImage *raw.NSImage) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage)
+	return x
+}
+
+// WithMiniwindowTitle sets the miniwindowTitle property and returns the receiver for chaining.
+func (x *ColorPanel) WithMiniwindowTitle(miniwindowTitle string) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetMiniwindowTitle(foundation.NSStringStringWithUTF8String(miniwindowTitle))
+	return x
+}
+
+// WithDocumentEdited sets the documentEdited property and returns the receiver for chaining.
+func (x *ColorPanel) WithDocumentEdited(documentEdited bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetDocumentEdited(documentEdited)
+	return x
+}
+
+// WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
+func (x *ColorPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal)
+	return x
+}
+
+// WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
+func (x *ColorPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive)
+	return x
+}
+
+// WithBackingType sets the backingType property and returns the receiver for chaining.
+func (x *ColorPanel) WithBackingType(backingType raw.NSBackingStoreType) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetBackingType(backingType)
+	return x
+}
+
+// WithLevel sets the level property and returns the receiver for chaining.
+func (x *ColorPanel) WithLevel(level int) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetLevel(level)
+	return x
+}
+
+// WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
+func (x *ColorPanel) WithDepthLimit(depthLimit raw.NSWindowDepth) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetDepthLimit(depthLimit)
+	return x
+}
+
+// WithHasShadow sets the hasShadow property and returns the receiver for chaining.
+func (x *ColorPanel) WithHasShadow(hasShadow bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetHasShadow(hasShadow)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *ColorPanel) WithAlphaValue(alphaValue float64) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *ColorPanel) WithOpaque(opaque bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetOpaque(opaque)
+	return x
+}
+
+// WithSharingType sets the sharingType property and returns the receiver for chaining.
+func (x *ColorPanel) WithSharingType(sharingType raw.NSWindowSharingType) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetSharingType(sharingType)
+	return x
+}
+
+// WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
+func (x *ColorPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing)
+	return x
+}
+
+// WithDisplaysWhenScreenProfileChanges sets the displaysWhenScreenProfileChanges property and returns the receiver for chaining.
+func (x *ColorPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges)
+	return x
+}
+
+// WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
+func (x *ColorPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin)
+	return x
+}
+
+// WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
+func (x *ColorPanel) WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetCollectionBehavior(collectionBehavior)
+	return x
+}
+
+// WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
+func (x *ColorPanel) WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetAnimationBehavior(animationBehavior)
+	return x
+}
+
+// WithFrameAutosaveName sets the frameAutosaveName property and returns the receiver for chaining.
+func (x *ColorPanel) WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetFrameAutosaveName(frameAutosaveName)
+	return x
+}
+
+// WithMinSize sets the minSize property and returns the receiver for chaining.
+func (x *ColorPanel) WithMinSize(minSize corefoundation.CGSize) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetMinSize(minSize)
+	return x
+}
+
+// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+func (x *ColorPanel) WithMaxSize(maxSize corefoundation.CGSize) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetMaxSize(maxSize)
+	return x
+}
+
+// WithContentMinSize sets the contentMinSize property and returns the receiver for chaining.
+func (x *ColorPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetContentMinSize(contentMinSize)
+	return x
+}
+
+// WithContentMaxSize sets the contentMaxSize property and returns the receiver for chaining.
+func (x *ColorPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetContentMaxSize(contentMaxSize)
+	return x
+}
+
+// WithMinFullScreenContentSize sets the minFullScreenContentSize property and returns the receiver for chaining.
+func (x *ColorPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetMinFullScreenContentSize(minFullScreenContentSize)
+	return x
+}
+
+// WithMaxFullScreenContentSize sets the maxFullScreenContentSize property and returns the receiver for chaining.
+func (x *ColorPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetMaxFullScreenContentSize(maxFullScreenContentSize)
+	return x
+}
+
+// WithWindowController sets the windowController property and returns the receiver for chaining.
+func (x *ColorPanel) WithWindowController(windowController *raw.NSWindowController) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetWindowController(windowController)
+	return x
+}
+
+// WithParentWindow sets the parentWindow property and returns the receiver for chaining.
+func (x *ColorPanel) WithParentWindow(parentWindow WindowProvider) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetParentWindow(parentWindow.asWindow())
+	return x
+}
+
+// WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
+func (x *ColorPanel) WithAppearanceSource(appearanceSource *foundation.NSObject) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetAppearanceSource(appearanceSource)
+	return x
+}
+
+// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+func (x *ColorPanel) WithColorSpace(colorSpace *raw.NSColorSpace) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetColorSpace(colorSpace)
+	return x
+}
+
+// WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
+func (x *ColorPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+	return x
+}
+
+// WithContentViewController sets the contentViewController property and returns the receiver for chaining.
+func (x *ColorPanel) WithContentViewController(contentViewController ViewControllerProvider) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetContentViewController(contentViewController.asViewController())
+	return x
+}
+
+// WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
+func (x *ColorPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetInitialFirstResponder(initialFirstResponder.asView())
+	return x
+}
+
+// WithDefaultButtonCell sets the defaultButtonCell property and returns the receiver for chaining.
+func (x *ColorPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetDefaultButtonCell(defaultButtonCell.asButtonCell())
+	return x
+}
+
+// WithAutorecalculatesKeyViewLoop sets the autorecalculatesKeyViewLoop property and returns the receiver for chaining.
+func (x *ColorPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop)
+	return x
+}
+
+// WithToolbar sets the toolbar property and returns the receiver for chaining.
+func (x *ColorPanel) WithToolbar(toolbar *raw.NSToolbar) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetToolbar(toolbar)
+	return x
+}
+
+// WithShowsToolbarButton sets the showsToolbarButton property and returns the receiver for chaining.
+func (x *ColorPanel) WithShowsToolbarButton(showsToolbarButton bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetShowsToolbarButton(showsToolbarButton)
+	return x
+}
+
+// WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
+func (x *ColorPanel) WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetTabbingMode(tabbingMode)
+	return x
+}
+
+// WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
+func (x *ColorPanel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetTabbingIdentifier(tabbingIdentifier)
+	return x
+}
+
+// WithAcceptsMouseMovedEvents sets the acceptsMouseMovedEvents property and returns the receiver for chaining.
+func (x *ColorPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents)
+	return x
+}
+
+// WithIgnoresMouseEvents sets the ignoresMouseEvents property and returns the receiver for chaining.
+func (x *ColorPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetIgnoresMouseEvents(ignoresMouseEvents)
+	return x
+}
+
+// WithAutodisplay sets the autodisplay property and returns the receiver for chaining.
+func (x *ColorPanel) WithAutodisplay(autodisplay bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetAutodisplay(autodisplay)
+	return x
+}
+
+// WithOneShot sets the oneShot property and returns the receiver for chaining.
+func (x *ColorPanel) WithOneShot(oneShot bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetOneShot(oneShot)
+	return x
+}
+
+// WithPreferredBackingLocation sets the preferredBackingLocation property and returns the receiver for chaining.
+func (x *ColorPanel) WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetPreferredBackingLocation(preferredBackingLocation)
+	return x
+}
+
+// WithShowsResizeIndicator sets the showsResizeIndicator property and returns the receiver for chaining.
+func (x *ColorPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetShowsResizeIndicator(showsResizeIndicator)
+	return x
+}
+
+// WithOrderedIndex sets the orderedIndex property and returns the receiver for chaining.
+func (x *ColorPanel) WithOrderedIndex(orderedIndex int) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetOrderedIndex(orderedIndex)
+	return x
+}
+
+// WithRestorable sets the restorable property and returns the receiver for chaining.
+func (x *ColorPanel) WithRestorable(restorable bool) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetRestorable(restorable)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *ColorPanel) WithNextResponder(nextResponder ResponderProvider) *ColorPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *ColorPanel) WithMenu(menu *raw.NSMenu) *ColorPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *ColorPanel) WithUserActivity(userActivity *foundation.NSUserActivity) *ColorPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *ColorPanel) WithTouchBar(touchBar *raw.NSTouchBar) *ColorPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -179,6 +648,82 @@ type ColorPanelable interface {
 	WithMode(mode raw.NSColorPanelMode) *ColorPanel
 	WithColor(color *raw.NSColor) *ColorPanel
 	WithMaximumLinearExposure(maximumLinearExposure float64) *ColorPanel
+	WithFloatingPanel(floatingPanel bool) *ColorPanel
+	WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *ColorPanel
+	WithWorksWhenModal(worksWhenModal bool) *ColorPanel
+	WithTitle(title string) *ColorPanel
+	WithSubtitle(subtitle string) *ColorPanel
+	WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *ColorPanel
+	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *ColorPanel
+	WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *ColorPanel
+	WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *ColorPanel
+	WithRepresentedURL(representedURL string) *ColorPanel
+	WithRepresentedFilename(representedFilename string) *ColorPanel
+	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *ColorPanel
+	WithContentView(contentView ViewProvider) *ColorPanel
+	WithDelegate(delegate raw.NSWindowDelegate) *ColorPanel
+	WithStyleMask(styleMask raw.NSWindowStyleMask) *ColorPanel
+	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *ColorPanel
+	WithAspectRatio(aspectRatio corefoundation.CGSize) *ColorPanel
+	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *ColorPanel
+	WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *ColorPanel
+	WithViewsNeedDisplay(viewsNeedDisplay bool) *ColorPanel
+	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *ColorPanel
+	WithReleasedWhenClosed(releasedWhenClosed bool) *ColorPanel
+	WithBackgroundColor(backgroundColor *raw.NSColor) *ColorPanel
+	WithMovable(movable bool) *ColorPanel
+	WithMovableByWindowBackground(movableByWindowBackground bool) *ColorPanel
+	WithHidesOnDeactivate(hidesOnDeactivate bool) *ColorPanel
+	WithCanHide(canHide bool) *ColorPanel
+	WithMiniwindowImage(miniwindowImage *raw.NSImage) *ColorPanel
+	WithMiniwindowTitle(miniwindowTitle string) *ColorPanel
+	WithDocumentEdited(documentEdited bool) *ColorPanel
+	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *ColorPanel
+	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *ColorPanel
+	WithBackingType(backingType raw.NSBackingStoreType) *ColorPanel
+	WithLevel(level int) *ColorPanel
+	WithDepthLimit(depthLimit raw.NSWindowDepth) *ColorPanel
+	WithHasShadow(hasShadow bool) *ColorPanel
+	WithAlphaValue(alphaValue float64) *ColorPanel
+	WithOpaque(opaque bool) *ColorPanel
+	WithSharingType(sharingType raw.NSWindowSharingType) *ColorPanel
+	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *ColorPanel
+	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *ColorPanel
+	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *ColorPanel
+	WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *ColorPanel
+	WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *ColorPanel
+	WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *ColorPanel
+	WithMinSize(minSize corefoundation.CGSize) *ColorPanel
+	WithMaxSize(maxSize corefoundation.CGSize) *ColorPanel
+	WithContentMinSize(contentMinSize corefoundation.CGSize) *ColorPanel
+	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *ColorPanel
+	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *ColorPanel
+	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *ColorPanel
+	WithWindowController(windowController *raw.NSWindowController) *ColorPanel
+	WithParentWindow(parentWindow WindowProvider) *ColorPanel
+	WithAppearanceSource(appearanceSource *foundation.NSObject) *ColorPanel
+	WithColorSpace(colorSpace *raw.NSColorSpace) *ColorPanel
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *ColorPanel
+	WithContentViewController(contentViewController ViewControllerProvider) *ColorPanel
+	WithInitialFirstResponder(initialFirstResponder ViewProvider) *ColorPanel
+	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *ColorPanel
+	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *ColorPanel
+	WithToolbar(toolbar *raw.NSToolbar) *ColorPanel
+	WithShowsToolbarButton(showsToolbarButton bool) *ColorPanel
+	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *ColorPanel
+	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *ColorPanel
+	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *ColorPanel
+	WithIgnoresMouseEvents(ignoresMouseEvents bool) *ColorPanel
+	WithAutodisplay(autodisplay bool) *ColorPanel
+	WithOneShot(oneShot bool) *ColorPanel
+	WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *ColorPanel
+	WithShowsResizeIndicator(showsResizeIndicator bool) *ColorPanel
+	WithOrderedIndex(orderedIndex int) *ColorPanel
+	WithRestorable(restorable bool) *ColorPanel
+	WithNextResponder(nextResponder ResponderProvider) *ColorPanel
+	WithMenu(menu *raw.NSMenu) *ColorPanel
+	WithUserActivity(userActivity *foundation.NSUserActivity) *ColorPanel
+	WithTouchBar(touchBar *raw.NSTouchBar) *ColorPanel
 	SetAction(selector objc.SEL)
 	SetTarget(target objc.ID)
 	AttachColorList(colorList *raw.NSColorList)

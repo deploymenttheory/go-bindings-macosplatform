@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -43,6 +44,18 @@ func (x *NNPadNode) WithFillValue(fillValue float32) *NNPadNode {
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNPadNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNPadNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNPadNode) WithLabel(label string) *NNPadNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // FillValue calls the underlying FillValue.
 func (x *NNPadNode) FillValue() float32 {
 	return x.inner.FillValue()
@@ -59,6 +72,8 @@ func (x *NNPadNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSN
 type NNPadNodeable interface {
 	Unwrap() *raw.MPSNNPadNode
 	WithFillValue(fillValue float32) *NNPadNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNPadNode
+	WithLabel(label string) *NNPadNode
 	FillValue() float32
 	SetFillValue(fillValue float32)
 }

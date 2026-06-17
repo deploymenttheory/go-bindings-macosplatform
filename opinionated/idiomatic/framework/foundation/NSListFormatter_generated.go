@@ -47,6 +47,12 @@ func (x *ListFormatter) WithItemFormatter(itemFormatter FormatterProvider) *List
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ListFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ListFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringFromItems calls the underlying StringFromItems.
 func (x *ListFormatter) StringFromItems(items *raw.NSArray[objc.ID]) *String {
 	_r := x.inner.StringFromItems(items)
@@ -93,6 +99,7 @@ type ListFormatterable interface {
 	Unwrap() *raw.NSListFormatter
 	WithLocale(locale *raw.NSLocale) *ListFormatter
 	WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ListFormatter
 	StringFromItems(items *raw.NSArray[objc.ID]) *String
 	Locale() *Locale
 	SetLocale(locale *raw.NSLocale)

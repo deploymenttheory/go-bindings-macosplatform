@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +52,24 @@ func (x *ImageStatisticsMinAndMax) WithClipRectSource(clipRectSource metal.MTLRe
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageStatisticsMinAndMax) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMinAndMax {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageStatisticsMinAndMax) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMinAndMax {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageStatisticsMinAndMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMinAndMax {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // ClipRectSource calls the underlying ClipRectSource.
 func (x *ImageStatisticsMinAndMax) ClipRectSource() metal.MTLRegion {
 	return x.inner.ClipRectSource()
@@ -67,6 +86,9 @@ func (x *ImageStatisticsMinAndMax) asUnaryImageKernel() *raw.MPSUnaryImageKernel
 type ImageStatisticsMinAndMaxable interface {
 	Unwrap() *raw.MPSImageStatisticsMinAndMax
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMinAndMax
+	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMinAndMax
+	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMinAndMax
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMinAndMax
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }

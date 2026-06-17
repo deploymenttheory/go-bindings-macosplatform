@@ -50,6 +50,18 @@ func (x *AssetReaderAudioMixOutput) WithAudioTimePitchAlgorithm(audioTimePitchAl
 	return x
 }
 
+// WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
+func (x *AssetReaderAudioMixOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderAudioMixOutput {
+	x.inner.AVAssetReaderOutput.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
+	return x
+}
+
+// WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
+func (x *AssetReaderAudioMixOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderAudioMixOutput {
+	x.inner.AVAssetReaderOutput.SetSupportsRandomAccess(supportsRandomAccess)
+	return x
+}
+
 // AudioTracks returns the collection as a Go slice.
 func (x *AssetReaderAudioMixOutput) AudioTracks() []*raw.AVAssetTrack {
 	arr := x.inner.AudioTracks()
@@ -101,6 +113,8 @@ type AssetReaderAudioMixOutputable interface {
 	Unwrap() *raw.AVAssetReaderAudioMixOutput
 	WithAudioMix(audioMix AudioMixProvider) *AssetReaderAudioMixOutput
 	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetReaderAudioMixOutput
+	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderAudioMixOutput
+	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderAudioMixOutput
 	AudioTracks() []*raw.AVAssetTrack
 	AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	AudioMix() *AudioMix

@@ -35,11 +35,18 @@ func NewJSONSerialization() *JSONSerialization {
 	return &JSONSerialization{inner: raw.NSJSONSerializationFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *JSONSerialization) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *JSONSerialization {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *JSONSerialization) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // JSONSerializationable is the interface implemented by [JSONSerialization], for mocking and DI.
 type JSONSerializationable interface {
 	Unwrap() *raw.NSJSONSerialization
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *JSONSerialization
 }
 
 var _ JSONSerializationable = (*JSONSerialization)(nil)

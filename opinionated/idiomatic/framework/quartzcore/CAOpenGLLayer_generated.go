@@ -5,7 +5,9 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -40,6 +42,332 @@ func NewOpenGLLayer() *OpenGLLayer {
 // WithAsynchronous sets the asynchronous property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithAsynchronous(asynchronous bool) *OpenGLLayer {
 	x.inner.SetAsynchronous(asynchronous)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithBounds(bounds corefoundation.CGRect) *OpenGLLayer {
+	x.inner.CALayer.SetBounds(bounds)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithPosition(position corefoundation.CGPoint) *OpenGLLayer {
+	x.inner.CALayer.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithZPosition(zPosition float64) *OpenGLLayer {
+	x.inner.CALayer.SetZPosition(zPosition)
+	return x
+}
+
+// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *OpenGLLayer {
+	x.inner.CALayer.SetAnchorPoint(anchorPoint)
+	return x
+}
+
+// WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithAnchorPointZ(anchorPointZ float64) *OpenGLLayer {
+	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithTransform(transform raw.CATransform3D) *OpenGLLayer {
+	x.inner.CALayer.SetTransform(transform)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithFrame(frame corefoundation.CGRect) *OpenGLLayer {
+	x.inner.CALayer.SetFrame(frame)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithHidden(hidden bool) *OpenGLLayer {
+	x.inner.CALayer.SetHidden(hidden)
+	return x
+}
+
+// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithDoubleSided(doubleSided bool) *OpenGLLayer {
+	x.inner.CALayer.SetDoubleSided(doubleSided)
+	return x
+}
+
+// WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithGeometryFlipped(geometryFlipped bool) *OpenGLLayer {
+	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
+	return x
+}
+
+// WithSublayers sets the collection, converting the Go slice to an NSArray.
+func (x *OpenGLLayer) WithSublayers(items ...LayerProvider) *OpenGLLayer {
+	if len(items) == 0 {
+		x.inner.CALayer.SetSublayers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.CALayer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CALayer.SetSublayers(_arr)
+	return x
+}
+
+// WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *OpenGLLayer {
+	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
+	return x
+}
+
+// WithMask sets the mask property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithMask(mask LayerProvider) *OpenGLLayer {
+	x.inner.CALayer.SetMask(mask.asLayer())
+	return x
+}
+
+// WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithMasksToBounds(masksToBounds bool) *OpenGLLayer {
+	x.inner.CALayer.SetMasksToBounds(masksToBounds)
+	return x
+}
+
+// WithContents sets the contents property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithContents(contents objc.ID) *OpenGLLayer {
+	x.inner.CALayer.SetContents(contents)
+	return x
+}
+
+// WithContentsRect sets the contentsRect property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithContentsRect(contentsRect corefoundation.CGRect) *OpenGLLayer {
+	x.inner.CALayer.SetContentsRect(contentsRect)
+	return x
+}
+
+// WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithContentsGravity(contentsGravity *foundation.NSString) *OpenGLLayer {
+	x.inner.CALayer.SetContentsGravity(contentsGravity)
+	return x
+}
+
+// WithContentsScale sets the contentsScale property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithContentsScale(contentsScale float64) *OpenGLLayer {
+	x.inner.CALayer.SetContentsScale(contentsScale)
+	return x
+}
+
+// WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *OpenGLLayer {
+	x.inner.CALayer.SetContentsCenter(contentsCenter)
+	return x
+}
+
+// WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithContentsFormat(contentsFormat *foundation.NSString) *OpenGLLayer {
+	x.inner.CALayer.SetContentsFormat(contentsFormat)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeContent sets the wantsExtendedDynamicRangeContent property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *OpenGLLayer {
+	x.inner.CALayer.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
+	return x
+}
+
+// WithToneMapMode sets the toneMapMode property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithToneMapMode(toneMapMode *foundation.NSString) *OpenGLLayer {
+	x.inner.CALayer.SetToneMapMode(toneMapMode)
+	return x
+}
+
+// WithPreferredDynamicRange sets the preferredDynamicRange property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *OpenGLLayer {
+	x.inner.CALayer.SetPreferredDynamicRange(preferredDynamicRange)
+	return x
+}
+
+// WithContentsHeadroom sets the contentsHeadroom property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithContentsHeadroom(contentsHeadroom float64) *OpenGLLayer {
+	x.inner.CALayer.SetContentsHeadroom(contentsHeadroom)
+	return x
+}
+
+// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *OpenGLLayer {
+	x.inner.CALayer.SetMinificationFilter(minificationFilter)
+	return x
+}
+
+// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *OpenGLLayer {
+	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
+	return x
+}
+
+// WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithMinificationFilterBias(minificationFilterBias float32) *OpenGLLayer {
+	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithOpaque(opaque bool) *OpenGLLayer {
+	x.inner.CALayer.SetOpaque(opaque)
+	return x
+}
+
+// WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *OpenGLLayer {
+	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
+	return x
+}
+
+// WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *OpenGLLayer {
+	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
+	return x
+}
+
+// WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *OpenGLLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+	return x
+}
+
+// WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *OpenGLLayer {
+	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
+	return x
+}
+
+// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithCornerRadius(cornerRadius float64) *OpenGLLayer {
+	x.inner.CALayer.SetCornerRadius(cornerRadius)
+	return x
+}
+
+// WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *OpenGLLayer {
+	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+	return x
+}
+
+// WithCornerCurve sets the cornerCurve property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithCornerCurve(cornerCurve *foundation.NSString) *OpenGLLayer {
+	x.inner.CALayer.SetCornerCurve(cornerCurve)
+	return x
+}
+
+// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithBorderWidth(borderWidth float64) *OpenGLLayer {
+	x.inner.CALayer.SetBorderWidth(borderWidth)
+	return x
+}
+
+// WithOpacity sets the opacity property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithOpacity(opacity float32) *OpenGLLayer {
+	x.inner.CALayer.SetOpacity(opacity)
+	return x
+}
+
+// WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *OpenGLLayer {
+	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithCompositingFilter(compositingFilter objc.ID) *OpenGLLayer {
+	x.inner.CALayer.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithShouldRasterize(shouldRasterize bool) *OpenGLLayer {
+	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithRasterizationScale(rasterizationScale float64) *OpenGLLayer {
+	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
+	return x
+}
+
+// WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithShadowOpacity(shadowOpacity float32) *OpenGLLayer {
+	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
+	return x
+}
+
+// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *OpenGLLayer {
+	x.inner.CALayer.SetShadowOffset(shadowOffset)
+	return x
+}
+
+// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithShadowRadius(shadowRadius float64) *OpenGLLayer {
+	x.inner.CALayer.SetShadowRadius(shadowRadius)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *OpenGLLayer {
+	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *OpenGLLayer {
+	x.inner.CALayer.SetLayoutManager(layoutManager)
+	return x
+}
+
+// WithActions sets the actions property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *OpenGLLayer {
+	x.inner.CALayer.SetActions(actions)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithName(name string) *OpenGLLayer {
+	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithDelegate(delegate raw.CALayerDelegate) *OpenGLLayer {
+	x.inner.CALayer.SetDelegate(delegate)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *OpenGLLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *OpenGLLayer {
+	x.inner.CALayer.SetStyle(style)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *OpenGLLayer) WithConstraints(items ...*raw.CAConstraint) *OpenGLLayer {
+	if len(items) == 0 {
+		x.inner.CALayer.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CALayer.SetConstraints(_arr)
 	return x
 }
 
@@ -99,6 +427,57 @@ func (x *OpenGLLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
 type OpenGLLayerable interface {
 	Unwrap() *raw.CAOpenGLLayer
 	WithAsynchronous(asynchronous bool) *OpenGLLayer
+	WithBounds(bounds corefoundation.CGRect) *OpenGLLayer
+	WithPosition(position corefoundation.CGPoint) *OpenGLLayer
+	WithZPosition(zPosition float64) *OpenGLLayer
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *OpenGLLayer
+	WithAnchorPointZ(anchorPointZ float64) *OpenGLLayer
+	WithTransform(transform raw.CATransform3D) *OpenGLLayer
+	WithFrame(frame corefoundation.CGRect) *OpenGLLayer
+	WithHidden(hidden bool) *OpenGLLayer
+	WithDoubleSided(doubleSided bool) *OpenGLLayer
+	WithGeometryFlipped(geometryFlipped bool) *OpenGLLayer
+	WithSublayers(items ...LayerProvider) *OpenGLLayer
+	WithSublayerTransform(sublayerTransform raw.CATransform3D) *OpenGLLayer
+	WithMask(mask LayerProvider) *OpenGLLayer
+	WithMasksToBounds(masksToBounds bool) *OpenGLLayer
+	WithContents(contents objc.ID) *OpenGLLayer
+	WithContentsRect(contentsRect corefoundation.CGRect) *OpenGLLayer
+	WithContentsGravity(contentsGravity *foundation.NSString) *OpenGLLayer
+	WithContentsScale(contentsScale float64) *OpenGLLayer
+	WithContentsCenter(contentsCenter corefoundation.CGRect) *OpenGLLayer
+	WithContentsFormat(contentsFormat *foundation.NSString) *OpenGLLayer
+	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *OpenGLLayer
+	WithToneMapMode(toneMapMode *foundation.NSString) *OpenGLLayer
+	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *OpenGLLayer
+	WithContentsHeadroom(contentsHeadroom float64) *OpenGLLayer
+	WithMinificationFilter(minificationFilter *foundation.NSString) *OpenGLLayer
+	WithMagnificationFilter(magnificationFilter *foundation.NSString) *OpenGLLayer
+	WithMinificationFilterBias(minificationFilterBias float32) *OpenGLLayer
+	WithOpaque(opaque bool) *OpenGLLayer
+	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *OpenGLLayer
+	WithDrawsAsynchronously(drawsAsynchronously bool) *OpenGLLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *OpenGLLayer
+	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *OpenGLLayer
+	WithCornerRadius(cornerRadius float64) *OpenGLLayer
+	WithMaskedCorners(maskedCorners raw.CACornerMask) *OpenGLLayer
+	WithCornerCurve(cornerCurve *foundation.NSString) *OpenGLLayer
+	WithBorderWidth(borderWidth float64) *OpenGLLayer
+	WithOpacity(opacity float32) *OpenGLLayer
+	WithAllowsGroupOpacity(allowsGroupOpacity bool) *OpenGLLayer
+	WithCompositingFilter(compositingFilter objc.ID) *OpenGLLayer
+	WithShouldRasterize(shouldRasterize bool) *OpenGLLayer
+	WithRasterizationScale(rasterizationScale float64) *OpenGLLayer
+	WithShadowOpacity(shadowOpacity float32) *OpenGLLayer
+	WithShadowOffset(shadowOffset corefoundation.CGSize) *OpenGLLayer
+	WithShadowRadius(shadowRadius float64) *OpenGLLayer
+	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *OpenGLLayer
+	WithLayoutManager(layoutManager raw.CALayoutManager) *OpenGLLayer
+	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *OpenGLLayer
+	WithName(name string) *OpenGLLayer
+	WithDelegate(delegate raw.CALayerDelegate) *OpenGLLayer
+	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *OpenGLLayer
+	WithConstraints(items ...*raw.CAConstraint) *OpenGLLayer
 	CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx unsafe.Pointer, pf unsafe.Pointer, t float64, ts *corevideo.CVTimeStamp) bool
 	DrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx unsafe.Pointer, pf unsafe.Pointer, t float64, ts *corevideo.CVTimeStamp)
 	CopyCGLPixelFormatForDisplayMask(mask uint32) unsafe.Pointer

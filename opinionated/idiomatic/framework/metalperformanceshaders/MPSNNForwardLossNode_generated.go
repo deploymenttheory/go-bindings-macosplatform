@@ -58,6 +58,18 @@ func (x *NNForwardLossNode) WithPropertyCallBack(propertyCallBack mpsneuralnetwo
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNForwardLossNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNForwardLossNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNForwardLossNode) WithLabel(label string) *NNForwardLossNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // GradientFilterWithSources calls the underlying GradientFilterWithSources.
 func (x *NNForwardLossNode) GradientFilterWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *mpsneuralnetwork.MPSNNLossGradientNode {
 	return x.inner.GradientFilterWithSources(sourceGradient)
@@ -134,6 +146,8 @@ func (x *NNForwardLossNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
 type NNForwardLossNodeable interface {
 	Unwrap() *raw.MPSNNForwardLossNode
 	WithPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) *NNForwardLossNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNForwardLossNode
+	WithLabel(label string) *NNForwardLossNode
 	GradientFilterWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *mpsneuralnetwork.MPSNNLossGradientNode
 	GradientFiltersWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode]
 	GradientFilterWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *mpsneuralnetwork.MPSNNLossGradientNode

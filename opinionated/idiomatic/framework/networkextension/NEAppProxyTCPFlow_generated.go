@@ -39,6 +39,12 @@ func NewNEAppProxyTCPFlow() *NEAppProxyTCPFlow {
 	return &NEAppProxyTCPFlow{inner: raw.NEAppProxyTCPFlowFromID(_id)}
 }
 
+// WithNetworkInterface sets the networkInterface property and returns the receiver for chaining.
+func (x *NEAppProxyTCPFlow) WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyTCPFlow {
+	x.inner.NEAppProxyFlow.SetNetworkInterface(networkInterface)
+	return x
+}
+
 // ReadData blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyTCPFlow) ReadData(ctx context.Context) (*foundation.NSData, error) {
 	type _result struct {
@@ -96,6 +102,7 @@ func (x *NEAppProxyTCPFlow) asNEAppProxyFlow() *raw.NEAppProxyFlow { return &x.i
 // NEAppProxyTCPFlowable is the interface implemented by [NEAppProxyTCPFlow], for mocking and DI.
 type NEAppProxyTCPFlowable interface {
 	Unwrap() *raw.NEAppProxyTCPFlow
+	WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyTCPFlow
 	ReadData(ctx context.Context) (*foundation.NSData, error)
 	WriteData(ctx context.Context, data *foundation.NSData) error
 	RemoteFlowEndpoint() *foundation.NSObject

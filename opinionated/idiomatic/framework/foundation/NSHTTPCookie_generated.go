@@ -37,6 +37,12 @@ func NewHTTPCookieWithProperties(properties *raw.NSDictionary[*raw.NSString, obj
 	return &HTTPCookie{inner: raw.NSHTTPCookieFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *HTTPCookie) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPCookie {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Properties calls the underlying Properties.
 func (x *HTTPCookie) Properties() *raw.NSDictionary[*raw.NSString, objc.ID] {
 	return x.inner.Properties()
@@ -145,6 +151,7 @@ func (x *HTTPCookie) asObject() *raw.NSObject { return &x.inner.NSObject }
 // HTTPCookieable is the interface implemented by [HTTPCookie], for mocking and DI.
 type HTTPCookieable interface {
 	Unwrap() *raw.NSHTTPCookie
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPCookie
 	Properties() *raw.NSDictionary[*raw.NSString, objc.ID]
 	Name() *String
 	Value() *String

@@ -149,6 +149,12 @@ func (x *DateComponents) WithRepeatedDay(repeatedDay bool) *DateComponents {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DateComponents) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateComponents {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Week calls the underlying Week.
 func (x *DateComponents) Week() int {
 	return x.inner.Week()
@@ -410,6 +416,7 @@ type DateComponentsable interface {
 	WithDayOfYear(dayOfYear int) *DateComponents
 	WithLeapMonth(leapMonth bool) *DateComponents
 	WithRepeatedDay(repeatedDay bool) *DateComponents
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateComponents
 	Week() int
 	SetWeek(v int)
 	SetValueForComponent(value int, unit raw.NSCalendarUnit)

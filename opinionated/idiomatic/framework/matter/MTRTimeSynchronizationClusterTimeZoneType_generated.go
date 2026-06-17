@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTimeSynchronizationClusterTimeZoneType() *MTRTimeSynchronizationClust
 	return &MTRTimeSynchronizationClusterTimeZoneType{inner: raw.MTRTimeSynchronizationClusterTimeZoneTypeFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterTimeZoneType) WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterTimeZoneType {
+	x.inner.MTRTimeSynchronizationClusterTimeZoneStruct.SetOffset(offset)
+	return x
+}
+
+// WithValidAt sets the validAt property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterTimeZoneType) WithValidAt(validAt *foundation.NSNumber) *MTRTimeSynchronizationClusterTimeZoneType {
+	x.inner.MTRTimeSynchronizationClusterTimeZoneStruct.SetValidAt(validAt)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterTimeZoneType) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneType {
+	x.inner.MTRTimeSynchronizationClusterTimeZoneStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
 func (x *MTRTimeSynchronizationClusterTimeZoneType) asMTRTimeSynchronizationClusterTimeZoneStruct() *raw.MTRTimeSynchronizationClusterTimeZoneStruct { return &x.inner.MTRTimeSynchronizationClusterTimeZoneStruct }
 
 // MTRTimeSynchronizationClusterTimeZoneTypeable is the interface implemented by [MTRTimeSynchronizationClusterTimeZoneType], for mocking and DI.
 type MTRTimeSynchronizationClusterTimeZoneTypeable interface {
 	Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneType
+	WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterTimeZoneType
+	WithValidAt(validAt *foundation.NSNumber) *MTRTimeSynchronizationClusterTimeZoneType
+	WithName(name string) *MTRTimeSynchronizationClusterTimeZoneType
 }
 
 var _ MTRTimeSynchronizationClusterTimeZoneTypeable = (*MTRTimeSynchronizationClusterTimeZoneType)(nil)

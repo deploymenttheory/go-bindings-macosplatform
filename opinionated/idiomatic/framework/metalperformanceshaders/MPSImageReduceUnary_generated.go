@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -44,6 +45,36 @@ func (x *ImageReduceUnary) WithClipRectSource(clipRectSource metal.MTLRegion) *I
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceUnary) WithOffset(offset mpscore.MPSOffset) *ImageReduceUnary {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceUnary) WithClipRect(clipRect metal.MTLRegion) *ImageReduceUnary {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceUnary) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceUnary {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageReduceUnary) WithOptions(options mpscore.MPSKernelOptions) *ImageReduceUnary {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageReduceUnary) WithLabel(label string) *ImageReduceUnary {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ClipRectSource calls the underlying ClipRectSource.
 func (x *ImageReduceUnary) ClipRectSource() metal.MTLRegion {
 	return x.inner.ClipRectSource()
@@ -62,6 +93,11 @@ func (x *ImageReduceUnary) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUn
 type ImageReduceUnaryable interface {
 	Unwrap() *raw.MPSImageReduceUnary
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceUnary
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceUnary
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceUnary
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceUnary
+	WithOptions(options mpscore.MPSKernelOptions) *ImageReduceUnary
+	WithLabel(label string) *ImageReduceUnary
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }

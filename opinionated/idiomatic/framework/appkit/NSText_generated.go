@@ -7,9 +7,12 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Text wraps [raw.NSText] with a fluent Go API.
@@ -157,6 +160,340 @@ func (x *Text) WithHorizontallyResizable(horizontallyResizable bool) *Text {
 // WithVerticallyResizable sets the verticallyResizable property and returns the receiver for chaining.
 func (x *Text) WithVerticallyResizable(verticallyResizable bool) *Text {
 	x.inner.SetVerticallyResizable(verticallyResizable)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *Text) WithSubviews(items ...ViewProvider) *Text {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Text) WithHidden(hidden bool) *Text {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *Text) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Text {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *Text) WithAutoresizesSubviews(autoresizesSubviews bool) *Text {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *Text) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Text {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *Text) WithFrame(frame corefoundation.CGRect) *Text {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *Text) WithFrameRotation(frameRotation float64) *Text {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *Text) WithFrameCenterRotation(frameCenterRotation float64) *Text {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *Text) WithBoundsRotation(boundsRotation float64) *Text {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *Text) WithBounds(bounds corefoundation.CGRect) *Text {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *Text) WithCanDrawConcurrently(canDrawConcurrently bool) *Text {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *Text) WithNeedsDisplay(needsDisplay bool) *Text {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *Text) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Text {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *Text) WithWantsRestingTouches(wantsRestingTouches bool) *Text {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *Text) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Text {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *Text) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Text {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *Text) WithWantsLayer(wantsLayer bool) *Text {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *Text) WithLayer(layer *quartzcore.CALayer) *Text {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *Text) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Text {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *Text) WithNeedsLayout(needsLayout bool) *Text {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *Text) WithAlphaValue(alphaValue float64) *Text {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *Text) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Text {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Text) WithBackgroundFilters(items ...*coreimage.CIFilter) *Text {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *Text) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Text {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Text) WithContentFilters(items ...*coreimage.CIFilter) *Text {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *Text) WithShadow(shadow *raw.NSShadow) *Text {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *Text) WithClipsToBounds(clipsToBounds bool) *Text {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *Text) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Text {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *Text) WithToolTip(toolTip string) *Text {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *Text) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Text {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *Text) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Text {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *Text) WithNextKeyView(nextKeyView ViewProvider) *Text {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *Text) WithFocusRingType(focusRingType raw.NSFocusRingType) *Text {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *Text) WithGestureRecognizers(items ...GestureRecognizerProvider) *Text {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *Text) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Text {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *Text) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Text {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *Text) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Text {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *Text) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Text {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *Text) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Text {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *Text) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Text {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Text) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Text {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Text) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Text {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *Text) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Text {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *Text) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Text {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *Text) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Text {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Text) WithNextResponder(nextResponder ResponderProvider) *Text {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Text) WithMenu(menu *raw.NSMenu) *Text {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Text) WithUserActivity(userActivity *foundation.NSUserActivity) *Text {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Text) WithTouchBar(touchBar *raw.NSTouchBar) *Text {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -554,6 +891,55 @@ type Textable interface {
 	WithMinSize(minSize corefoundation.CGSize) *Text
 	WithHorizontallyResizable(horizontallyResizable bool) *Text
 	WithVerticallyResizable(verticallyResizable bool) *Text
+	WithSubviews(items ...ViewProvider) *Text
+	WithHidden(hidden bool) *Text
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Text
+	WithAutoresizesSubviews(autoresizesSubviews bool) *Text
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Text
+	WithFrame(frame corefoundation.CGRect) *Text
+	WithFrameRotation(frameRotation float64) *Text
+	WithFrameCenterRotation(frameCenterRotation float64) *Text
+	WithBoundsRotation(boundsRotation float64) *Text
+	WithBounds(bounds corefoundation.CGRect) *Text
+	WithCanDrawConcurrently(canDrawConcurrently bool) *Text
+	WithNeedsDisplay(needsDisplay bool) *Text
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Text
+	WithWantsRestingTouches(wantsRestingTouches bool) *Text
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Text
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Text
+	WithWantsLayer(wantsLayer bool) *Text
+	WithLayer(layer *quartzcore.CALayer) *Text
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Text
+	WithNeedsLayout(needsLayout bool) *Text
+	WithAlphaValue(alphaValue float64) *Text
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Text
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *Text
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Text
+	WithContentFilters(items ...*coreimage.CIFilter) *Text
+	WithShadow(shadow *raw.NSShadow) *Text
+	WithClipsToBounds(clipsToBounds bool) *Text
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Text
+	WithToolTip(toolTip string) *Text
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Text
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Text
+	WithNextKeyView(nextKeyView ViewProvider) *Text
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *Text
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *Text
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Text
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Text
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Text
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Text
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Text
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Text
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Text
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Text
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Text
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Text
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Text
+	WithNextResponder(nextResponder ResponderProvider) *Text
+	WithMenu(menu *raw.NSMenu) *Text
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Text
+	WithTouchBar(touchBar *raw.NSTouchBar) *Text
 	ReplaceCharactersInRangeWithString(range_ foundation.NSRange, string_ string)
 	ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData *foundation.NSData)
 	ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData *foundation.NSData)

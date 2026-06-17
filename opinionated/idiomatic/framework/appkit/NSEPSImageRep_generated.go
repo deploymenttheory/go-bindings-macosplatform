@@ -38,6 +38,54 @@ func NewEPSImageRepWithData(epsData *foundation.NSData) *EPSImageRep {
 	return &EPSImageRep{inner: raw.NSEPSImageRepFromID(_id)}
 }
 
+// WithSize sets the size property and returns the receiver for chaining.
+func (x *EPSImageRep) WithSize(size corefoundation.CGSize) *EPSImageRep {
+	x.inner.NSImageRep.SetSize(size)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *EPSImageRep) WithAlpha(alpha bool) *EPSImageRep {
+	x.inner.NSImageRep.SetAlpha(alpha)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *EPSImageRep) WithOpaque(opaque bool) *EPSImageRep {
+	x.inner.NSImageRep.SetOpaque(opaque)
+	return x
+}
+
+// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
+func (x *EPSImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *EPSImageRep {
+	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+	return x
+}
+
+// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+func (x *EPSImageRep) WithBitsPerSample(bitsPerSample int) *EPSImageRep {
+	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	return x
+}
+
+// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+func (x *EPSImageRep) WithPixelsWide(pixelsWide int) *EPSImageRep {
+	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	return x
+}
+
+// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+func (x *EPSImageRep) WithPixelsHigh(pixelsHigh int) *EPSImageRep {
+	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	return x
+}
+
+// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
+func (x *EPSImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *EPSImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+	return x
+}
+
 // PrepareGState calls the underlying PrepareGState.
 func (x *EPSImageRep) PrepareGState() {
 	x.inner.PrepareGState()
@@ -58,6 +106,14 @@ func (x *EPSImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep 
 // EPSImageRepable is the interface implemented by [EPSImageRep], for mocking and DI.
 type EPSImageRepable interface {
 	Unwrap() *raw.NSEPSImageRep
+	WithSize(size corefoundation.CGSize) *EPSImageRep
+	WithAlpha(alpha bool) *EPSImageRep
+	WithOpaque(opaque bool) *EPSImageRep
+	WithColorSpaceName(colorSpaceName *foundation.NSString) *EPSImageRep
+	WithBitsPerSample(bitsPerSample int) *EPSImageRep
+	WithPixelsWide(pixelsWide int) *EPSImageRep
+	WithPixelsHigh(pixelsHigh int) *EPSImageRep
+	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *EPSImageRep
 	PrepareGState()
 	BoundingBox() corefoundation.CGRect
 	EPSRepresentation() *foundation.NSData

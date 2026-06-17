@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,18 @@ func NewMTRBasicClusterStartUpEvent() *MTRBasicClusterStartUpEvent {
 	return &MTRBasicClusterStartUpEvent{inner: raw.MTRBasicClusterStartUpEventFromID(_id)}
 }
 
+// WithSoftwareVersion sets the softwareVersion property and returns the receiver for chaining.
+func (x *MTRBasicClusterStartUpEvent) WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTRBasicClusterStartUpEvent {
+	x.inner.MTRBasicInformationClusterStartUpEvent.SetSoftwareVersion(softwareVersion)
+	return x
+}
+
 func (x *MTRBasicClusterStartUpEvent) asMTRBasicInformationClusterStartUpEvent() *raw.MTRBasicInformationClusterStartUpEvent { return &x.inner.MTRBasicInformationClusterStartUpEvent }
 
 // MTRBasicClusterStartUpEventable is the interface implemented by [MTRBasicClusterStartUpEvent], for mocking and DI.
 type MTRBasicClusterStartUpEventable interface {
 	Unwrap() *raw.MTRBasicClusterStartUpEvent
+	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTRBasicClusterStartUpEvent
 }
 
 var _ MTRBasicClusterStartUpEventable = (*MTRBasicClusterStartUpEvent)(nil)

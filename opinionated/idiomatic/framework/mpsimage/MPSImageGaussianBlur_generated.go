@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,24 @@ func NewImageGaussianBlurWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &ImageGaussianBlur{inner: raw.MPSImageGaussianBlurFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageGaussianBlur) WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageGaussianBlur) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageGaussianBlur) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianBlur {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // Sigma calls the underlying Sigma.
 func (x *ImageGaussianBlur) Sigma() float32 {
 	return x.inner.Sigma()
@@ -55,6 +74,9 @@ func (x *ImageGaussianBlur) asUnaryImageKernel() *raw.MPSUnaryImageKernel { retu
 // ImageGaussianBlurable is the interface implemented by [ImageGaussianBlur], for mocking and DI.
 type ImageGaussianBlurable interface {
 	Unwrap() *raw.MPSImageGaussianBlur
+	WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur
+	WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianBlur
 	Sigma() float32
 }
 

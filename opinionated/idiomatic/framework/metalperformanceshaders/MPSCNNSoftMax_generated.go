@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -37,6 +39,66 @@ func NewCNNSoftMax() *CNNSoftMax {
 	return &CNNSoftMax{inner: raw.MPSCNNSoftMaxFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNSoftMax) WithOffset(offset mpscore.MPSOffset) *CNNSoftMax {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNSoftMax) WithClipRect(clipRect metal.MTLRegion) *CNNSoftMax {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNSoftMax) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNSoftMax {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNSoftMax) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNSoftMax {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNSoftMax) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNSoftMax {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNSoftMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNSoftMax {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNSoftMax) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNSoftMax {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNSoftMax) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNSoftMax {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNSoftMax) WithOptions(options mpscore.MPSKernelOptions) *CNNSoftMax {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNSoftMax) WithLabel(label string) *CNNSoftMax {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNSoftMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 func (x *CNNSoftMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
@@ -44,6 +106,16 @@ func (x *CNNSoftMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKerne
 // CNNSoftMaxable is the interface implemented by [CNNSoftMax], for mocking and DI.
 type CNNSoftMaxable interface {
 	Unwrap() *raw.MPSCNNSoftMax
+	WithOffset(offset mpscore.MPSOffset) *CNNSoftMax
+	WithClipRect(clipRect metal.MTLRegion) *CNNSoftMax
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNSoftMax
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNSoftMax
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNSoftMax
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNSoftMax
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNSoftMax
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNSoftMax
+	WithOptions(options mpscore.MPSKernelOptions) *CNNSoftMax
+	WithLabel(label string) *CNNSoftMax
 }
 
 var _ CNNSoftMaxable = (*CNNSoftMax)(nil)

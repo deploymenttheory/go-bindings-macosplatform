@@ -73,6 +73,42 @@ func (x *MatrixBatchNormalization) WithComputeStatistics(computeStatistics bool)
 	return x
 }
 
+// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixBatchNormalization) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalization {
+	x.inner.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixBatchNormalization) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalization {
+	x.inner.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixBatchNormalization) WithBatchStart(batchStart uint) *MatrixBatchNormalization {
+	x.inner.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixBatchNormalization) WithBatchSize(batchSize uint) *MatrixBatchNormalization {
+	x.inner.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixBatchNormalization) WithOptions(options mpscore.MPSKernelOptions) *MatrixBatchNormalization {
+	x.inner.MPSMatrixUnaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixBatchNormalization) WithLabel(label string) *MatrixBatchNormalization {
+	x.inner.MPSMatrixUnaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
 func (x *MatrixBatchNormalization) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
 	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
@@ -163,6 +199,12 @@ type MatrixBatchNormalizationable interface {
 	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixBatchNormalization
 	WithEpsilon(epsilon float32) *MatrixBatchNormalization
 	WithComputeStatistics(computeStatistics bool) *MatrixBatchNormalization
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalization
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalization
+	WithBatchStart(batchStart uint) *MatrixBatchNormalization
+	WithBatchSize(batchSize uint) *MatrixBatchNormalization
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixBatchNormalization
+	WithLabel(label string) *MatrixBatchNormalization
 	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
 	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
 	NeuronParameterA() float32

@@ -7,8 +7,11 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ComboBox wraps [raw.NSComboBox] with a fluent Go API.
@@ -82,6 +85,648 @@ func (x *ComboBox) WithCompletes(completes bool) *ComboBox {
 // WithDataSource sets the dataSource property and returns the receiver for chaining.
 func (x *ComboBox) WithDataSource(dataSource raw.NSComboBoxDataSource) *ComboBox {
 	x.inner.SetDataSource(dataSource)
+	return x
+}
+
+// WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
+func (x *ComboBox) WithPlaceholderString(placeholderString string) *ComboBox {
+	x.inner.NSTextField.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	return x
+}
+
+// WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
+func (x *ComboBox) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *ComboBox {
+	x.inner.NSTextField.SetPlaceholderAttributedString(placeholderAttributedString)
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *ComboBox) WithBackgroundColor(backgroundColor *raw.NSColor) *ComboBox {
+	x.inner.NSTextField.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+func (x *ComboBox) WithDrawsBackground(drawsBackground bool) *ComboBox {
+	x.inner.NSTextField.SetDrawsBackground(drawsBackground)
+	return x
+}
+
+// WithTextColor sets the textColor property and returns the receiver for chaining.
+func (x *ComboBox) WithTextColor(textColor *raw.NSColor) *ComboBox {
+	x.inner.NSTextField.SetTextColor(textColor)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *ComboBox) WithBordered(bordered bool) *ComboBox {
+	x.inner.NSTextField.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *ComboBox) WithBezeled(bezeled bool) *ComboBox {
+	x.inner.NSTextField.SetBezeled(bezeled)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *ComboBox) WithEditable(editable bool) *ComboBox {
+	x.inner.NSTextField.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *ComboBox) WithSelectable(selectable bool) *ComboBox {
+	x.inner.NSTextField.SetSelectable(selectable)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *ComboBox) WithDelegate(delegate raw.NSTextFieldDelegate) *ComboBox {
+	x.inner.NSTextField.SetDelegate(delegate)
+	return x
+}
+
+// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
+func (x *ComboBox) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *ComboBox {
+	x.inner.NSTextField.SetBezelStyle(bezelStyle)
+	return x
+}
+
+// WithPreferredMaxLayoutWidth sets the preferredMaxLayoutWidth property and returns the receiver for chaining.
+func (x *ComboBox) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *ComboBox {
+	x.inner.NSTextField.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
+	return x
+}
+
+// WithMaximumNumberOfLines sets the maximumNumberOfLines property and returns the receiver for chaining.
+func (x *ComboBox) WithMaximumNumberOfLines(maximumNumberOfLines int) *ComboBox {
+	x.inner.NSTextField.SetMaximumNumberOfLines(maximumNumberOfLines)
+	return x
+}
+
+// WithAllowsDefaultTighteningForTruncation sets the allowsDefaultTighteningForTruncation property and returns the receiver for chaining.
+func (x *ComboBox) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *ComboBox {
+	x.inner.NSTextField.SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation)
+	return x
+}
+
+// WithLineBreakStrategy sets the lineBreakStrategy property and returns the receiver for chaining.
+func (x *ComboBox) WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *ComboBox {
+	x.inner.NSTextField.SetLineBreakStrategy(lineBreakStrategy)
+	return x
+}
+
+// WithAllowsWritingTools sets the allowsWritingTools property and returns the receiver for chaining.
+func (x *ComboBox) WithAllowsWritingTools(allowsWritingTools bool) *ComboBox {
+	x.inner.NSTextField.SetAllowsWritingTools(allowsWritingTools)
+	return x
+}
+
+// WithAllowsWritingToolsAffordance sets the allowsWritingToolsAffordance property and returns the receiver for chaining.
+func (x *ComboBox) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *ComboBox {
+	x.inner.NSTextField.SetAllowsWritingToolsAffordance(allowsWritingToolsAffordance)
+	return x
+}
+
+// WithPlaceholderStrings sets the collection, converting the Go slice to an NSArray.
+func (x *ComboBox) WithPlaceholderStrings(items ...*foundation.NSString) *ComboBox {
+	if len(items) == 0 {
+		x.inner.NSTextField.SetPlaceholderStrings(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTextField.SetPlaceholderStrings(_arr)
+	return x
+}
+
+// WithPlaceholderAttributedStrings sets the collection, converting the Go slice to an NSArray.
+func (x *ComboBox) WithPlaceholderAttributedStrings(items ...*foundation.NSAttributedString) *ComboBox {
+	if len(items) == 0 {
+		x.inner.NSTextField.SetPlaceholderAttributedStrings(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSAttributedString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTextField.SetPlaceholderAttributedStrings(_arr)
+	return x
+}
+
+// WithResolvesNaturalAlignmentWithBaseWritingDirection sets the resolvesNaturalAlignmentWithBaseWritingDirection property and returns the receiver for chaining.
+func (x *ComboBox) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *ComboBox {
+	x.inner.NSTextField.SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection)
+	return x
+}
+
+// WithAutomaticTextCompletionEnabled sets the automaticTextCompletionEnabled property and returns the receiver for chaining.
+func (x *ComboBox) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *ComboBox {
+	x.inner.NSTextField.SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled)
+	return x
+}
+
+// WithAllowsCharacterPickerTouchBarItem sets the allowsCharacterPickerTouchBarItem property and returns the receiver for chaining.
+func (x *ComboBox) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *ComboBox {
+	x.inner.NSTextField.SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *ComboBox) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ComboBox {
+	x.inner.NSTextField.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *ComboBox) WithImportsGraphics(importsGraphics bool) *ComboBox {
+	x.inner.NSTextField.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *ComboBox) WithTarget(target objc.ID) *ComboBox {
+	x.inner.NSTextField.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *ComboBox) WithAction(action objc.SEL) *ComboBox {
+	x.inner.NSTextField.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *ComboBox) WithTag(tag int) *ComboBox {
+	x.inner.NSTextField.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *ComboBox) WithIgnoresMultiClick(ignoresMultiClick bool) *ComboBox {
+	x.inner.NSTextField.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *ComboBox) WithContinuous(continuous bool) *ComboBox {
+	x.inner.NSTextField.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ComboBox) WithEnabled(enabled bool) *ComboBox {
+	x.inner.NSTextField.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *ComboBox) WithRefusesFirstResponder(refusesFirstResponder bool) *ComboBox {
+	x.inner.NSTextField.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *ComboBox) WithHighlighted(highlighted bool) *ComboBox {
+	x.inner.NSTextField.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *ComboBox) WithControlSize(controlSize raw.NSControlSize) *ComboBox {
+	x.inner.NSTextField.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *ComboBox) WithFormatter(formatter *foundation.NSFormatter) *ComboBox {
+	x.inner.NSTextField.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *ComboBox) WithObjectValue(objectValue objc.ID) *ComboBox {
+	x.inner.NSTextField.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *ComboBox) WithStringValue(stringValue string) *ComboBox {
+	x.inner.NSTextField.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *ComboBox) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ComboBox {
+	x.inner.NSTextField.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *ComboBox) WithIntValue(intValue int) *ComboBox {
+	x.inner.NSTextField.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *ComboBox) WithIntegerValue(integerValue int) *ComboBox {
+	x.inner.NSTextField.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *ComboBox) WithFloatValue(floatValue float32) *ComboBox {
+	x.inner.NSTextField.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *ComboBox) WithDoubleValue(doubleValue float64) *ComboBox {
+	x.inner.NSTextField.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *ComboBox) WithFont(font *raw.NSFont) *ComboBox {
+	x.inner.NSTextField.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *ComboBox) WithUsesSingleLineMode(usesSingleLineMode bool) *ComboBox {
+	x.inner.NSTextField.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *ComboBox) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ComboBox {
+	x.inner.NSTextField.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *ComboBox) WithAlignment(alignment raw.NSTextAlignment) *ComboBox {
+	x.inner.NSTextField.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *ComboBox) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ComboBox {
+	x.inner.NSTextField.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *ComboBox) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ComboBox {
+	x.inner.NSTextField.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *ComboBox) WithCell(cell CellProvider) *ComboBox {
+	x.inner.NSTextField.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *ComboBox) WithSubviews(items ...ViewProvider) *ComboBox {
+	if len(items) == 0 {
+		x.inner.NSTextField.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTextField.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *ComboBox) WithHidden(hidden bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *ComboBox) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *ComboBox) WithAutoresizesSubviews(autoresizesSubviews bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *ComboBox) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *ComboBox) WithFrame(frame corefoundation.CGRect) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *ComboBox) WithFrameRotation(frameRotation float64) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *ComboBox) WithFrameCenterRotation(frameCenterRotation float64) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *ComboBox) WithBoundsRotation(boundsRotation float64) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *ComboBox) WithBounds(bounds corefoundation.CGRect) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *ComboBox) WithCanDrawConcurrently(canDrawConcurrently bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *ComboBox) WithNeedsDisplay(needsDisplay bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *ComboBox) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *ComboBox) WithWantsRestingTouches(wantsRestingTouches bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *ComboBox) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *ComboBox) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *ComboBox) WithWantsLayer(wantsLayer bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *ComboBox) WithLayer(layer *quartzcore.CALayer) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *ComboBox) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *ComboBox) WithNeedsLayout(needsLayout bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *ComboBox) WithAlphaValue(alphaValue float64) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *ComboBox) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ComboBox) WithBackgroundFilters(items ...*coreimage.CIFilter) *ComboBox {
+	if len(items) == 0 {
+		x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *ComboBox) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ComboBox) WithContentFilters(items ...*coreimage.CIFilter) *ComboBox {
+	if len(items) == 0 {
+		x.inner.NSTextField.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTextField.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *ComboBox) WithShadow(shadow *raw.NSShadow) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *ComboBox) WithClipsToBounds(clipsToBounds bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *ComboBox) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *ComboBox) WithToolTip(toolTip string) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *ComboBox) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *ComboBox) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *ComboBox) WithNextKeyView(nextKeyView ViewProvider) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *ComboBox) WithFocusRingType(focusRingType raw.NSFocusRingType) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *ComboBox) WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboBox {
+	if len(items) == 0 {
+		x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *ComboBox) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *ComboBox) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *ComboBox) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *ComboBox) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *ComboBox) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *ComboBox) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *ComboBox) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *ComboBox) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *ComboBox) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *ComboBox) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *ComboBox) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *ComboBox) WithNextResponder(nextResponder ResponderProvider) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *ComboBox) WithMenu(menu *raw.NSMenu) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *ComboBox) WithUserActivity(userActivity *foundation.NSUserActivity) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *ComboBox) WithTouchBar(touchBar *raw.NSTouchBar) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -279,6 +924,103 @@ type ComboBoxable interface {
 	WithUsesDataSource(usesDataSource bool) *ComboBox
 	WithCompletes(completes bool) *ComboBox
 	WithDataSource(dataSource raw.NSComboBoxDataSource) *ComboBox
+	WithPlaceholderString(placeholderString string) *ComboBox
+	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *ComboBox
+	WithBackgroundColor(backgroundColor *raw.NSColor) *ComboBox
+	WithDrawsBackground(drawsBackground bool) *ComboBox
+	WithTextColor(textColor *raw.NSColor) *ComboBox
+	WithBordered(bordered bool) *ComboBox
+	WithBezeled(bezeled bool) *ComboBox
+	WithEditable(editable bool) *ComboBox
+	WithSelectable(selectable bool) *ComboBox
+	WithDelegate(delegate raw.NSTextFieldDelegate) *ComboBox
+	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *ComboBox
+	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *ComboBox
+	WithMaximumNumberOfLines(maximumNumberOfLines int) *ComboBox
+	WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *ComboBox
+	WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *ComboBox
+	WithAllowsWritingTools(allowsWritingTools bool) *ComboBox
+	WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *ComboBox
+	WithPlaceholderStrings(items ...*foundation.NSString) *ComboBox
+	WithPlaceholderAttributedStrings(items ...*foundation.NSAttributedString) *ComboBox
+	WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *ComboBox
+	WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *ComboBox
+	WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *ComboBox
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ComboBox
+	WithImportsGraphics(importsGraphics bool) *ComboBox
+	WithTarget(target objc.ID) *ComboBox
+	WithAction(action objc.SEL) *ComboBox
+	WithTag(tag int) *ComboBox
+	WithIgnoresMultiClick(ignoresMultiClick bool) *ComboBox
+	WithContinuous(continuous bool) *ComboBox
+	WithEnabled(enabled bool) *ComboBox
+	WithRefusesFirstResponder(refusesFirstResponder bool) *ComboBox
+	WithHighlighted(highlighted bool) *ComboBox
+	WithControlSize(controlSize raw.NSControlSize) *ComboBox
+	WithFormatter(formatter *foundation.NSFormatter) *ComboBox
+	WithObjectValue(objectValue objc.ID) *ComboBox
+	WithStringValue(stringValue string) *ComboBox
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ComboBox
+	WithIntValue(intValue int) *ComboBox
+	WithIntegerValue(integerValue int) *ComboBox
+	WithFloatValue(floatValue float32) *ComboBox
+	WithDoubleValue(doubleValue float64) *ComboBox
+	WithFont(font *raw.NSFont) *ComboBox
+	WithUsesSingleLineMode(usesSingleLineMode bool) *ComboBox
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ComboBox
+	WithAlignment(alignment raw.NSTextAlignment) *ComboBox
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ComboBox
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ComboBox
+	WithCell(cell CellProvider) *ComboBox
+	WithSubviews(items ...ViewProvider) *ComboBox
+	WithHidden(hidden bool) *ComboBox
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboBox
+	WithAutoresizesSubviews(autoresizesSubviews bool) *ComboBox
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ComboBox
+	WithFrame(frame corefoundation.CGRect) *ComboBox
+	WithFrameRotation(frameRotation float64) *ComboBox
+	WithFrameCenterRotation(frameCenterRotation float64) *ComboBox
+	WithBoundsRotation(boundsRotation float64) *ComboBox
+	WithBounds(bounds corefoundation.CGRect) *ComboBox
+	WithCanDrawConcurrently(canDrawConcurrently bool) *ComboBox
+	WithNeedsDisplay(needsDisplay bool) *ComboBox
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboBox
+	WithWantsRestingTouches(wantsRestingTouches bool) *ComboBox
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ComboBox
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ComboBox
+	WithWantsLayer(wantsLayer bool) *ComboBox
+	WithLayer(layer *quartzcore.CALayer) *ComboBox
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboBox
+	WithNeedsLayout(needsLayout bool) *ComboBox
+	WithAlphaValue(alphaValue float64) *ComboBox
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ComboBox
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *ComboBox
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ComboBox
+	WithContentFilters(items ...*coreimage.CIFilter) *ComboBox
+	WithShadow(shadow *raw.NSShadow) *ComboBox
+	WithClipsToBounds(clipsToBounds bool) *ComboBox
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboBox
+	WithToolTip(toolTip string) *ComboBox
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ComboBox
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboBox
+	WithNextKeyView(nextKeyView ViewProvider) *ComboBox
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *ComboBox
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboBox
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ComboBox
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboBox
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboBox
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ComboBox
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ComboBox
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ComboBox
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ComboBox
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboBox
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ComboBox
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ComboBox
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ComboBox
+	WithNextResponder(nextResponder ResponderProvider) *ComboBox
+	WithMenu(menu *raw.NSMenu) *ComboBox
+	WithUserActivity(userActivity *foundation.NSUserActivity) *ComboBox
+	WithTouchBar(touchBar *raw.NSTouchBar) *ComboBox
 	ReloadData()
 	NoteNumberOfItemsChanged()
 	ScrollItemAtIndexToTop(index int)

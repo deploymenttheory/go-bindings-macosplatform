@@ -5,8 +5,10 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Torus wraps [raw.SCNTorus] with a fluent Go API.
@@ -59,6 +61,80 @@ func (x *Torus) WithPipeSegmentCount(pipeSegmentCount int) *Torus {
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Torus) WithName(name string) *Torus {
+	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithMaterials sets the collection, converting the Go slice to an NSArray.
+func (x *Torus) WithMaterials(items ...*raw.SCNMaterial) *Torus {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetMaterials(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetMaterials(_arr)
+	return x
+}
+
+// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+func (x *Torus) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Torus {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+	return x
+}
+
+// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
+func (x *Torus) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Torus {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+	return x
+}
+
+// WithTessellator sets the tessellator property and returns the receiver for chaining.
+func (x *Torus) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Torus {
+	x.inner.SCNGeometry.SetTessellator(tessellator)
+	return x
+}
+
+// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
+func (x *Torus) WithSubdivisionLevel(subdivisionLevel uint) *Torus {
+	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+	return x
+}
+
+// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+func (x *Torus) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Torus {
+	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	return x
+}
+
+// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+func (x *Torus) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Torus {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+	return x
+}
+
+// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+func (x *Torus) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Torus {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+	return x
+}
+
 // RingRadius calls the underlying RingRadius.
 func (x *Torus) RingRadius() float64 {
 	return x.inner.RingRadius()
@@ -108,6 +184,15 @@ type Torusable interface {
 	WithPipeRadius(pipeRadius float64) *Torus
 	WithRingSegmentCount(ringSegmentCount int) *Torus
 	WithPipeSegmentCount(pipeSegmentCount int) *Torus
+	WithName(name string) *Torus
+	WithMaterials(items ...*raw.SCNMaterial) *Torus
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Torus
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Torus
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Torus
+	WithSubdivisionLevel(subdivisionLevel uint) *Torus
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Torus
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Torus
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Torus
 	RingRadius() float64
 	SetRingRadius(ringRadius float64)
 	PipeRadius() float64

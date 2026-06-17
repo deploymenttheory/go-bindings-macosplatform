@@ -48,6 +48,24 @@ func (x *CollectionLayoutBoundarySupplementaryItem) WithPinToVisibleBounds(pinTo
 	return x
 }
 
+// WithZIndex sets the zIndex property and returns the receiver for chaining.
+func (x *CollectionLayoutBoundarySupplementaryItem) WithZIndex(zIndex int) *CollectionLayoutBoundarySupplementaryItem {
+	x.inner.NSCollectionLayoutSupplementaryItem.SetZIndex(zIndex)
+	return x
+}
+
+// WithContentInsets sets the contentInsets property and returns the receiver for chaining.
+func (x *CollectionLayoutBoundarySupplementaryItem) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutBoundarySupplementaryItem {
+	x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem.SetContentInsets(contentInsets)
+	return x
+}
+
+// WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
+func (x *CollectionLayoutBoundarySupplementaryItem) WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem {
+	x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing)
+	return x
+}
+
 // ExtendsBoundary calls the underlying ExtendsBoundary.
 func (x *CollectionLayoutBoundarySupplementaryItem) ExtendsBoundary() bool {
 	return x.inner.ExtendsBoundary()
@@ -87,6 +105,9 @@ type CollectionLayoutBoundarySupplementaryItemable interface {
 	Unwrap() *raw.NSCollectionLayoutBoundarySupplementaryItem
 	WithExtendsBoundary(extendsBoundary bool) *CollectionLayoutBoundarySupplementaryItem
 	WithPinToVisibleBounds(pinToVisibleBounds bool) *CollectionLayoutBoundarySupplementaryItem
+	WithZIndex(zIndex int) *CollectionLayoutBoundarySupplementaryItem
+	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutBoundarySupplementaryItem
+	WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem
 	ExtendsBoundary() bool
 	SetExtendsBoundary(extendsBoundary bool)
 	PinToVisibleBounds() bool

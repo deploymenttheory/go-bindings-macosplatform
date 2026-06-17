@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestListStructOctet() *MTRTestClusterClusterTestLis
 	return &MTRTestClusterClusterTestListStructOctet{inner: raw.MTRTestClusterClusterTestListStructOctetFromID(_id)}
 }
 
+// WithMember1 sets the member1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestListStructOctet) WithMember1(member1 *foundation.NSNumber) *MTRTestClusterClusterTestListStructOctet {
+	x.inner.MTRUnitTestingClusterTestListStructOctet.SetMember1(member1)
+	return x
+}
+
+// WithMember2 sets the member2 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestListStructOctet) WithMember2(member2 *foundation.NSData) *MTRTestClusterClusterTestListStructOctet {
+	x.inner.MTRUnitTestingClusterTestListStructOctet.SetMember2(member2)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestListStructOctet) asMTRUnitTestingClusterTestListStructOctet() *raw.MTRUnitTestingClusterTestListStructOctet { return &x.inner.MTRUnitTestingClusterTestListStructOctet }
 
 // MTRTestClusterClusterTestListStructOctetable is the interface implemented by [MTRTestClusterClusterTestListStructOctet], for mocking and DI.
 type MTRTestClusterClusterTestListStructOctetable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestListStructOctet
+	WithMember1(member1 *foundation.NSNumber) *MTRTestClusterClusterTestListStructOctet
+	WithMember2(member2 *foundation.NSData) *MTRTestClusterClusterTestListStructOctet
 }
 
 var _ MTRTestClusterClusterTestListStructOctetable = (*MTRTestClusterClusterTestListStructOctet)(nil)

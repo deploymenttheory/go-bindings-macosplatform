@@ -61,6 +61,30 @@ func (x *PropertyAnimation) WithValueFunction(valueFunction *raw.CAValueFunction
 	return x
 }
 
+// WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
+func (x *PropertyAnimation) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *PropertyAnimation {
+	x.inner.CAAnimation.SetTimingFunction(timingFunction)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *PropertyAnimation) WithDelegate(delegate raw.CAAnimationDelegate) *PropertyAnimation {
+	x.inner.CAAnimation.SetDelegate(delegate)
+	return x
+}
+
+// WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
+func (x *PropertyAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *PropertyAnimation {
+	x.inner.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)
+	return x
+}
+
+// WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
+func (x *PropertyAnimation) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *PropertyAnimation {
+	x.inner.CAAnimation.SetPreferredFrameRateRange(preferredFrameRateRange)
+	return x
+}
+
 // KeyPath calls the underlying KeyPath.
 func (x *PropertyAnimation) KeyPath() string {
 	_r := x.inner.KeyPath()
@@ -120,6 +144,10 @@ type PropertyAnimationable interface {
 	WithAdditive(additive bool) *PropertyAnimation
 	WithCumulative(cumulative bool) *PropertyAnimation
 	WithValueFunction(valueFunction *raw.CAValueFunction) *PropertyAnimation
+	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *PropertyAnimation
+	WithDelegate(delegate raw.CAAnimationDelegate) *PropertyAnimation
+	WithRemovedOnCompletion(removedOnCompletion bool) *PropertyAnimation
+	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *PropertyAnimation
 	KeyPath() string
 	SetKeyPath(keyPath string)
 	IsAdditive() bool

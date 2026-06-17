@@ -42,6 +42,24 @@ func (x *ImageBasedRequest) WithRegionOfInterest(regionOfInterest corefoundation
 	return x
 }
 
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *ImageBasedRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageBasedRequest {
+	x.inner.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *ImageBasedRequest) WithUsesCPUOnly(usesCPUOnly bool) *ImageBasedRequest {
+	x.inner.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *ImageBasedRequest) WithRevision(revision uint) *ImageBasedRequest {
+	x.inner.VNRequest.SetRevision(revision)
+	return x
+}
+
 // RegionOfInterest calls the underlying RegionOfInterest.
 func (x *ImageBasedRequest) RegionOfInterest() corefoundation.CGRect {
 	return x.inner.RegionOfInterest()
@@ -60,6 +78,9 @@ func (x *ImageBasedRequest) asRequest() *raw.VNRequest { return &x.inner.VNReque
 type ImageBasedRequestable interface {
 	Unwrap() *raw.VNImageBasedRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageBasedRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageBasedRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *ImageBasedRequest
+	WithRevision(revision uint) *ImageBasedRequest
 	RegionOfInterest() corefoundation.CGRect
 	SetRegionOfInterest(regionOfInterest corefoundation.CGRect)
 }

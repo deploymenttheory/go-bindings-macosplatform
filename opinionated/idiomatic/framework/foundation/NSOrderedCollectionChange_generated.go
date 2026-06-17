@@ -43,6 +43,12 @@ func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject objc.
 	return &OrderedCollectionChange{inner: raw.NSOrderedCollectionChangeFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *OrderedCollectionChange) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedCollectionChange {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Object calls the underlying Object.
 func (x *OrderedCollectionChange) Object() objc.ID {
 	return x.inner.Object()
@@ -68,6 +74,7 @@ func (x *OrderedCollectionChange) asObject() *raw.NSObject { return &x.inner.NSO
 // OrderedCollectionChangeable is the interface implemented by [OrderedCollectionChange], for mocking and DI.
 type OrderedCollectionChangeable interface {
 	Unwrap() *raw.NSOrderedCollectionChange[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedCollectionChange
 	Object() objc.ID
 	ChangeType() raw.NSCollectionChangeType
 	Index() uint

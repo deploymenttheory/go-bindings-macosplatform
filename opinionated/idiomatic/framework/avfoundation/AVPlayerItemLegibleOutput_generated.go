@@ -50,6 +50,12 @@ func (x *PlayerItemLegibleOutput) WithTextStylingResolution(textStylingResolutio
 	return x
 }
 
+// WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
+func (x *PlayerItemLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemLegibleOutput {
+	x.inner.AVPlayerItemOutput.SetSuppressesPlayerRendering(suppressesPlayerRendering)
+	return x
+}
+
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *PlayerItemLegibleOutput) SetDelegateQueue(delegate raw.AVPlayerItemLegibleOutputPushDelegate, delegateQueue *foundation.NSObject) {
 	x.inner.SetDelegateQueue(delegate, delegateQueue)
@@ -96,6 +102,7 @@ type PlayerItemLegibleOutputable interface {
 	Unwrap() *raw.AVPlayerItemLegibleOutput
 	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemLegibleOutput
 	WithTextStylingResolution(textStylingResolution *foundation.NSString) *PlayerItemLegibleOutput
+	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemLegibleOutput
 	SetDelegateQueue(delegate raw.AVPlayerItemLegibleOutputPushDelegate, delegateQueue *foundation.NSObject)
 	Delegate() raw.AVPlayerItemLegibleOutputPushDelegate
 	DelegateQueue() *foundation.NSObject

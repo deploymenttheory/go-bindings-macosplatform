@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +66,30 @@ func (x *DetectTrajectoriesRequest) WithMaximumObjectSize(maximumObjectSize floa
 // WithTargetFrameTime sets the targetFrameTime property and returns the receiver for chaining.
 func (x *DetectTrajectoriesRequest) WithTargetFrameTime(targetFrameTime coremedia.CMTime) *DetectTrajectoriesRequest {
 	x.inner.SetTargetFrameTime(targetFrameTime)
+	return x
+}
+
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectTrajectoriesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectTrajectoriesRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectTrajectoriesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectTrajectoriesRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectTrajectoriesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectTrajectoriesRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectTrajectoriesRequest) WithRevision(revision uint) *DetectTrajectoriesRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
 	return x
 }
 
@@ -137,6 +162,10 @@ type DetectTrajectoriesRequestable interface {
 	WithObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius float32) *DetectTrajectoriesRequest
 	WithMaximumObjectSize(maximumObjectSize float32) *DetectTrajectoriesRequest
 	WithTargetFrameTime(targetFrameTime coremedia.CMTime) *DetectTrajectoriesRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectTrajectoriesRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectTrajectoriesRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectTrajectoriesRequest
+	WithRevision(revision uint) *DetectTrajectoriesRequest
 	TrajectoryLength() int
 	ObjectMinimumNormalizedRadius() float32
 	SetObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius float32)

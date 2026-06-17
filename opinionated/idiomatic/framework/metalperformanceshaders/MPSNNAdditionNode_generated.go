@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,84 @@ func NewNNAdditionNode() *NNAdditionNode {
 	return &NNAdditionNode{inner: raw.MPSNNAdditionNodeFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithPrimaryScale(primaryScale float32) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithSecondaryScale(secondaryScale float32) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithBias(bias float32) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithMinimumValue(minimumValue float32) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithMaximumValue(maximumValue float32) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNAdditionNode) WithLabel(label string) *NNAdditionNode {
+	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNAdditionNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode { return &x.inner.MPSNNBinaryArithmeticNode }
 
 func (x *NNAdditionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
@@ -43,6 +122,19 @@ func (x *NNAdditionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { re
 // NNAdditionNodeable is the interface implemented by [NNAdditionNode], for mocking and DI.
 type NNAdditionNodeable interface {
 	Unwrap() *raw.MPSNNAdditionNode
+	WithPrimaryScale(primaryScale float32) *NNAdditionNode
+	WithSecondaryScale(secondaryScale float32) *NNAdditionNode
+	WithBias(bias float32) *NNAdditionNode
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNAdditionNode
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNAdditionNode
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNAdditionNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNAdditionNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNAdditionNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNAdditionNode
+	WithMinimumValue(minimumValue float32) *NNAdditionNode
+	WithMaximumValue(maximumValue float32) *NNAdditionNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNAdditionNode
+	WithLabel(label string) *NNAdditionNode
 }
 
 var _ NNAdditionNodeable = (*NNAdditionNode)(nil)

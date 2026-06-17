@@ -6,6 +6,7 @@ package mpsndarray
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -43,6 +44,12 @@ func (x *ArrayVectorLUTDequantize) WithVectorAxis(vectorAxis uint) *ArrayVectorL
 	return x
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayVectorLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayVectorLUTDequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 // VectorAxis calls the underlying VectorAxis.
 func (x *ArrayVectorLUTDequantize) VectorAxis() uint {
 	return x.inner.VectorAxis()
@@ -61,6 +68,7 @@ func (x *ArrayVectorLUTDequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiary
 type ArrayVectorLUTDequantizeable interface {
 	Unwrap() *raw.MPSNDArrayVectorLUTDequantize
 	WithVectorAxis(vectorAxis uint) *ArrayVectorLUTDequantize
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayVectorLUTDequantize
 	VectorAxis() uint
 	SetVectorAxis(vectorAxis uint)
 }

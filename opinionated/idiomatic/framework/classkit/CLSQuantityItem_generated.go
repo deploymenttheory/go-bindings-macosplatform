@@ -43,6 +43,12 @@ func (x *QuantityItem) WithQuantity(quantity float64) *QuantityItem {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *QuantityItem) WithTitle(title string) *QuantityItem {
+	x.inner.CLSActivityItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
 // Quantity calls the underlying Quantity.
 func (x *QuantityItem) Quantity() float64 {
 	return x.inner.Quantity()
@@ -61,6 +67,7 @@ func (x *QuantityItem) asObject() *raw.CLSObject { return &x.inner.CLSActivityIt
 type QuantityItemable interface {
 	Unwrap() *raw.CLSQuantityItem
 	WithQuantity(quantity float64) *QuantityItem
+	WithTitle(title string) *QuantityItem
 	Quantity() float64
 	SetQuantity(quantity float64)
 }

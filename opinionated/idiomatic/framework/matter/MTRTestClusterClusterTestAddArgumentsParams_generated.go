@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTRTestClusterClusterTestAddArgumentsParams() *MTRTestClusterClusterTest
 	return &MTRTestClusterClusterTestAddArgumentsParams{inner: raw.MTRTestClusterClusterTestAddArgumentsParamsFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestAddArgumentsParams) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsParams {
+	x.inner.MTRUnitTestingClusterTestAddArgumentsParams.SetArg1(arg1)
+	return x
+}
+
+// WithArg2 sets the arg2 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestAddArgumentsParams) WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsParams {
+	x.inner.MTRUnitTestingClusterTestAddArgumentsParams.SetArg2(arg2)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestAddArgumentsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsParams {
+	x.inner.MTRUnitTestingClusterTestAddArgumentsParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestAddArgumentsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsParams {
+	x.inner.MTRUnitTestingClusterTestAddArgumentsParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestAddArgumentsParams) asMTRUnitTestingClusterTestAddArgumentsParams() *raw.MTRUnitTestingClusterTestAddArgumentsParams { return &x.inner.MTRUnitTestingClusterTestAddArgumentsParams }
 
 // MTRTestClusterClusterTestAddArgumentsParamsable is the interface implemented by [MTRTestClusterClusterTestAddArgumentsParams], for mocking and DI.
 type MTRTestClusterClusterTestAddArgumentsParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestAddArgumentsParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsParams
+	WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsParams
 }
 
 var _ MTRTestClusterClusterTestAddArgumentsParamsable = (*MTRTestClusterClusterTestAddArgumentsParams)(nil)

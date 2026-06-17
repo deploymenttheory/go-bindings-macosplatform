@@ -43,6 +43,54 @@ func (x *IndexSpecifier) WithIndex(index int) *IndexSpecifier {
 	return x
 }
 
+// WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
+func (x *IndexSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
+func (x *IndexSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
+func (x *IndexSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *IndexSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
+	return x
+}
+
+// WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
+func (x *IndexSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *IndexSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
+	return x
+}
+
+// WithKey sets the key property and returns the receiver for chaining.
+func (x *IndexSpecifier) WithKey(key string) *IndexSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
+	return x
+}
+
+// WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
+func (x *IndexSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *IndexSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+	return x
+}
+
+// WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
+func (x *IndexSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *IndexSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *IndexSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *IndexSpecifier {
+	x.inner.NSScriptObjectSpecifier.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Index calls the underlying Index.
 func (x *IndexSpecifier) Index() int {
 	return x.inner.Index()
@@ -61,6 +109,14 @@ func (x *IndexSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObje
 type IndexSpecifierable interface {
 	Unwrap() *raw.NSIndexSpecifier
 	WithIndex(index int) *IndexSpecifier
+	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier
+	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier
+	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *IndexSpecifier
+	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *IndexSpecifier
+	WithKey(key string) *IndexSpecifier
+	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *IndexSpecifier
+	WithEvaluationErrorNumber(evaluationErrorNumber int) *IndexSpecifier
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *IndexSpecifier
 	Index() int
 	SetIndex(index int)
 }

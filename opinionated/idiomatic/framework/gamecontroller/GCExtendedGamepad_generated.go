@@ -41,6 +41,12 @@ func (x *ExtendedGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.
 	return x
 }
 
+// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
+func (x *ExtendedGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *ExtendedGamepad {
+	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+	return x
+}
+
 // SaveSnapshot calls the underlying SaveSnapshot.
 func (x *ExtendedGamepad) SaveSnapshot() *ExtendedGamepadSnapshot {
 	_r := x.inner.SaveSnapshot()
@@ -226,6 +232,7 @@ func (x *ExtendedGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
 type ExtendedGamepadable interface {
 	Unwrap() *raw.GCExtendedGamepad
 	WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *ExtendedGamepad
+	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *ExtendedGamepad
 	SaveSnapshot() *ExtendedGamepadSnapshot
 	SetStateFromExtendedGamepad(extendedGamepad *raw.GCExtendedGamepad)
 	Controller() *Controller

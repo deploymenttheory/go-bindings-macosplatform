@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,18 @@ func NewMTRTestClusterClusterTestFabricScopedEventEvent() *MTRTestClusterCluster
 	return &MTRTestClusterClusterTestFabricScopedEventEvent{inner: raw.MTRTestClusterClusterTestFabricScopedEventEventFromID(_id)}
 }
 
+// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRTestClusterClusterTestFabricScopedEventEvent {
+	x.inner.MTRUnitTestingClusterTestFabricScopedEventEvent.SetFabricIndex(fabricIndex)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestFabricScopedEventEvent) asMTRUnitTestingClusterTestFabricScopedEventEvent() *raw.MTRUnitTestingClusterTestFabricScopedEventEvent { return &x.inner.MTRUnitTestingClusterTestFabricScopedEventEvent }
 
 // MTRTestClusterClusterTestFabricScopedEventEventable is the interface implemented by [MTRTestClusterClusterTestFabricScopedEventEvent], for mocking and DI.
 type MTRTestClusterClusterTestFabricScopedEventEventable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestFabricScopedEventEvent
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRTestClusterClusterTestFabricScopedEventEvent
 }
 
 var _ MTRTestClusterClusterTestFabricScopedEventEventable = (*MTRTestClusterClusterTestFabricScopedEventEvent)(nil)

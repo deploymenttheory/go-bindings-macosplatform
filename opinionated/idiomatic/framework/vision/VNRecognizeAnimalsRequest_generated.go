@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -37,6 +38,30 @@ func NewRecognizeAnimalsRequest() *RecognizeAnimalsRequest {
 	return &RecognizeAnimalsRequest{inner: raw.VNRecognizeAnimalsRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *RecognizeAnimalsRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeAnimalsRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *RecognizeAnimalsRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeAnimalsRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *RecognizeAnimalsRequest) WithUsesCPUOnly(usesCPUOnly bool) *RecognizeAnimalsRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *RecognizeAnimalsRequest) WithRevision(revision uint) *RecognizeAnimalsRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // SupportedIdentifiers returns the collection as a Go slice.
 func (x *RecognizeAnimalsRequest) SupportedIdentifiers() ([]*foundation.NSString, error) {
 	arr, err := x.inner.SupportedIdentifiersAndReturnError()
@@ -58,6 +83,10 @@ func (x *RecognizeAnimalsRequest) asRequest() *raw.VNRequest { return &x.inner.V
 // RecognizeAnimalsRequestable is the interface implemented by [RecognizeAnimalsRequest], for mocking and DI.
 type RecognizeAnimalsRequestable interface {
 	Unwrap() *raw.VNRecognizeAnimalsRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeAnimalsRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeAnimalsRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *RecognizeAnimalsRequest
+	WithRevision(revision uint) *RecognizeAnimalsRequest
 	SupportedIdentifiers() ([]*foundation.NSString, error)
 }
 

@@ -37,6 +37,42 @@ func NewIOBluetoothHandsFreeDeviceWithDeviceDelegate(device *raw.IOBluetoothDevi
 	return &IOBluetoothHandsFreeDevice{inner: raw.IOBluetoothHandsFreeDeviceFromID(_id)}
 }
 
+// WithSupportedFeatures sets the supportedFeatures property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeDevice) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeDevice {
+	x.inner.IOBluetoothHandsFree.SetSupportedFeatures(supportedFeatures)
+	return x
+}
+
+// WithInputVolume sets the inputVolume property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeDevice) WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeDevice {
+	x.inner.IOBluetoothHandsFree.SetInputVolume(inputVolume)
+	return x
+}
+
+// WithInputMuted sets the inputMuted property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeDevice) WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeDevice {
+	x.inner.IOBluetoothHandsFree.SetInputMuted(inputMuted)
+	return x
+}
+
+// WithOutputVolume sets the outputVolume property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeDevice) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeDevice {
+	x.inner.IOBluetoothHandsFree.SetOutputVolume(outputVolume)
+	return x
+}
+
+// WithOutputMuted sets the outputMuted property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeDevice) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeDevice {
+	x.inner.IOBluetoothHandsFree.SetOutputMuted(outputMuted)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *IOBluetoothHandsFreeDevice) WithDelegate(delegate raw.IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFreeDevice {
+	x.inner.IOBluetoothHandsFree.SetDelegate(delegate)
+	return x
+}
+
 // DialNumber calls the underlying DialNumber.
 func (x *IOBluetoothHandsFreeDevice) DialNumber(aNumber string) {
 	x.inner.DialNumber(foundation.NSStringStringWithUTF8String(aNumber))
@@ -147,6 +183,12 @@ func (x *IOBluetoothHandsFreeDevice) asIOBluetoothHandsFree() *raw.IOBluetoothHa
 // IOBluetoothHandsFreeDeviceable is the interface implemented by [IOBluetoothHandsFreeDevice], for mocking and DI.
 type IOBluetoothHandsFreeDeviceable interface {
 	Unwrap() *raw.IOBluetoothHandsFreeDevice
+	WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeDevice
+	WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeDevice
+	WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeDevice
+	WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeDevice
+	WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeDevice
+	WithDelegate(delegate raw.IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFreeDevice
 	DialNumber(aNumber string)
 	MemoryDial(memoryLocation int)
 	Redial()

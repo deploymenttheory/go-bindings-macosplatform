@@ -74,6 +74,36 @@ func (x *XMLDTDNode) WithNotationName(notationName string) *XMLDTDNode {
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *XMLDTDNode) WithName(name string) *XMLDTDNode {
+	x.inner.NSXMLNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *XMLDTDNode) WithObjectValue(objectValue objc.ID) *XMLDTDNode {
+	x.inner.NSXMLNode.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *XMLDTDNode) WithStringValue(stringValue string) *XMLDTDNode {
+	x.inner.NSXMLNode.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithURI sets the uRI property and returns the receiver for chaining.
+func (x *XMLDTDNode) WithURI(uRI string) *XMLDTDNode {
+	x.inner.NSXMLNode.SetURI(foundation.NSStringStringWithUTF8String(uRI))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XMLDTDNode) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDTDNode {
+	x.inner.NSXMLNode.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // DTDKind calls the underlying DTDKind.
 func (x *XMLDTDNode) DTDKind() raw.NSXMLDTDNodeKind {
 	return x.inner.DTDKind()
@@ -142,6 +172,11 @@ type XMLDTDNodeable interface {
 	WithPublicID(publicID string) *XMLDTDNode
 	WithSystemID(systemID string) *XMLDTDNode
 	WithNotationName(notationName string) *XMLDTDNode
+	WithName(name string) *XMLDTDNode
+	WithObjectValue(objectValue objc.ID) *XMLDTDNode
+	WithStringValue(stringValue string) *XMLDTDNode
+	WithURI(uRI string) *XMLDTDNode
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDTDNode
 	DTDKind() raw.NSXMLDTDNodeKind
 	SetDTDKind(dTDKind raw.NSXMLDTDNodeKind)
 	IsExternal() bool

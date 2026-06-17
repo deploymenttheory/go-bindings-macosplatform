@@ -35,11 +35,18 @@ func NewStringMetaParameter() *StringMetaParameter {
 	return &StringMetaParameter{inner: raw.PHASEStringMetaParameterFromID(_id)}
 }
 
+// WithValue sets the value property and returns the receiver for chaining.
+func (x *StringMetaParameter) WithValue(value objc.ID) *StringMetaParameter {
+	x.inner.PHASEMetaParameter.SetValue(value)
+	return x
+}
+
 func (x *StringMetaParameter) asMetaParameter() *raw.PHASEMetaParameter { return &x.inner.PHASEMetaParameter }
 
 // StringMetaParameterable is the interface implemented by [StringMetaParameter], for mocking and DI.
 type StringMetaParameterable interface {
 	Unwrap() *raw.PHASEStringMetaParameter
+	WithValue(value objc.ID) *StringMetaParameter
 }
 
 var _ StringMetaParameterable = (*StringMetaParameter)(nil)

@@ -5,8 +5,10 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Tube wraps [raw.SCNTube] with a fluent Go API.
@@ -62,6 +64,80 @@ func (x *Tube) WithRadialSegmentCount(radialSegmentCount int) *Tube {
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Tube) WithHeightSegmentCount(heightSegmentCount int) *Tube {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Tube) WithName(name string) *Tube {
+	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithMaterials sets the collection, converting the Go slice to an NSArray.
+func (x *Tube) WithMaterials(items ...*raw.SCNMaterial) *Tube {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetMaterials(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetMaterials(_arr)
+	return x
+}
+
+// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+func (x *Tube) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Tube {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+	return x
+}
+
+// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
+func (x *Tube) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Tube {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+	return x
+}
+
+// WithTessellator sets the tessellator property and returns the receiver for chaining.
+func (x *Tube) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Tube {
+	x.inner.SCNGeometry.SetTessellator(tessellator)
+	return x
+}
+
+// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
+func (x *Tube) WithSubdivisionLevel(subdivisionLevel uint) *Tube {
+	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+	return x
+}
+
+// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+func (x *Tube) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tube {
+	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	return x
+}
+
+// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+func (x *Tube) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Tube {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+	return x
+}
+
+// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+func (x *Tube) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Tube {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
 	return x
 }
 
@@ -125,6 +201,15 @@ type Tubeable interface {
 	WithHeight(height float64) *Tube
 	WithRadialSegmentCount(radialSegmentCount int) *Tube
 	WithHeightSegmentCount(heightSegmentCount int) *Tube
+	WithName(name string) *Tube
+	WithMaterials(items ...*raw.SCNMaterial) *Tube
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Tube
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Tube
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Tube
+	WithSubdivisionLevel(subdivisionLevel uint) *Tube
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tube
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Tube
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Tube
 	InnerRadius() float64
 	SetInnerRadius(innerRadius float64)
 	OuterRadius() float64

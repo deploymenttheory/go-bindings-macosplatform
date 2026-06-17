@@ -41,6 +41,12 @@ func (x *AudioUnitVarispeed) WithRate(rate float32) *AudioUnitVarispeed {
 	return x
 }
 
+// WithBypass sets the bypass property and returns the receiver for chaining.
+func (x *AudioUnitVarispeed) WithBypass(bypass bool) *AudioUnitVarispeed {
+	x.inner.AVAudioUnitTimeEffect.SetBypass(bypass)
+	return x
+}
+
 // Rate calls the underlying Rate.
 func (x *AudioUnitVarispeed) Rate() float32 {
 	return x.inner.Rate()
@@ -61,6 +67,7 @@ func (x *AudioUnitVarispeed) asAudioNode() *raw.AVAudioNode { return &x.inner.AV
 type AudioUnitVarispeedable interface {
 	Unwrap() *raw.AVAudioUnitVarispeed
 	WithRate(rate float32) *AudioUnitVarispeed
+	WithBypass(bypass bool) *AudioUnitVarispeed
 	Rate() float32
 	SetRate(rate float32)
 }

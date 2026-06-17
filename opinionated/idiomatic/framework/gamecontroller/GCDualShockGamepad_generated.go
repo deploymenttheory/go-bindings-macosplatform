@@ -35,6 +35,18 @@ func NewDualShockGamepad() *DualShockGamepad {
 	return &DualShockGamepad{inner: raw.GCDualShockGamepadFromID(_id)}
 }
 
+// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
+func (x *DualShockGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *DualShockGamepad {
+	x.inner.GCExtendedGamepad.SetValueChangedHandler(valueChangedHandler)
+	return x
+}
+
+// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
+func (x *DualShockGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DualShockGamepad {
+	x.inner.GCExtendedGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+	return x
+}
+
 // TouchpadButton calls the underlying TouchpadButton.
 func (x *DualShockGamepad) TouchpadButton() *ControllerButtonInput {
 	_r := x.inner.TouchpadButton()
@@ -69,6 +81,8 @@ func (x *DualShockGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile 
 // DualShockGamepadable is the interface implemented by [DualShockGamepad], for mocking and DI.
 type DualShockGamepadable interface {
 	Unwrap() *raw.GCDualShockGamepad
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *DualShockGamepad
+	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DualShockGamepad
 	TouchpadButton() *ControllerButtonInput
 	TouchpadPrimary() *ControllerDirectionPad
 	TouchpadSecondary() *ControllerDirectionPad

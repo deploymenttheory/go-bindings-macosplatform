@@ -35,6 +35,12 @@ func NewValueTransformer() *ValueTransformer {
 	return &ValueTransformer{inner: raw.NSValueTransformerFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ValueTransformer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ValueTransformer {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // TransformedValue calls the underlying TransformedValue.
 func (x *ValueTransformer) TransformedValue(value objc.ID) objc.ID {
 	return x.inner.TransformedValue(value)
@@ -52,6 +58,7 @@ func (x *ValueTransformer) asObject() *raw.NSObject { return &x.inner.NSObject }
 // ValueTransformerable is the interface implemented by [ValueTransformer], for mocking and DI.
 type ValueTransformerable interface {
 	Unwrap() *raw.NSValueTransformer
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ValueTransformer
 	TransformedValue(value objc.ID) objc.ID
 	ReverseTransformedValue(value objc.ID) objc.ID
 }

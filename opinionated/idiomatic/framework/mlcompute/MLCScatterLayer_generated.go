@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewScatterLayer() *ScatterLayer {
 	return &ScatterLayer{inner: raw.MLCScatterLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ScatterLayer) WithLabel(label string) *ScatterLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *ScatterLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ScatterLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Dimension calls the underlying Dimension.
 func (x *ScatterLayer) Dimension() uint {
 	return x.inner.Dimension()
@@ -50,6 +63,8 @@ func (x *ScatterLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // ScatterLayerable is the interface implemented by [ScatterLayer], for mocking and DI.
 type ScatterLayerable interface {
 	Unwrap() *raw.MLCScatterLayer
+	WithLabel(label string) *ScatterLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ScatterLayer
 	Dimension() uint
 	ReductionType() raw.MLCReductionType
 }

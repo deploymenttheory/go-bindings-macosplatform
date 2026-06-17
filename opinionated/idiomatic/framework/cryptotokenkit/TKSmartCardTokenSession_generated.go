@@ -35,6 +35,12 @@ func NewSmartCardTokenSession() *SmartCardTokenSession {
 	return &SmartCardTokenSession{inner: raw.TKSmartCardTokenSessionFromID(_id)}
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *SmartCardTokenSession) WithDelegate(delegate raw.TKTokenSessionDelegate) *SmartCardTokenSession {
+	x.inner.TKTokenSession.SetDelegate(delegate)
+	return x
+}
+
 // GetSmartCardWithError calls the underlying GetSmartCardWithError.
 func (x *SmartCardTokenSession) GetSmartCardWithError() (*SmartCard, error) {
 	_r, _err := x.inner.GetSmartCardWithError()
@@ -61,6 +67,7 @@ func (x *SmartCardTokenSession) asTokenSession() *raw.TKTokenSession { return &x
 // SmartCardTokenSessionable is the interface implemented by [SmartCardTokenSession], for mocking and DI.
 type SmartCardTokenSessionable interface {
 	Unwrap() *raw.TKSmartCardTokenSession
+	WithDelegate(delegate raw.TKTokenSessionDelegate) *SmartCardTokenSession
 	GetSmartCardWithError() (*SmartCard, error)
 	SmartCard() *SmartCard
 }

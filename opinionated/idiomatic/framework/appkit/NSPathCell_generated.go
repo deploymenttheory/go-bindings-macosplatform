@@ -113,6 +113,276 @@ func (x *PathCell) WithPlaceholderAttributedString(placeholderAttributedString *
 	return x
 }
 
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *PathCell) WithControlView(controlView ViewProvider) *PathCell {
+	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *PathCell) WithType(type_ raw.NSCellType) *PathCell {
+	x.inner.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *PathCell) WithState(state int) *PathCell {
+	x.inner.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *PathCell) WithTarget(target objc.ID) *PathCell {
+	x.inner.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *PathCell) WithAction(action objc.SEL) *PathCell {
+	x.inner.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *PathCell) WithTag(tag int) *PathCell {
+	x.inner.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *PathCell) WithTitle(title string) *PathCell {
+	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *PathCell) WithEnabled(enabled bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *PathCell) WithContinuous(continuous bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *PathCell) WithEditable(editable bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *PathCell) WithSelectable(selectable bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *PathCell) WithBordered(bordered bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *PathCell) WithBezeled(bezeled bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *PathCell) WithScrollable(scrollable bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *PathCell) WithHighlighted(highlighted bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *PathCell) WithAlignment(alignment raw.NSTextAlignment) *PathCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *PathCell) WithWraps(wraps bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *PathCell) WithFont(font *raw.NSFont) *PathCell {
+	x.inner.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *PathCell) WithFormatter(formatter *foundation.NSFormatter) *PathCell {
+	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *PathCell) WithObjectValue(objectValue objc.ID) *PathCell {
+	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *PathCell) WithStringValue(stringValue string) *PathCell {
+	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *PathCell) WithIntValue(intValue int) *PathCell {
+	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *PathCell) WithFloatValue(floatValue float32) *PathCell {
+	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *PathCell) WithDoubleValue(doubleValue float64) *PathCell {
+	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *PathCell) WithIntegerValue(integerValue int) *PathCell {
+	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *PathCell) WithImage(image *raw.NSImage) *PathCell {
+	x.inner.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *PathCell) WithControlSize(controlSize raw.NSControlSize) *PathCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *PathCell) WithRepresentedObject(representedObject objc.ID) *PathCell {
+	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *PathCell) WithMenu(menu *raw.NSMenu) *PathCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *PathCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *PathCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PathCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *PathCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *PathCell) WithAllowsUndo(allowsUndo bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *PathCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *PathCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PathCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *PathCell) WithUsesSingleLineMode(usesSingleLineMode bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *PathCell) WithRefusesFirstResponder(refusesFirstResponder bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *PathCell) WithShowsFirstResponder(showsFirstResponder bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *PathCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *PathCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *PathCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PathCell {
+	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *PathCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *PathCell) WithImportsGraphics(importsGraphics bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *PathCell) WithAllowsMixedState(allowsMixedState bool) *PathCell {
+	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *PathCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *PathCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *PathCell) WithControlTint(controlTint raw.NSControlTint) *PathCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // RectOfPathComponentCellWithFrameInView calls the underlying RectOfPathComponentCellWithFrameInView.
 func (x *PathCell) RectOfPathComponentCellWithFrameInView(cell *raw.NSPathComponentCell, frame corefoundation.CGRect, view *raw.NSView) corefoundation.CGRect {
 	return x.inner.RectOfPathComponentCellWithFrameInView(cell, frame, view)
@@ -272,6 +542,51 @@ type PathCellable interface {
 	WithBackgroundColor(backgroundColor *raw.NSColor) *PathCell
 	WithPlaceholderString(placeholderString string) *PathCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *PathCell
+	WithControlView(controlView ViewProvider) *PathCell
+	WithType(type_ raw.NSCellType) *PathCell
+	WithState(state int) *PathCell
+	WithTarget(target objc.ID) *PathCell
+	WithAction(action objc.SEL) *PathCell
+	WithTag(tag int) *PathCell
+	WithTitle(title string) *PathCell
+	WithEnabled(enabled bool) *PathCell
+	WithContinuous(continuous bool) *PathCell
+	WithEditable(editable bool) *PathCell
+	WithSelectable(selectable bool) *PathCell
+	WithBordered(bordered bool) *PathCell
+	WithBezeled(bezeled bool) *PathCell
+	WithScrollable(scrollable bool) *PathCell
+	WithHighlighted(highlighted bool) *PathCell
+	WithAlignment(alignment raw.NSTextAlignment) *PathCell
+	WithWraps(wraps bool) *PathCell
+	WithFont(font *raw.NSFont) *PathCell
+	WithFormatter(formatter *foundation.NSFormatter) *PathCell
+	WithObjectValue(objectValue objc.ID) *PathCell
+	WithStringValue(stringValue string) *PathCell
+	WithIntValue(intValue int) *PathCell
+	WithFloatValue(floatValue float32) *PathCell
+	WithDoubleValue(doubleValue float64) *PathCell
+	WithIntegerValue(integerValue int) *PathCell
+	WithImage(image *raw.NSImage) *PathCell
+	WithControlSize(controlSize raw.NSControlSize) *PathCell
+	WithRepresentedObject(representedObject objc.ID) *PathCell
+	WithMenu(menu *raw.NSMenu) *PathCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PathCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathCell
+	WithAllowsUndo(allowsUndo bool) *PathCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PathCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PathCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *PathCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *PathCell
+	WithShowsFirstResponder(showsFirstResponder bool) *PathCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *PathCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PathCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PathCell
+	WithImportsGraphics(importsGraphics bool) *PathCell
+	WithAllowsMixedState(allowsMixedState bool) *PathCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *PathCell
+	WithControlTint(controlTint raw.NSControlTint) *PathCell
 	RectOfPathComponentCellWithFrameInView(cell *raw.NSPathComponentCell, frame corefoundation.CGRect, view *raw.NSView) corefoundation.CGRect
 	PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *raw.NSView) *PathComponentCell
 	MouseEnteredWithFrameInView(event *raw.NSEvent, frame corefoundation.CGRect, view *raw.NSView)

@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -40,6 +41,30 @@ func NewDetectHumanHandPoseRequest() *DetectHumanHandPoseRequest {
 // WithMaximumHandCount sets the maximumHandCount property and returns the receiver for chaining.
 func (x *DetectHumanHandPoseRequest) WithMaximumHandCount(maximumHandCount uint) *DetectHumanHandPoseRequest {
 	x.inner.SetMaximumHandCount(maximumHandCount)
+	return x
+}
+
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectHumanHandPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanHandPoseRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectHumanHandPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanHandPoseRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectHumanHandPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanHandPoseRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectHumanHandPoseRequest) WithRevision(revision uint) *DetectHumanHandPoseRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
 	return x
 }
 
@@ -89,6 +114,10 @@ func (x *DetectHumanHandPoseRequest) asRequest() *raw.VNRequest { return &x.inne
 type DetectHumanHandPoseRequestable interface {
 	Unwrap() *raw.VNDetectHumanHandPoseRequest
 	WithMaximumHandCount(maximumHandCount uint) *DetectHumanHandPoseRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanHandPoseRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanHandPoseRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanHandPoseRequest
+	WithRevision(revision uint) *DetectHumanHandPoseRequest
 	SupportedJointNames() ([]*foundation.NSString, error)
 	SupportedJointsGroupNames() ([]*foundation.NSString, error)
 	MaximumHandCount() uint

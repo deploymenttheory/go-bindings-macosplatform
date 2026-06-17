@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
@@ -37,6 +39,36 @@ func NewImageErode() *ImageErode {
 	return &ImageErode{inner: raw.MPSImageErodeFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageErode) WithOffset(offset mpscore.MPSOffset) *ImageErode {
+	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageErode) WithClipRect(clipRect metal.MTLRegion) *ImageErode {
+	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageErode) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageErode {
+	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageErode) WithOptions(options mpscore.MPSKernelOptions) *ImageErode {
+	x.inner.MPSImageDilate.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageErode) WithLabel(label string) *ImageErode {
+	x.inner.MPSImageDilate.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageErode) asImageDilate() *mpsimage.MPSImageDilate { return &x.inner.MPSImageDilate }
 
 func (x *ImageErode) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageDilate.MPSUnaryImageKernel }
@@ -46,6 +78,11 @@ func (x *ImageErode) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageDil
 // ImageErodeable is the interface implemented by [ImageErode], for mocking and DI.
 type ImageErodeable interface {
 	Unwrap() *raw.MPSImageErode
+	WithOffset(offset mpscore.MPSOffset) *ImageErode
+	WithClipRect(clipRect metal.MTLRegion) *ImageErode
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageErode
+	WithOptions(options mpscore.MPSKernelOptions) *ImageErode
+	WithLabel(label string) *ImageErode
 }
 
 var _ ImageErodeable = (*ImageErode)(nil)

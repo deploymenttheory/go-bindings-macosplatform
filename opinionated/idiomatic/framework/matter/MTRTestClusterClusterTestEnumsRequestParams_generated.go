@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTRTestClusterClusterTestEnumsRequestParams() *MTRTestClusterClusterTest
 	return &MTRTestClusterClusterTestEnumsRequestParams{inner: raw.MTRTestClusterClusterTestEnumsRequestParamsFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEnumsRequestParams) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsRequestParams {
+	x.inner.MTRUnitTestingClusterTestEnumsRequestParams.SetArg1(arg1)
+	return x
+}
+
+// WithArg2 sets the arg2 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEnumsRequestParams) WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsRequestParams {
+	x.inner.MTRUnitTestingClusterTestEnumsRequestParams.SetArg2(arg2)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEnumsRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEnumsRequestParams {
+	x.inner.MTRUnitTestingClusterTestEnumsRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEnumsRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestEnumsRequestParams {
+	x.inner.MTRUnitTestingClusterTestEnumsRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestEnumsRequestParams) asMTRUnitTestingClusterTestEnumsRequestParams() *raw.MTRUnitTestingClusterTestEnumsRequestParams { return &x.inner.MTRUnitTestingClusterTestEnumsRequestParams }
 
 // MTRTestClusterClusterTestEnumsRequestParamsable is the interface implemented by [MTRTestClusterClusterTestEnumsRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestEnumsRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestEnumsRequestParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsRequestParams
+	WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEnumsRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestEnumsRequestParams
 }
 
 var _ MTRTestClusterClusterTestEnumsRequestParamsable = (*MTRTestClusterClusterTestEnumsRequestParams)(nil)

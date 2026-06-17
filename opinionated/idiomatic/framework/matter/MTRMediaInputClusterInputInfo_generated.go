@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTRMediaInputClusterInputInfo() *MTRMediaInputClusterInputInfo {
 	return &MTRMediaInputClusterInputInfo{inner: raw.MTRMediaInputClusterInputInfoFromID(_id)}
 }
 
+// WithIndex sets the index property and returns the receiver for chaining.
+func (x *MTRMediaInputClusterInputInfo) WithIndex(index *foundation.NSNumber) *MTRMediaInputClusterInputInfo {
+	x.inner.MTRMediaInputClusterInputInfoStruct.SetIndex(index)
+	return x
+}
+
+// WithInputType sets the inputType property and returns the receiver for chaining.
+func (x *MTRMediaInputClusterInputInfo) WithInputType(inputType *foundation.NSNumber) *MTRMediaInputClusterInputInfo {
+	x.inner.MTRMediaInputClusterInputInfoStruct.SetInputType(inputType)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *MTRMediaInputClusterInputInfo) WithName(name string) *MTRMediaInputClusterInputInfo {
+	x.inner.MTRMediaInputClusterInputInfoStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithDescriptionString sets the descriptionString property and returns the receiver for chaining.
+func (x *MTRMediaInputClusterInputInfo) WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfo {
+	x.inner.MTRMediaInputClusterInputInfoStruct.SetDescriptionString(foundation.NSStringStringWithUTF8String(descriptionString))
+	return x
+}
+
 func (x *MTRMediaInputClusterInputInfo) asMTRMediaInputClusterInputInfoStruct() *raw.MTRMediaInputClusterInputInfoStruct { return &x.inner.MTRMediaInputClusterInputInfoStruct }
 
 // MTRMediaInputClusterInputInfoable is the interface implemented by [MTRMediaInputClusterInputInfo], for mocking and DI.
 type MTRMediaInputClusterInputInfoable interface {
 	Unwrap() *raw.MTRMediaInputClusterInputInfo
+	WithIndex(index *foundation.NSNumber) *MTRMediaInputClusterInputInfo
+	WithInputType(inputType *foundation.NSNumber) *MTRMediaInputClusterInputInfo
+	WithName(name string) *MTRMediaInputClusterInputInfo
+	WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfo
 }
 
 var _ MTRMediaInputClusterInputInfoable = (*MTRMediaInputClusterInputInfo)(nil)

@@ -37,6 +37,12 @@ func NewMutableStringWithCapacity(capacity uint) *MutableString {
 	return &MutableString{inner: raw.NSMutableStringFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MutableString) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableString {
+	x.inner.NSString.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ReplaceCharactersInRangeWithString calls the underlying ReplaceCharactersInRangeWithString.
 func (x *MutableString) ReplaceCharactersInRangeWithString(range_ raw.NSRange, aString string) {
 	x.inner.ReplaceCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(aString))
@@ -84,6 +90,7 @@ func (x *MutableString) asObject() *raw.NSObject { return &x.inner.NSString.NSOb
 // MutableStringable is the interface implemented by [MutableString], for mocking and DI.
 type MutableStringable interface {
 	Unwrap() *raw.NSMutableString
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableString
 	ReplaceCharactersInRangeWithString(range_ raw.NSRange, aString string)
 	InsertStringAtIndex(aString string, loc uint)
 	DeleteCharactersInRange(range_ raw.NSRange)

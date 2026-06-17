@@ -66,6 +66,12 @@ func (x *AttributedStringMarkdownParsingOptions) WithAppliesSourcePositionAttrib
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *AttributedStringMarkdownParsingOptions) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedStringMarkdownParsingOptions {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AllowsExtendedAttributes calls the underlying AllowsExtendedAttributes.
 func (x *AttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() bool {
 	return x.inner.AllowsExtendedAttributes()
@@ -130,6 +136,7 @@ type AttributedStringMarkdownParsingOptionsable interface {
 	WithFailurePolicy(failurePolicy raw.NSAttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions
 	WithLanguageCode(languageCode string) *AttributedStringMarkdownParsingOptions
 	WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedStringMarkdownParsingOptions
 	AllowsExtendedAttributes() bool
 	SetAllowsExtendedAttributes(allowsExtendedAttributes bool)
 	InterpretedSyntax() raw.NSAttributedStringMarkdownInterpretedSyntax

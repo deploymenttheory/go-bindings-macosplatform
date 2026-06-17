@@ -42,6 +42,12 @@ func NewScriptWhoseTestWithCoder(inCoder *raw.NSCoder) *ScriptWhoseTest {
 	return &ScriptWhoseTest{inner: raw.NSScriptWhoseTestFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ScriptWhoseTest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptWhoseTest {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // IsTrue calls the underlying IsTrue.
 func (x *ScriptWhoseTest) IsTrue() bool {
 	return x.inner.IsTrue()
@@ -54,6 +60,7 @@ func (x *ScriptWhoseTest) asObject() *raw.NSObject { return &x.inner.NSObject }
 // ScriptWhoseTestable is the interface implemented by [ScriptWhoseTest], for mocking and DI.
 type ScriptWhoseTestable interface {
 	Unwrap() *raw.NSScriptWhoseTest
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptWhoseTest
 	IsTrue() bool
 }
 

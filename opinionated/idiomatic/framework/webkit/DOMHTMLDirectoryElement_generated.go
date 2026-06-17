@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +42,108 @@ func (x *DOMHTMLDirectoryElement) WithCompact(compact bool) *DOMHTMLDirectoryEle
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithTitle(title string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithLang(lang string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithDir(dir string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithTabIndex(tabIndex int) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithAccessKey(accessKey string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithInnerText(innerText string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithOuterText(outerText string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithContentEditable(contentEditable string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithIdName(idName string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithScrollLeft(scrollLeft int) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithScrollTop(scrollTop int) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithInnerHTML(innerHTML string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithOuterHTML(outerHTML string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithClassName(className string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithNodeValue(nodeValue string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithPrefix(prefix string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLDirectoryElement) WithTextContent(textContent string) *DOMHTMLDirectoryElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Compact calls the underlying Compact.
 func (x *DOMHTMLDirectoryElement) Compact() bool {
 	return x.inner.Compact()
@@ -65,6 +168,23 @@ func (x *DOMHTMLDirectoryElement) asWebScriptObject() *raw.WebScriptObject { ret
 type DOMHTMLDirectoryElementable interface {
 	Unwrap() *raw.DOMHTMLDirectoryElement
 	WithCompact(compact bool) *DOMHTMLDirectoryElement
+	WithTitle(title string) *DOMHTMLDirectoryElement
+	WithLang(lang string) *DOMHTMLDirectoryElement
+	WithDir(dir string) *DOMHTMLDirectoryElement
+	WithTabIndex(tabIndex int) *DOMHTMLDirectoryElement
+	WithAccessKey(accessKey string) *DOMHTMLDirectoryElement
+	WithInnerText(innerText string) *DOMHTMLDirectoryElement
+	WithOuterText(outerText string) *DOMHTMLDirectoryElement
+	WithContentEditable(contentEditable string) *DOMHTMLDirectoryElement
+	WithIdName(idName string) *DOMHTMLDirectoryElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLDirectoryElement
+	WithScrollTop(scrollTop int) *DOMHTMLDirectoryElement
+	WithInnerHTML(innerHTML string) *DOMHTMLDirectoryElement
+	WithOuterHTML(outerHTML string) *DOMHTMLDirectoryElement
+	WithClassName(className string) *DOMHTMLDirectoryElement
+	WithNodeValue(nodeValue string) *DOMHTMLDirectoryElement
+	WithPrefix(prefix string) *DOMHTMLDirectoryElement
+	WithTextContent(textContent string) *DOMHTMLDirectoryElement
 	Compact() bool
 	SetCompact(compact bool)
 }

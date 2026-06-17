@@ -47,6 +47,72 @@ func NewNNReduceColumnSumWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &NNReduceColumnSum{inner: raw.MPSNNReduceColumnSumFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithOffset(offset mpscore.MPSOffset) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithClipRect(clipRect metal.MTLRegion) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithOptions(options mpscore.MPSKernelOptions) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReduceColumnSum) WithLabel(label string) *NNReduceColumnSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReduceColumnSum) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
 func (x *NNReduceColumnSum) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
@@ -56,6 +122,17 @@ func (x *NNReduceColumnSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSN
 // NNReduceColumnSumable is the interface implemented by [NNReduceColumnSum], for mocking and DI.
 type NNReduceColumnSumable interface {
 	Unwrap() *raw.MPSNNReduceColumnSum
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceColumnSum
+	WithOffset(offset mpscore.MPSOffset) *NNReduceColumnSum
+	WithClipRect(clipRect metal.MTLRegion) *NNReduceColumnSum
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceColumnSum
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceColumnSum
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceColumnSum
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceColumnSum
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceColumnSum
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceColumnSum
+	WithOptions(options mpscore.MPSKernelOptions) *NNReduceColumnSum
+	WithLabel(label string) *NNReduceColumnSum
 }
 
 var _ NNReduceColumnSumable = (*NNReduceColumnSum)(nil)

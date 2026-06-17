@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PlayerPlaybackCoordinator wraps [raw.AVPlayerPlaybackCoordinator] with a fluent Go API.
@@ -38,6 +40,28 @@ func NewPlayerPlaybackCoordinator() *PlayerPlaybackCoordinator {
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PlayerPlaybackCoordinator) WithDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate) *PlayerPlaybackCoordinator {
 	x.inner.SetDelegate(delegate)
+	return x
+}
+
+// WithSuspensionReasonsThatTriggerWaiting sets the collection, converting the Go slice to an NSArray.
+func (x *PlayerPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *PlayerPlaybackCoordinator {
+	if len(items) == 0 {
+		x.inner.AVPlaybackCoordinator.SetSuspensionReasonsThatTriggerWaiting(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.AVPlaybackCoordinator.SetSuspensionReasonsThatTriggerWaiting(_arr)
+	return x
+}
+
+// WithPauseSnapsToMediaTimeOfOriginator sets the pauseSnapsToMediaTimeOfOriginator property and returns the receiver for chaining.
+func (x *PlayerPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlayerPlaybackCoordinator {
+	x.inner.AVPlaybackCoordinator.SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator)
 	return x
 }
 
@@ -80,6 +104,8 @@ func (x *PlayerPlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackCoord
 type PlayerPlaybackCoordinatorable interface {
 	Unwrap() *raw.AVPlayerPlaybackCoordinator
 	WithDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate) *PlayerPlaybackCoordinator
+	WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *PlayerPlaybackCoordinator
+	WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlayerPlaybackCoordinator
 	Player() *Player
 	Delegate() raw.AVPlayerPlaybackCoordinatorDelegate
 	SetDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate)

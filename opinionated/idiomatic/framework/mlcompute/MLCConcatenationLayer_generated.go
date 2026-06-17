@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewConcatenationLayer() *ConcatenationLayer {
 	return &ConcatenationLayer{inner: raw.MLCConcatenationLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ConcatenationLayer) WithLabel(label string) *ConcatenationLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *ConcatenationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConcatenationLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Dimension calls the underlying Dimension.
 func (x *ConcatenationLayer) Dimension() uint {
 	return x.inner.Dimension()
@@ -45,6 +58,8 @@ func (x *ConcatenationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer 
 // ConcatenationLayerable is the interface implemented by [ConcatenationLayer], for mocking and DI.
 type ConcatenationLayerable interface {
 	Unwrap() *raw.MLCConcatenationLayer
+	WithLabel(label string) *ConcatenationLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConcatenationLayer
 	Dimension() uint
 }
 

@@ -36,6 +36,12 @@ func NewMeasurementWithDoubleValueUnit(doubleValue float64, unit objc.ID) *Measu
 	return &Measurement{inner: raw.NSMeasurementFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Measurement) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Measurement {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CanBeConvertedToUnit calls the underlying CanBeConvertedToUnit.
 func (x *Measurement) CanBeConvertedToUnit(unit *raw.NSUnit) bool {
 	return x.inner.CanBeConvertedToUnit(unit)
@@ -71,6 +77,7 @@ func (x *Measurement) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Measurementable is the interface implemented by [Measurement], for mocking and DI.
 type Measurementable interface {
 	Unwrap() *raw.NSMeasurement[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Measurement
 	CanBeConvertedToUnit(unit *raw.NSUnit) bool
 	MeasurementByConvertingToUnit(unit *raw.NSUnit) *raw.NSMeasurement[objc.ID]
 	MeasurementByAddingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID]

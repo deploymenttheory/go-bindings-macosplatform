@@ -486,6 +486,30 @@ func (x *Window) WithRestorable(restorable bool) *Window {
 	return x
 }
 
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Window) WithNextResponder(nextResponder ResponderProvider) *Window {
+	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Window) WithMenu(menu *raw.NSMenu) *Window {
+	x.inner.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Window) WithUserActivity(userActivity *foundation.NSUserActivity) *Window {
+	x.inner.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Window) WithTouchBar(touchBar *raw.NSTouchBar) *Window {
+	x.inner.NSResponder.SetTouchBar(touchBar)
+	return x
+}
+
 // FrameRectForContentRect calls the underlying FrameRectForContentRect.
 func (x *Window) FrameRectForContentRect(contentRect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.FrameRectForContentRect(contentRect)
@@ -2375,6 +2399,10 @@ type Windowable interface {
 	WithShowsResizeIndicator(showsResizeIndicator bool) *Window
 	WithOrderedIndex(orderedIndex int) *Window
 	WithRestorable(restorable bool) *Window
+	WithNextResponder(nextResponder ResponderProvider) *Window
+	WithMenu(menu *raw.NSMenu) *Window
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Window
+	WithTouchBar(touchBar *raw.NSTouchBar) *Window
 	FrameRectForContentRect(contentRect corefoundation.CGRect) corefoundation.CGRect
 	ContentRectForFrameRect(frameRect corefoundation.CGRect) corefoundation.CGRect
 	AddTitlebarAccessoryViewController(childViewController *raw.NSTitlebarAccessoryViewController)

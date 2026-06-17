@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -45,11 +46,25 @@ func NewNNScaleNodeWithSourceTransformProviderOutputSize(sourceNode *mpsneuralne
 	return &NNScaleNode{inner: raw.MPSNNScaleNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNScaleNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNScaleNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNScaleNode) WithLabel(label string) *NNScaleNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNScaleNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
 // NNScaleNodeable is the interface implemented by [NNScaleNode], for mocking and DI.
 type NNScaleNodeable interface {
 	Unwrap() *raw.MPSNNScaleNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNScaleNode
+	WithLabel(label string) *NNScaleNode
 }
 
 var _ NNScaleNodeable = (*NNScaleNode)(nil)

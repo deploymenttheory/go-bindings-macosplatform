@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewArithmeticLayer() *ArithmeticLayer {
 	return &ArithmeticLayer{inner: raw.MLCArithmeticLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ArithmeticLayer) WithLabel(label string) *ArithmeticLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *ArithmeticLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ArithmeticLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Operation calls the underlying Operation.
 func (x *ArithmeticLayer) Operation() raw.MLCArithmeticOperation {
 	return x.inner.Operation()
@@ -45,6 +58,8 @@ func (x *ArithmeticLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // ArithmeticLayerable is the interface implemented by [ArithmeticLayer], for mocking and DI.
 type ArithmeticLayerable interface {
 	Unwrap() *raw.MLCArithmeticLayer
+	WithLabel(label string) *ArithmeticLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ArithmeticLayer
 	Operation() raw.MLCArithmeticOperation
 }
 

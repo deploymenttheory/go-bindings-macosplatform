@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +37,67 @@ func NewCNNLogSoftMax() *CNNLogSoftMax {
 	return &CNNLogSoftMax{inner: raw.MPSCNNLogSoftMaxFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNLogSoftMax) WithOffset(offset mpscore.MPSOffset) *CNNLogSoftMax {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNLogSoftMax) WithClipRect(clipRect metal.MTLRegion) *CNNLogSoftMax {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLogSoftMax) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLogSoftMax {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLogSoftMax) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLogSoftMax {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNLogSoftMax) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLogSoftMax {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNLogSoftMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLogSoftMax {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNLogSoftMax) WithPadding(padding raw.MPSNNPadding) *CNNLogSoftMax {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNLogSoftMax) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLogSoftMax {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNLogSoftMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 // CNNLogSoftMaxable is the interface implemented by [CNNLogSoftMax], for mocking and DI.
 type CNNLogSoftMaxable interface {
 	Unwrap() *raw.MPSCNNLogSoftMax
+	WithOffset(offset mpscore.MPSOffset) *CNNLogSoftMax
+	WithClipRect(clipRect metal.MTLRegion) *CNNLogSoftMax
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLogSoftMax
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLogSoftMax
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLogSoftMax
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLogSoftMax
+	WithPadding(padding raw.MPSNNPadding) *CNNLogSoftMax
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLogSoftMax
 }
 
 var _ CNNLogSoftMaxable = (*CNNLogSoftMax)(nil)

@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // VideoNode wraps [raw.SKVideoNode] with a fluent Go API.
@@ -86,6 +87,166 @@ func (x *VideoNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *VideoNo
 	return x
 }
 
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *VideoNode) WithPosition(position corefoundation.CGPoint) *VideoNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *VideoNode) WithZPosition(zPosition float64) *VideoNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *VideoNode) WithZRotation(zRotation float64) *VideoNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *VideoNode) WithXScale(xScale float64) *VideoNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *VideoNode) WithYScale(yScale float64) *VideoNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *VideoNode) WithSpeed(speed float64) *VideoNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *VideoNode) WithAlpha(alpha float64) *VideoNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *VideoNode) WithPaused(paused bool) *VideoNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *VideoNode) WithHidden(hidden bool) *VideoNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *VideoNode) WithUserInteractionEnabled(userInteractionEnabled bool) *VideoNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *VideoNode) WithName(name string) *VideoNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *VideoNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *VideoNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *VideoNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *VideoNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *VideoNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *VideoNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *VideoNode) WithConstraints(items ...*raw.SKConstraint) *VideoNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *VideoNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *VideoNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *VideoNode) WithAccessibilityElement(accessibilityElement bool) *VideoNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *VideoNode) WithAccessibilityRole(accessibilityRole string) *VideoNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *VideoNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *VideoNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *VideoNode) WithAccessibilitySubrole(accessibilitySubrole string) *VideoNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *VideoNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *VideoNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *VideoNode) WithAccessibilityParent(accessibilityParent objc.ID) *VideoNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *VideoNode) WithAccessibilityHelp(accessibilityHelp string) *VideoNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *VideoNode) WithAccessibilityLabel(accessibilityLabel string) *VideoNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *VideoNode) WithAccessibilityEnabled(accessibilityEnabled bool) *VideoNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	return x
+}
+
 // Play calls the underlying Play.
 func (x *VideoNode) Play() {
 	x.inner.Play()
@@ -123,6 +284,31 @@ type VideoNodeable interface {
 	Unwrap() *raw.SKVideoNode
 	WithSize(size corefoundation.CGSize) *VideoNode
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *VideoNode
+	WithPosition(position corefoundation.CGPoint) *VideoNode
+	WithZPosition(zPosition float64) *VideoNode
+	WithZRotation(zRotation float64) *VideoNode
+	WithXScale(xScale float64) *VideoNode
+	WithYScale(yScale float64) *VideoNode
+	WithSpeed(speed float64) *VideoNode
+	WithAlpha(alpha float64) *VideoNode
+	WithPaused(paused bool) *VideoNode
+	WithHidden(hidden bool) *VideoNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *VideoNode
+	WithName(name string) *VideoNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *VideoNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *VideoNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *VideoNode
+	WithConstraints(items ...*raw.SKConstraint) *VideoNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *VideoNode
+	WithAccessibilityElement(accessibilityElement bool) *VideoNode
+	WithAccessibilityRole(accessibilityRole string) *VideoNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *VideoNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *VideoNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *VideoNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *VideoNode
+	WithAccessibilityHelp(accessibilityHelp string) *VideoNode
+	WithAccessibilityLabel(accessibilityLabel string) *VideoNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *VideoNode
 	Play()
 	Pause()
 	Size() corefoundation.CGSize

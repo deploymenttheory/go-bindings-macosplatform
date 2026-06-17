@@ -37,6 +37,42 @@ func NewATSTypesetter() *ATSTypesetter {
 	return &ATSTypesetter{inner: raw.NSATSTypesetterFromID(_id)}
 }
 
+// WithUsesFontLeading sets the usesFontLeading property and returns the receiver for chaining.
+func (x *ATSTypesetter) WithUsesFontLeading(usesFontLeading bool) *ATSTypesetter {
+	x.inner.NSTypesetter.SetUsesFontLeading(usesFontLeading)
+	return x
+}
+
+// WithTypesetterBehavior sets the typesetterBehavior property and returns the receiver for chaining.
+func (x *ATSTypesetter) WithTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) *ATSTypesetter {
+	x.inner.NSTypesetter.SetTypesetterBehavior(typesetterBehavior)
+	return x
+}
+
+// WithHyphenationFactor sets the hyphenationFactor property and returns the receiver for chaining.
+func (x *ATSTypesetter) WithHyphenationFactor(hyphenationFactor float32) *ATSTypesetter {
+	x.inner.NSTypesetter.SetHyphenationFactor(hyphenationFactor)
+	return x
+}
+
+// WithLineFragmentPadding sets the lineFragmentPadding property and returns the receiver for chaining.
+func (x *ATSTypesetter) WithLineFragmentPadding(lineFragmentPadding float64) *ATSTypesetter {
+	x.inner.NSTypesetter.SetLineFragmentPadding(lineFragmentPadding)
+	return x
+}
+
+// WithBidiProcessingEnabled sets the bidiProcessingEnabled property and returns the receiver for chaining.
+func (x *ATSTypesetter) WithBidiProcessingEnabled(bidiProcessingEnabled bool) *ATSTypesetter {
+	x.inner.NSTypesetter.SetBidiProcessingEnabled(bidiProcessingEnabled)
+	return x
+}
+
+// WithAttributedString sets the attributedString property and returns the receiver for chaining.
+func (x *ATSTypesetter) WithAttributedString(attributedString *foundation.NSAttributedString) *ATSTypesetter {
+	x.inner.NSTypesetter.SetAttributedString(attributedString)
+	return x
+}
+
 // LineFragmentRectForProposedRectRemainingRect calls the underlying LineFragmentRectForProposedRectRemainingRect.
 func (x *ATSTypesetter) LineFragmentRectForProposedRectRemainingRect(proposedRect corefoundation.CGRect, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.LineFragmentRectForProposedRectRemainingRect(proposedRect, remainingRect)
@@ -52,6 +88,12 @@ func (x *ATSTypesetter) asTypesetter() *raw.NSTypesetter { return &x.inner.NSTyp
 // ATSTypesetterable is the interface implemented by [ATSTypesetter], for mocking and DI.
 type ATSTypesetterable interface {
 	Unwrap() *raw.NSATSTypesetter
+	WithUsesFontLeading(usesFontLeading bool) *ATSTypesetter
+	WithTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) *ATSTypesetter
+	WithHyphenationFactor(hyphenationFactor float32) *ATSTypesetter
+	WithLineFragmentPadding(lineFragmentPadding float64) *ATSTypesetter
+	WithBidiProcessingEnabled(bidiProcessingEnabled bool) *ATSTypesetter
+	WithAttributedString(attributedString *foundation.NSAttributedString) *ATSTypesetter
 	LineFragmentRectForProposedRectRemainingRect(proposedRect corefoundation.CGRect, remainingRect *corefoundation.CGRect) corefoundation.CGRect
 	GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool) uint
 }

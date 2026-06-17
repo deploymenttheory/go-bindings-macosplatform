@@ -38,6 +38,102 @@ func NewQueuePlayerWithItems(items *foundation.NSArray[*raw.AVPlayerItem]) *Queu
 	return &QueuePlayer{inner: raw.AVQueuePlayerFromID(_id)}
 }
 
+// WithRate sets the rate property and returns the receiver for chaining.
+func (x *QueuePlayer) WithRate(rate float32) *QueuePlayer {
+	x.inner.AVPlayer.SetRate(rate)
+	return x
+}
+
+// WithDefaultRate sets the defaultRate property and returns the receiver for chaining.
+func (x *QueuePlayer) WithDefaultRate(defaultRate float32) *QueuePlayer {
+	x.inner.AVPlayer.SetDefaultRate(defaultRate)
+	return x
+}
+
+// WithActionAtItemEnd sets the actionAtItemEnd property and returns the receiver for chaining.
+func (x *QueuePlayer) WithActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd) *QueuePlayer {
+	x.inner.AVPlayer.SetActionAtItemEnd(actionAtItemEnd)
+	return x
+}
+
+// WithAutomaticallyWaitsToMinimizeStalling sets the automaticallyWaitsToMinimizeStalling property and returns the receiver for chaining.
+func (x *QueuePlayer) WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *QueuePlayer {
+	x.inner.AVPlayer.SetAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling)
+	return x
+}
+
+// WithVolume sets the volume property and returns the receiver for chaining.
+func (x *QueuePlayer) WithVolume(volume float32) *QueuePlayer {
+	x.inner.AVPlayer.SetVolume(volume)
+	return x
+}
+
+// WithMuted sets the muted property and returns the receiver for chaining.
+func (x *QueuePlayer) WithMuted(muted bool) *QueuePlayer {
+	x.inner.AVPlayer.SetMuted(muted)
+	return x
+}
+
+// WithAppliesMediaSelectionCriteriaAutomatically sets the appliesMediaSelectionCriteriaAutomatically property and returns the receiver for chaining.
+func (x *QueuePlayer) WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *QueuePlayer {
+	x.inner.AVPlayer.SetAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically)
+	return x
+}
+
+// WithAudioOutputDeviceUniqueID sets the audioOutputDeviceUniqueID property and returns the receiver for chaining.
+func (x *QueuePlayer) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *QueuePlayer {
+	x.inner.AVPlayer.SetAudioOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(audioOutputDeviceUniqueID))
+	return x
+}
+
+// WithAllowsExternalPlayback sets the allowsExternalPlayback property and returns the receiver for chaining.
+func (x *QueuePlayer) WithAllowsExternalPlayback(allowsExternalPlayback bool) *QueuePlayer {
+	x.inner.AVPlayer.SetAllowsExternalPlayback(allowsExternalPlayback)
+	return x
+}
+
+// WithPreferredVideoDecoderGPURegistryID sets the preferredVideoDecoderGPURegistryID property and returns the receiver for chaining.
+func (x *QueuePlayer) WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *QueuePlayer {
+	x.inner.AVPlayer.SetPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID)
+	return x
+}
+
+// WithPreventsDisplaySleepDuringVideoPlayback sets the preventsDisplaySleepDuringVideoPlayback property and returns the receiver for chaining.
+func (x *QueuePlayer) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *QueuePlayer {
+	x.inner.AVPlayer.SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback)
+	return x
+}
+
+// WithAudiovisualBackgroundPlaybackPolicy sets the audiovisualBackgroundPlaybackPolicy property and returns the receiver for chaining.
+func (x *QueuePlayer) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer {
+	x.inner.AVPlayer.SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy)
+	return x
+}
+
+// WithVideoOutput sets the videoOutput property and returns the receiver for chaining.
+func (x *QueuePlayer) WithVideoOutput(videoOutput *raw.AVPlayerVideoOutput) *QueuePlayer {
+	x.inner.AVPlayer.SetVideoOutput(videoOutput)
+	return x
+}
+
+// WithNetworkResourcePriority sets the networkResourcePriority property and returns the receiver for chaining.
+func (x *QueuePlayer) WithNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) *QueuePlayer {
+	x.inner.AVPlayer.SetNetworkResourcePriority(networkResourcePriority)
+	return x
+}
+
+// WithAllowsCaptureOfClearKeyVideo sets the allowsCaptureOfClearKeyVideo property and returns the receiver for chaining.
+func (x *QueuePlayer) WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *QueuePlayer {
+	x.inner.AVPlayer.SetAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo)
+	return x
+}
+
+// WithClosedCaptionDisplayEnabled sets the closedCaptionDisplayEnabled property and returns the receiver for chaining.
+func (x *QueuePlayer) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *QueuePlayer {
+	x.inner.AVPlayer.SetClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled)
+	return x
+}
+
 // Items returns the collection as a Go slice.
 func (x *QueuePlayer) Items() []*raw.AVPlayerItem {
 	arr := x.inner.Items()
@@ -79,6 +175,22 @@ func (x *QueuePlayer) asPlayer() *raw.AVPlayer { return &x.inner.AVPlayer }
 // QueuePlayerable is the interface implemented by [QueuePlayer], for mocking and DI.
 type QueuePlayerable interface {
 	Unwrap() *raw.AVQueuePlayer
+	WithRate(rate float32) *QueuePlayer
+	WithDefaultRate(defaultRate float32) *QueuePlayer
+	WithActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd) *QueuePlayer
+	WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *QueuePlayer
+	WithVolume(volume float32) *QueuePlayer
+	WithMuted(muted bool) *QueuePlayer
+	WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *QueuePlayer
+	WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *QueuePlayer
+	WithAllowsExternalPlayback(allowsExternalPlayback bool) *QueuePlayer
+	WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *QueuePlayer
+	WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *QueuePlayer
+	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer
+	WithVideoOutput(videoOutput *raw.AVPlayerVideoOutput) *QueuePlayer
+	WithNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) *QueuePlayer
+	WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *QueuePlayer
+	WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *QueuePlayer
 	Items() []*raw.AVPlayerItem
 	AdvanceToNextItem()
 	CanInsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem) bool

@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,54 @@ func NewCNNDropoutWithDeviceKeepProbabilitySeedMaskStrideInPixels(device metal.M
 	return &CNNDropout{inner: raw.MPSCNNDropoutFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNDropout) WithOffset(offset mpscore.MPSOffset) *CNNDropout {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNDropout) WithClipRect(clipRect metal.MTLRegion) *CNNDropout {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDropout) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDropout {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDropout) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNDropout {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNDropout) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNDropout {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNDropout) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNDropout {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNDropout) WithPadding(padding raw.MPSNNPadding) *CNNDropout {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNDropout) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDropout {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // KeepProbability calls the underlying KeepProbability.
 func (x *CNNDropout) KeepProbability() float32 {
 	return x.inner.KeepProbability()
@@ -65,6 +114,14 @@ func (x *CNNDropout) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKer
 // CNNDropoutable is the interface implemented by [CNNDropout], for mocking and DI.
 type CNNDropoutable interface {
 	Unwrap() *raw.MPSCNNDropout
+	WithOffset(offset mpscore.MPSOffset) *CNNDropout
+	WithClipRect(clipRect metal.MTLRegion) *CNNDropout
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDropout
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNDropout
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNDropout
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNDropout
+	WithPadding(padding raw.MPSNNPadding) *CNNDropout
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDropout
 	KeepProbability() float32
 	Seed() uint
 	MaskStrideInPixels() metal.MTLSize

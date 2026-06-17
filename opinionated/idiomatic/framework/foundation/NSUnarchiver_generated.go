@@ -37,6 +37,12 @@ func NewUnarchiverForReadingWithData(data *raw.NSData) *Unarchiver {
 	return &Unarchiver{inner: raw.NSUnarchiverFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Unarchiver) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Unarchiver {
+	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // DecodeClassNameAsClassName calls the underlying DecodeClassNameAsClassName.
 func (x *Unarchiver) DecodeClassNameAsClassName(inArchiveName string, trueName string) {
 	x.inner.DecodeClassNameAsClassName(foundation.NSStringStringWithUTF8String(inArchiveName), foundation.NSStringStringWithUTF8String(trueName))
@@ -68,6 +74,7 @@ func (x *Unarchiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject
 // Unarchiverable is the interface implemented by [Unarchiver], for mocking and DI.
 type Unarchiverable interface {
 	Unwrap() *raw.NSUnarchiver
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Unarchiver
 	DecodeClassNameAsClassName(inArchiveName string, trueName string)
 	ClassNameDecodedForArchiveClassName(inArchiveName string) *String
 	ReplaceObjectWithObject(object objc.ID, newObject objc.ID)

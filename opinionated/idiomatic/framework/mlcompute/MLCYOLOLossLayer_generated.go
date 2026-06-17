@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewYOLOLossLayer() *YOLOLossLayer {
 	return &YOLOLossLayer{inner: raw.MLCYOLOLossLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *YOLOLossLayer) WithLabel(label string) *YOLOLossLayer {
+	x.inner.MLCLossLayer.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *YOLOLossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *YOLOLossLayer {
+	x.inner.MLCLossLayer.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // YoloLossDescriptor calls the underlying YoloLossDescriptor.
 func (x *YOLOLossLayer) YoloLossDescriptor() *YOLOLossDescriptor {
 	_r := x.inner.YoloLossDescriptor()
@@ -51,6 +64,8 @@ func (x *YOLOLossLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLossLayer.M
 // YOLOLossLayerable is the interface implemented by [YOLOLossLayer], for mocking and DI.
 type YOLOLossLayerable interface {
 	Unwrap() *raw.MLCYOLOLossLayer
+	WithLabel(label string) *YOLOLossLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *YOLOLossLayer
 	YoloLossDescriptor() *YOLOLossDescriptor
 }
 

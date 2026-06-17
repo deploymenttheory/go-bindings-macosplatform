@@ -36,6 +36,12 @@ func NewDOMCSSStyleSheet() *DOMCSSStyleSheet {
 	return &DOMCSSStyleSheet{inner: raw.DOMCSSStyleSheetFromID(_id)}
 }
 
+// WithDisabled sets the disabled property and returns the receiver for chaining.
+func (x *DOMCSSStyleSheet) WithDisabled(disabled bool) *DOMCSSStyleSheet {
+	x.inner.DOMStyleSheet.SetDisabled(disabled)
+	return x
+}
+
 // InsertRuleIndex calls the underlying InsertRuleIndex.
 func (x *DOMCSSStyleSheet) InsertRuleIndex(rule string, index uint) uint {
 	return x.inner.InsertRuleIndex(foundation.NSStringStringWithUTF8String(rule), index)
@@ -97,6 +103,7 @@ func (x *DOMCSSStyleSheet) asWebScriptObject() *raw.WebScriptObject { return &x.
 // DOMCSSStyleSheetable is the interface implemented by [DOMCSSStyleSheet], for mocking and DI.
 type DOMCSSStyleSheetable interface {
 	Unwrap() *raw.DOMCSSStyleSheet
+	WithDisabled(disabled bool) *DOMCSSStyleSheet
 	InsertRuleIndex(rule string, index uint) uint
 	DeleteRule(index uint)
 	AddRuleStyleIndex(selector string, style string, index uint) int

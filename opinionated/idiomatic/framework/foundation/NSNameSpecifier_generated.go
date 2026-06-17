@@ -50,6 +50,54 @@ func (x *NameSpecifier) WithName(name string) *NameSpecifier {
 	return x
 }
 
+// WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
+func (x *NameSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *NameSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
+func (x *NameSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *NameSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
+func (x *NameSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *NameSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
+	return x
+}
+
+// WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
+func (x *NameSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *NameSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
+	return x
+}
+
+// WithKey sets the key property and returns the receiver for chaining.
+func (x *NameSpecifier) WithKey(key string) *NameSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
+	return x
+}
+
+// WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
+func (x *NameSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *NameSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+	return x
+}
+
+// WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
+func (x *NameSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *NameSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *NameSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NameSpecifier {
+	x.inner.NSScriptObjectSpecifier.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Name calls the underlying Name.
 func (x *NameSpecifier) Name() *String {
 	_r := x.inner.Name()
@@ -72,6 +120,14 @@ func (x *NameSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjec
 type NameSpecifierable interface {
 	Unwrap() *raw.NSNameSpecifier
 	WithName(name string) *NameSpecifier
+	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *NameSpecifier
+	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *NameSpecifier
+	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *NameSpecifier
+	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *NameSpecifier
+	WithKey(key string) *NameSpecifier
+	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *NameSpecifier
+	WithEvaluationErrorNumber(evaluationErrorNumber int) *NameSpecifier
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NameSpecifier
 	Name() *String
 	SetName(name string)
 }

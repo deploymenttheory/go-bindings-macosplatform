@@ -36,6 +36,12 @@ func NewPortCoderWithReceivePortSendPortComponents(rcvPort *raw.NSPort, sndPort 
 	return &PortCoder{inner: raw.NSPortCoderFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PortCoder) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortCoder {
+	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // IsBycopy calls the underlying IsBycopy.
 func (x *PortCoder) IsBycopy() bool {
 	return x.inner.IsBycopy()
@@ -81,6 +87,7 @@ func (x *PortCoder) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject 
 // PortCoderable is the interface implemented by [PortCoder], for mocking and DI.
 type PortCoderable interface {
 	Unwrap() *raw.NSPortCoder
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortCoder
 	IsBycopy() bool
 	IsByref() bool
 	EncodePortObject(aport *raw.NSPort)

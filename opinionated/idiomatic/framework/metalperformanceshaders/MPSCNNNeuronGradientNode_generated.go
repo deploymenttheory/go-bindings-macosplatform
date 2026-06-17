@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNNeuronGradientNodeWithSourceGradientSourceImageGradientStateDescripto
 	return &CNNNeuronGradientNode{inner: raw.MPSCNNNeuronGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNNeuronGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronGradientNode) WithLabel(label string) *CNNNeuronGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Descriptor calls the underlying Descriptor.
 func (x *CNNNeuronGradientNode) Descriptor() *mpsneuralnetwork.MPSNNNeuronDescriptor {
 	return x.inner.Descriptor()
@@ -49,6 +62,8 @@ func (x *CNNNeuronGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNo
 // CNNNeuronGradientNodeable is the interface implemented by [CNNNeuronGradientNode], for mocking and DI.
 type CNNNeuronGradientNodeable interface {
 	Unwrap() *raw.MPSCNNNeuronGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronGradientNode
+	WithLabel(label string) *CNNNeuronGradientNode
 	Descriptor() *mpsneuralnetwork.MPSNNNeuronDescriptor
 }
 

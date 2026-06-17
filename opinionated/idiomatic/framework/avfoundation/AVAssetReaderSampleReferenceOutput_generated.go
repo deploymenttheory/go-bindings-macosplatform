@@ -36,6 +36,18 @@ func NewAssetReaderSampleReferenceOutputWithTrack(track *raw.AVAssetTrack) *Asse
 	return &AssetReaderSampleReferenceOutput{inner: raw.AVAssetReaderSampleReferenceOutputFromID(_id)}
 }
 
+// WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
+func (x *AssetReaderSampleReferenceOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderSampleReferenceOutput {
+	x.inner.AVAssetReaderOutput.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
+	return x
+}
+
+// WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
+func (x *AssetReaderSampleReferenceOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderSampleReferenceOutput {
+	x.inner.AVAssetReaderOutput.SetSupportsRandomAccess(supportsRandomAccess)
+	return x
+}
+
 // Track calls the underlying Track.
 func (x *AssetReaderSampleReferenceOutput) Track() *AssetTrack {
 	_r := x.inner.Track()
@@ -50,6 +62,8 @@ func (x *AssetReaderSampleReferenceOutput) asAssetReaderOutput() *raw.AVAssetRea
 // AssetReaderSampleReferenceOutputable is the interface implemented by [AssetReaderSampleReferenceOutput], for mocking and DI.
 type AssetReaderSampleReferenceOutputable interface {
 	Unwrap() *raw.AVAssetReaderSampleReferenceOutput
+	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderSampleReferenceOutput
+	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderSampleReferenceOutput
 	Track() *AssetTrack
 }
 

@@ -41,6 +41,24 @@ func (x *BillboardConstraint) WithFreeAxes(freeAxes raw.SCNBillboardAxis) *Billb
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *BillboardConstraint) WithEnabled(enabled bool) *BillboardConstraint {
+	x.inner.SCNConstraint.SetEnabled(enabled)
+	return x
+}
+
+// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+func (x *BillboardConstraint) WithInfluenceFactor(influenceFactor float64) *BillboardConstraint {
+	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	return x
+}
+
+// WithIncremental sets the incremental property and returns the receiver for chaining.
+func (x *BillboardConstraint) WithIncremental(incremental bool) *BillboardConstraint {
+	x.inner.SCNConstraint.SetIncremental(incremental)
+	return x
+}
+
 // FreeAxes calls the underlying FreeAxes.
 func (x *BillboardConstraint) FreeAxes() raw.SCNBillboardAxis {
 	return x.inner.FreeAxes()
@@ -57,6 +75,9 @@ func (x *BillboardConstraint) asConstraint() *raw.SCNConstraint { return &x.inne
 type BillboardConstraintable interface {
 	Unwrap() *raw.SCNBillboardConstraint
 	WithFreeAxes(freeAxes raw.SCNBillboardAxis) *BillboardConstraint
+	WithEnabled(enabled bool) *BillboardConstraint
+	WithInfluenceFactor(influenceFactor float64) *BillboardConstraint
+	WithIncremental(incremental bool) *BillboardConstraint
 	FreeAxes() raw.SCNBillboardAxis
 	SetFreeAxes(freeAxes raw.SCNBillboardAxis)
 }

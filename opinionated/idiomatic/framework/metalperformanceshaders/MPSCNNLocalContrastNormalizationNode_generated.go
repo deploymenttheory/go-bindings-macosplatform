@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -74,6 +75,36 @@ func (x *CNNLocalContrastNormalizationNode) WithKernelHeight(kernelHeight uint) 
 	return x
 }
 
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationNode) WithAlpha(alpha float32) *CNNLocalContrastNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.SetAlpha(alpha)
+	return x
+}
+
+// WithBeta sets the beta property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationNode) WithBeta(beta float32) *CNNLocalContrastNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.SetBeta(beta)
+	return x
+}
+
+// WithDelta sets the delta property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationNode) WithDelta(delta float32) *CNNLocalContrastNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.SetDelta(delta)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNLocalContrastNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationNode) WithLabel(label string) *CNNLocalContrastNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Pm calls the underlying Pm.
 func (x *CNNLocalContrastNormalizationNode) Pm() float32 {
 	return x.inner.Pm()
@@ -136,6 +167,11 @@ type CNNLocalContrastNormalizationNodeable interface {
 	WithP0(p0 float32) *CNNLocalContrastNormalizationNode
 	WithKernelWidth(kernelWidth uint) *CNNLocalContrastNormalizationNode
 	WithKernelHeight(kernelHeight uint) *CNNLocalContrastNormalizationNode
+	WithAlpha(alpha float32) *CNNLocalContrastNormalizationNode
+	WithBeta(beta float32) *CNNLocalContrastNormalizationNode
+	WithDelta(delta float32) *CNNLocalContrastNormalizationNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNLocalContrastNormalizationNode
+	WithLabel(label string) *CNNLocalContrastNormalizationNode
 	Pm() float32
 	SetPm(pm float32)
 	Ps() float32

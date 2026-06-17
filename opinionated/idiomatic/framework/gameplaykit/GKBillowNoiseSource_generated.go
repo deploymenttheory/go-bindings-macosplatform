@@ -42,6 +42,30 @@ func (x *BillowNoiseSource) WithPersistence(persistence float64) *BillowNoiseSou
 	return x
 }
 
+// WithFrequency sets the frequency property and returns the receiver for chaining.
+func (x *BillowNoiseSource) WithFrequency(frequency float64) *BillowNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetFrequency(frequency)
+	return x
+}
+
+// WithOctaveCount sets the octaveCount property and returns the receiver for chaining.
+func (x *BillowNoiseSource) WithOctaveCount(octaveCount int) *BillowNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetOctaveCount(octaveCount)
+	return x
+}
+
+// WithLacunarity sets the lacunarity property and returns the receiver for chaining.
+func (x *BillowNoiseSource) WithLacunarity(lacunarity float64) *BillowNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetLacunarity(lacunarity)
+	return x
+}
+
+// WithSeed sets the seed property and returns the receiver for chaining.
+func (x *BillowNoiseSource) WithSeed(seed int32) *BillowNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetSeed(seed)
+	return x
+}
+
 // Persistence calls the underlying Persistence.
 func (x *BillowNoiseSource) Persistence() float64 {
 	return x.inner.Persistence()
@@ -60,6 +84,10 @@ func (x *BillowNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner
 type BillowNoiseSourceable interface {
 	Unwrap() *raw.GKBillowNoiseSource
 	WithPersistence(persistence float64) *BillowNoiseSource
+	WithFrequency(frequency float64) *BillowNoiseSource
+	WithOctaveCount(octaveCount int) *BillowNoiseSource
+	WithLacunarity(lacunarity float64) *BillowNoiseSource
+	WithSeed(seed int32) *BillowNoiseSource
 	Persistence() float64
 	SetPersistence(persistence float64)
 }

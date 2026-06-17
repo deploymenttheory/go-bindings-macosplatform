@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +42,108 @@ func (x *DOMHTMLMenuElement) WithCompact(compact bool) *DOMHTMLMenuElement {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithTitle(title string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithLang(lang string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithDir(dir string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithTabIndex(tabIndex int) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithAccessKey(accessKey string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithInnerText(innerText string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithOuterText(outerText string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithContentEditable(contentEditable string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithIdName(idName string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithScrollLeft(scrollLeft int) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithScrollTop(scrollTop int) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithInnerHTML(innerHTML string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithOuterHTML(outerHTML string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithClassName(className string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithNodeValue(nodeValue string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithPrefix(prefix string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLMenuElement) WithTextContent(textContent string) *DOMHTMLMenuElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Compact calls the underlying Compact.
 func (x *DOMHTMLMenuElement) Compact() bool {
 	return x.inner.Compact()
@@ -65,6 +168,23 @@ func (x *DOMHTMLMenuElement) asWebScriptObject() *raw.WebScriptObject { return &
 type DOMHTMLMenuElementable interface {
 	Unwrap() *raw.DOMHTMLMenuElement
 	WithCompact(compact bool) *DOMHTMLMenuElement
+	WithTitle(title string) *DOMHTMLMenuElement
+	WithLang(lang string) *DOMHTMLMenuElement
+	WithDir(dir string) *DOMHTMLMenuElement
+	WithTabIndex(tabIndex int) *DOMHTMLMenuElement
+	WithAccessKey(accessKey string) *DOMHTMLMenuElement
+	WithInnerText(innerText string) *DOMHTMLMenuElement
+	WithOuterText(outerText string) *DOMHTMLMenuElement
+	WithContentEditable(contentEditable string) *DOMHTMLMenuElement
+	WithIdName(idName string) *DOMHTMLMenuElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLMenuElement
+	WithScrollTop(scrollTop int) *DOMHTMLMenuElement
+	WithInnerHTML(innerHTML string) *DOMHTMLMenuElement
+	WithOuterHTML(outerHTML string) *DOMHTMLMenuElement
+	WithClassName(className string) *DOMHTMLMenuElement
+	WithNodeValue(nodeValue string) *DOMHTMLMenuElement
+	WithPrefix(prefix string) *DOMHTMLMenuElement
+	WithTextContent(textContent string) *DOMHTMLMenuElement
 	Compact() bool
 	SetCompact(compact bool)
 }

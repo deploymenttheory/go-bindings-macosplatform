@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,24 @@ func NewNDArrayAffineInt4DequantizeWithDeviceQuantizationDescriptor(device metal
 	return &NDArrayAffineInt4Dequantize{inner: raw.MPSNDArrayAffineInt4DequantizeFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayAffineInt4Dequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayAffineInt4Dequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayAffineInt4Dequantize) WithOptions(options mpscore.MPSKernelOptions) *NDArrayAffineInt4Dequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayAffineInt4Dequantize) WithLabel(label string) *NDArrayAffineInt4Dequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NDArrayAffineInt4Dequantize) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *NDArrayAffineInt4Dequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
@@ -48,6 +67,9 @@ func (x *NDArrayAffineInt4Dequantize) asKernel() *mpscore.MPSKernel { return &x.
 // NDArrayAffineInt4Dequantizeable is the interface implemented by [NDArrayAffineInt4Dequantize], for mocking and DI.
 type NDArrayAffineInt4Dequantizeable interface {
 	Unwrap() *raw.MPSNDArrayAffineInt4Dequantize
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayAffineInt4Dequantize
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayAffineInt4Dequantize
+	WithLabel(label string) *NDArrayAffineInt4Dequantize
 }
 
 var _ NDArrayAffineInt4Dequantizeable = (*NDArrayAffineInt4Dequantize)(nil)

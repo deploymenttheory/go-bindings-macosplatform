@@ -47,6 +47,36 @@ func NewImageMedianWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MT
 	return &ImageMedian{inner: raw.MPSImageMedianFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageMedian) WithOffset(offset mpscore.MPSOffset) *ImageMedian {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageMedian) WithClipRect(clipRect metal.MTLRegion) *ImageMedian {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageMedian) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageMedian {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageMedian) WithOptions(options mpscore.MPSKernelOptions) *ImageMedian {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageMedian) WithLabel(label string) *ImageMedian {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelDiameter calls the underlying KernelDiameter.
 func (x *ImageMedian) KernelDiameter() uint {
 	return x.inner.KernelDiameter()
@@ -59,6 +89,11 @@ func (x *ImageMedian) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryIm
 // ImageMedianable is the interface implemented by [ImageMedian], for mocking and DI.
 type ImageMedianable interface {
 	Unwrap() *raw.MPSImageMedian
+	WithOffset(offset mpscore.MPSOffset) *ImageMedian
+	WithClipRect(clipRect metal.MTLRegion) *ImageMedian
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageMedian
+	WithOptions(options mpscore.MPSKernelOptions) *ImageMedian
+	WithLabel(label string) *ImageMedian
 	KernelDiameter() uint
 }
 

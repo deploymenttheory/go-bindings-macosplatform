@@ -43,6 +43,66 @@ func (x *ScannerFunctionalUnitNegativeTransparency) WithDocumentType(documentTyp
 	return x
 }
 
+// WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
+func (x *ScannerFunctionalUnitNegativeTransparency) WithPixelDataType(pixelDataType raw.ICScannerPixelDataType) *ScannerFunctionalUnitNegativeTransparency {
+	x.inner.ICScannerFunctionalUnit.SetPixelDataType(pixelDataType)
+	return x
+}
+
+// WithBitDepth sets the bitDepth property and returns the receiver for chaining.
+func (x *ScannerFunctionalUnitNegativeTransparency) WithBitDepth(bitDepth raw.ICScannerBitDepth) *ScannerFunctionalUnitNegativeTransparency {
+	x.inner.ICScannerFunctionalUnit.SetBitDepth(bitDepth)
+	return x
+}
+
+// WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
+func (x *ScannerFunctionalUnitNegativeTransparency) WithMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) *ScannerFunctionalUnitNegativeTransparency {
+	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(measurementUnit)
+	return x
+}
+
+// WithResolution sets the resolution property and returns the receiver for chaining.
+func (x *ScannerFunctionalUnitNegativeTransparency) WithResolution(resolution uint) *ScannerFunctionalUnitNegativeTransparency {
+	x.inner.ICScannerFunctionalUnit.SetResolution(resolution)
+	return x
+}
+
+// WithScaleFactor sets the scaleFactor property and returns the receiver for chaining.
+func (x *ScannerFunctionalUnitNegativeTransparency) WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitNegativeTransparency {
+	x.inner.ICScannerFunctionalUnit.SetScaleFactor(scaleFactor)
+	return x
+}
+
+// WithScanArea sets the scanArea property and returns the receiver for chaining.
+func (x *ScannerFunctionalUnitNegativeTransparency) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitNegativeTransparency {
+	x.inner.ICScannerFunctionalUnit.SetScanArea(scanArea)
+	return x
+}
+
+// WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
+func (x *ScannerFunctionalUnitNegativeTransparency) WithScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitNegativeTransparency {
+	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(scanAreaOrientation)
+	return x
+}
+
+// WithUsesThresholdForBlackAndWhiteScanning sets the usesThresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
+func (x *ScannerFunctionalUnitNegativeTransparency) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitNegativeTransparency {
+	x.inner.ICScannerFunctionalUnit.SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning)
+	return x
+}
+
+// WithThresholdForBlackAndWhiteScanning sets the thresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
+func (x *ScannerFunctionalUnitNegativeTransparency) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitNegativeTransparency {
+	x.inner.ICScannerFunctionalUnit.SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning)
+	return x
+}
+
+// WithOverviewResolution sets the overviewResolution property and returns the receiver for chaining.
+func (x *ScannerFunctionalUnitNegativeTransparency) WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitNegativeTransparency {
+	x.inner.ICScannerFunctionalUnit.SetOverviewResolution(overviewResolution)
+	return x
+}
+
 // SupportedDocumentTypes calls the underlying SupportedDocumentTypes.
 func (x *ScannerFunctionalUnitNegativeTransparency) SupportedDocumentTypes() *foundation.NSIndexSet {
 	return x.inner.SupportedDocumentTypes()
@@ -69,6 +129,16 @@ func (x *ScannerFunctionalUnitNegativeTransparency) asScannerFunctionalUnit() *r
 type ScannerFunctionalUnitNegativeTransparencyable interface {
 	Unwrap() *raw.ICScannerFunctionalUnitNegativeTransparency
 	WithDocumentType(documentType raw.ICScannerDocumentType) *ScannerFunctionalUnitNegativeTransparency
+	WithPixelDataType(pixelDataType raw.ICScannerPixelDataType) *ScannerFunctionalUnitNegativeTransparency
+	WithBitDepth(bitDepth raw.ICScannerBitDepth) *ScannerFunctionalUnitNegativeTransparency
+	WithMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) *ScannerFunctionalUnitNegativeTransparency
+	WithResolution(resolution uint) *ScannerFunctionalUnitNegativeTransparency
+	WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitNegativeTransparency
+	WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitNegativeTransparency
+	WithScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitNegativeTransparency
+	WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitNegativeTransparency
+	WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitNegativeTransparency
+	WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitNegativeTransparency
 	SupportedDocumentTypes() *foundation.NSIndexSet
 	DocumentType() raw.ICScannerDocumentType
 	SetDocumentType(documentType raw.ICScannerDocumentType)

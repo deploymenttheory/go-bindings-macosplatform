@@ -85,6 +85,24 @@ func (x *DOMDocument) WithSelectedStylesheetSet(selectedStylesheetSet string) *D
 	return x
 }
 
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMDocument) WithNodeValue(nodeValue string) *DOMDocument {
+	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMDocument) WithPrefix(prefix string) *DOMDocument {
+	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMDocument) WithTextContent(textContent string) *DOMDocument {
+	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // CreateElement calls the underlying CreateElement.
 func (x *DOMDocument) CreateElement(tagName string) *DOMElement {
 	_r := x.inner.CreateElement(foundation.NSStringStringWithUTF8String(tagName))
@@ -852,6 +870,9 @@ type DOMDocumentable interface {
 	WithBody(body DOMHTMLElementProvider) *DOMDocument
 	WithCharset(charset string) *DOMDocument
 	WithSelectedStylesheetSet(selectedStylesheetSet string) *DOMDocument
+	WithNodeValue(nodeValue string) *DOMDocument
+	WithPrefix(prefix string) *DOMDocument
+	WithTextContent(textContent string) *DOMDocument
 	CreateElement(tagName string) *DOMElement
 	CreateDocumentFragment() *DOMDocumentFragment
 	CreateTextNode(data string) *DOMText

@@ -5,6 +5,8 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -81,6 +83,332 @@ func (x *ReplicatorLayer) WithInstanceBlueOffset(instanceBlueOffset float32) *Re
 // WithInstanceAlphaOffset sets the instanceAlphaOffset property and returns the receiver for chaining.
 func (x *ReplicatorLayer) WithInstanceAlphaOffset(instanceAlphaOffset float32) *ReplicatorLayer {
 	x.inner.SetInstanceAlphaOffset(instanceAlphaOffset)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithBounds(bounds corefoundation.CGRect) *ReplicatorLayer {
+	x.inner.CALayer.SetBounds(bounds)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithPosition(position corefoundation.CGPoint) *ReplicatorLayer {
+	x.inner.CALayer.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithZPosition(zPosition float64) *ReplicatorLayer {
+	x.inner.CALayer.SetZPosition(zPosition)
+	return x
+}
+
+// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ReplicatorLayer {
+	x.inner.CALayer.SetAnchorPoint(anchorPoint)
+	return x
+}
+
+// WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithAnchorPointZ(anchorPointZ float64) *ReplicatorLayer {
+	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithTransform(transform raw.CATransform3D) *ReplicatorLayer {
+	x.inner.CALayer.SetTransform(transform)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithFrame(frame corefoundation.CGRect) *ReplicatorLayer {
+	x.inner.CALayer.SetFrame(frame)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithHidden(hidden bool) *ReplicatorLayer {
+	x.inner.CALayer.SetHidden(hidden)
+	return x
+}
+
+// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithDoubleSided(doubleSided bool) *ReplicatorLayer {
+	x.inner.CALayer.SetDoubleSided(doubleSided)
+	return x
+}
+
+// WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithGeometryFlipped(geometryFlipped bool) *ReplicatorLayer {
+	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
+	return x
+}
+
+// WithSublayers sets the collection, converting the Go slice to an NSArray.
+func (x *ReplicatorLayer) WithSublayers(items ...LayerProvider) *ReplicatorLayer {
+	if len(items) == 0 {
+		x.inner.CALayer.SetSublayers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.CALayer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CALayer.SetSublayers(_arr)
+	return x
+}
+
+// WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *ReplicatorLayer {
+	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
+	return x
+}
+
+// WithMask sets the mask property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithMask(mask LayerProvider) *ReplicatorLayer {
+	x.inner.CALayer.SetMask(mask.asLayer())
+	return x
+}
+
+// WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithMasksToBounds(masksToBounds bool) *ReplicatorLayer {
+	x.inner.CALayer.SetMasksToBounds(masksToBounds)
+	return x
+}
+
+// WithContents sets the contents property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithContents(contents objc.ID) *ReplicatorLayer {
+	x.inner.CALayer.SetContents(contents)
+	return x
+}
+
+// WithContentsRect sets the contentsRect property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithContentsRect(contentsRect corefoundation.CGRect) *ReplicatorLayer {
+	x.inner.CALayer.SetContentsRect(contentsRect)
+	return x
+}
+
+// WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithContentsGravity(contentsGravity *foundation.NSString) *ReplicatorLayer {
+	x.inner.CALayer.SetContentsGravity(contentsGravity)
+	return x
+}
+
+// WithContentsScale sets the contentsScale property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithContentsScale(contentsScale float64) *ReplicatorLayer {
+	x.inner.CALayer.SetContentsScale(contentsScale)
+	return x
+}
+
+// WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *ReplicatorLayer {
+	x.inner.CALayer.SetContentsCenter(contentsCenter)
+	return x
+}
+
+// WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithContentsFormat(contentsFormat *foundation.NSString) *ReplicatorLayer {
+	x.inner.CALayer.SetContentsFormat(contentsFormat)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeContent sets the wantsExtendedDynamicRangeContent property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ReplicatorLayer {
+	x.inner.CALayer.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
+	return x
+}
+
+// WithToneMapMode sets the toneMapMode property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithToneMapMode(toneMapMode *foundation.NSString) *ReplicatorLayer {
+	x.inner.CALayer.SetToneMapMode(toneMapMode)
+	return x
+}
+
+// WithPreferredDynamicRange sets the preferredDynamicRange property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *ReplicatorLayer {
+	x.inner.CALayer.SetPreferredDynamicRange(preferredDynamicRange)
+	return x
+}
+
+// WithContentsHeadroom sets the contentsHeadroom property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithContentsHeadroom(contentsHeadroom float64) *ReplicatorLayer {
+	x.inner.CALayer.SetContentsHeadroom(contentsHeadroom)
+	return x
+}
+
+// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *ReplicatorLayer {
+	x.inner.CALayer.SetMinificationFilter(minificationFilter)
+	return x
+}
+
+// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *ReplicatorLayer {
+	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
+	return x
+}
+
+// WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithMinificationFilterBias(minificationFilterBias float32) *ReplicatorLayer {
+	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithOpaque(opaque bool) *ReplicatorLayer {
+	x.inner.CALayer.SetOpaque(opaque)
+	return x
+}
+
+// WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ReplicatorLayer {
+	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
+	return x
+}
+
+// WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *ReplicatorLayer {
+	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
+	return x
+}
+
+// WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *ReplicatorLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+	return x
+}
+
+// WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ReplicatorLayer {
+	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
+	return x
+}
+
+// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithCornerRadius(cornerRadius float64) *ReplicatorLayer {
+	x.inner.CALayer.SetCornerRadius(cornerRadius)
+	return x
+}
+
+// WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *ReplicatorLayer {
+	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+	return x
+}
+
+// WithCornerCurve sets the cornerCurve property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithCornerCurve(cornerCurve *foundation.NSString) *ReplicatorLayer {
+	x.inner.CALayer.SetCornerCurve(cornerCurve)
+	return x
+}
+
+// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithBorderWidth(borderWidth float64) *ReplicatorLayer {
+	x.inner.CALayer.SetBorderWidth(borderWidth)
+	return x
+}
+
+// WithOpacity sets the opacity property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithOpacity(opacity float32) *ReplicatorLayer {
+	x.inner.CALayer.SetOpacity(opacity)
+	return x
+}
+
+// WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *ReplicatorLayer {
+	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithCompositingFilter(compositingFilter objc.ID) *ReplicatorLayer {
+	x.inner.CALayer.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithShouldRasterize(shouldRasterize bool) *ReplicatorLayer {
+	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithRasterizationScale(rasterizationScale float64) *ReplicatorLayer {
+	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
+	return x
+}
+
+// WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithShadowOpacity(shadowOpacity float32) *ReplicatorLayer {
+	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
+	return x
+}
+
+// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *ReplicatorLayer {
+	x.inner.CALayer.SetShadowOffset(shadowOffset)
+	return x
+}
+
+// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithShadowRadius(shadowRadius float64) *ReplicatorLayer {
+	x.inner.CALayer.SetShadowRadius(shadowRadius)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *ReplicatorLayer {
+	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *ReplicatorLayer {
+	x.inner.CALayer.SetLayoutManager(layoutManager)
+	return x
+}
+
+// WithActions sets the actions property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *ReplicatorLayer {
+	x.inner.CALayer.SetActions(actions)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithName(name string) *ReplicatorLayer {
+	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithDelegate(delegate raw.CALayerDelegate) *ReplicatorLayer {
+	x.inner.CALayer.SetDelegate(delegate)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *ReplicatorLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *ReplicatorLayer {
+	x.inner.CALayer.SetStyle(style)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *ReplicatorLayer) WithConstraints(items ...*raw.CAConstraint) *ReplicatorLayer {
+	if len(items) == 0 {
+		x.inner.CALayer.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CALayer.SetConstraints(_arr)
 	return x
 }
 
@@ -187,6 +515,57 @@ type ReplicatorLayerable interface {
 	WithInstanceGreenOffset(instanceGreenOffset float32) *ReplicatorLayer
 	WithInstanceBlueOffset(instanceBlueOffset float32) *ReplicatorLayer
 	WithInstanceAlphaOffset(instanceAlphaOffset float32) *ReplicatorLayer
+	WithBounds(bounds corefoundation.CGRect) *ReplicatorLayer
+	WithPosition(position corefoundation.CGPoint) *ReplicatorLayer
+	WithZPosition(zPosition float64) *ReplicatorLayer
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ReplicatorLayer
+	WithAnchorPointZ(anchorPointZ float64) *ReplicatorLayer
+	WithTransform(transform raw.CATransform3D) *ReplicatorLayer
+	WithFrame(frame corefoundation.CGRect) *ReplicatorLayer
+	WithHidden(hidden bool) *ReplicatorLayer
+	WithDoubleSided(doubleSided bool) *ReplicatorLayer
+	WithGeometryFlipped(geometryFlipped bool) *ReplicatorLayer
+	WithSublayers(items ...LayerProvider) *ReplicatorLayer
+	WithSublayerTransform(sublayerTransform raw.CATransform3D) *ReplicatorLayer
+	WithMask(mask LayerProvider) *ReplicatorLayer
+	WithMasksToBounds(masksToBounds bool) *ReplicatorLayer
+	WithContents(contents objc.ID) *ReplicatorLayer
+	WithContentsRect(contentsRect corefoundation.CGRect) *ReplicatorLayer
+	WithContentsGravity(contentsGravity *foundation.NSString) *ReplicatorLayer
+	WithContentsScale(contentsScale float64) *ReplicatorLayer
+	WithContentsCenter(contentsCenter corefoundation.CGRect) *ReplicatorLayer
+	WithContentsFormat(contentsFormat *foundation.NSString) *ReplicatorLayer
+	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ReplicatorLayer
+	WithToneMapMode(toneMapMode *foundation.NSString) *ReplicatorLayer
+	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *ReplicatorLayer
+	WithContentsHeadroom(contentsHeadroom float64) *ReplicatorLayer
+	WithMinificationFilter(minificationFilter *foundation.NSString) *ReplicatorLayer
+	WithMagnificationFilter(magnificationFilter *foundation.NSString) *ReplicatorLayer
+	WithMinificationFilterBias(minificationFilterBias float32) *ReplicatorLayer
+	WithOpaque(opaque bool) *ReplicatorLayer
+	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ReplicatorLayer
+	WithDrawsAsynchronously(drawsAsynchronously bool) *ReplicatorLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *ReplicatorLayer
+	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ReplicatorLayer
+	WithCornerRadius(cornerRadius float64) *ReplicatorLayer
+	WithMaskedCorners(maskedCorners raw.CACornerMask) *ReplicatorLayer
+	WithCornerCurve(cornerCurve *foundation.NSString) *ReplicatorLayer
+	WithBorderWidth(borderWidth float64) *ReplicatorLayer
+	WithOpacity(opacity float32) *ReplicatorLayer
+	WithAllowsGroupOpacity(allowsGroupOpacity bool) *ReplicatorLayer
+	WithCompositingFilter(compositingFilter objc.ID) *ReplicatorLayer
+	WithShouldRasterize(shouldRasterize bool) *ReplicatorLayer
+	WithRasterizationScale(rasterizationScale float64) *ReplicatorLayer
+	WithShadowOpacity(shadowOpacity float32) *ReplicatorLayer
+	WithShadowOffset(shadowOffset corefoundation.CGSize) *ReplicatorLayer
+	WithShadowRadius(shadowRadius float64) *ReplicatorLayer
+	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *ReplicatorLayer
+	WithLayoutManager(layoutManager raw.CALayoutManager) *ReplicatorLayer
+	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *ReplicatorLayer
+	WithName(name string) *ReplicatorLayer
+	WithDelegate(delegate raw.CALayerDelegate) *ReplicatorLayer
+	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *ReplicatorLayer
+	WithConstraints(items ...*raw.CAConstraint) *ReplicatorLayer
 	InstanceCount() int
 	SetInstanceCount(instanceCount int)
 	PreservesDepth() bool

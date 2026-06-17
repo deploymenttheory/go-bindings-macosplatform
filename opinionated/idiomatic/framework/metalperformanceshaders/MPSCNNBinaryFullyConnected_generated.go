@@ -54,6 +54,66 @@ func NewCNNBinaryFullyConnectedWithCoderDevice(aDecoder *foundation.NSCoder, dev
 	return &CNNBinaryFullyConnected{inner: raw.MPSCNNBinaryFullyConnectedFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnected) WithOffset(offset mpscore.MPSOffset) *CNNBinaryFullyConnected {
+	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnected) WithClipRect(clipRect metal.MTLRegion) *CNNBinaryFullyConnected {
+	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnected) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBinaryFullyConnected {
+	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnected) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBinaryFullyConnected {
+	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnected) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBinaryFullyConnected {
+	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnected) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBinaryFullyConnected {
+	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnected) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNBinaryFullyConnected {
+	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnected) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBinaryFullyConnected {
+	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnected) WithOptions(options mpscore.MPSKernelOptions) *CNNBinaryFullyConnected {
+	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnected) WithLabel(label string) *CNNBinaryFullyConnected {
+	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNBinaryFullyConnected) asCNNBinaryConvolution() *mpsneuralnetwork.MPSCNNBinaryConvolution { return &x.inner.MPSCNNBinaryConvolution }
 
 func (x *CNNBinaryFullyConnected) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNBinaryConvolution.MPSCNNKernel }
@@ -63,6 +123,16 @@ func (x *CNNBinaryFullyConnected) asKernel() *mpscore.MPSKernel { return &x.inne
 // CNNBinaryFullyConnectedable is the interface implemented by [CNNBinaryFullyConnected], for mocking and DI.
 type CNNBinaryFullyConnectedable interface {
 	Unwrap() *raw.MPSCNNBinaryFullyConnected
+	WithOffset(offset mpscore.MPSOffset) *CNNBinaryFullyConnected
+	WithClipRect(clipRect metal.MTLRegion) *CNNBinaryFullyConnected
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBinaryFullyConnected
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBinaryFullyConnected
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBinaryFullyConnected
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBinaryFullyConnected
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNBinaryFullyConnected
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBinaryFullyConnected
+	WithOptions(options mpscore.MPSKernelOptions) *CNNBinaryFullyConnected
+	WithLabel(label string) *CNNBinaryFullyConnected
 }
 
 var _ CNNBinaryFullyConnectedable = (*CNNBinaryFullyConnected)(nil)

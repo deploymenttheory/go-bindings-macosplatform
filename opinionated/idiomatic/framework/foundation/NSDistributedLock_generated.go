@@ -37,6 +37,12 @@ func NewDistributedLockWithPath(path string) *DistributedLock {
 	return &DistributedLock{inner: raw.NSDistributedLockFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DistributedLock) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DistributedLock {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // TryLock calls the underlying TryLock.
 func (x *DistributedLock) TryLock() bool {
 	return x.inner.TryLock()
@@ -66,6 +72,7 @@ func (x *DistributedLock) asObject() *raw.NSObject { return &x.inner.NSObject }
 // DistributedLockable is the interface implemented by [DistributedLock], for mocking and DI.
 type DistributedLockable interface {
 	Unwrap() *raw.NSDistributedLock
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DistributedLock
 	TryLock() bool
 	Unlock()
 	BreakLock()

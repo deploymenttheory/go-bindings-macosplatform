@@ -46,6 +46,12 @@ func NewURLProtectionSpaceWithProxyHostPortTypeRealmAuthenticationMethod(host st
 	return &URLProtectionSpace{inner: raw.NSURLProtectionSpaceFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLProtectionSpace) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLProtectionSpace {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Realm calls the underlying Realm.
 func (x *URLProtectionSpace) Realm() *String {
 	_r := x.inner.Realm()
@@ -127,6 +133,7 @@ func (x *URLProtectionSpace) asObject() *raw.NSObject { return &x.inner.NSObject
 // URLProtectionSpaceable is the interface implemented by [URLProtectionSpace], for mocking and DI.
 type URLProtectionSpaceable interface {
 	Unwrap() *raw.NSURLProtectionSpace
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLProtectionSpace
 	Realm() *String
 	ReceivesCredentialSecurely() bool
 	IsProxy() bool

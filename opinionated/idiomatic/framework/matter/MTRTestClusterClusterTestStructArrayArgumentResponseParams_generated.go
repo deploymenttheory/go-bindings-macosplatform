@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTestClusterClusterTestStructArrayArgumentResponseParams() *MTRTestClu
 	return &MTRTestClusterClusterTestStructArrayArgumentResponseParams{inner: raw.MTRTestClusterClusterTestStructArrayArgumentResponseParamsFromID(_id)}
 }
 
+// WithArg5 sets the arg5 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestStructArrayArgumentResponseParams) WithArg5(arg5 *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentResponseParams {
+	x.inner.MTRUnitTestingClusterTestStructArrayArgumentResponseParams.SetArg5(arg5)
+	return x
+}
+
+// WithArg6 sets the arg6 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestStructArrayArgumentResponseParams) WithArg6(arg6 *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentResponseParams {
+	x.inner.MTRUnitTestingClusterTestStructArrayArgumentResponseParams.SetArg6(arg6)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestStructArrayArgumentResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentResponseParams {
+	x.inner.MTRUnitTestingClusterTestStructArrayArgumentResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestStructArrayArgumentResponseParams) asMTRUnitTestingClusterTestStructArrayArgumentResponseParams() *raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParams { return &x.inner.MTRUnitTestingClusterTestStructArrayArgumentResponseParams }
 
 // MTRTestClusterClusterTestStructArrayArgumentResponseParamsable is the interface implemented by [MTRTestClusterClusterTestStructArrayArgumentResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestStructArrayArgumentResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestStructArrayArgumentResponseParams
+	WithArg5(arg5 *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentResponseParams
+	WithArg6(arg6 *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestStructArrayArgumentResponseParams
 }
 
 var _ MTRTestClusterClusterTestStructArrayArgumentResponseParamsable = (*MTRTestClusterClusterTestStructArrayArgumentResponseParams)(nil)

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTimeSynchronizationClusterDstOffsetType() *MTRTimeSynchronizationClus
 	return &MTRTimeSynchronizationClusterDstOffsetType{inner: raw.MTRTimeSynchronizationClusterDstOffsetTypeFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterDstOffsetType) WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterDstOffsetType {
+	x.inner.MTRTimeSynchronizationClusterDSTOffsetStruct.SetOffset(offset)
+	return x
+}
+
+// WithValidStarting sets the validStarting property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterDstOffsetType) WithValidStarting(validStarting *foundation.NSNumber) *MTRTimeSynchronizationClusterDstOffsetType {
+	x.inner.MTRTimeSynchronizationClusterDSTOffsetStruct.SetValidStarting(validStarting)
+	return x
+}
+
+// WithValidUntil sets the validUntil property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterDstOffsetType) WithValidUntil(validUntil *foundation.NSNumber) *MTRTimeSynchronizationClusterDstOffsetType {
+	x.inner.MTRTimeSynchronizationClusterDSTOffsetStruct.SetValidUntil(validUntil)
+	return x
+}
+
 func (x *MTRTimeSynchronizationClusterDstOffsetType) asMTRTimeSynchronizationClusterDSTOffsetStruct() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct { return &x.inner.MTRTimeSynchronizationClusterDSTOffsetStruct }
 
 // MTRTimeSynchronizationClusterDstOffsetTypeable is the interface implemented by [MTRTimeSynchronizationClusterDstOffsetType], for mocking and DI.
 type MTRTimeSynchronizationClusterDstOffsetTypeable interface {
 	Unwrap() *raw.MTRTimeSynchronizationClusterDstOffsetType
+	WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterDstOffsetType
+	WithValidStarting(validStarting *foundation.NSNumber) *MTRTimeSynchronizationClusterDstOffsetType
+	WithValidUntil(validUntil *foundation.NSNumber) *MTRTimeSynchronizationClusterDstOffsetType
 }
 
 var _ MTRTimeSynchronizationClusterDstOffsetTypeable = (*MTRTimeSynchronizationClusterDstOffsetType)(nil)

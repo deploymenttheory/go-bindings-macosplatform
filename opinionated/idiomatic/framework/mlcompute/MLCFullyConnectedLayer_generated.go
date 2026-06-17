@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -33,6 +34,18 @@ func FullyConnectedLayerFromID(id objc.ID) *FullyConnectedLayer {
 func NewFullyConnectedLayer() *FullyConnectedLayer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCFullyConnectedLayer")), objc.RegisterName("new"))
 	return &FullyConnectedLayer{inner: raw.MLCFullyConnectedLayerFromID(_id)}
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *FullyConnectedLayer) WithLabel(label string) *FullyConnectedLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *FullyConnectedLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *FullyConnectedLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
 }
 
 // Descriptor calls the underlying Descriptor.
@@ -85,6 +98,8 @@ func (x *FullyConnectedLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer
 // FullyConnectedLayerable is the interface implemented by [FullyConnectedLayer], for mocking and DI.
 type FullyConnectedLayerable interface {
 	Unwrap() *raw.MLCFullyConnectedLayer
+	WithLabel(label string) *FullyConnectedLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *FullyConnectedLayer
 	Descriptor() *ConvolutionDescriptor
 	Weights() *Tensor
 	Biases() *Tensor

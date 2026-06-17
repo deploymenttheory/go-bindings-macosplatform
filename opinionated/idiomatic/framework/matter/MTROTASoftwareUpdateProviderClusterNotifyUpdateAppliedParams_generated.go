@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams() *MTROtaSo
 	return &MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams{inner: raw.MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParamsFromID(_id)}
 }
 
+// WithUpdateToken sets the updateToken property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams) WithUpdateToken(updateToken *foundation.NSData) *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams.SetUpdateToken(updateToken)
+	return x
+}
+
+// WithSoftwareVersion sets the softwareVersion property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams) WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams.SetSoftwareVersion(softwareVersion)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams) asMTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams() *raw.MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams { return &x.inner.MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams }
 
 // MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams], for mocking and DI.
 type MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParamsable interface {
 	Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams
+	WithUpdateToken(updateToken *foundation.NSData) *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams
+	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams
 }
 
 var _ MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParamsable = (*MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams)(nil)

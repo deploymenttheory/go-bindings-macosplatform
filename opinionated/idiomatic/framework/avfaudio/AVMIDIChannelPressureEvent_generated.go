@@ -42,6 +42,12 @@ func (x *MIDIChannelPressureEvent) WithPressure(pressure uint) *MIDIChannelPress
 	return x
 }
 
+// WithChannel sets the channel property and returns the receiver for chaining.
+func (x *MIDIChannelPressureEvent) WithChannel(channel uint) *MIDIChannelPressureEvent {
+	x.inner.AVMIDIChannelEvent.SetChannel(channel)
+	return x
+}
+
 // Pressure calls the underlying Pressure.
 func (x *MIDIChannelPressureEvent) Pressure() uint {
 	return x.inner.Pressure()
@@ -60,6 +66,7 @@ func (x *MIDIChannelPressureEvent) asMusicEvent() *raw.AVMusicEvent { return &x.
 type MIDIChannelPressureEventable interface {
 	Unwrap() *raw.AVMIDIChannelPressureEvent
 	WithPressure(pressure uint) *MIDIChannelPressureEvent
+	WithChannel(channel uint) *MIDIChannelPressureEvent
 	Pressure() uint
 	SetPressure(pressure uint)
 }

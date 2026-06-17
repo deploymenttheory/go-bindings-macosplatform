@@ -5,6 +5,7 @@
 package gamecontroller
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
 	"github.com/ebitengine/purego/objc"
 )
@@ -56,6 +57,36 @@ func (x *ControllerButtonInput) WithTouchedChangedHandler(touchedChangedHandler 
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithValue(value float32) *ControllerButtonInput {
 	x.inner.SetValue(value)
+	return x
+}
+
+// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
+func (x *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerButtonInput {
+	x.inner.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+	return x
+}
+
+// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+func (x *ControllerButtonInput) WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput {
+	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	return x
+}
+
+// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+func (x *ControllerButtonInput) WithLocalizedName(localizedName string) *ControllerButtonInput {
+	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	return x
+}
+
+// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+func (x *ControllerButtonInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerButtonInput {
+	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	return x
+}
+
+// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+func (x *ControllerButtonInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerButtonInput {
+	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
 	return x
 }
 
@@ -120,6 +151,11 @@ type ControllerButtonInputable interface {
 	WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput
 	WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *ControllerButtonInput
 	WithValue(value float32) *ControllerButtonInput
+	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerButtonInput
+	WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput
+	WithLocalizedName(localizedName string) *ControllerButtonInput
+	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerButtonInput
+	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerButtonInput
 	SetValue(value float32)
 	ValueChangedHandler() objc.Block
 	SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool))

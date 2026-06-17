@@ -37,6 +37,78 @@ func NewPhotometricLightWithIESProfile(uRL string) *PhotometricLight {
 	return &PhotometricLight{inner: raw.MDLPhotometricLightFromID(_id)}
 }
 
+// WithLumens sets the lumens property and returns the receiver for chaining.
+func (x *PhotometricLight) WithLumens(lumens float32) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.SetLumens(lumens)
+	return x
+}
+
+// WithInnerConeAngle sets the innerConeAngle property and returns the receiver for chaining.
+func (x *PhotometricLight) WithInnerConeAngle(innerConeAngle float32) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.SetInnerConeAngle(innerConeAngle)
+	return x
+}
+
+// WithOuterConeAngle sets the outerConeAngle property and returns the receiver for chaining.
+func (x *PhotometricLight) WithOuterConeAngle(outerConeAngle float32) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.SetOuterConeAngle(outerConeAngle)
+	return x
+}
+
+// WithAttenuationStartDistance sets the attenuationStartDistance property and returns the receiver for chaining.
+func (x *PhotometricLight) WithAttenuationStartDistance(attenuationStartDistance float32) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationStartDistance(attenuationStartDistance)
+	return x
+}
+
+// WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
+func (x *PhotometricLight) WithAttenuationEndDistance(attenuationEndDistance float32) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationEndDistance(attenuationEndDistance)
+	return x
+}
+
+// WithLightType sets the lightType property and returns the receiver for chaining.
+func (x *PhotometricLight) WithLightType(lightType raw.MDLLightType) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetLightType(lightType)
+	return x
+}
+
+// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+func (x *PhotometricLight) WithColorSpace(colorSpace string) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
+	return x
+}
+
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *PhotometricLight) WithParent(parent ObjectProvider) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *PhotometricLight) WithInstance(instance ObjectProvider) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *PhotometricLight) WithTransform(transform raw.MDLTransformComponent) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *PhotometricLight) WithChildren(children raw.MDLObjectContainerComponent) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *PhotometricLight) WithHidden(hidden bool) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetHidden(hidden)
+	return x
+}
+
 // GenerateSphericalHarmonicsFromLight calls the underlying GenerateSphericalHarmonicsFromLight.
 func (x *PhotometricLight) GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel uint) {
 	x.inner.GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel)
@@ -84,6 +156,18 @@ func (x *PhotometricLight) asObject() *raw.MDLObject { return &x.inner.MDLPhysic
 // PhotometricLightable is the interface implemented by [PhotometricLight], for mocking and DI.
 type PhotometricLightable interface {
 	Unwrap() *raw.MDLPhotometricLight
+	WithLumens(lumens float32) *PhotometricLight
+	WithInnerConeAngle(innerConeAngle float32) *PhotometricLight
+	WithOuterConeAngle(outerConeAngle float32) *PhotometricLight
+	WithAttenuationStartDistance(attenuationStartDistance float32) *PhotometricLight
+	WithAttenuationEndDistance(attenuationEndDistance float32) *PhotometricLight
+	WithLightType(lightType raw.MDLLightType) *PhotometricLight
+	WithColorSpace(colorSpace string) *PhotometricLight
+	WithParent(parent ObjectProvider) *PhotometricLight
+	WithInstance(instance ObjectProvider) *PhotometricLight
+	WithTransform(transform raw.MDLTransformComponent) *PhotometricLight
+	WithChildren(children raw.MDLObjectContainerComponent) *PhotometricLight
+	WithHidden(hidden bool) *PhotometricLight
 	GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel uint)
 	GenerateCubemapFromLight(textureSize uint)
 	GenerateTexture(textureSize uint) *Texture

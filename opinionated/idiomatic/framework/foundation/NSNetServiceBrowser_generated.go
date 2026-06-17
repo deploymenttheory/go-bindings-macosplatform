@@ -48,6 +48,12 @@ func (x *NetServiceBrowser) WithIncludesPeerToPeer(includesPeerToPeer bool) *Net
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *NetServiceBrowser) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NetServiceBrowser {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
 func (x *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
 	x.inner.ScheduleInRunLoopForMode(aRunLoop, mode)
@@ -105,6 +111,7 @@ type NetServiceBrowserable interface {
 	Unwrap() *raw.NSNetServiceBrowser
 	WithDelegate(delegate raw.NSNetServiceBrowserDelegate) *NetServiceBrowser
 	WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NetServiceBrowser
 	ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
 	RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
 	SearchForBrowsableDomains()

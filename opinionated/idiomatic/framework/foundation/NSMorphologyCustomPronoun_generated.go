@@ -66,6 +66,12 @@ func (x *MorphologyCustomPronoun) WithReflexiveForm(reflexiveForm string) *Morph
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MorphologyCustomPronoun) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MorphologyCustomPronoun {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SubjectForm calls the underlying SubjectForm.
 func (x *MorphologyCustomPronoun) SubjectForm() *String {
 	_r := x.inner.SubjectForm()
@@ -146,6 +152,7 @@ type MorphologyCustomPronounable interface {
 	WithPossessiveForm(possessiveForm string) *MorphologyCustomPronoun
 	WithPossessiveAdjectiveForm(possessiveAdjectiveForm string) *MorphologyCustomPronoun
 	WithReflexiveForm(reflexiveForm string) *MorphologyCustomPronoun
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MorphologyCustomPronoun
 	SubjectForm() *String
 	SetSubjectForm(subjectForm string)
 	ObjectForm() *String

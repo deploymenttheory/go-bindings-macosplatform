@@ -39,6 +39,12 @@ func NewArrayIdentityWithDevice(device metal.MTLDevice) *ArrayIdentity {
 	return &ArrayIdentity{inner: raw.MPSNDArrayIdentityFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayIdentity) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayIdentity {
+	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 // ReshapeWithCommandBufferSourceArrayShapeDestinationArray calls the underlying ReshapeWithCommandBufferSourceArrayShapeDestinationArray.
 func (x *ArrayIdentity) ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
 	return x.inner.ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf, sourceArray, shape, destinationArray)
@@ -68,6 +74,7 @@ func (x *ArrayIdentity) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { retu
 // ArrayIdentityable is the interface implemented by [ArrayIdentity], for mocking and DI.
 type ArrayIdentityable interface {
 	Unwrap() *raw.MPSNDArrayIdentity
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayIdentity
 	ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
 	ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, numberOfDimensions uint, dimensionSizes *uint, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
 	ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray(encoder metal.MTLComputeCommandEncoder, cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray

@@ -6,6 +6,7 @@ package mpsndarray
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,24 @@ func NewArrayQuantizedMatrixMultiplicationWithDeviceLeftQuantizationDescriptorRi
 	return &ArrayQuantizedMatrixMultiplication{inner: raw.MPSNDArrayQuantizedMatrixMultiplicationFromID(_id)}
 }
 
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *ArrayQuantizedMatrixMultiplication) WithAlpha(alpha float64) *ArrayQuantizedMatrixMultiplication {
+	x.inner.MPSNDArrayMatrixMultiplication.SetAlpha(alpha)
+	return x
+}
+
+// WithBeta sets the beta property and returns the receiver for chaining.
+func (x *ArrayQuantizedMatrixMultiplication) WithBeta(beta float64) *ArrayQuantizedMatrixMultiplication {
+	x.inner.MPSNDArrayMatrixMultiplication.SetBeta(beta)
+	return x
+}
+
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayQuantizedMatrixMultiplication) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayQuantizedMatrixMultiplication {
+	x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 func (x *ArrayQuantizedMatrixMultiplication) asArrayMatrixMultiplication() *raw.MPSNDArrayMatrixMultiplication { return &x.inner.MPSNDArrayMatrixMultiplication }
 
 func (x *ArrayQuantizedMatrixMultiplication) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel }
@@ -46,6 +65,9 @@ func (x *ArrayQuantizedMatrixMultiplication) asArrayMultiaryBase() *raw.MPSNDArr
 // ArrayQuantizedMatrixMultiplicationable is the interface implemented by [ArrayQuantizedMatrixMultiplication], for mocking and DI.
 type ArrayQuantizedMatrixMultiplicationable interface {
 	Unwrap() *raw.MPSNDArrayQuantizedMatrixMultiplication
+	WithAlpha(alpha float64) *ArrayQuantizedMatrixMultiplication
+	WithBeta(beta float64) *ArrayQuantizedMatrixMultiplication
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayQuantizedMatrixMultiplication
 }
 
 var _ ArrayQuantizedMatrixMultiplicationable = (*ArrayQuantizedMatrixMultiplication)(nil)

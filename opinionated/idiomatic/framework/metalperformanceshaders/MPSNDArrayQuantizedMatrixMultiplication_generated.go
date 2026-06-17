@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,36 @@ func NewNDArrayQuantizedMatrixMultiplicationWithDeviceLeftQuantizationDescriptor
 	return &NDArrayQuantizedMatrixMultiplication{inner: raw.MPSNDArrayQuantizedMatrixMultiplicationFromID(_id)}
 }
 
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *NDArrayQuantizedMatrixMultiplication) WithAlpha(alpha float64) *NDArrayQuantizedMatrixMultiplication {
+	x.inner.MPSNDArrayMatrixMultiplication.SetAlpha(alpha)
+	return x
+}
+
+// WithBeta sets the beta property and returns the receiver for chaining.
+func (x *NDArrayQuantizedMatrixMultiplication) WithBeta(beta float64) *NDArrayQuantizedMatrixMultiplication {
+	x.inner.MPSNDArrayMatrixMultiplication.SetBeta(beta)
+	return x
+}
+
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayQuantizedMatrixMultiplication) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayQuantizedMatrixMultiplication {
+	x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayQuantizedMatrixMultiplication) WithOptions(options mpscore.MPSKernelOptions) *NDArrayQuantizedMatrixMultiplication {
+	x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayQuantizedMatrixMultiplication) WithLabel(label string) *NDArrayQuantizedMatrixMultiplication {
+	x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMatrixMultiplication() *mpsndarray.MPSNDArrayMatrixMultiplication { return &x.inner.MPSNDArrayMatrixMultiplication }
 
 func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel }
@@ -50,6 +81,11 @@ func (x *NDArrayQuantizedMatrixMultiplication) asKernel() *mpscore.MPSKernel { r
 // NDArrayQuantizedMatrixMultiplicationable is the interface implemented by [NDArrayQuantizedMatrixMultiplication], for mocking and DI.
 type NDArrayQuantizedMatrixMultiplicationable interface {
 	Unwrap() *raw.MPSNDArrayQuantizedMatrixMultiplication
+	WithAlpha(alpha float64) *NDArrayQuantizedMatrixMultiplication
+	WithBeta(beta float64) *NDArrayQuantizedMatrixMultiplication
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayQuantizedMatrixMultiplication
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayQuantizedMatrixMultiplication
+	WithLabel(label string) *NDArrayQuantizedMatrixMultiplication
 }
 
 var _ NDArrayQuantizedMatrixMultiplicationable = (*NDArrayQuantizedMatrixMultiplication)(nil)

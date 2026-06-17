@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,11 +36,25 @@ func NewAssetResourceRenewalRequest() *AssetResourceRenewalRequest {
 	return &AssetResourceRenewalRequest{inner: raw.AVAssetResourceRenewalRequestFromID(_id)}
 }
 
+// WithResponse sets the response property and returns the receiver for chaining.
+func (x *AssetResourceRenewalRequest) WithResponse(response *foundation.NSURLResponse) *AssetResourceRenewalRequest {
+	x.inner.AVAssetResourceLoadingRequest.SetResponse(response)
+	return x
+}
+
+// WithRedirect sets the redirect property and returns the receiver for chaining.
+func (x *AssetResourceRenewalRequest) WithRedirect(redirect *foundation.NSURLRequest) *AssetResourceRenewalRequest {
+	x.inner.AVAssetResourceLoadingRequest.SetRedirect(redirect)
+	return x
+}
+
 func (x *AssetResourceRenewalRequest) asAssetResourceLoadingRequest() *raw.AVAssetResourceLoadingRequest { return &x.inner.AVAssetResourceLoadingRequest }
 
 // AssetResourceRenewalRequestable is the interface implemented by [AssetResourceRenewalRequest], for mocking and DI.
 type AssetResourceRenewalRequestable interface {
 	Unwrap() *raw.AVAssetResourceRenewalRequest
+	WithResponse(response *foundation.NSURLResponse) *AssetResourceRenewalRequest
+	WithRedirect(redirect *foundation.NSURLRequest) *AssetResourceRenewalRequest
 }
 
 var _ AssetResourceRenewalRequestable = (*AssetResourceRenewalRequest)(nil)

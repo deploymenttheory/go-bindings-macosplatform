@@ -93,6 +93,12 @@ func (x *ScriptObjectSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber 
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ScriptObjectSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptObjectSpecifier {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // IndicesOfObjectsByEvaluatingWithContainerCount calls the underlying IndicesOfObjectsByEvaluatingWithContainerCount.
 func (x *ScriptObjectSpecifier) IndicesOfObjectsByEvaluatingWithContainerCount(container objc.ID, count *int64) *int64 {
 	return x.inner.IndicesOfObjectsByEvaluatingWithContainerCount(container, count)
@@ -235,6 +241,7 @@ type ScriptObjectSpecifierable interface {
 	WithKey(key string) *ScriptObjectSpecifier
 	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *ScriptObjectSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *ScriptObjectSpecifier
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptObjectSpecifier
 	IndicesOfObjectsByEvaluatingWithContainerCount(container objc.ID, count *int64) *int64
 	ObjectsByEvaluatingWithContainers(containers objc.ID) objc.ID
 	ChildSpecifier() *ScriptObjectSpecifier

@@ -37,6 +37,18 @@ func NewCNNNeuronPReLUNodeWithSourceAData(sourceNode *raw.MPSNNImageNode, aData 
 	return &CNNNeuronPReLUNode{inner: raw.MPSCNNNeuronPReLUNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNNeuronPReLUNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronPReLUNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronPReLUNode) WithLabel(label string) *CNNNeuronPReLUNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronPReLUNode) asCNNNeuronNode() *raw.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
 
 func (x *CNNNeuronPReLUNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
@@ -44,6 +56,8 @@ func (x *CNNNeuronPReLUNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.i
 // CNNNeuronPReLUNodeable is the interface implemented by [CNNNeuronPReLUNode], for mocking and DI.
 type CNNNeuronPReLUNodeable interface {
 	Unwrap() *raw.MPSCNNNeuronPReLUNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronPReLUNode
+	WithLabel(label string) *CNNNeuronPReLUNode
 }
 
 var _ CNNNeuronPReLUNodeable = (*CNNNeuronPReLUNode)(nil)

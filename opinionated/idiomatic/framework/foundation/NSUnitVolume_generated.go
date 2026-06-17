@@ -35,6 +35,12 @@ func NewUnitVolume() *UnitVolume {
 	return &UnitVolume{inner: raw.NSUnitVolumeFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitVolume) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitVolume {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitVolume) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitVolume) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitVolume) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUn
 // UnitVolumeable is the interface implemented by [UnitVolume], for mocking and DI.
 type UnitVolumeable interface {
 	Unwrap() *raw.NSUnitVolume
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitVolume
 }
 
 var _ UnitVolumeable = (*UnitVolume)(nil)

@@ -37,6 +37,18 @@ func NewTransposeLayer() *TransposeLayer {
 	return &TransposeLayer{inner: raw.MLCTransposeLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *TransposeLayer) WithLabel(label string) *TransposeLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *TransposeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *TransposeLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Dimensions returns the collection as a Go slice.
 func (x *TransposeLayer) Dimensions() []*foundation.NSNumber {
 	arr := x.inner.Dimensions()
@@ -53,6 +65,8 @@ func (x *TransposeLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // TransposeLayerable is the interface implemented by [TransposeLayer], for mocking and DI.
 type TransposeLayerable interface {
 	Unwrap() *raw.MLCTransposeLayer
+	WithLabel(label string) *TransposeLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *TransposeLayer
 	Dimensions() []*foundation.NSNumber
 }
 

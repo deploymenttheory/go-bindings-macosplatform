@@ -46,6 +46,12 @@ func (x *FileCoordinator) WithPurposeIdentifier(purposeIdentifier string) *FileC
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *FileCoordinator) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileCoordinator {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CoordinateAccessWithIntentsQueueByAccessor blocks until the operation completes or ctx is cancelled.
 func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents *raw.NSArray[*raw.NSFileAccessIntent], queue *raw.NSOperationQueue) error {
 	_ch := make(chan error, 1)
@@ -165,6 +171,7 @@ func (x *FileCoordinator) asObject() *raw.NSObject { return &x.inner.NSObject }
 type FileCoordinatorable interface {
 	Unwrap() *raw.NSFileCoordinator
 	WithPurposeIdentifier(purposeIdentifier string) *FileCoordinator
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileCoordinator
 	CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents *raw.NSArray[*raw.NSFileAccessIntent], queue *raw.NSOperationQueue) error
 	CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options raw.NSFileCoordinatorReadingOptions, outError unsafe.Pointer) (*URL, error)
 	CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer) (*URL, error)

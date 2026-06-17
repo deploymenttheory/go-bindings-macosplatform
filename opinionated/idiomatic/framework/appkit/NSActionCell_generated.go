@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,6 +36,276 @@ func NewActionCell() *ActionCell {
 	return &ActionCell{inner: raw.NSActionCellFromID(_id)}
 }
 
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *ActionCell) WithControlView(controlView ViewProvider) *ActionCell {
+	x.inner.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *ActionCell) WithType(type_ raw.NSCellType) *ActionCell {
+	x.inner.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *ActionCell) WithState(state int) *ActionCell {
+	x.inner.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *ActionCell) WithTarget(target objc.ID) *ActionCell {
+	x.inner.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *ActionCell) WithAction(action objc.SEL) *ActionCell {
+	x.inner.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *ActionCell) WithTag(tag int) *ActionCell {
+	x.inner.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *ActionCell) WithTitle(title string) *ActionCell {
+	x.inner.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ActionCell) WithEnabled(enabled bool) *ActionCell {
+	x.inner.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *ActionCell) WithContinuous(continuous bool) *ActionCell {
+	x.inner.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *ActionCell) WithEditable(editable bool) *ActionCell {
+	x.inner.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *ActionCell) WithSelectable(selectable bool) *ActionCell {
+	x.inner.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *ActionCell) WithBordered(bordered bool) *ActionCell {
+	x.inner.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *ActionCell) WithBezeled(bezeled bool) *ActionCell {
+	x.inner.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *ActionCell) WithScrollable(scrollable bool) *ActionCell {
+	x.inner.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *ActionCell) WithHighlighted(highlighted bool) *ActionCell {
+	x.inner.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *ActionCell) WithAlignment(alignment raw.NSTextAlignment) *ActionCell {
+	x.inner.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *ActionCell) WithWraps(wraps bool) *ActionCell {
+	x.inner.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *ActionCell) WithFont(font *raw.NSFont) *ActionCell {
+	x.inner.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *ActionCell) WithFormatter(formatter *foundation.NSFormatter) *ActionCell {
+	x.inner.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *ActionCell) WithObjectValue(objectValue objc.ID) *ActionCell {
+	x.inner.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *ActionCell) WithStringValue(stringValue string) *ActionCell {
+	x.inner.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *ActionCell) WithIntValue(intValue int) *ActionCell {
+	x.inner.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *ActionCell) WithFloatValue(floatValue float32) *ActionCell {
+	x.inner.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *ActionCell) WithDoubleValue(doubleValue float64) *ActionCell {
+	x.inner.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *ActionCell) WithIntegerValue(integerValue int) *ActionCell {
+	x.inner.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *ActionCell) WithImage(image *raw.NSImage) *ActionCell {
+	x.inner.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *ActionCell) WithControlSize(controlSize raw.NSControlSize) *ActionCell {
+	x.inner.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *ActionCell) WithRepresentedObject(representedObject objc.ID) *ActionCell {
+	x.inner.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *ActionCell) WithMenu(menu *raw.NSMenu) *ActionCell {
+	x.inner.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *ActionCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ActionCell {
+	x.inner.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *ActionCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ActionCell {
+	x.inner.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *ActionCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ActionCell {
+	x.inner.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *ActionCell) WithAllowsUndo(allowsUndo bool) *ActionCell {
+	x.inner.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *ActionCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ActionCell {
+	x.inner.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *ActionCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ActionCell {
+	x.inner.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *ActionCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ActionCell {
+	x.inner.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *ActionCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ActionCell {
+	x.inner.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *ActionCell) WithShowsFirstResponder(showsFirstResponder bool) *ActionCell {
+	x.inner.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *ActionCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *ActionCell {
+	x.inner.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *ActionCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ActionCell {
+	x.inner.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *ActionCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ActionCell {
+	x.inner.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *ActionCell) WithImportsGraphics(importsGraphics bool) *ActionCell {
+	x.inner.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *ActionCell) WithAllowsMixedState(allowsMixedState bool) *ActionCell {
+	x.inner.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *ActionCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ActionCell {
+	x.inner.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *ActionCell) WithControlTint(controlTint raw.NSControlTint) *ActionCell {
+	x.inner.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 func (x *ActionCell) asActionCell() *raw.NSActionCell { return x.inner }
 
 func (x *ActionCell) asCell() *raw.NSCell { return &x.inner.NSCell }
@@ -42,6 +313,51 @@ func (x *ActionCell) asCell() *raw.NSCell { return &x.inner.NSCell }
 // ActionCellable is the interface implemented by [ActionCell], for mocking and DI.
 type ActionCellable interface {
 	Unwrap() *raw.NSActionCell
+	WithControlView(controlView ViewProvider) *ActionCell
+	WithType(type_ raw.NSCellType) *ActionCell
+	WithState(state int) *ActionCell
+	WithTarget(target objc.ID) *ActionCell
+	WithAction(action objc.SEL) *ActionCell
+	WithTag(tag int) *ActionCell
+	WithTitle(title string) *ActionCell
+	WithEnabled(enabled bool) *ActionCell
+	WithContinuous(continuous bool) *ActionCell
+	WithEditable(editable bool) *ActionCell
+	WithSelectable(selectable bool) *ActionCell
+	WithBordered(bordered bool) *ActionCell
+	WithBezeled(bezeled bool) *ActionCell
+	WithScrollable(scrollable bool) *ActionCell
+	WithHighlighted(highlighted bool) *ActionCell
+	WithAlignment(alignment raw.NSTextAlignment) *ActionCell
+	WithWraps(wraps bool) *ActionCell
+	WithFont(font *raw.NSFont) *ActionCell
+	WithFormatter(formatter *foundation.NSFormatter) *ActionCell
+	WithObjectValue(objectValue objc.ID) *ActionCell
+	WithStringValue(stringValue string) *ActionCell
+	WithIntValue(intValue int) *ActionCell
+	WithFloatValue(floatValue float32) *ActionCell
+	WithDoubleValue(doubleValue float64) *ActionCell
+	WithIntegerValue(integerValue int) *ActionCell
+	WithImage(image *raw.NSImage) *ActionCell
+	WithControlSize(controlSize raw.NSControlSize) *ActionCell
+	WithRepresentedObject(representedObject objc.ID) *ActionCell
+	WithMenu(menu *raw.NSMenu) *ActionCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ActionCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ActionCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ActionCell
+	WithAllowsUndo(allowsUndo bool) *ActionCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ActionCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ActionCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *ActionCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *ActionCell
+	WithShowsFirstResponder(showsFirstResponder bool) *ActionCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *ActionCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ActionCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ActionCell
+	WithImportsGraphics(importsGraphics bool) *ActionCell
+	WithAllowsMixedState(allowsMixedState bool) *ActionCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ActionCell
+	WithControlTint(controlTint raw.NSControlTint) *ActionCell
 }
 
 var _ ActionCellable = (*ActionCell)(nil)

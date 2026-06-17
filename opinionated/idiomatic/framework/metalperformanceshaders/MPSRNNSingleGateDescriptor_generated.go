@@ -48,6 +48,36 @@ func (x *RNNSingleGateDescriptor) WithRecurrentWeights(recurrentWeights mpsneura
 	return x
 }
 
+// WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
+func (x *RNNSingleGateDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *RNNSingleGateDescriptor {
+	x.inner.MPSRNNDescriptor.SetInputFeatureChannels(inputFeatureChannels)
+	return x
+}
+
+// WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
+func (x *RNNSingleGateDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *RNNSingleGateDescriptor {
+	x.inner.MPSRNNDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
+	return x
+}
+
+// WithUseLayerInputUnitTransformMode sets the useLayerInputUnitTransformMode property and returns the receiver for chaining.
+func (x *RNNSingleGateDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNSingleGateDescriptor {
+	x.inner.MPSRNNDescriptor.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
+	return x
+}
+
+// WithUseFloat32Weights sets the useFloat32Weights property and returns the receiver for chaining.
+func (x *RNNSingleGateDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNSingleGateDescriptor {
+	x.inner.MPSRNNDescriptor.SetUseFloat32Weights(useFloat32Weights)
+	return x
+}
+
+// WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
+func (x *RNNSingleGateDescriptor) WithLayerSequenceDirection(layerSequenceDirection mpsneuralnetwork.MPSRNNSequenceDirection) *RNNSingleGateDescriptor {
+	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(layerSequenceDirection)
+	return x
+}
+
 // InputWeights calls the underlying InputWeights.
 func (x *RNNSingleGateDescriptor) InputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.InputWeights()
@@ -75,6 +105,11 @@ type RNNSingleGateDescriptorable interface {
 	Unwrap() *raw.MPSRNNSingleGateDescriptor
 	WithInputWeights(inputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *RNNSingleGateDescriptor
 	WithRecurrentWeights(recurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *RNNSingleGateDescriptor
+	WithInputFeatureChannels(inputFeatureChannels uint) *RNNSingleGateDescriptor
+	WithOutputFeatureChannels(outputFeatureChannels uint) *RNNSingleGateDescriptor
+	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNSingleGateDescriptor
+	WithUseFloat32Weights(useFloat32Weights bool) *RNNSingleGateDescriptor
+	WithLayerSequenceDirection(layerSequenceDirection mpsneuralnetwork.MPSRNNSequenceDirection) *RNNSingleGateDescriptor
 	InputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource
 	SetInputWeights(inputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource)
 	RecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource

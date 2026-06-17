@@ -42,6 +42,18 @@ func (x *MTL4MachineLearningPipelineDescriptor) WithMachineLearningFunctionDescr
 	return x
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MTL4MachineLearningPipelineDescriptor) WithLabel(label string) *MTL4MachineLearningPipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MTL4MachineLearningPipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetOptions(options)
+	return x
+}
+
 // SetInputDimensionsAtBufferIndex calls the underlying SetInputDimensionsAtBufferIndex.
 func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsAtBufferIndex(dimensions *raw.MTLTensorExtents, bufferIndex int) {
 	x.inner.SetInputDimensionsAtBufferIndex(dimensions, bufferIndex)
@@ -86,6 +98,8 @@ func (x *MTL4MachineLearningPipelineDescriptor) asMTL4PipelineDescriptor() *raw.
 type MTL4MachineLearningPipelineDescriptorable interface {
 	Unwrap() *raw.MTL4MachineLearningPipelineDescriptor
 	WithMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4MachineLearningPipelineDescriptor
+	WithLabel(label string) *MTL4MachineLearningPipelineDescriptor
+	WithOptions(options *raw.MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor
 	SetInputDimensionsAtBufferIndex(dimensions *raw.MTLTensorExtents, bufferIndex int)
 	SetInputDimensionsWithRange(dimensions *foundation.NSArray[*raw.MTLTensorExtents], range_ foundation.NSRange)
 	InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents

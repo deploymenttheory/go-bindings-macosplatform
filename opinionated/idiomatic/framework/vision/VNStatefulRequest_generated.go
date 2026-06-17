@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
@@ -38,6 +39,30 @@ func NewStatefulRequestWithFrameAnalysisSpacingCompletionHandler(frameAnalysisSp
 	return &StatefulRequest{inner: raw.VNStatefulRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *StatefulRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *StatefulRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *StatefulRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *StatefulRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *StatefulRequest) WithUsesCPUOnly(usesCPUOnly bool) *StatefulRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *StatefulRequest) WithRevision(revision uint) *StatefulRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // MinimumLatencyFrameCount calls the underlying MinimumLatencyFrameCount.
 func (x *StatefulRequest) MinimumLatencyFrameCount() int {
 	return x.inner.MinimumLatencyFrameCount()
@@ -57,6 +82,10 @@ func (x *StatefulRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBa
 // StatefulRequestable is the interface implemented by [StatefulRequest], for mocking and DI.
 type StatefulRequestable interface {
 	Unwrap() *raw.VNStatefulRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *StatefulRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *StatefulRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *StatefulRequest
+	WithRevision(revision uint) *StatefulRequest
 	MinimumLatencyFrameCount() int
 	FrameAnalysisSpacing() coremedia.CMTime
 }

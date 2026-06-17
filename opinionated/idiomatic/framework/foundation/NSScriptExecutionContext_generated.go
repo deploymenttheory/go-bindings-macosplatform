@@ -53,6 +53,12 @@ func (x *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject o
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ScriptExecutionContext) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptExecutionContext {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // TopLevelObject calls the underlying TopLevelObject.
 func (x *ScriptExecutionContext) TopLevelObject() objc.ID {
 	return x.inner.TopLevelObject()
@@ -91,6 +97,7 @@ type ScriptExecutionContextable interface {
 	WithTopLevelObject(topLevelObject objc.ID) *ScriptExecutionContext
 	WithObjectBeingTested(objectBeingTested objc.ID) *ScriptExecutionContext
 	WithRangeContainerObject(rangeContainerObject objc.ID) *ScriptExecutionContext
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptExecutionContext
 	TopLevelObject() objc.ID
 	SetTopLevelObject(topLevelObject objc.ID)
 	ObjectBeingTested() objc.ID

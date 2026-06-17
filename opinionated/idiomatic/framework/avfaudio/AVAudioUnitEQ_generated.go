@@ -43,6 +43,12 @@ func (x *AudioUnitEQ) WithGlobalGain(globalGain float32) *AudioUnitEQ {
 	return x
 }
 
+// WithBypass sets the bypass property and returns the receiver for chaining.
+func (x *AudioUnitEQ) WithBypass(bypass bool) *AudioUnitEQ {
+	x.inner.AVAudioUnitEffect.SetBypass(bypass)
+	return x
+}
+
 // Bands returns the collection as a Go slice.
 func (x *AudioUnitEQ) Bands() []*raw.AVAudioUnitEQFilterParameters {
 	arr := x.inner.Bands()
@@ -74,6 +80,7 @@ func (x *AudioUnitEQ) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUn
 type AudioUnitEQable interface {
 	Unwrap() *raw.AVAudioUnitEQ
 	WithGlobalGain(globalGain float32) *AudioUnitEQ
+	WithBypass(bypass bool) *AudioUnitEQ
 	Bands() []*raw.AVAudioUnitEQFilterParameters
 	GlobalGain() float32
 	SetGlobalGain(globalGain float32)

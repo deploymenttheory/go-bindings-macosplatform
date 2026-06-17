@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,150 @@ func NewCNNSubtractGradientWithDeviceIsSecondarySourceFilter(device metal.MTLDev
 	return &CNNSubtractGradient{inner: raw.MPSCNNSubtractGradientFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithPrimaryScale(primaryScale float32) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithSecondaryScale(secondaryScale float32) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithBias(bias float32) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.SetBias(bias)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithMinimumValue(minimumValue float32) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithMaximumValue(maximumValue float32) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithKernelOffsetX(kernelOffsetX int) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithKernelOffsetY(kernelOffsetY int) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithClipRect(clipRect metal.MTLRegion) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithPadding(padding raw.MPSNNPadding) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNSubtractGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNSubtractGradient {
+	x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNSubtractGradient) asCNNArithmeticGradient() *raw.MPSCNNArithmeticGradient { return &x.inner.MPSCNNArithmeticGradient }
 
 func (x *CNNSubtractGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel }
@@ -46,6 +191,30 @@ func (x *CNNSubtractGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { retu
 // CNNSubtractGradientable is the interface implemented by [CNNSubtractGradient], for mocking and DI.
 type CNNSubtractGradientable interface {
 	Unwrap() *raw.MPSCNNSubtractGradient
+	WithPrimaryScale(primaryScale float32) *CNNSubtractGradient
+	WithSecondaryScale(secondaryScale float32) *CNNSubtractGradient
+	WithBias(bias float32) *CNNSubtractGradient
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNSubtractGradient
+	WithMinimumValue(minimumValue float32) *CNNSubtractGradient
+	WithMaximumValue(maximumValue float32) *CNNSubtractGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNSubtractGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNSubtractGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNSubtractGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNSubtractGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNSubtractGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNSubtractGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNSubtractGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNSubtractGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNSubtractGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNSubtractGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNSubtractGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNSubtractGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNSubtractGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNSubtractGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNSubtractGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNSubtractGradient
+	WithPadding(padding raw.MPSNNPadding) *CNNSubtractGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNSubtractGradient
 }
 
 var _ CNNSubtractGradientable = (*CNNSubtractGradient)(nil)

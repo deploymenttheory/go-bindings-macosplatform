@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,60 @@ func NewMTRNetworkCommissioningClusterThreadInterfaceScanResult() *MTRNetworkCom
 	return &MTRNetworkCommissioningClusterThreadInterfaceScanResult{inner: raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultFromID(_id)}
 }
 
+// WithPanId sets the panId property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithPanId(panId *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct.SetPanId(panId)
+	return x
+}
+
+// WithExtendedPanId sets the extendedPanId property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithExtendedPanId(extendedPanId *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct.SetExtendedPanId(extendedPanId)
+	return x
+}
+
+// WithNetworkName sets the networkName property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithNetworkName(networkName string) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct.SetNetworkName(foundation.NSStringStringWithUTF8String(networkName))
+	return x
+}
+
+// WithChannel sets the channel property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithChannel(channel *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct.SetChannel(channel)
+	return x
+}
+
+// WithExtendedAddress sets the extendedAddress property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithExtendedAddress(extendedAddress *foundation.NSData) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct.SetExtendedAddress(extendedAddress)
+	return x
+}
+
+// WithRssi sets the rssi property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithRssi(rssi *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct.SetRssi(rssi)
+	return x
+}
+
+// WithLqi sets the lqi property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithLqi(lqi *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct.SetLqi(lqi)
+	return x
+}
+
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) asMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct { return &x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct }
 
 // MTRNetworkCommissioningClusterThreadInterfaceScanResultable is the interface implemented by [MTRNetworkCommissioningClusterThreadInterfaceScanResult], for mocking and DI.
 type MTRNetworkCommissioningClusterThreadInterfaceScanResultable interface {
 	Unwrap() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResult
+	WithPanId(panId *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
+	WithExtendedPanId(extendedPanId *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
+	WithNetworkName(networkName string) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
+	WithChannel(channel *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
+	WithExtendedAddress(extendedAddress *foundation.NSData) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
+	WithRssi(rssi *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
+	WithLqi(lqi *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResult
 }
 
 var _ MTRNetworkCommissioningClusterThreadInterfaceScanResultable = (*MTRNetworkCommissioningClusterThreadInterfaceScanResult)(nil)

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +38,24 @@ func NewNNReductionColumnMaxNode() *NNReductionColumnMaxNode {
 	return &NNReductionColumnMaxNode{inner: raw.MPSNNReductionColumnMaxNodeFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReductionColumnMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMaxNode {
+	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionColumnMaxNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNReductionColumnMaxNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionColumnMaxNode) WithLabel(label string) *NNReductionColumnMaxNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReductionColumnMaxNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
 
 func (x *NNReductionColumnMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
@@ -43,6 +63,9 @@ func (x *NNReductionColumnMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilte
 // NNReductionColumnMaxNodeable is the interface implemented by [NNReductionColumnMaxNode], for mocking and DI.
 type NNReductionColumnMaxNodeable interface {
 	Unwrap() *raw.MPSNNReductionColumnMaxNode
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMaxNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNReductionColumnMaxNode
+	WithLabel(label string) *NNReductionColumnMaxNode
 }
 
 var _ NNReductionColumnMaxNodeable = (*NNReductionColumnMaxNode)(nil)

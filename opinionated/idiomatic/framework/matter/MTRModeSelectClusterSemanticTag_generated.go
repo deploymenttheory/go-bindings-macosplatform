@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRModeSelectClusterSemanticTag() *MTRModeSelectClusterSemanticTag {
 	return &MTRModeSelectClusterSemanticTag{inner: raw.MTRModeSelectClusterSemanticTagFromID(_id)}
 }
 
+// WithMfgCode sets the mfgCode property and returns the receiver for chaining.
+func (x *MTRModeSelectClusterSemanticTag) WithMfgCode(mfgCode *foundation.NSNumber) *MTRModeSelectClusterSemanticTag {
+	x.inner.MTRModeSelectClusterSemanticTagStruct.SetMfgCode(mfgCode)
+	return x
+}
+
+// WithValue sets the value property and returns the receiver for chaining.
+func (x *MTRModeSelectClusterSemanticTag) WithValue(value *foundation.NSNumber) *MTRModeSelectClusterSemanticTag {
+	x.inner.MTRModeSelectClusterSemanticTagStruct.SetValue(value)
+	return x
+}
+
 func (x *MTRModeSelectClusterSemanticTag) asMTRModeSelectClusterSemanticTagStruct() *raw.MTRModeSelectClusterSemanticTagStruct { return &x.inner.MTRModeSelectClusterSemanticTagStruct }
 
 // MTRModeSelectClusterSemanticTagable is the interface implemented by [MTRModeSelectClusterSemanticTag], for mocking and DI.
 type MTRModeSelectClusterSemanticTagable interface {
 	Unwrap() *raw.MTRModeSelectClusterSemanticTag
+	WithMfgCode(mfgCode *foundation.NSNumber) *MTRModeSelectClusterSemanticTag
+	WithValue(value *foundation.NSNumber) *MTRModeSelectClusterSemanticTag
 }
 
 var _ MTRModeSelectClusterSemanticTagable = (*MTRModeSelectClusterSemanticTag)(nil)

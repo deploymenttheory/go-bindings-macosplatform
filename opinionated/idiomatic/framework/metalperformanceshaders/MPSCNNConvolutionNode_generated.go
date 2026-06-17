@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +50,18 @@ func (x *CNNConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision mpsne
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNConvolutionNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNConvolutionNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // TrainingStyle calls the underlying TrainingStyle.
 func (x *CNNConvolutionNode) TrainingStyle() mpsneuralnetwork.MPSNNTrainingStyle {
 	return x.inner.TrainingStyle()
@@ -81,6 +94,8 @@ type CNNConvolutionNodeable interface {
 	Unwrap() *raw.MPSCNNConvolutionNode
 	WithTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) *CNNConvolutionNode
 	WithAccumulatorPrecision(accumulatorPrecision mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNConvolutionNode
+	WithLabel(label string) *CNNConvolutionNode
 	TrainingStyle() mpsneuralnetwork.MPSNNTrainingStyle
 	SetTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle)
 	AccumulatorPrecision() mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption

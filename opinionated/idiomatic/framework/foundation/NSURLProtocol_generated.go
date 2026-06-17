@@ -43,6 +43,12 @@ func NewURLProtocolWithTaskCachedResponseClient(task *raw.NSURLSessionTask, cach
 	return &URLProtocol{inner: raw.NSURLProtocolFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLProtocol) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLProtocol {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StartLoading calls the underlying StartLoading.
 func (x *URLProtocol) StartLoading() {
 	x.inner.StartLoading()
@@ -90,6 +96,7 @@ func (x *URLProtocol) asObject() *raw.NSObject { return &x.inner.NSObject }
 // URLProtocolable is the interface implemented by [URLProtocol], for mocking and DI.
 type URLProtocolable interface {
 	Unwrap() *raw.NSURLProtocol
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLProtocol
 	StartLoading()
 	StopLoading()
 	Client() raw.NSURLProtocolClient

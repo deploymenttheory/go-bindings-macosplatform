@@ -47,6 +47,36 @@ func NewImageThresholdTruncateWithCoderDevice(aDecoder *foundation.NSCoder, devi
 	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageThresholdTruncate) WithOffset(offset mpscore.MPSOffset) *ImageThresholdTruncate {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageThresholdTruncate) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdTruncate {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageThresholdTruncate) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdTruncate {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageThresholdTruncate) WithOptions(options mpscore.MPSKernelOptions) *ImageThresholdTruncate {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageThresholdTruncate) WithLabel(label string) *ImageThresholdTruncate {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ThresholdValue calls the underlying ThresholdValue.
 func (x *ImageThresholdTruncate) ThresholdValue() float32 {
 	return x.inner.ThresholdValue()
@@ -64,6 +94,11 @@ func (x *ImageThresholdTruncate) asKernel() *mpscore.MPSKernel { return &x.inner
 // ImageThresholdTruncateable is the interface implemented by [ImageThresholdTruncate], for mocking and DI.
 type ImageThresholdTruncateable interface {
 	Unwrap() *raw.MPSImageThresholdTruncate
+	WithOffset(offset mpscore.MPSOffset) *ImageThresholdTruncate
+	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdTruncate
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdTruncate
+	WithOptions(options mpscore.MPSKernelOptions) *ImageThresholdTruncate
+	WithLabel(label string) *ImageThresholdTruncate
 	ThresholdValue() float32
 	Transform() *float32
 }

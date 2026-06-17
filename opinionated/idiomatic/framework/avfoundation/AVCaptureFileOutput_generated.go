@@ -61,6 +61,12 @@ func (x *CaptureFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int6
 	return x
 }
 
+// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+func (x *CaptureFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureFileOutput {
+	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	return x
+}
+
 // StartRecordingToOutputFileURLRecordingDelegate calls the underlying StartRecordingToOutputFileURLRecordingDelegate.
 func (x *CaptureFileOutput) StartRecordingToOutputFileURLRecordingDelegate(outputFileURL string, delegate raw.AVCaptureFileOutputRecordingDelegate) {
 	x.inner.StartRecordingToOutputFileURLRecordingDelegate(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputFileURL)), delegate)
@@ -157,6 +163,7 @@ type CaptureFileOutputable interface {
 	WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureFileOutput
 	WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureFileOutput
 	WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureFileOutput
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureFileOutput
 	StartRecordingToOutputFileURLRecordingDelegate(outputFileURL string, delegate raw.AVCaptureFileOutputRecordingDelegate)
 	StopRecording()
 	PauseRecording()

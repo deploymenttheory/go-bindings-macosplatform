@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +52,24 @@ func (x *ImageStatisticsMean) WithClipRectSource(clipRectSource metal.MTLRegion)
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageStatisticsMean) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMean {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageStatisticsMean) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMean {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageStatisticsMean) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMean {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // ClipRectSource calls the underlying ClipRectSource.
 func (x *ImageStatisticsMean) ClipRectSource() metal.MTLRegion {
 	return x.inner.ClipRectSource()
@@ -67,6 +86,9 @@ func (x *ImageStatisticsMean) asUnaryImageKernel() *raw.MPSUnaryImageKernel { re
 type ImageStatisticsMeanable interface {
 	Unwrap() *raw.MPSImageStatisticsMean
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMean
+	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMean
+	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMean
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMean
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }

@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -33,6 +34,18 @@ func InstanceNormalizationLayerFromID(id objc.ID) *InstanceNormalizationLayer {
 func NewInstanceNormalizationLayer() *InstanceNormalizationLayer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCInstanceNormalizationLayer")), objc.RegisterName("new"))
 	return &InstanceNormalizationLayer{inner: raw.MLCInstanceNormalizationLayerFromID(_id)}
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *InstanceNormalizationLayer) WithLabel(label string) *InstanceNormalizationLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *InstanceNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *InstanceNormalizationLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
 }
 
 // FeatureChannelCount calls the underlying FeatureChannelCount.
@@ -109,6 +122,8 @@ func (x *InstanceNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.M
 // InstanceNormalizationLayerable is the interface implemented by [InstanceNormalizationLayer], for mocking and DI.
 type InstanceNormalizationLayerable interface {
 	Unwrap() *raw.MLCInstanceNormalizationLayer
+	WithLabel(label string) *InstanceNormalizationLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *InstanceNormalizationLayer
 	FeatureChannelCount() uint
 	Mean() *Tensor
 	Variance() *Tensor

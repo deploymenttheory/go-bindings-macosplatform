@@ -35,6 +35,12 @@ func NewUnitElectricResistance() *UnitElectricResistance {
 	return &UnitElectricResistance{inner: raw.NSUnitElectricResistanceFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitElectricResistance) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricResistance {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitElectricResistance) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitElectricResistance) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitElectricResistance) asObject() *raw.NSObject { return &x.inner.NSDi
 // UnitElectricResistanceable is the interface implemented by [UnitElectricResistance], for mocking and DI.
 type UnitElectricResistanceable interface {
 	Unwrap() *raw.NSUnitElectricResistance
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricResistance
 }
 
 var _ UnitElectricResistanceable = (*UnitElectricResistance)(nil)

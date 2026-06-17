@@ -6,9 +6,13 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // StackView wraps [raw.NSStackView] with a fluent Go API.
@@ -82,6 +86,340 @@ func (x *StackView) WithDetachesHiddenViews(detachesHiddenViews bool) *StackView
 // WithHasEqualSpacing sets the hasEqualSpacing property and returns the receiver for chaining.
 func (x *StackView) WithHasEqualSpacing(hasEqualSpacing bool) *StackView {
 	x.inner.SetHasEqualSpacing(hasEqualSpacing)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *StackView) WithSubviews(items ...ViewProvider) *StackView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *StackView) WithHidden(hidden bool) *StackView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *StackView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StackView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *StackView) WithAutoresizesSubviews(autoresizesSubviews bool) *StackView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *StackView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *StackView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *StackView) WithFrame(frame corefoundation.CGRect) *StackView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *StackView) WithFrameRotation(frameRotation float64) *StackView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *StackView) WithFrameCenterRotation(frameCenterRotation float64) *StackView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *StackView) WithBoundsRotation(boundsRotation float64) *StackView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *StackView) WithBounds(bounds corefoundation.CGRect) *StackView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *StackView) WithCanDrawConcurrently(canDrawConcurrently bool) *StackView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *StackView) WithNeedsDisplay(needsDisplay bool) *StackView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *StackView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *StackView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *StackView) WithWantsRestingTouches(wantsRestingTouches bool) *StackView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *StackView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *StackView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *StackView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *StackView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *StackView) WithWantsLayer(wantsLayer bool) *StackView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *StackView) WithLayer(layer *quartzcore.CALayer) *StackView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *StackView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StackView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *StackView) WithNeedsLayout(needsLayout bool) *StackView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *StackView) WithAlphaValue(alphaValue float64) *StackView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *StackView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *StackView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *StackView) WithBackgroundFilters(items ...*coreimage.CIFilter) *StackView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *StackView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *StackView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *StackView) WithContentFilters(items ...*coreimage.CIFilter) *StackView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *StackView) WithShadow(shadow *raw.NSShadow) *StackView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *StackView) WithClipsToBounds(clipsToBounds bool) *StackView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *StackView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StackView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *StackView) WithToolTip(toolTip string) *StackView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *StackView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StackView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *StackView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StackView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *StackView) WithNextKeyView(nextKeyView ViewProvider) *StackView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *StackView) WithFocusRingType(focusRingType raw.NSFocusRingType) *StackView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *StackView) WithGestureRecognizers(items ...GestureRecognizerProvider) *StackView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *StackView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *StackView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *StackView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StackView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *StackView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StackView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *StackView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *StackView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *StackView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *StackView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *StackView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *StackView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *StackView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *StackView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *StackView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StackView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *StackView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *StackView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *StackView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *StackView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *StackView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *StackView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *StackView) WithNextResponder(nextResponder ResponderProvider) *StackView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *StackView) WithMenu(menu *raw.NSMenu) *StackView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *StackView) WithUserActivity(userActivity *foundation.NSUserActivity) *StackView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *StackView) WithTouchBar(touchBar *raw.NSTouchBar) *StackView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -293,6 +631,55 @@ type StackViewable interface {
 	WithSpacing(spacing float64) *StackView
 	WithDetachesHiddenViews(detachesHiddenViews bool) *StackView
 	WithHasEqualSpacing(hasEqualSpacing bool) *StackView
+	WithSubviews(items ...ViewProvider) *StackView
+	WithHidden(hidden bool) *StackView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StackView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *StackView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *StackView
+	WithFrame(frame corefoundation.CGRect) *StackView
+	WithFrameRotation(frameRotation float64) *StackView
+	WithFrameCenterRotation(frameCenterRotation float64) *StackView
+	WithBoundsRotation(boundsRotation float64) *StackView
+	WithBounds(bounds corefoundation.CGRect) *StackView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *StackView
+	WithNeedsDisplay(needsDisplay bool) *StackView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *StackView
+	WithWantsRestingTouches(wantsRestingTouches bool) *StackView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *StackView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *StackView
+	WithWantsLayer(wantsLayer bool) *StackView
+	WithLayer(layer *quartzcore.CALayer) *StackView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StackView
+	WithNeedsLayout(needsLayout bool) *StackView
+	WithAlphaValue(alphaValue float64) *StackView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *StackView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *StackView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *StackView
+	WithContentFilters(items ...*coreimage.CIFilter) *StackView
+	WithShadow(shadow *raw.NSShadow) *StackView
+	WithClipsToBounds(clipsToBounds bool) *StackView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StackView
+	WithToolTip(toolTip string) *StackView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StackView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StackView
+	WithNextKeyView(nextKeyView ViewProvider) *StackView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *StackView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *StackView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *StackView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StackView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StackView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *StackView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *StackView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *StackView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *StackView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StackView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *StackView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *StackView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *StackView
+	WithNextResponder(nextResponder ResponderProvider) *StackView
+	WithMenu(menu *raw.NSMenu) *StackView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *StackView
+	WithTouchBar(touchBar *raw.NSTouchBar) *StackView
 	SetCustomSpacingAfterView(spacing float64, view *raw.NSView)
 	CustomSpacingAfterView(view *raw.NSView) float64
 	AddArrangedSubview(view *raw.NSView)

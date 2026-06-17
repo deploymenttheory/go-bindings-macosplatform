@@ -45,6 +45,12 @@ func NewValueWithCoder(coder *raw.NSCoder) *Value {
 	return &Value{inner: raw.NSValueFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Value) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Value {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // GetValueSize calls the underlying GetValueSize.
 func (x *Value) GetValueSize(value unsafe.Pointer, size uint) {
 	x.inner.GetValueSize(value, size)
@@ -107,6 +113,7 @@ func (x *Value) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Valueable is the interface implemented by [Value], for mocking and DI.
 type Valueable interface {
 	Unwrap() *raw.NSValue
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Value
 	GetValueSize(value unsafe.Pointer, size uint)
 	ObjCType() unsafe.Pointer
 	IsEqualToValue(value *raw.NSValue) bool

@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -56,6 +57,54 @@ func NewCNNConvolutionWithCoderDevice(aDecoder *foundation.NSCoder, device metal
 // WithAccumulatorPrecisionOption sets the accumulatorPrecisionOption property and returns the receiver for chaining.
 func (x *CNNConvolution) WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolution {
 	x.inner.SetAccumulatorPrecisionOption(accumulatorPrecisionOption)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNConvolution) WithOffset(offset mpscore.MPSOffset) *CNNConvolution {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNConvolution) WithClipRect(clipRect metal.MTLRegion) *CNNConvolution {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNConvolution) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolution {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNConvolution) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNConvolution {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNConvolution) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNConvolution {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNConvolution) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNConvolution {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNConvolution) WithPadding(padding raw.MPSNNPadding) *CNNConvolution {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNConvolution) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNConvolution {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
 	return x
 }
 
@@ -165,6 +214,14 @@ func (x *CNNConvolution) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCN
 type CNNConvolutionable interface {
 	Unwrap() *raw.MPSCNNConvolution
 	WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolution
+	WithOffset(offset mpscore.MPSOffset) *CNNConvolution
+	WithClipRect(clipRect metal.MTLRegion) *CNNConvolution
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolution
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNConvolution
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNConvolution
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNConvolution
+	WithPadding(padding raw.MPSNNPadding) *CNNConvolution
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNConvolution
 	ReloadWeightsAndBiasesFromDataSource()
 	ReloadWeightsAndBiasesWithDataSource(dataSource raw.MPSCNNConvolutionDataSource)
 	ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *raw.MPSCNNConvolutionWeightsAndBiasesState)

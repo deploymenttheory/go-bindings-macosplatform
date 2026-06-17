@@ -73,6 +73,48 @@ func (x *MatrixFullyConnected) WithAlpha(alpha float64) *MatrixFullyConnected {
 	return x
 }
 
+// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixFullyConnected) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected {
+	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixFullyConnected) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected {
+	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixFullyConnected) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected {
+	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixFullyConnected) WithBatchStart(batchStart uint) *MatrixFullyConnected {
+	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixFullyConnected) WithBatchSize(batchSize uint) *MatrixFullyConnected {
+	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixFullyConnected) WithOptions(options mpscore.MPSKernelOptions) *MatrixFullyConnected {
+	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixFullyConnected) WithLabel(label string) *MatrixFullyConnected {
+	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
 func (x *MatrixFullyConnected) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
 	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
@@ -163,6 +205,13 @@ type MatrixFullyConnectedable interface {
 	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixFullyConnected
 	WithSourceOutputFeatureChannels(sourceOutputFeatureChannels uint) *MatrixFullyConnected
 	WithAlpha(alpha float64) *MatrixFullyConnected
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFullyConnected
+	WithBatchStart(batchStart uint) *MatrixFullyConnected
+	WithBatchSize(batchSize uint) *MatrixFullyConnected
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixFullyConnected
+	WithLabel(label string) *MatrixFullyConnected
 	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
 	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
 	NeuronParameterA() float32

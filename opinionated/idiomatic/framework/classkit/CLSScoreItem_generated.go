@@ -49,6 +49,12 @@ func (x *ScoreItem) WithMaxScore(maxScore float64) *ScoreItem {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *ScoreItem) WithTitle(title string) *ScoreItem {
+	x.inner.CLSActivityItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
 // Score calls the underlying Score.
 func (x *ScoreItem) Score() float64 {
 	return x.inner.Score()
@@ -78,6 +84,7 @@ type ScoreItemable interface {
 	Unwrap() *raw.CLSScoreItem
 	WithScore(score float64) *ScoreItem
 	WithMaxScore(maxScore float64) *ScoreItem
+	WithTitle(title string) *ScoreItem
 	Score() float64
 	SetScore(score float64)
 	MaxScore() float64

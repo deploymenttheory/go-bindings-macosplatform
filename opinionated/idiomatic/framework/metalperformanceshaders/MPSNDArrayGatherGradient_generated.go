@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
@@ -37,6 +38,24 @@ func NewNDArrayGatherGradient() *NDArrayGatherGradient {
 	return &NDArrayGatherGradient{inner: raw.MPSNDArrayGatherGradientFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayGatherGradient) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayGatherGradient {
+	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayGatherGradient) WithOptions(options mpscore.MPSKernelOptions) *NDArrayGatherGradient {
+	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayGatherGradient) WithLabel(label string) *NDArrayGatherGradient {
+	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NDArrayGatherGradient) asNDArrayBinaryPrimaryGradientKernel() *mpsndarray.MPSNDArrayBinaryPrimaryGradientKernel { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel }
 
 func (x *NDArrayGatherGradient) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel }
@@ -48,6 +67,9 @@ func (x *NDArrayGatherGradient) asKernel() *mpscore.MPSKernel { return &x.inner.
 // NDArrayGatherGradientable is the interface implemented by [NDArrayGatherGradient], for mocking and DI.
 type NDArrayGatherGradientable interface {
 	Unwrap() *raw.MPSNDArrayGatherGradient
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayGatherGradient
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayGatherGradient
+	WithLabel(label string) *NDArrayGatherGradient
 }
 
 var _ NDArrayGatherGradientable = (*NDArrayGatherGradient)(nil)

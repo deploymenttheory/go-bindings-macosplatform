@@ -47,6 +47,36 @@ func NewImageHistogramEqualizationWithCoderDevice(aDecoder *foundation.NSCoder, 
 	return &ImageHistogramEqualization{inner: raw.MPSImageHistogramEqualizationFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageHistogramEqualization) WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageHistogramEqualization) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageHistogramEqualization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramEqualization {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageHistogramEqualization) WithOptions(options mpscore.MPSKernelOptions) *ImageHistogramEqualization {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageHistogramEqualization) WithLabel(label string) *ImageHistogramEqualization {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset calls the underlying EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset.
 func (x *ImageHistogramEqualization) EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
 	x.inner.EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer, source, histogram, histogramOffset)
@@ -64,6 +94,11 @@ func (x *ImageHistogramEqualization) asKernel() *mpscore.MPSKernel { return &x.i
 // ImageHistogramEqualizationable is the interface implemented by [ImageHistogramEqualization], for mocking and DI.
 type ImageHistogramEqualizationable interface {
 	Unwrap() *raw.MPSImageHistogramEqualization
+	WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization
+	WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramEqualization
+	WithOptions(options mpscore.MPSKernelOptions) *ImageHistogramEqualization
+	WithLabel(label string) *ImageHistogramEqualization
 	EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint)
 	HistogramInfo() mpsimage.MPSImageHistogramInfo
 }

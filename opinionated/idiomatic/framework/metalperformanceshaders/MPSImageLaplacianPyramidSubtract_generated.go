@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
@@ -37,6 +39,48 @@ func NewImageLaplacianPyramidSubtract() *ImageLaplacianPyramidSubtract {
 	return &ImageLaplacianPyramidSubtract{inner: raw.MPSImageLaplacianPyramidSubtractFromID(_id)}
 }
 
+// WithLaplacianBias sets the laplacianBias property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidSubtract) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidSubtract {
+	x.inner.MPSImageLaplacianPyramid.SetLaplacianBias(laplacianBias)
+	return x
+}
+
+// WithLaplacianScale sets the laplacianScale property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidSubtract) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidSubtract {
+	x.inner.MPSImageLaplacianPyramid.SetLaplacianScale(laplacianScale)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidSubtract) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidSubtract {
+	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidSubtract) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidSubtract {
+	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidSubtract) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramidSubtract {
+	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidSubtract) WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacianPyramidSubtract {
+	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidSubtract) WithLabel(label string) *ImageLaplacianPyramidSubtract {
+	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageLaplacianPyramidSubtract) asImageLaplacianPyramid() *mpsimage.MPSImageLaplacianPyramid { return &x.inner.MPSImageLaplacianPyramid }
 
 func (x *ImageLaplacianPyramidSubtract) asImagePyramid() *mpsimage.MPSImagePyramid { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid }
@@ -48,6 +92,13 @@ func (x *ImageLaplacianPyramidSubtract) asKernel() *mpscore.MPSKernel { return &
 // ImageLaplacianPyramidSubtractable is the interface implemented by [ImageLaplacianPyramidSubtract], for mocking and DI.
 type ImageLaplacianPyramidSubtractable interface {
 	Unwrap() *raw.MPSImageLaplacianPyramidSubtract
+	WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidSubtract
+	WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidSubtract
+	WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidSubtract
+	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidSubtract
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramidSubtract
+	WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacianPyramidSubtract
+	WithLabel(label string) *ImageLaplacianPyramidSubtract
 }
 
 var _ ImageLaplacianPyramidSubtractable = (*ImageLaplacianPyramidSubtract)(nil)

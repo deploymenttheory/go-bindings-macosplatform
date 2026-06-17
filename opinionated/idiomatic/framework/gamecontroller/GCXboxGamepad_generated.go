@@ -35,6 +35,18 @@ func NewXboxGamepad() *XboxGamepad {
 	return &XboxGamepad{inner: raw.GCXboxGamepadFromID(_id)}
 }
 
+// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
+func (x *XboxGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *XboxGamepad {
+	x.inner.GCExtendedGamepad.SetValueChangedHandler(valueChangedHandler)
+	return x
+}
+
+// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
+func (x *XboxGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *XboxGamepad {
+	x.inner.GCExtendedGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+	return x
+}
+
 // PaddleButton1 calls the underlying PaddleButton1.
 func (x *XboxGamepad) PaddleButton1() *ControllerButtonInput {
 	_r := x.inner.PaddleButton1()
@@ -87,6 +99,8 @@ func (x *XboxGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { ret
 // XboxGamepadable is the interface implemented by [XboxGamepad], for mocking and DI.
 type XboxGamepadable interface {
 	Unwrap() *raw.GCXboxGamepad
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *XboxGamepad
+	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *XboxGamepad
 	PaddleButton1() *ControllerButtonInput
 	PaddleButton2() *ControllerButtonInput
 	PaddleButton3() *ControllerButtonInput

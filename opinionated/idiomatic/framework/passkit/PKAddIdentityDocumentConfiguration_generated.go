@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewAddIdentityDocumentConfiguration() *AddIdentityDocumentConfiguration {
 	return &AddIdentityDocumentConfiguration{inner: raw.PKAddIdentityDocumentConfigurationFromID(_id)}
 }
 
+// WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
+func (x *AddIdentityDocumentConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration {
+	x.inner.PKAddSecureElementPassConfiguration.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
+	return x
+}
+
+// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
+func (x *AddIdentityDocumentConfiguration) WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration {
+	x.inner.PKAddSecureElementPassConfiguration.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	return x
+}
+
 // Metadata calls the underlying Metadata.
 func (x *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata {
 	_r := x.inner.Metadata()
@@ -49,6 +62,8 @@ func (x *AddIdentityDocumentConfiguration) asAddSecureElementPassConfiguration()
 // AddIdentityDocumentConfigurationable is the interface implemented by [AddIdentityDocumentConfiguration], for mocking and DI.
 type AddIdentityDocumentConfigurationable interface {
 	Unwrap() *raw.PKAddIdentityDocumentConfiguration
+	WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration
+	WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration
 	Metadata() *IdentityDocumentMetadata
 }
 

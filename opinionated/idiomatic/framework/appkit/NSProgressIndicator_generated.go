@@ -6,8 +6,12 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ProgressIndicator wraps [raw.NSProgressIndicator] with a fluent Go API.
@@ -99,6 +103,340 @@ func (x *ProgressIndicator) WithBezeled(bezeled bool) *ProgressIndicator {
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithControlTint(controlTint raw.NSControlTint) *ProgressIndicator {
 	x.inner.SetControlTint(controlTint)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *ProgressIndicator) WithSubviews(items ...ViewProvider) *ProgressIndicator {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithHidden(hidden bool) *ProgressIndicator {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ProgressIndicator {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *ProgressIndicator {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ProgressIndicator {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithFrame(frame corefoundation.CGRect) *ProgressIndicator {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithFrameRotation(frameRotation float64) *ProgressIndicator {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithFrameCenterRotation(frameCenterRotation float64) *ProgressIndicator {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithBoundsRotation(boundsRotation float64) *ProgressIndicator {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithBounds(bounds corefoundation.CGRect) *ProgressIndicator {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *ProgressIndicator {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithNeedsDisplay(needsDisplay bool) *ProgressIndicator {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ProgressIndicator {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *ProgressIndicator {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ProgressIndicator {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ProgressIndicator {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithWantsLayer(wantsLayer bool) *ProgressIndicator {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithLayer(layer *quartzcore.CALayer) *ProgressIndicator {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ProgressIndicator {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithNeedsLayout(needsLayout bool) *ProgressIndicator {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithAlphaValue(alphaValue float64) *ProgressIndicator {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ProgressIndicator {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ProgressIndicator) WithBackgroundFilters(items ...*coreimage.CIFilter) *ProgressIndicator {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ProgressIndicator {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ProgressIndicator) WithContentFilters(items ...*coreimage.CIFilter) *ProgressIndicator {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithShadow(shadow *raw.NSShadow) *ProgressIndicator {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithClipsToBounds(clipsToBounds bool) *ProgressIndicator {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ProgressIndicator {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithToolTip(toolTip string) *ProgressIndicator {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ProgressIndicator {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ProgressIndicator {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithNextKeyView(nextKeyView ViewProvider) *ProgressIndicator {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithFocusRingType(focusRingType raw.NSFocusRingType) *ProgressIndicator {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *ProgressIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *ProgressIndicator {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ProgressIndicator {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ProgressIndicator {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ProgressIndicator {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ProgressIndicator {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ProgressIndicator {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ProgressIndicator {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ProgressIndicator {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ProgressIndicator {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ProgressIndicator {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ProgressIndicator {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ProgressIndicator {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithNextResponder(nextResponder ResponderProvider) *ProgressIndicator {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithMenu(menu *raw.NSMenu) *ProgressIndicator {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithUserActivity(userActivity *foundation.NSUserActivity) *ProgressIndicator {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *ProgressIndicator) WithTouchBar(touchBar *raw.NSTouchBar) *ProgressIndicator {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -265,6 +603,55 @@ type ProgressIndicatorable interface {
 	WithDisplayedWhenStopped(displayedWhenStopped bool) *ProgressIndicator
 	WithBezeled(bezeled bool) *ProgressIndicator
 	WithControlTint(controlTint raw.NSControlTint) *ProgressIndicator
+	WithSubviews(items ...ViewProvider) *ProgressIndicator
+	WithHidden(hidden bool) *ProgressIndicator
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ProgressIndicator
+	WithAutoresizesSubviews(autoresizesSubviews bool) *ProgressIndicator
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ProgressIndicator
+	WithFrame(frame corefoundation.CGRect) *ProgressIndicator
+	WithFrameRotation(frameRotation float64) *ProgressIndicator
+	WithFrameCenterRotation(frameCenterRotation float64) *ProgressIndicator
+	WithBoundsRotation(boundsRotation float64) *ProgressIndicator
+	WithBounds(bounds corefoundation.CGRect) *ProgressIndicator
+	WithCanDrawConcurrently(canDrawConcurrently bool) *ProgressIndicator
+	WithNeedsDisplay(needsDisplay bool) *ProgressIndicator
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ProgressIndicator
+	WithWantsRestingTouches(wantsRestingTouches bool) *ProgressIndicator
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ProgressIndicator
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ProgressIndicator
+	WithWantsLayer(wantsLayer bool) *ProgressIndicator
+	WithLayer(layer *quartzcore.CALayer) *ProgressIndicator
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ProgressIndicator
+	WithNeedsLayout(needsLayout bool) *ProgressIndicator
+	WithAlphaValue(alphaValue float64) *ProgressIndicator
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ProgressIndicator
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *ProgressIndicator
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ProgressIndicator
+	WithContentFilters(items ...*coreimage.CIFilter) *ProgressIndicator
+	WithShadow(shadow *raw.NSShadow) *ProgressIndicator
+	WithClipsToBounds(clipsToBounds bool) *ProgressIndicator
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ProgressIndicator
+	WithToolTip(toolTip string) *ProgressIndicator
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ProgressIndicator
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ProgressIndicator
+	WithNextKeyView(nextKeyView ViewProvider) *ProgressIndicator
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *ProgressIndicator
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *ProgressIndicator
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ProgressIndicator
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ProgressIndicator
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ProgressIndicator
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ProgressIndicator
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ProgressIndicator
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ProgressIndicator
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ProgressIndicator
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ProgressIndicator
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ProgressIndicator
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ProgressIndicator
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ProgressIndicator
+	WithNextResponder(nextResponder ResponderProvider) *ProgressIndicator
+	WithMenu(menu *raw.NSMenu) *ProgressIndicator
+	WithUserActivity(userActivity *foundation.NSUserActivity) *ProgressIndicator
+	WithTouchBar(touchBar *raw.NSTouchBar) *ProgressIndicator
 	IncrementBy(delta float64)
 	StartAnimation(sender objc.ID)
 	StopAnimation(sender objc.ID)

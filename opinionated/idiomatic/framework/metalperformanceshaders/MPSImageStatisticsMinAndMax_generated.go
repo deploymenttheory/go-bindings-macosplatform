@@ -53,6 +53,36 @@ func (x *ImageStatisticsMinAndMax) WithClipRectSource(clipRectSource metal.MTLRe
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageStatisticsMinAndMax) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMinAndMax {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageStatisticsMinAndMax) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMinAndMax {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageStatisticsMinAndMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMinAndMax {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageStatisticsMinAndMax) WithOptions(options mpscore.MPSKernelOptions) *ImageStatisticsMinAndMax {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageStatisticsMinAndMax) WithLabel(label string) *ImageStatisticsMinAndMax {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ClipRectSource calls the underlying ClipRectSource.
 func (x *ImageStatisticsMinAndMax) ClipRectSource() metal.MTLRegion {
 	return x.inner.ClipRectSource()
@@ -71,6 +101,11 @@ func (x *ImageStatisticsMinAndMax) asKernel() *mpscore.MPSKernel { return &x.inn
 type ImageStatisticsMinAndMaxable interface {
 	Unwrap() *raw.MPSImageStatisticsMinAndMax
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMinAndMax
+	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMinAndMax
+	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMinAndMax
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMinAndMax
+	WithOptions(options mpscore.MPSKernelOptions) *ImageStatisticsMinAndMax
+	WithLabel(label string) *ImageStatisticsMinAndMax
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }

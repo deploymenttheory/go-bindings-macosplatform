@@ -59,6 +59,132 @@ func (x *CNNPoolingAverageGradient) WithZeroPadSizeY(zeroPadSizeY uint) *CNNPool
 	return x
 }
 
+// WithSourceSize sets the sourceSize property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithSourceSize(sourceSize metal.MTLSize) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.SetSourceSize(sourceSize)
+	return x
+}
+
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithKernelOffsetX(kernelOffsetX int) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithKernelOffsetY(kernelOffsetY int) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithClipRect(clipRect metal.MTLRegion) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradient) WithLabel(label string) *CNNPoolingAverageGradient {
+	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ZeroPadSizeX calls the underlying ZeroPadSizeX.
 func (x *CNNPoolingAverageGradient) ZeroPadSizeX() uint {
 	return x.inner.ZeroPadSizeX()
@@ -92,6 +218,27 @@ type CNNPoolingAverageGradientable interface {
 	Unwrap() *raw.MPSCNNPoolingAverageGradient
 	WithZeroPadSizeX(zeroPadSizeX uint) *CNNPoolingAverageGradient
 	WithZeroPadSizeY(zeroPadSizeY uint) *CNNPoolingAverageGradient
+	WithSourceSize(sourceSize metal.MTLSize) *CNNPoolingAverageGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNPoolingAverageGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNPoolingAverageGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNPoolingAverageGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNPoolingAverageGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNPoolingAverageGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingAverageGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNPoolingAverageGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNPoolingAverageGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNPoolingAverageGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNPoolingAverageGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNPoolingAverageGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNPoolingAverageGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNPoolingAverageGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNPoolingAverageGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNPoolingAverageGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNPoolingAverageGradient
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNPoolingAverageGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingAverageGradient
+	WithOptions(options mpscore.MPSKernelOptions) *CNNPoolingAverageGradient
+	WithLabel(label string) *CNNPoolingAverageGradient
 	ZeroPadSizeX() uint
 	SetZeroPadSizeX(zeroPadSizeX uint)
 	ZeroPadSizeY() uint

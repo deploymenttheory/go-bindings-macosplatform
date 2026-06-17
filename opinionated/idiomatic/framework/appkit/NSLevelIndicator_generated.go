@@ -7,7 +7,11 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // LevelIndicator wraps [raw.NSLevelIndicator] with a fluent Go API.
@@ -129,6 +133,484 @@ func (x *LevelIndicator) WithRatingImage(ratingImage *raw.NSImage) *LevelIndicat
 // WithRatingPlaceholderImage sets the ratingPlaceholderImage property and returns the receiver for chaining.
 func (x *LevelIndicator) WithRatingPlaceholderImage(ratingPlaceholderImage *raw.NSImage) *LevelIndicator {
 	x.inner.SetRatingPlaceholderImage(ratingPlaceholderImage)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *LevelIndicator) WithTarget(target objc.ID) *LevelIndicator {
+	x.inner.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *LevelIndicator) WithAction(action objc.SEL) *LevelIndicator {
+	x.inner.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *LevelIndicator) WithTag(tag int) *LevelIndicator {
+	x.inner.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *LevelIndicator) WithIgnoresMultiClick(ignoresMultiClick bool) *LevelIndicator {
+	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *LevelIndicator) WithContinuous(continuous bool) *LevelIndicator {
+	x.inner.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *LevelIndicator) WithEnabled(enabled bool) *LevelIndicator {
+	x.inner.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *LevelIndicator) WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicator {
+	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *LevelIndicator) WithHighlighted(highlighted bool) *LevelIndicator {
+	x.inner.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *LevelIndicator) WithControlSize(controlSize raw.NSControlSize) *LevelIndicator {
+	x.inner.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *LevelIndicator) WithFormatter(formatter *foundation.NSFormatter) *LevelIndicator {
+	x.inner.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *LevelIndicator) WithObjectValue(objectValue objc.ID) *LevelIndicator {
+	x.inner.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *LevelIndicator) WithStringValue(stringValue string) *LevelIndicator {
+	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *LevelIndicator) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *LevelIndicator {
+	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *LevelIndicator) WithIntValue(intValue int) *LevelIndicator {
+	x.inner.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *LevelIndicator) WithIntegerValue(integerValue int) *LevelIndicator {
+	x.inner.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *LevelIndicator) WithFloatValue(floatValue float32) *LevelIndicator {
+	x.inner.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *LevelIndicator) WithDoubleValue(doubleValue float64) *LevelIndicator {
+	x.inner.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *LevelIndicator) WithFont(font *raw.NSFont) *LevelIndicator {
+	x.inner.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *LevelIndicator) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicator {
+	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *LevelIndicator) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *LevelIndicator {
+	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *LevelIndicator) WithAlignment(alignment raw.NSTextAlignment) *LevelIndicator {
+	x.inner.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *LevelIndicator) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *LevelIndicator {
+	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *LevelIndicator) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *LevelIndicator {
+	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *LevelIndicator) WithCell(cell CellProvider) *LevelIndicator {
+	x.inner.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *LevelIndicator) WithSubviews(items ...ViewProvider) *LevelIndicator {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *LevelIndicator) WithHidden(hidden bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *LevelIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *LevelIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *LevelIndicator) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *LevelIndicator {
+	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *LevelIndicator) WithFrame(frame corefoundation.CGRect) *LevelIndicator {
+	x.inner.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *LevelIndicator) WithFrameRotation(frameRotation float64) *LevelIndicator {
+	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *LevelIndicator) WithFrameCenterRotation(frameCenterRotation float64) *LevelIndicator {
+	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *LevelIndicator) WithBoundsRotation(boundsRotation float64) *LevelIndicator {
+	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *LevelIndicator) WithBounds(bounds corefoundation.CGRect) *LevelIndicator {
+	x.inner.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *LevelIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *LevelIndicator) WithNeedsDisplay(needsDisplay bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *LevelIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *LevelIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *LevelIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *LevelIndicator {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *LevelIndicator) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *LevelIndicator {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *LevelIndicator) WithWantsLayer(wantsLayer bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *LevelIndicator) WithLayer(layer *quartzcore.CALayer) *LevelIndicator {
+	x.inner.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *LevelIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *LevelIndicator) WithNeedsLayout(needsLayout bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *LevelIndicator) WithAlphaValue(alphaValue float64) *LevelIndicator {
+	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *LevelIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *LevelIndicator) WithBackgroundFilters(items ...*coreimage.CIFilter) *LevelIndicator {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *LevelIndicator) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *LevelIndicator {
+	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *LevelIndicator) WithContentFilters(items ...*coreimage.CIFilter) *LevelIndicator {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *LevelIndicator) WithShadow(shadow *raw.NSShadow) *LevelIndicator {
+	x.inner.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *LevelIndicator) WithClipsToBounds(clipsToBounds bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *LevelIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *LevelIndicator) WithToolTip(toolTip string) *LevelIndicator {
+	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *LevelIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *LevelIndicator {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *LevelIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *LevelIndicator {
+	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *LevelIndicator) WithNextKeyView(nextKeyView ViewProvider) *LevelIndicator {
+	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *LevelIndicator) WithFocusRingType(focusRingType raw.NSFocusRingType) *LevelIndicator {
+	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *LevelIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *LevelIndicator {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *LevelIndicator) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *LevelIndicator {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *LevelIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *LevelIndicator {
+	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *LevelIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *LevelIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *LevelIndicator {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *LevelIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *LevelIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *LevelIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *LevelIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *LevelIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *LevelIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *LevelIndicator {
+	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *LevelIndicator) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *LevelIndicator {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *LevelIndicator) WithNextResponder(nextResponder ResponderProvider) *LevelIndicator {
+	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *LevelIndicator) WithMenu(menu *raw.NSMenu) *LevelIndicator {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *LevelIndicator) WithUserActivity(userActivity *foundation.NSUserActivity) *LevelIndicator {
+	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *LevelIndicator) WithTouchBar(touchBar *raw.NSTouchBar) *LevelIndicator {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -347,6 +829,79 @@ type LevelIndicatorable interface {
 	WithPlaceholderVisibility(placeholderVisibility raw.NSLevelIndicatorPlaceholderVisibility) *LevelIndicator
 	WithRatingImage(ratingImage *raw.NSImage) *LevelIndicator
 	WithRatingPlaceholderImage(ratingPlaceholderImage *raw.NSImage) *LevelIndicator
+	WithTarget(target objc.ID) *LevelIndicator
+	WithAction(action objc.SEL) *LevelIndicator
+	WithTag(tag int) *LevelIndicator
+	WithIgnoresMultiClick(ignoresMultiClick bool) *LevelIndicator
+	WithContinuous(continuous bool) *LevelIndicator
+	WithEnabled(enabled bool) *LevelIndicator
+	WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicator
+	WithHighlighted(highlighted bool) *LevelIndicator
+	WithControlSize(controlSize raw.NSControlSize) *LevelIndicator
+	WithFormatter(formatter *foundation.NSFormatter) *LevelIndicator
+	WithObjectValue(objectValue objc.ID) *LevelIndicator
+	WithStringValue(stringValue string) *LevelIndicator
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *LevelIndicator
+	WithIntValue(intValue int) *LevelIndicator
+	WithIntegerValue(integerValue int) *LevelIndicator
+	WithFloatValue(floatValue float32) *LevelIndicator
+	WithDoubleValue(doubleValue float64) *LevelIndicator
+	WithFont(font *raw.NSFont) *LevelIndicator
+	WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicator
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *LevelIndicator
+	WithAlignment(alignment raw.NSTextAlignment) *LevelIndicator
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *LevelIndicator
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *LevelIndicator
+	WithCell(cell CellProvider) *LevelIndicator
+	WithSubviews(items ...ViewProvider) *LevelIndicator
+	WithHidden(hidden bool) *LevelIndicator
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *LevelIndicator
+	WithAutoresizesSubviews(autoresizesSubviews bool) *LevelIndicator
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *LevelIndicator
+	WithFrame(frame corefoundation.CGRect) *LevelIndicator
+	WithFrameRotation(frameRotation float64) *LevelIndicator
+	WithFrameCenterRotation(frameCenterRotation float64) *LevelIndicator
+	WithBoundsRotation(boundsRotation float64) *LevelIndicator
+	WithBounds(bounds corefoundation.CGRect) *LevelIndicator
+	WithCanDrawConcurrently(canDrawConcurrently bool) *LevelIndicator
+	WithNeedsDisplay(needsDisplay bool) *LevelIndicator
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *LevelIndicator
+	WithWantsRestingTouches(wantsRestingTouches bool) *LevelIndicator
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *LevelIndicator
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *LevelIndicator
+	WithWantsLayer(wantsLayer bool) *LevelIndicator
+	WithLayer(layer *quartzcore.CALayer) *LevelIndicator
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *LevelIndicator
+	WithNeedsLayout(needsLayout bool) *LevelIndicator
+	WithAlphaValue(alphaValue float64) *LevelIndicator
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *LevelIndicator
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *LevelIndicator
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *LevelIndicator
+	WithContentFilters(items ...*coreimage.CIFilter) *LevelIndicator
+	WithShadow(shadow *raw.NSShadow) *LevelIndicator
+	WithClipsToBounds(clipsToBounds bool) *LevelIndicator
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *LevelIndicator
+	WithToolTip(toolTip string) *LevelIndicator
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *LevelIndicator
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *LevelIndicator
+	WithNextKeyView(nextKeyView ViewProvider) *LevelIndicator
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *LevelIndicator
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *LevelIndicator
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *LevelIndicator
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *LevelIndicator
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *LevelIndicator
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *LevelIndicator
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *LevelIndicator
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *LevelIndicator
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *LevelIndicator
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *LevelIndicator
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *LevelIndicator
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *LevelIndicator
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *LevelIndicator
+	WithNextResponder(nextResponder ResponderProvider) *LevelIndicator
+	WithMenu(menu *raw.NSMenu) *LevelIndicator
+	WithUserActivity(userActivity *foundation.NSUserActivity) *LevelIndicator
+	WithTouchBar(touchBar *raw.NSTouchBar) *LevelIndicator
 	TickMarkValueAtIndex(index int) float64
 	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
 	LevelIndicatorStyle() raw.NSLevelIndicatorStyle

@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewDOMCDATASection() *DOMCDATASection {
 	return &DOMCDATASection{inner: raw.DOMCDATASectionFromID(_id)}
 }
 
+// WithData sets the data property and returns the receiver for chaining.
+func (x *DOMCDATASection) WithData(data string) *DOMCDATASection {
+	x.inner.DOMText.DOMCharacterData.SetData(foundation.NSStringStringWithUTF8String(data))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMCDATASection) WithNodeValue(nodeValue string) *DOMCDATASection {
+	x.inner.DOMText.DOMCharacterData.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMCDATASection) WithPrefix(prefix string) *DOMCDATASection {
+	x.inner.DOMText.DOMCharacterData.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMCDATASection) WithTextContent(textContent string) *DOMCDATASection {
+	x.inner.DOMText.DOMCharacterData.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 func (x *DOMCDATASection) asDOMText() *raw.DOMText { return &x.inner.DOMText }
 
 func (x *DOMCDATASection) asDOMCharacterData() *raw.DOMCharacterData { return &x.inner.DOMText.DOMCharacterData }
@@ -48,6 +73,10 @@ func (x *DOMCDATASection) asWebScriptObject() *raw.WebScriptObject { return &x.i
 // DOMCDATASectionable is the interface implemented by [DOMCDATASection], for mocking and DI.
 type DOMCDATASectionable interface {
 	Unwrap() *raw.DOMCDATASection
+	WithData(data string) *DOMCDATASection
+	WithNodeValue(nodeValue string) *DOMCDATASection
+	WithPrefix(prefix string) *DOMCDATASection
+	WithTextContent(textContent string) *DOMCDATASection
 }
 
 var _ DOMCDATASectionable = (*DOMCDATASection)(nil)

@@ -40,6 +40,28 @@ func NewDelegatingPlaybackCoordinatorWithPlaybackControlDelegate(playbackControl
 	return &DelegatingPlaybackCoordinator{inner: raw.AVDelegatingPlaybackCoordinatorFromID(_id)}
 }
 
+// WithSuspensionReasonsThatTriggerWaiting sets the collection, converting the Go slice to an NSArray.
+func (x *DelegatingPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *DelegatingPlaybackCoordinator {
+	if len(items) == 0 {
+		x.inner.AVPlaybackCoordinator.SetSuspensionReasonsThatTriggerWaiting(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.AVPlaybackCoordinator.SetSuspensionReasonsThatTriggerWaiting(_arr)
+	return x
+}
+
+// WithPauseSnapsToMediaTimeOfOriginator sets the pauseSnapsToMediaTimeOfOriginator property and returns the receiver for chaining.
+func (x *DelegatingPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *DelegatingPlaybackCoordinator {
+	x.inner.AVPlaybackCoordinator.SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator)
+	return x
+}
+
 // CoordinateRateChangeToRateOptions calls the underlying CoordinateRateChangeToRateOptions.
 func (x *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options raw.AVDelegatingPlaybackCoordinatorRateChangeOptions) {
 	x.inner.CoordinateRateChangeToRateOptions(rate, options)
@@ -79,6 +101,8 @@ func (x *DelegatingPlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackC
 // DelegatingPlaybackCoordinatorable is the interface implemented by [DelegatingPlaybackCoordinator], for mocking and DI.
 type DelegatingPlaybackCoordinatorable interface {
 	Unwrap() *raw.AVDelegatingPlaybackCoordinator
+	WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *DelegatingPlaybackCoordinator
+	WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *DelegatingPlaybackCoordinator
 	CoordinateRateChangeToRateOptions(rate float32, options raw.AVDelegatingPlaybackCoordinatorRateChangeOptions)
 	CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options raw.AVDelegatingPlaybackCoordinatorSeekOptions)
 	TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase unsafe.Pointer)

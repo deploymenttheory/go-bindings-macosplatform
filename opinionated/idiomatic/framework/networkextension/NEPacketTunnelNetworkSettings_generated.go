@@ -60,6 +60,18 @@ func (x *NEPacketTunnelNetworkSettings) WithMTU(mTU *foundation.NSNumber) *NEPac
 	return x
 }
 
+// WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
+func (x *NEPacketTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEPacketTunnelNetworkSettings {
+	x.inner.NETunnelNetworkSettings.SetDNSSettings(dNSSettings.asNEDNSSettings())
+	return x
+}
+
+// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
+func (x *NEPacketTunnelNetworkSettings) WithProxySettings(proxySettings *raw.NEProxySettings) *NEPacketTunnelNetworkSettings {
+	x.inner.NETunnelNetworkSettings.SetProxySettings(proxySettings)
+	return x
+}
+
 // IPv4Settings calls the underlying IPv4Settings.
 func (x *NEPacketTunnelNetworkSettings) IPv4Settings() *NEIPv4Settings {
 	_r := x.inner.IPv4Settings()
@@ -119,6 +131,8 @@ type NEPacketTunnelNetworkSettingsable interface {
 	WithIPv6Settings(iPv6Settings *raw.NEIPv6Settings) *NEPacketTunnelNetworkSettings
 	WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEPacketTunnelNetworkSettings
 	WithMTU(mTU *foundation.NSNumber) *NEPacketTunnelNetworkSettings
+	WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEPacketTunnelNetworkSettings
+	WithProxySettings(proxySettings *raw.NEProxySettings) *NEPacketTunnelNetworkSettings
 	IPv4Settings() *NEIPv4Settings
 	SetIPv4Settings(iPv4Settings *raw.NEIPv4Settings)
 	IPv6Settings() *NEIPv6Settings

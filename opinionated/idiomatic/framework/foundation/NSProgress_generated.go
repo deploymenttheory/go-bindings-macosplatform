@@ -134,6 +134,12 @@ func (x *Progress) WithFileCompletedCount(fileCompletedCount NumberProvider) *Pr
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Progress) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Progress {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // BecomeCurrentWithPendingUnitCount calls the underlying BecomeCurrentWithPendingUnitCount.
 func (x *Progress) BecomeCurrentWithPendingUnitCount(unitCount int64) {
 	x.inner.BecomeCurrentWithPendingUnitCount(unitCount)
@@ -472,6 +478,7 @@ type Progressable interface {
 	WithFileURL(fileURL string) *Progress
 	WithFileTotalCount(fileTotalCount NumberProvider) *Progress
 	WithFileCompletedCount(fileCompletedCount NumberProvider) *Progress
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Progress
 	BecomeCurrentWithPendingUnitCount(unitCount int64)
 	PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context, unitCount int64) error
 	ResignCurrent()

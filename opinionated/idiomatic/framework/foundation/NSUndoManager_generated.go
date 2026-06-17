@@ -66,6 +66,12 @@ func (x *UndoManager) WithRunLoopModes(items ...StringProvider) *UndoManager {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UndoManager) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UndoManager {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // BeginUndoGrouping calls the underlying BeginUndoGrouping.
 func (x *UndoManager) BeginUndoGrouping() {
 	x.inner.BeginUndoGrouping()
@@ -299,6 +305,7 @@ type UndoManagerable interface {
 	WithGroupsByEvent(groupsByEvent bool) *UndoManager
 	WithLevelsOfUndo(levelsOfUndo uint) *UndoManager
 	WithRunLoopModes(items ...StringProvider) *UndoManager
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UndoManager
 	BeginUndoGrouping()
 	EndUndoGrouping()
 	DisableUndoRegistration()

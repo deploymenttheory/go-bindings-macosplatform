@@ -85,6 +85,18 @@ func (x *BeaconRegion) WithNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay b
 	return x
 }
 
+// WithNotifyOnEntry sets the notifyOnEntry property and returns the receiver for chaining.
+func (x *BeaconRegion) WithNotifyOnEntry(notifyOnEntry bool) *BeaconRegion {
+	x.inner.CLRegion.SetNotifyOnEntry(notifyOnEntry)
+	return x
+}
+
+// WithNotifyOnExit sets the notifyOnExit property and returns the receiver for chaining.
+func (x *BeaconRegion) WithNotifyOnExit(notifyOnExit bool) *BeaconRegion {
+	x.inner.CLRegion.SetNotifyOnExit(notifyOnExit)
+	return x
+}
+
 // PeripheralDataWithMeasuredPower calls the underlying PeripheralDataWithMeasuredPower.
 func (x *BeaconRegion) PeripheralDataWithMeasuredPower(measuredPower *foundation.NSNumber) *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.PeripheralDataWithMeasuredPower(measuredPower)
@@ -135,6 +147,8 @@ func (x *BeaconRegion) asRegion() *raw.CLRegion { return &x.inner.CLRegion }
 type BeaconRegionable interface {
 	Unwrap() *raw.CLBeaconRegion
 	WithNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) *BeaconRegion
+	WithNotifyOnEntry(notifyOnEntry bool) *BeaconRegion
+	WithNotifyOnExit(notifyOnExit bool) *BeaconRegion
 	PeripheralDataWithMeasuredPower(measuredPower *foundation.NSNumber) *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]
 	BeaconIdentityConstraint() *BeaconIdentityConstraint
 	UUID() *foundation.NSUUID

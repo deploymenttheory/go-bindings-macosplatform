@@ -48,6 +48,12 @@ func (x *FileVersion) WithDiscardable(discardable bool) *FileVersion {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *FileVersion) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileVersion {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ReplaceItemAtURLOptionsError calls the underlying ReplaceItemAtURLOptionsError.
 func (x *FileVersion) ReplaceItemAtURLOptionsError(url string, options raw.NSFileVersionReplacingOptions) (*URL, error) {
 	_r, _err := x.inner.ReplaceItemAtURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
@@ -158,6 +164,7 @@ type FileVersionable interface {
 	Unwrap() *raw.NSFileVersion
 	WithResolved(resolved bool) *FileVersion
 	WithDiscardable(discardable bool) *FileVersion
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileVersion
 	ReplaceItemAtURLOptionsError(url string, options raw.NSFileVersionReplacingOptions) (*URL, error)
 	RemoveAndReturnError() error
 	URL() *URL

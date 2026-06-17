@@ -38,6 +38,12 @@ func NewCoder() *Coder {
 	return &Coder{inner: raw.NSCoderFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Coder) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Coder {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // EncodeValueOfObjCTypeAt calls the underlying EncodeValueOfObjCTypeAt.
 func (x *Coder) EncodeValueOfObjCTypeAt(type_ string, addr unsafe.Pointer) {
 	x.inner.EncodeValueOfObjCTypeAt(type_, addr)
@@ -419,6 +425,7 @@ func (x *Coder) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Coderable is the interface implemented by [Coder], for mocking and DI.
 type Coderable interface {
 	Unwrap() *raw.NSCoder
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Coder
 	EncodeValueOfObjCTypeAt(type_ string, addr unsafe.Pointer)
 	EncodeDataObject(data *raw.NSData)
 	DecodeDataObject() *Data

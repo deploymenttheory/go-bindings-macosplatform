@@ -6,6 +6,7 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,30 @@ func NewImageReduceRowMaxWithDevice(device metal.MTLDevice) *ImageReduceRowMax {
 	return &ImageReduceRowMax{inner: raw.MPSImageReduceRowMaxFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *ImageReduceRowMax) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMax {
+	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceRowMax) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMax {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceRowMax) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMax {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceRowMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMax {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageReduceRowMax) asImageReduceUnary() *raw.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
 
 func (x *ImageReduceRowMax) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
@@ -44,6 +69,10 @@ func (x *ImageReduceRowMax) asUnaryImageKernel() *raw.MPSUnaryImageKernel { retu
 // ImageReduceRowMaxable is the interface implemented by [ImageReduceRowMax], for mocking and DI.
 type ImageReduceRowMaxable interface {
 	Unwrap() *raw.MPSImageReduceRowMax
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMax
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMax
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMax
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMax
 }
 
 var _ ImageReduceRowMaxable = (*ImageReduceRowMax)(nil)

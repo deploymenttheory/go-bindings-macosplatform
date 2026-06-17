@@ -37,6 +37,12 @@ func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, stat
 	return &HTTPURLResponse{inner: raw.NSHTTPURLResponseFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *HTTPURLResponse) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPURLResponse {
+	x.inner.NSURLResponse.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ValueForHTTPHeaderField calls the underlying ValueForHTTPHeaderField.
 func (x *HTTPURLResponse) ValueForHTTPHeaderField(field string) *String {
 	_r := x.inner.ValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(field))
@@ -63,6 +69,7 @@ func (x *HTTPURLResponse) asObject() *raw.NSObject { return &x.inner.NSURLRespon
 // HTTPURLResponseable is the interface implemented by [HTTPURLResponse], for mocking and DI.
 type HTTPURLResponseable interface {
 	Unwrap() *raw.NSHTTPURLResponse
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPURLResponse
 	ValueForHTTPHeaderField(field string) *String
 	StatusCode() int
 	AllHeaderFields() *raw.NSDictionary[objc.ID, objc.ID]

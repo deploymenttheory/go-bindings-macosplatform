@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -36,6 +37,18 @@ func NewCircle() *Circle {
 	return &Circle{inner: raw.MKCircleFromID(_id)}
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *Circle) WithTitle(title string) *Circle {
+	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *Circle) WithSubtitle(subtitle string) *Circle {
+	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
 // Coordinate calls the underlying Coordinate.
 func (x *Circle) Coordinate() unsafe.Pointer {
 	return x.inner.Coordinate()
@@ -56,6 +69,8 @@ func (x *Circle) asShape() *raw.MKShape { return &x.inner.MKShape }
 // Circleable is the interface implemented by [Circle], for mocking and DI.
 type Circleable interface {
 	Unwrap() *raw.MKCircle
+	WithTitle(title string) *Circle
+	WithSubtitle(subtitle string) *Circle
 	Coordinate() unsafe.Pointer
 	Radius() unsafe.Pointer
 	BoundingMapRect() raw.MKMapRect

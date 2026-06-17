@@ -42,11 +42,18 @@ func NewImageryMapConfigurationWithElevationStyle(elevationStyle raw.MKMapElevat
 	return &ImageryMapConfiguration{inner: raw.MKImageryMapConfigurationFromID(_id)}
 }
 
+// WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
+func (x *ImageryMapConfiguration) WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *ImageryMapConfiguration {
+	x.inner.MKMapConfiguration.SetElevationStyle(elevationStyle)
+	return x
+}
+
 func (x *ImageryMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration { return &x.inner.MKMapConfiguration }
 
 // ImageryMapConfigurationable is the interface implemented by [ImageryMapConfiguration], for mocking and DI.
 type ImageryMapConfigurationable interface {
 	Unwrap() *raw.MKImageryMapConfiguration
+	WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *ImageryMapConfiguration
 }
 
 var _ ImageryMapConfigurationable = (*ImageryMapConfiguration)(nil)

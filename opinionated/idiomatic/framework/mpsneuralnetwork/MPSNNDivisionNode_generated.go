@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,84 @@ func NewNNDivisionNode() *NNDivisionNode {
 	return &NNDivisionNode{inner: raw.MPSNNDivisionNodeFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithPrimaryScale(primaryScale float32) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithSecondaryScale(secondaryScale float32) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithBias(bias float32) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithMinimumValue(minimumValue float32) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithMaximumValue(maximumValue float32) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNDivisionNode) WithLabel(label string) *NNDivisionNode {
+	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNDivisionNode) asNNBinaryArithmeticNode() *raw.MPSNNBinaryArithmeticNode { return &x.inner.MPSNNBinaryArithmeticNode }
 
 func (x *NNDivisionNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
@@ -42,6 +121,19 @@ func (x *NNDivisionNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner
 // NNDivisionNodeable is the interface implemented by [NNDivisionNode], for mocking and DI.
 type NNDivisionNodeable interface {
 	Unwrap() *raw.MPSNNDivisionNode
+	WithPrimaryScale(primaryScale float32) *NNDivisionNode
+	WithSecondaryScale(secondaryScale float32) *NNDivisionNode
+	WithBias(bias float32) *NNDivisionNode
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNDivisionNode
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNDivisionNode
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNDivisionNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNDivisionNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNDivisionNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNDivisionNode
+	WithMinimumValue(minimumValue float32) *NNDivisionNode
+	WithMaximumValue(maximumValue float32) *NNDivisionNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNDivisionNode
+	WithLabel(label string) *NNDivisionNode
 }
 
 var _ NNDivisionNodeable = (*NNDivisionNode)(nil)

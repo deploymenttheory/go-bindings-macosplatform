@@ -36,6 +36,12 @@ func NewUbiquitousKeyValueStore() *UbiquitousKeyValueStore {
 	return &UbiquitousKeyValueStore{inner: raw.NSUbiquitousKeyValueStoreFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UbiquitousKeyValueStore) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UbiquitousKeyValueStore {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *UbiquitousKeyValueStore) ObjectForKey(aKey string) objc.ID {
 	return x.inner.ObjectForKey(foundation.NSStringStringWithUTF8String(aKey))
@@ -144,6 +150,7 @@ func (x *UbiquitousKeyValueStore) asObject() *raw.NSObject { return &x.inner.NSO
 // UbiquitousKeyValueStoreable is the interface implemented by [UbiquitousKeyValueStore], for mocking and DI.
 type UbiquitousKeyValueStoreable interface {
 	Unwrap() *raw.NSUbiquitousKeyValueStore
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UbiquitousKeyValueStore
 	ObjectForKey(aKey string) objc.ID
 	SetObjectForKey(anObject objc.ID, aKey string)
 	RemoveObjectForKey(aKey string)

@@ -69,6 +69,276 @@ func (x *BrowserCell) WithAlternateImage(alternateImage *raw.NSImage) *BrowserCe
 	return x
 }
 
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *BrowserCell) WithControlView(controlView ViewProvider) *BrowserCell {
+	x.inner.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *BrowserCell) WithType(type_ raw.NSCellType) *BrowserCell {
+	x.inner.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *BrowserCell) WithState(state int) *BrowserCell {
+	x.inner.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *BrowserCell) WithTarget(target objc.ID) *BrowserCell {
+	x.inner.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *BrowserCell) WithAction(action objc.SEL) *BrowserCell {
+	x.inner.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *BrowserCell) WithTag(tag int) *BrowserCell {
+	x.inner.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *BrowserCell) WithTitle(title string) *BrowserCell {
+	x.inner.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *BrowserCell) WithEnabled(enabled bool) *BrowserCell {
+	x.inner.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *BrowserCell) WithContinuous(continuous bool) *BrowserCell {
+	x.inner.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *BrowserCell) WithEditable(editable bool) *BrowserCell {
+	x.inner.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *BrowserCell) WithSelectable(selectable bool) *BrowserCell {
+	x.inner.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *BrowserCell) WithBordered(bordered bool) *BrowserCell {
+	x.inner.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *BrowserCell) WithBezeled(bezeled bool) *BrowserCell {
+	x.inner.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *BrowserCell) WithScrollable(scrollable bool) *BrowserCell {
+	x.inner.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *BrowserCell) WithHighlighted(highlighted bool) *BrowserCell {
+	x.inner.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *BrowserCell) WithAlignment(alignment raw.NSTextAlignment) *BrowserCell {
+	x.inner.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *BrowserCell) WithWraps(wraps bool) *BrowserCell {
+	x.inner.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *BrowserCell) WithFont(font *raw.NSFont) *BrowserCell {
+	x.inner.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *BrowserCell) WithFormatter(formatter *foundation.NSFormatter) *BrowserCell {
+	x.inner.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *BrowserCell) WithObjectValue(objectValue objc.ID) *BrowserCell {
+	x.inner.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *BrowserCell) WithStringValue(stringValue string) *BrowserCell {
+	x.inner.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *BrowserCell) WithIntValue(intValue int) *BrowserCell {
+	x.inner.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *BrowserCell) WithFloatValue(floatValue float32) *BrowserCell {
+	x.inner.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *BrowserCell) WithDoubleValue(doubleValue float64) *BrowserCell {
+	x.inner.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *BrowserCell) WithIntegerValue(integerValue int) *BrowserCell {
+	x.inner.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *BrowserCell) WithImage(image *raw.NSImage) *BrowserCell {
+	x.inner.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *BrowserCell) WithControlSize(controlSize raw.NSControlSize) *BrowserCell {
+	x.inner.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *BrowserCell) WithRepresentedObject(representedObject objc.ID) *BrowserCell {
+	x.inner.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *BrowserCell) WithMenu(menu *raw.NSMenu) *BrowserCell {
+	x.inner.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *BrowserCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *BrowserCell {
+	x.inner.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *BrowserCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *BrowserCell {
+	x.inner.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *BrowserCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *BrowserCell {
+	x.inner.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *BrowserCell) WithAllowsUndo(allowsUndo bool) *BrowserCell {
+	x.inner.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *BrowserCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *BrowserCell {
+	x.inner.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *BrowserCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *BrowserCell {
+	x.inner.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *BrowserCell) WithUsesSingleLineMode(usesSingleLineMode bool) *BrowserCell {
+	x.inner.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *BrowserCell) WithRefusesFirstResponder(refusesFirstResponder bool) *BrowserCell {
+	x.inner.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *BrowserCell) WithShowsFirstResponder(showsFirstResponder bool) *BrowserCell {
+	x.inner.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *BrowserCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *BrowserCell {
+	x.inner.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *BrowserCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *BrowserCell {
+	x.inner.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *BrowserCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *BrowserCell {
+	x.inner.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *BrowserCell) WithImportsGraphics(importsGraphics bool) *BrowserCell {
+	x.inner.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *BrowserCell) WithAllowsMixedState(allowsMixedState bool) *BrowserCell {
+	x.inner.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *BrowserCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *BrowserCell {
+	x.inner.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *BrowserCell) WithControlTint(controlTint raw.NSControlTint) *BrowserCell {
+	x.inner.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // HighlightColorInView calls the underlying HighlightColorInView.
 func (x *BrowserCell) HighlightColorInView(controlView *raw.NSView) *Color {
 	_r := x.inner.HighlightColorInView(controlView)
@@ -130,6 +400,51 @@ type BrowserCellable interface {
 	WithLeaf(leaf bool) *BrowserCell
 	WithLoaded(loaded bool) *BrowserCell
 	WithAlternateImage(alternateImage *raw.NSImage) *BrowserCell
+	WithControlView(controlView ViewProvider) *BrowserCell
+	WithType(type_ raw.NSCellType) *BrowserCell
+	WithState(state int) *BrowserCell
+	WithTarget(target objc.ID) *BrowserCell
+	WithAction(action objc.SEL) *BrowserCell
+	WithTag(tag int) *BrowserCell
+	WithTitle(title string) *BrowserCell
+	WithEnabled(enabled bool) *BrowserCell
+	WithContinuous(continuous bool) *BrowserCell
+	WithEditable(editable bool) *BrowserCell
+	WithSelectable(selectable bool) *BrowserCell
+	WithBordered(bordered bool) *BrowserCell
+	WithBezeled(bezeled bool) *BrowserCell
+	WithScrollable(scrollable bool) *BrowserCell
+	WithHighlighted(highlighted bool) *BrowserCell
+	WithAlignment(alignment raw.NSTextAlignment) *BrowserCell
+	WithWraps(wraps bool) *BrowserCell
+	WithFont(font *raw.NSFont) *BrowserCell
+	WithFormatter(formatter *foundation.NSFormatter) *BrowserCell
+	WithObjectValue(objectValue objc.ID) *BrowserCell
+	WithStringValue(stringValue string) *BrowserCell
+	WithIntValue(intValue int) *BrowserCell
+	WithFloatValue(floatValue float32) *BrowserCell
+	WithDoubleValue(doubleValue float64) *BrowserCell
+	WithIntegerValue(integerValue int) *BrowserCell
+	WithImage(image *raw.NSImage) *BrowserCell
+	WithControlSize(controlSize raw.NSControlSize) *BrowserCell
+	WithRepresentedObject(representedObject objc.ID) *BrowserCell
+	WithMenu(menu *raw.NSMenu) *BrowserCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *BrowserCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *BrowserCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *BrowserCell
+	WithAllowsUndo(allowsUndo bool) *BrowserCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *BrowserCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *BrowserCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *BrowserCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *BrowserCell
+	WithShowsFirstResponder(showsFirstResponder bool) *BrowserCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *BrowserCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *BrowserCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *BrowserCell
+	WithImportsGraphics(importsGraphics bool) *BrowserCell
+	WithAllowsMixedState(allowsMixedState bool) *BrowserCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *BrowserCell
+	WithControlTint(controlTint raw.NSControlTint) *BrowserCell
 	HighlightColorInView(controlView *raw.NSView) *Color
 	Reset()
 	Set()

@@ -54,6 +54,12 @@ func (x *UserUnixTask) WithStandardError(standardError *raw.NSFileHandle) *UserU
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UserUnixTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserUnixTask {
+	x.inner.NSUserScriptTask.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ExecuteWithArgumentsCompletionHandler calls the underlying ExecuteWithArgumentsCompletionHandler.
 func (x *UserUnixTask) ExecuteWithArgumentsCompletionHandler(arguments *raw.NSArray[*raw.NSString], handler func(unsafe.Pointer)) {
 	x.inner.ExecuteWithArgumentsCompletionHandler(arguments, handler)
@@ -111,6 +117,7 @@ type UserUnixTaskable interface {
 	WithStandardInput(standardInput *raw.NSFileHandle) *UserUnixTask
 	WithStandardOutput(standardOutput *raw.NSFileHandle) *UserUnixTask
 	WithStandardError(standardError *raw.NSFileHandle) *UserUnixTask
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserUnixTask
 	ExecuteWithArgumentsCompletionHandler(arguments *raw.NSArray[*raw.NSString], handler func(unsafe.Pointer))
 	StandardInput() *FileHandle
 	SetStandardInput(standardInput *raw.NSFileHandle)

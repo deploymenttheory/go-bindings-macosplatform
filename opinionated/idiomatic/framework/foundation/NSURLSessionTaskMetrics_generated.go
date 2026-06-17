@@ -36,6 +36,12 @@ func NewURLSessionTaskMetrics() *URLSessionTaskMetrics {
 	return &URLSessionTaskMetrics{inner: raw.NSURLSessionTaskMetricsFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLSessionTaskMetrics) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionTaskMetrics {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // TransactionMetrics returns the collection as a Go slice.
 func (x *URLSessionTaskMetrics) TransactionMetrics() []*raw.NSURLSessionTaskTransactionMetrics {
 	arr := x.inner.TransactionMetrics()
@@ -66,6 +72,7 @@ func (x *URLSessionTaskMetrics) asObject() *raw.NSObject { return &x.inner.NSObj
 // URLSessionTaskMetricsable is the interface implemented by [URLSessionTaskMetrics], for mocking and DI.
 type URLSessionTaskMetricsable interface {
 	Unwrap() *raw.NSURLSessionTaskMetrics
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionTaskMetrics
 	TransactionMetrics() []*raw.NSURLSessionTaskTransactionMetrics
 	TaskInterval() *DateInterval
 	RedirectCount() uint

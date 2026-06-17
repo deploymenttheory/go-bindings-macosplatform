@@ -67,6 +67,42 @@ func (x *MatrixNeuron) WithAlpha(alpha float64) *MatrixNeuron {
 	return x
 }
 
+// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixNeuron) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixNeuron {
+	x.inner.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixNeuron) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixNeuron {
+	x.inner.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixNeuron) WithBatchStart(batchStart uint) *MatrixNeuron {
+	x.inner.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixNeuron) WithBatchSize(batchSize uint) *MatrixNeuron {
+	x.inner.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixNeuron) WithOptions(options mpscore.MPSKernelOptions) *MatrixNeuron {
+	x.inner.MPSMatrixUnaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixNeuron) WithLabel(label string) *MatrixNeuron {
+	x.inner.MPSMatrixUnaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
 func (x *MatrixNeuron) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
 	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
@@ -151,6 +187,12 @@ type MatrixNeuronable interface {
 	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixNeuron
 	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixNeuron
 	WithAlpha(alpha float64) *MatrixNeuron
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixNeuron
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixNeuron
+	WithBatchStart(batchStart uint) *MatrixNeuron
+	WithBatchSize(batchSize uint) *MatrixNeuron
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixNeuron
+	WithLabel(label string) *MatrixNeuron
 	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
 	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
 	NeuronParameterA() float32

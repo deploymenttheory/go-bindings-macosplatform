@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewInstantFundsOutFeeSummaryItem() *InstantFundsOutFeeSummaryItem {
 	return &InstantFundsOutFeeSummaryItem{inner: raw.PKInstantFundsOutFeeSummaryItemFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *InstantFundsOutFeeSummaryItem) WithLabel(label string) *InstantFundsOutFeeSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithAmount sets the amount property and returns the receiver for chaining.
+func (x *InstantFundsOutFeeSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *InstantFundsOutFeeSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetAmount(amount)
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *InstantFundsOutFeeSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *InstantFundsOutFeeSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetType(type_)
+	return x
+}
+
 func (x *InstantFundsOutFeeSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
 
 // InstantFundsOutFeeSummaryItemable is the interface implemented by [InstantFundsOutFeeSummaryItem], for mocking and DI.
 type InstantFundsOutFeeSummaryItemable interface {
 	Unwrap() *raw.PKInstantFundsOutFeeSummaryItem
+	WithLabel(label string) *InstantFundsOutFeeSummaryItem
+	WithAmount(amount *foundation.NSDecimalNumber) *InstantFundsOutFeeSummaryItem
+	WithType(type_ raw.PKPaymentSummaryItemType) *InstantFundsOutFeeSummaryItem
 }
 
 var _ InstantFundsOutFeeSummaryItemable = (*InstantFundsOutFeeSummaryItem)(nil)

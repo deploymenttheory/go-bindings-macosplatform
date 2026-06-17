@@ -103,6 +103,12 @@ func (x *InstanceAccelerationStructure) WithInstanceCount(instanceCount uint) *I
 	return x
 }
 
+// WithUsage sets the usage property and returns the receiver for chaining.
+func (x *InstanceAccelerationStructure) WithUsage(usage raw.MPSAccelerationStructureUsage) *InstanceAccelerationStructure {
+	x.inner.MPSAccelerationStructure.SetUsage(usage)
+	return x
+}
+
 // AccelerationStructures returns the collection as a Go slice.
 func (x *InstanceAccelerationStructure) AccelerationStructures() []*raw.MPSPolygonAccelerationStructure {
 	arr := x.inner.AccelerationStructures()
@@ -213,6 +219,7 @@ type InstanceAccelerationStructureable interface {
 	WithMaskBuffer(maskBuffer metal.MTLBuffer) *InstanceAccelerationStructure
 	WithMaskBufferOffset(maskBufferOffset uint) *InstanceAccelerationStructure
 	WithInstanceCount(instanceCount uint) *InstanceAccelerationStructure
+	WithUsage(usage raw.MPSAccelerationStructureUsage) *InstanceAccelerationStructure
 	AccelerationStructures() []*raw.MPSPolygonAccelerationStructure
 	SetAccelerationStructures(accelerationStructures *foundation.NSArray[*raw.MPSPolygonAccelerationStructure])
 	InstanceBuffer() metal.MTLBuffer

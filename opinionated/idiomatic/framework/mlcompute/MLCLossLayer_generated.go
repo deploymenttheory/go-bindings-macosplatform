@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewLossLayer() *LossLayer {
 	return &LossLayer{inner: raw.MLCLossLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *LossLayer) WithLabel(label string) *LossLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *LossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LossLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Descriptor calls the underlying Descriptor.
 func (x *LossLayer) Descriptor() *LossDescriptor {
 	_r := x.inner.Descriptor()
@@ -60,6 +73,8 @@ func (x *LossLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // LossLayerable is the interface implemented by [LossLayer], for mocking and DI.
 type LossLayerable interface {
 	Unwrap() *raw.MLCLossLayer
+	WithLabel(label string) *LossLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *LossLayer
 	Descriptor() *LossDescriptor
 	Weights() *Tensor
 }

@@ -42,6 +42,48 @@ func (x *Agent2D) WithRotation(rotation float32) *Agent2D {
 	return x
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *Agent2D) WithDelegate(delegate raw.GKAgentDelegate) *Agent2D {
+	x.inner.GKAgent.SetDelegate(delegate)
+	return x
+}
+
+// WithBehavior sets the behavior property and returns the receiver for chaining.
+func (x *Agent2D) WithBehavior(behavior BehaviorProvider) *Agent2D {
+	x.inner.GKAgent.SetBehavior(behavior.asBehavior())
+	return x
+}
+
+// WithMass sets the mass property and returns the receiver for chaining.
+func (x *Agent2D) WithMass(mass float32) *Agent2D {
+	x.inner.GKAgent.SetMass(mass)
+	return x
+}
+
+// WithRadius sets the radius property and returns the receiver for chaining.
+func (x *Agent2D) WithRadius(radius float32) *Agent2D {
+	x.inner.GKAgent.SetRadius(radius)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *Agent2D) WithSpeed(speed float32) *Agent2D {
+	x.inner.GKAgent.SetSpeed(speed)
+	return x
+}
+
+// WithMaxAcceleration sets the maxAcceleration property and returns the receiver for chaining.
+func (x *Agent2D) WithMaxAcceleration(maxAcceleration float32) *Agent2D {
+	x.inner.GKAgent.SetMaxAcceleration(maxAcceleration)
+	return x
+}
+
+// WithMaxSpeed sets the maxSpeed property and returns the receiver for chaining.
+func (x *Agent2D) WithMaxSpeed(maxSpeed float32) *Agent2D {
+	x.inner.GKAgent.SetMaxSpeed(maxSpeed)
+	return x
+}
+
 // Position calls the underlying Position.
 func (x *Agent2D) Position() unsafe.Pointer {
 	return x.inner.Position()
@@ -75,6 +117,13 @@ func (x *Agent2D) asComponent() *raw.GKComponent { return &x.inner.GKAgent.GKCom
 type Agent2Dable interface {
 	Unwrap() *raw.GKAgent2D
 	WithRotation(rotation float32) *Agent2D
+	WithDelegate(delegate raw.GKAgentDelegate) *Agent2D
+	WithBehavior(behavior BehaviorProvider) *Agent2D
+	WithMass(mass float32) *Agent2D
+	WithRadius(radius float32) *Agent2D
+	WithSpeed(speed float32) *Agent2D
+	WithMaxAcceleration(maxAcceleration float32) *Agent2D
+	WithMaxSpeed(maxSpeed float32) *Agent2D
 	Position() unsafe.Pointer
 	SetPosition(position unsafe.Pointer)
 	Velocity() unsafe.Pointer

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,54 @@ func NewCloneCommand() *CloneCommand {
 	return &CloneCommand{inner: raw.NSCloneCommandFromID(_id)}
 }
 
+// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
+func (x *CloneCommand) WithDirectParameter(directParameter objc.ID) *CloneCommand {
+	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+	return x
+}
+
+// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
+func (x *CloneCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CloneCommand {
+	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithArguments sets the arguments property and returns the receiver for chaining.
+func (x *CloneCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *CloneCommand {
+	x.inner.NSScriptCommand.SetArguments(arguments)
+	return x
+}
+
+// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
+func (x *CloneCommand) WithScriptErrorNumber(scriptErrorNumber int) *CloneCommand {
+	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
+	return x
+}
+
+// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
+func (x *CloneCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *CloneCommand {
+	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor)
+	return x
+}
+
+// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
+func (x *CloneCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *CloneCommand {
+	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor)
+	return x
+}
+
+// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
+func (x *CloneCommand) WithScriptErrorString(scriptErrorString string) *CloneCommand {
+	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *CloneCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CloneCommand {
+	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // KeySpecifier calls the underlying KeySpecifier.
 func (x *CloneCommand) KeySpecifier() *ScriptObjectSpecifier {
 	_r := x.inner.KeySpecifier()
@@ -51,6 +100,14 @@ func (x *CloneCommand) asObject() *raw.NSObject { return &x.inner.NSScriptComman
 // CloneCommandable is the interface implemented by [CloneCommand], for mocking and DI.
 type CloneCommandable interface {
 	Unwrap() *raw.NSCloneCommand
+	WithDirectParameter(directParameter objc.ID) *CloneCommand
+	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CloneCommand
+	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *CloneCommand
+	WithScriptErrorNumber(scriptErrorNumber int) *CloneCommand
+	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *CloneCommand
+	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *CloneCommand
+	WithScriptErrorString(scriptErrorString string) *CloneCommand
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CloneCommand
 	KeySpecifier() *ScriptObjectSpecifier
 }
 

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,54 @@ func NewCNNUpsampling() *CNNUpsampling {
 	return &CNNUpsampling{inner: raw.MPSCNNUpsamplingFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithOffset(offset mpscore.MPSOffset) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithClipRect(clipRect metal.MTLRegion) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithPadding(padding raw.MPSNNPadding) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // ScaleFactorX calls the underlying ScaleFactorX.
 func (x *CNNUpsampling) ScaleFactorX() float64 {
 	return x.inner.ScaleFactorX()
@@ -57,6 +107,14 @@ func (x *CNNUpsampling) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNN
 // CNNUpsamplingable is the interface implemented by [CNNUpsampling], for mocking and DI.
 type CNNUpsamplingable interface {
 	Unwrap() *raw.MPSCNNUpsampling
+	WithOffset(offset mpscore.MPSOffset) *CNNUpsampling
+	WithClipRect(clipRect metal.MTLRegion) *CNNUpsampling
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsampling
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsampling
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsampling
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsampling
+	WithPadding(padding raw.MPSNNPadding) *CNNUpsampling
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsampling
 	ScaleFactorX() float64
 	ScaleFactorY() float64
 	AlignCorners() bool

@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
@@ -201,6 +202,30 @@ func NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptionsCompleti
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *TargetedImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TargetedImageRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *TargetedImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TargetedImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *TargetedImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *TargetedImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *TargetedImageRequest) WithRevision(revision uint) *TargetedImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *TargetedImageRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest { return x.inner }
 
 func (x *TargetedImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
@@ -210,6 +235,10 @@ func (x *TargetedImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNIm
 // TargetedImageRequestable is the interface implemented by [TargetedImageRequest], for mocking and DI.
 type TargetedImageRequestable interface {
 	Unwrap() *raw.VNTargetedImageRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TargetedImageRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TargetedImageRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *TargetedImageRequest
+	WithRevision(revision uint) *TargetedImageRequest
 }
 
 var _ TargetedImageRequestable = (*TargetedImageRequest)(nil)

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,81 @@ func NewMTRThreadNetworkDiagnosticsClusterRouteTable() *MTRThreadNetworkDiagnost
 	return &MTRThreadNetworkDiagnosticsClusterRouteTable{inner: raw.MTRThreadNetworkDiagnosticsClusterRouteTableFromID(_id)}
 }
 
+// WithExtAddress sets the extAddress property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithExtAddress(extAddress *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct.SetExtAddress(extAddress)
+	return x
+}
+
+// WithRloc16 sets the rloc16 property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithRloc16(rloc16 *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct.SetRloc16(rloc16)
+	return x
+}
+
+// WithRouterId sets the routerId property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithRouterId(routerId *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct.SetRouterId(routerId)
+	return x
+}
+
+// WithNextHop sets the nextHop property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithNextHop(nextHop *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct.SetNextHop(nextHop)
+	return x
+}
+
+// WithPathCost sets the pathCost property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithPathCost(pathCost *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct.SetPathCost(pathCost)
+	return x
+}
+
+// WithLqiIn sets the lqiIn property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithLqiIn(lqiIn *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct.SetLqiIn(lqiIn)
+	return x
+}
+
+// WithLqiOut sets the lqiOut property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithLqiOut(lqiOut *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct.SetLqiOut(lqiOut)
+	return x
+}
+
+// WithAge sets the age property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithAge(age *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct.SetAge(age)
+	return x
+}
+
+// WithAllocated sets the allocated property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithAllocated(allocated *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct.SetAllocated(allocated)
+	return x
+}
+
+// WithLinkEstablished sets the linkEstablished property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) WithLinkEstablished(linkEstablished *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct.SetLinkEstablished(linkEstablished)
+	return x
+}
+
 func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) asMTRThreadNetworkDiagnosticsClusterRouteTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterRouteTableStruct { return &x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct }
 
 // MTRThreadNetworkDiagnosticsClusterRouteTableable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterRouteTable], for mocking and DI.
 type MTRThreadNetworkDiagnosticsClusterRouteTableable interface {
 	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterRouteTable
+	WithExtAddress(extAddress *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable
+	WithRloc16(rloc16 *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable
+	WithRouterId(routerId *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable
+	WithNextHop(nextHop *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable
+	WithPathCost(pathCost *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable
+	WithLqiIn(lqiIn *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable
+	WithLqiOut(lqiOut *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable
+	WithAge(age *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable
+	WithAllocated(allocated *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable
+	WithLinkEstablished(linkEstablished *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTable
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterRouteTableable = (*MTRThreadNetworkDiagnosticsClusterRouteTable)(nil)

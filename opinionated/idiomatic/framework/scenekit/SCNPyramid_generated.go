@@ -5,8 +5,10 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Pyramid wraps [raw.SCNPyramid] with a fluent Go API.
@@ -68,6 +70,80 @@ func (x *Pyramid) WithHeightSegmentCount(heightSegmentCount int) *Pyramid {
 // WithLengthSegmentCount sets the lengthSegmentCount property and returns the receiver for chaining.
 func (x *Pyramid) WithLengthSegmentCount(lengthSegmentCount int) *Pyramid {
 	x.inner.SetLengthSegmentCount(lengthSegmentCount)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Pyramid) WithName(name string) *Pyramid {
+	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithMaterials sets the collection, converting the Go slice to an NSArray.
+func (x *Pyramid) WithMaterials(items ...*raw.SCNMaterial) *Pyramid {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetMaterials(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetMaterials(_arr)
+	return x
+}
+
+// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+func (x *Pyramid) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Pyramid {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+	return x
+}
+
+// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
+func (x *Pyramid) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Pyramid {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+	return x
+}
+
+// WithTessellator sets the tessellator property and returns the receiver for chaining.
+func (x *Pyramid) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Pyramid {
+	x.inner.SCNGeometry.SetTessellator(tessellator)
+	return x
+}
+
+// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
+func (x *Pyramid) WithSubdivisionLevel(subdivisionLevel uint) *Pyramid {
+	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+	return x
+}
+
+// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+func (x *Pyramid) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Pyramid {
+	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	return x
+}
+
+// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+func (x *Pyramid) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Pyramid {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+	return x
+}
+
+// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+func (x *Pyramid) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Pyramid {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
 	return x
 }
 
@@ -142,6 +218,15 @@ type Pyramidable interface {
 	WithWidthSegmentCount(widthSegmentCount int) *Pyramid
 	WithHeightSegmentCount(heightSegmentCount int) *Pyramid
 	WithLengthSegmentCount(lengthSegmentCount int) *Pyramid
+	WithName(name string) *Pyramid
+	WithMaterials(items ...*raw.SCNMaterial) *Pyramid
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Pyramid
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Pyramid
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Pyramid
+	WithSubdivisionLevel(subdivisionLevel uint) *Pyramid
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Pyramid
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Pyramid
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Pyramid
 	Width() float64
 	SetWidth(width float64)
 	Height() float64

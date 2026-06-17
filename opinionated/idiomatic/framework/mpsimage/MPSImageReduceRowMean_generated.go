@@ -6,6 +6,7 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,30 @@ func NewImageReduceRowMeanWithDevice(device metal.MTLDevice) *ImageReduceRowMean
 	return &ImageReduceRowMean{inner: raw.MPSImageReduceRowMeanFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *ImageReduceRowMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMean {
+	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceRowMean) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceRowMean) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceRowMean) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageReduceRowMean) asImageReduceUnary() *raw.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
 
 func (x *ImageReduceRowMean) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
@@ -44,6 +69,10 @@ func (x *ImageReduceRowMean) asUnaryImageKernel() *raw.MPSUnaryImageKernel { ret
 // ImageReduceRowMeanable is the interface implemented by [ImageReduceRowMean], for mocking and DI.
 type ImageReduceRowMeanable interface {
 	Unwrap() *raw.MPSImageReduceRowMean
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMean
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMean
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMean
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMean
 }
 
 var _ ImageReduceRowMeanable = (*ImageReduceRowMean)(nil)

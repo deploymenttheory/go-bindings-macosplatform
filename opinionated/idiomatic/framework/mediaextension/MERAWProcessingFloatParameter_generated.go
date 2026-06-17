@@ -70,6 +70,12 @@ func (x *RAWProcessingFloatParameter) WithCurrentValue(currentValue float32) *RA
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *RAWProcessingFloatParameter) WithEnabled(enabled bool) *RAWProcessingFloatParameter {
+	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
+	return x
+}
+
 // HasNeutralValue calls the underlying HasNeutralValue.
 func (x *RAWProcessingFloatParameter) HasNeutralValue(outNeutralValue *float32) bool {
 	return x.inner.HasNeutralValue(outNeutralValue)
@@ -106,6 +112,7 @@ func (x *RAWProcessingFloatParameter) asRAWProcessingParameter() *raw.MERAWProce
 type RAWProcessingFloatParameterable interface {
 	Unwrap() *raw.MERAWProcessingFloatParameter
 	WithCurrentValue(currentValue float32) *RAWProcessingFloatParameter
+	WithEnabled(enabled bool) *RAWProcessingFloatParameter
 	HasNeutralValue(outNeutralValue *float32) bool
 	HasCameraValue(outCameraValue *float32) bool
 	MaximumValue() float32

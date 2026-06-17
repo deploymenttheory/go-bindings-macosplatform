@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +42,108 @@ func (x *DOMHTMLDListElement) WithCompact(compact bool) *DOMHTMLDListElement {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithTitle(title string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithLang(lang string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithDir(dir string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithTabIndex(tabIndex int) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithAccessKey(accessKey string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithInnerText(innerText string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithOuterText(outerText string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithContentEditable(contentEditable string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithIdName(idName string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithScrollLeft(scrollLeft int) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithScrollTop(scrollTop int) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithInnerHTML(innerHTML string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithOuterHTML(outerHTML string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithClassName(className string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithNodeValue(nodeValue string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithPrefix(prefix string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLDListElement) WithTextContent(textContent string) *DOMHTMLDListElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Compact calls the underlying Compact.
 func (x *DOMHTMLDListElement) Compact() bool {
 	return x.inner.Compact()
@@ -65,6 +168,23 @@ func (x *DOMHTMLDListElement) asWebScriptObject() *raw.WebScriptObject { return 
 type DOMHTMLDListElementable interface {
 	Unwrap() *raw.DOMHTMLDListElement
 	WithCompact(compact bool) *DOMHTMLDListElement
+	WithTitle(title string) *DOMHTMLDListElement
+	WithLang(lang string) *DOMHTMLDListElement
+	WithDir(dir string) *DOMHTMLDListElement
+	WithTabIndex(tabIndex int) *DOMHTMLDListElement
+	WithAccessKey(accessKey string) *DOMHTMLDListElement
+	WithInnerText(innerText string) *DOMHTMLDListElement
+	WithOuterText(outerText string) *DOMHTMLDListElement
+	WithContentEditable(contentEditable string) *DOMHTMLDListElement
+	WithIdName(idName string) *DOMHTMLDListElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLDListElement
+	WithScrollTop(scrollTop int) *DOMHTMLDListElement
+	WithInnerHTML(innerHTML string) *DOMHTMLDListElement
+	WithOuterHTML(outerHTML string) *DOMHTMLDListElement
+	WithClassName(className string) *DOMHTMLDListElement
+	WithNodeValue(nodeValue string) *DOMHTMLDListElement
+	WithPrefix(prefix string) *DOMHTMLDListElement
+	WithTextContent(textContent string) *DOMHTMLDListElement
 	Compact() bool
 	SetCompact(compact bool)
 }

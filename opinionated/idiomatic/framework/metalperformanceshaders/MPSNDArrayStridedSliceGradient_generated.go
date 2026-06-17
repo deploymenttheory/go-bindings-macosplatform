@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
@@ -37,6 +38,24 @@ func NewNDArrayStridedSliceGradient() *NDArrayStridedSliceGradient {
 	return &NDArrayStridedSliceGradient{inner: raw.MPSNDArrayStridedSliceGradientFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayStridedSliceGradient) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayStridedSliceGradient {
+	x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayStridedSliceGradient) WithOptions(options mpscore.MPSKernelOptions) *NDArrayStridedSliceGradient {
+	x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayStridedSliceGradient) WithLabel(label string) *NDArrayStridedSliceGradient {
+	x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NDArrayStridedSliceGradient) asNDArrayUnaryGradientKernel() *mpsndarray.MPSNDArrayUnaryGradientKernel { return &x.inner.MPSNDArrayUnaryGradientKernel }
 
 func (x *NDArrayStridedSliceGradient) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel }
@@ -48,6 +67,9 @@ func (x *NDArrayStridedSliceGradient) asKernel() *mpscore.MPSKernel { return &x.
 // NDArrayStridedSliceGradientable is the interface implemented by [NDArrayStridedSliceGradient], for mocking and DI.
 type NDArrayStridedSliceGradientable interface {
 	Unwrap() *raw.MPSNDArrayStridedSliceGradient
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayStridedSliceGradient
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayStridedSliceGradient
+	WithLabel(label string) *NDArrayStridedSliceGradient
 }
 
 var _ NDArrayStridedSliceGradientable = (*NDArrayStridedSliceGradient)(nil)

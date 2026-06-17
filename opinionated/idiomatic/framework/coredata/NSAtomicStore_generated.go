@@ -37,6 +37,30 @@ func NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(coo
 	return &AtomicStore{inner: raw.NSAtomicStoreFromID(_id)}
 }
 
+// WithURL sets the uRL property and returns the receiver for chaining.
+func (x *AtomicStore) WithURL(uRL string) *AtomicStore {
+	x.inner.NSPersistentStore.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	return x
+}
+
+// WithIdentifier sets the identifier property and returns the receiver for chaining.
+func (x *AtomicStore) WithIdentifier(identifier string) *AtomicStore {
+	x.inner.NSPersistentStore.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	return x
+}
+
+// WithReadOnly sets the readOnly property and returns the receiver for chaining.
+func (x *AtomicStore) WithReadOnly(readOnly bool) *AtomicStore {
+	x.inner.NSPersistentStore.SetReadOnly(readOnly)
+	return x
+}
+
+// WithMetadata sets the metadata property and returns the receiver for chaining.
+func (x *AtomicStore) WithMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AtomicStore {
+	x.inner.NSPersistentStore.SetMetadata(metadata)
+	return x
+}
+
 // Load returns any validation error.
 func (x *AtomicStore) Load() error {
 	_, err := x.inner.Load()
@@ -111,6 +135,10 @@ func (x *AtomicStore) asPersistentStore() *raw.NSPersistentStore { return &x.inn
 // AtomicStoreable is the interface implemented by [AtomicStore], for mocking and DI.
 type AtomicStoreable interface {
 	Unwrap() *raw.NSAtomicStore
+	WithURL(uRL string) *AtomicStore
+	WithIdentifier(identifier string) *AtomicStore
+	WithReadOnly(readOnly bool) *AtomicStore
+	WithMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AtomicStore
 	Load() error
 	Save() error
 	NewCacheNodeForManagedObject(managedObject *raw.NSManagedObject) *AtomicStoreCacheNode

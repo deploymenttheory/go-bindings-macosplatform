@@ -7,9 +7,12 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Box wraps [raw.NSBox] with a fluent Go API.
@@ -107,6 +110,340 @@ func (x *Box) WithFillColor(fillColor *raw.NSColor) *Box {
 // WithBorderType sets the borderType property and returns the receiver for chaining.
 func (x *Box) WithBorderType(borderType raw.NSBorderType) *Box {
 	x.inner.SetBorderType(borderType)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *Box) WithSubviews(items ...ViewProvider) *Box {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Box) WithHidden(hidden bool) *Box {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *Box) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Box {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *Box) WithAutoresizesSubviews(autoresizesSubviews bool) *Box {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *Box) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Box {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *Box) WithFrame(frame corefoundation.CGRect) *Box {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *Box) WithFrameRotation(frameRotation float64) *Box {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *Box) WithFrameCenterRotation(frameCenterRotation float64) *Box {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *Box) WithBoundsRotation(boundsRotation float64) *Box {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *Box) WithBounds(bounds corefoundation.CGRect) *Box {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *Box) WithCanDrawConcurrently(canDrawConcurrently bool) *Box {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *Box) WithNeedsDisplay(needsDisplay bool) *Box {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *Box) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Box {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *Box) WithWantsRestingTouches(wantsRestingTouches bool) *Box {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *Box) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Box {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *Box) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Box {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *Box) WithWantsLayer(wantsLayer bool) *Box {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *Box) WithLayer(layer *quartzcore.CALayer) *Box {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *Box) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Box {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *Box) WithNeedsLayout(needsLayout bool) *Box {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *Box) WithAlphaValue(alphaValue float64) *Box {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *Box) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Box {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Box) WithBackgroundFilters(items ...*coreimage.CIFilter) *Box {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *Box) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Box {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Box) WithContentFilters(items ...*coreimage.CIFilter) *Box {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *Box) WithShadow(shadow *raw.NSShadow) *Box {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *Box) WithClipsToBounds(clipsToBounds bool) *Box {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *Box) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Box {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *Box) WithToolTip(toolTip string) *Box {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *Box) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Box {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *Box) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Box {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *Box) WithNextKeyView(nextKeyView ViewProvider) *Box {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *Box) WithFocusRingType(focusRingType raw.NSFocusRingType) *Box {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *Box) WithGestureRecognizers(items ...GestureRecognizerProvider) *Box {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *Box) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Box {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *Box) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Box {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *Box) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *Box) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Box {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *Box) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Box {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *Box) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Box {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Box) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Box {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Box) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Box {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *Box) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Box {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *Box) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Box {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *Box) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Box {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Box) WithNextResponder(nextResponder ResponderProvider) *Box {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Box) WithMenu(menu *raw.NSMenu) *Box {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Box) WithUserActivity(userActivity *foundation.NSUserActivity) *Box {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Box) WithTouchBar(touchBar *raw.NSTouchBar) *Box {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -299,6 +636,55 @@ type Boxable interface {
 	WithBorderColor(borderColor *raw.NSColor) *Box
 	WithFillColor(fillColor *raw.NSColor) *Box
 	WithBorderType(borderType raw.NSBorderType) *Box
+	WithSubviews(items ...ViewProvider) *Box
+	WithHidden(hidden bool) *Box
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Box
+	WithAutoresizesSubviews(autoresizesSubviews bool) *Box
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Box
+	WithFrame(frame corefoundation.CGRect) *Box
+	WithFrameRotation(frameRotation float64) *Box
+	WithFrameCenterRotation(frameCenterRotation float64) *Box
+	WithBoundsRotation(boundsRotation float64) *Box
+	WithBounds(bounds corefoundation.CGRect) *Box
+	WithCanDrawConcurrently(canDrawConcurrently bool) *Box
+	WithNeedsDisplay(needsDisplay bool) *Box
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Box
+	WithWantsRestingTouches(wantsRestingTouches bool) *Box
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Box
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Box
+	WithWantsLayer(wantsLayer bool) *Box
+	WithLayer(layer *quartzcore.CALayer) *Box
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Box
+	WithNeedsLayout(needsLayout bool) *Box
+	WithAlphaValue(alphaValue float64) *Box
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Box
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *Box
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Box
+	WithContentFilters(items ...*coreimage.CIFilter) *Box
+	WithShadow(shadow *raw.NSShadow) *Box
+	WithClipsToBounds(clipsToBounds bool) *Box
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Box
+	WithToolTip(toolTip string) *Box
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Box
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Box
+	WithNextKeyView(nextKeyView ViewProvider) *Box
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *Box
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *Box
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Box
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Box
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Box
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Box
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Box
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Box
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Box
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Box
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Box
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Box
+	WithNextResponder(nextResponder ResponderProvider) *Box
+	WithMenu(menu *raw.NSMenu) *Box
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Box
+	WithTouchBar(touchBar *raw.NSTouchBar) *Box
 	SizeToFit()
 	SetFrameFromContentFrame(contentFrame corefoundation.CGRect)
 	BoxType() raw.NSBoxType

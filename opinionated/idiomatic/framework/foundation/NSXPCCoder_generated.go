@@ -43,6 +43,12 @@ func (x *XPCCoder) WithUserInfo(userInfo raw.NSObjectProtocol) *XPCCoder {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XPCCoder) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCCoder {
+	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // EncodeXPCObjectForKey calls the underlying EncodeXPCObjectForKey.
 func (x *XPCCoder) EncodeXPCObjectForKey(xpcObject *raw.NSObject, key string) {
 	x.inner.EncodeXPCObjectForKey(xpcObject, foundation.NSStringStringWithUTF8String(key))
@@ -84,6 +90,7 @@ func (x *XPCCoder) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
 type XPCCoderable interface {
 	Unwrap() *raw.NSXPCCoder
 	WithUserInfo(userInfo raw.NSObjectProtocol) *XPCCoder
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCCoder
 	EncodeXPCObjectForKey(xpcObject *raw.NSObject, key string)
 	DecodeXPCObjectOfTypeForKey(type_ unsafe.Pointer, key string) *Object
 	UserInfo() raw.NSObjectProtocol

@@ -78,6 +78,12 @@ func (x *CandidateListTouchBarItem) WithCustomizationLabel(customizationLabel st
 	return x
 }
 
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *CandidateListTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CandidateListTouchBarItem {
+	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
 // UpdateWithInsertionPointVisibility calls the underlying UpdateWithInsertionPointVisibility.
 func (x *CandidateListTouchBarItem) UpdateWithInsertionPointVisibility(isVisible bool) {
 	x.inner.UpdateWithInsertionPointVisibility(isVisible)
@@ -179,6 +185,7 @@ type CandidateListTouchBarItemable interface {
 	WithAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool) *CandidateListTouchBarItem
 	WithAttributedStringForCandidate(attributedStringForCandidate objc.Block) *CandidateListTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *CandidateListTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *CandidateListTouchBarItem
 	UpdateWithInsertionPointVisibility(isVisible bool)
 	SetCandidatesForSelectedRangeInString(candidates *foundation.NSArray[objc.ID], selectedRange foundation.NSRange, originalString string)
 	Client() *View

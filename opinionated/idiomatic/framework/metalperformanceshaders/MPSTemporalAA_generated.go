@@ -53,6 +53,18 @@ func (x *TemporalAA) WithBlendFactor(blendFactor float32) *TemporalAA {
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *TemporalAA) WithOptions(options mpscore.MPSKernelOptions) *TemporalAA {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *TemporalAA) WithLabel(label string) *TemporalAA {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
 func (x *TemporalAA) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *TemporalAA {
 	_r := x.inner.CopyWithZoneDevice(zone, device)
@@ -88,6 +100,8 @@ func (x *TemporalAA) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 type TemporalAAable interface {
 	Unwrap() *raw.MPSTemporalAA
 	WithBlendFactor(blendFactor float32) *TemporalAA
+	WithOptions(options mpscore.MPSKernelOptions) *TemporalAA
+	WithLabel(label string) *TemporalAA
 	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *TemporalAA
 	EncodeWithCoder(coder *foundation.NSCoder)
 	EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthTexture metal.MTLTexture)

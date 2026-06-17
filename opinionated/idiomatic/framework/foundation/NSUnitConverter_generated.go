@@ -35,6 +35,12 @@ func NewUnitConverter() *UnitConverter {
 	return &UnitConverter{inner: raw.NSUnitConverterFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitConverter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConverter {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // BaseUnitValueFromValue calls the underlying BaseUnitValueFromValue.
 func (x *UnitConverter) BaseUnitValueFromValue(value float64) float64 {
 	return x.inner.BaseUnitValueFromValue(value)
@@ -52,6 +58,7 @@ func (x *UnitConverter) asObject() *raw.NSObject { return &x.inner.NSObject }
 // UnitConverterable is the interface implemented by [UnitConverter], for mocking and DI.
 type UnitConverterable interface {
 	Unwrap() *raw.NSUnitConverter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConverter
 	BaseUnitValueFromValue(value float64) float64
 	ValueFromBaseUnitValue(baseUnitValue float64) float64
 }

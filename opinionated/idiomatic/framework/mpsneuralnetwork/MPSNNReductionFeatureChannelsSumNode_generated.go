@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +43,24 @@ func (x *NNReductionFeatureChannelsSumNode) WithWeight(weight float32) *NNReduct
 	return x
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReductionFeatureChannelsSumNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsSumNode {
+	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionFeatureChannelsSumNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionFeatureChannelsSumNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionFeatureChannelsSumNode) WithLabel(label string) *NNReductionFeatureChannelsSumNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Weight calls the underlying Weight.
 func (x *NNReductionFeatureChannelsSumNode) Weight() float32 {
 	return x.inner.Weight()
@@ -59,6 +79,9 @@ func (x *NNReductionFeatureChannelsSumNode) asNNFilterNode() *raw.MPSNNFilterNod
 type NNReductionFeatureChannelsSumNodeable interface {
 	Unwrap() *raw.MPSNNReductionFeatureChannelsSumNode
 	WithWeight(weight float32) *NNReductionFeatureChannelsSumNode
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsSumNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionFeatureChannelsSumNode
+	WithLabel(label string) *NNReductionFeatureChannelsSumNode
 	Weight() float32
 	SetWeight(weight float32)
 }

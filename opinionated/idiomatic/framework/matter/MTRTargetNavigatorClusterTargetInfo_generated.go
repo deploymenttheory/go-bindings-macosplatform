@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTargetNavigatorClusterTargetInfo() *MTRTargetNavigatorClusterTargetIn
 	return &MTRTargetNavigatorClusterTargetInfo{inner: raw.MTRTargetNavigatorClusterTargetInfoFromID(_id)}
 }
 
+// WithIdentifier sets the identifier property and returns the receiver for chaining.
+func (x *MTRTargetNavigatorClusterTargetInfo) WithIdentifier(identifier *foundation.NSNumber) *MTRTargetNavigatorClusterTargetInfo {
+	x.inner.MTRTargetNavigatorClusterTargetInfoStruct.SetIdentifier(identifier)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *MTRTargetNavigatorClusterTargetInfo) WithName(name string) *MTRTargetNavigatorClusterTargetInfo {
+	x.inner.MTRTargetNavigatorClusterTargetInfoStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
 func (x *MTRTargetNavigatorClusterTargetInfo) asMTRTargetNavigatorClusterTargetInfoStruct() *raw.MTRTargetNavigatorClusterTargetInfoStruct { return &x.inner.MTRTargetNavigatorClusterTargetInfoStruct }
 
 // MTRTargetNavigatorClusterTargetInfoable is the interface implemented by [MTRTargetNavigatorClusterTargetInfo], for mocking and DI.
 type MTRTargetNavigatorClusterTargetInfoable interface {
 	Unwrap() *raw.MTRTargetNavigatorClusterTargetInfo
+	WithIdentifier(identifier *foundation.NSNumber) *MTRTargetNavigatorClusterTargetInfo
+	WithName(name string) *MTRTargetNavigatorClusterTargetInfo
 }
 
 var _ MTRTargetNavigatorClusterTargetInfoable = (*MTRTargetNavigatorClusterTargetInfo)(nil)

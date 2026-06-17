@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNGroupNormalizationGradientNodeWithSourceGradientSourceImageGradientSt
 	return &CNNGroupNormalizationGradientNode{inner: raw.MPSCNNGroupNormalizationGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNGroupNormalizationGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNGroupNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNGroupNormalizationGradientNode) WithLabel(label string) *CNNGroupNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNGroupNormalizationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNGroupNormalizationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
@@ -44,6 +57,8 @@ func (x *CNNGroupNormalizationGradientNode) asNNFilterNode() *mpsneuralnetwork.M
 // CNNGroupNormalizationGradientNodeable is the interface implemented by [CNNGroupNormalizationGradientNode], for mocking and DI.
 type CNNGroupNormalizationGradientNodeable interface {
 	Unwrap() *raw.MPSCNNGroupNormalizationGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNGroupNormalizationGradientNode
+	WithLabel(label string) *CNNGroupNormalizationGradientNode
 }
 
 var _ CNNGroupNormalizationGradientNodeable = (*CNNGroupNormalizationGradientNode)(nil)

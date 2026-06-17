@@ -6,7 +6,10 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SplitViewItemAccessoryViewController wraps [raw.NSSplitViewItemAccessoryViewController] with a fluent Go API.
@@ -50,6 +53,82 @@ func (x *SplitViewItemAccessoryViewController) WithAutomaticallyAppliesContentIn
 // WithPreferredScrollEdgeEffectStyle sets the preferredScrollEdgeEffectStyle property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) *SplitViewItemAccessoryViewController {
 	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *SplitViewItemAccessoryViewController) WithRepresentedObject(representedObject objc.ID) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *SplitViewItemAccessoryViewController) WithTitle(title string) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *SplitViewItemAccessoryViewController) WithView(view ViewProvider) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.SetView(view.asView())
+	return x
+}
+
+// WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
+func (x *SplitViewItemAccessoryViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
+	return x
+}
+
+// WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
+func (x *SplitViewItemAccessoryViewController) WithChildViewControllers(items ...ViewControllerProvider) *SplitViewItemAccessoryViewController {
+	if len(items) == 0 {
+		x.inner.NSViewController.SetChildViewControllers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSViewController](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSViewController.SetChildViewControllers(_arr)
+	return x
+}
+
+// WithSourceItemView sets the sourceItemView property and returns the receiver for chaining.
+func (x *SplitViewItemAccessoryViewController) WithSourceItemView(sourceItemView ViewProvider) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.SetSourceItemView(sourceItemView.asView())
+	return x
+}
+
+// WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
+func (x *SplitViewItemAccessoryViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *SplitViewItemAccessoryViewController) WithNextResponder(nextResponder ResponderProvider) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *SplitViewItemAccessoryViewController) WithMenu(menu *raw.NSMenu) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *SplitViewItemAccessoryViewController) WithUserActivity(userActivity *foundation.NSUserActivity) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *SplitViewItemAccessoryViewController) WithTouchBar(touchBar *raw.NSTouchBar) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -97,6 +176,17 @@ type SplitViewItemAccessoryViewControllerable interface {
 	WithHidden(hidden bool) *SplitViewItemAccessoryViewController
 	WithAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets bool) *SplitViewItemAccessoryViewController
 	WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) *SplitViewItemAccessoryViewController
+	WithRepresentedObject(representedObject objc.ID) *SplitViewItemAccessoryViewController
+	WithTitle(title string) *SplitViewItemAccessoryViewController
+	WithView(view ViewProvider) *SplitViewItemAccessoryViewController
+	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *SplitViewItemAccessoryViewController
+	WithChildViewControllers(items ...ViewControllerProvider) *SplitViewItemAccessoryViewController
+	WithSourceItemView(sourceItemView ViewProvider) *SplitViewItemAccessoryViewController
+	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *SplitViewItemAccessoryViewController
+	WithNextResponder(nextResponder ResponderProvider) *SplitViewItemAccessoryViewController
+	WithMenu(menu *raw.NSMenu) *SplitViewItemAccessoryViewController
+	WithUserActivity(userActivity *foundation.NSUserActivity) *SplitViewItemAccessoryViewController
+	WithTouchBar(touchBar *raw.NSTouchBar) *SplitViewItemAccessoryViewController
 	IsHidden() bool
 	SetHidden(hidden bool)
 	AutomaticallyAppliesContentInsets() bool

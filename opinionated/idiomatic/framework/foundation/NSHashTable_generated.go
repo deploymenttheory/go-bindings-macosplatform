@@ -43,6 +43,12 @@ func NewHashTableWithPointerFunctionsCapacity(functions *raw.NSPointerFunctions,
 	return &HashTable{inner: raw.NSHashTableFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *HashTable) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HashTable {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Member calls the underlying Member.
 func (x *HashTable) Member(object objc.ID) objc.ID {
 	return x.inner.Member(object)
@@ -137,6 +143,7 @@ func (x *HashTable) asObject() *raw.NSObject { return &x.inner.NSObject }
 // HashTableable is the interface implemented by [HashTable], for mocking and DI.
 type HashTableable interface {
 	Unwrap() *raw.NSHashTable[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HashTable
 	Member(object objc.ID) objc.ID
 	ObjectEnumerator() *raw.NSEnumerator[objc.ID]
 	AddObject(object objc.ID)

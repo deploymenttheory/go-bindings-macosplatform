@@ -71,6 +71,12 @@ func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, 
 	return &SocketPort{inner: raw.NSSocketPortFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *SocketPort) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SocketPort {
+	x.inner.NSPort.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ProtocolFamily calls the underlying ProtocolFamily.
 func (x *SocketPort) ProtocolFamily() int {
 	return x.inner.ProtocolFamily()
@@ -107,6 +113,7 @@ func (x *SocketPort) asObject() *raw.NSObject { return &x.inner.NSPort.NSObject 
 // SocketPortable is the interface implemented by [SocketPort], for mocking and DI.
 type SocketPortable interface {
 	Unwrap() *raw.NSSocketPort
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SocketPort
 	ProtocolFamily() int
 	SocketType() int
 	Protocol() int

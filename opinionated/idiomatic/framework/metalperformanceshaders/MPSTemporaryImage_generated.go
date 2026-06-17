@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
@@ -42,6 +43,12 @@ func (x *TemporaryImage) WithReadCount(readCount uint) *TemporaryImage {
 	return x
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *TemporaryImage) WithLabel(label string) *TemporaryImage {
+	x.inner.MPSImage.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ReadCount calls the underlying ReadCount.
 func (x *TemporaryImage) ReadCount() uint {
 	return x.inner.ReadCount()
@@ -58,6 +65,7 @@ func (x *TemporaryImage) asImage() *mpscore.MPSImage { return &x.inner.MPSImage 
 type TemporaryImageable interface {
 	Unwrap() *raw.MPSTemporaryImage
 	WithReadCount(readCount uint) *TemporaryImage
+	WithLabel(label string) *TemporaryImage
 	ReadCount() uint
 	SetReadCount(readCount uint)
 }

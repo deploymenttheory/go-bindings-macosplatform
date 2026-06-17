@@ -102,6 +102,30 @@ func (x *WindowController) WithWindow(window WindowProvider) *WindowController {
 	return x
 }
 
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *WindowController) WithNextResponder(nextResponder ResponderProvider) *WindowController {
+	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *WindowController) WithMenu(menu *raw.NSMenu) *WindowController {
+	x.inner.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *WindowController) WithUserActivity(userActivity *foundation.NSUserActivity) *WindowController {
+	x.inner.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *WindowController) WithTouchBar(touchBar *raw.NSTouchBar) *WindowController {
+	x.inner.NSResponder.SetTouchBar(touchBar)
+	return x
+}
+
 // SetDocumentEdited calls the underlying SetDocumentEdited.
 func (x *WindowController) SetDocumentEdited(dirtyFlag bool) {
 	x.inner.SetDocumentEdited(dirtyFlag)
@@ -281,6 +305,10 @@ type WindowControllerable interface {
 	WithShouldCloseDocument(shouldCloseDocument bool) *WindowController
 	WithContentViewController(contentViewController ViewControllerProvider) *WindowController
 	WithWindow(window WindowProvider) *WindowController
+	WithNextResponder(nextResponder ResponderProvider) *WindowController
+	WithMenu(menu *raw.NSMenu) *WindowController
+	WithUserActivity(userActivity *foundation.NSUserActivity) *WindowController
+	WithTouchBar(touchBar *raw.NSTouchBar) *WindowController
 	SetDocumentEdited(dirtyFlag bool)
 	SynchronizeWindowTitleWithDocumentName()
 	WindowTitleForDocumentDisplayName(displayName string) string

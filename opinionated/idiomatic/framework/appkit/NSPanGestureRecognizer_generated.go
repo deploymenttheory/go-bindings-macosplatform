@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,6 +46,90 @@ func (x *PanGestureRecognizer) WithButtonMask(buttonMask uint) *PanGestureRecogn
 // WithNumberOfTouchesRequired sets the numberOfTouchesRequired property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PanGestureRecognizer {
 	x.inner.SetNumberOfTouchesRequired(numberOfTouchesRequired)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithTarget(target objc.ID) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithAction(action objc.SEL) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAction(action)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithState(state raw.NSGestureRecognizerState) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetState(state)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelegate(delegate)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithEnabled(enabled bool) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetEnabled(enabled)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
+	return x
+}
+
+// WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
+	return x
+}
+
+// WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
+	return x
+}
+
+// WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysKeyEvents(delaysKeyEvents)
+	return x
+}
+
+// WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysMagnificationEvents(delaysMagnificationEvents)
+	return x
+}
+
+// WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysRotationEvents(delaysRotationEvents)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithName(name string) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *PanGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(allowedTouchTypes)
 	return x
 }
 
@@ -90,6 +175,20 @@ type PanGestureRecognizerable interface {
 	Unwrap() *raw.NSPanGestureRecognizer
 	WithButtonMask(buttonMask uint) *PanGestureRecognizer
 	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PanGestureRecognizer
+	WithTarget(target objc.ID) *PanGestureRecognizer
+	WithAction(action objc.SEL) *PanGestureRecognizer
+	WithState(state raw.NSGestureRecognizerState) *PanGestureRecognizer
+	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *PanGestureRecognizer
+	WithEnabled(enabled bool) *PanGestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PanGestureRecognizer
+	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PanGestureRecognizer
+	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PanGestureRecognizer
+	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PanGestureRecognizer
+	WithDelaysKeyEvents(delaysKeyEvents bool) *PanGestureRecognizer
+	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PanGestureRecognizer
+	WithDelaysRotationEvents(delaysRotationEvents bool) *PanGestureRecognizer
+	WithName(name string) *PanGestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PanGestureRecognizer
 	TranslationInView(view *raw.NSView) corefoundation.CGPoint
 	SetTranslationInView(translation corefoundation.CGPoint, view *raw.NSView)
 	VelocityInView(view *raw.NSView) corefoundation.CGPoint

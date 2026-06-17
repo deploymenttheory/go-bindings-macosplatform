@@ -43,6 +43,12 @@ func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *raw.NSU
 	return &CachedURLResponse{inner: raw.NSCachedURLResponseFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *CachedURLResponse) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CachedURLResponse {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Response calls the underlying Response.
 func (x *CachedURLResponse) Response() *URLResponse {
 	_r := x.inner.Response()
@@ -76,6 +82,7 @@ func (x *CachedURLResponse) asObject() *raw.NSObject { return &x.inner.NSObject 
 // CachedURLResponseable is the interface implemented by [CachedURLResponse], for mocking and DI.
 type CachedURLResponseable interface {
 	Unwrap() *raw.NSCachedURLResponse
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CachedURLResponse
 	Response() *URLResponse
 	Data() *Data
 	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]

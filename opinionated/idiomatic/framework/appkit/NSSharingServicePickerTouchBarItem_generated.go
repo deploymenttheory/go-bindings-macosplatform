@@ -61,6 +61,12 @@ func (x *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *raw.NSIm
 	return x
 }
 
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *SharingServicePickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem {
+	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
 // Delegate calls the underlying Delegate.
 func (x *SharingServicePickerTouchBarItem) Delegate() raw.NSSharingServicePickerTouchBarItemDelegate {
 	return x.inner.Delegate()
@@ -118,6 +124,7 @@ type SharingServicePickerTouchBarItemable interface {
 	WithEnabled(enabled bool) *SharingServicePickerTouchBarItem
 	WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem
 	WithButtonImage(buttonImage *raw.NSImage) *SharingServicePickerTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem
 	Delegate() raw.NSSharingServicePickerTouchBarItemDelegate
 	SetDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate)
 	IsEnabled() bool

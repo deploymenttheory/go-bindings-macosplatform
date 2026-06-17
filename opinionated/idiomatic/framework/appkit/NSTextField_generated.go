@@ -6,7 +6,10 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -199,6 +202,484 @@ func (x *TextField) WithAllowsEditingTextAttributes(allowsEditingTextAttributes 
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *TextField) WithImportsGraphics(importsGraphics bool) *TextField {
 	x.inner.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *TextField) WithTarget(target objc.ID) *TextField {
+	x.inner.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *TextField) WithAction(action objc.SEL) *TextField {
+	x.inner.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *TextField) WithTag(tag int) *TextField {
+	x.inner.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *TextField) WithIgnoresMultiClick(ignoresMultiClick bool) *TextField {
+	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *TextField) WithContinuous(continuous bool) *TextField {
+	x.inner.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *TextField) WithEnabled(enabled bool) *TextField {
+	x.inner.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *TextField) WithRefusesFirstResponder(refusesFirstResponder bool) *TextField {
+	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *TextField) WithHighlighted(highlighted bool) *TextField {
+	x.inner.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *TextField) WithControlSize(controlSize raw.NSControlSize) *TextField {
+	x.inner.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *TextField) WithFormatter(formatter *foundation.NSFormatter) *TextField {
+	x.inner.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *TextField) WithObjectValue(objectValue objc.ID) *TextField {
+	x.inner.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *TextField) WithStringValue(stringValue string) *TextField {
+	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *TextField) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextField {
+	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *TextField) WithIntValue(intValue int) *TextField {
+	x.inner.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *TextField) WithIntegerValue(integerValue int) *TextField {
+	x.inner.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *TextField) WithFloatValue(floatValue float32) *TextField {
+	x.inner.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *TextField) WithDoubleValue(doubleValue float64) *TextField {
+	x.inner.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *TextField) WithFont(font *raw.NSFont) *TextField {
+	x.inner.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *TextField) WithUsesSingleLineMode(usesSingleLineMode bool) *TextField {
+	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *TextField) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextField {
+	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *TextField) WithAlignment(alignment raw.NSTextAlignment) *TextField {
+	x.inner.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *TextField) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextField {
+	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *TextField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TextField {
+	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *TextField) WithCell(cell CellProvider) *TextField {
+	x.inner.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *TextField) WithSubviews(items ...ViewProvider) *TextField {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *TextField) WithHidden(hidden bool) *TextField {
+	x.inner.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *TextField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextField {
+	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *TextField) WithAutoresizesSubviews(autoresizesSubviews bool) *TextField {
+	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *TextField) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TextField {
+	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *TextField) WithFrame(frame corefoundation.CGRect) *TextField {
+	x.inner.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *TextField) WithFrameRotation(frameRotation float64) *TextField {
+	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *TextField) WithFrameCenterRotation(frameCenterRotation float64) *TextField {
+	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *TextField) WithBoundsRotation(boundsRotation float64) *TextField {
+	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *TextField) WithBounds(bounds corefoundation.CGRect) *TextField {
+	x.inner.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *TextField) WithCanDrawConcurrently(canDrawConcurrently bool) *TextField {
+	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *TextField) WithNeedsDisplay(needsDisplay bool) *TextField {
+	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *TextField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextField {
+	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *TextField) WithWantsRestingTouches(wantsRestingTouches bool) *TextField {
+	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *TextField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TextField {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *TextField) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TextField {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *TextField) WithWantsLayer(wantsLayer bool) *TextField {
+	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *TextField) WithLayer(layer *quartzcore.CALayer) *TextField {
+	x.inner.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *TextField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextField {
+	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *TextField) WithNeedsLayout(needsLayout bool) *TextField {
+	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *TextField) WithAlphaValue(alphaValue float64) *TextField {
+	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *TextField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextField {
+	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *TextField) WithBackgroundFilters(items ...*coreimage.CIFilter) *TextField {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *TextField) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TextField {
+	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *TextField) WithContentFilters(items ...*coreimage.CIFilter) *TextField {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *TextField) WithShadow(shadow *raw.NSShadow) *TextField {
+	x.inner.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *TextField) WithClipsToBounds(clipsToBounds bool) *TextField {
+	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *TextField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextField {
+	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *TextField) WithToolTip(toolTip string) *TextField {
+	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *TextField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextField {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *TextField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextField {
+	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *TextField) WithNextKeyView(nextKeyView ViewProvider) *TextField {
+	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *TextField) WithFocusRingType(focusRingType raw.NSFocusRingType) *TextField {
+	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *TextField) WithGestureRecognizers(items ...GestureRecognizerProvider) *TextField {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *TextField) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextField {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *TextField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextField {
+	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *TextField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField {
+	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *TextField) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TextField {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *TextField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextField {
+	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *TextField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextField {
+	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *TextField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextField {
+	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *TextField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextField {
+	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *TextField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextField {
+	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *TextField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextField {
+	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *TextField) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TextField {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *TextField) WithNextResponder(nextResponder ResponderProvider) *TextField {
+	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *TextField) WithMenu(menu *raw.NSMenu) *TextField {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *TextField) WithUserActivity(userActivity *foundation.NSUserActivity) *TextField {
+	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *TextField) WithTouchBar(touchBar *raw.NSTouchBar) *TextField {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -536,6 +1017,79 @@ type TextFieldable interface {
 	WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TextField
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextField
 	WithImportsGraphics(importsGraphics bool) *TextField
+	WithTarget(target objc.ID) *TextField
+	WithAction(action objc.SEL) *TextField
+	WithTag(tag int) *TextField
+	WithIgnoresMultiClick(ignoresMultiClick bool) *TextField
+	WithContinuous(continuous bool) *TextField
+	WithEnabled(enabled bool) *TextField
+	WithRefusesFirstResponder(refusesFirstResponder bool) *TextField
+	WithHighlighted(highlighted bool) *TextField
+	WithControlSize(controlSize raw.NSControlSize) *TextField
+	WithFormatter(formatter *foundation.NSFormatter) *TextField
+	WithObjectValue(objectValue objc.ID) *TextField
+	WithStringValue(stringValue string) *TextField
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextField
+	WithIntValue(intValue int) *TextField
+	WithIntegerValue(integerValue int) *TextField
+	WithFloatValue(floatValue float32) *TextField
+	WithDoubleValue(doubleValue float64) *TextField
+	WithFont(font *raw.NSFont) *TextField
+	WithUsesSingleLineMode(usesSingleLineMode bool) *TextField
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextField
+	WithAlignment(alignment raw.NSTextAlignment) *TextField
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextField
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TextField
+	WithCell(cell CellProvider) *TextField
+	WithSubviews(items ...ViewProvider) *TextField
+	WithHidden(hidden bool) *TextField
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextField
+	WithAutoresizesSubviews(autoresizesSubviews bool) *TextField
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TextField
+	WithFrame(frame corefoundation.CGRect) *TextField
+	WithFrameRotation(frameRotation float64) *TextField
+	WithFrameCenterRotation(frameCenterRotation float64) *TextField
+	WithBoundsRotation(boundsRotation float64) *TextField
+	WithBounds(bounds corefoundation.CGRect) *TextField
+	WithCanDrawConcurrently(canDrawConcurrently bool) *TextField
+	WithNeedsDisplay(needsDisplay bool) *TextField
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextField
+	WithWantsRestingTouches(wantsRestingTouches bool) *TextField
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TextField
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TextField
+	WithWantsLayer(wantsLayer bool) *TextField
+	WithLayer(layer *quartzcore.CALayer) *TextField
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextField
+	WithNeedsLayout(needsLayout bool) *TextField
+	WithAlphaValue(alphaValue float64) *TextField
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextField
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *TextField
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TextField
+	WithContentFilters(items ...*coreimage.CIFilter) *TextField
+	WithShadow(shadow *raw.NSShadow) *TextField
+	WithClipsToBounds(clipsToBounds bool) *TextField
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextField
+	WithToolTip(toolTip string) *TextField
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextField
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextField
+	WithNextKeyView(nextKeyView ViewProvider) *TextField
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *TextField
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *TextField
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextField
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextField
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TextField
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextField
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextField
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextField
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextField
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextField
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextField
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TextField
+	WithNextResponder(nextResponder ResponderProvider) *TextField
+	WithMenu(menu *raw.NSMenu) *TextField
+	WithUserActivity(userActivity *foundation.NSUserActivity) *TextField
+	WithTouchBar(touchBar *raw.NSTouchBar) *TextField
 	SelectText(sender objc.ID)
 	TextShouldBeginEditing(textObject *raw.NSText) bool
 	TextShouldEndEditing(textObject *raw.NSText) bool

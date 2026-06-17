@@ -47,6 +47,66 @@ func NewNNResizeBilinearWithCoderDevice(aDecoder *foundation.NSCoder, device met
 	return &NNResizeBilinear{inner: raw.MPSNNResizeBilinearFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNResizeBilinear) WithOffset(offset mpscore.MPSOffset) *NNResizeBilinear {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNResizeBilinear) WithClipRect(clipRect metal.MTLRegion) *NNResizeBilinear {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNResizeBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNResizeBilinear {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNResizeBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNResizeBilinear {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNResizeBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNResizeBilinear {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNResizeBilinear) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNResizeBilinear {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNResizeBilinear) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNResizeBilinear {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNResizeBilinear) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNResizeBilinear {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNResizeBilinear) WithOptions(options mpscore.MPSKernelOptions) *NNResizeBilinear {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNResizeBilinear) WithLabel(label string) *NNResizeBilinear {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ResizeWidth calls the underlying ResizeWidth.
 func (x *NNResizeBilinear) ResizeWidth() uint {
 	return x.inner.ResizeWidth()
@@ -69,6 +129,16 @@ func (x *NNResizeBilinear) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCN
 // NNResizeBilinearable is the interface implemented by [NNResizeBilinear], for mocking and DI.
 type NNResizeBilinearable interface {
 	Unwrap() *raw.MPSNNResizeBilinear
+	WithOffset(offset mpscore.MPSOffset) *NNResizeBilinear
+	WithClipRect(clipRect metal.MTLRegion) *NNResizeBilinear
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNResizeBilinear
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNResizeBilinear
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNResizeBilinear
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNResizeBilinear
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNResizeBilinear
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNResizeBilinear
+	WithOptions(options mpscore.MPSKernelOptions) *NNResizeBilinear
+	WithLabel(label string) *NNResizeBilinear
 	ResizeWidth() uint
 	ResizeHeight() uint
 	AlignCorners() bool

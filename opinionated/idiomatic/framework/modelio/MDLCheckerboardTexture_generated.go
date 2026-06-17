@@ -44,6 +44,18 @@ func (x *CheckerboardTexture) WithDivisions(divisions float32) *CheckerboardText
 	return x
 }
 
+// WithIsCube sets the isCube property and returns the receiver for chaining.
+func (x *CheckerboardTexture) WithIsCube(isCube bool) *CheckerboardTexture {
+	x.inner.MDLTexture.SetIsCube(isCube)
+	return x
+}
+
+// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+func (x *CheckerboardTexture) WithHasAlphaValues(hasAlphaValues bool) *CheckerboardTexture {
+	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	return x
+}
+
 // Divisions calls the underlying Divisions.
 func (x *CheckerboardTexture) Divisions() float32 {
 	return x.inner.Divisions()
@@ -80,6 +92,8 @@ func (x *CheckerboardTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLT
 type CheckerboardTextureable interface {
 	Unwrap() *raw.MDLCheckerboardTexture
 	WithDivisions(divisions float32) *CheckerboardTexture
+	WithIsCube(isCube bool) *CheckerboardTexture
+	WithHasAlphaValues(hasAlphaValues bool) *CheckerboardTexture
 	Divisions() float32
 	SetDivisions(divisions float32)
 	Color1() unsafe.Pointer

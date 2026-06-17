@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewGeneratePersonInstanceMaskRequest() *GeneratePersonInstanceMaskRequest {
 	return &GeneratePersonInstanceMaskRequest{inner: raw.VNGeneratePersonInstanceMaskRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *GeneratePersonInstanceMaskRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonInstanceMaskRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *GeneratePersonInstanceMaskRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonInstanceMaskRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *GeneratePersonInstanceMaskRequest) WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonInstanceMaskRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *GeneratePersonInstanceMaskRequest) WithRevision(revision uint) *GeneratePersonInstanceMaskRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *GeneratePersonInstanceMaskRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *GeneratePersonInstanceMaskRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
@@ -42,6 +67,10 @@ func (x *GeneratePersonInstanceMaskRequest) asRequest() *raw.VNRequest { return 
 // GeneratePersonInstanceMaskRequestable is the interface implemented by [GeneratePersonInstanceMaskRequest], for mocking and DI.
 type GeneratePersonInstanceMaskRequestable interface {
 	Unwrap() *raw.VNGeneratePersonInstanceMaskRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonInstanceMaskRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonInstanceMaskRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonInstanceMaskRequest
+	WithRevision(revision uint) *GeneratePersonInstanceMaskRequest
 }
 
 var _ GeneratePersonInstanceMaskRequestable = (*GeneratePersonInstanceMaskRequest)(nil)

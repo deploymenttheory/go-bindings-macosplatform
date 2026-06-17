@@ -55,6 +55,108 @@ func (x *DOMHTMLStyleElement) WithType(type_ string) *DOMHTMLStyleElement {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithTitle(title string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithLang(lang string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithDir(dir string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithTabIndex(tabIndex int) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithAccessKey(accessKey string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithInnerText(innerText string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithOuterText(outerText string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithContentEditable(contentEditable string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithIdName(idName string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithScrollLeft(scrollLeft int) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithScrollTop(scrollTop int) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithInnerHTML(innerHTML string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithOuterHTML(outerHTML string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithClassName(className string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithNodeValue(nodeValue string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithPrefix(prefix string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLStyleElement) WithTextContent(textContent string) *DOMHTMLStyleElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Disabled calls the underlying Disabled.
 func (x *DOMHTMLStyleElement) Disabled() bool {
 	return x.inner.Disabled()
@@ -109,6 +211,23 @@ type DOMHTMLStyleElementable interface {
 	WithDisabled(disabled bool) *DOMHTMLStyleElement
 	WithMedia(media string) *DOMHTMLStyleElement
 	WithType(type_ string) *DOMHTMLStyleElement
+	WithTitle(title string) *DOMHTMLStyleElement
+	WithLang(lang string) *DOMHTMLStyleElement
+	WithDir(dir string) *DOMHTMLStyleElement
+	WithTabIndex(tabIndex int) *DOMHTMLStyleElement
+	WithAccessKey(accessKey string) *DOMHTMLStyleElement
+	WithInnerText(innerText string) *DOMHTMLStyleElement
+	WithOuterText(outerText string) *DOMHTMLStyleElement
+	WithContentEditable(contentEditable string) *DOMHTMLStyleElement
+	WithIdName(idName string) *DOMHTMLStyleElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLStyleElement
+	WithScrollTop(scrollTop int) *DOMHTMLStyleElement
+	WithInnerHTML(innerHTML string) *DOMHTMLStyleElement
+	WithOuterHTML(outerHTML string) *DOMHTMLStyleElement
+	WithClassName(className string) *DOMHTMLStyleElement
+	WithNodeValue(nodeValue string) *DOMHTMLStyleElement
+	WithPrefix(prefix string) *DOMHTMLStyleElement
+	WithTextContent(textContent string) *DOMHTMLStyleElement
 	Disabled() bool
 	SetDisabled(disabled bool)
 	Media() string

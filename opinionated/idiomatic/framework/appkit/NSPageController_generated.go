@@ -6,8 +6,10 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PageController wraps [raw.NSPageController] with a fluent Go API.
@@ -51,6 +53,82 @@ func (x *PageController) WithTransitionStyle(transitionStyle raw.NSPageControlle
 // WithSelectedIndex sets the selectedIndex property and returns the receiver for chaining.
 func (x *PageController) WithSelectedIndex(selectedIndex int) *PageController {
 	x.inner.SetSelectedIndex(selectedIndex)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *PageController) WithRepresentedObject(representedObject objc.ID) *PageController {
+	x.inner.NSViewController.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *PageController) WithTitle(title string) *PageController {
+	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *PageController) WithView(view ViewProvider) *PageController {
+	x.inner.NSViewController.SetView(view.asView())
+	return x
+}
+
+// WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
+func (x *PageController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *PageController {
+	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
+	return x
+}
+
+// WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
+func (x *PageController) WithChildViewControllers(items ...ViewControllerProvider) *PageController {
+	if len(items) == 0 {
+		x.inner.NSViewController.SetChildViewControllers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSViewController](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSViewController.SetChildViewControllers(_arr)
+	return x
+}
+
+// WithSourceItemView sets the sourceItemView property and returns the receiver for chaining.
+func (x *PageController) WithSourceItemView(sourceItemView ViewProvider) *PageController {
+	x.inner.NSViewController.SetSourceItemView(sourceItemView.asView())
+	return x
+}
+
+// WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
+func (x *PageController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *PageController {
+	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *PageController) WithNextResponder(nextResponder ResponderProvider) *PageController {
+	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *PageController) WithMenu(menu *raw.NSMenu) *PageController {
+	x.inner.NSViewController.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *PageController) WithUserActivity(userActivity *foundation.NSUserActivity) *PageController {
+	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *PageController) WithTouchBar(touchBar *raw.NSTouchBar) *PageController {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -138,6 +216,17 @@ type PageControllerable interface {
 	WithDelegate(delegate raw.NSPageControllerDelegate) *PageController
 	WithTransitionStyle(transitionStyle raw.NSPageControllerTransitionStyle) *PageController
 	WithSelectedIndex(selectedIndex int) *PageController
+	WithRepresentedObject(representedObject objc.ID) *PageController
+	WithTitle(title string) *PageController
+	WithView(view ViewProvider) *PageController
+	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *PageController
+	WithChildViewControllers(items ...ViewControllerProvider) *PageController
+	WithSourceItemView(sourceItemView ViewProvider) *PageController
+	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *PageController
+	WithNextResponder(nextResponder ResponderProvider) *PageController
+	WithMenu(menu *raw.NSMenu) *PageController
+	WithUserActivity(userActivity *foundation.NSUserActivity) *PageController
+	WithTouchBar(touchBar *raw.NSTouchBar) *PageController
 	NavigateForwardToObject(object objc.ID)
 	CompleteTransition()
 	NavigateBack(sender objc.ID)

@@ -5,6 +5,7 @@
 package intents
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewShareFocusStatusIntentWithFocusStatus(focusStatus *raw.INFocusStatus) *S
 	return &ShareFocusStatusIntent{inner: raw.INShareFocusStatusIntentFromID(_id)}
 }
 
+// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+func (x *ShareFocusStatusIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *ShareFocusStatusIntent {
+	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	return x
+}
+
+// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+func (x *ShareFocusStatusIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *ShareFocusStatusIntent {
+	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	return x
+}
+
 // FocusStatus calls the underlying FocusStatus.
 func (x *ShareFocusStatusIntent) FocusStatus() *FocusStatus {
 	_r := x.inner.FocusStatus()
@@ -50,6 +63,8 @@ func (x *ShareFocusStatusIntent) asIntent() *raw.INIntent { return &x.inner.INIn
 // ShareFocusStatusIntentable is the interface implemented by [ShareFocusStatusIntent], for mocking and DI.
 type ShareFocusStatusIntentable interface {
 	Unwrap() *raw.INShareFocusStatusIntent
+	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *ShareFocusStatusIntent
+	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *ShareFocusStatusIntent
 	FocusStatus() *FocusStatus
 }
 

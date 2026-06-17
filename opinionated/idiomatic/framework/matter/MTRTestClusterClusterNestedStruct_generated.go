@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTestClusterClusterNestedStruct() *MTRTestClusterClusterNestedStruct {
 	return &MTRTestClusterClusterNestedStruct{inner: raw.MTRTestClusterClusterNestedStructFromID(_id)}
 }
 
+// WithA sets the a property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterNestedStruct) WithA(a *foundation.NSNumber) *MTRTestClusterClusterNestedStruct {
+	x.inner.MTRUnitTestingClusterNestedStruct.SetA(a)
+	return x
+}
+
+// WithB sets the b property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterNestedStruct) WithB(b *foundation.NSNumber) *MTRTestClusterClusterNestedStruct {
+	x.inner.MTRUnitTestingClusterNestedStruct.SetB(b)
+	return x
+}
+
+// WithC sets the c property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterNestedStruct) WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNestedStruct {
+	x.inner.MTRUnitTestingClusterNestedStruct.SetC(c.asMTRUnitTestingClusterSimpleStruct())
+	return x
+}
+
 func (x *MTRTestClusterClusterNestedStruct) asMTRUnitTestingClusterNestedStruct() *raw.MTRUnitTestingClusterNestedStruct { return &x.inner.MTRUnitTestingClusterNestedStruct }
 
 // MTRTestClusterClusterNestedStructable is the interface implemented by [MTRTestClusterClusterNestedStruct], for mocking and DI.
 type MTRTestClusterClusterNestedStructable interface {
 	Unwrap() *raw.MTRTestClusterClusterNestedStruct
+	WithA(a *foundation.NSNumber) *MTRTestClusterClusterNestedStruct
+	WithB(b *foundation.NSNumber) *MTRTestClusterClusterNestedStruct
+	WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNestedStruct
 }
 
 var _ MTRTestClusterClusterNestedStructable = (*MTRTestClusterClusterNestedStruct)(nil)

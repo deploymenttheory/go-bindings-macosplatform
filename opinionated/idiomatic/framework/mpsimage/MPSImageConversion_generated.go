@@ -6,6 +6,7 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -38,6 +39,24 @@ func NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo(
 	return &ImageConversion{inner: raw.MPSImageConversionFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageConversion) WithOffset(offset mpscore.MPSOffset) *ImageConversion {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageConversion) WithClipRect(clipRect metal.MTLRegion) *ImageConversion {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageConversion) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConversion {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // SourceAlpha calls the underlying SourceAlpha.
 func (x *ImageConversion) SourceAlpha() raw.MPSAlphaType {
 	return x.inner.SourceAlpha()
@@ -53,6 +72,9 @@ func (x *ImageConversion) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return
 // ImageConversionable is the interface implemented by [ImageConversion], for mocking and DI.
 type ImageConversionable interface {
 	Unwrap() *raw.MPSImageConversion
+	WithOffset(offset mpscore.MPSOffset) *ImageConversion
+	WithClipRect(clipRect metal.MTLRegion) *ImageConversion
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConversion
 	SourceAlpha() raw.MPSAlphaType
 	DestinationAlpha() raw.MPSAlphaType
 }

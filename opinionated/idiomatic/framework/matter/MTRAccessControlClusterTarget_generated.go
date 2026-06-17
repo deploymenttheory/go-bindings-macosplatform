@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRAccessControlClusterTarget() *MTRAccessControlClusterTarget {
 	return &MTRAccessControlClusterTarget{inner: raw.MTRAccessControlClusterTargetFromID(_id)}
 }
 
+// WithCluster sets the cluster property and returns the receiver for chaining.
+func (x *MTRAccessControlClusterTarget) WithCluster(cluster *foundation.NSNumber) *MTRAccessControlClusterTarget {
+	x.inner.MTRAccessControlClusterAccessControlTargetStruct.SetCluster(cluster)
+	return x
+}
+
+// WithEndpoint sets the endpoint property and returns the receiver for chaining.
+func (x *MTRAccessControlClusterTarget) WithEndpoint(endpoint *foundation.NSNumber) *MTRAccessControlClusterTarget {
+	x.inner.MTRAccessControlClusterAccessControlTargetStruct.SetEndpoint(endpoint)
+	return x
+}
+
+// WithDeviceType sets the deviceType property and returns the receiver for chaining.
+func (x *MTRAccessControlClusterTarget) WithDeviceType(deviceType *foundation.NSNumber) *MTRAccessControlClusterTarget {
+	x.inner.MTRAccessControlClusterAccessControlTargetStruct.SetDeviceType(deviceType)
+	return x
+}
+
 func (x *MTRAccessControlClusterTarget) asMTRAccessControlClusterAccessControlTargetStruct() *raw.MTRAccessControlClusterAccessControlTargetStruct { return &x.inner.MTRAccessControlClusterAccessControlTargetStruct }
 
 // MTRAccessControlClusterTargetable is the interface implemented by [MTRAccessControlClusterTarget], for mocking and DI.
 type MTRAccessControlClusterTargetable interface {
 	Unwrap() *raw.MTRAccessControlClusterTarget
+	WithCluster(cluster *foundation.NSNumber) *MTRAccessControlClusterTarget
+	WithEndpoint(endpoint *foundation.NSNumber) *MTRAccessControlClusterTarget
+	WithDeviceType(deviceType *foundation.NSNumber) *MTRAccessControlClusterTarget
 }
 
 var _ MTRAccessControlClusterTargetable = (*MTRAccessControlClusterTarget)(nil)

@@ -36,6 +36,12 @@ func NewURLCredentialStorage() *URLCredentialStorage {
 	return &URLCredentialStorage{inner: raw.NSURLCredentialStorageFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLCredentialStorage) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLCredentialStorage {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CredentialsForProtectionSpace calls the underlying CredentialsForProtectionSpace.
 func (x *URLCredentialStorage) CredentialsForProtectionSpace(space *raw.NSURLProtectionSpace) *raw.NSDictionary[*raw.NSString, *raw.NSURLCredential] {
 	return x.inner.CredentialsForProtectionSpace(space)
@@ -123,6 +129,7 @@ func (x *URLCredentialStorage) asObject() *raw.NSObject { return &x.inner.NSObje
 // URLCredentialStorageable is the interface implemented by [URLCredentialStorage], for mocking and DI.
 type URLCredentialStorageable interface {
 	Unwrap() *raw.NSURLCredentialStorage
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLCredentialStorage
 	CredentialsForProtectionSpace(space *raw.NSURLProtectionSpace) *raw.NSDictionary[*raw.NSString, *raw.NSURLCredential]
 	SetCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace)
 	RemoveCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace)

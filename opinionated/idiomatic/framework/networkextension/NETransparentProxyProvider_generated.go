@@ -35,6 +35,12 @@ func NewNETransparentProxyProvider() *NETransparentProxyProvider {
 	return &NETransparentProxyProvider{inner: raw.NETransparentProxyProviderFromID(_id)}
 }
 
+// WithReasserting sets the reasserting property and returns the receiver for chaining.
+func (x *NETransparentProxyProvider) WithReasserting(reasserting bool) *NETransparentProxyProvider {
+	x.inner.NEAppProxyProvider.NETunnelProvider.SetReasserting(reasserting)
+	return x
+}
+
 func (x *NETransparentProxyProvider) asNEAppProxyProvider() *raw.NEAppProxyProvider { return &x.inner.NEAppProxyProvider }
 
 func (x *NETransparentProxyProvider) asNETunnelProvider() *raw.NETunnelProvider { return &x.inner.NEAppProxyProvider.NETunnelProvider }
@@ -44,6 +50,7 @@ func (x *NETransparentProxyProvider) asNEProvider() *raw.NEProvider { return &x.
 // NETransparentProxyProviderable is the interface implemented by [NETransparentProxyProvider], for mocking and DI.
 type NETransparentProxyProviderable interface {
 	Unwrap() *raw.NETransparentProxyProvider
+	WithReasserting(reasserting bool) *NETransparentProxyProvider
 }
 
 var _ NETransparentProxyProviderable = (*NETransparentProxyProvider)(nil)

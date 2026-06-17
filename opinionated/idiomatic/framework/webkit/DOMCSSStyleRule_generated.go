@@ -43,6 +43,12 @@ func (x *DOMCSSStyleRule) WithSelectorText(selectorText string) *DOMCSSStyleRule
 	return x
 }
 
+// WithCssText sets the cssText property and returns the receiver for chaining.
+func (x *DOMCSSStyleRule) WithCssText(cssText string) *DOMCSSStyleRule {
+	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	return x
+}
+
 // SelectorText calls the underlying SelectorText.
 func (x *DOMCSSStyleRule) SelectorText() string {
 	_r := x.inner.SelectorText()
@@ -76,6 +82,7 @@ func (x *DOMCSSStyleRule) asWebScriptObject() *raw.WebScriptObject { return &x.i
 type DOMCSSStyleRuleable interface {
 	Unwrap() *raw.DOMCSSStyleRule
 	WithSelectorText(selectorText string) *DOMCSSStyleRule
+	WithCssText(cssText string) *DOMCSSStyleRule
 	SelectorText() string
 	SetSelectorText(selectorText string)
 	Style() *DOMCSSStyleDeclaration

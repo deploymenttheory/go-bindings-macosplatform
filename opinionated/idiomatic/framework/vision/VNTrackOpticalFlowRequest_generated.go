@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -61,6 +62,30 @@ func (x *TrackOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput bool) 
 	return x
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *TrackOpticalFlowRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackOpticalFlowRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *TrackOpticalFlowRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackOpticalFlowRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *TrackOpticalFlowRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackOpticalFlowRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *TrackOpticalFlowRequest) WithRevision(revision uint) *TrackOpticalFlowRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // ComputationAccuracy calls the underlying ComputationAccuracy.
 func (x *TrackOpticalFlowRequest) ComputationAccuracy() raw.VNTrackOpticalFlowRequestComputationAccuracy {
 	return x.inner.ComputationAccuracy()
@@ -103,6 +128,10 @@ type TrackOpticalFlowRequestable interface {
 	WithComputationAccuracy(computationAccuracy raw.VNTrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest
 	WithOutputPixelFormat(outputPixelFormat uint) *TrackOpticalFlowRequest
 	WithKeepNetworkOutput(keepNetworkOutput bool) *TrackOpticalFlowRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackOpticalFlowRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackOpticalFlowRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *TrackOpticalFlowRequest
+	WithRevision(revision uint) *TrackOpticalFlowRequest
 	ComputationAccuracy() raw.VNTrackOpticalFlowRequestComputationAccuracy
 	SetComputationAccuracy(computationAccuracy raw.VNTrackOpticalFlowRequestComputationAccuracy)
 	OutputPixelFormat() uint

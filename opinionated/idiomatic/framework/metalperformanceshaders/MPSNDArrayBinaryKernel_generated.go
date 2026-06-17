@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -37,6 +38,24 @@ func NewNDArrayBinaryKernelWithDevice(device metal.MTLDevice) *NDArrayBinaryKern
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayBinaryKernel")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
 	return &NDArrayBinaryKernel{inner: raw.MPSNDArrayBinaryKernelFromID(_id)}
+}
+
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayBinaryKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayBinaryKernel {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayBinaryKernel) WithOptions(options mpscore.MPSKernelOptions) *NDArrayBinaryKernel {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayBinaryKernel) WithLabel(label string) *NDArrayBinaryKernel {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
 }
 
 // EncodeToCommandBufferPrimarySourceArraySecondarySourceArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArray.
@@ -118,6 +137,9 @@ func (x *NDArrayBinaryKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MP
 // NDArrayBinaryKernelable is the interface implemented by [NDArrayBinaryKernel], for mocking and DI.
 type NDArrayBinaryKernelable interface {
 	Unwrap() *raw.MPSNDArrayBinaryKernel
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayBinaryKernel
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayBinaryKernel
+	WithLabel(label string) *NDArrayBinaryKernel
 	EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
 	EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray)
 	EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray

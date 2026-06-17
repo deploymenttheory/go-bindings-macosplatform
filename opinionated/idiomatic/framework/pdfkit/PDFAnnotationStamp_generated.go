@@ -5,10 +5,13 @@
 package pdfkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AnnotationStamp wraps [raw.PDFAnnotationStamp] with a fluent Go API.
@@ -37,6 +40,264 @@ func NewAnnotationStamp() *AnnotationStamp {
 	return &AnnotationStamp{inner: raw.PDFAnnotationStampFromID(_id)}
 }
 
+// WithPage sets the page property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithPage(page *raw.PDFPage) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetPage(page)
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithType(type_ string) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetType(foundation.NSStringStringWithUTF8String(type_))
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithBounds(bounds corefoundation.CGRect) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetBounds(bounds)
+	return x
+}
+
+// WithShouldDisplay sets the shouldDisplay property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithShouldDisplay(shouldDisplay bool) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetShouldDisplay(shouldDisplay)
+	return x
+}
+
+// WithShouldPrint sets the shouldPrint property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithShouldPrint(shouldPrint bool) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetShouldPrint(shouldPrint)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithHighlighted(highlighted bool) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetHighlighted(highlighted)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithFont(font *appkit.NSFont) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetFont(font)
+	return x
+}
+
+// WithFontColor sets the fontColor property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithFontColor(fontColor *appkit.NSColor) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetFontColor(fontColor)
+	return x
+}
+
+// WithInteriorColor sets the interiorColor property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetInteriorColor(interiorColor)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithAlignment(alignment appkit.NSTextAlignment) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetAlignment(alignment)
+	return x
+}
+
+// WithStartPoint sets the startPoint property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetStartPoint(startPoint)
+	return x
+}
+
+// WithEndPoint sets the endPoint property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetEndPoint(endPoint)
+	return x
+}
+
+// WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+	return x
+}
+
+// WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+	return x
+}
+
+// WithIconType sets the iconType property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetIconType(iconType)
+	return x
+}
+
+// WithQuadrilateralPoints sets the collection, converting the Go slice to an NSArray.
+func (x *AnnotationStamp) WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationStamp {
+	if len(items) == 0 {
+		x.inner.PDFAnnotation.SetQuadrilateralPoints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSValue](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PDFAnnotation.SetQuadrilateralPoints(_arr)
+	return x
+}
+
+// WithMarkupType sets the markupType property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetMarkupType(markupType)
+	return x
+}
+
+// WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+	return x
+}
+
+// WithMultiline sets the multiline property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithMultiline(multiline bool) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetMultiline(multiline)
+	return x
+}
+
+// WithComb sets the comb property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithComb(comb bool) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetComb(comb)
+	return x
+}
+
+// WithMaximumLength sets the maximumLength property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithMaximumLength(maximumLength int) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetMaximumLength(maximumLength)
+	return x
+}
+
+// WithWidgetStringValue sets the widgetStringValue property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithWidgetStringValue(widgetStringValue string) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetWidgetStringValue(foundation.NSStringStringWithUTF8String(widgetStringValue))
+	return x
+}
+
+// WithWidgetDefaultStringValue sets the widgetDefaultStringValue property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetWidgetDefaultStringValue(foundation.NSStringStringWithUTF8String(widgetDefaultStringValue))
+	return x
+}
+
+// WithAllowsToggleToOff sets the allowsToggleToOff property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetAllowsToggleToOff(allowsToggleToOff)
+	return x
+}
+
+// WithRadiosInUnison sets the radiosInUnison property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithRadiosInUnison(radiosInUnison bool) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetRadiosInUnison(radiosInUnison)
+	return x
+}
+
+// WithReadOnly sets the readOnly property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithReadOnly(readOnly bool) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetReadOnly(readOnly)
+	return x
+}
+
+// WithListChoice sets the listChoice property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithListChoice(listChoice bool) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetListChoice(listChoice)
+	return x
+}
+
+// WithChoices sets the collection, converting the Go slice to an NSArray.
+func (x *AnnotationStamp) WithChoices(items ...*foundation.NSString) *AnnotationStamp {
+	if len(items) == 0 {
+		x.inner.PDFAnnotation.SetChoices(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PDFAnnotation.SetChoices(_arr)
+	return x
+}
+
+// WithValues sets the collection, converting the Go slice to an NSArray.
+func (x *AnnotationStamp) WithValues(items ...*foundation.NSString) *AnnotationStamp {
+	if len(items) == 0 {
+		x.inner.PDFAnnotation.SetValues(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PDFAnnotation.SetValues(_arr)
+	return x
+}
+
+// WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+	return x
+}
+
+// WithButtonWidgetStateString sets the buttonWidgetStateString property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetButtonWidgetStateString(foundation.NSStringStringWithUTF8String(buttonWidgetStateString))
+	return x
+}
+
+// WithOpen sets the open property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithOpen(open bool) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetOpen(open)
+	return x
+}
+
+// WithDestination sets the destination property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithDestination(destination *raw.PDFDestination) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetDestination(destination)
+	return x
+}
+
+// WithURL sets the uRL property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithURL(uRL string) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	return x
+}
+
+// WithFieldName sets the fieldName property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithFieldName(fieldName string) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetFieldName(foundation.NSStringStringWithUTF8String(fieldName))
+	return x
+}
+
+// WithCaption sets the caption property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithCaption(caption string) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetCaption(foundation.NSStringStringWithUTF8String(caption))
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithStampName sets the stampName property and returns the receiver for chaining.
+func (x *AnnotationStamp) WithStampName(stampName string) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetStampName(foundation.NSStringStringWithUTF8String(stampName))
+	return x
+}
+
 // Name calls the underlying Name.
 func (x *AnnotationStamp) Name() string {
 	_r := x.inner.Name()
@@ -56,6 +317,44 @@ func (x *AnnotationStamp) asAnnotation() *raw.PDFAnnotation { return &x.inner.PD
 // AnnotationStampable is the interface implemented by [AnnotationStamp], for mocking and DI.
 type AnnotationStampable interface {
 	Unwrap() *raw.PDFAnnotationStamp
+	WithPage(page *raw.PDFPage) *AnnotationStamp
+	WithType(type_ string) *AnnotationStamp
+	WithBounds(bounds corefoundation.CGRect) *AnnotationStamp
+	WithShouldDisplay(shouldDisplay bool) *AnnotationStamp
+	WithShouldPrint(shouldPrint bool) *AnnotationStamp
+	WithHighlighted(highlighted bool) *AnnotationStamp
+	WithFont(font *appkit.NSFont) *AnnotationStamp
+	WithFontColor(fontColor *appkit.NSColor) *AnnotationStamp
+	WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationStamp
+	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationStamp
+	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationStamp
+	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationStamp
+	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationStamp
+	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationStamp
+	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationStamp
+	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationStamp
+	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationStamp
+	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationStamp
+	WithMultiline(multiline bool) *AnnotationStamp
+	WithComb(comb bool) *AnnotationStamp
+	WithMaximumLength(maximumLength int) *AnnotationStamp
+	WithWidgetStringValue(widgetStringValue string) *AnnotationStamp
+	WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationStamp
+	WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationStamp
+	WithRadiosInUnison(radiosInUnison bool) *AnnotationStamp
+	WithReadOnly(readOnly bool) *AnnotationStamp
+	WithListChoice(listChoice bool) *AnnotationStamp
+	WithChoices(items ...*foundation.NSString) *AnnotationStamp
+	WithValues(items ...*foundation.NSString) *AnnotationStamp
+	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationStamp
+	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationStamp
+	WithOpen(open bool) *AnnotationStamp
+	WithDestination(destination *raw.PDFDestination) *AnnotationStamp
+	WithURL(uRL string) *AnnotationStamp
+	WithFieldName(fieldName string) *AnnotationStamp
+	WithCaption(caption string) *AnnotationStamp
+	WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationStamp
+	WithStampName(stampName string) *AnnotationStamp
 	Name() string
 	SetName(name string)
 }

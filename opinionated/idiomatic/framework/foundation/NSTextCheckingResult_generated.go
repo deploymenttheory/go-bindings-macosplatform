@@ -37,6 +37,12 @@ func NewTextCheckingResult() *TextCheckingResult {
 	return &TextCheckingResult{inner: raw.NSTextCheckingResultFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *TextCheckingResult) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TextCheckingResult {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ResultType calls the underlying ResultType.
 func (x *TextCheckingResult) ResultType() raw.NSTextCheckingType {
 	return x.inner.ResultType()
@@ -170,6 +176,7 @@ func (x *TextCheckingResult) asObject() *raw.NSObject { return &x.inner.NSObject
 // TextCheckingResultable is the interface implemented by [TextCheckingResult], for mocking and DI.
 type TextCheckingResultable interface {
 	Unwrap() *raw.NSTextCheckingResult
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TextCheckingResult
 	ResultType() raw.NSTextCheckingType
 	Range() raw.NSRange
 	RangeAtIndex(idx uint) raw.NSRange

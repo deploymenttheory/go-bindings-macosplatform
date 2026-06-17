@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,24 @@ func NewImageAreaMin() *ImageAreaMin {
 	return &ImageAreaMin{inner: raw.MPSImageAreaMinFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageAreaMin) WithOffset(offset mpscore.MPSOffset) *ImageAreaMin {
+	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageAreaMin) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMin {
+	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageAreaMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMin {
+	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageAreaMin) asImageAreaMax() *raw.MPSImageAreaMax { return &x.inner.MPSImageAreaMax }
 
 func (x *ImageAreaMin) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel }
@@ -42,6 +62,9 @@ func (x *ImageAreaMin) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x
 // ImageAreaMinable is the interface implemented by [ImageAreaMin], for mocking and DI.
 type ImageAreaMinable interface {
 	Unwrap() *raw.MPSImageAreaMin
+	WithOffset(offset mpscore.MPSOffset) *ImageAreaMin
+	WithClipRect(clipRect metal.MTLRegion) *ImageAreaMin
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMin
 }
 
 var _ ImageAreaMinable = (*ImageAreaMin)(nil)

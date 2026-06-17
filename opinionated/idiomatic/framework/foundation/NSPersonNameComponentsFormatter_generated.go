@@ -54,6 +54,12 @@ func (x *PersonNameComponentsFormatter) WithLocale(locale *raw.NSLocale) *Person
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PersonNameComponentsFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponentsFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringFromPersonNameComponents calls the underlying StringFromPersonNameComponents.
 func (x *PersonNameComponentsFormatter) StringFromPersonNameComponents(components *raw.NSPersonNameComponents) *String {
 	_r := x.inner.StringFromPersonNameComponents(components)
@@ -125,6 +131,7 @@ type PersonNameComponentsFormatterable interface {
 	WithStyle(style raw.NSPersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter
 	WithPhonetic(phonetic bool) *PersonNameComponentsFormatter
 	WithLocale(locale *raw.NSLocale) *PersonNameComponentsFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponentsFormatter
 	StringFromPersonNameComponents(components *raw.NSPersonNameComponents) *String
 	AnnotatedStringFromPersonNameComponents(components *raw.NSPersonNameComponents) *AttributedString
 	PersonNameComponentsFromString(string_ string) *PersonNameComponents

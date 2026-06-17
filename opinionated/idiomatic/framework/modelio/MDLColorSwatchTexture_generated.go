@@ -45,11 +45,25 @@ func NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions(colo
 	return &ColorSwatchTexture{inner: raw.MDLColorSwatchTextureFromID(_id)}
 }
 
+// WithIsCube sets the isCube property and returns the receiver for chaining.
+func (x *ColorSwatchTexture) WithIsCube(isCube bool) *ColorSwatchTexture {
+	x.inner.MDLTexture.SetIsCube(isCube)
+	return x
+}
+
+// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+func (x *ColorSwatchTexture) WithHasAlphaValues(hasAlphaValues bool) *ColorSwatchTexture {
+	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	return x
+}
+
 func (x *ColorSwatchTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
 // ColorSwatchTextureable is the interface implemented by [ColorSwatchTexture], for mocking and DI.
 type ColorSwatchTextureable interface {
 	Unwrap() *raw.MDLColorSwatchTexture
+	WithIsCube(isCube bool) *ColorSwatchTexture
+	WithHasAlphaValues(hasAlphaValues bool) *ColorSwatchTexture
 }
 
 var _ ColorSwatchTextureable = (*ColorSwatchTexture)(nil)

@@ -5,9 +5,12 @@
 package spritekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // EffectNode wraps [raw.SKEffectNode] with a fluent Go API.
@@ -69,6 +72,166 @@ func (x *EffectNode) WithBlendMode(blendMode raw.SKBlendMode) *EffectNode {
 // WithShader sets the shader property and returns the receiver for chaining.
 func (x *EffectNode) WithShader(shader *raw.SKShader) *EffectNode {
 	x.inner.SetShader(shader)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *EffectNode) WithPosition(position corefoundation.CGPoint) *EffectNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *EffectNode) WithZPosition(zPosition float64) *EffectNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *EffectNode) WithZRotation(zRotation float64) *EffectNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *EffectNode) WithXScale(xScale float64) *EffectNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *EffectNode) WithYScale(yScale float64) *EffectNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *EffectNode) WithSpeed(speed float64) *EffectNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *EffectNode) WithAlpha(alpha float64) *EffectNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *EffectNode) WithPaused(paused bool) *EffectNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *EffectNode) WithHidden(hidden bool) *EffectNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *EffectNode) WithUserInteractionEnabled(userInteractionEnabled bool) *EffectNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *EffectNode) WithName(name string) *EffectNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *EffectNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *EffectNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *EffectNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EffectNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *EffectNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *EffectNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *EffectNode) WithConstraints(items ...*raw.SKConstraint) *EffectNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *EffectNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EffectNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *EffectNode) WithAccessibilityElement(accessibilityElement bool) *EffectNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *EffectNode) WithAccessibilityRole(accessibilityRole string) *EffectNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *EffectNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EffectNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *EffectNode) WithAccessibilitySubrole(accessibilitySubrole string) *EffectNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *EffectNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EffectNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *EffectNode) WithAccessibilityParent(accessibilityParent objc.ID) *EffectNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *EffectNode) WithAccessibilityHelp(accessibilityHelp string) *EffectNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *EffectNode) WithAccessibilityLabel(accessibilityLabel string) *EffectNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *EffectNode) WithAccessibilityEnabled(accessibilityEnabled bool) *EffectNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
@@ -149,6 +312,31 @@ type EffectNodeable interface {
 	WithShouldRasterize(shouldRasterize bool) *EffectNode
 	WithBlendMode(blendMode raw.SKBlendMode) *EffectNode
 	WithShader(shader *raw.SKShader) *EffectNode
+	WithPosition(position corefoundation.CGPoint) *EffectNode
+	WithZPosition(zPosition float64) *EffectNode
+	WithZRotation(zRotation float64) *EffectNode
+	WithXScale(xScale float64) *EffectNode
+	WithYScale(yScale float64) *EffectNode
+	WithSpeed(speed float64) *EffectNode
+	WithAlpha(alpha float64) *EffectNode
+	WithPaused(paused bool) *EffectNode
+	WithHidden(hidden bool) *EffectNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *EffectNode
+	WithName(name string) *EffectNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *EffectNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EffectNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *EffectNode
+	WithConstraints(items ...*raw.SKConstraint) *EffectNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EffectNode
+	WithAccessibilityElement(accessibilityElement bool) *EffectNode
+	WithAccessibilityRole(accessibilityRole string) *EffectNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EffectNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *EffectNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EffectNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *EffectNode
+	WithAccessibilityHelp(accessibilityHelp string) *EffectNode
+	WithAccessibilityLabel(accessibilityLabel string) *EffectNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *EffectNode
 	Filter() *coreimage.CIFilter
 	SetFilter(filter *coreimage.CIFilter)
 	ShouldCenterFilter() bool

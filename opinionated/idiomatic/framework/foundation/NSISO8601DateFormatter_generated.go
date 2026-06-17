@@ -48,6 +48,12 @@ func (x *ISO8601DateFormatter) WithFormatOptions(formatOptions raw.NSISO8601Date
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ISO8601DateFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ISO8601DateFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringFromDate calls the underlying StringFromDate.
 func (x *ISO8601DateFormatter) StringFromDate(date *raw.NSDate) *String {
 	_r := x.inner.StringFromDate(date)
@@ -99,6 +105,7 @@ type ISO8601DateFormatterable interface {
 	Unwrap() *raw.NSISO8601DateFormatter
 	WithTimeZone(timeZone *raw.NSTimeZone) *ISO8601DateFormatter
 	WithFormatOptions(formatOptions raw.NSISO8601DateFormatOptions) *ISO8601DateFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ISO8601DateFormatter
 	StringFromDate(date *raw.NSDate) *String
 	DateFromString(string_ string) *Date
 	TimeZone() *TimeZone

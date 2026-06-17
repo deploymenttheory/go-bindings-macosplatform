@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,30 @@ func NewClassifyImageRequest() *ClassifyImageRequest {
 	return &ClassifyImageRequest{inner: raw.VNClassifyImageRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *ClassifyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ClassifyImageRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *ClassifyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ClassifyImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *ClassifyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *ClassifyImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *ClassifyImageRequest) WithRevision(revision uint) *ClassifyImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // SupportedIdentifiers returns the collection as a Go slice.
 func (x *ClassifyImageRequest) SupportedIdentifiers() ([]string, error) {
 	arr, err := x.inner.SupportedIdentifiersAndReturnError()
@@ -57,6 +82,10 @@ func (x *ClassifyImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNIm
 // ClassifyImageRequestable is the interface implemented by [ClassifyImageRequest], for mocking and DI.
 type ClassifyImageRequestable interface {
 	Unwrap() *raw.VNClassifyImageRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ClassifyImageRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ClassifyImageRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *ClassifyImageRequest
+	WithRevision(revision uint) *ClassifyImageRequest
 	SupportedIdentifiers() ([]string, error)
 }
 

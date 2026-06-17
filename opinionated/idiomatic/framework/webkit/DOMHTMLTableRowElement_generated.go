@@ -67,6 +67,108 @@ func (x *DOMHTMLTableRowElement) WithVAlign(vAlign string) *DOMHTMLTableRowEleme
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithTitle(title string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithLang(lang string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithDir(dir string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithTabIndex(tabIndex int) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithAccessKey(accessKey string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithInnerText(innerText string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithOuterText(outerText string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithContentEditable(contentEditable string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithIdName(idName string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithScrollLeft(scrollLeft int) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithScrollTop(scrollTop int) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithInnerHTML(innerHTML string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithOuterHTML(outerHTML string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithClassName(className string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithNodeValue(nodeValue string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithPrefix(prefix string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLTableRowElement) WithTextContent(textContent string) *DOMHTMLTableRowElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // InsertCell calls the underlying InsertCell.
 func (x *DOMHTMLTableRowElement) InsertCell(index int) *DOMHTMLElement {
 	_r := x.inner.InsertCell(index)
@@ -188,6 +290,23 @@ type DOMHTMLTableRowElementable interface {
 	WithCh(ch string) *DOMHTMLTableRowElement
 	WithChOff(chOff string) *DOMHTMLTableRowElement
 	WithVAlign(vAlign string) *DOMHTMLTableRowElement
+	WithTitle(title string) *DOMHTMLTableRowElement
+	WithLang(lang string) *DOMHTMLTableRowElement
+	WithDir(dir string) *DOMHTMLTableRowElement
+	WithTabIndex(tabIndex int) *DOMHTMLTableRowElement
+	WithAccessKey(accessKey string) *DOMHTMLTableRowElement
+	WithInnerText(innerText string) *DOMHTMLTableRowElement
+	WithOuterText(outerText string) *DOMHTMLTableRowElement
+	WithContentEditable(contentEditable string) *DOMHTMLTableRowElement
+	WithIdName(idName string) *DOMHTMLTableRowElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLTableRowElement
+	WithScrollTop(scrollTop int) *DOMHTMLTableRowElement
+	WithInnerHTML(innerHTML string) *DOMHTMLTableRowElement
+	WithOuterHTML(outerHTML string) *DOMHTMLTableRowElement
+	WithClassName(className string) *DOMHTMLTableRowElement
+	WithNodeValue(nodeValue string) *DOMHTMLTableRowElement
+	WithPrefix(prefix string) *DOMHTMLTableRowElement
+	WithTextContent(textContent string) *DOMHTMLTableRowElement
 	InsertCell(index int) *DOMHTMLElement
 	DeleteCell(index int)
 	RowIndex() int

@@ -35,6 +35,12 @@ func NewUnit() *Unit {
 	return &Unit{inner: raw.NSUnitFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Unit) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Unit {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Symbol calls the underlying Symbol.
 func (x *Unit) Symbol() *String {
 	_r := x.inner.Symbol()
@@ -51,6 +57,7 @@ func (x *Unit) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Unitable is the interface implemented by [Unit], for mocking and DI.
 type Unitable interface {
 	Unwrap() *raw.NSUnit
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Unit
 	Symbol() *String
 }
 

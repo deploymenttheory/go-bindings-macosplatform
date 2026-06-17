@@ -53,6 +53,36 @@ func (x *ImageScale) WithScaleTransform(scaleTransform *mpscore.MPSScaleTransfor
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageScale) WithOffset(offset mpscore.MPSOffset) *ImageScale {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageScale) WithClipRect(clipRect metal.MTLRegion) *ImageScale {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageScale) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageScale {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageScale) WithOptions(options mpscore.MPSKernelOptions) *ImageScale {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageScale) WithLabel(label string) *ImageScale {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ScaleTransform calls the underlying ScaleTransform.
 func (x *ImageScale) ScaleTransform() *mpscore.MPSScaleTransform {
 	return x.inner.ScaleTransform()
@@ -71,6 +101,11 @@ func (x *ImageScale) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryIma
 type ImageScaleable interface {
 	Unwrap() *raw.MPSImageScale
 	WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageScale
+	WithOffset(offset mpscore.MPSOffset) *ImageScale
+	WithClipRect(clipRect metal.MTLRegion) *ImageScale
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageScale
+	WithOptions(options mpscore.MPSKernelOptions) *ImageScale
+	WithLabel(label string) *ImageScale
 	ScaleTransform() *mpscore.MPSScaleTransform
 	SetScaleTransform(scaleTransform *mpscore.MPSScaleTransform)
 }

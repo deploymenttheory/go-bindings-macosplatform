@@ -5,8 +5,10 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Plane wraps [raw.SCNPlane] with a fluent Go API.
@@ -68,6 +70,80 @@ func (x *Plane) WithCornerRadius(cornerRadius float64) *Plane {
 // WithCornerSegmentCount sets the cornerSegmentCount property and returns the receiver for chaining.
 func (x *Plane) WithCornerSegmentCount(cornerSegmentCount int) *Plane {
 	x.inner.SetCornerSegmentCount(cornerSegmentCount)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Plane) WithName(name string) *Plane {
+	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithMaterials sets the collection, converting the Go slice to an NSArray.
+func (x *Plane) WithMaterials(items ...*raw.SCNMaterial) *Plane {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetMaterials(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetMaterials(_arr)
+	return x
+}
+
+// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+func (x *Plane) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Plane {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+	return x
+}
+
+// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
+func (x *Plane) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Plane {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+	return x
+}
+
+// WithTessellator sets the tessellator property and returns the receiver for chaining.
+func (x *Plane) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Plane {
+	x.inner.SCNGeometry.SetTessellator(tessellator)
+	return x
+}
+
+// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
+func (x *Plane) WithSubdivisionLevel(subdivisionLevel uint) *Plane {
+	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+	return x
+}
+
+// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+func (x *Plane) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Plane {
+	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	return x
+}
+
+// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+func (x *Plane) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Plane {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+	return x
+}
+
+// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+func (x *Plane) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Plane {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
 	return x
 }
 
@@ -142,6 +218,15 @@ type Planeable interface {
 	WithHeightSegmentCount(heightSegmentCount int) *Plane
 	WithCornerRadius(cornerRadius float64) *Plane
 	WithCornerSegmentCount(cornerSegmentCount int) *Plane
+	WithName(name string) *Plane
+	WithMaterials(items ...*raw.SCNMaterial) *Plane
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Plane
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Plane
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Plane
+	WithSubdivisionLevel(subdivisionLevel uint) *Plane
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Plane
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Plane
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Plane
 	Width() float64
 	SetWidth(width float64)
 	Height() float64

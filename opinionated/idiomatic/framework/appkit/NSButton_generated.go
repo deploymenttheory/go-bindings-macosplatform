@@ -7,9 +7,12 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Button wraps [raw.NSButton] with a fluent Go API.
@@ -191,6 +194,484 @@ func (x *Button) WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSE
 // WithBorderShape sets the borderShape property and returns the receiver for chaining.
 func (x *Button) WithBorderShape(borderShape raw.NSControlBorderShape) *Button {
 	x.inner.SetBorderShape(borderShape)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *Button) WithTarget(target objc.ID) *Button {
+	x.inner.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *Button) WithAction(action objc.SEL) *Button {
+	x.inner.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *Button) WithTag(tag int) *Button {
+	x.inner.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *Button) WithIgnoresMultiClick(ignoresMultiClick bool) *Button {
+	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *Button) WithContinuous(continuous bool) *Button {
+	x.inner.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *Button) WithEnabled(enabled bool) *Button {
+	x.inner.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *Button) WithRefusesFirstResponder(refusesFirstResponder bool) *Button {
+	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *Button) WithHighlighted(highlighted bool) *Button {
+	x.inner.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *Button) WithControlSize(controlSize raw.NSControlSize) *Button {
+	x.inner.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *Button) WithFormatter(formatter *foundation.NSFormatter) *Button {
+	x.inner.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *Button) WithObjectValue(objectValue objc.ID) *Button {
+	x.inner.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *Button) WithStringValue(stringValue string) *Button {
+	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *Button) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Button {
+	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *Button) WithIntValue(intValue int) *Button {
+	x.inner.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *Button) WithIntegerValue(integerValue int) *Button {
+	x.inner.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *Button) WithFloatValue(floatValue float32) *Button {
+	x.inner.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *Button) WithDoubleValue(doubleValue float64) *Button {
+	x.inner.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *Button) WithFont(font *raw.NSFont) *Button {
+	x.inner.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *Button) WithUsesSingleLineMode(usesSingleLineMode bool) *Button {
+	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *Button) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Button {
+	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *Button) WithAlignment(alignment raw.NSTextAlignment) *Button {
+	x.inner.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *Button) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Button {
+	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *Button) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Button {
+	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *Button) WithCell(cell CellProvider) *Button {
+	x.inner.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *Button) WithSubviews(items ...ViewProvider) *Button {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Button) WithHidden(hidden bool) *Button {
+	x.inner.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *Button) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Button {
+	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *Button) WithAutoresizesSubviews(autoresizesSubviews bool) *Button {
+	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *Button) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Button {
+	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *Button) WithFrame(frame corefoundation.CGRect) *Button {
+	x.inner.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *Button) WithFrameRotation(frameRotation float64) *Button {
+	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *Button) WithFrameCenterRotation(frameCenterRotation float64) *Button {
+	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *Button) WithBoundsRotation(boundsRotation float64) *Button {
+	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *Button) WithBounds(bounds corefoundation.CGRect) *Button {
+	x.inner.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *Button) WithCanDrawConcurrently(canDrawConcurrently bool) *Button {
+	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *Button) WithNeedsDisplay(needsDisplay bool) *Button {
+	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *Button) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Button {
+	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *Button) WithWantsRestingTouches(wantsRestingTouches bool) *Button {
+	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *Button) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Button {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *Button) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Button {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *Button) WithWantsLayer(wantsLayer bool) *Button {
+	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *Button) WithLayer(layer *quartzcore.CALayer) *Button {
+	x.inner.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *Button) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Button {
+	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *Button) WithNeedsLayout(needsLayout bool) *Button {
+	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *Button) WithAlphaValue(alphaValue float64) *Button {
+	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *Button) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Button {
+	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Button) WithBackgroundFilters(items ...*coreimage.CIFilter) *Button {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *Button) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Button {
+	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Button) WithContentFilters(items ...*coreimage.CIFilter) *Button {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *Button) WithShadow(shadow *raw.NSShadow) *Button {
+	x.inner.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *Button) WithClipsToBounds(clipsToBounds bool) *Button {
+	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *Button) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Button {
+	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *Button) WithToolTip(toolTip string) *Button {
+	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *Button) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Button {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *Button) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Button {
+	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *Button) WithNextKeyView(nextKeyView ViewProvider) *Button {
+	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *Button) WithFocusRingType(focusRingType raw.NSFocusRingType) *Button {
+	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *Button) WithGestureRecognizers(items ...GestureRecognizerProvider) *Button {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *Button) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Button {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *Button) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Button {
+	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *Button) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Button {
+	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *Button) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Button {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *Button) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Button {
+	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *Button) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Button {
+	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Button) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Button {
+	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Button) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Button {
+	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *Button) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Button {
+	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *Button) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Button {
+	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *Button) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Button {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Button) WithNextResponder(nextResponder ResponderProvider) *Button {
+	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Button) WithMenu(menu *raw.NSMenu) *Button {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Button) WithUserActivity(userActivity *foundation.NSUserActivity) *Button {
+	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Button) WithTouchBar(touchBar *raw.NSTouchBar) *Button {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -576,6 +1057,79 @@ type Buttonable interface {
 	WithKeyEquivalent(keyEquivalent string) *Button
 	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *Button
 	WithBorderShape(borderShape raw.NSControlBorderShape) *Button
+	WithTarget(target objc.ID) *Button
+	WithAction(action objc.SEL) *Button
+	WithTag(tag int) *Button
+	WithIgnoresMultiClick(ignoresMultiClick bool) *Button
+	WithContinuous(continuous bool) *Button
+	WithEnabled(enabled bool) *Button
+	WithRefusesFirstResponder(refusesFirstResponder bool) *Button
+	WithHighlighted(highlighted bool) *Button
+	WithControlSize(controlSize raw.NSControlSize) *Button
+	WithFormatter(formatter *foundation.NSFormatter) *Button
+	WithObjectValue(objectValue objc.ID) *Button
+	WithStringValue(stringValue string) *Button
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Button
+	WithIntValue(intValue int) *Button
+	WithIntegerValue(integerValue int) *Button
+	WithFloatValue(floatValue float32) *Button
+	WithDoubleValue(doubleValue float64) *Button
+	WithFont(font *raw.NSFont) *Button
+	WithUsesSingleLineMode(usesSingleLineMode bool) *Button
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Button
+	WithAlignment(alignment raw.NSTextAlignment) *Button
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Button
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Button
+	WithCell(cell CellProvider) *Button
+	WithSubviews(items ...ViewProvider) *Button
+	WithHidden(hidden bool) *Button
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Button
+	WithAutoresizesSubviews(autoresizesSubviews bool) *Button
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Button
+	WithFrame(frame corefoundation.CGRect) *Button
+	WithFrameRotation(frameRotation float64) *Button
+	WithFrameCenterRotation(frameCenterRotation float64) *Button
+	WithBoundsRotation(boundsRotation float64) *Button
+	WithBounds(bounds corefoundation.CGRect) *Button
+	WithCanDrawConcurrently(canDrawConcurrently bool) *Button
+	WithNeedsDisplay(needsDisplay bool) *Button
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Button
+	WithWantsRestingTouches(wantsRestingTouches bool) *Button
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Button
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Button
+	WithWantsLayer(wantsLayer bool) *Button
+	WithLayer(layer *quartzcore.CALayer) *Button
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Button
+	WithNeedsLayout(needsLayout bool) *Button
+	WithAlphaValue(alphaValue float64) *Button
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Button
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *Button
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Button
+	WithContentFilters(items ...*coreimage.CIFilter) *Button
+	WithShadow(shadow *raw.NSShadow) *Button
+	WithClipsToBounds(clipsToBounds bool) *Button
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Button
+	WithToolTip(toolTip string) *Button
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Button
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Button
+	WithNextKeyView(nextKeyView ViewProvider) *Button
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *Button
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *Button
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Button
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Button
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Button
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Button
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Button
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Button
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Button
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Button
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Button
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Button
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Button
+	WithNextResponder(nextResponder ResponderProvider) *Button
+	WithMenu(menu *raw.NSMenu) *Button
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Button
+	WithTouchBar(touchBar *raw.NSTouchBar) *Button
 	SetButtonType(type_ raw.NSButtonType)
 	SetPeriodicDelayInterval(delay float32, interval float32)
 	GetPeriodicDelayInterval(delay *float32, interval *float32)

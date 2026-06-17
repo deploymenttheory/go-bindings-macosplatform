@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams() *MTRTe
 	return &MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams{inner: raw.MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams.SetArg1(arg1)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams { return &x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams }
 
 // MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams
 }
 
 var _ MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsable = (*MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams)(nil)

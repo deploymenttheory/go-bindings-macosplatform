@@ -44,6 +44,54 @@ func (x *PDFImageRep) WithCurrentPage(currentPage int) *PDFImageRep {
 	return x
 }
 
+// WithSize sets the size property and returns the receiver for chaining.
+func (x *PDFImageRep) WithSize(size corefoundation.CGSize) *PDFImageRep {
+	x.inner.NSImageRep.SetSize(size)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *PDFImageRep) WithAlpha(alpha bool) *PDFImageRep {
+	x.inner.NSImageRep.SetAlpha(alpha)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *PDFImageRep) WithOpaque(opaque bool) *PDFImageRep {
+	x.inner.NSImageRep.SetOpaque(opaque)
+	return x
+}
+
+// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
+func (x *PDFImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *PDFImageRep {
+	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+	return x
+}
+
+// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+func (x *PDFImageRep) WithBitsPerSample(bitsPerSample int) *PDFImageRep {
+	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	return x
+}
+
+// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+func (x *PDFImageRep) WithPixelsWide(pixelsWide int) *PDFImageRep {
+	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	return x
+}
+
+// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+func (x *PDFImageRep) WithPixelsHigh(pixelsHigh int) *PDFImageRep {
+	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	return x
+}
+
+// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
+func (x *PDFImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *PDFImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+	return x
+}
+
 // PDFRepresentation calls the underlying PDFRepresentation.
 func (x *PDFImageRep) PDFRepresentation() *foundation.NSData {
 	return x.inner.PDFRepresentation()
@@ -75,6 +123,14 @@ func (x *PDFImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep 
 type PDFImageRepable interface {
 	Unwrap() *raw.NSPDFImageRep
 	WithCurrentPage(currentPage int) *PDFImageRep
+	WithSize(size corefoundation.CGSize) *PDFImageRep
+	WithAlpha(alpha bool) *PDFImageRep
+	WithOpaque(opaque bool) *PDFImageRep
+	WithColorSpaceName(colorSpaceName *foundation.NSString) *PDFImageRep
+	WithBitsPerSample(bitsPerSample int) *PDFImageRep
+	WithPixelsWide(pixelsWide int) *PDFImageRep
+	WithPixelsHigh(pixelsHigh int) *PDFImageRep
+	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *PDFImageRep
 	PDFRepresentation() *foundation.NSData
 	Bounds() corefoundation.CGRect
 	CurrentPage() int

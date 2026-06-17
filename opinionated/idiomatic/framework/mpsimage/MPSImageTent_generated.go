@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,24 @@ func NewImageTent() *ImageTent {
 	return &ImageTent{inner: raw.MPSImageTentFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageTent) WithOffset(offset mpscore.MPSOffset) *ImageTent {
+	x.inner.MPSImageBox.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageTent) WithClipRect(clipRect metal.MTLRegion) *ImageTent {
+	x.inner.MPSImageBox.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageTent) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTent {
+	x.inner.MPSImageBox.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageTent) asImageBox() *raw.MPSImageBox { return &x.inner.MPSImageBox }
 
 func (x *ImageTent) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageBox.MPSUnaryImageKernel }
@@ -42,6 +62,9 @@ func (x *ImageTent) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.in
 // ImageTentable is the interface implemented by [ImageTent], for mocking and DI.
 type ImageTentable interface {
 	Unwrap() *raw.MPSImageTent
+	WithOffset(offset mpscore.MPSOffset) *ImageTent
+	WithClipRect(clipRect metal.MTLRegion) *ImageTent
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTent
 }
 
 var _ ImageTentable = (*ImageTent)(nil)

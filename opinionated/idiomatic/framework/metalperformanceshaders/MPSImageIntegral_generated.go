@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
@@ -37,6 +39,36 @@ func NewImageIntegral() *ImageIntegral {
 	return &ImageIntegral{inner: raw.MPSImageIntegralFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageIntegral) WithOffset(offset mpscore.MPSOffset) *ImageIntegral {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageIntegral) WithClipRect(clipRect metal.MTLRegion) *ImageIntegral {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageIntegral) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegral {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageIntegral) WithOptions(options mpscore.MPSKernelOptions) *ImageIntegral {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageIntegral) WithLabel(label string) *ImageIntegral {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageIntegral) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageIntegral) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
@@ -44,6 +76,11 @@ func (x *ImageIntegral) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnary
 // ImageIntegralable is the interface implemented by [ImageIntegral], for mocking and DI.
 type ImageIntegralable interface {
 	Unwrap() *raw.MPSImageIntegral
+	WithOffset(offset mpscore.MPSOffset) *ImageIntegral
+	WithClipRect(clipRect metal.MTLRegion) *ImageIntegral
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegral
+	WithOptions(options mpscore.MPSKernelOptions) *ImageIntegral
+	WithLabel(label string) *ImageIntegral
 }
 
 var _ ImageIntegralable = (*ImageIntegral)(nil)

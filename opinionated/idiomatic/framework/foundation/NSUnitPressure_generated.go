@@ -35,6 +35,12 @@ func NewUnitPressure() *UnitPressure {
 	return &UnitPressure{inner: raw.NSUnitPressureFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitPressure) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitPressure {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitPressure) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitPressure) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitPressure) asObject() *raw.NSObject { return &x.inner.NSDimension.NS
 // UnitPressureable is the interface implemented by [UnitPressure], for mocking and DI.
 type UnitPressureable interface {
 	Unwrap() *raw.NSUnitPressure
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitPressure
 }
 
 var _ UnitPressureable = (*UnitPressure)(nil)

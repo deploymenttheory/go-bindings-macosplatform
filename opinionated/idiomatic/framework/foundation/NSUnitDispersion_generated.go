@@ -35,6 +35,12 @@ func NewUnitDispersion() *UnitDispersion {
 	return &UnitDispersion{inner: raw.NSUnitDispersionFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitDispersion) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitDispersion {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitDispersion) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitDispersion) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitDispersion) asObject() *raw.NSObject { return &x.inner.NSDimension.
 // UnitDispersionable is the interface implemented by [UnitDispersion], for mocking and DI.
 type UnitDispersionable interface {
 	Unwrap() *raw.NSUnitDispersion
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitDispersion
 }
 
 var _ UnitDispersionable = (*UnitDispersion)(nil)

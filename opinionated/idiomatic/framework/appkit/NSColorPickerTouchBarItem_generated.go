@@ -96,6 +96,12 @@ func (x *ColorPickerTouchBarItem) WithEnabled(enabled bool) *ColorPickerTouchBar
 	return x
 }
 
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *ColorPickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *ColorPickerTouchBarItem {
+	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
 // Color calls the underlying Color.
 func (x *ColorPickerTouchBarItem) Color() *Color {
 	_r := x.inner.Color()
@@ -198,6 +204,7 @@ type ColorPickerTouchBarItemable interface {
 	WithTarget(target objc.ID) *ColorPickerTouchBarItem
 	WithAction(action objc.SEL) *ColorPickerTouchBarItem
 	WithEnabled(enabled bool) *ColorPickerTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *ColorPickerTouchBarItem
 	Color() *Color
 	SetColor(color *raw.NSColor)
 	ShowsAlpha() bool

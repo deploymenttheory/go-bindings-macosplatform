@@ -7,7 +7,9 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -148,6 +150,340 @@ func (x *CollectionView) WithMinItemSize(minItemSize corefoundation.CGSize) *Col
 // WithMaxItemSize sets the maxItemSize property and returns the receiver for chaining.
 func (x *CollectionView) WithMaxItemSize(maxItemSize corefoundation.CGSize) *CollectionView {
 	x.inner.SetMaxItemSize(maxItemSize)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *CollectionView) WithSubviews(items ...ViewProvider) *CollectionView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *CollectionView) WithHidden(hidden bool) *CollectionView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *CollectionView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *CollectionView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *CollectionView) WithAutoresizesSubviews(autoresizesSubviews bool) *CollectionView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *CollectionView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *CollectionView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *CollectionView) WithFrame(frame corefoundation.CGRect) *CollectionView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *CollectionView) WithFrameRotation(frameRotation float64) *CollectionView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *CollectionView) WithFrameCenterRotation(frameCenterRotation float64) *CollectionView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *CollectionView) WithBoundsRotation(boundsRotation float64) *CollectionView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *CollectionView) WithBounds(bounds corefoundation.CGRect) *CollectionView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *CollectionView) WithCanDrawConcurrently(canDrawConcurrently bool) *CollectionView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *CollectionView) WithNeedsDisplay(needsDisplay bool) *CollectionView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *CollectionView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *CollectionView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *CollectionView) WithWantsRestingTouches(wantsRestingTouches bool) *CollectionView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *CollectionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *CollectionView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *CollectionView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *CollectionView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *CollectionView) WithWantsLayer(wantsLayer bool) *CollectionView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *CollectionView) WithLayer(layer *quartzcore.CALayer) *CollectionView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *CollectionView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *CollectionView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *CollectionView) WithNeedsLayout(needsLayout bool) *CollectionView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *CollectionView) WithAlphaValue(alphaValue float64) *CollectionView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *CollectionView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *CollectionView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *CollectionView) WithBackgroundFilters(items ...*coreimage.CIFilter) *CollectionView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *CollectionView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *CollectionView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *CollectionView) WithContentFilters(items ...*coreimage.CIFilter) *CollectionView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *CollectionView) WithShadow(shadow *raw.NSShadow) *CollectionView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *CollectionView) WithClipsToBounds(clipsToBounds bool) *CollectionView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *CollectionView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *CollectionView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *CollectionView) WithToolTip(toolTip string) *CollectionView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *CollectionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *CollectionView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *CollectionView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *CollectionView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *CollectionView) WithNextKeyView(nextKeyView ViewProvider) *CollectionView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *CollectionView) WithFocusRingType(focusRingType raw.NSFocusRingType) *CollectionView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *CollectionView) WithGestureRecognizers(items ...GestureRecognizerProvider) *CollectionView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *CollectionView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *CollectionView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *CollectionView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *CollectionView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *CollectionView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *CollectionView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *CollectionView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *CollectionView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *CollectionView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *CollectionView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *CollectionView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *CollectionView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *CollectionView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *CollectionView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *CollectionView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *CollectionView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *CollectionView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *CollectionView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *CollectionView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *CollectionView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *CollectionView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *CollectionView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *CollectionView) WithNextResponder(nextResponder ResponderProvider) *CollectionView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *CollectionView) WithMenu(menu *raw.NSMenu) *CollectionView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *CollectionView) WithUserActivity(userActivity *foundation.NSUserActivity) *CollectionView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *CollectionView) WithTouchBar(touchBar *raw.NSTouchBar) *CollectionView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -629,6 +965,55 @@ type CollectionViewable interface {
 	WithMaxNumberOfColumns(maxNumberOfColumns uint) *CollectionView
 	WithMinItemSize(minItemSize corefoundation.CGSize) *CollectionView
 	WithMaxItemSize(maxItemSize corefoundation.CGSize) *CollectionView
+	WithSubviews(items ...ViewProvider) *CollectionView
+	WithHidden(hidden bool) *CollectionView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *CollectionView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *CollectionView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *CollectionView
+	WithFrame(frame corefoundation.CGRect) *CollectionView
+	WithFrameRotation(frameRotation float64) *CollectionView
+	WithFrameCenterRotation(frameCenterRotation float64) *CollectionView
+	WithBoundsRotation(boundsRotation float64) *CollectionView
+	WithBounds(bounds corefoundation.CGRect) *CollectionView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *CollectionView
+	WithNeedsDisplay(needsDisplay bool) *CollectionView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *CollectionView
+	WithWantsRestingTouches(wantsRestingTouches bool) *CollectionView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *CollectionView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *CollectionView
+	WithWantsLayer(wantsLayer bool) *CollectionView
+	WithLayer(layer *quartzcore.CALayer) *CollectionView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *CollectionView
+	WithNeedsLayout(needsLayout bool) *CollectionView
+	WithAlphaValue(alphaValue float64) *CollectionView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *CollectionView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *CollectionView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *CollectionView
+	WithContentFilters(items ...*coreimage.CIFilter) *CollectionView
+	WithShadow(shadow *raw.NSShadow) *CollectionView
+	WithClipsToBounds(clipsToBounds bool) *CollectionView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *CollectionView
+	WithToolTip(toolTip string) *CollectionView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *CollectionView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *CollectionView
+	WithNextKeyView(nextKeyView ViewProvider) *CollectionView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *CollectionView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *CollectionView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *CollectionView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *CollectionView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *CollectionView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *CollectionView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *CollectionView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *CollectionView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *CollectionView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *CollectionView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *CollectionView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *CollectionView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *CollectionView
+	WithNextResponder(nextResponder ResponderProvider) *CollectionView
+	WithMenu(menu *raw.NSMenu) *CollectionView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *CollectionView
+	WithTouchBar(touchBar *raw.NSTouchBar) *CollectionView
 	ReloadData()
 	LayoutAttributesForItemAtIndexPath(indexPath *foundation.NSIndexPath) *CollectionViewLayoutAttributes
 	LayoutAttributesForSupplementaryElementOfKindAtIndexPath(kind *foundation.NSString, indexPath *foundation.NSIndexPath) *CollectionViewLayoutAttributes

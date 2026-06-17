@@ -5,6 +5,7 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -69,6 +70,72 @@ func (x *SpringAnimation) WithInitialVelocity(initialVelocity float64) *SpringAn
 // WithAllowsOverdamping sets the allowsOverdamping property and returns the receiver for chaining.
 func (x *SpringAnimation) WithAllowsOverdamping(allowsOverdamping bool) *SpringAnimation {
 	x.inner.SetAllowsOverdamping(allowsOverdamping)
+	return x
+}
+
+// WithFromValue sets the fromValue property and returns the receiver for chaining.
+func (x *SpringAnimation) WithFromValue(fromValue objc.ID) *SpringAnimation {
+	x.inner.CABasicAnimation.SetFromValue(fromValue)
+	return x
+}
+
+// WithToValue sets the toValue property and returns the receiver for chaining.
+func (x *SpringAnimation) WithToValue(toValue objc.ID) *SpringAnimation {
+	x.inner.CABasicAnimation.SetToValue(toValue)
+	return x
+}
+
+// WithByValue sets the byValue property and returns the receiver for chaining.
+func (x *SpringAnimation) WithByValue(byValue objc.ID) *SpringAnimation {
+	x.inner.CABasicAnimation.SetByValue(byValue)
+	return x
+}
+
+// WithKeyPath sets the keyPath property and returns the receiver for chaining.
+func (x *SpringAnimation) WithKeyPath(keyPath string) *SpringAnimation {
+	x.inner.CABasicAnimation.CAPropertyAnimation.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
+	return x
+}
+
+// WithAdditive sets the additive property and returns the receiver for chaining.
+func (x *SpringAnimation) WithAdditive(additive bool) *SpringAnimation {
+	x.inner.CABasicAnimation.CAPropertyAnimation.SetAdditive(additive)
+	return x
+}
+
+// WithCumulative sets the cumulative property and returns the receiver for chaining.
+func (x *SpringAnimation) WithCumulative(cumulative bool) *SpringAnimation {
+	x.inner.CABasicAnimation.CAPropertyAnimation.SetCumulative(cumulative)
+	return x
+}
+
+// WithValueFunction sets the valueFunction property and returns the receiver for chaining.
+func (x *SpringAnimation) WithValueFunction(valueFunction *raw.CAValueFunction) *SpringAnimation {
+	x.inner.CABasicAnimation.CAPropertyAnimation.SetValueFunction(valueFunction)
+	return x
+}
+
+// WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
+func (x *SpringAnimation) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *SpringAnimation {
+	x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *SpringAnimation) WithDelegate(delegate raw.CAAnimationDelegate) *SpringAnimation {
+	x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation.SetDelegate(delegate)
+	return x
+}
+
+// WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
+func (x *SpringAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *SpringAnimation {
+	x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)
+	return x
+}
+
+// WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
+func (x *SpringAnimation) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *SpringAnimation {
+	x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation.SetPreferredFrameRateRange(preferredFrameRateRange)
 	return x
 }
 
@@ -146,6 +213,17 @@ type SpringAnimationable interface {
 	WithDamping(damping float64) *SpringAnimation
 	WithInitialVelocity(initialVelocity float64) *SpringAnimation
 	WithAllowsOverdamping(allowsOverdamping bool) *SpringAnimation
+	WithFromValue(fromValue objc.ID) *SpringAnimation
+	WithToValue(toValue objc.ID) *SpringAnimation
+	WithByValue(byValue objc.ID) *SpringAnimation
+	WithKeyPath(keyPath string) *SpringAnimation
+	WithAdditive(additive bool) *SpringAnimation
+	WithCumulative(cumulative bool) *SpringAnimation
+	WithValueFunction(valueFunction *raw.CAValueFunction) *SpringAnimation
+	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *SpringAnimation
+	WithDelegate(delegate raw.CAAnimationDelegate) *SpringAnimation
+	WithRemovedOnCompletion(removedOnCompletion bool) *SpringAnimation
+	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *SpringAnimation
 	Mass() float64
 	SetMass(mass float64)
 	Stiffness() float64

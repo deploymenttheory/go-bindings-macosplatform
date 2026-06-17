@@ -37,6 +37,12 @@ func NewRAWProcessingListElementParameterWithNameDescriptionElementID(name strin
 	return &RAWProcessingListElementParameter{inner: raw.MERAWProcessingListElementParameterFromID(_id)}
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *RAWProcessingListElementParameter) WithEnabled(enabled bool) *RAWProcessingListElementParameter {
+	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
+	return x
+}
+
 // ListElementID calls the underlying ListElementID.
 func (x *RAWProcessingListElementParameter) ListElementID() int {
 	return x.inner.ListElementID()
@@ -47,6 +53,7 @@ func (x *RAWProcessingListElementParameter) asRAWProcessingParameter() *raw.MERA
 // RAWProcessingListElementParameterable is the interface implemented by [RAWProcessingListElementParameter], for mocking and DI.
 type RAWProcessingListElementParameterable interface {
 	Unwrap() *raw.MERAWProcessingListElementParameter
+	WithEnabled(enabled bool) *RAWProcessingListElementParameter
 	ListElementID() int
 }
 

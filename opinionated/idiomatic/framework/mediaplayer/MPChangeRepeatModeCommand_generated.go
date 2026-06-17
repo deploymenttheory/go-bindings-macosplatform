@@ -41,6 +41,12 @@ func (x *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType raw.MP
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ChangeRepeatModeCommand) WithEnabled(enabled bool) *ChangeRepeatModeCommand {
+	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	return x
+}
+
 // CurrentRepeatType calls the underlying CurrentRepeatType.
 func (x *ChangeRepeatModeCommand) CurrentRepeatType() raw.MPRepeatType {
 	return x.inner.CurrentRepeatType()
@@ -57,6 +63,7 @@ func (x *ChangeRepeatModeCommand) asRemoteCommand() *raw.MPRemoteCommand { retur
 type ChangeRepeatModeCommandable interface {
 	Unwrap() *raw.MPChangeRepeatModeCommand
 	WithCurrentRepeatType(currentRepeatType raw.MPRepeatType) *ChangeRepeatModeCommand
+	WithEnabled(enabled bool) *ChangeRepeatModeCommand
 	CurrentRepeatType() raw.MPRepeatType
 	SetCurrentRepeatType(currentRepeatType raw.MPRepeatType)
 }

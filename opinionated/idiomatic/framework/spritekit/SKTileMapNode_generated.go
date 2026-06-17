@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TileMapNode wraps [raw.SKTileMapNode] with a fluent Go API.
@@ -116,6 +117,166 @@ func (x *TileMapNode) WithLightingBitMask(lightingBitMask uint32) *TileMapNode {
 // WithEnableAutomapping sets the enableAutomapping property and returns the receiver for chaining.
 func (x *TileMapNode) WithEnableAutomapping(enableAutomapping bool) *TileMapNode {
 	x.inner.SetEnableAutomapping(enableAutomapping)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *TileMapNode) WithPosition(position corefoundation.CGPoint) *TileMapNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *TileMapNode) WithZPosition(zPosition float64) *TileMapNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *TileMapNode) WithZRotation(zRotation float64) *TileMapNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *TileMapNode) WithXScale(xScale float64) *TileMapNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *TileMapNode) WithYScale(yScale float64) *TileMapNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *TileMapNode) WithSpeed(speed float64) *TileMapNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *TileMapNode) WithAlpha(alpha float64) *TileMapNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *TileMapNode) WithPaused(paused bool) *TileMapNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *TileMapNode) WithHidden(hidden bool) *TileMapNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *TileMapNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TileMapNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *TileMapNode) WithName(name string) *TileMapNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *TileMapNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *TileMapNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *TileMapNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TileMapNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *TileMapNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *TileMapNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *TileMapNode) WithConstraints(items ...*raw.SKConstraint) *TileMapNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *TileMapNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *TileMapNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *TileMapNode) WithAccessibilityElement(accessibilityElement bool) *TileMapNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *TileMapNode) WithAccessibilityRole(accessibilityRole string) *TileMapNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *TileMapNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TileMapNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *TileMapNode) WithAccessibilitySubrole(accessibilitySubrole string) *TileMapNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *TileMapNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TileMapNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *TileMapNode) WithAccessibilityParent(accessibilityParent objc.ID) *TileMapNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *TileMapNode) WithAccessibilityHelp(accessibilityHelp string) *TileMapNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *TileMapNode) WithAccessibilityLabel(accessibilityLabel string) *TileMapNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *TileMapNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TileMapNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
@@ -306,6 +467,31 @@ type TileMapNodeable interface {
 	WithShader(shader *raw.SKShader) *TileMapNode
 	WithLightingBitMask(lightingBitMask uint32) *TileMapNode
 	WithEnableAutomapping(enableAutomapping bool) *TileMapNode
+	WithPosition(position corefoundation.CGPoint) *TileMapNode
+	WithZPosition(zPosition float64) *TileMapNode
+	WithZRotation(zRotation float64) *TileMapNode
+	WithXScale(xScale float64) *TileMapNode
+	WithYScale(yScale float64) *TileMapNode
+	WithSpeed(speed float64) *TileMapNode
+	WithAlpha(alpha float64) *TileMapNode
+	WithPaused(paused bool) *TileMapNode
+	WithHidden(hidden bool) *TileMapNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *TileMapNode
+	WithName(name string) *TileMapNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *TileMapNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TileMapNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *TileMapNode
+	WithConstraints(items ...*raw.SKConstraint) *TileMapNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *TileMapNode
+	WithAccessibilityElement(accessibilityElement bool) *TileMapNode
+	WithAccessibilityRole(accessibilityRole string) *TileMapNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TileMapNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *TileMapNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TileMapNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *TileMapNode
+	WithAccessibilityHelp(accessibilityHelp string) *TileMapNode
+	WithAccessibilityLabel(accessibilityLabel string) *TileMapNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *TileMapNode
 	FillWithTileGroup(tileGroup *raw.SKTileGroup)
 	TileDefinitionAtColumnRow(column uint, row uint) *TileDefinition
 	TileGroupAtColumnRow(column uint, row uint) *TileGroup

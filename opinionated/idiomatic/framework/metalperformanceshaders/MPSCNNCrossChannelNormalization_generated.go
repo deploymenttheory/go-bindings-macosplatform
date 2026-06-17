@@ -65,6 +65,66 @@ func (x *CNNCrossChannelNormalization) WithDelta(delta float32) *CNNCrossChannel
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalization) WithOffset(offset mpscore.MPSOffset) *CNNCrossChannelNormalization {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNCrossChannelNormalization {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNCrossChannelNormalization {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNCrossChannelNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNCrossChannelNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNCrossChannelNormalization {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalization) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNCrossChannelNormalization {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalization) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNCrossChannelNormalization {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalization) WithOptions(options mpscore.MPSKernelOptions) *CNNCrossChannelNormalization {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalization) WithLabel(label string) *CNNCrossChannelNormalization {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Alpha calls the underlying Alpha.
 func (x *CNNCrossChannelNormalization) Alpha() float32 {
 	return x.inner.Alpha()
@@ -110,6 +170,16 @@ type CNNCrossChannelNormalizationable interface {
 	WithAlpha(alpha float32) *CNNCrossChannelNormalization
 	WithBeta(beta float32) *CNNCrossChannelNormalization
 	WithDelta(delta float32) *CNNCrossChannelNormalization
+	WithOffset(offset mpscore.MPSOffset) *CNNCrossChannelNormalization
+	WithClipRect(clipRect metal.MTLRegion) *CNNCrossChannelNormalization
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNCrossChannelNormalization
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNCrossChannelNormalization
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNCrossChannelNormalization
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNCrossChannelNormalization
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNCrossChannelNormalization
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNCrossChannelNormalization
+	WithOptions(options mpscore.MPSKernelOptions) *CNNCrossChannelNormalization
+	WithLabel(label string) *CNNCrossChannelNormalization
 	Alpha() float32
 	SetAlpha(alpha float32)
 	Beta() float32

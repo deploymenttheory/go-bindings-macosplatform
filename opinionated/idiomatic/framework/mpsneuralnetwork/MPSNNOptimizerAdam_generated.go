@@ -52,6 +52,18 @@ func (x *NNOptimizerAdam) WithTimeStep(timeStep uint) *NNOptimizerAdam {
 	return x
 }
 
+// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+func (x *NNOptimizerAdam) WithLearningRate(learningRate float32) *NNOptimizerAdam {
+	x.inner.MPSNNOptimizer.SetLearningRate(learningRate)
+	return x
+}
+
+// WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
+func (x *NNOptimizerAdam) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerAdam {
+	x.inner.MPSNNOptimizer.SetApplyGradientClipping(applyGradientClipping)
+	return x
+}
+
 // EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector.
 func (x *NNOptimizerAdam) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, inputVelocityVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputMomentumVector, inputVelocityVector, resultValuesVector)
@@ -133,6 +145,8 @@ func (x *NNOptimizerAdam) asNNOptimizer() *raw.MPSNNOptimizer { return &x.inner.
 type NNOptimizerAdamable interface {
 	Unwrap() *raw.MPSNNOptimizerAdam
 	WithTimeStep(timeStep uint) *NNOptimizerAdam
+	WithLearningRate(learningRate float32) *NNOptimizerAdam
+	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerAdam
 	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, inputVelocityVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)
 	EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputMomentumMatrix *mpscore.MPSMatrix, inputVelocityMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix)
 	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorMaximumVelocityVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, inputVelocityVector *mpscore.MPSVector, maximumVelocityVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)

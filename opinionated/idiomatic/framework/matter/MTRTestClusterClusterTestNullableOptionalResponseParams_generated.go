@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,46 @@ func NewMTRTestClusterClusterTestNullableOptionalResponseParams() *MTRTestCluste
 	return &MTRTestClusterClusterTestNullableOptionalResponseParams{inner: raw.MTRTestClusterClusterTestNullableOptionalResponseParamsFromID(_id)}
 }
 
+// WithWasPresent sets the wasPresent property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) WithWasPresent(wasPresent *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalResponseParams {
+	x.inner.MTRUnitTestingClusterTestNullableOptionalResponseParams.SetWasPresent(wasPresent)
+	return x
+}
+
+// WithWasNull sets the wasNull property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) WithWasNull(wasNull *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalResponseParams {
+	x.inner.MTRUnitTestingClusterTestNullableOptionalResponseParams.SetWasNull(wasNull)
+	return x
+}
+
+// WithValue sets the value property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) WithValue(value *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalResponseParams {
+	x.inner.MTRUnitTestingClusterTestNullableOptionalResponseParams.SetValue(value)
+	return x
+}
+
+// WithOriginalValue sets the originalValue property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) WithOriginalValue(originalValue *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalResponseParams {
+	x.inner.MTRUnitTestingClusterTestNullableOptionalResponseParams.SetOriginalValue(originalValue)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalResponseParams {
+	x.inner.MTRUnitTestingClusterTestNullableOptionalResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) asMTRUnitTestingClusterTestNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestNullableOptionalResponseParams { return &x.inner.MTRUnitTestingClusterTestNullableOptionalResponseParams }
 
 // MTRTestClusterClusterTestNullableOptionalResponseParamsable is the interface implemented by [MTRTestClusterClusterTestNullableOptionalResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestNullableOptionalResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestNullableOptionalResponseParams
+	WithWasPresent(wasPresent *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalResponseParams
+	WithWasNull(wasNull *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalResponseParams
+	WithValue(value *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalResponseParams
+	WithOriginalValue(originalValue *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalResponseParams
 }
 
 var _ MTRTestClusterClusterTestNullableOptionalResponseParamsable = (*MTRTestClusterClusterTestNullableOptionalResponseParams)(nil)

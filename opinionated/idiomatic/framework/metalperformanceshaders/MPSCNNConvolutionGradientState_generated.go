@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -38,6 +39,18 @@ func NewCNNConvolutionGradientState() *CNNConvolutionGradientState {
 	return &CNNConvolutionGradientState{inner: raw.MPSCNNConvolutionGradientStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNConvolutionGradientState) WithReadCount(readCount uint) *CNNConvolutionGradientState {
+	x.inner.MPSNNGradientState.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNConvolutionGradientState) WithLabel(label string) *CNNConvolutionGradientState {
+	x.inner.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // GradientForWeights calls the underlying GradientForWeights.
 func (x *CNNConvolutionGradientState) GradientForWeights() metal.MTLBuffer {
 	return x.inner.GradientForWeights()
@@ -65,6 +78,8 @@ func (x *CNNConvolutionGradientState) asState() *mpscore.MPSState { return &x.in
 // CNNConvolutionGradientStateable is the interface implemented by [CNNConvolutionGradientState], for mocking and DI.
 type CNNConvolutionGradientStateable interface {
 	Unwrap() *raw.MPSCNNConvolutionGradientState
+	WithReadCount(readCount uint) *CNNConvolutionGradientState
+	WithLabel(label string) *CNNConvolutionGradientState
 	GradientForWeights() metal.MTLBuffer
 	GradientForBiases() metal.MTLBuffer
 	Convolution() *mpsneuralnetwork.MPSCNNConvolution

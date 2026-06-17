@@ -35,6 +35,12 @@ func NewMessagePort() *MessagePort {
 	return &MessagePort{inner: raw.NSMessagePortFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MessagePort) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MessagePort {
+	x.inner.NSPort.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *MessagePort) asPort() *raw.NSPort { return &x.inner.NSPort }
 
 func (x *MessagePort) asObject() *raw.NSObject { return &x.inner.NSPort.NSObject }
@@ -42,6 +48,7 @@ func (x *MessagePort) asObject() *raw.NSObject { return &x.inner.NSPort.NSObject
 // MessagePortable is the interface implemented by [MessagePort], for mocking and DI.
 type MessagePortable interface {
 	Unwrap() *raw.NSMessagePort
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MessagePort
 }
 
 var _ MessagePortable = (*MessagePort)(nil)

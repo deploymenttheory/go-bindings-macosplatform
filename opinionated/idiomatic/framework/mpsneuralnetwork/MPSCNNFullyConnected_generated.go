@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,60 @@ func NewCNNFullyConnectedWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &CNNFullyConnected{inner: raw.MPSCNNFullyConnectedFromID(_id)}
 }
 
+// WithAccumulatorPrecisionOption sets the accumulatorPrecisionOption property and returns the receiver for chaining.
+func (x *CNNFullyConnected) WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnected {
+	x.inner.MPSCNNConvolution.SetAccumulatorPrecisionOption(accumulatorPrecisionOption)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNFullyConnected) WithOffset(offset mpscore.MPSOffset) *CNNFullyConnected {
+	x.inner.MPSCNNConvolution.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNFullyConnected) WithClipRect(clipRect metal.MTLRegion) *CNNFullyConnected {
+	x.inner.MPSCNNConvolution.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNFullyConnected) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNFullyConnected {
+	x.inner.MPSCNNConvolution.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNFullyConnected) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNFullyConnected {
+	x.inner.MPSCNNConvolution.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNFullyConnected) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNFullyConnected {
+	x.inner.MPSCNNConvolution.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNFullyConnected) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNFullyConnected {
+	x.inner.MPSCNNConvolution.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNFullyConnected) WithPadding(padding raw.MPSNNPadding) *CNNFullyConnected {
+	x.inner.MPSCNNConvolution.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNFullyConnected) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNFullyConnected {
+	x.inner.MPSCNNConvolution.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNFullyConnected) asCNNConvolution() *raw.MPSCNNConvolution { return &x.inner.MPSCNNConvolution }
 
 func (x *CNNFullyConnected) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNConvolution.MPSCNNKernel }
@@ -52,6 +107,15 @@ func (x *CNNFullyConnected) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MP
 // CNNFullyConnectedable is the interface implemented by [CNNFullyConnected], for mocking and DI.
 type CNNFullyConnectedable interface {
 	Unwrap() *raw.MPSCNNFullyConnected
+	WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnected
+	WithOffset(offset mpscore.MPSOffset) *CNNFullyConnected
+	WithClipRect(clipRect metal.MTLRegion) *CNNFullyConnected
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNFullyConnected
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNFullyConnected
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNFullyConnected
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNFullyConnected
+	WithPadding(padding raw.MPSNNPadding) *CNNFullyConnected
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNFullyConnected
 }
 
 var _ CNNFullyConnectedable = (*CNNFullyConnected)(nil)

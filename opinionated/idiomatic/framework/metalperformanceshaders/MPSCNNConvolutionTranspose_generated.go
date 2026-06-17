@@ -66,6 +66,66 @@ func (x *CNNConvolutionTranspose) WithAccumulatorPrecisionOption(accumulatorPrec
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNConvolutionTranspose) WithOffset(offset mpscore.MPSOffset) *CNNConvolutionTranspose {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNConvolutionTranspose) WithClipRect(clipRect metal.MTLRegion) *CNNConvolutionTranspose {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNConvolutionTranspose) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolutionTranspose {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNConvolutionTranspose) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNConvolutionTranspose {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNConvolutionTranspose) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNConvolutionTranspose {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNConvolutionTranspose) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionTranspose {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNConvolutionTranspose) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNConvolutionTranspose {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNConvolutionTranspose) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNConvolutionTranspose {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNConvolutionTranspose) WithOptions(options mpscore.MPSKernelOptions) *CNNConvolutionTranspose {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNConvolutionTranspose) WithLabel(label string) *CNNConvolutionTranspose {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceImageConvolutionGradientState calls the underlying EncodeToCommandBufferSourceImageConvolutionGradientState.
 func (x *CNNConvolutionTranspose) EncodeToCommandBufferSourceImageConvolutionGradientState(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState) *mpscore.MPSImage {
 	return x.inner.EncodeToCommandBufferSourceImageConvolutionGradientState(commandBuffer, sourceImage, convolutionGradientState)
@@ -191,6 +251,16 @@ type CNNConvolutionTransposeable interface {
 	WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionTranspose
 	WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionTranspose
 	WithAccumulatorPrecisionOption(accumulatorPrecisionOption mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTranspose
+	WithOffset(offset mpscore.MPSOffset) *CNNConvolutionTranspose
+	WithClipRect(clipRect metal.MTLRegion) *CNNConvolutionTranspose
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolutionTranspose
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNConvolutionTranspose
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNConvolutionTranspose
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionTranspose
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNConvolutionTranspose
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNConvolutionTranspose
+	WithOptions(options mpscore.MPSKernelOptions) *CNNConvolutionTranspose
+	WithLabel(label string) *CNNConvolutionTranspose
 	EncodeToCommandBufferSourceImageConvolutionGradientState(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState) *mpscore.MPSImage
 	EncodeBatchToCommandBufferSourceImagesConvolutionGradientStates(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, convolutionGradientState unsafe.Pointer) unsafe.Pointer
 	EncodeToCommandBufferSourceImageConvolutionGradientStateDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, destinationImage *mpscore.MPSImage)

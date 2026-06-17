@@ -141,6 +141,12 @@ func NewNumberWithUnsignedInteger(value uint) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Number) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Number {
+	x.inner.NSValue.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Compare calls the underlying Compare.
 func (x *Number) Compare(otherNumber *raw.NSNumber) raw.NSComparisonResult {
 	return x.inner.Compare(otherNumber)
@@ -258,6 +264,7 @@ func (x *Number) asObject() *raw.NSObject { return &x.inner.NSValue.NSObject }
 // Numberable is the interface implemented by [Number], for mocking and DI.
 type Numberable interface {
 	Unwrap() *raw.NSNumber
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Number
 	Compare(otherNumber *raw.NSNumber) raw.NSComparisonResult
 	IsEqualToNumber(number *raw.NSNumber) bool
 	DescriptionWithLocale(locale objc.ID) *String

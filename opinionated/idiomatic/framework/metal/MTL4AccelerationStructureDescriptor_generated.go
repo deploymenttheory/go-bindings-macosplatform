@@ -35,6 +35,12 @@ func NewMTL4AccelerationStructureDescriptor() *MTL4AccelerationStructureDescript
 	return &MTL4AccelerationStructureDescriptor{inner: raw.MTL4AccelerationStructureDescriptorFromID(_id)}
 }
 
+// WithUsage sets the usage property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureDescriptor) WithUsage(usage raw.MTLAccelerationStructureUsage) *MTL4AccelerationStructureDescriptor {
+	x.inner.MTLAccelerationStructureDescriptor.SetUsage(usage)
+	return x
+}
+
 func (x *MTL4AccelerationStructureDescriptor) asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor { return x.inner }
 
 func (x *MTL4AccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return &x.inner.MTLAccelerationStructureDescriptor }
@@ -42,6 +48,7 @@ func (x *MTL4AccelerationStructureDescriptor) asAccelerationStructureDescriptor(
 // MTL4AccelerationStructureDescriptorable is the interface implemented by [MTL4AccelerationStructureDescriptor], for mocking and DI.
 type MTL4AccelerationStructureDescriptorable interface {
 	Unwrap() *raw.MTL4AccelerationStructureDescriptor
+	WithUsage(usage raw.MTLAccelerationStructureUsage) *MTL4AccelerationStructureDescriptor
 }
 
 var _ MTL4AccelerationStructureDescriptorable = (*MTL4AccelerationStructureDescriptor)(nil)

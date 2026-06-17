@@ -42,6 +42,12 @@ func (x *MIDIPitchBendEvent) WithValue(value uint) *MIDIPitchBendEvent {
 	return x
 }
 
+// WithChannel sets the channel property and returns the receiver for chaining.
+func (x *MIDIPitchBendEvent) WithChannel(channel uint) *MIDIPitchBendEvent {
+	x.inner.AVMIDIChannelEvent.SetChannel(channel)
+	return x
+}
+
 // Value calls the underlying Value.
 func (x *MIDIPitchBendEvent) Value() uint {
 	return x.inner.Value()
@@ -60,6 +66,7 @@ func (x *MIDIPitchBendEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.
 type MIDIPitchBendEventable interface {
 	Unwrap() *raw.AVMIDIPitchBendEvent
 	WithValue(value uint) *MIDIPitchBendEvent
+	WithChannel(channel uint) *MIDIPitchBendEvent
 	Value() uint
 	SetValue(value uint)
 }

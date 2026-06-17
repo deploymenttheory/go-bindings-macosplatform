@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,6 +45,54 @@ func NewCachedImageRepWithSizeDepthSeparateAlpha(size corefoundation.CGSize, dep
 	return &CachedImageRep{inner: raw.NSCachedImageRepFromID(_id)}
 }
 
+// WithSize sets the size property and returns the receiver for chaining.
+func (x *CachedImageRep) WithSize(size corefoundation.CGSize) *CachedImageRep {
+	x.inner.NSImageRep.SetSize(size)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *CachedImageRep) WithAlpha(alpha bool) *CachedImageRep {
+	x.inner.NSImageRep.SetAlpha(alpha)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *CachedImageRep) WithOpaque(opaque bool) *CachedImageRep {
+	x.inner.NSImageRep.SetOpaque(opaque)
+	return x
+}
+
+// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
+func (x *CachedImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *CachedImageRep {
+	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+	return x
+}
+
+// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+func (x *CachedImageRep) WithBitsPerSample(bitsPerSample int) *CachedImageRep {
+	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	return x
+}
+
+// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+func (x *CachedImageRep) WithPixelsWide(pixelsWide int) *CachedImageRep {
+	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	return x
+}
+
+// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+func (x *CachedImageRep) WithPixelsHigh(pixelsHigh int) *CachedImageRep {
+	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	return x
+}
+
+// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
+func (x *CachedImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CachedImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+	return x
+}
+
 // Window calls the underlying Window.
 func (x *CachedImageRep) Window() *Window {
 	_r := x.inner.Window()
@@ -63,6 +112,14 @@ func (x *CachedImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageR
 // CachedImageRepable is the interface implemented by [CachedImageRep], for mocking and DI.
 type CachedImageRepable interface {
 	Unwrap() *raw.NSCachedImageRep
+	WithSize(size corefoundation.CGSize) *CachedImageRep
+	WithAlpha(alpha bool) *CachedImageRep
+	WithOpaque(opaque bool) *CachedImageRep
+	WithColorSpaceName(colorSpaceName *foundation.NSString) *CachedImageRep
+	WithBitsPerSample(bitsPerSample int) *CachedImageRep
+	WithPixelsWide(pixelsWide int) *CachedImageRep
+	WithPixelsHigh(pixelsHigh int) *CachedImageRep
+	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CachedImageRep
 	Window() *Window
 	Rect() corefoundation.CGRect
 }

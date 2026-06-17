@@ -36,11 +36,18 @@ func NewFileSecurityWithCoder(coder *raw.NSCoder) *FileSecurity {
 	return &FileSecurity{inner: raw.NSFileSecurityFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *FileSecurity) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileSecurity {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *FileSecurity) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // FileSecurityable is the interface implemented by [FileSecurity], for mocking and DI.
 type FileSecurityable interface {
 	Unwrap() *raw.NSFileSecurity
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileSecurity
 }
 
 var _ FileSecurityable = (*FileSecurity)(nil)

@@ -54,6 +54,66 @@ func (x *NEOnDemandRuleEvaluateConnection) WithConnectionRules(items ...*raw.NEE
 	return x
 }
 
+// WithDNSSearchDomainMatch sets the collection, converting the Go slice to an NSArray.
+func (x *NEOnDemandRuleEvaluateConnection) WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection {
+	if len(items) == 0 {
+		x.inner.NEOnDemandRule.SetDNSSearchDomainMatch(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NEOnDemandRule.SetDNSSearchDomainMatch(_arr)
+	return x
+}
+
+// WithDNSServerAddressMatch sets the collection, converting the Go slice to an NSArray.
+func (x *NEOnDemandRuleEvaluateConnection) WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection {
+	if len(items) == 0 {
+		x.inner.NEOnDemandRule.SetDNSServerAddressMatch(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NEOnDemandRule.SetDNSServerAddressMatch(_arr)
+	return x
+}
+
+// WithInterfaceTypeMatch sets the interfaceTypeMatch property and returns the receiver for chaining.
+func (x *NEOnDemandRuleEvaluateConnection) WithInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection {
+	x.inner.NEOnDemandRule.SetInterfaceTypeMatch(interfaceTypeMatch)
+	return x
+}
+
+// WithSSIDMatch sets the collection, converting the Go slice to an NSArray.
+func (x *NEOnDemandRuleEvaluateConnection) WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection {
+	if len(items) == 0 {
+		x.inner.NEOnDemandRule.SetSSIDMatch(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NEOnDemandRule.SetSSIDMatch(_arr)
+	return x
+}
+
+// WithProbeURL sets the probeURL property and returns the receiver for chaining.
+func (x *NEOnDemandRuleEvaluateConnection) WithProbeURL(probeURL string) *NEOnDemandRuleEvaluateConnection {
+	x.inner.NEOnDemandRule.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
+	return x
+}
+
 // ConnectionRules returns the collection as a Go slice.
 func (x *NEOnDemandRuleEvaluateConnection) ConnectionRules() []*raw.NEEvaluateConnectionRule {
 	arr := x.inner.ConnectionRules()
@@ -76,6 +136,11 @@ func (x *NEOnDemandRuleEvaluateConnection) asNEOnDemandRule() *raw.NEOnDemandRul
 type NEOnDemandRuleEvaluateConnectionable interface {
 	Unwrap() *raw.NEOnDemandRuleEvaluateConnection
 	WithConnectionRules(items ...*raw.NEEvaluateConnectionRule) *NEOnDemandRuleEvaluateConnection
+	WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection
+	WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection
+	WithInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection
+	WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection
+	WithProbeURL(probeURL string) *NEOnDemandRuleEvaluateConnection
 	ConnectionRules() []*raw.NEEvaluateConnectionRule
 	SetConnectionRules(connectionRules *foundation.NSArray[*raw.NEEvaluateConnectionRule])
 }

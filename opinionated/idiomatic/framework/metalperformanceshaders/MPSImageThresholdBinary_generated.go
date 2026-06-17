@@ -47,6 +47,36 @@ func NewImageThresholdBinaryWithCoderDevice(aDecoder *foundation.NSCoder, device
 	return &ImageThresholdBinary{inner: raw.MPSImageThresholdBinaryFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageThresholdBinary) WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinary {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageThresholdBinary) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinary {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageThresholdBinary) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdBinary {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageThresholdBinary) WithOptions(options mpscore.MPSKernelOptions) *ImageThresholdBinary {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageThresholdBinary) WithLabel(label string) *ImageThresholdBinary {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ThresholdValue calls the underlying ThresholdValue.
 func (x *ImageThresholdBinary) ThresholdValue() float32 {
 	return x.inner.ThresholdValue()
@@ -69,6 +99,11 @@ func (x *ImageThresholdBinary) asKernel() *mpscore.MPSKernel { return &x.inner.M
 // ImageThresholdBinaryable is the interface implemented by [ImageThresholdBinary], for mocking and DI.
 type ImageThresholdBinaryable interface {
 	Unwrap() *raw.MPSImageThresholdBinary
+	WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinary
+	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinary
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdBinary
+	WithOptions(options mpscore.MPSKernelOptions) *ImageThresholdBinary
+	WithLabel(label string) *ImageThresholdBinary
 	ThresholdValue() float32
 	MaximumValue() float32
 	Transform() *float32

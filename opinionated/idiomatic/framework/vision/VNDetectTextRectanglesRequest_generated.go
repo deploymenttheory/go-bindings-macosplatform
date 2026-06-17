@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +42,30 @@ func (x *DetectTextRectanglesRequest) WithReportCharacterBoxes(reportCharacterBo
 	return x
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectTextRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectTextRectanglesRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectTextRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectTextRectanglesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectTextRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectTextRectanglesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectTextRectanglesRequest) WithRevision(revision uint) *DetectTextRectanglesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // ReportCharacterBoxes calls the underlying ReportCharacterBoxes.
 func (x *DetectTextRectanglesRequest) ReportCharacterBoxes() bool {
 	return x.inner.ReportCharacterBoxes()
@@ -59,6 +84,10 @@ func (x *DetectTextRectanglesRequest) asRequest() *raw.VNRequest { return &x.inn
 type DetectTextRectanglesRequestable interface {
 	Unwrap() *raw.VNDetectTextRectanglesRequest
 	WithReportCharacterBoxes(reportCharacterBoxes bool) *DetectTextRectanglesRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectTextRectanglesRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectTextRectanglesRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectTextRectanglesRequest
+	WithRevision(revision uint) *DetectTextRectanglesRequest
 	ReportCharacterBoxes() bool
 	SetReportCharacterBoxes(reportCharacterBoxes bool)
 }

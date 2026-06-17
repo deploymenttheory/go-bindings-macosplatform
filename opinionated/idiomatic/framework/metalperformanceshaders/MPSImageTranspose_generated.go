@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
@@ -37,6 +39,36 @@ func NewImageTranspose() *ImageTranspose {
 	return &ImageTranspose{inner: raw.MPSImageTransposeFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageTranspose) WithOffset(offset mpscore.MPSOffset) *ImageTranspose {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageTranspose) WithClipRect(clipRect metal.MTLRegion) *ImageTranspose {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageTranspose) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTranspose {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageTranspose) WithOptions(options mpscore.MPSKernelOptions) *ImageTranspose {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageTranspose) WithLabel(label string) *ImageTranspose {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageTranspose) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageTranspose) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
@@ -44,6 +76,11 @@ func (x *ImageTranspose) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnar
 // ImageTransposeable is the interface implemented by [ImageTranspose], for mocking and DI.
 type ImageTransposeable interface {
 	Unwrap() *raw.MPSImageTranspose
+	WithOffset(offset mpscore.MPSOffset) *ImageTranspose
+	WithClipRect(clipRect metal.MTLRegion) *ImageTranspose
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTranspose
+	WithOptions(options mpscore.MPSKernelOptions) *ImageTranspose
+	WithLabel(label string) *ImageTranspose
 }
 
 var _ ImageTransposeable = (*ImageTranspose)(nil)

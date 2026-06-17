@@ -43,6 +43,12 @@ func (x *XPCListener) WithDelegate(delegate raw.NSXPCListenerDelegate) *XPCListe
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XPCListener) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCListener {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Resume calls the underlying Resume.
 func (x *XPCListener) Resume() {
 	x.inner.Resume()
@@ -93,6 +99,7 @@ func (x *XPCListener) asObject() *raw.NSObject { return &x.inner.NSObject }
 type XPCListenerable interface {
 	Unwrap() *raw.NSXPCListener
 	WithDelegate(delegate raw.NSXPCListenerDelegate) *XPCListener
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCListener
 	Resume()
 	Suspend()
 	Activate()

@@ -58,6 +58,12 @@ func NewSortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmp
 	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *SortDescriptor) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SortDescriptor {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AllowEvaluation calls the underlying AllowEvaluation.
 func (x *SortDescriptor) AllowEvaluation() {
 	x.inner.AllowEvaluation()
@@ -102,6 +108,7 @@ func (x *SortDescriptor) asObject() *raw.NSObject { return &x.inner.NSObject }
 // SortDescriptorable is the interface implemented by [SortDescriptor], for mocking and DI.
 type SortDescriptorable interface {
 	Unwrap() *raw.NSSortDescriptor
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SortDescriptor
 	AllowEvaluation()
 	CompareObjectToObject(object1 objc.ID, object2 objc.ID) raw.NSComparisonResult
 	Key() *String

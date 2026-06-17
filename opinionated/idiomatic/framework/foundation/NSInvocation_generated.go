@@ -48,6 +48,12 @@ func (x *Invocation) WithSelector(selector objc.SEL) *Invocation {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Invocation) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Invocation {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // RetainArguments calls the underlying RetainArguments.
 func (x *Invocation) RetainArguments() {
 	x.inner.RetainArguments()
@@ -129,6 +135,7 @@ type Invocationable interface {
 	Unwrap() *raw.NSInvocation
 	WithTarget(target objc.ID) *Invocation
 	WithSelector(selector objc.SEL) *Invocation
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Invocation
 	RetainArguments()
 	GetReturnValue(retLoc unsafe.Pointer)
 	SetReturnValue(retLoc unsafe.Pointer)

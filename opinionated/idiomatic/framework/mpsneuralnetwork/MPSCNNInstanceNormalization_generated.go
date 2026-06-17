@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +52,54 @@ func (x *CNNInstanceNormalization) WithEpsilon(epsilon float32) *CNNInstanceNorm
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithOffset(offset mpscore.MPSOffset) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithPadding(padding raw.MPSNNPadding) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNInstanceNormalization) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNInstanceNormalization {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // ReloadDataSource calls the underlying ReloadDataSource.
 func (x *CNNInstanceNormalization) ReloadDataSource(dataSource raw.MPSCNNInstanceNormalizationDataSource) {
 	x.inner.ReloadDataSource(dataSource)
@@ -87,6 +136,14 @@ func (x *CNNInstanceNormalization) asCNNKernel() *raw.MPSCNNKernel { return &x.i
 type CNNInstanceNormalizationable interface {
 	Unwrap() *raw.MPSCNNInstanceNormalization
 	WithEpsilon(epsilon float32) *CNNInstanceNormalization
+	WithOffset(offset mpscore.MPSOffset) *CNNInstanceNormalization
+	WithClipRect(clipRect metal.MTLRegion) *CNNInstanceNormalization
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNInstanceNormalization
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNInstanceNormalization
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNInstanceNormalization
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNInstanceNormalization
+	WithPadding(padding raw.MPSNNPadding) *CNNInstanceNormalization
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNInstanceNormalization
 	ReloadDataSource(dataSource raw.MPSCNNInstanceNormalizationDataSource)
 	ReloadGammaAndBetaFromDataSource()
 	ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *raw.MPSCNNNormalizationGammaAndBetaState)

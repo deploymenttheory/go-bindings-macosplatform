@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRContentLauncherClusterDimension() *MTRContentLauncherClusterDimension
 	return &MTRContentLauncherClusterDimension{inner: raw.MTRContentLauncherClusterDimensionFromID(_id)}
 }
 
+// WithWidth sets the width property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterDimension) WithWidth(width *foundation.NSNumber) *MTRContentLauncherClusterDimension {
+	x.inner.MTRContentLauncherClusterDimensionStruct.SetWidth(width)
+	return x
+}
+
+// WithHeight sets the height property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterDimension) WithHeight(height *foundation.NSNumber) *MTRContentLauncherClusterDimension {
+	x.inner.MTRContentLauncherClusterDimensionStruct.SetHeight(height)
+	return x
+}
+
+// WithMetric sets the metric property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterDimension) WithMetric(metric *foundation.NSNumber) *MTRContentLauncherClusterDimension {
+	x.inner.MTRContentLauncherClusterDimensionStruct.SetMetric(metric)
+	return x
+}
+
 func (x *MTRContentLauncherClusterDimension) asMTRContentLauncherClusterDimensionStruct() *raw.MTRContentLauncherClusterDimensionStruct { return &x.inner.MTRContentLauncherClusterDimensionStruct }
 
 // MTRContentLauncherClusterDimensionable is the interface implemented by [MTRContentLauncherClusterDimension], for mocking and DI.
 type MTRContentLauncherClusterDimensionable interface {
 	Unwrap() *raw.MTRContentLauncherClusterDimension
+	WithWidth(width *foundation.NSNumber) *MTRContentLauncherClusterDimension
+	WithHeight(height *foundation.NSNumber) *MTRContentLauncherClusterDimension
+	WithMetric(metric *foundation.NSNumber) *MTRContentLauncherClusterDimension
 }
 
 var _ MTRContentLauncherClusterDimensionable = (*MTRContentLauncherClusterDimension)(nil)

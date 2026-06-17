@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +42,30 @@ func (x *GenerateImageFeaturePrintRequest) WithImageCropAndScaleOption(imageCrop
 	return x
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *GenerateImageFeaturePrintRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateImageFeaturePrintRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *GenerateImageFeaturePrintRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateImageFeaturePrintRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *GenerateImageFeaturePrintRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateImageFeaturePrintRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *GenerateImageFeaturePrintRequest) WithRevision(revision uint) *GenerateImageFeaturePrintRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // ImageCropAndScaleOption calls the underlying ImageCropAndScaleOption.
 func (x *GenerateImageFeaturePrintRequest) ImageCropAndScaleOption() raw.VNImageCropAndScaleOption {
 	return x.inner.ImageCropAndScaleOption()
@@ -59,6 +84,10 @@ func (x *GenerateImageFeaturePrintRequest) asRequest() *raw.VNRequest { return &
 type GenerateImageFeaturePrintRequestable interface {
 	Unwrap() *raw.VNGenerateImageFeaturePrintRequest
 	WithImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) *GenerateImageFeaturePrintRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateImageFeaturePrintRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateImageFeaturePrintRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *GenerateImageFeaturePrintRequest
+	WithRevision(revision uint) *GenerateImageFeaturePrintRequest
 	ImageCropAndScaleOption() raw.VNImageCropAndScaleOption
 	SetImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption)
 }

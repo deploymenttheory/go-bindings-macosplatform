@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,66 @@ func NewCNNNeuronPReLUWithDeviceACount(device metal.MTLDevice, a *float32, count
 	return &CNNNeuronPReLU{inner: raw.MPSCNNNeuronPReLUFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNNeuronPReLU) WithOffset(offset mpscore.MPSOffset) *CNNNeuronPReLU {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNNeuronPReLU) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronPReLU {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronPReLU) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronPReLU {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronPReLU) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronPReLU {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNNeuronPReLU) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronPReLU {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNNeuronPReLU) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronPReLU {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNNeuronPReLU) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronPReLU {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNNeuronPReLU) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronPReLU {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNNeuronPReLU) WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronPReLU {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronPReLU) WithLabel(label string) *CNNNeuronPReLU {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronPReLU) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
 func (x *CNNNeuronPReLU) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
@@ -48,6 +109,16 @@ func (x *CNNNeuronPReLU) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNN
 // CNNNeuronPReLUable is the interface implemented by [CNNNeuronPReLU], for mocking and DI.
 type CNNNeuronPReLUable interface {
 	Unwrap() *raw.MPSCNNNeuronPReLU
+	WithOffset(offset mpscore.MPSOffset) *CNNNeuronPReLU
+	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronPReLU
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronPReLU
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronPReLU
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronPReLU
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronPReLU
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronPReLU
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronPReLU
+	WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronPReLU
+	WithLabel(label string) *CNNNeuronPReLU
 }
 
 var _ CNNNeuronPReLUable = (*CNNNeuronPReLU)(nil)

@@ -48,6 +48,30 @@ func (x *TextContentStorage) WithAttributedString(attributedString *foundation.N
 	return x
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *TextContentStorage) WithDelegate(delegate raw.NSTextContentManagerDelegate) *TextContentStorage {
+	x.inner.NSTextContentManager.SetDelegate(delegate)
+	return x
+}
+
+// WithPrimaryTextLayoutManager sets the primaryTextLayoutManager property and returns the receiver for chaining.
+func (x *TextContentStorage) WithPrimaryTextLayoutManager(primaryTextLayoutManager *raw.NSTextLayoutManager) *TextContentStorage {
+	x.inner.NSTextContentManager.SetPrimaryTextLayoutManager(primaryTextLayoutManager)
+	return x
+}
+
+// WithAutomaticallySynchronizesTextLayoutManagers sets the automaticallySynchronizesTextLayoutManagers property and returns the receiver for chaining.
+func (x *TextContentStorage) WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentStorage {
+	x.inner.NSTextContentManager.SetAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers)
+	return x
+}
+
+// WithAutomaticallySynchronizesToBackingStore sets the automaticallySynchronizesToBackingStore property and returns the receiver for chaining.
+func (x *TextContentStorage) WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentStorage {
+	x.inner.NSTextContentManager.SetAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore)
+	return x
+}
+
 // AttributedStringForTextElement calls the underlying AttributedStringForTextElement.
 func (x *TextContentStorage) AttributedStringForTextElement(textElement *raw.NSTextElement) *foundation.NSAttributedString {
 	return x.inner.AttributedStringForTextElement(textElement)
@@ -108,6 +132,10 @@ type TextContentStorageable interface {
 	Unwrap() *raw.NSTextContentStorage
 	WithIncludesTextListMarkers(includesTextListMarkers bool) *TextContentStorage
 	WithAttributedString(attributedString *foundation.NSAttributedString) *TextContentStorage
+	WithDelegate(delegate raw.NSTextContentManagerDelegate) *TextContentStorage
+	WithPrimaryTextLayoutManager(primaryTextLayoutManager *raw.NSTextLayoutManager) *TextContentStorage
+	WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentStorage
+	WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentStorage
 	AttributedStringForTextElement(textElement *raw.NSTextElement) *foundation.NSAttributedString
 	TextElementForAttributedString(attributedString *foundation.NSAttributedString) *TextElement
 	LocationFromLocationWithOffset(location raw.NSTextLocation, offset int) raw.NSTextLocation

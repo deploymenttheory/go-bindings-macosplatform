@@ -78,6 +78,12 @@ func (x *StepperTouchBarItem) WithCustomizationLabel(customizationLabel string) 
 	return x
 }
 
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *StepperTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *StepperTouchBarItem {
+	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
 // MaxValue calls the underlying MaxValue.
 func (x *StepperTouchBarItem) MaxValue() float64 {
 	return x.inner.MaxValue()
@@ -155,6 +161,7 @@ type StepperTouchBarItemable interface {
 	WithTarget(target objc.ID) *StepperTouchBarItem
 	WithAction(action objc.SEL) *StepperTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *StepperTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *StepperTouchBarItem
 	MaxValue() float64
 	SetMaxValue(maxValue float64)
 	MinValue() float64

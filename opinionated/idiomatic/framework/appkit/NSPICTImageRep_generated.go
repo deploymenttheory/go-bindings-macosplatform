@@ -38,6 +38,54 @@ func NewPICTImageRepWithData(pictData *foundation.NSData) *PICTImageRep {
 	return &PICTImageRep{inner: raw.NSPICTImageRepFromID(_id)}
 }
 
+// WithSize sets the size property and returns the receiver for chaining.
+func (x *PICTImageRep) WithSize(size corefoundation.CGSize) *PICTImageRep {
+	x.inner.NSImageRep.SetSize(size)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *PICTImageRep) WithAlpha(alpha bool) *PICTImageRep {
+	x.inner.NSImageRep.SetAlpha(alpha)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *PICTImageRep) WithOpaque(opaque bool) *PICTImageRep {
+	x.inner.NSImageRep.SetOpaque(opaque)
+	return x
+}
+
+// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
+func (x *PICTImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *PICTImageRep {
+	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+	return x
+}
+
+// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+func (x *PICTImageRep) WithBitsPerSample(bitsPerSample int) *PICTImageRep {
+	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	return x
+}
+
+// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+func (x *PICTImageRep) WithPixelsWide(pixelsWide int) *PICTImageRep {
+	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	return x
+}
+
+// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+func (x *PICTImageRep) WithPixelsHigh(pixelsHigh int) *PICTImageRep {
+	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	return x
+}
+
+// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
+func (x *PICTImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *PICTImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+	return x
+}
+
 // PICTRepresentation calls the underlying PICTRepresentation.
 func (x *PICTImageRep) PICTRepresentation() *foundation.NSData {
 	return x.inner.PICTRepresentation()
@@ -53,6 +101,14 @@ func (x *PICTImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep
 // PICTImageRepable is the interface implemented by [PICTImageRep], for mocking and DI.
 type PICTImageRepable interface {
 	Unwrap() *raw.NSPICTImageRep
+	WithSize(size corefoundation.CGSize) *PICTImageRep
+	WithAlpha(alpha bool) *PICTImageRep
+	WithOpaque(opaque bool) *PICTImageRep
+	WithColorSpaceName(colorSpaceName *foundation.NSString) *PICTImageRep
+	WithBitsPerSample(bitsPerSample int) *PICTImageRep
+	WithPixelsWide(pixelsWide int) *PICTImageRep
+	WithPixelsHigh(pixelsHigh int) *PICTImageRep
+	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *PICTImageRep
 	PICTRepresentation() *foundation.NSData
 	BoundingBox() corefoundation.CGRect
 }

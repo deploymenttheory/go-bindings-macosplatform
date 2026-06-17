@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -43,6 +44,30 @@ func NewTrackTranslationalImageRegistrationRequestWithCompletionHandler(completi
 	return &TrackTranslationalImageRegistrationRequest{inner: raw.VNTrackTranslationalImageRegistrationRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *TrackTranslationalImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackTranslationalImageRegistrationRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *TrackTranslationalImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackTranslationalImageRegistrationRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *TrackTranslationalImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackTranslationalImageRegistrationRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *TrackTranslationalImageRegistrationRequest) WithRevision(revision uint) *TrackTranslationalImageRegistrationRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *TrackTranslationalImageRegistrationRequest) asStatefulRequest() *raw.VNStatefulRequest { return &x.inner.VNStatefulRequest }
 
 func (x *TrackTranslationalImageRegistrationRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest }
@@ -52,6 +77,10 @@ func (x *TrackTranslationalImageRegistrationRequest) asRequest() *raw.VNRequest 
 // TrackTranslationalImageRegistrationRequestable is the interface implemented by [TrackTranslationalImageRegistrationRequest], for mocking and DI.
 type TrackTranslationalImageRegistrationRequestable interface {
 	Unwrap() *raw.VNTrackTranslationalImageRegistrationRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackTranslationalImageRegistrationRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackTranslationalImageRegistrationRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *TrackTranslationalImageRegistrationRequest
+	WithRevision(revision uint) *TrackTranslationalImageRegistrationRequest
 }
 
 var _ TrackTranslationalImageRegistrationRequestable = (*TrackTranslationalImageRegistrationRequest)(nil)

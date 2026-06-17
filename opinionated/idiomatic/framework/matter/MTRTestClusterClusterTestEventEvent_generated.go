@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTRTestClusterClusterTestEventEvent() *MTRTestClusterClusterTestEventEve
 	return &MTRTestClusterClusterTestEventEvent{inner: raw.MTRTestClusterClusterTestEventEventFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEventEvent) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent {
+	x.inner.MTRUnitTestingClusterTestEventEvent.SetArg1(arg1)
+	return x
+}
+
+// WithArg2 sets the arg2 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEventEvent) WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent {
+	x.inner.MTRUnitTestingClusterTestEventEvent.SetArg2(arg2)
+	return x
+}
+
+// WithArg3 sets the arg3 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEventEvent) WithArg3(arg3 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent {
+	x.inner.MTRUnitTestingClusterTestEventEvent.SetArg3(arg3)
+	return x
+}
+
+// WithArg4 sets the arg4 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEventEvent) WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestEventEvent {
+	x.inner.MTRUnitTestingClusterTestEventEvent.SetArg4(arg4.asMTRUnitTestingClusterSimpleStruct())
+	return x
+}
+
 func (x *MTRTestClusterClusterTestEventEvent) asMTRUnitTestingClusterTestEventEvent() *raw.MTRUnitTestingClusterTestEventEvent { return &x.inner.MTRUnitTestingClusterTestEventEvent }
 
 // MTRTestClusterClusterTestEventEventable is the interface implemented by [MTRTestClusterClusterTestEventEvent], for mocking and DI.
 type MTRTestClusterClusterTestEventEventable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestEventEvent
+	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent
+	WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent
+	WithArg3(arg3 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent
+	WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestEventEvent
 }
 
 var _ MTRTestClusterClusterTestEventEventable = (*MTRTestClusterClusterTestEventEvent)(nil)

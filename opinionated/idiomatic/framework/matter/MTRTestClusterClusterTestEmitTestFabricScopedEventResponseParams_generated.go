@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams() *MTRT
 	return &MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams{inner: raw.MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsFromID(_id)}
 }
 
+// WithValue sets the value property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) WithValue(value *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams.SetValue(value)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams { return &x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams }
 
 // MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
+	WithValue(value *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
 }
 
 var _ MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsable = (*MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams)(nil)

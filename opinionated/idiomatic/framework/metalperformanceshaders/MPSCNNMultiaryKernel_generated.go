@@ -72,6 +72,18 @@ func (x *CNNMultiaryKernel) WithDestinationImageAllocator(destinationImageAlloca
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNMultiaryKernel) WithOptions(options mpscore.MPSKernelOptions) *CNNMultiaryKernel {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNMultiaryKernel) WithLabel(label string) *CNNMultiaryKernel {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // OffsetAtIndex calls the underlying OffsetAtIndex.
 func (x *CNNMultiaryKernel) OffsetAtIndex(index uint) mpscore.MPSOffset {
 	return x.inner.OffsetAtIndex(index)
@@ -301,6 +313,8 @@ type CNNMultiaryKernelable interface {
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNMultiaryKernel
 	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNMultiaryKernel
 	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNMultiaryKernel
+	WithOptions(options mpscore.MPSKernelOptions) *CNNMultiaryKernel
+	WithLabel(label string) *CNNMultiaryKernel
 	OffsetAtIndex(index uint) mpscore.MPSOffset
 	SetOffsetAtIndex(offset mpscore.MPSOffset, index uint)
 	SourceFeatureChannelOffsetAtIndex(index uint) uint

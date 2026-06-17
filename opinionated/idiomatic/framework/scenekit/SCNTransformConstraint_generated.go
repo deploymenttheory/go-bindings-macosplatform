@@ -35,11 +35,32 @@ func NewTransformConstraint() *TransformConstraint {
 	return &TransformConstraint{inner: raw.SCNTransformConstraintFromID(_id)}
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *TransformConstraint) WithEnabled(enabled bool) *TransformConstraint {
+	x.inner.SCNConstraint.SetEnabled(enabled)
+	return x
+}
+
+// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+func (x *TransformConstraint) WithInfluenceFactor(influenceFactor float64) *TransformConstraint {
+	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	return x
+}
+
+// WithIncremental sets the incremental property and returns the receiver for chaining.
+func (x *TransformConstraint) WithIncremental(incremental bool) *TransformConstraint {
+	x.inner.SCNConstraint.SetIncremental(incremental)
+	return x
+}
+
 func (x *TransformConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
 
 // TransformConstraintable is the interface implemented by [TransformConstraint], for mocking and DI.
 type TransformConstraintable interface {
 	Unwrap() *raw.SCNTransformConstraint
+	WithEnabled(enabled bool) *TransformConstraint
+	WithInfluenceFactor(influenceFactor float64) *TransformConstraint
+	WithIncremental(incremental bool) *TransformConstraint
 }
 
 var _ TransformConstraintable = (*TransformConstraint)(nil)

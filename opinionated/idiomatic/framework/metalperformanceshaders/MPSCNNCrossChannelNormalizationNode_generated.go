@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -50,6 +51,36 @@ func (x *CNNCrossChannelNormalizationNode) WithKernelSizeInFeatureChannels(kerne
 	return x
 }
 
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalizationNode) WithAlpha(alpha float32) *CNNCrossChannelNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.SetAlpha(alpha)
+	return x
+}
+
+// WithBeta sets the beta property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalizationNode) WithBeta(beta float32) *CNNCrossChannelNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.SetBeta(beta)
+	return x
+}
+
+// WithDelta sets the delta property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalizationNode) WithDelta(delta float32) *CNNCrossChannelNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.SetDelta(delta)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalizationNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNCrossChannelNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalizationNode) WithLabel(label string) *CNNCrossChannelNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelSizeInFeatureChannels calls the underlying KernelSizeInFeatureChannels.
 func (x *CNNCrossChannelNormalizationNode) KernelSizeInFeatureChannels() uint {
 	return x.inner.KernelSizeInFeatureChannels()
@@ -68,6 +99,11 @@ func (x *CNNCrossChannelNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MP
 type CNNCrossChannelNormalizationNodeable interface {
 	Unwrap() *raw.MPSCNNCrossChannelNormalizationNode
 	WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels uint) *CNNCrossChannelNormalizationNode
+	WithAlpha(alpha float32) *CNNCrossChannelNormalizationNode
+	WithBeta(beta float32) *CNNCrossChannelNormalizationNode
+	WithDelta(delta float32) *CNNCrossChannelNormalizationNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNCrossChannelNormalizationNode
+	WithLabel(label string) *CNNCrossChannelNormalizationNode
 	KernelSizeInFeatureChannels() uint
 	SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels uint)
 }

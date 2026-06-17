@@ -35,6 +35,12 @@ func NewDistantObjectRequest() *DistantObjectRequest {
 	return &DistantObjectRequest{inner: raw.NSDistantObjectRequestFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DistantObjectRequest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DistantObjectRequest {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ReplyWithException calls the underlying ReplyWithException.
 func (x *DistantObjectRequest) ReplyWithException(exception *raw.NSException) {
 	x.inner.ReplyWithException(exception)
@@ -68,6 +74,7 @@ func (x *DistantObjectRequest) asObject() *raw.NSObject { return &x.inner.NSObje
 // DistantObjectRequestable is the interface implemented by [DistantObjectRequest], for mocking and DI.
 type DistantObjectRequestable interface {
 	Unwrap() *raw.NSDistantObjectRequest
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DistantObjectRequest
 	ReplyWithException(exception *raw.NSException)
 	Invocation() *Invocation
 	Connection() *Connection

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,6 +54,90 @@ func (x *ClickGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequ
 	return x
 }
 
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithTarget(target objc.ID) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithAction(action objc.SEL) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAction(action)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithState(state raw.NSGestureRecognizerState) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetState(state)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelegate(delegate)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithEnabled(enabled bool) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetEnabled(enabled)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
+	return x
+}
+
+// WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
+	return x
+}
+
+// WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
+	return x
+}
+
+// WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysKeyEvents(delaysKeyEvents)
+	return x
+}
+
+// WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysMagnificationEvents(delaysMagnificationEvents)
+	return x
+}
+
+// WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetDelaysRotationEvents(delaysRotationEvents)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithName(name string) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *ClickGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
 // ButtonMask calls the underlying ButtonMask.
 func (x *ClickGestureRecognizer) ButtonMask() uint {
 	return x.inner.ButtonMask()
@@ -91,6 +176,20 @@ type ClickGestureRecognizerable interface {
 	WithButtonMask(buttonMask uint) *ClickGestureRecognizer
 	WithNumberOfClicksRequired(numberOfClicksRequired int) *ClickGestureRecognizer
 	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *ClickGestureRecognizer
+	WithTarget(target objc.ID) *ClickGestureRecognizer
+	WithAction(action objc.SEL) *ClickGestureRecognizer
+	WithState(state raw.NSGestureRecognizerState) *ClickGestureRecognizer
+	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *ClickGestureRecognizer
+	WithEnabled(enabled bool) *ClickGestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ClickGestureRecognizer
+	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *ClickGestureRecognizer
+	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *ClickGestureRecognizer
+	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *ClickGestureRecognizer
+	WithDelaysKeyEvents(delaysKeyEvents bool) *ClickGestureRecognizer
+	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *ClickGestureRecognizer
+	WithDelaysRotationEvents(delaysRotationEvents bool) *ClickGestureRecognizer
+	WithName(name string) *ClickGestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ClickGestureRecognizer
 	ButtonMask() uint
 	SetButtonMask(buttonMask uint)
 	NumberOfClicksRequired() int

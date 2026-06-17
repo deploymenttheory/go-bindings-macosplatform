@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
@@ -43,6 +44,24 @@ func (x *NDArrayStridedSlice) WithStrides(strides mpsndarray.MPSNDArrayOffsets) 
 	return x
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayStridedSlice) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayStridedSlice {
+	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayStridedSlice) WithOptions(options mpscore.MPSKernelOptions) *NDArrayStridedSlice {
+	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayStridedSlice) WithLabel(label string) *NDArrayStridedSlice {
+	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Strides calls the underlying Strides.
 func (x *NDArrayStridedSlice) Strides() mpsndarray.MPSNDArrayOffsets {
 	return x.inner.Strides()
@@ -65,6 +84,9 @@ func (x *NDArrayStridedSlice) asKernel() *mpscore.MPSKernel { return &x.inner.MP
 type NDArrayStridedSliceable interface {
 	Unwrap() *raw.MPSNDArrayStridedSlice
 	WithStrides(strides mpsndarray.MPSNDArrayOffsets) *NDArrayStridedSlice
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayStridedSlice
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayStridedSlice
+	WithLabel(label string) *NDArrayStridedSlice
 	Strides() mpsndarray.MPSNDArrayOffsets
 	SetStrides(strides mpsndarray.MPSNDArrayOffsets)
 }

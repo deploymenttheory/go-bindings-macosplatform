@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -34,6 +35,12 @@ func DOMCSSImportRuleFromID(id objc.ID) *DOMCSSImportRule {
 func NewDOMCSSImportRule() *DOMCSSImportRule {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSImportRule")), objc.RegisterName("new"))
 	return &DOMCSSImportRule{inner: raw.DOMCSSImportRuleFromID(_id)}
+}
+
+// WithCssText sets the cssText property and returns the receiver for chaining.
+func (x *DOMCSSImportRule) WithCssText(cssText string) *DOMCSSImportRule {
+	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	return x
 }
 
 // Href calls the underlying Href.
@@ -72,6 +79,7 @@ func (x *DOMCSSImportRule) asWebScriptObject() *raw.WebScriptObject { return &x.
 // DOMCSSImportRuleable is the interface implemented by [DOMCSSImportRule], for mocking and DI.
 type DOMCSSImportRuleable interface {
 	Unwrap() *raw.DOMCSSImportRule
+	WithCssText(cssText string) *DOMCSSImportRule
 	Href() string
 	Media() *DOMMediaList
 	StyleSheet() *DOMCSSStyleSheet

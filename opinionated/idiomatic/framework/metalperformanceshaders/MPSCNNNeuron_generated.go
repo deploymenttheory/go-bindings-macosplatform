@@ -47,6 +47,66 @@ func NewCNNNeuronWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLD
 	return &CNNNeuron{inner: raw.MPSCNNNeuronFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNNeuron) WithOffset(offset mpscore.MPSOffset) *CNNNeuron {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNNeuron) WithClipRect(clipRect metal.MTLRegion) *CNNNeuron {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuron) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuron {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuron) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuron {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNNeuron) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuron {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNNeuron) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuron {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNNeuron) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuron {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNNeuron) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuron {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNNeuron) WithOptions(options mpscore.MPSKernelOptions) *CNNNeuron {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuron) WithLabel(label string) *CNNNeuron {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // NeuronType calls the underlying NeuronType.
 func (x *CNNNeuron) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
 	return x.inner.NeuronType()
@@ -79,6 +139,16 @@ func (x *CNNNeuron) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel
 // CNNNeuronable is the interface implemented by [CNNNeuron], for mocking and DI.
 type CNNNeuronable interface {
 	Unwrap() *raw.MPSCNNNeuron
+	WithOffset(offset mpscore.MPSOffset) *CNNNeuron
+	WithClipRect(clipRect metal.MTLRegion) *CNNNeuron
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuron
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuron
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuron
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuron
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuron
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuron
+	WithOptions(options mpscore.MPSKernelOptions) *CNNNeuron
+	WithLabel(label string) *CNNNeuron
 	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
 	A() float32
 	B() float32

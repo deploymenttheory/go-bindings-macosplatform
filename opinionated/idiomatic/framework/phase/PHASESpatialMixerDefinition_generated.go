@@ -62,6 +62,18 @@ func (x *SpatialMixerDefinition) WithSourceDirectivityModelParameters(sourceDire
 	return x
 }
 
+// WithGain sets the gain property and returns the receiver for chaining.
+func (x *SpatialMixerDefinition) WithGain(gain float64) *SpatialMixerDefinition {
+	x.inner.PHASEMixerDefinition.SetGain(gain)
+	return x
+}
+
+// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
+func (x *SpatialMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialMixerDefinition {
+	x.inner.PHASEMixerDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
+	return x
+}
+
 // SpatialPipeline calls the underlying SpatialPipeline.
 func (x *SpatialMixerDefinition) SpatialPipeline() *SpatialPipeline {
 	_r := x.inner.SpatialPipeline()
@@ -123,6 +135,8 @@ type SpatialMixerDefinitionable interface {
 	WithDistanceModelParameters(distanceModelParameters DistanceModelParametersProvider) *SpatialMixerDefinition
 	WithListenerDirectivityModelParameters(listenerDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition
 	WithSourceDirectivityModelParameters(sourceDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition
+	WithGain(gain float64) *SpatialMixerDefinition
+	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialMixerDefinition
 	SpatialPipeline() *SpatialPipeline
 	DistanceModelParameters() *DistanceModelParameters
 	SetDistanceModelParameters(distanceModelParameters *raw.PHASEDistanceModelParameters)

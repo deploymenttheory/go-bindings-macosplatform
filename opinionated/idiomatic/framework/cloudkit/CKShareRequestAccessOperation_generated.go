@@ -74,6 +74,54 @@ func (x *ShareRequestAccessOperation) WithShareRequestAccessCompletionBlock(shar
 	return x
 }
 
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *ShareRequestAccessOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *ShareRequestAccessOperation) WithGroup(group *raw.CKOperationGroup) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *ShareRequestAccessOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *ShareRequestAccessOperation) WithContainer(container *raw.CKContainer) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *ShareRequestAccessOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *ShareRequestAccessOperation) WithLongLived(longLived bool) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *ShareRequestAccessOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *ShareRequestAccessOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // ShareURLs returns the collection as a Go slice.
 func (x *ShareRequestAccessOperation) ShareURLs() []*foundation.NSURL {
 	arr := x.inner.ShareURLs()
@@ -150,6 +198,14 @@ type ShareRequestAccessOperationable interface {
 	WithShareURLs(items ...*foundation.NSURL) *ShareRequestAccessOperation
 	WithPerShareAccessRequestCompletionBlock(perShareAccessRequestCompletionBlock func(*foundation.NSURL, unsafe.Pointer)) *ShareRequestAccessOperation
 	WithShareRequestAccessCompletionBlock(shareRequestAccessCompletionBlock func(unsafe.Pointer)) *ShareRequestAccessOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *ShareRequestAccessOperation
+	WithGroup(group *raw.CKOperationGroup) *ShareRequestAccessOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ShareRequestAccessOperation
+	WithContainer(container *raw.CKContainer) *ShareRequestAccessOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *ShareRequestAccessOperation
+	WithLongLived(longLived bool) *ShareRequestAccessOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ShareRequestAccessOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ShareRequestAccessOperation
 	ShareURLs() []*foundation.NSURL
 	SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL])
 	PerShareAccessRequestCompletionBlock() objc.Block

@@ -43,6 +43,12 @@ func NewUnitConverterLinearWithCoefficientConstant(coefficient float64, constant
 	return &UnitConverterLinear{inner: raw.NSUnitConverterLinearFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitConverterLinear) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConverterLinear {
+	x.inner.NSUnitConverter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Coefficient calls the underlying Coefficient.
 func (x *UnitConverterLinear) Coefficient() float64 {
 	return x.inner.Coefficient()
@@ -60,6 +66,7 @@ func (x *UnitConverterLinear) asObject() *raw.NSObject { return &x.inner.NSUnitC
 // UnitConverterLinearable is the interface implemented by [UnitConverterLinear], for mocking and DI.
 type UnitConverterLinearable interface {
 	Unwrap() *raw.NSUnitConverterLinear
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConverterLinear
 	Coefficient() float64
 	Constant() float64
 }

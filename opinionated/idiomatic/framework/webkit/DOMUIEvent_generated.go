@@ -44,6 +44,18 @@ func NewDOMUIEventUIEvent(type_ string, canBubble bool, cancelable bool, view *r
 	return &DOMUIEvent{inner: raw.DOMUIEventFromID(_id)}
 }
 
+// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+func (x *DOMUIEvent) WithReturnValue(returnValue bool) *DOMUIEvent {
+	x.inner.DOMEvent.SetReturnValue(returnValue)
+	return x
+}
+
+// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+func (x *DOMUIEvent) WithCancelBubble(cancelBubble bool) *DOMUIEvent {
+	x.inner.DOMEvent.SetCancelBubble(cancelBubble)
+	return x
+}
+
 // View calls the underlying View.
 func (x *DOMUIEvent) View() *DOMAbstractView {
 	_r := x.inner.View()
@@ -104,6 +116,8 @@ func (x *DOMUIEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.
 // DOMUIEventable is the interface implemented by [DOMUIEvent], for mocking and DI.
 type DOMUIEventable interface {
 	Unwrap() *raw.DOMUIEvent
+	WithReturnValue(returnValue bool) *DOMUIEvent
+	WithCancelBubble(cancelBubble bool) *DOMUIEvent
 	View() *DOMAbstractView
 	Detail() int
 	KeyCode() int

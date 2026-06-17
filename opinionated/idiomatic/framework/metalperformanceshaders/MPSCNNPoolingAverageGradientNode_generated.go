@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,18 @@ func NewCNNPoolingAverageGradientNode() *CNNPoolingAverageGradientNode {
 	return &CNNPoolingAverageGradientNode{inner: raw.MPSCNNPoolingAverageGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNPoolingAverageGradientNode {
+	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNPoolingAverageGradientNode) WithLabel(label string) *CNNPoolingAverageGradientNode {
+	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNPoolingAverageGradientNode) asCNNPoolingGradientNode() *mpsneuralnetwork.MPSCNNPoolingGradientNode { return &x.inner.MPSCNNPoolingGradientNode }
 
 func (x *CNNPoolingAverageGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode }
@@ -45,6 +58,8 @@ func (x *CNNPoolingAverageGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNN
 // CNNPoolingAverageGradientNodeable is the interface implemented by [CNNPoolingAverageGradientNode], for mocking and DI.
 type CNNPoolingAverageGradientNodeable interface {
 	Unwrap() *raw.MPSCNNPoolingAverageGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNPoolingAverageGradientNode
+	WithLabel(label string) *CNNPoolingAverageGradientNode
 }
 
 var _ CNNPoolingAverageGradientNodeable = (*CNNPoolingAverageGradientNode)(nil)

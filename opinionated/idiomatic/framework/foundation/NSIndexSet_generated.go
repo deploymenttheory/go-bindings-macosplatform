@@ -50,6 +50,12 @@ func NewIndexSetWithIndex(value uint) *IndexSet {
 	return &IndexSet{inner: raw.NSIndexSetFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *IndexSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *IndexSet {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // IsEqualToIndexSet calls the underlying IsEqualToIndexSet.
 func (x *IndexSet) IsEqualToIndexSet(indexSet *raw.NSIndexSet) bool {
 	return x.inner.IsEqualToIndexSet(indexSet)
@@ -199,6 +205,7 @@ func (x *IndexSet) asObject() *raw.NSObject { return &x.inner.NSObject }
 // IndexSetable is the interface implemented by [IndexSet], for mocking and DI.
 type IndexSetable interface {
 	Unwrap() *raw.NSIndexSet
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *IndexSet
 	IsEqualToIndexSet(indexSet *raw.NSIndexSet) bool
 	IndexGreaterThanIndex(value uint) uint
 	IndexLessThanIndex(value uint) uint

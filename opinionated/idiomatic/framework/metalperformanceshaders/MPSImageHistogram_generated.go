@@ -60,6 +60,18 @@ func (x *ImageHistogram) WithZeroHistogram(zeroHistogram bool) *ImageHistogram {
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageHistogram) WithOptions(options mpscore.MPSKernelOptions) *ImageHistogram {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageHistogram) WithLabel(label string) *ImageHistogram {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceTextureHistogramHistogramOffset calls the underlying EncodeToCommandBufferSourceTextureHistogramHistogramOffset.
 func (x *ImageHistogram) EncodeToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
 	x.inner.EncodeToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer, source, histogram, histogramOffset)
@@ -112,6 +124,8 @@ type ImageHistogramable interface {
 	Unwrap() *raw.MPSImageHistogram
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageHistogram
 	WithZeroHistogram(zeroHistogram bool) *ImageHistogram
+	WithOptions(options mpscore.MPSKernelOptions) *ImageHistogram
+	WithLabel(label string) *ImageHistogram
 	EncodeToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint)
 	HistogramSizeForSourceFormat(sourceFormat metal.MTLPixelFormat) uint
 	ClipRectSource() metal.MTLRegion

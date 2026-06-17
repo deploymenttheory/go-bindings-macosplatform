@@ -43,6 +43,12 @@ func (x *PlayerItemMetadataOutput) WithAdvanceIntervalForDelegateInvocation(adva
 	return x
 }
 
+// WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
+func (x *PlayerItemMetadataOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemMetadataOutput {
+	x.inner.AVPlayerItemOutput.SetSuppressesPlayerRendering(suppressesPlayerRendering)
+	return x
+}
+
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *PlayerItemMetadataOutput) SetDelegateQueue(delegate raw.AVPlayerItemMetadataOutputPushDelegate, delegateQueue *foundation.NSObject) {
 	x.inner.SetDelegateQueue(delegate, delegateQueue)
@@ -74,6 +80,7 @@ func (x *PlayerItemMetadataOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput 
 type PlayerItemMetadataOutputable interface {
 	Unwrap() *raw.AVPlayerItemMetadataOutput
 	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemMetadataOutput
+	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemMetadataOutput
 	SetDelegateQueue(delegate raw.AVPlayerItemMetadataOutputPushDelegate, delegateQueue *foundation.NSObject)
 	Delegate() raw.AVPlayerItemMetadataOutputPushDelegate
 	DelegateQueue() *foundation.NSObject

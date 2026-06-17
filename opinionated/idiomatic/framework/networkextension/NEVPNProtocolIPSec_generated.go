@@ -67,6 +67,90 @@ func (x *NEVPNProtocolIPSec) WithRemoteIdentifier(remoteIdentifier string) *NEVP
 	return x
 }
 
+// WithServerAddress sets the serverAddress property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithServerAddress(serverAddress string) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
+	return x
+}
+
+// WithUsername sets the username property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithUsername(username string) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetUsername(foundation.NSStringStringWithUTF8String(username))
+	return x
+}
+
+// WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithPasswordReference(passwordReference *foundation.NSData) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetPasswordReference(passwordReference)
+	return x
+}
+
+// WithIdentityReference sets the identityReference property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithIdentityReference(identityReference *foundation.NSData) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetIdentityReference(identityReference)
+	return x
+}
+
+// WithIdentityData sets the identityData property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithIdentityData(identityData *foundation.NSData) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetIdentityData(identityData)
+	return x
+}
+
+// WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetIdentityDataPassword(foundation.NSStringStringWithUTF8String(identityDataPassword))
+	return x
+}
+
+// WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetDisconnectOnSleep(disconnectOnSleep)
+	return x
+}
+
+// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithProxySettings(proxySettings *raw.NEProxySettings) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetProxySettings(proxySettings)
+	return x
+}
+
+// WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetIncludeAllNetworks(includeAllNetworks)
+	return x
+}
+
+// WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetExcludeLocalNetworks(excludeLocalNetworks)
+	return x
+}
+
+// WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithExcludeCellularServices(excludeCellularServices bool) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetExcludeCellularServices(excludeCellularServices)
+	return x
+}
+
+// WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithExcludeAPNs(excludeAPNs bool) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetExcludeAPNs(excludeAPNs)
+	return x
+}
+
+// WithExcludeDeviceCommunication sets the excludeDeviceCommunication property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetExcludeDeviceCommunication(excludeDeviceCommunication)
+	return x
+}
+
+// WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
+func (x *NEVPNProtocolIPSec) WithEnforceRoutes(enforceRoutes bool) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetEnforceRoutes(enforceRoutes)
+	return x
+}
+
 // AuthenticationMethod calls the underlying AuthenticationMethod.
 func (x *NEVPNProtocolIPSec) AuthenticationMethod() raw.NEVPNIKEAuthenticationMethod {
 	return x.inner.AuthenticationMethod()
@@ -137,6 +221,20 @@ type NEVPNProtocolIPSecable interface {
 	WithSharedSecretReference(sharedSecretReference *foundation.NSData) *NEVPNProtocolIPSec
 	WithLocalIdentifier(localIdentifier string) *NEVPNProtocolIPSec
 	WithRemoteIdentifier(remoteIdentifier string) *NEVPNProtocolIPSec
+	WithServerAddress(serverAddress string) *NEVPNProtocolIPSec
+	WithUsername(username string) *NEVPNProtocolIPSec
+	WithPasswordReference(passwordReference *foundation.NSData) *NEVPNProtocolIPSec
+	WithIdentityReference(identityReference *foundation.NSData) *NEVPNProtocolIPSec
+	WithIdentityData(identityData *foundation.NSData) *NEVPNProtocolIPSec
+	WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocolIPSec
+	WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocolIPSec
+	WithProxySettings(proxySettings *raw.NEProxySettings) *NEVPNProtocolIPSec
+	WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNProtocolIPSec
+	WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEVPNProtocolIPSec
+	WithExcludeCellularServices(excludeCellularServices bool) *NEVPNProtocolIPSec
+	WithExcludeAPNs(excludeAPNs bool) *NEVPNProtocolIPSec
+	WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEVPNProtocolIPSec
+	WithEnforceRoutes(enforceRoutes bool) *NEVPNProtocolIPSec
 	AuthenticationMethod() raw.NEVPNIKEAuthenticationMethod
 	SetAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod)
 	UseExtendedAuthentication() bool

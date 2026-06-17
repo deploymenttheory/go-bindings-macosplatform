@@ -40,6 +40,24 @@ func NewNDArrayMultiaryGradientKernelWithDeviceSourceCountSourceGradientIndex(de
 	return &NDArrayMultiaryGradientKernel{inner: raw.MPSNDArrayMultiaryGradientKernelFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayMultiaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayMultiaryGradientKernel) WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayMultiaryGradientKernel) WithLabel(label string) *NDArrayMultiaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceArraysSourceGradientGradientState calls the underlying EncodeToCommandBufferSourceArraysSourceGradientGradientState.
 func (x *NDArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
 	return x.inner.EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf, sources, gradient, state)
@@ -57,6 +75,9 @@ func (x *NDArrayMultiaryGradientKernel) asKernel() *mpscore.MPSKernel { return &
 // NDArrayMultiaryGradientKernelable is the interface implemented by [NDArrayMultiaryGradientKernel], for mocking and DI.
 type NDArrayMultiaryGradientKernelable interface {
 	Unwrap() *raw.MPSNDArrayMultiaryGradientKernel
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryGradientKernel
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryGradientKernel
+	WithLabel(label string) *NDArrayMultiaryGradientKernel
 	EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
 	EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
 }

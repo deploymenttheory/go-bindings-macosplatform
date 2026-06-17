@@ -60,6 +60,18 @@ func (x *CollectionLayoutGroup) WithInterItemSpacing(interItemSpacing *raw.NSCol
 	return x
 }
 
+// WithContentInsets sets the contentInsets property and returns the receiver for chaining.
+func (x *CollectionLayoutGroup) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutGroup {
+	x.inner.NSCollectionLayoutItem.SetContentInsets(contentInsets)
+	return x
+}
+
+// WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
+func (x *CollectionLayoutGroup) WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutGroup {
+	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing)
+	return x
+}
+
 // VisualDescription calls the underlying VisualDescription.
 func (x *CollectionLayoutGroup) VisualDescription() string {
 	_r := x.inner.VisualDescription()
@@ -106,6 +118,8 @@ type CollectionLayoutGroupable interface {
 	Unwrap() *raw.NSCollectionLayoutGroup
 	WithSupplementaryItems(items ...CollectionLayoutSupplementaryItemProvider) *CollectionLayoutGroup
 	WithInterItemSpacing(interItemSpacing *raw.NSCollectionLayoutSpacing) *CollectionLayoutGroup
+	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutGroup
+	WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutGroup
 	VisualDescription() string
 	SetSupplementaryItems(supplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem])
 	InterItemSpacing() *CollectionLayoutSpacing

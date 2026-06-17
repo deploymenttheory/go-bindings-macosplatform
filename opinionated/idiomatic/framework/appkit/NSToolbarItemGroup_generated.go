@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -69,6 +70,138 @@ func (x *ToolbarItemGroup) WithSelectionMode(selectionMode raw.NSToolbarItemGrou
 // WithSelectedIndex sets the selectedIndex property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithSelectedIndex(selectedIndex int) *ToolbarItemGroup {
 	x.inner.SetSelectedIndex(selectedIndex)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithLabel(label string) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithPaletteLabel sets the paletteLabel property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithPaletteLabel(paletteLabel string) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetPaletteLabel(foundation.NSStringStringWithUTF8String(paletteLabel))
+	return x
+}
+
+// WithPossibleLabels sets the possibleLabels property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetPossibleLabels(possibleLabels)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithToolTip(toolTip string) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithTag(tag int) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetTag(tag)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithTarget(target objc.ID) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithAction(action objc.SEL) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetAction(action)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithEnabled(enabled bool) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetEnabled(enabled)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithImage(image *raw.NSImage) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetImage(image)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithTitle(title string) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithBordered(bordered bool) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetBordered(bordered)
+	return x
+}
+
+// WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithStyle(style raw.NSToolbarItemStyle) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetStyle(style)
+	return x
+}
+
+// WithNavigational sets the navigational property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithNavigational(navigational bool) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetNavigational(navigational)
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithView(view ViewProvider) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetView(view.asView())
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithHidden(hidden bool) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetHidden(hidden)
+	return x
+}
+
+// WithMinSize sets the minSize property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithMinSize(minSize corefoundation.CGSize) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetMinSize(minSize)
+	return x
+}
+
+// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithMaxSize(maxSize corefoundation.CGSize) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetMaxSize(maxSize)
+	return x
+}
+
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithVisibilityPriority(visibilityPriority int) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
+// WithBadge sets the badge property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithBadge(badge *raw.NSItemBadge) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetBadge(badge)
+	return x
+}
+
+// WithAutovalidates sets the autovalidates property and returns the receiver for chaining.
+func (x *ToolbarItemGroup) WithAutovalidates(autovalidates bool) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetAutovalidates(autovalidates)
 	return x
 }
 
@@ -137,6 +270,28 @@ type ToolbarItemGroupable interface {
 	WithControlRepresentation(controlRepresentation raw.NSToolbarItemGroupControlRepresentation) *ToolbarItemGroup
 	WithSelectionMode(selectionMode raw.NSToolbarItemGroupSelectionMode) *ToolbarItemGroup
 	WithSelectedIndex(selectedIndex int) *ToolbarItemGroup
+	WithLabel(label string) *ToolbarItemGroup
+	WithPaletteLabel(paletteLabel string) *ToolbarItemGroup
+	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *ToolbarItemGroup
+	WithToolTip(toolTip string) *ToolbarItemGroup
+	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *ToolbarItemGroup
+	WithTag(tag int) *ToolbarItemGroup
+	WithTarget(target objc.ID) *ToolbarItemGroup
+	WithAction(action objc.SEL) *ToolbarItemGroup
+	WithEnabled(enabled bool) *ToolbarItemGroup
+	WithImage(image *raw.NSImage) *ToolbarItemGroup
+	WithTitle(title string) *ToolbarItemGroup
+	WithBordered(bordered bool) *ToolbarItemGroup
+	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *ToolbarItemGroup
+	WithStyle(style raw.NSToolbarItemStyle) *ToolbarItemGroup
+	WithNavigational(navigational bool) *ToolbarItemGroup
+	WithView(view ViewProvider) *ToolbarItemGroup
+	WithHidden(hidden bool) *ToolbarItemGroup
+	WithMinSize(minSize corefoundation.CGSize) *ToolbarItemGroup
+	WithMaxSize(maxSize corefoundation.CGSize) *ToolbarItemGroup
+	WithVisibilityPriority(visibilityPriority int) *ToolbarItemGroup
+	WithBadge(badge *raw.NSItemBadge) *ToolbarItemGroup
+	WithAutovalidates(autovalidates bool) *ToolbarItemGroup
 	SetSelectedAtIndex(selected bool, index int)
 	IsSelectedAtIndex(index int) bool
 	Subitems() []*raw.NSToolbarItem

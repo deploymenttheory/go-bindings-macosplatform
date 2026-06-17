@@ -108,6 +108,36 @@ func (x *XMLDocument) WithDTD(dTD *raw.NSXMLDTD) *XMLDocument {
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *XMLDocument) WithName(name string) *XMLDocument {
+	x.inner.NSXMLNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *XMLDocument) WithObjectValue(objectValue objc.ID) *XMLDocument {
+	x.inner.NSXMLNode.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *XMLDocument) WithStringValue(stringValue string) *XMLDocument {
+	x.inner.NSXMLNode.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithURI sets the uRI property and returns the receiver for chaining.
+func (x *XMLDocument) WithURI(uRI string) *XMLDocument {
+	x.inner.NSXMLNode.SetURI(foundation.NSStringStringWithUTF8String(uRI))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XMLDocument) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDocument {
+	x.inner.NSXMLNode.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SetRootElement calls the underlying SetRootElement.
 func (x *XMLDocument) SetRootElement(root *raw.NSXMLElement) {
 	x.inner.SetRootElement(root)
@@ -265,6 +295,11 @@ type XMLDocumentable interface {
 	WithDocumentContentKind(documentContentKind raw.NSXMLDocumentContentKind) *XMLDocument
 	WithMIMEType(mIMEType string) *XMLDocument
 	WithDTD(dTD *raw.NSXMLDTD) *XMLDocument
+	WithName(name string) *XMLDocument
+	WithObjectValue(objectValue objc.ID) *XMLDocument
+	WithStringValue(stringValue string) *XMLDocument
+	WithURI(uRI string) *XMLDocument
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDocument
 	SetRootElement(root *raw.NSXMLElement)
 	RootElement() *XMLElement
 	InsertChildAtIndex(child *raw.NSXMLNode, index uint)

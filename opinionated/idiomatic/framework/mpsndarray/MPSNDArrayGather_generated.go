@@ -5,6 +5,7 @@
 package mpsndarray
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +42,12 @@ func (x *ArrayGather) WithAxis(axis uint) *ArrayGather {
 	return x
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayGather) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayGather {
+	x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 // Axis calls the underlying Axis.
 func (x *ArrayGather) Axis() uint {
 	return x.inner.Axis()
@@ -61,6 +68,7 @@ func (x *ArrayGather) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return
 type ArrayGatherable interface {
 	Unwrap() *raw.MPSNDArrayGather
 	WithAxis(axis uint) *ArrayGather
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayGather
 	Axis() uint
 	SetAxis(axis uint)
 }

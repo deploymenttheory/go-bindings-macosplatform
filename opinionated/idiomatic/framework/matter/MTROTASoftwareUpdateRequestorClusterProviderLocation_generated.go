@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTROtaSoftwareUpdateRequestorClusterProviderLocation() *MTROtaSoftwareUp
 	return &MTROtaSoftwareUpdateRequestorClusterProviderLocation{inner: raw.MTROtaSoftwareUpdateRequestorClusterProviderLocationFromID(_id)}
 }
 
+// WithProviderNodeID sets the providerNodeID property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithProviderNodeID(providerNodeID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+	x.inner.MTROTASoftwareUpdateRequestorClusterProviderLocation.SetProviderNodeID(providerNodeID)
+	return x
+}
+
+// WithEndpoint sets the endpoint property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithEndpoint(endpoint *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+	x.inner.MTROTASoftwareUpdateRequestorClusterProviderLocation.SetEndpoint(endpoint)
+	return x
+}
+
+// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+	x.inner.MTROTASoftwareUpdateRequestorClusterProviderLocation.SetFabricIndex(fabricIndex)
+	return x
+}
+
 func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) asMTROTASoftwareUpdateRequestorClusterProviderLocation() *raw.MTROTASoftwareUpdateRequestorClusterProviderLocation { return &x.inner.MTROTASoftwareUpdateRequestorClusterProviderLocation }
 
 // MTROtaSoftwareUpdateRequestorClusterProviderLocationable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterProviderLocation], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterProviderLocationable interface {
 	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterProviderLocation
+	WithProviderNodeID(providerNodeID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterProviderLocation
+	WithEndpoint(endpoint *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterProviderLocation
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterProviderLocation
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterProviderLocationable = (*MTROtaSoftwareUpdateRequestorClusterProviderLocation)(nil)

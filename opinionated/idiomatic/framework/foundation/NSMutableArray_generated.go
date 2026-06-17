@@ -65,6 +65,12 @@ func NewMutableArrayWithContentsOfURL(url string) *MutableArray {
 	return &MutableArray{inner: raw.NSMutableArrayFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MutableArray) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableArray {
+	x.inner.NSArray.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddObject calls the underlying AddObject.
 func (x *MutableArray) AddObject(anObject objc.ID) {
 	x.inner.AddObject(anObject)
@@ -217,6 +223,7 @@ func (x *MutableArray) asObject() *raw.NSObject { return &x.inner.NSArray.NSObje
 // MutableArrayable is the interface implemented by [MutableArray], for mocking and DI.
 type MutableArrayable interface {
 	Unwrap() *raw.NSMutableArray[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableArray
 	AddObject(anObject objc.ID)
 	InsertObjectAtIndex(anObject objc.ID, index uint)
 	RemoveLastObject()

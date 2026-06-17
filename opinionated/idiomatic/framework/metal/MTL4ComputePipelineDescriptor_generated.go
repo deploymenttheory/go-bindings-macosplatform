@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -74,6 +75,18 @@ func (x *MTL4ComputePipelineDescriptor) WithStaticLinkingDescriptor(staticLinkin
 // WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor {
 	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MTL4ComputePipelineDescriptor) WithLabel(label string) *MTL4ComputePipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MTL4ComputePipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *MTL4ComputePipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetOptions(options)
 	return x
 }
 
@@ -172,6 +185,8 @@ type MTL4ComputePipelineDescriptorable interface {
 	WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4ComputePipelineDescriptor
 	WithStaticLinkingDescriptor(staticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor
+	WithLabel(label string) *MTL4ComputePipelineDescriptor
+	WithOptions(options *raw.MTL4PipelineOptions) *MTL4ComputePipelineDescriptor
 	Reset()
 	ComputeFunctionDescriptor() *MTL4FunctionDescriptor
 	SetComputeFunctionDescriptor(computeFunctionDescriptor *raw.MTL4FunctionDescriptor)

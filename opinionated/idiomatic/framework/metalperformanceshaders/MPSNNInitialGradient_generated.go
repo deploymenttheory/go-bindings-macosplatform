@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,66 @@ func NewNNInitialGradientWithDevice(device metal.MTLDevice) *NNInitialGradient {
 	return &NNInitialGradient{inner: raw.MPSNNInitialGradientFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNInitialGradient) WithOffset(offset mpscore.MPSOffset) *NNInitialGradient {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNInitialGradient) WithClipRect(clipRect metal.MTLRegion) *NNInitialGradient {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNInitialGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNInitialGradient {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNInitialGradient) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNInitialGradient {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNInitialGradient) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNInitialGradient {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNInitialGradient) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNInitialGradient {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNInitialGradient) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNInitialGradient {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNInitialGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNInitialGradient {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNInitialGradient) WithOptions(options mpscore.MPSKernelOptions) *NNInitialGradient {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNInitialGradient) WithLabel(label string) *NNInitialGradient {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNInitialGradient) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 func (x *NNInitialGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
@@ -46,6 +107,16 @@ func (x *NNInitialGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSC
 // NNInitialGradientable is the interface implemented by [NNInitialGradient], for mocking and DI.
 type NNInitialGradientable interface {
 	Unwrap() *raw.MPSNNInitialGradient
+	WithOffset(offset mpscore.MPSOffset) *NNInitialGradient
+	WithClipRect(clipRect metal.MTLRegion) *NNInitialGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNInitialGradient
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNInitialGradient
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNInitialGradient
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNInitialGradient
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNInitialGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNInitialGradient
+	WithOptions(options mpscore.MPSKernelOptions) *NNInitialGradient
+	WithLabel(label string) *NNInitialGradient
 }
 
 var _ NNInitialGradientable = (*NNInitialGradient)(nil)

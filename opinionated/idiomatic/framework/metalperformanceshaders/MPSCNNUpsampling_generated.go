@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -37,6 +39,66 @@ func NewCNNUpsampling() *CNNUpsampling {
 	return &CNNUpsampling{inner: raw.MPSCNNUpsamplingFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithOffset(offset mpscore.MPSOffset) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithClipRect(clipRect metal.MTLRegion) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsampling {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithOptions(options mpscore.MPSKernelOptions) *CNNUpsampling {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNUpsampling) WithLabel(label string) *CNNUpsampling {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ScaleFactorX calls the underlying ScaleFactorX.
 func (x *CNNUpsampling) ScaleFactorX() float64 {
 	return x.inner.ScaleFactorX()
@@ -59,6 +121,16 @@ func (x *CNNUpsampling) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKe
 // CNNUpsamplingable is the interface implemented by [CNNUpsampling], for mocking and DI.
 type CNNUpsamplingable interface {
 	Unwrap() *raw.MPSCNNUpsampling
+	WithOffset(offset mpscore.MPSOffset) *CNNUpsampling
+	WithClipRect(clipRect metal.MTLRegion) *CNNUpsampling
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsampling
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsampling
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsampling
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsampling
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsampling
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsampling
+	WithOptions(options mpscore.MPSKernelOptions) *CNNUpsampling
+	WithLabel(label string) *CNNUpsampling
 	ScaleFactorX() float64
 	ScaleFactorY() float64
 	AlignCorners() bool

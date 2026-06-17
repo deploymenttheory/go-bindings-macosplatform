@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +37,32 @@ func NewImageTranspose() *ImageTranspose {
 	return &ImageTranspose{inner: raw.MPSImageTransposeFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageTranspose) WithOffset(offset mpscore.MPSOffset) *ImageTranspose {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageTranspose) WithClipRect(clipRect metal.MTLRegion) *ImageTranspose {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageTranspose) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTranspose {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageTranspose) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 // ImageTransposeable is the interface implemented by [ImageTranspose], for mocking and DI.
 type ImageTransposeable interface {
 	Unwrap() *raw.MPSImageTranspose
+	WithOffset(offset mpscore.MPSOffset) *ImageTranspose
+	WithClipRect(clipRect metal.MTLRegion) *ImageTranspose
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTranspose
 }
 
 var _ ImageTransposeable = (*ImageTranspose)(nil)

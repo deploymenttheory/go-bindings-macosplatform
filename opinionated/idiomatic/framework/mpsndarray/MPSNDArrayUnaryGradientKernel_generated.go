@@ -38,6 +38,12 @@ func NewArrayUnaryGradientKernelWithDevice(device metal.MTLDevice) *ArrayUnaryGr
 	return &ArrayUnaryGradientKernel{inner: raw.MPSNDArrayUnaryGradientKernelFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayUnaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayUnaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 // EncodeToCommandBufferSourceArraySourceGradientGradientState calls the underlying EncodeToCommandBufferSourceArraySourceGradientGradientState.
 func (x *ArrayUnaryGradientKernel) EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
 	return x.inner.EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf, sourceArray, gradient, state)
@@ -57,6 +63,7 @@ func (x *ArrayUnaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiary
 // ArrayUnaryGradientKernelable is the interface implemented by [ArrayUnaryGradientKernel], for mocking and DI.
 type ArrayUnaryGradientKernelable interface {
 	Unwrap() *raw.MPSNDArrayUnaryGradientKernel
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayUnaryGradientKernel
 	EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
 	EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
 }

@@ -37,6 +37,12 @@ func NewFragmentedMovieMinderWithMovieMindingInterval(movie *raw.AVFragmentedMov
 	return &FragmentedMovieMinder{inner: raw.AVFragmentedMovieMinderFromID(_id)}
 }
 
+// WithMindingInterval sets the mindingInterval property and returns the receiver for chaining.
+func (x *FragmentedMovieMinder) WithMindingInterval(mindingInterval float64) *FragmentedMovieMinder {
+	x.inner.AVFragmentedAssetMinder.SetMindingInterval(mindingInterval)
+	return x
+}
+
 // AddFragmentedMovie calls the underlying AddFragmentedMovie.
 func (x *FragmentedMovieMinder) AddFragmentedMovie(movie *raw.AVFragmentedMovie) {
 	x.inner.AddFragmentedMovie(movie)
@@ -63,6 +69,7 @@ func (x *FragmentedMovieMinder) asFragmentedAssetMinder() *raw.AVFragmentedAsset
 // FragmentedMovieMinderable is the interface implemented by [FragmentedMovieMinder], for mocking and DI.
 type FragmentedMovieMinderable interface {
 	Unwrap() *raw.AVFragmentedMovieMinder
+	WithMindingInterval(mindingInterval float64) *FragmentedMovieMinder
 	AddFragmentedMovie(movie *raw.AVFragmentedMovie)
 	RemoveFragmentedMovie(movie *raw.AVFragmentedMovie)
 	Movies() []*raw.AVFragmentedMovie

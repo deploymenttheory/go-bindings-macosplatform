@@ -64,6 +64,12 @@ func (x *CaptureIndexPicker) WithAccessibilityIdentifier(accessibilityIdentifier
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *CaptureIndexPicker) WithEnabled(enabled bool) *CaptureIndexPicker {
+	x.inner.AVCaptureControl.SetEnabled(enabled)
+	return x
+}
+
 // SetActionQueueAction calls the underlying SetActionQueueAction.
 func (x *CaptureIndexPicker) SetActionQueueAction(actionQueue *foundation.NSObject, action func(int)) {
 	x.inner.SetActionQueueAction(actionQueue, action)
@@ -134,6 +140,7 @@ type CaptureIndexPickerable interface {
 	Unwrap() *raw.AVCaptureIndexPicker
 	WithSelectedIndex(selectedIndex int) *CaptureIndexPicker
 	WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureIndexPicker
+	WithEnabled(enabled bool) *CaptureIndexPicker
 	SetActionQueueAction(actionQueue *foundation.NSObject, action func(int))
 	SelectedIndex() int
 	SetSelectedIndex(selectedIndex int)

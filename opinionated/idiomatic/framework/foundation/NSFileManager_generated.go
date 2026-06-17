@@ -45,6 +45,12 @@ func (x *FileManager) WithDelegate(delegate raw.NSFileManagerDelegate) *FileMana
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *FileManager) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileManager {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // MountedVolumeURLsIncludingResourceValuesForKeysOptions calls the underlying MountedVolumeURLsIncludingResourceValuesForKeysOptions.
 func (x *FileManager) MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys *raw.NSArray[*raw.NSString], options raw.NSVolumeEnumerationOptions) *raw.NSArray[*raw.NSURL] {
 	return x.inner.MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys, options)
@@ -563,6 +569,7 @@ func (x *FileManager) asObject() *raw.NSObject { return &x.inner.NSObject }
 type FileManagerable interface {
 	Unwrap() *raw.NSFileManager
 	WithDelegate(delegate raw.NSFileManagerDelegate) *FileManager
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileManager
 	MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys *raw.NSArray[*raw.NSString], options raw.NSVolumeEnumerationOptions) *raw.NSArray[*raw.NSURL]
 	UnmountVolumeAtURLOptions(ctx context.Context, url string, mask raw.NSFileManagerUnmountOptions) error
 	ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url string, keys *raw.NSArray[*raw.NSString], mask raw.NSDirectoryEnumerationOptions) (*raw.NSArray[*raw.NSURL], error)

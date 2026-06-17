@@ -37,6 +37,18 @@ func NewTextParagraphWithAttributedString(attributedString *foundation.NSAttribu
 	return &TextParagraph{inner: raw.NSTextParagraphFromID(_id)}
 }
 
+// WithTextContentManager sets the textContentManager property and returns the receiver for chaining.
+func (x *TextParagraph) WithTextContentManager(textContentManager TextContentManagerProvider) *TextParagraph {
+	x.inner.NSTextElement.SetTextContentManager(textContentManager.asTextContentManager())
+	return x
+}
+
+// WithElementRange sets the elementRange property and returns the receiver for chaining.
+func (x *TextParagraph) WithElementRange(elementRange *raw.NSTextRange) *TextParagraph {
+	x.inner.NSTextElement.SetElementRange(elementRange)
+	return x
+}
+
 // AttributedString calls the underlying AttributedString.
 func (x *TextParagraph) AttributedString() *foundation.NSAttributedString {
 	return x.inner.AttributedString()
@@ -67,6 +79,8 @@ func (x *TextParagraph) asTextElement() *raw.NSTextElement { return &x.inner.NST
 // TextParagraphable is the interface implemented by [TextParagraph], for mocking and DI.
 type TextParagraphable interface {
 	Unwrap() *raw.NSTextParagraph
+	WithTextContentManager(textContentManager TextContentManagerProvider) *TextParagraph
+	WithElementRange(elementRange *raw.NSTextRange) *TextParagraph
 	AttributedString() *foundation.NSAttributedString
 	ParagraphContentRange() *TextRange
 	ParagraphSeparatorRange() *TextRange

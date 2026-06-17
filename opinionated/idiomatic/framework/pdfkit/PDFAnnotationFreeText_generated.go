@@ -5,8 +5,12 @@
 package pdfkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AnnotationFreeText wraps [raw.PDFAnnotationFreeText] with a fluent Go API.
@@ -35,11 +39,307 @@ func NewAnnotationFreeText() *AnnotationFreeText {
 	return &AnnotationFreeText{inner: raw.PDFAnnotationFreeTextFromID(_id)}
 }
 
+// WithPage sets the page property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithPage(page *raw.PDFPage) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetPage(page)
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithType(type_ string) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetType(foundation.NSStringStringWithUTF8String(type_))
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithBounds(bounds corefoundation.CGRect) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetBounds(bounds)
+	return x
+}
+
+// WithShouldDisplay sets the shouldDisplay property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithShouldDisplay(shouldDisplay bool) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetShouldDisplay(shouldDisplay)
+	return x
+}
+
+// WithShouldPrint sets the shouldPrint property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithShouldPrint(shouldPrint bool) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetShouldPrint(shouldPrint)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithHighlighted(highlighted bool) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetHighlighted(highlighted)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithFont(font *appkit.NSFont) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetFont(font)
+	return x
+}
+
+// WithFontColor sets the fontColor property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithFontColor(fontColor *appkit.NSColor) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetFontColor(fontColor)
+	return x
+}
+
+// WithInteriorColor sets the interiorColor property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetInteriorColor(interiorColor)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithAlignment(alignment appkit.NSTextAlignment) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetAlignment(alignment)
+	return x
+}
+
+// WithStartPoint sets the startPoint property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetStartPoint(startPoint)
+	return x
+}
+
+// WithEndPoint sets the endPoint property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetEndPoint(endPoint)
+	return x
+}
+
+// WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+	return x
+}
+
+// WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+	return x
+}
+
+// WithIconType sets the iconType property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetIconType(iconType)
+	return x
+}
+
+// WithQuadrilateralPoints sets the collection, converting the Go slice to an NSArray.
+func (x *AnnotationFreeText) WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationFreeText {
+	if len(items) == 0 {
+		x.inner.PDFAnnotation.SetQuadrilateralPoints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSValue](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PDFAnnotation.SetQuadrilateralPoints(_arr)
+	return x
+}
+
+// WithMarkupType sets the markupType property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetMarkupType(markupType)
+	return x
+}
+
+// WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+	return x
+}
+
+// WithMultiline sets the multiline property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithMultiline(multiline bool) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetMultiline(multiline)
+	return x
+}
+
+// WithComb sets the comb property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithComb(comb bool) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetComb(comb)
+	return x
+}
+
+// WithMaximumLength sets the maximumLength property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithMaximumLength(maximumLength int) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetMaximumLength(maximumLength)
+	return x
+}
+
+// WithWidgetStringValue sets the widgetStringValue property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithWidgetStringValue(widgetStringValue string) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetWidgetStringValue(foundation.NSStringStringWithUTF8String(widgetStringValue))
+	return x
+}
+
+// WithWidgetDefaultStringValue sets the widgetDefaultStringValue property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetWidgetDefaultStringValue(foundation.NSStringStringWithUTF8String(widgetDefaultStringValue))
+	return x
+}
+
+// WithAllowsToggleToOff sets the allowsToggleToOff property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetAllowsToggleToOff(allowsToggleToOff)
+	return x
+}
+
+// WithRadiosInUnison sets the radiosInUnison property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithRadiosInUnison(radiosInUnison bool) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetRadiosInUnison(radiosInUnison)
+	return x
+}
+
+// WithReadOnly sets the readOnly property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithReadOnly(readOnly bool) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetReadOnly(readOnly)
+	return x
+}
+
+// WithListChoice sets the listChoice property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithListChoice(listChoice bool) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetListChoice(listChoice)
+	return x
+}
+
+// WithChoices sets the collection, converting the Go slice to an NSArray.
+func (x *AnnotationFreeText) WithChoices(items ...*foundation.NSString) *AnnotationFreeText {
+	if len(items) == 0 {
+		x.inner.PDFAnnotation.SetChoices(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PDFAnnotation.SetChoices(_arr)
+	return x
+}
+
+// WithValues sets the collection, converting the Go slice to an NSArray.
+func (x *AnnotationFreeText) WithValues(items ...*foundation.NSString) *AnnotationFreeText {
+	if len(items) == 0 {
+		x.inner.PDFAnnotation.SetValues(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PDFAnnotation.SetValues(_arr)
+	return x
+}
+
+// WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+	return x
+}
+
+// WithButtonWidgetStateString sets the buttonWidgetStateString property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetButtonWidgetStateString(foundation.NSStringStringWithUTF8String(buttonWidgetStateString))
+	return x
+}
+
+// WithOpen sets the open property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithOpen(open bool) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetOpen(open)
+	return x
+}
+
+// WithDestination sets the destination property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithDestination(destination *raw.PDFDestination) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetDestination(destination)
+	return x
+}
+
+// WithURL sets the uRL property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithURL(uRL string) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	return x
+}
+
+// WithFieldName sets the fieldName property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithFieldName(fieldName string) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetFieldName(foundation.NSStringStringWithUTF8String(fieldName))
+	return x
+}
+
+// WithCaption sets the caption property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithCaption(caption string) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetCaption(foundation.NSStringStringWithUTF8String(caption))
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithStampName sets the stampName property and returns the receiver for chaining.
+func (x *AnnotationFreeText) WithStampName(stampName string) *AnnotationFreeText {
+	x.inner.PDFAnnotation.SetStampName(foundation.NSStringStringWithUTF8String(stampName))
+	return x
+}
+
 func (x *AnnotationFreeText) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
 // AnnotationFreeTextable is the interface implemented by [AnnotationFreeText], for mocking and DI.
 type AnnotationFreeTextable interface {
 	Unwrap() *raw.PDFAnnotationFreeText
+	WithPage(page *raw.PDFPage) *AnnotationFreeText
+	WithType(type_ string) *AnnotationFreeText
+	WithBounds(bounds corefoundation.CGRect) *AnnotationFreeText
+	WithShouldDisplay(shouldDisplay bool) *AnnotationFreeText
+	WithShouldPrint(shouldPrint bool) *AnnotationFreeText
+	WithHighlighted(highlighted bool) *AnnotationFreeText
+	WithFont(font *appkit.NSFont) *AnnotationFreeText
+	WithFontColor(fontColor *appkit.NSColor) *AnnotationFreeText
+	WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationFreeText
+	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationFreeText
+	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationFreeText
+	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationFreeText
+	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationFreeText
+	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationFreeText
+	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationFreeText
+	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationFreeText
+	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationFreeText
+	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationFreeText
+	WithMultiline(multiline bool) *AnnotationFreeText
+	WithComb(comb bool) *AnnotationFreeText
+	WithMaximumLength(maximumLength int) *AnnotationFreeText
+	WithWidgetStringValue(widgetStringValue string) *AnnotationFreeText
+	WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationFreeText
+	WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationFreeText
+	WithRadiosInUnison(radiosInUnison bool) *AnnotationFreeText
+	WithReadOnly(readOnly bool) *AnnotationFreeText
+	WithListChoice(listChoice bool) *AnnotationFreeText
+	WithChoices(items ...*foundation.NSString) *AnnotationFreeText
+	WithValues(items ...*foundation.NSString) *AnnotationFreeText
+	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationFreeText
+	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationFreeText
+	WithOpen(open bool) *AnnotationFreeText
+	WithDestination(destination *raw.PDFDestination) *AnnotationFreeText
+	WithURL(uRL string) *AnnotationFreeText
+	WithFieldName(fieldName string) *AnnotationFreeText
+	WithCaption(caption string) *AnnotationFreeText
+	WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationFreeText
+	WithStampName(stampName string) *AnnotationFreeText
 }
 
 var _ AnnotationFreeTextable = (*AnnotationFreeText)(nil)

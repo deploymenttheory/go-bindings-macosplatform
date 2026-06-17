@@ -55,6 +55,12 @@ func (x *AnswerCallIntentResponse) WithCallRecords(items ...*raw.INCallRecord) *
 	return x
 }
 
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *AnswerCallIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *AnswerCallIntentResponse {
+	x.inner.INIntentResponse.SetUserActivity(userActivity)
+	return x
+}
+
 // Code calls the underlying Code.
 func (x *AnswerCallIntentResponse) Code() raw.INAnswerCallIntentResponseCode {
 	return x.inner.Code()
@@ -82,6 +88,7 @@ func (x *AnswerCallIntentResponse) asIntentResponse() *raw.INIntentResponse { re
 type AnswerCallIntentResponseable interface {
 	Unwrap() *raw.INAnswerCallIntentResponse
 	WithCallRecords(items ...*raw.INCallRecord) *AnswerCallIntentResponse
+	WithUserActivity(userActivity *foundation.NSUserActivity) *AnswerCallIntentResponse
 	Code() raw.INAnswerCallIntentResponseCode
 	CallRecords() []*raw.INCallRecord
 	SetCallRecords(callRecords *foundation.NSArray[*raw.INCallRecord])

@@ -6,6 +6,7 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -46,6 +47,12 @@ func (x *CustomMigrationStage) WithWillMigrateHandler(willMigrateHandler func(*r
 // WithDidMigrateHandler sets the didMigrateHandler property and returns the receiver for chaining.
 func (x *CustomMigrationStage) WithDidMigrateHandler(didMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage {
 	x.inner.SetDidMigrateHandler(didMigrateHandler)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CustomMigrationStage) WithLabel(label string) *CustomMigrationStage {
+	x.inner.NSMigrationStage.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
@@ -94,6 +101,7 @@ type CustomMigrationStageable interface {
 	Unwrap() *raw.NSCustomMigrationStage
 	WithWillMigrateHandler(willMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage
 	WithDidMigrateHandler(didMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage
+	WithLabel(label string) *CustomMigrationStage
 	CurrentModel() *ManagedObjectModelReference
 	NextModel() *ManagedObjectModelReference
 	WillMigrateHandler() objc.Block
