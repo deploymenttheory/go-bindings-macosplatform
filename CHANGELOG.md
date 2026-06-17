@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.3.1...v0.4.0) (2026-06-17)
+
+
+### Features
+
+* Commit text (G1+G2 are the same theme — idiomatic types at the wrapper boundary — so one commit reads well): ([562ec5d](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/562ec5dd9a23b02039fa5b5850dc09b7110ddd8e))
+* return and accept idiomatic wrappers at slice/setter boundaries ([917de9c](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/917de9c2f564a65ff483329ed128863409463990))
+
 ## [0.3.1](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.3.0...v0.3.1) (2026-06-17)
 
 
