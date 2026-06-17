@@ -1,14 +1,26 @@
 //go:build darwin
 
-// Package keychain is an ergonomic wrapper over the macOS Security framework's
-// keychain item APIs for the common internet-password case.
+// Package keychain is an ergonomic CRUD wrapper over the macOS Security
+// framework's keychain item API (SecItemAdd/CopyMatching/Update/Delete), with
+// typed facades for each keychain item class.
 //
 // It is written entirely against the idiomatic layer and the runtime bridging
 // helpers — no raw bindings, no manual ObjC message sends, no CFDictionary
-// plumbing or OSStatus decoding. The CoreFoundation constants come from the
-// idiomatic security package (security.KSecClass() etc.), queries are built with
-// the idiomatic foundation dictionary builder, and the SecItem* calls return Go
+// plumbing or OSStatus decoding. CoreFoundation constants come from the idiomatic
+// security package (security.KSecClass() etc.), queries are built with the
+// idiomatic foundation dictionary builder, and the SecItem* calls return Go
 // errors directly.
+//
+// The five item classes share one class-agnostic CRUD core in this file; each
+// class adds a typed struct and Create/Read/Update/Delete/List that map its
+// fields to the relevant kSec* attributes. The verbs follow the standard CRUD
+// mapping onto Security:
+//
+//	Create -> SecItemAdd          (fails if a matching item already exists)
+//	Read   -> SecItemCopyMatching (kSecMatchLimitOne)
+//	Update -> SecItemUpdate
+//	Delete -> SecItemDelete
+//	List   -> SecItemCopyMatching (kSecMatchLimitAll)
 package keychain
 
 import (
@@ -41,8 +53,8 @@ func (e *Error) Error() string {
 }
 
 // describe converts the runtime OSStatus error returned by the SecItem* wrappers
-// into a keychain [Error] enriched with Security's message. It passes nil and
-// non-OSStatus errors through unchanged.
+// into a keychain [Error] enriched with Security's message. nil and non-OSStatus
+// errors pass through unchanged.
 func describe(err error) error {
 	var oserr *purego.OSStatusError
 	if !errors.As(err, &oserr) {
@@ -55,78 +67,104 @@ func describe(err error) error {
 	}
 }
 
-// InternetPassword describes an internet-password keychain item. Server and
-// Label together identify the item for store/find/delete.
-type InternetPassword struct {
-	Server   string // host the credential is for, e.g. "example.com"
-	Account  string // the username
-	Password string // the secret
-	Label    string // human-readable label shown in Keychain Access
+// isNotFound reports whether err is the errSecItemNotFound OSStatus.
+func isNotFound(err error) bool {
+	var oserr *purego.OSStatusError
+	return errors.As(err, &oserr) && oserr.Status.Int() == errSecItemNotFound
 }
 
-// StoreInternetPassword adds item to the default keychain, or updates the
-// existing item when one with the same Server and Label is already present.
-func StoreInternetPassword(item InternetPassword) error {
-	query := baseQuery(item.Server, item.Label)
+// ── class-agnostic CRUD core ─────────────────────────────────────────────────
+//
+// Each facade describes an item as a kSecClass value plus a list of attributes
+// (key/value object pointers). The core builds the CFDictionary and performs the
+// SecItem* call.
 
-	switch _, err := security.SecItemCopyMatching(query.ID()); {
-	case err == nil:
-		attrs := foundation.NewMutableDictionary().
-			Set(security.KSecAttrAccount(), purego.NSString(item.Account)).
-			Set(security.KSecValueData(), newData(item.Password))
-		return describe(security.SecItemUpdate(query.ID(), attrs.ID()))
-	case isNotFound(err):
-		add := baseQuery(item.Server, item.Label).
-			Set(security.KSecAttrAccount(), purego.NSString(item.Account)).
-			Set(security.KSecValueData(), newData(item.Password))
-		_, err := security.SecItemAdd(add.ID())
-		return describe(err)
-	default:
-		return describe(err)
+// attr is one key/value pair for an item dictionary.
+type attr struct{ key, value purego.ID }
+
+// str builds a string-valued attribute (e.g. an account name).
+func str(key purego.ID, s string) attr { return attr{key, purego.NSString(s)} }
+
+// blob builds an NSData-valued attribute (e.g. kSecValueData).
+func blob(key purego.ID, b []byte) attr { return attr{key, newData(b)} }
+
+// ref builds an attribute whose value is an existing object/CFTypeRef id
+// (e.g. kSecValueRef with a SecCertificateRef).
+func ref(key, value purego.ID) attr { return attr{key, value} }
+
+// dict builds a mutable item dictionary: the class plus each attribute.
+func dict(class purego.ID, attrs []attr) *foundation.MutableDictionary {
+	d := foundation.NewMutableDictionary().Set(security.KSecClass(), class)
+	for _, a := range attrs {
+		d.Set(a.key, a.value)
 	}
+	return d
 }
 
-// FindInternetPassword returns the account and password stored for server and
-// label. found is false (with a nil error) when no matching item exists.
-func FindInternetPassword(server, label string) (account, password string, found bool, err error) {
-	query := baseQuery(server, label).
+// trueValue is kCFBooleanTrue as an NSNumber id, for the kSecReturn* flags.
+func trueValue() purego.ID { return foundation.NewNumberWithBool(true).ID() }
+
+// create adds a new item; it fails (errSecDuplicateItem) if a matching item
+// already exists.
+func create(class purego.ID, attrs []attr) error {
+	_, err := security.SecItemAdd(dict(class, attrs).ID())
+	return describe(err)
+}
+
+// readOne returns the single item matching query, or found=false when absent.
+// withData additionally requests the item's kSecValueData.
+func readOne(class purego.ID, query []attr, withData bool) (*foundation.Dictionary, bool, error) {
+	q := dict(class, query).
 		Set(security.KSecMatchLimit(), security.KSecMatchLimitOne()).
-		Set(security.KSecReturnAttributes(), foundation.NewNumberWithBool(true).ID()).
-		Set(security.KSecReturnData(), foundation.NewNumberWithBool(true).ID())
-
-	resultID, err := security.SecItemCopyMatching(query.ID())
-	switch {
+		Set(security.KSecReturnAttributes(), trueValue())
+	if withData {
+		q.Set(security.KSecReturnData(), trueValue())
+	}
+	switch id, err := security.SecItemCopyMatching(q.ID()); {
 	case err == nil:
-		// proceed
+		return foundation.DictionaryFromID(id), true, nil
 	case isNotFound(err):
-		return "", "", false, nil
+		return nil, false, nil
 	default:
-		return "", "", false, describe(err)
+		return nil, false, describe(err)
 	}
-
-	result := foundation.DictionaryFromID(resultID)
-	accountID := result.ObjectForKey(security.KSecAttrAccount())
-	valueID := result.ObjectForKey(security.KSecValueData())
-	if accountID == 0 || valueID == 0 {
-		return "", "", false, errors.New("keychain item has unexpected format")
-	}
-
-	// valueID is borrowed from result; retain before adopting it as a wrapper so
-	// the wrapper's releasing finalizer is balanced.
-	data := foundation.DataFromID(purego.Retain(valueID))
-	password = string(unsafe.Slice((*byte)(data.Bytes()), data.Length()))
-	return purego.GoString(accountID), password, true, nil
 }
 
-// DeleteInternetPassword removes the item(s) matching server and label.
-// Deleting an item that does not exist is not an error.
-func DeleteInternetPassword(server, label string) error {
-	query := foundation.NewMutableDictionary().
-		Set(security.KSecClass(), security.KSecClassInternetPassword()).
-		Set(security.KSecAttrServer(), purego.NSString(server)).
-		Set(security.KSecAttrLabel(), purego.NSString(label))
+// readAll returns every item matching query (nil when none match). withData
+// additionally requests each item's kSecValueData.
+func readAll(class purego.ID, query []attr, withData bool) ([]*foundation.Dictionary, error) {
+	q := dict(class, query).
+		Set(security.KSecMatchLimit(), security.KSecMatchLimitAll()).
+		Set(security.KSecReturnAttributes(), trueValue())
+	if withData {
+		q.Set(security.KSecReturnData(), trueValue())
+	}
+	switch id, err := security.SecItemCopyMatching(q.ID()); {
+	case err == nil:
+		arr := foundation.ArrayFromID(id)
+		return purego.NSArrayToSlice(arr.ID(), func(e purego.ID) *foundation.Dictionary {
+			return foundation.DictionaryFromID(purego.Retain(e))
+		}), nil
+	case isNotFound(err):
+		return nil, nil
+	default:
+		return nil, describe(err)
+	}
+}
 
-	switch err := security.SecItemDelete(query.ID()); {
+// update modifies the attributes of the item(s) matching query.
+func update(class purego.ID, query, changes []attr) error {
+	c := foundation.NewMutableDictionary()
+	for _, a := range changes {
+		c.Set(a.key, a.value)
+	}
+	return describe(security.SecItemUpdate(dict(class, query).ID(), c.ID()))
+}
+
+// remove deletes the item(s) matching query. Deleting a non-existent item is not
+// an error.
+func remove(class purego.ID, query []attr) error {
+	switch err := security.SecItemDelete(dict(class, query).ID()); {
 	case err == nil, isNotFound(err):
 		return nil
 	default:
@@ -134,27 +172,33 @@ func DeleteInternetPassword(server, label string) error {
 	}
 }
 
-// baseQuery builds the class/protocol/server/label dictionary that identifies an
-// internet-password item.
-func baseQuery(server, label string) *foundation.MutableDictionary {
-	return foundation.NewMutableDictionary().
-		Set(security.KSecClass(), security.KSecClassInternetPassword()).
-		Set(security.KSecAttrProtocol(), security.KSecAttrProtocolHTTPS()).
-		Set(security.KSecAttrServer(), purego.NSString(server)).
-		Set(security.KSecAttrLabel(), purego.NSString(label))
+// ── result decoding ──────────────────────────────────────────────────────────
+
+// attrString reads a string-valued attribute from a result dictionary ("" when
+// absent).
+func attrString(d *foundation.Dictionary, key purego.ID) string {
+	return purego.GoString(d.ObjectForKey(key))
 }
 
-// newData boxes a secret as an NSData/CFData id for kSecValueData.
-func newData(s string) purego.ID {
-	b := []byte(s)
+// attrBytes reads an NSData-valued attribute from a result dictionary (nil when
+// absent), copied into a Go slice.
+func attrBytes(d *foundation.Dictionary, key purego.ID) []byte {
+	id := d.ObjectForKey(key)
+	if id == 0 {
+		return nil
+	}
+	data := foundation.DataFromID(purego.Retain(id))
+	n := data.Length()
+	if n == 0 {
+		return nil
+	}
+	return append([]byte(nil), unsafe.Slice((*byte)(data.Bytes()), n)...)
+}
+
+// newData boxes a Go byte slice as an NSData/CFData id.
+func newData(b []byte) purego.ID {
 	if len(b) == 0 {
 		return foundation.NewDataWithBytesLength(nil, 0).ID()
 	}
 	return foundation.NewDataWithBytesLength(unsafe.Pointer(&b[0]), uint(len(b))).ID()
-}
-
-// isNotFound reports whether err is the errSecItemNotFound OSStatus.
-func isNotFound(err error) bool {
-	var oserr *purego.OSStatusError
-	return errors.As(err, &oserr) && oserr.Status.Int() == errSecItemNotFound
 }

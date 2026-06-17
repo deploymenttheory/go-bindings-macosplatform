@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// CMIODeviceProcessAVCCommand wraps [raw.CMIODeviceProcessAVCCommand], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIODeviceProcessAVCCommand wraps [raw.CMIODeviceProcessAVCCommand], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIODeviceProcessAVCCommand(deviceID uint, ioAVCCommand *raw.CMIODeviceAVCCommand) error {
 	if _err := purego.NewOSStatus(raw.CMIODeviceProcessAVCCommand(deviceID, ioAVCCommand)).Err(); _err != nil {
 		return _err
@@ -19,7 +19,7 @@ func CMIODeviceProcessAVCCommand(deviceID uint, ioAVCCommand *raw.CMIODeviceAVCC
 	return nil
 }
 
-// CMIODeviceProcessRS422Command wraps [raw.CMIODeviceProcessRS422Command], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIODeviceProcessRS422Command wraps [raw.CMIODeviceProcessRS422Command], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIODeviceProcessRS422Command(deviceID uint, ioRS422Command *raw.CMIODeviceRS422Command) error {
 	if _err := purego.NewOSStatus(raw.CMIODeviceProcessRS422Command(deviceID, ioRS422Command)).Err(); _err != nil {
 		return _err
@@ -27,7 +27,7 @@ func CMIODeviceProcessRS422Command(deviceID uint, ioRS422Command *raw.CMIODevice
 	return nil
 }
 
-// CMIODeviceStartStream wraps [raw.CMIODeviceStartStream], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIODeviceStartStream wraps [raw.CMIODeviceStartStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIODeviceStartStream(deviceID uint, streamID uint) error {
 	if _err := purego.NewOSStatus(raw.CMIODeviceStartStream(deviceID, streamID)).Err(); _err != nil {
 		return _err
@@ -35,7 +35,7 @@ func CMIODeviceStartStream(deviceID uint, streamID uint) error {
 	return nil
 }
 
-// CMIODeviceStopStream wraps [raw.CMIODeviceStopStream], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIODeviceStopStream wraps [raw.CMIODeviceStopStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIODeviceStopStream(deviceID uint, streamID uint) error {
 	if _err := purego.NewOSStatus(raw.CMIODeviceStopStream(deviceID, streamID)).Err(); _err != nil {
 		return _err
@@ -43,7 +43,7 @@ func CMIODeviceStopStream(deviceID uint, streamID uint) error {
 	return nil
 }
 
-// CMIOObjectIsPropertySettable wraps [raw.CMIOObjectIsPropertySettable], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIOObjectIsPropertySettable wraps [raw.CMIOObjectIsPropertySettable], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIOObjectIsPropertySettable(objectID uint, address *raw.CMIOObjectPropertyAddress, isSettable *uint8) error {
 	if _err := purego.NewOSStatus(raw.CMIOObjectIsPropertySettable(objectID, address, isSettable)).Err(); _err != nil {
 		return _err
@@ -51,7 +51,7 @@ func CMIOObjectIsPropertySettable(objectID uint, address *raw.CMIOObjectProperty
 	return nil
 }
 
-// CMIOStreamClockInvalidate wraps [raw.CMIOStreamClockInvalidate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIOStreamClockInvalidate wraps [raw.CMIOStreamClockInvalidate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIOStreamClockInvalidate(clock objc.ID) error {
 	if _err := purego.NewOSStatus(raw.CMIOStreamClockInvalidate(purego.CFRef(clock))).Err(); _err != nil {
 		return _err
@@ -59,7 +59,7 @@ func CMIOStreamClockInvalidate(clock objc.ID) error {
 	return nil
 }
 
-// CMIOStreamClockPostTimingEvent wraps [raw.CMIOStreamClockPostTimingEvent], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIOStreamClockPostTimingEvent wraps [raw.CMIOStreamClockPostTimingEvent], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIOStreamClockPostTimingEvent(eventTime coremedia.CMTime, hostTime uint64, resynchronize uint8, clock objc.ID) error {
 	if _err := purego.NewOSStatus(raw.CMIOStreamClockPostTimingEvent(eventTime, hostTime, resynchronize, purego.CFRef(clock))).Err(); _err != nil {
 		return _err
@@ -67,7 +67,7 @@ func CMIOStreamClockPostTimingEvent(eventTime coremedia.CMTime, hostTime uint64,
 	return nil
 }
 
-// CMIOStreamDeckCueTo wraps [raw.CMIOStreamDeckCueTo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIOStreamDeckCueTo wraps [raw.CMIOStreamDeckCueTo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIOStreamDeckCueTo(streamID uint, frameNumber uint64, playOnCue uint8) error {
 	if _err := purego.NewOSStatus(raw.CMIOStreamDeckCueTo(streamID, frameNumber, playOnCue)).Err(); _err != nil {
 		return _err
@@ -75,7 +75,7 @@ func CMIOStreamDeckCueTo(streamID uint, frameNumber uint64, playOnCue uint8) err
 	return nil
 }
 
-// CMIOStreamDeckJog wraps [raw.CMIOStreamDeckJog], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIOStreamDeckJog wraps [raw.CMIOStreamDeckJog], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIOStreamDeckJog(streamID uint, speed int) error {
 	if _err := purego.NewOSStatus(raw.CMIOStreamDeckJog(streamID, speed)).Err(); _err != nil {
 		return _err
@@ -83,7 +83,7 @@ func CMIOStreamDeckJog(streamID uint, speed int) error {
 	return nil
 }
 
-// CMIOStreamDeckPlay wraps [raw.CMIOStreamDeckPlay], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIOStreamDeckPlay wraps [raw.CMIOStreamDeckPlay], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIOStreamDeckPlay(streamID uint) error {
 	if _err := purego.NewOSStatus(raw.CMIOStreamDeckPlay(streamID)).Err(); _err != nil {
 		return _err
@@ -91,7 +91,7 @@ func CMIOStreamDeckPlay(streamID uint) error {
 	return nil
 }
 
-// CMIOStreamDeckStop wraps [raw.CMIOStreamDeckStop], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMIOStreamDeckStop wraps [raw.CMIOStreamDeckStop], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMIOStreamDeckStop(streamID uint) error {
 	if _err := purego.NewOSStatus(raw.CMIOStreamDeckStop(streamID)).Err(); _err != nil {
 		return _err

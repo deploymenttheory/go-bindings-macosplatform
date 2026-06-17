@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// AHGotoMainTOC wraps [raw.AHGotoMainTOC], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// AHGotoMainTOC wraps [raw.AHGotoMainTOC], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func AHGotoMainTOC(toctype int16) error {
 	if _err := purego.NewOSStatus(raw.AHGotoMainTOC(toctype)).Err(); _err != nil {
 		return _err
@@ -19,7 +19,7 @@ func AHGotoMainTOC(toctype int16) error {
 	return nil
 }
 
-// AHGotoPage wraps [raw.AHGotoPage], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// AHGotoPage wraps [raw.AHGotoPage], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func AHGotoPage(bookname objc.ID, path objc.ID, anchor objc.ID) error {
 	if _err := purego.NewOSStatus(raw.AHGotoPage(purego.CFRef(bookname), purego.CFRef(path), purego.CFRef(anchor))).Err(); _err != nil {
 		return _err
@@ -27,7 +27,7 @@ func AHGotoPage(bookname objc.ID, path objc.ID, anchor objc.ID) error {
 	return nil
 }
 
-// AHLookupAnchor wraps [raw.AHLookupAnchor], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// AHLookupAnchor wraps [raw.AHLookupAnchor], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func AHLookupAnchor(bookname objc.ID, anchor objc.ID) error {
 	if _err := purego.NewOSStatus(raw.AHLookupAnchor(purego.CFRef(bookname), purego.CFRef(anchor))).Err(); _err != nil {
 		return _err
@@ -35,7 +35,7 @@ func AHLookupAnchor(bookname objc.ID, anchor objc.ID) error {
 	return nil
 }
 
-// AHRegisterHelpBook wraps [raw.AHRegisterHelpBook], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// AHRegisterHelpBook wraps [raw.AHRegisterHelpBook], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func AHRegisterHelpBook(appBundleRef *carboncore.FSRef) error {
 	if _err := purego.NewOSStatus(raw.AHRegisterHelpBook(appBundleRef)).Err(); _err != nil {
 		return _err
@@ -43,7 +43,7 @@ func AHRegisterHelpBook(appBundleRef *carboncore.FSRef) error {
 	return nil
 }
 
-// AHRegisterHelpBookWithURL wraps [raw.AHRegisterHelpBookWithURL], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// AHRegisterHelpBookWithURL wraps [raw.AHRegisterHelpBookWithURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func AHRegisterHelpBookWithURL(applicationURL objc.ID) error {
 	if _err := purego.NewOSStatus(raw.AHRegisterHelpBookWithURL(purego.CFRef(applicationURL))).Err(); _err != nil {
 		return _err
@@ -51,7 +51,7 @@ func AHRegisterHelpBookWithURL(applicationURL objc.ID) error {
 	return nil
 }
 
-// AHSearch wraps [raw.AHSearch], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// AHSearch wraps [raw.AHSearch], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func AHSearch(bookname objc.ID, query objc.ID) error {
 	if _err := purego.NewOSStatus(raw.AHSearch(purego.CFRef(bookname), purego.CFRef(query))).Err(); _err != nil {
 		return _err

@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// VTCopySupportedPropertyDictionaryForEncoder wraps [raw.VTCopySupportedPropertyDictionaryForEncoder], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// VTCopySupportedPropertyDictionaryForEncoder wraps [raw.VTCopySupportedPropertyDictionaryForEncoder], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func VTCopySupportedPropertyDictionaryForEncoder(width int32, height int32, codecType uint, encoderSpecification objc.ID) (objc.ID, objc.ID, error) {
 	var _out0 uintptr
 	var _out1 uintptr
@@ -21,7 +21,7 @@ func VTCopySupportedPropertyDictionaryForEncoder(width int32, height int32, code
 	return objc.ID(_out0), objc.ID(_out1), nil
 }
 
-// VTCopyVideoEncoderList wraps [raw.VTCopyVideoEncoderList], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// VTCopyVideoEncoderList wraps [raw.VTCopyVideoEncoderList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func VTCopyVideoEncoderList(options objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.VTCopyVideoEncoderList(purego.CFRef(options), unsafe.Pointer(&_out0))).Err(); _err != nil {

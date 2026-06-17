@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// CMMetadataCreateIdentifierForKeyAndKeySpace wraps [raw.CMMetadataCreateIdentifierForKeyAndKeySpace], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMMetadataCreateIdentifierForKeyAndKeySpace wraps [raw.CMMetadataCreateIdentifierForKeyAndKeySpace], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMMetadataCreateIdentifierForKeyAndKeySpace(allocator objc.ID, key objc.ID, keySpace objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.CMMetadataCreateIdentifierForKeyAndKeySpace(purego.CFRef(allocator), purego.CFRef(key), purego.CFRef(keySpace), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -20,7 +20,7 @@ func CMMetadataCreateIdentifierForKeyAndKeySpace(allocator objc.ID, key objc.ID,
 	return objc.ID(_out0), nil
 }
 
-// CMMetadataCreateKeyFromIdentifier wraps [raw.CMMetadataCreateKeyFromIdentifier], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMMetadataCreateKeyFromIdentifier wraps [raw.CMMetadataCreateKeyFromIdentifier], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMMetadataCreateKeyFromIdentifier(allocator objc.ID, identifier objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.CMMetadataCreateKeyFromIdentifier(purego.CFRef(allocator), purego.CFRef(identifier), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -29,7 +29,7 @@ func CMMetadataCreateKeyFromIdentifier(allocator objc.ID, identifier objc.ID) (o
 	return objc.ID(_out0), nil
 }
 
-// CMMetadataCreateKeyFromIdentifierAsCFData wraps [raw.CMMetadataCreateKeyFromIdentifierAsCFData], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMMetadataCreateKeyFromIdentifierAsCFData wraps [raw.CMMetadataCreateKeyFromIdentifierAsCFData], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMMetadataCreateKeyFromIdentifierAsCFData(allocator objc.ID, identifier objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.CMMetadataCreateKeyFromIdentifierAsCFData(purego.CFRef(allocator), purego.CFRef(identifier), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -38,7 +38,7 @@ func CMMetadataCreateKeyFromIdentifierAsCFData(allocator objc.ID, identifier obj
 	return objc.ID(_out0), nil
 }
 
-// CMMetadataCreateKeySpaceFromIdentifier wraps [raw.CMMetadataCreateKeySpaceFromIdentifier], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMMetadataCreateKeySpaceFromIdentifier wraps [raw.CMMetadataCreateKeySpaceFromIdentifier], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMMetadataCreateKeySpaceFromIdentifier(allocator objc.ID, identifier objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.CMMetadataCreateKeySpaceFromIdentifier(purego.CFRef(allocator), purego.CFRef(identifier), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -47,7 +47,7 @@ func CMMetadataCreateKeySpaceFromIdentifier(allocator objc.ID, identifier objc.I
 	return objc.ID(_out0), nil
 }
 
-// CMMetadataDataTypeRegistryRegisterDataType wraps [raw.CMMetadataDataTypeRegistryRegisterDataType], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMMetadataDataTypeRegistryRegisterDataType wraps [raw.CMMetadataDataTypeRegistryRegisterDataType], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMMetadataDataTypeRegistryRegisterDataType(dataType objc.ID, description objc.ID, conformingDataTypes objc.ID) error {
 	if _err := purego.NewOSStatus(raw.CMMetadataDataTypeRegistryRegisterDataType(purego.CFRef(dataType), purego.CFRef(description), purego.CFRef(conformingDataTypes))).Err(); _err != nil {
 		return _err
@@ -55,7 +55,7 @@ func CMMetadataDataTypeRegistryRegisterDataType(dataType objc.ID, description ob
 	return nil
 }
 
-// CMSwapBigEndianClosedCaptionDescriptionToHost wraps [raw.CMSwapBigEndianClosedCaptionDescriptionToHost], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapBigEndianClosedCaptionDescriptionToHost wraps [raw.CMSwapBigEndianClosedCaptionDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapBigEndianClosedCaptionDescriptionToHost(closedCaptionDescriptionData *uint8, closedCaptionDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapBigEndianClosedCaptionDescriptionToHost(closedCaptionDescriptionData, closedCaptionDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -63,7 +63,7 @@ func CMSwapBigEndianClosedCaptionDescriptionToHost(closedCaptionDescriptionData 
 	return nil
 }
 
-// CMSwapBigEndianImageDescriptionToHost wraps [raw.CMSwapBigEndianImageDescriptionToHost], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapBigEndianImageDescriptionToHost wraps [raw.CMSwapBigEndianImageDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapBigEndianImageDescriptionToHost(imageDescriptionData *uint8, imageDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapBigEndianImageDescriptionToHost(imageDescriptionData, imageDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -71,7 +71,7 @@ func CMSwapBigEndianImageDescriptionToHost(imageDescriptionData *uint8, imageDes
 	return nil
 }
 
-// CMSwapBigEndianMetadataDescriptionToHost wraps [raw.CMSwapBigEndianMetadataDescriptionToHost], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapBigEndianMetadataDescriptionToHost wraps [raw.CMSwapBigEndianMetadataDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapBigEndianMetadataDescriptionToHost(metadataDescriptionData *uint8, metadataDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapBigEndianMetadataDescriptionToHost(metadataDescriptionData, metadataDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -79,7 +79,7 @@ func CMSwapBigEndianMetadataDescriptionToHost(metadataDescriptionData *uint8, me
 	return nil
 }
 
-// CMSwapBigEndianSoundDescriptionToHost wraps [raw.CMSwapBigEndianSoundDescriptionToHost], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapBigEndianSoundDescriptionToHost wraps [raw.CMSwapBigEndianSoundDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapBigEndianSoundDescriptionToHost(soundDescriptionData *uint8, soundDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapBigEndianSoundDescriptionToHost(soundDescriptionData, soundDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -87,7 +87,7 @@ func CMSwapBigEndianSoundDescriptionToHost(soundDescriptionData *uint8, soundDes
 	return nil
 }
 
-// CMSwapBigEndianTextDescriptionToHost wraps [raw.CMSwapBigEndianTextDescriptionToHost], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapBigEndianTextDescriptionToHost wraps [raw.CMSwapBigEndianTextDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapBigEndianTextDescriptionToHost(textDescriptionData *uint8, textDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapBigEndianTextDescriptionToHost(textDescriptionData, textDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -95,7 +95,7 @@ func CMSwapBigEndianTextDescriptionToHost(textDescriptionData *uint8, textDescri
 	return nil
 }
 
-// CMSwapBigEndianTimeCodeDescriptionToHost wraps [raw.CMSwapBigEndianTimeCodeDescriptionToHost], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapBigEndianTimeCodeDescriptionToHost wraps [raw.CMSwapBigEndianTimeCodeDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapBigEndianTimeCodeDescriptionToHost(timeCodeDescriptionData *uint8, timeCodeDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapBigEndianTimeCodeDescriptionToHost(timeCodeDescriptionData, timeCodeDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -103,7 +103,7 @@ func CMSwapBigEndianTimeCodeDescriptionToHost(timeCodeDescriptionData *uint8, ti
 	return nil
 }
 
-// CMSwapHostEndianClosedCaptionDescriptionToBig wraps [raw.CMSwapHostEndianClosedCaptionDescriptionToBig], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapHostEndianClosedCaptionDescriptionToBig wraps [raw.CMSwapHostEndianClosedCaptionDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapHostEndianClosedCaptionDescriptionToBig(closedCaptionDescriptionData *uint8, closedCaptionDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapHostEndianClosedCaptionDescriptionToBig(closedCaptionDescriptionData, closedCaptionDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -111,7 +111,7 @@ func CMSwapHostEndianClosedCaptionDescriptionToBig(closedCaptionDescriptionData 
 	return nil
 }
 
-// CMSwapHostEndianImageDescriptionToBig wraps [raw.CMSwapHostEndianImageDescriptionToBig], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapHostEndianImageDescriptionToBig wraps [raw.CMSwapHostEndianImageDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapHostEndianImageDescriptionToBig(imageDescriptionData *uint8, imageDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapHostEndianImageDescriptionToBig(imageDescriptionData, imageDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -119,7 +119,7 @@ func CMSwapHostEndianImageDescriptionToBig(imageDescriptionData *uint8, imageDes
 	return nil
 }
 
-// CMSwapHostEndianMetadataDescriptionToBig wraps [raw.CMSwapHostEndianMetadataDescriptionToBig], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapHostEndianMetadataDescriptionToBig wraps [raw.CMSwapHostEndianMetadataDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapHostEndianMetadataDescriptionToBig(metadataDescriptionData *uint8, metadataDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapHostEndianMetadataDescriptionToBig(metadataDescriptionData, metadataDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -127,7 +127,7 @@ func CMSwapHostEndianMetadataDescriptionToBig(metadataDescriptionData *uint8, me
 	return nil
 }
 
-// CMSwapHostEndianSoundDescriptionToBig wraps [raw.CMSwapHostEndianSoundDescriptionToBig], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapHostEndianSoundDescriptionToBig wraps [raw.CMSwapHostEndianSoundDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapHostEndianSoundDescriptionToBig(soundDescriptionData *uint8, soundDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapHostEndianSoundDescriptionToBig(soundDescriptionData, soundDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -135,7 +135,7 @@ func CMSwapHostEndianSoundDescriptionToBig(soundDescriptionData *uint8, soundDes
 	return nil
 }
 
-// CMSwapHostEndianTextDescriptionToBig wraps [raw.CMSwapHostEndianTextDescriptionToBig], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapHostEndianTextDescriptionToBig wraps [raw.CMSwapHostEndianTextDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapHostEndianTextDescriptionToBig(textDescriptionData *uint8, textDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapHostEndianTextDescriptionToBig(textDescriptionData, textDescriptionSize)).Err(); _err != nil {
 		return _err
@@ -143,7 +143,7 @@ func CMSwapHostEndianTextDescriptionToBig(textDescriptionData *uint8, textDescri
 	return nil
 }
 
-// CMSwapHostEndianTimeCodeDescriptionToBig wraps [raw.CMSwapHostEndianTimeCodeDescriptionToBig], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CMSwapHostEndianTimeCodeDescriptionToBig wraps [raw.CMSwapHostEndianTimeCodeDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CMSwapHostEndianTimeCodeDescriptionToBig(timeCodeDescriptionData *uint8, timeCodeDescriptionSize uint) error {
 	if _err := purego.NewOSStatus(raw.CMSwapHostEndianTimeCodeDescriptionToBig(timeCodeDescriptionData, timeCodeDescriptionSize)).Err(); _err != nil {
 		return _err

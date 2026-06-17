@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// CWKeychainCopyEAPIdentityList wraps [raw.CWKeychainCopyEAPIdentityList], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainCopyEAPIdentityList wraps [raw.CWKeychainCopyEAPIdentityList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainCopyEAPIdentityList() (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.CWKeychainCopyEAPIdentityList(unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -21,7 +21,7 @@ func CWKeychainCopyEAPIdentityList() (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// CWKeychainCopyEAPUsernameAndPassword wraps [raw.CWKeychainCopyEAPUsernameAndPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainCopyEAPUsernameAndPassword wraps [raw.CWKeychainCopyEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainCopyEAPUsernameAndPassword(ssidData objc.ID) (objc.ID, objc.ID, error) {
 	var _out0 uintptr
 	var _out1 uintptr
@@ -31,7 +31,7 @@ func CWKeychainCopyEAPUsernameAndPassword(ssidData objc.ID) (objc.ID, objc.ID, e
 	return objc.ID(_out0), objc.ID(_out1), nil
 }
 
-// CWKeychainCopyPassword wraps [raw.CWKeychainCopyPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainCopyPassword wraps [raw.CWKeychainCopyPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainCopyPassword(ssidData objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.CWKeychainCopyPassword(purego.CFRef(ssidData), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -40,7 +40,7 @@ func CWKeychainCopyPassword(ssidData objc.ID) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// CWKeychainDeleteEAPUsernameAndPassword wraps [raw.CWKeychainDeleteEAPUsernameAndPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainDeleteEAPUsernameAndPassword wraps [raw.CWKeychainDeleteEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainDeleteEAPUsernameAndPassword(ssidData objc.ID) error {
 	if _err := purego.NewOSStatus(raw.CWKeychainDeleteEAPUsernameAndPassword(purego.CFRef(ssidData))).Err(); _err != nil {
 		return _err
@@ -48,7 +48,7 @@ func CWKeychainDeleteEAPUsernameAndPassword(ssidData objc.ID) error {
 	return nil
 }
 
-// CWKeychainDeletePassword wraps [raw.CWKeychainDeletePassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainDeletePassword wraps [raw.CWKeychainDeletePassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainDeletePassword(ssidData objc.ID) error {
 	if _err := purego.NewOSStatus(raw.CWKeychainDeletePassword(purego.CFRef(ssidData))).Err(); _err != nil {
 		return _err
@@ -56,7 +56,7 @@ func CWKeychainDeletePassword(ssidData objc.ID) error {
 	return nil
 }
 
-// CWKeychainDeleteWiFiEAPUsernameAndPassword wraps [raw.CWKeychainDeleteWiFiEAPUsernameAndPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainDeleteWiFiEAPUsernameAndPassword wraps [raw.CWKeychainDeleteWiFiEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainDeleteWiFiEAPUsernameAndPassword(domain raw.CWKeychainDomain, ssid *foundation.NSData) error {
 	if _err := purego.NewOSStatus(raw.CWKeychainDeleteWiFiEAPUsernameAndPassword(domain, ssid)).Err(); _err != nil {
 		return _err
@@ -64,7 +64,7 @@ func CWKeychainDeleteWiFiEAPUsernameAndPassword(domain raw.CWKeychainDomain, ssi
 	return nil
 }
 
-// CWKeychainDeleteWiFiPassword wraps [raw.CWKeychainDeleteWiFiPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainDeleteWiFiPassword wraps [raw.CWKeychainDeleteWiFiPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainDeleteWiFiPassword(domain raw.CWKeychainDomain, ssid *foundation.NSData) error {
 	if _err := purego.NewOSStatus(raw.CWKeychainDeleteWiFiPassword(domain, ssid)).Err(); _err != nil {
 		return _err
@@ -72,7 +72,7 @@ func CWKeychainDeleteWiFiPassword(domain raw.CWKeychainDomain, ssid *foundation.
 	return nil
 }
 
-// CWKeychainFindWiFiEAPUsernameAndPassword wraps [raw.CWKeychainFindWiFiEAPUsernameAndPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainFindWiFiEAPUsernameAndPassword wraps [raw.CWKeychainFindWiFiEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainFindWiFiEAPUsernameAndPassword(domain raw.CWKeychainDomain, ssid *foundation.NSData, username *foundation.NSString, password *foundation.NSString) error {
 	if _err := purego.NewOSStatus(raw.CWKeychainFindWiFiEAPUsernameAndPassword(domain, ssid, username, password)).Err(); _err != nil {
 		return _err
@@ -80,7 +80,7 @@ func CWKeychainFindWiFiEAPUsernameAndPassword(domain raw.CWKeychainDomain, ssid 
 	return nil
 }
 
-// CWKeychainFindWiFiPassword wraps [raw.CWKeychainFindWiFiPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainFindWiFiPassword wraps [raw.CWKeychainFindWiFiPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainFindWiFiPassword(domain raw.CWKeychainDomain, ssid *foundation.NSData, password *foundation.NSString) error {
 	if _err := purego.NewOSStatus(raw.CWKeychainFindWiFiPassword(domain, ssid, password)).Err(); _err != nil {
 		return _err
@@ -88,7 +88,7 @@ func CWKeychainFindWiFiPassword(domain raw.CWKeychainDomain, ssid *foundation.NS
 	return nil
 }
 
-// CWKeychainSetEAPUsernameAndPassword wraps [raw.CWKeychainSetEAPUsernameAndPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainSetEAPUsernameAndPassword wraps [raw.CWKeychainSetEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainSetEAPUsernameAndPassword(ssidData objc.ID, username objc.ID, password objc.ID) error {
 	if _err := purego.NewOSStatus(raw.CWKeychainSetEAPUsernameAndPassword(purego.CFRef(ssidData), purego.CFRef(username), purego.CFRef(password))).Err(); _err != nil {
 		return _err
@@ -96,7 +96,7 @@ func CWKeychainSetEAPUsernameAndPassword(ssidData objc.ID, username objc.ID, pas
 	return nil
 }
 
-// CWKeychainSetPassword wraps [raw.CWKeychainSetPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainSetPassword wraps [raw.CWKeychainSetPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainSetPassword(ssidData objc.ID, password objc.ID) error {
 	if _err := purego.NewOSStatus(raw.CWKeychainSetPassword(purego.CFRef(ssidData), purego.CFRef(password))).Err(); _err != nil {
 		return _err
@@ -104,7 +104,7 @@ func CWKeychainSetPassword(ssidData objc.ID, password objc.ID) error {
 	return nil
 }
 
-// CWKeychainSetWiFiEAPUsernameAndPassword wraps [raw.CWKeychainSetWiFiEAPUsernameAndPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainSetWiFiEAPUsernameAndPassword wraps [raw.CWKeychainSetWiFiEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainSetWiFiEAPUsernameAndPassword(domain raw.CWKeychainDomain, ssid *foundation.NSData, username *foundation.NSString, password *foundation.NSString) error {
 	if _err := purego.NewOSStatus(raw.CWKeychainSetWiFiEAPUsernameAndPassword(domain, ssid, username, password)).Err(); _err != nil {
 		return _err
@@ -112,7 +112,7 @@ func CWKeychainSetWiFiEAPUsernameAndPassword(domain raw.CWKeychainDomain, ssid *
 	return nil
 }
 
-// CWKeychainSetWiFiPassword wraps [raw.CWKeychainSetWiFiPassword], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CWKeychainSetWiFiPassword wraps [raw.CWKeychainSetWiFiPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CWKeychainSetWiFiPassword(domain raw.CWKeychainDomain, ssid *foundation.NSData, password *foundation.NSString) error {
 	if _err := purego.NewOSStatus(raw.CWKeychainSetWiFiPassword(domain, ssid, password)).Err(); _err != nil {
 		return _err

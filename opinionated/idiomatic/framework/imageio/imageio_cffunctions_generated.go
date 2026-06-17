@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// CGImageSourceSetAllowableTypes wraps [raw.CGImageSourceSetAllowableTypes], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// CGImageSourceSetAllowableTypes wraps [raw.CGImageSourceSetAllowableTypes], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func CGImageSourceSetAllowableTypes(allowableTypes objc.ID) error {
 	if _err := purego.NewOSStatus(raw.CGImageSourceSetAllowableTypes(purego.CFRef(allowableTypes))).Err(); _err != nil {
 		return _err

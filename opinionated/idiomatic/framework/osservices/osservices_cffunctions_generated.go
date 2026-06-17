@@ -7,10 +7,9 @@ package osservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
 )
 
-// KCGetKeychainManagerVersion wraps [raw.KCGetKeychainManagerVersion], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// KCGetKeychainManagerVersion wraps [raw.KCGetKeychainManagerVersion], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func KCGetKeychainManagerVersion(returnVers *uint) error {
 	if _err := purego.NewOSStatus(raw.KCGetKeychainManagerVersion(returnVers)).Err(); _err != nil {
 		return _err
@@ -18,7 +17,7 @@ func KCGetKeychainManagerVersion(returnVers *uint) error {
 	return nil
 }
 
-// KCSetInteractionAllowed wraps [raw.KCSetInteractionAllowed], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// KCSetInteractionAllowed wraps [raw.KCSetInteractionAllowed], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func KCSetInteractionAllowed(state uint8) error {
 	if _err := purego.NewOSStatus(raw.KCSetInteractionAllowed(state)).Err(); _err != nil {
 		return _err

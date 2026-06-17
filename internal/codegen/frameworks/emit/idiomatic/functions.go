@@ -492,7 +492,7 @@ func emitCFFunctionWrappers(
 			retSig = "(" + strings.Join(append(append([]string{}, outTypes...), "error"), ", ") + ")"
 		}
 
-		fmt.Fprintf(&body, "// %s wraps [%s.%s], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.\n", goName, rawPkgAlias, goName)
+		fmt.Fprintf(&body, "// %s wraps [%s.%s], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.\n", goName, rawPkgAlias, goName)
 		fmt.Fprintf(&body, "func %s(%s) %s {\n", goName, strings.Join(sigParams, ", "), retSig)
 		for _, pl := range preLines {
 			fmt.Fprintln(&body, pl)

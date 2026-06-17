@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// FCAddCollection wraps [raw.FCAddCollection], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// FCAddCollection wraps [raw.FCAddCollection], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func FCAddCollection(iCollection objc.ID, iCollectionOptions uint) error {
 	if _err := purego.NewOSStatus(raw.FCAddCollection(purego.CFRef(iCollection), iCollectionOptions)).Err(); _err != nil {
 		return _err
@@ -18,7 +18,7 @@ func FCAddCollection(iCollection objc.ID, iCollectionOptions uint) error {
 	return nil
 }
 
-// FCRemoveCollection wraps [raw.FCRemoveCollection], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// FCRemoveCollection wraps [raw.FCRemoveCollection], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func FCRemoveCollection(iCollection objc.ID) error {
 	if _err := purego.NewOSStatus(raw.FCRemoveCollection(purego.CFRef(iCollection))).Err(); _err != nil {
 		return _err
@@ -26,7 +26,7 @@ func FCRemoveCollection(iCollection objc.ID) error {
 	return nil
 }
 
-// FPShowHideFontPanel wraps [raw.FPShowHideFontPanel], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
+// FPShowHideFontPanel wraps [raw.FPShowHideFontPanel], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
 func FPShowHideFontPanel() error {
 	if _err := purego.NewOSStatus(raw.FPShowHideFontPanel()).Err(); _err != nil {
 		return _err
