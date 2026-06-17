@@ -38,14 +38,14 @@ func NewOperation() *Operation {
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *Operation) WithConfiguration(configuration *raw.CKOperationConfiguration) *Operation {
-	x.inner.SetConfiguration(configuration)
+func (x *Operation) WithConfiguration(configuration *OperationConfiguration) *Operation {
+	x.inner.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *Operation) WithGroup(group *raw.CKOperationGroup) *Operation {
-	x.inner.SetGroup(group)
+func (x *Operation) WithGroup(group *OperationGroup) *Operation {
+	x.inner.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -56,8 +56,8 @@ func (x *Operation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWa
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *Operation) WithContainer(container *raw.CKContainer) *Operation {
-	x.inner.SetContainer(container)
+func (x *Operation) WithContainer(container *Container) *Operation {
+	x.inner.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -200,10 +200,10 @@ func (x *Operation) asOperation() *raw.CKOperation { return x.inner }
 // Operationable is the interface implemented by [Operation], for mocking and DI.
 type Operationable interface {
 	Unwrap() *raw.CKOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *Operation
-	WithGroup(group *raw.CKOperationGroup) *Operation
+	WithConfiguration(configuration *OperationConfiguration) *Operation
+	WithGroup(group *OperationGroup) *Operation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *Operation
-	WithContainer(container *raw.CKContainer) *Operation
+	WithContainer(container *Container) *Operation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *Operation
 	WithLongLived(longLived bool) *Operation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *Operation

@@ -47,8 +47,8 @@ func NewContentEditingOutputWithPlaceholderForCreatedAsset(placeholderForCreated
 }
 
 // WithAdjustmentData sets the adjustmentData property and returns the receiver for chaining.
-func (x *ContentEditingOutput) WithAdjustmentData(adjustmentData *raw.PHAdjustmentData) *ContentEditingOutput {
-	x.inner.SetAdjustmentData(adjustmentData)
+func (x *ContentEditingOutput) WithAdjustmentData(adjustmentData *AdjustmentData) *ContentEditingOutput {
+	x.inner.SetAdjustmentData(adjustmentData.Unwrap())
 	return x
 }
 
@@ -95,7 +95,7 @@ func (x *ContentEditingOutput) SupportedRenderedContentTypes() []*uniformtypeide
 // ContentEditingOutputable is the interface implemented by [ContentEditingOutput], for mocking and DI.
 type ContentEditingOutputable interface {
 	Unwrap() *raw.PHContentEditingOutput
-	WithAdjustmentData(adjustmentData *raw.PHAdjustmentData) *ContentEditingOutput
+	WithAdjustmentData(adjustmentData *AdjustmentData) *ContentEditingOutput
 	RenderedContentURLForTypeError(type_ *uniformtypeidentifiers.UTType) (*foundation.NSURL, error)
 	AdjustmentData() *AdjustmentData
 	SetAdjustmentData(adjustmentData *raw.PHAdjustmentData)

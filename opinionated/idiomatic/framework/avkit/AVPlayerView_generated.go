@@ -239,13 +239,13 @@ func (x *PlayerView) SetDelegate(delegate raw.AVPlayerViewDelegate) {
 }
 
 // Speeds returns the collection as a Go slice.
-func (x *PlayerView) Speeds() []*raw.AVPlaybackSpeed {
+func (x *PlayerView) Speeds() []*PlaybackSpeed {
 	arr := x.inner.Speeds()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlaybackSpeed {
-		return raw.AVPlaybackSpeedFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlaybackSpeed {
+		return &PlaybackSpeed{inner: raw.AVPlaybackSpeedFromID(purego.Retain(_id))}
 	})
 }
 
@@ -434,7 +434,7 @@ type PlayerViewable interface {
 	SetUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool)
 	Delegate() raw.AVPlayerViewDelegate
 	SetDelegate(delegate raw.AVPlayerViewDelegate)
-	Speeds() []*raw.AVPlaybackSpeed
+	Speeds() []*PlaybackSpeed
 	SetSpeeds(speeds *foundation.NSArray[*raw.AVPlaybackSpeed])
 	SelectedSpeed() *PlaybackSpeed
 	AllowsVideoFrameAnalysis() bool

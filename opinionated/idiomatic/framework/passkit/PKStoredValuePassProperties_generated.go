@@ -53,13 +53,13 @@ func (x *StoredValuePassProperties) ExpirationDate() *foundation.NSDate {
 }
 
 // Balances returns the collection as a Go slice.
-func (x *StoredValuePassProperties) Balances() []*raw.PKStoredValuePassBalance {
+func (x *StoredValuePassProperties) Balances() []*StoredValuePassBalance {
 	arr := x.inner.Balances()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKStoredValuePassBalance {
-		return raw.PKStoredValuePassBalanceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *StoredValuePassBalance {
+		return &StoredValuePassBalance{inner: raw.PKStoredValuePassBalanceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -71,7 +71,7 @@ type StoredValuePassPropertiesable interface {
 	IsBlacklisted() bool
 	IsBlocked() bool
 	ExpirationDate() *foundation.NSDate
-	Balances() []*raw.PKStoredValuePassBalance
+	Balances() []*StoredValuePassBalance
 }
 
 var _ StoredValuePassPropertiesable = (*StoredValuePassProperties)(nil)

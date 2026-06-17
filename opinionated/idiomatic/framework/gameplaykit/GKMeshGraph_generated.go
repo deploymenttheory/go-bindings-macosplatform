@@ -83,13 +83,13 @@ func (x *MeshGraph) ClassForGenericArgumentAtIndex(index uint) objc.Class {
 }
 
 // Obstacles returns the collection as a Go slice.
-func (x *MeshGraph) Obstacles() []*raw.GKPolygonObstacle {
+func (x *MeshGraph) Obstacles() []*PolygonObstacle {
 	arr := x.inner.Obstacles()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKPolygonObstacle {
-		return raw.GKPolygonObstacleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PolygonObstacle {
+		return &PolygonObstacle{inner: raw.GKPolygonObstacleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -125,7 +125,7 @@ type MeshGraphable interface {
 	Triangulate()
 	TriangleAtIndex(index uint) raw.GKTriangle
 	ClassForGenericArgumentAtIndex(index uint) objc.Class
-	Obstacles() []*raw.GKPolygonObstacle
+	Obstacles() []*PolygonObstacle
 	BufferRadius() float32
 	TriangulationMode() raw.GKMeshGraphTriangulationMode
 	SetTriangulationMode(triangulationMode raw.GKMeshGraphTriangulationMode)

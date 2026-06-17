@@ -55,13 +55,13 @@ func (x *OutgoingMessageEncodingStatus) SecurityError() unsafe.Pointer {
 }
 
 // AddressesFailingEncryption returns the collection as a Go slice.
-func (x *OutgoingMessageEncodingStatus) AddressesFailingEncryption() []*raw.MEEmailAddress {
+func (x *OutgoingMessageEncodingStatus) AddressesFailingEncryption() []*EmailAddress {
 	arr := x.inner.AddressesFailingEncryption()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
-		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
+		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
 	})
 }
 
@@ -71,7 +71,7 @@ type OutgoingMessageEncodingStatusable interface {
 	CanSign() bool
 	CanEncrypt() bool
 	SecurityError() unsafe.Pointer
-	AddressesFailingEncryption() []*raw.MEEmailAddress
+	AddressesFailingEncryption() []*EmailAddress
 }
 
 var _ OutgoingMessageEncodingStatusable = (*OutgoingMessageEncodingStatus)(nil)

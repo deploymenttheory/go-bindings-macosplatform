@@ -110,8 +110,8 @@ func (x *VSUserAccount) WithAuthenticationData(authenticationData string) *VSUse
 }
 
 // WithAppleSubscription sets the appleSubscription property and returns the receiver for chaining.
-func (x *VSUserAccount) WithAppleSubscription(appleSubscription *raw.VSAppleSubscription) *VSUserAccount {
-	x.inner.SetAppleSubscription(appleSubscription)
+func (x *VSUserAccount) WithAppleSubscription(appleSubscription *VSAppleSubscription) *VSUserAccount {
+	x.inner.SetAppleSubscription(appleSubscription.Unwrap())
 	return x
 }
 
@@ -274,7 +274,7 @@ type VSUserAccountable interface {
 	WithTierIdentifiers(items ...*foundation.NSString) *VSUserAccount
 	WithBillingIdentifier(billingIdentifier string) *VSUserAccount
 	WithAuthenticationData(authenticationData string) *VSUserAccount
-	WithAppleSubscription(appleSubscription *raw.VSAppleSubscription) *VSUserAccount
+	WithAppleSubscription(appleSubscription *VSAppleSubscription) *VSUserAccount
 	UpdateURL() *foundation.NSURL
 	SetUpdateURL(updateURL string)
 	RequiresSystemTrust() bool

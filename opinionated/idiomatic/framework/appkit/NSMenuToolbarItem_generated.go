@@ -38,8 +38,8 @@ func NewMenuToolbarItem() *MenuToolbarItem {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *MenuToolbarItem) WithMenu(menu *raw.NSMenu) *MenuToolbarItem {
-	x.inner.SetMenu(menu)
+func (x *MenuToolbarItem) WithMenu(menu *Menu) *MenuToolbarItem {
+	x.inner.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -74,8 +74,8 @@ func (x *MenuToolbarItem) WithToolTip(toolTip string) *MenuToolbarItem {
 }
 
 // WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
-func (x *MenuToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *MenuToolbarItem {
-	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation)
+func (x *MenuToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation.Unwrap())
 	return x
 }
 
@@ -104,8 +104,8 @@ func (x *MenuToolbarItem) WithEnabled(enabled bool) *MenuToolbarItem {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *MenuToolbarItem) WithImage(image *raw.NSImage) *MenuToolbarItem {
-	x.inner.NSToolbarItem.SetImage(image)
+func (x *MenuToolbarItem) WithImage(image *Image) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetImage(image.Unwrap())
 	return x
 }
 
@@ -122,8 +122,8 @@ func (x *MenuToolbarItem) WithBordered(bordered bool) *MenuToolbarItem {
 }
 
 // WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
-func (x *MenuToolbarItem) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *MenuToolbarItem {
-	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor)
+func (x *MenuToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor.Unwrap())
 	return x
 }
 
@@ -170,8 +170,8 @@ func (x *MenuToolbarItem) WithVisibilityPriority(visibilityPriority int) *MenuTo
 }
 
 // WithBadge sets the badge property and returns the receiver for chaining.
-func (x *MenuToolbarItem) WithBadge(badge *raw.NSItemBadge) *MenuToolbarItem {
-	x.inner.NSToolbarItem.SetBadge(badge)
+func (x *MenuToolbarItem) WithBadge(badge *ItemBadge) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetBadge(badge.Unwrap())
 	return x
 }
 
@@ -210,21 +210,21 @@ func (x *MenuToolbarItem) asToolbarItem() *raw.NSToolbarItem { return &x.inner.N
 // MenuToolbarItemable is the interface implemented by [MenuToolbarItem], for mocking and DI.
 type MenuToolbarItemable interface {
 	Unwrap() *raw.NSMenuToolbarItem
-	WithMenu(menu *raw.NSMenu) *MenuToolbarItem
+	WithMenu(menu *Menu) *MenuToolbarItem
 	WithShowsIndicator(showsIndicator bool) *MenuToolbarItem
 	WithLabel(label string) *MenuToolbarItem
 	WithPaletteLabel(paletteLabel string) *MenuToolbarItem
 	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *MenuToolbarItem
 	WithToolTip(toolTip string) *MenuToolbarItem
-	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *MenuToolbarItem
+	WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *MenuToolbarItem
 	WithTag(tag int) *MenuToolbarItem
 	WithTarget(target objc.ID) *MenuToolbarItem
 	WithAction(action objc.SEL) *MenuToolbarItem
 	WithEnabled(enabled bool) *MenuToolbarItem
-	WithImage(image *raw.NSImage) *MenuToolbarItem
+	WithImage(image *Image) *MenuToolbarItem
 	WithTitle(title string) *MenuToolbarItem
 	WithBordered(bordered bool) *MenuToolbarItem
-	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *MenuToolbarItem
+	WithBackgroundTintColor(backgroundTintColor *Color) *MenuToolbarItem
 	WithStyle(style raw.NSToolbarItemStyle) *MenuToolbarItem
 	WithNavigational(navigational bool) *MenuToolbarItem
 	WithView(view ViewProvider) *MenuToolbarItem
@@ -232,7 +232,7 @@ type MenuToolbarItemable interface {
 	WithMinSize(minSize corefoundation.CGSize) *MenuToolbarItem
 	WithMaxSize(maxSize corefoundation.CGSize) *MenuToolbarItem
 	WithVisibilityPriority(visibilityPriority int) *MenuToolbarItem
-	WithBadge(badge *raw.NSItemBadge) *MenuToolbarItem
+	WithBadge(badge *ItemBadge) *MenuToolbarItem
 	WithAutovalidates(autovalidates bool) *MenuToolbarItem
 	Menu() *Menu
 	SetMenu(menu *raw.NSMenu)

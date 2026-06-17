@@ -119,13 +119,13 @@ func (x *Match) VoiceChatWithName(name string) *VoiceChat {
 }
 
 // Players returns the collection as a Go slice.
-func (x *Match) Players() []*raw.GKPlayer {
+func (x *Match) Players() []*Player {
 	arr := x.inner.Players()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKPlayer {
-		return raw.GKPlayerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Player {
+		return &Player{inner: raw.GKPlayerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -203,7 +203,7 @@ type Matchable interface {
 	ChooseBestHostingPlayer(ctx context.Context) (*Player, error)
 	Rematch(ctx context.Context) (*Match, error)
 	VoiceChatWithName(name string) *VoiceChat
-	Players() []*raw.GKPlayer
+	Players() []*Player
 	Delegate() raw.GKMatchDelegate
 	SetDelegate(delegate raw.GKMatchDelegate)
 	ExpectedPlayerCount() uint

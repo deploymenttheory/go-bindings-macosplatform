@@ -74,13 +74,13 @@ func (x *CaptionConversionValidator) Status() raw.AVCaptionConversionValidatorSt
 }
 
 // Captions returns the collection as a Go slice.
-func (x *CaptionConversionValidator) Captions() []*raw.AVCaption {
+func (x *CaptionConversionValidator) Captions() []*Caption {
 	arr := x.inner.Captions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaption {
-		return raw.AVCaptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Caption {
+		return &Caption{inner: raw.AVCaptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -90,13 +90,13 @@ func (x *CaptionConversionValidator) TimeRange() coremedia.CMTimeRange {
 }
 
 // Warnings returns the collection as a Go slice.
-func (x *CaptionConversionValidator) Warnings() []*raw.AVCaptionConversionWarning {
+func (x *CaptionConversionValidator) Warnings() []*CaptionConversionWarning {
 	arr := x.inner.Warnings()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptionConversionWarning {
-		return raw.AVCaptionConversionWarningFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptionConversionWarning {
+		return &CaptionConversionWarning{inner: raw.AVCaptionConversionWarningFromID(purego.Retain(_id))}
 	})
 }
 
@@ -106,9 +106,9 @@ type CaptionConversionValidatorable interface {
 	ValidateCaptionConversionWithWarningHandler(ctx context.Context) (*CaptionConversionWarning, error)
 	StopValidating()
 	Status() raw.AVCaptionConversionValidatorStatus
-	Captions() []*raw.AVCaption
+	Captions() []*Caption
 	TimeRange() coremedia.CMTimeRange
-	Warnings() []*raw.AVCaptionConversionWarning
+	Warnings() []*CaptionConversionWarning
 }
 
 var _ CaptionConversionValidatorable = (*CaptionConversionValidator)(nil)

@@ -94,8 +94,8 @@ func (x *AssetExportSession) WithMetadata(items ...MetadataItemProvider) *AssetE
 }
 
 // WithMetadataItemFilter sets the metadataItemFilter property and returns the receiver for chaining.
-func (x *AssetExportSession) WithMetadataItemFilter(metadataItemFilter *raw.AVMetadataItemFilter) *AssetExportSession {
-	x.inner.SetMetadataItemFilter(metadataItemFilter)
+func (x *AssetExportSession) WithMetadataItemFilter(metadataItemFilter *MetadataItemFilter) *AssetExportSession {
+	x.inner.SetMetadataItemFilter(metadataItemFilter.Unwrap())
 	return x
 }
 
@@ -288,13 +288,13 @@ func (x *AssetExportSession) SetFileLengthLimit(fileLengthLimit int64) {
 }
 
 // Metadata returns the collection as a Go slice.
-func (x *AssetExportSession) Metadata() []*raw.AVMetadataItem {
+func (x *AssetExportSession) Metadata() []*MetadataItem {
 	arr := x.inner.Metadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -404,7 +404,7 @@ type AssetExportSessionable interface {
 	WithTimeRange(timeRange coremedia.CMTimeRange) *AssetExportSession
 	WithFileLengthLimit(fileLengthLimit int64) *AssetExportSession
 	WithMetadata(items ...MetadataItemProvider) *AssetExportSession
-	WithMetadataItemFilter(metadataItemFilter *raw.AVMetadataItemFilter) *AssetExportSession
+	WithMetadataItemFilter(metadataItemFilter *MetadataItemFilter) *AssetExportSession
 	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetExportSession
 	WithAudioMix(audioMix AudioMixProvider) *AssetExportSession
 	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetExportSession
@@ -436,7 +436,7 @@ type AssetExportSessionable interface {
 	EstimatedOutputFileLength() int64
 	FileLengthLimit() int64
 	SetFileLengthLimit(fileLengthLimit int64)
-	Metadata() []*raw.AVMetadataItem
+	Metadata() []*MetadataItem
 	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
 	MetadataItemFilter() *MetadataItemFilter
 	SetMetadataItemFilter(metadataItemFilter *raw.AVMetadataItemFilter)

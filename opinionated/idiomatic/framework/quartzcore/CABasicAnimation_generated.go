@@ -73,14 +73,14 @@ func (x *BasicAnimation) WithCumulative(cumulative bool) *BasicAnimation {
 }
 
 // WithValueFunction sets the valueFunction property and returns the receiver for chaining.
-func (x *BasicAnimation) WithValueFunction(valueFunction *raw.CAValueFunction) *BasicAnimation {
-	x.inner.CAPropertyAnimation.SetValueFunction(valueFunction)
+func (x *BasicAnimation) WithValueFunction(valueFunction *ValueFunction) *BasicAnimation {
+	x.inner.CAPropertyAnimation.SetValueFunction(valueFunction.Unwrap())
 	return x
 }
 
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *BasicAnimation) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *BasicAnimation {
-	x.inner.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction)
+func (x *BasicAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *BasicAnimation {
+	x.inner.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
@@ -147,8 +147,8 @@ type BasicAnimationable interface {
 	WithKeyPath(keyPath string) *BasicAnimation
 	WithAdditive(additive bool) *BasicAnimation
 	WithCumulative(cumulative bool) *BasicAnimation
-	WithValueFunction(valueFunction *raw.CAValueFunction) *BasicAnimation
-	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *BasicAnimation
+	WithValueFunction(valueFunction *ValueFunction) *BasicAnimation
+	WithTimingFunction(timingFunction *MediaTimingFunction) *BasicAnimation
 	WithDelegate(delegate raw.CAAnimationDelegate) *BasicAnimation
 	WithRemovedOnCompletion(removedOnCompletion bool) *BasicAnimation
 	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *BasicAnimation

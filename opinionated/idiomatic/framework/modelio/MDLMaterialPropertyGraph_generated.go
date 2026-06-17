@@ -50,24 +50,24 @@ func (x *MaterialPropertyGraph) Evaluate() {
 }
 
 // Nodes returns the collection as a Go slice.
-func (x *MaterialPropertyGraph) Nodes() []*raw.MDLMaterialPropertyNode {
+func (x *MaterialPropertyGraph) Nodes() []*MaterialPropertyNode {
 	arr := x.inner.Nodes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLMaterialPropertyNode {
-		return raw.MDLMaterialPropertyNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MaterialPropertyNode {
+		return &MaterialPropertyNode{inner: raw.MDLMaterialPropertyNodeFromID(purego.Retain(_id))}
 	})
 }
 
 // Connections returns the collection as a Go slice.
-func (x *MaterialPropertyGraph) Connections() []*raw.MDLMaterialPropertyConnection {
+func (x *MaterialPropertyGraph) Connections() []*MaterialPropertyConnection {
 	arr := x.inner.Connections()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLMaterialPropertyConnection {
-		return raw.MDLMaterialPropertyConnectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MaterialPropertyConnection {
+		return &MaterialPropertyConnection{inner: raw.MDLMaterialPropertyConnectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -78,8 +78,8 @@ type MaterialPropertyGraphable interface {
 	Unwrap() *raw.MDLMaterialPropertyGraph
 	WithEvaluationFunction(evaluationFunction func(*raw.MDLMaterialPropertyNode)) *MaterialPropertyGraph
 	Evaluate()
-	Nodes() []*raw.MDLMaterialPropertyNode
-	Connections() []*raw.MDLMaterialPropertyConnection
+	Nodes() []*MaterialPropertyNode
+	Connections() []*MaterialPropertyConnection
 }
 
 var _ MaterialPropertyGraphable = (*MaterialPropertyGraph)(nil)

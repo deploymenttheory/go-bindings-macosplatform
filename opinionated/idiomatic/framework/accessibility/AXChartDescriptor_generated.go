@@ -114,8 +114,8 @@ func (x *ChartDescriptor) WithXAxis(xAxis raw.AXDataAxisDescriptor) *ChartDescri
 }
 
 // WithYAxis sets the yAxis property and returns the receiver for chaining.
-func (x *ChartDescriptor) WithYAxis(yAxis *raw.AXNumericDataAxisDescriptor) *ChartDescriptor {
-	x.inner.SetYAxis(yAxis)
+func (x *ChartDescriptor) WithYAxis(yAxis *NumericDataAxisDescriptor) *ChartDescriptor {
+	x.inner.SetYAxis(yAxis.Unwrap())
 	return x
 }
 
@@ -178,13 +178,13 @@ func (x *ChartDescriptor) SetContentFrame(contentFrame corefoundation.CGRect) {
 }
 
 // Series returns the collection as a Go slice.
-func (x *ChartDescriptor) Series() []*raw.AXDataSeriesDescriptor {
+func (x *ChartDescriptor) Series() []*DataSeriesDescriptor {
 	arr := x.inner.Series()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXDataSeriesDescriptor {
-		return raw.AXDataSeriesDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DataSeriesDescriptor {
+		return &DataSeriesDescriptor{inner: raw.AXDataSeriesDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -237,7 +237,7 @@ type ChartDescriptorable interface {
 	WithContentFrame(contentFrame corefoundation.CGRect) *ChartDescriptor
 	WithSeries(items ...*raw.AXDataSeriesDescriptor) *ChartDescriptor
 	WithXAxis(xAxis raw.AXDataAxisDescriptor) *ChartDescriptor
-	WithYAxis(yAxis *raw.AXNumericDataAxisDescriptor) *ChartDescriptor
+	WithYAxis(yAxis *NumericDataAxisDescriptor) *ChartDescriptor
 	Title() string
 	SetTitle(title string)
 	AttributedTitle() *foundation.NSAttributedString
@@ -248,7 +248,7 @@ type ChartDescriptorable interface {
 	SetContentDirection(contentDirection raw.AXChartDescriptorContentDirection)
 	ContentFrame() corefoundation.CGRect
 	SetContentFrame(contentFrame corefoundation.CGRect)
-	Series() []*raw.AXDataSeriesDescriptor
+	Series() []*DataSeriesDescriptor
 	SetSeries(series *foundation.NSArray[*raw.AXDataSeriesDescriptor])
 	XAxis() raw.AXDataAxisDescriptor
 	SetXAxis(xAxis raw.AXDataAxisDescriptor)

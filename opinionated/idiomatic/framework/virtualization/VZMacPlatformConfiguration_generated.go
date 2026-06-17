@@ -36,20 +36,20 @@ func NewMacPlatformConfiguration() *MacPlatformConfiguration {
 }
 
 // WithHardwareModel sets the hardwareModel property and returns the receiver for chaining.
-func (x *MacPlatformConfiguration) WithHardwareModel(hardwareModel *raw.VZMacHardwareModel) *MacPlatformConfiguration {
-	x.inner.SetHardwareModel(hardwareModel)
+func (x *MacPlatformConfiguration) WithHardwareModel(hardwareModel *MacHardwareModel) *MacPlatformConfiguration {
+	x.inner.SetHardwareModel(hardwareModel.Unwrap())
 	return x
 }
 
 // WithMachineIdentifier sets the machineIdentifier property and returns the receiver for chaining.
-func (x *MacPlatformConfiguration) WithMachineIdentifier(machineIdentifier *raw.VZMacMachineIdentifier) *MacPlatformConfiguration {
-	x.inner.SetMachineIdentifier(machineIdentifier)
+func (x *MacPlatformConfiguration) WithMachineIdentifier(machineIdentifier *MacMachineIdentifier) *MacPlatformConfiguration {
+	x.inner.SetMachineIdentifier(machineIdentifier.Unwrap())
 	return x
 }
 
 // WithAuxiliaryStorage sets the auxiliaryStorage property and returns the receiver for chaining.
-func (x *MacPlatformConfiguration) WithAuxiliaryStorage(auxiliaryStorage *raw.VZMacAuxiliaryStorage) *MacPlatformConfiguration {
-	x.inner.SetAuxiliaryStorage(auxiliaryStorage)
+func (x *MacPlatformConfiguration) WithAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) *MacPlatformConfiguration {
+	x.inner.SetAuxiliaryStorage(auxiliaryStorage.Unwrap())
 	return x
 }
 
@@ -100,9 +100,9 @@ func (x *MacPlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConf
 // MacPlatformConfigurationable is the interface implemented by [MacPlatformConfiguration], for mocking and DI.
 type MacPlatformConfigurationable interface {
 	Unwrap() *raw.VZMacPlatformConfiguration
-	WithHardwareModel(hardwareModel *raw.VZMacHardwareModel) *MacPlatformConfiguration
-	WithMachineIdentifier(machineIdentifier *raw.VZMacMachineIdentifier) *MacPlatformConfiguration
-	WithAuxiliaryStorage(auxiliaryStorage *raw.VZMacAuxiliaryStorage) *MacPlatformConfiguration
+	WithHardwareModel(hardwareModel *MacHardwareModel) *MacPlatformConfiguration
+	WithMachineIdentifier(machineIdentifier *MacMachineIdentifier) *MacPlatformConfiguration
+	WithAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) *MacPlatformConfiguration
 	HardwareModel() *MacHardwareModel
 	SetHardwareModel(hardwareModel *raw.VZMacHardwareModel)
 	MachineIdentifier() *MacMachineIdentifier

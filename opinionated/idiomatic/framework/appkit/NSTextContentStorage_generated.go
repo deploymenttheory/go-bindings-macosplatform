@@ -55,8 +55,8 @@ func (x *TextContentStorage) WithDelegate(delegate raw.NSTextContentManagerDeleg
 }
 
 // WithPrimaryTextLayoutManager sets the primaryTextLayoutManager property and returns the receiver for chaining.
-func (x *TextContentStorage) WithPrimaryTextLayoutManager(primaryTextLayoutManager *raw.NSTextLayoutManager) *TextContentStorage {
-	x.inner.NSTextContentManager.SetPrimaryTextLayoutManager(primaryTextLayoutManager)
+func (x *TextContentStorage) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentStorage {
+	x.inner.NSTextContentManager.SetPrimaryTextLayoutManager(primaryTextLayoutManager.Unwrap())
 	return x
 }
 
@@ -133,7 +133,7 @@ type TextContentStorageable interface {
 	WithIncludesTextListMarkers(includesTextListMarkers bool) *TextContentStorage
 	WithAttributedString(attributedString *foundation.NSAttributedString) *TextContentStorage
 	WithDelegate(delegate raw.NSTextContentManagerDelegate) *TextContentStorage
-	WithPrimaryTextLayoutManager(primaryTextLayoutManager *raw.NSTextLayoutManager) *TextContentStorage
+	WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentStorage
 	WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentStorage
 	WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentStorage
 	AttributedStringForTextElement(textElement *raw.NSTextElement) *foundation.NSAttributedString

@@ -68,24 +68,24 @@ func (x *TreeNode) IsLeaf() bool {
 }
 
 // ChildNodes returns the collection as a Go slice.
-func (x *TreeNode) ChildNodes() []*raw.NSTreeNode {
+func (x *TreeNode) ChildNodes() []*TreeNode {
 	arr := x.inner.ChildNodes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTreeNode {
-		return raw.NSTreeNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TreeNode {
+		return &TreeNode{inner: raw.NSTreeNodeFromID(purego.Retain(_id))}
 	})
 }
 
 // MutableChildNodes returns the collection as a Go slice.
-func (x *TreeNode) MutableChildNodes() []*raw.NSTreeNode {
+func (x *TreeNode) MutableChildNodes() []*TreeNode {
 	arr := x.inner.MutableChildNodes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTreeNode {
-		return raw.NSTreeNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TreeNode {
+		return &TreeNode{inner: raw.NSTreeNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -106,8 +106,8 @@ type TreeNodeable interface {
 	RepresentedObject() objc.ID
 	IndexPath() *foundation.NSIndexPath
 	IsLeaf() bool
-	ChildNodes() []*raw.NSTreeNode
-	MutableChildNodes() []*raw.NSTreeNode
+	ChildNodes() []*TreeNode
+	MutableChildNodes() []*TreeNode
 	ParentNode() *TreeNode
 }
 

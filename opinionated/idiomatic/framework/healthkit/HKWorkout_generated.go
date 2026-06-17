@@ -52,24 +52,24 @@ func (x *Workout) WorkoutActivityType() raw.HKWorkoutActivityType {
 }
 
 // WorkoutEvents returns the collection as a Go slice.
-func (x *Workout) WorkoutEvents() []*raw.HKWorkoutEvent {
+func (x *Workout) WorkoutEvents() []*WorkoutEvent {
 	arr := x.inner.WorkoutEvents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKWorkoutEvent {
-		return raw.HKWorkoutEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WorkoutEvent {
+		return &WorkoutEvent{inner: raw.HKWorkoutEventFromID(purego.Retain(_id))}
 	})
 }
 
 // WorkoutActivities returns the collection as a Go slice.
-func (x *Workout) WorkoutActivities() []*raw.HKWorkoutActivity {
+func (x *Workout) WorkoutActivities() []*WorkoutActivity {
 	arr := x.inner.WorkoutActivities()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKWorkoutActivity {
-		return raw.HKWorkoutActivityFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WorkoutActivity {
+		return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(purego.Retain(_id))}
 	})
 }
 
@@ -128,8 +128,8 @@ type Workoutable interface {
 	Unwrap() *raw.HKWorkout
 	StatisticsForType(quantityType *raw.HKQuantityType) *Statistics
 	WorkoutActivityType() raw.HKWorkoutActivityType
-	WorkoutEvents() []*raw.HKWorkoutEvent
-	WorkoutActivities() []*raw.HKWorkoutActivity
+	WorkoutEvents() []*WorkoutEvent
+	WorkoutActivities() []*WorkoutActivity
 	Duration() float64
 	TotalEnergyBurned() *Quantity
 	TotalDistance() *Quantity

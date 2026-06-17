@@ -38,8 +38,8 @@ func NewSearchToolbarItem() *SearchToolbarItem {
 }
 
 // WithSearchField sets the searchField property and returns the receiver for chaining.
-func (x *SearchToolbarItem) WithSearchField(searchField *raw.NSSearchField) *SearchToolbarItem {
-	x.inner.SetSearchField(searchField)
+func (x *SearchToolbarItem) WithSearchField(searchField *SearchField) *SearchToolbarItem {
+	x.inner.SetSearchField(searchField.Unwrap())
 	return x
 }
 
@@ -80,8 +80,8 @@ func (x *SearchToolbarItem) WithToolTip(toolTip string) *SearchToolbarItem {
 }
 
 // WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
-func (x *SearchToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *SearchToolbarItem {
-	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation)
+func (x *SearchToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation.Unwrap())
 	return x
 }
 
@@ -110,8 +110,8 @@ func (x *SearchToolbarItem) WithEnabled(enabled bool) *SearchToolbarItem {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *SearchToolbarItem) WithImage(image *raw.NSImage) *SearchToolbarItem {
-	x.inner.NSToolbarItem.SetImage(image)
+func (x *SearchToolbarItem) WithImage(image *Image) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetImage(image.Unwrap())
 	return x
 }
 
@@ -128,8 +128,8 @@ func (x *SearchToolbarItem) WithBordered(bordered bool) *SearchToolbarItem {
 }
 
 // WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
-func (x *SearchToolbarItem) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *SearchToolbarItem {
-	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor)
+func (x *SearchToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor.Unwrap())
 	return x
 }
 
@@ -176,8 +176,8 @@ func (x *SearchToolbarItem) WithVisibilityPriority(visibilityPriority int) *Sear
 }
 
 // WithBadge sets the badge property and returns the receiver for chaining.
-func (x *SearchToolbarItem) WithBadge(badge *raw.NSItemBadge) *SearchToolbarItem {
-	x.inner.NSToolbarItem.SetBadge(badge)
+func (x *SearchToolbarItem) WithBadge(badge *ItemBadge) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetBadge(badge.Unwrap())
 	return x
 }
 
@@ -236,22 +236,22 @@ func (x *SearchToolbarItem) asToolbarItem() *raw.NSToolbarItem { return &x.inner
 // SearchToolbarItemable is the interface implemented by [SearchToolbarItem], for mocking and DI.
 type SearchToolbarItemable interface {
 	Unwrap() *raw.NSSearchToolbarItem
-	WithSearchField(searchField *raw.NSSearchField) *SearchToolbarItem
+	WithSearchField(searchField *SearchField) *SearchToolbarItem
 	WithResignsFirstResponderWithCancel(resignsFirstResponderWithCancel bool) *SearchToolbarItem
 	WithPreferredWidthForSearchField(preferredWidthForSearchField float64) *SearchToolbarItem
 	WithLabel(label string) *SearchToolbarItem
 	WithPaletteLabel(paletteLabel string) *SearchToolbarItem
 	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *SearchToolbarItem
 	WithToolTip(toolTip string) *SearchToolbarItem
-	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *SearchToolbarItem
+	WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SearchToolbarItem
 	WithTag(tag int) *SearchToolbarItem
 	WithTarget(target objc.ID) *SearchToolbarItem
 	WithAction(action objc.SEL) *SearchToolbarItem
 	WithEnabled(enabled bool) *SearchToolbarItem
-	WithImage(image *raw.NSImage) *SearchToolbarItem
+	WithImage(image *Image) *SearchToolbarItem
 	WithTitle(title string) *SearchToolbarItem
 	WithBordered(bordered bool) *SearchToolbarItem
-	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *SearchToolbarItem
+	WithBackgroundTintColor(backgroundTintColor *Color) *SearchToolbarItem
 	WithStyle(style raw.NSToolbarItemStyle) *SearchToolbarItem
 	WithNavigational(navigational bool) *SearchToolbarItem
 	WithView(view ViewProvider) *SearchToolbarItem
@@ -259,7 +259,7 @@ type SearchToolbarItemable interface {
 	WithMinSize(minSize corefoundation.CGSize) *SearchToolbarItem
 	WithMaxSize(maxSize corefoundation.CGSize) *SearchToolbarItem
 	WithVisibilityPriority(visibilityPriority int) *SearchToolbarItem
-	WithBadge(badge *raw.NSItemBadge) *SearchToolbarItem
+	WithBadge(badge *ItemBadge) *SearchToolbarItem
 	WithAutovalidates(autovalidates bool) *SearchToolbarItem
 	BeginSearchInteraction()
 	EndSearchInteraction()

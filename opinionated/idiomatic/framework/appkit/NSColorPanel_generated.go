@@ -63,8 +63,8 @@ func (x *ColorPanel) WithMode(mode raw.NSColorPanelMode) *ColorPanel {
 }
 
 // WithColor sets the color property and returns the receiver for chaining.
-func (x *ColorPanel) WithColor(color *raw.NSColor) *ColorPanel {
-	x.inner.SetColor(color)
+func (x *ColorPanel) WithColor(color *Color) *ColorPanel {
+	x.inner.SetColor(color.Unwrap())
 	return x
 }
 
@@ -217,8 +217,8 @@ func (x *ColorPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *ColorPanel
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *ColorPanel) WithBackgroundColor(backgroundColor *raw.NSColor) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetBackgroundColor(backgroundColor)
+func (x *ColorPanel) WithBackgroundColor(backgroundColor *Color) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -247,8 +247,8 @@ func (x *ColorPanel) WithCanHide(canHide bool) *ColorPanel {
 }
 
 // WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
-func (x *ColorPanel) WithMiniwindowImage(miniwindowImage *raw.NSImage) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage)
+func (x *ColorPanel) WithMiniwindowImage(miniwindowImage *Image) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage.Unwrap())
 	return x
 }
 
@@ -391,8 +391,8 @@ func (x *ColorPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize coref
 }
 
 // WithWindowController sets the windowController property and returns the receiver for chaining.
-func (x *ColorPanel) WithWindowController(windowController *raw.NSWindowController) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetWindowController(windowController)
+func (x *ColorPanel) WithWindowController(windowController *WindowController) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetWindowController(windowController.Unwrap())
 	return x
 }
 
@@ -409,8 +409,8 @@ func (x *ColorPanel) WithAppearanceSource(appearanceSource *foundation.NSObject)
 }
 
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
-func (x *ColorPanel) WithColorSpace(colorSpace *raw.NSColorSpace) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetColorSpace(colorSpace)
+func (x *ColorPanel) WithColorSpace(colorSpace *ColorSpace) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetColorSpace(colorSpace.Unwrap())
 	return x
 }
 
@@ -445,8 +445,8 @@ func (x *ColorPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop
 }
 
 // WithToolbar sets the toolbar property and returns the receiver for chaining.
-func (x *ColorPanel) WithToolbar(toolbar *raw.NSToolbar) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetToolbar(toolbar)
+func (x *ColorPanel) WithToolbar(toolbar *Toolbar) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetToolbar(toolbar.Unwrap())
 	return x
 }
 
@@ -523,8 +523,8 @@ func (x *ColorPanel) WithNextResponder(nextResponder ResponderProvider) *ColorPa
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ColorPanel) WithMenu(menu *raw.NSMenu) *ColorPanel {
-	x.inner.NSPanel.NSWindow.NSResponder.SetMenu(menu)
+func (x *ColorPanel) WithMenu(menu *Menu) *ColorPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -535,8 +535,8 @@ func (x *ColorPanel) WithUserActivity(userActivity *foundation.NSUserActivity) *
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ColorPanel) WithTouchBar(touchBar *raw.NSTouchBar) *ColorPanel {
-	x.inner.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar)
+func (x *ColorPanel) WithTouchBar(touchBar *TouchBar) *ColorPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -646,7 +646,7 @@ type ColorPanelable interface {
 	WithContinuous(continuous bool) *ColorPanel
 	WithShowsAlpha(showsAlpha bool) *ColorPanel
 	WithMode(mode raw.NSColorPanelMode) *ColorPanel
-	WithColor(color *raw.NSColor) *ColorPanel
+	WithColor(color *Color) *ColorPanel
 	WithMaximumLinearExposure(maximumLinearExposure float64) *ColorPanel
 	WithFloatingPanel(floatingPanel bool) *ColorPanel
 	WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *ColorPanel
@@ -670,12 +670,12 @@ type ColorPanelable interface {
 	WithViewsNeedDisplay(viewsNeedDisplay bool) *ColorPanel
 	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *ColorPanel
 	WithReleasedWhenClosed(releasedWhenClosed bool) *ColorPanel
-	WithBackgroundColor(backgroundColor *raw.NSColor) *ColorPanel
+	WithBackgroundColor(backgroundColor *Color) *ColorPanel
 	WithMovable(movable bool) *ColorPanel
 	WithMovableByWindowBackground(movableByWindowBackground bool) *ColorPanel
 	WithHidesOnDeactivate(hidesOnDeactivate bool) *ColorPanel
 	WithCanHide(canHide bool) *ColorPanel
-	WithMiniwindowImage(miniwindowImage *raw.NSImage) *ColorPanel
+	WithMiniwindowImage(miniwindowImage *Image) *ColorPanel
 	WithMiniwindowTitle(miniwindowTitle string) *ColorPanel
 	WithDocumentEdited(documentEdited bool) *ColorPanel
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *ColorPanel
@@ -699,16 +699,16 @@ type ColorPanelable interface {
 	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *ColorPanel
 	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *ColorPanel
 	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *ColorPanel
-	WithWindowController(windowController *raw.NSWindowController) *ColorPanel
+	WithWindowController(windowController *WindowController) *ColorPanel
 	WithParentWindow(parentWindow WindowProvider) *ColorPanel
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *ColorPanel
-	WithColorSpace(colorSpace *raw.NSColorSpace) *ColorPanel
+	WithColorSpace(colorSpace *ColorSpace) *ColorPanel
 	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *ColorPanel
 	WithContentViewController(contentViewController ViewControllerProvider) *ColorPanel
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *ColorPanel
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *ColorPanel
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *ColorPanel
-	WithToolbar(toolbar *raw.NSToolbar) *ColorPanel
+	WithToolbar(toolbar *Toolbar) *ColorPanel
 	WithShowsToolbarButton(showsToolbarButton bool) *ColorPanel
 	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *ColorPanel
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *ColorPanel
@@ -721,9 +721,9 @@ type ColorPanelable interface {
 	WithOrderedIndex(orderedIndex int) *ColorPanel
 	WithRestorable(restorable bool) *ColorPanel
 	WithNextResponder(nextResponder ResponderProvider) *ColorPanel
-	WithMenu(menu *raw.NSMenu) *ColorPanel
+	WithMenu(menu *Menu) *ColorPanel
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ColorPanel
-	WithTouchBar(touchBar *raw.NSTouchBar) *ColorPanel
+	WithTouchBar(touchBar *TouchBar) *ColorPanel
 	SetAction(selector objc.SEL)
 	SetTarget(target objc.ID)
 	AttachColorList(colorList *raw.NSColorList)

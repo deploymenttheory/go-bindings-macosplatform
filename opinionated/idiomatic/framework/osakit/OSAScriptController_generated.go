@@ -37,8 +37,8 @@ func NewScriptController() *ScriptController {
 }
 
 // WithScriptView sets the scriptView property and returns the receiver for chaining.
-func (x *ScriptController) WithScriptView(scriptView *raw.OSAScriptView) *ScriptController {
-	x.inner.SetScriptView(scriptView)
+func (x *ScriptController) WithScriptView(scriptView *ScriptView) *ScriptController {
+	x.inner.SetScriptView(scriptView.Unwrap())
 	return x
 }
 
@@ -49,14 +49,14 @@ func (x *ScriptController) WithResultView(resultView *appkit.NSTextView) *Script
 }
 
 // WithScript sets the script property and returns the receiver for chaining.
-func (x *ScriptController) WithScript(script *raw.OSAScript) *ScriptController {
-	x.inner.SetScript(script)
+func (x *ScriptController) WithScript(script *Script) *ScriptController {
+	x.inner.SetScript(script.Unwrap())
 	return x
 }
 
 // WithLanguage sets the language property and returns the receiver for chaining.
-func (x *ScriptController) WithLanguage(language *raw.OSALanguage) *ScriptController {
-	x.inner.SetLanguage(language)
+func (x *ScriptController) WithLanguage(language *Language) *ScriptController {
+	x.inner.SetLanguage(language.Unwrap())
 	return x
 }
 
@@ -145,10 +145,10 @@ func (x *ScriptController) IsCompiling() bool {
 // ScriptControllerable is the interface implemented by [ScriptController], for mocking and DI.
 type ScriptControllerable interface {
 	Unwrap() *raw.OSAScriptController
-	WithScriptView(scriptView *raw.OSAScriptView) *ScriptController
+	WithScriptView(scriptView *ScriptView) *ScriptController
 	WithResultView(resultView *appkit.NSTextView) *ScriptController
-	WithScript(script *raw.OSAScript) *ScriptController
-	WithLanguage(language *raw.OSALanguage) *ScriptController
+	WithScript(script *Script) *ScriptController
+	WithLanguage(language *Language) *ScriptController
 	CompileScript(sender objc.ID)
 	RecordScript(sender objc.ID)
 	RunScript(sender objc.ID)

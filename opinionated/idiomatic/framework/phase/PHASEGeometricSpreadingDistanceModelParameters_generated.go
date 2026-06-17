@@ -42,8 +42,8 @@ func (x *GeometricSpreadingDistanceModelParameters) WithRolloffFactor(rolloffFac
 }
 
 // WithFadeOutParameters sets the fadeOutParameters property and returns the receiver for chaining.
-func (x *GeometricSpreadingDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *raw.PHASEDistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters {
-	x.inner.PHASEDistanceModelParameters.SetFadeOutParameters(fadeOutParameters)
+func (x *GeometricSpreadingDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters {
+	x.inner.PHASEDistanceModelParameters.SetFadeOutParameters(fadeOutParameters.Unwrap())
 	return x
 }
 
@@ -63,7 +63,7 @@ func (x *GeometricSpreadingDistanceModelParameters) asDistanceModelParameters() 
 type GeometricSpreadingDistanceModelParametersable interface {
 	Unwrap() *raw.PHASEGeometricSpreadingDistanceModelParameters
 	WithRolloffFactor(rolloffFactor float64) *GeometricSpreadingDistanceModelParameters
-	WithFadeOutParameters(fadeOutParameters *raw.PHASEDistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters
+	WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters
 	RolloffFactor() float64
 	SetRolloffFactor(rolloffFactor float64)
 }

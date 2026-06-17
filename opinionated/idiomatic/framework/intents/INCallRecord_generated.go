@@ -111,13 +111,13 @@ func (x *CallRecord) IsCallerIdBlocked() *foundation.NSNumber {
 }
 
 // Participants returns the collection as a Go slice.
-func (x *CallRecord) Participants() []*raw.INPerson {
+func (x *CallRecord) Participants() []*Person {
 	arr := x.inner.Participants()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INPerson {
-		return raw.INPersonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Person {
+		return &Person{inner: raw.INPersonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -141,7 +141,7 @@ type CallRecordable interface {
 	CallCapability() raw.INCallCapability
 	NumberOfCalls() *foundation.NSNumber
 	IsCallerIdBlocked() *foundation.NSNumber
-	Participants() []*raw.INPerson
+	Participants() []*Person
 	Caller() *Person
 }
 

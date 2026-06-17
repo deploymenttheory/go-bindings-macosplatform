@@ -37,24 +37,24 @@ func NewSyncEngineFetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChange
 }
 
 // Modifications returns the collection as a Go slice.
-func (x *SyncEngineFetchedDatabaseChangesEvent) Modifications() []*raw.CKRecordZone {
+func (x *SyncEngineFetchedDatabaseChangesEvent) Modifications() []*RecordZone {
 	arr := x.inner.Modifications()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZone {
-		return raw.CKRecordZoneFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZone {
+		return &RecordZone{inner: raw.CKRecordZoneFromID(purego.Retain(_id))}
 	})
 }
 
 // Deletions returns the collection as a Go slice.
-func (x *SyncEngineFetchedDatabaseChangesEvent) Deletions() []*raw.CKSyncEngineFetchedZoneDeletion {
+func (x *SyncEngineFetchedDatabaseChangesEvent) Deletions() []*SyncEngineFetchedZoneDeletion {
 	arr := x.inner.Deletions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKSyncEngineFetchedZoneDeletion {
-		return raw.CKSyncEngineFetchedZoneDeletionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SyncEngineFetchedZoneDeletion {
+		return &SyncEngineFetchedZoneDeletion{inner: raw.CKSyncEngineFetchedZoneDeletionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -63,8 +63,8 @@ func (x *SyncEngineFetchedDatabaseChangesEvent) asSyncEngineEvent() *raw.CKSyncE
 // SyncEngineFetchedDatabaseChangesEventable is the interface implemented by [SyncEngineFetchedDatabaseChangesEvent], for mocking and DI.
 type SyncEngineFetchedDatabaseChangesEventable interface {
 	Unwrap() *raw.CKSyncEngineFetchedDatabaseChangesEvent
-	Modifications() []*raw.CKRecordZone
-	Deletions() []*raw.CKSyncEngineFetchedZoneDeletion
+	Modifications() []*RecordZone
+	Deletions() []*SyncEngineFetchedZoneDeletion
 }
 
 var _ SyncEngineFetchedDatabaseChangesEventable = (*SyncEngineFetchedDatabaseChangesEvent)(nil)

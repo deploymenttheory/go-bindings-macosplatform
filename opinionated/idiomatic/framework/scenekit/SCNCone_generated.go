@@ -90,8 +90,8 @@ func (x *Cone) WithMaterials(items ...*raw.SCNMaterial) *Cone {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Cone) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Cone {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Cone) WithFirstMaterial(firstMaterial *Material) *Cone {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -112,8 +112,8 @@ func (x *Cone) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cone {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Cone) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Cone {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Cone) WithTessellator(tessellator *GeometryTessellator) *Cone {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -130,14 +130,14 @@ func (x *Cone) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cone
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Cone) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Cone {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Cone) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cone {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Cone) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Cone {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Cone) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cone {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -203,13 +203,13 @@ type Coneable interface {
 	WithHeightSegmentCount(heightSegmentCount int) *Cone
 	WithName(name string) *Cone
 	WithMaterials(items ...*raw.SCNMaterial) *Cone
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Cone
+	WithFirstMaterial(firstMaterial *Material) *Cone
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cone
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Cone
+	WithTessellator(tessellator *GeometryTessellator) *Cone
 	WithSubdivisionLevel(subdivisionLevel uint) *Cone
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cone
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Cone
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Cone
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cone
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cone
 	TopRadius() float64
 	SetTopRadius(topRadius float64)
 	BottomRadius() float64

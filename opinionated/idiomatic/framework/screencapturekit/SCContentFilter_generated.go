@@ -104,35 +104,35 @@ func (x *ContentFilter) SetIncludeMenuBar(includeMenuBar bool) {
 }
 
 // IncludedDisplays returns the collection as a Go slice.
-func (x *ContentFilter) IncludedDisplays() []*raw.SCDisplay {
+func (x *ContentFilter) IncludedDisplays() []*Display {
 	arr := x.inner.IncludedDisplays()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCDisplay {
-		return raw.SCDisplayFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Display {
+		return &Display{inner: raw.SCDisplayFromID(purego.Retain(_id))}
 	})
 }
 
 // IncludedApplications returns the collection as a Go slice.
-func (x *ContentFilter) IncludedApplications() []*raw.SCRunningApplication {
+func (x *ContentFilter) IncludedApplications() []*RunningApplication {
 	arr := x.inner.IncludedApplications()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCRunningApplication {
-		return raw.SCRunningApplicationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RunningApplication {
+		return &RunningApplication{inner: raw.SCRunningApplicationFromID(purego.Retain(_id))}
 	})
 }
 
 // IncludedWindows returns the collection as a Go slice.
-func (x *ContentFilter) IncludedWindows() []*raw.SCWindow {
+func (x *ContentFilter) IncludedWindows() []*Window {
 	arr := x.inner.IncludedWindows()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCWindow {
-		return raw.SCWindowFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
+		return &Window{inner: raw.SCWindowFromID(purego.Retain(_id))}
 	})
 }
 
@@ -146,9 +146,9 @@ type ContentFilterable interface {
 	ContentRect() corefoundation.CGRect
 	IncludeMenuBar() bool
 	SetIncludeMenuBar(includeMenuBar bool)
-	IncludedDisplays() []*raw.SCDisplay
-	IncludedApplications() []*raw.SCRunningApplication
-	IncludedWindows() []*raw.SCWindow
+	IncludedDisplays() []*Display
+	IncludedApplications() []*RunningApplication
+	IncludedWindows() []*Window
 }
 
 var _ ContentFilterable = (*ContentFilter)(nil)

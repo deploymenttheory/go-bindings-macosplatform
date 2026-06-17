@@ -46,13 +46,13 @@ func (x *SpeechRecognitionResult) BestTranscription() *Transcription {
 }
 
 // Transcriptions returns the collection as a Go slice.
-func (x *SpeechRecognitionResult) Transcriptions() []*raw.SFTranscription {
+func (x *SpeechRecognitionResult) Transcriptions() []*Transcription {
 	arr := x.inner.Transcriptions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SFTranscription {
-		return raw.SFTranscriptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Transcription {
+		return &Transcription{inner: raw.SFTranscriptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -74,7 +74,7 @@ func (x *SpeechRecognitionResult) SpeechRecognitionMetadata() *SpeechRecognition
 type SpeechRecognitionResultable interface {
 	Unwrap() *raw.SFSpeechRecognitionResult
 	BestTranscription() *Transcription
-	Transcriptions() []*raw.SFTranscription
+	Transcriptions() []*Transcription
 	IsFinal() bool
 	SpeechRecognitionMetadata() *SpeechRecognitionMetadata
 }

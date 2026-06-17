@@ -43,13 +43,13 @@ func (x *URLSessionTaskMetrics) WithScriptingProperties(scriptingProperties *raw
 }
 
 // TransactionMetrics returns the collection as a Go slice.
-func (x *URLSessionTaskMetrics) TransactionMetrics() []*raw.NSURLSessionTaskTransactionMetrics {
+func (x *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransactionMetrics {
 	arr := x.inner.TransactionMetrics()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSURLSessionTaskTransactionMetrics {
-		return raw.NSURLSessionTaskTransactionMetricsFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *URLSessionTaskTransactionMetrics {
+		return &URLSessionTaskTransactionMetrics{inner: raw.NSURLSessionTaskTransactionMetricsFromID(purego.Retain(_id))}
 	})
 }
 
@@ -73,7 +73,7 @@ func (x *URLSessionTaskMetrics) asObject() *raw.NSObject { return &x.inner.NSObj
 type URLSessionTaskMetricsable interface {
 	Unwrap() *raw.NSURLSessionTaskMetrics
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionTaskMetrics
-	TransactionMetrics() []*raw.NSURLSessionTaskTransactionMetrics
+	TransactionMetrics() []*URLSessionTaskTransactionMetrics
 	TaskInterval() *DateInterval
 	RedirectCount() uint
 }

@@ -62,8 +62,8 @@ func (x *FunctionStitchingGraph) WithNodes(items ...*raw.MTLFunctionStitchingFun
 }
 
 // WithOutputNode sets the outputNode property and returns the receiver for chaining.
-func (x *FunctionStitchingGraph) WithOutputNode(outputNode *raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingGraph {
-	x.inner.SetOutputNode(outputNode)
+func (x *FunctionStitchingGraph) WithOutputNode(outputNode *FunctionStitchingFunctionNode) *FunctionStitchingGraph {
+	x.inner.SetOutputNode(outputNode.Unwrap())
 	return x
 }
 
@@ -82,13 +82,13 @@ func (x *FunctionStitchingGraph) SetFunctionName(functionName string) {
 }
 
 // Nodes returns the collection as a Go slice.
-func (x *FunctionStitchingGraph) Nodes() []*raw.MTLFunctionStitchingFunctionNode {
+func (x *FunctionStitchingGraph) Nodes() []*FunctionStitchingFunctionNode {
 	arr := x.inner.Nodes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLFunctionStitchingFunctionNode {
-		return raw.MTLFunctionStitchingFunctionNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FunctionStitchingFunctionNode {
+		return &FunctionStitchingFunctionNode{inner: raw.MTLFunctionStitchingFunctionNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -126,10 +126,10 @@ type FunctionStitchingGraphable interface {
 	Unwrap() *raw.MTLFunctionStitchingGraph
 	WithFunctionName(functionName string) *FunctionStitchingGraph
 	WithNodes(items ...*raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingGraph
-	WithOutputNode(outputNode *raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingGraph
+	WithOutputNode(outputNode *FunctionStitchingFunctionNode) *FunctionStitchingGraph
 	FunctionName() string
 	SetFunctionName(functionName string)
-	Nodes() []*raw.MTLFunctionStitchingFunctionNode
+	Nodes() []*FunctionStitchingFunctionNode
 	SetNodes(nodes *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode])
 	OutputNode() *FunctionStitchingFunctionNode
 	SetOutputNode(outputNode *raw.MTLFunctionStitchingFunctionNode)

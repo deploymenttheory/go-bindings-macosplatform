@@ -223,13 +223,13 @@ func (x *PolygonAccelerationStructure) SetPolygonCount(polygonCount uint) {
 }
 
 // PolygonBuffers returns the collection as a Go slice.
-func (x *PolygonAccelerationStructure) PolygonBuffers() []*raw.MPSPolygonBuffer {
+func (x *PolygonAccelerationStructure) PolygonBuffers() []*PolygonBuffer {
 	arr := x.inner.PolygonBuffers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSPolygonBuffer {
-		return raw.MPSPolygonBufferFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PolygonBuffer {
+		return &PolygonBuffer{inner: raw.MPSPolygonBufferFromID(purego.Retain(_id))}
 	})
 }
 
@@ -277,7 +277,7 @@ type PolygonAccelerationStructureable interface {
 	SetMaskBufferOffset(maskBufferOffset uint)
 	PolygonCount() uint
 	SetPolygonCount(polygonCount uint)
-	PolygonBuffers() []*raw.MPSPolygonBuffer
+	PolygonBuffers() []*PolygonBuffer
 	SetPolygonBuffers(polygonBuffers *foundation.NSArray[*raw.MPSPolygonBuffer])
 }
 

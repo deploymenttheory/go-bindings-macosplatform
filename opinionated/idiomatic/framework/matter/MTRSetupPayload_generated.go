@@ -171,13 +171,13 @@ func (x *MTRSetupPayload) IsConcatenated() bool {
 }
 
 // SubPayloads returns the collection as a Go slice.
-func (x *MTRSetupPayload) SubPayloads() []*raw.MTRSetupPayload {
+func (x *MTRSetupPayload) SubPayloads() []*MTRSetupPayload {
 	arr := x.inner.SubPayloads()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRSetupPayload {
-		return raw.MTRSetupPayloadFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRSetupPayload {
+		return &MTRSetupPayload{inner: raw.MTRSetupPayloadFromID(purego.Retain(_id))}
 	})
 }
 
@@ -271,13 +271,13 @@ func (x *MTRSetupPayload) SetSerialNumber(serialNumber string) {
 }
 
 // VendorElements returns the collection as a Go slice.
-func (x *MTRSetupPayload) VendorElements() []*raw.MTROptionalQRCodeInfo {
+func (x *MTRSetupPayload) VendorElements() []*MTROptionalQRCodeInfo {
 	arr := x.inner.VendorElements()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTROptionalQRCodeInfo {
-		return raw.MTROptionalQRCodeInfoFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTROptionalQRCodeInfo {
+		return &MTROptionalQRCodeInfo{inner: raw.MTROptionalQRCodeInfoFromID(purego.Retain(_id))}
 	})
 }
 
@@ -294,7 +294,7 @@ func (x *MTRSetupPayload) QrCodeString2() (string, error) {
 }
 
 // GetAllOptionalVendorData returns the collection as a Go slice.
-func (x *MTRSetupPayload) GetAllOptionalVendorData() ([]*raw.MTROptionalQRCodeInfo, error) {
+func (x *MTRSetupPayload) GetAllOptionalVendorData() ([]*MTROptionalQRCodeInfo, error) {
 	arr, err := x.inner.GetAllOptionalVendorData()
 	if err != nil {
 		return nil, err
@@ -302,8 +302,8 @@ func (x *MTRSetupPayload) GetAllOptionalVendorData() ([]*raw.MTROptionalQRCodeIn
 	if arr == nil {
 		return nil, nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTROptionalQRCodeInfo {
-		return raw.MTROptionalQRCodeInfoFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTROptionalQRCodeInfo {
+		return &MTROptionalQRCodeInfo{inner: raw.MTROptionalQRCodeInfoFromID(purego.Retain(_id))}
 	}), nil
 }
 
@@ -347,7 +347,7 @@ type MTRSetupPayloadable interface {
 	ManualEntryCode() string
 	QrCodeString() string
 	IsConcatenated() bool
-	SubPayloads() []*raw.MTRSetupPayload
+	SubPayloads() []*MTRSetupPayload
 	SetSubPayloads(subPayloads *foundation.NSArray[*raw.MTRSetupPayload])
 	VendorID() *foundation.NSNumber
 	SetVendorID(vendorID *foundation.NSNumber)
@@ -365,9 +365,9 @@ type MTRSetupPayloadable interface {
 	SetSetupPasscode(setupPasscode *foundation.NSNumber)
 	SerialNumber() string
 	SetSerialNumber(serialNumber string)
-	VendorElements() []*raw.MTROptionalQRCodeInfo
+	VendorElements() []*MTROptionalQRCodeInfo
 	QrCodeString2() (string, error)
-	GetAllOptionalVendorData() ([]*raw.MTROptionalQRCodeInfo, error)
+	GetAllOptionalVendorData() ([]*MTROptionalQRCodeInfo, error)
 	RendezvousInformation() *foundation.NSNumber
 	SetRendezvousInformation(rendezvousInformation *foundation.NSNumber)
 	SetUpPINCode() *foundation.NSNumber

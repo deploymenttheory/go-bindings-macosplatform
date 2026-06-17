@@ -53,13 +53,13 @@ func (x *CaptureDeviceFormat) FormatDescription() unsafe.Pointer {
 }
 
 // VideoSupportedFrameRateRanges returns the collection as a Go slice.
-func (x *CaptureDeviceFormat) VideoSupportedFrameRateRanges() []*raw.AVFrameRateRange {
+func (x *CaptureDeviceFormat) VideoSupportedFrameRateRanges() []*FrameRateRange {
 	arr := x.inner.VideoSupportedFrameRateRanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVFrameRateRange {
-		return raw.AVFrameRateRangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FrameRateRange {
+		return &FrameRateRange{inner: raw.AVFrameRateRangeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -103,13 +103,13 @@ func (x *CaptureDeviceFormat) SupportedColorSpaces() []*foundation.NSNumber {
 }
 
 // SupportedVideoZoomRangesForDepthDataDelivery returns the collection as a Go slice.
-func (x *CaptureDeviceFormat) SupportedVideoZoomRangesForDepthDataDelivery() []*raw.AVZoomRange {
+func (x *CaptureDeviceFormat) SupportedVideoZoomRangesForDepthDataDelivery() []*ZoomRange {
 	arr := x.inner.SupportedVideoZoomRangesForDepthDataDelivery()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVZoomRange {
-		return raw.AVZoomRangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ZoomRange {
+		return &ZoomRange{inner: raw.AVZoomRangeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -305,13 +305,13 @@ type CaptureDeviceFormatable interface {
 	Unwrap() *raw.AVCaptureDeviceFormat
 	MediaType() string
 	FormatDescription() unsafe.Pointer
-	VideoSupportedFrameRateRanges() []*raw.AVFrameRateRange
+	VideoSupportedFrameRateRanges() []*FrameRateRange
 	SystemRecommendedVideoZoomRange() *ZoomRange
 	SystemRecommendedExposureBiasRange() *ExposureBiasRange
 	IsHighPhotoQualitySupported() bool
 	AutoFocusSystem() raw.AVCaptureAutoFocusSystem
 	SupportedColorSpaces() []*foundation.NSNumber
-	SupportedVideoZoomRangesForDepthDataDelivery() []*raw.AVZoomRange
+	SupportedVideoZoomRangesForDepthDataDelivery() []*ZoomRange
 	ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported() bool
 	SupportedMaxPhotoDimensions() []*foundation.NSValue
 	SecondaryNativeResolutionZoomFactors() []*foundation.NSNumber

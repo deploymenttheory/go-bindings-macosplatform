@@ -90,8 +90,8 @@ func (x *Capsule) WithMaterials(items ...*raw.SCNMaterial) *Capsule {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Capsule) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Capsule {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Capsule) WithFirstMaterial(firstMaterial *Material) *Capsule {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -112,8 +112,8 @@ func (x *Capsule) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Capsule {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Capsule) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Capsule {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Capsule) WithTessellator(tessellator *GeometryTessellator) *Capsule {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -130,14 +130,14 @@ func (x *Capsule) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *C
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Capsule) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Capsule {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Capsule) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Capsule {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Capsule) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Capsule {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Capsule) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Capsule {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -203,13 +203,13 @@ type Capsuleable interface {
 	WithCapSegmentCount(capSegmentCount int) *Capsule
 	WithName(name string) *Capsule
 	WithMaterials(items ...*raw.SCNMaterial) *Capsule
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Capsule
+	WithFirstMaterial(firstMaterial *Material) *Capsule
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Capsule
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Capsule
+	WithTessellator(tessellator *GeometryTessellator) *Capsule
 	WithSubdivisionLevel(subdivisionLevel uint) *Capsule
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Capsule
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Capsule
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Capsule
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Capsule
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Capsule
 	CapRadius() float64
 	SetCapRadius(capRadius float64)
 	Height() float64

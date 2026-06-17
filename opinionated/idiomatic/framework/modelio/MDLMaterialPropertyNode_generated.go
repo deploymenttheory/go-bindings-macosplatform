@@ -74,24 +74,24 @@ func (x *MaterialPropertyNode) SetEvaluationFunction(ctx context.Context) (*Mate
 }
 
 // Inputs returns the collection as a Go slice.
-func (x *MaterialPropertyNode) Inputs() []*raw.MDLMaterialProperty {
+func (x *MaterialPropertyNode) Inputs() []*MaterialProperty {
 	arr := x.inner.Inputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLMaterialProperty {
-		return raw.MDLMaterialPropertyFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MaterialProperty {
+		return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(purego.Retain(_id))}
 	})
 }
 
 // Outputs returns the collection as a Go slice.
-func (x *MaterialPropertyNode) Outputs() []*raw.MDLMaterialProperty {
+func (x *MaterialPropertyNode) Outputs() []*MaterialProperty {
 	arr := x.inner.Outputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLMaterialProperty {
-		return raw.MDLMaterialPropertyFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MaterialProperty {
+		return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(purego.Retain(_id))}
 	})
 }
 
@@ -103,8 +103,8 @@ type MaterialPropertyNodeable interface {
 	WithEvaluationFunction(evaluationFunction func(*raw.MDLMaterialPropertyNode)) *MaterialPropertyNode
 	EvaluationFunction() objc.Block
 	SetEvaluationFunction(ctx context.Context) (*MaterialPropertyNode, error)
-	Inputs() []*raw.MDLMaterialProperty
-	Outputs() []*raw.MDLMaterialProperty
+	Inputs() []*MaterialProperty
+	Outputs() []*MaterialProperty
 }
 
 var _ MaterialPropertyNodeable = (*MaterialPropertyNode)(nil)

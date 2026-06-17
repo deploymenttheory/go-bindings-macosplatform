@@ -39,8 +39,8 @@ func NewThumbnailView() *ThumbnailView {
 }
 
 // WithPDFView sets the pDFView property and returns the receiver for chaining.
-func (x *ThumbnailView) WithPDFView(pDFView *raw.PDFView) *ThumbnailView {
-	x.inner.SetPDFView(pDFView)
+func (x *ThumbnailView) WithPDFView(pDFView *View) *ThumbnailView {
+	x.inner.SetPDFView(pDFView.Unwrap())
 	return x
 }
 
@@ -105,13 +105,13 @@ func (x *ThumbnailView) SetBackgroundColor(backgroundColor *appkit.NSColor) {
 }
 
 // SelectedPages returns the collection as a Go slice.
-func (x *ThumbnailView) SelectedPages() []*raw.PDFPage {
+func (x *ThumbnailView) SelectedPages() []*Page {
 	arr := x.inner.SelectedPages()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PDFPage {
-		return raw.PDFPageFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Page {
+		return &Page{inner: raw.PDFPageFromID(purego.Retain(_id))}
 	})
 }
 
@@ -168,7 +168,7 @@ func (x *ThumbnailView) SetAllowsMultipleSelection(allowsMultipleSelection bool)
 // ThumbnailViewable is the interface implemented by [ThumbnailView], for mocking and DI.
 type ThumbnailViewable interface {
 	Unwrap() *raw.PDFThumbnailView
-	WithPDFView(pDFView *raw.PDFView) *ThumbnailView
+	WithPDFView(pDFView *View) *ThumbnailView
 	WithBackgroundColor(backgroundColor *appkit.NSColor) *ThumbnailView
 	WithThumbnailSize(thumbnailSize corefoundation.CGSize) *ThumbnailView
 	WithMaximumNumberOfColumns(maximumNumberOfColumns uint) *ThumbnailView
@@ -179,7 +179,7 @@ type ThumbnailViewable interface {
 	SetPDFView(pDFView *raw.PDFView)
 	BackgroundColor() *appkit.NSColor
 	SetBackgroundColor(backgroundColor *appkit.NSColor)
-	SelectedPages() []*raw.PDFPage
+	SelectedPages() []*Page
 	ThumbnailSize() corefoundation.CGSize
 	SetThumbnailSize(thumbnailSize corefoundation.CGSize)
 	MaximumNumberOfColumns() uint

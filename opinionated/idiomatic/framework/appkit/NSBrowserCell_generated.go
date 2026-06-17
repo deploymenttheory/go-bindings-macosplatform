@@ -64,8 +64,8 @@ func (x *BrowserCell) WithLoaded(loaded bool) *BrowserCell {
 }
 
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
-func (x *BrowserCell) WithAlternateImage(alternateImage *raw.NSImage) *BrowserCell {
-	x.inner.SetAlternateImage(alternateImage)
+func (x *BrowserCell) WithAlternateImage(alternateImage *Image) *BrowserCell {
+	x.inner.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
@@ -172,8 +172,8 @@ func (x *BrowserCell) WithWraps(wraps bool) *BrowserCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *BrowserCell) WithFont(font *raw.NSFont) *BrowserCell {
-	x.inner.NSCell.SetFont(font)
+func (x *BrowserCell) WithFont(font *Font) *BrowserCell {
+	x.inner.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -220,8 +220,8 @@ func (x *BrowserCell) WithIntegerValue(integerValue int) *BrowserCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *BrowserCell) WithImage(image *raw.NSImage) *BrowserCell {
-	x.inner.NSCell.SetImage(image)
+func (x *BrowserCell) WithImage(image *Image) *BrowserCell {
+	x.inner.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -238,8 +238,8 @@ func (x *BrowserCell) WithRepresentedObject(representedObject objc.ID) *BrowserC
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *BrowserCell) WithMenu(menu *raw.NSMenu) *BrowserCell {
-	x.inner.NSCell.SetMenu(menu)
+func (x *BrowserCell) WithMenu(menu *Menu) *BrowserCell {
+	x.inner.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -399,7 +399,7 @@ type BrowserCellable interface {
 	Unwrap() *raw.NSBrowserCell
 	WithLeaf(leaf bool) *BrowserCell
 	WithLoaded(loaded bool) *BrowserCell
-	WithAlternateImage(alternateImage *raw.NSImage) *BrowserCell
+	WithAlternateImage(alternateImage *Image) *BrowserCell
 	WithControlView(controlView ViewProvider) *BrowserCell
 	WithType(type_ raw.NSCellType) *BrowserCell
 	WithState(state int) *BrowserCell
@@ -417,7 +417,7 @@ type BrowserCellable interface {
 	WithHighlighted(highlighted bool) *BrowserCell
 	WithAlignment(alignment raw.NSTextAlignment) *BrowserCell
 	WithWraps(wraps bool) *BrowserCell
-	WithFont(font *raw.NSFont) *BrowserCell
+	WithFont(font *Font) *BrowserCell
 	WithFormatter(formatter *foundation.NSFormatter) *BrowserCell
 	WithObjectValue(objectValue objc.ID) *BrowserCell
 	WithStringValue(stringValue string) *BrowserCell
@@ -425,10 +425,10 @@ type BrowserCellable interface {
 	WithFloatValue(floatValue float32) *BrowserCell
 	WithDoubleValue(doubleValue float64) *BrowserCell
 	WithIntegerValue(integerValue int) *BrowserCell
-	WithImage(image *raw.NSImage) *BrowserCell
+	WithImage(image *Image) *BrowserCell
 	WithControlSize(controlSize raw.NSControlSize) *BrowserCell
 	WithRepresentedObject(representedObject objc.ID) *BrowserCell
-	WithMenu(menu *raw.NSMenu) *BrowserCell
+	WithMenu(menu *Menu) *BrowserCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *BrowserCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *BrowserCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *BrowserCell

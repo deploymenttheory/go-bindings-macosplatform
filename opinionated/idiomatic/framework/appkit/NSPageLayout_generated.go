@@ -68,13 +68,13 @@ func (x *PageLayout) RunModal() int {
 }
 
 // AccessoryControllers returns the collection as a Go slice.
-func (x *PageLayout) AccessoryControllers() []*raw.NSViewController {
+func (x *PageLayout) AccessoryControllers() []*ViewController {
 	arr := x.inner.AccessoryControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSViewController {
-		return raw.NSViewControllerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ViewController {
+		return &ViewController{inner: raw.NSViewControllerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -120,7 +120,7 @@ type PageLayoutable interface {
 	BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *raw.NSPrintInfo, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
 	RunModalWithPrintInfo(printInfo *raw.NSPrintInfo) int
 	RunModal() int
-	AccessoryControllers() []*raw.NSViewController
+	AccessoryControllers() []*ViewController
 	PrintInfo() *PrintInfo
 	SetAccessoryView(accessoryView *raw.NSView)
 	AccessoryView() *View

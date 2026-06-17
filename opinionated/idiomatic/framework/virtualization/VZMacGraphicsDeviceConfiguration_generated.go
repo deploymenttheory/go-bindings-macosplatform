@@ -55,13 +55,13 @@ func (x *MacGraphicsDeviceConfiguration) WithDisplays(items ...*raw.VZMacGraphic
 }
 
 // Displays returns the collection as a Go slice.
-func (x *MacGraphicsDeviceConfiguration) Displays() []*raw.VZMacGraphicsDisplayConfiguration {
+func (x *MacGraphicsDeviceConfiguration) Displays() []*MacGraphicsDisplayConfiguration {
 	arr := x.inner.Displays()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZMacGraphicsDisplayConfiguration {
-		return raw.VZMacGraphicsDisplayConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MacGraphicsDisplayConfiguration {
+		return &MacGraphicsDisplayConfiguration{inner: raw.VZMacGraphicsDisplayConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -76,7 +76,7 @@ func (x *MacGraphicsDeviceConfiguration) asGraphicsDeviceConfiguration() *raw.VZ
 type MacGraphicsDeviceConfigurationable interface {
 	Unwrap() *raw.VZMacGraphicsDeviceConfiguration
 	WithDisplays(items ...*raw.VZMacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration
-	Displays() []*raw.VZMacGraphicsDisplayConfiguration
+	Displays() []*MacGraphicsDisplayConfiguration
 	SetDisplays(displays *foundation.NSArray[*raw.VZMacGraphicsDisplayConfiguration])
 }
 

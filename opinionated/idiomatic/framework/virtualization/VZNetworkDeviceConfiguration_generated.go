@@ -36,8 +36,8 @@ func NewNetworkDeviceConfiguration() *NetworkDeviceConfiguration {
 }
 
 // WithMACAddress sets the mACAddress property and returns the receiver for chaining.
-func (x *NetworkDeviceConfiguration) WithMACAddress(mACAddress *raw.VZMACAddress) *NetworkDeviceConfiguration {
-	x.inner.SetMACAddress(mACAddress)
+func (x *NetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *NetworkDeviceConfiguration {
+	x.inner.SetMACAddress(mACAddress.Unwrap())
 	return x
 }
 
@@ -80,7 +80,7 @@ func (x *NetworkDeviceConfiguration) asNetworkDeviceConfiguration() *raw.VZNetwo
 // NetworkDeviceConfigurationable is the interface implemented by [NetworkDeviceConfiguration], for mocking and DI.
 type NetworkDeviceConfigurationable interface {
 	Unwrap() *raw.VZNetworkDeviceConfiguration
-	WithMACAddress(mACAddress *raw.VZMACAddress) *NetworkDeviceConfiguration
+	WithMACAddress(mACAddress *MACAddress) *NetworkDeviceConfiguration
 	WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDeviceConfiguration
 	MACAddress() *MACAddress
 	SetMACAddress(mACAddress *raw.VZMACAddress)

@@ -94,24 +94,24 @@ func (x *GraphExecutable) SetOptions(options raw.MPSGraphOptions) {
 }
 
 // FeedTensors returns the collection as a Go slice.
-func (x *GraphExecutable) FeedTensors() []*raw.MPSGraphTensor {
+func (x *GraphExecutable) FeedTensors() []*GraphTensor {
 	arr := x.inner.FeedTensors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSGraphTensor {
-		return raw.MPSGraphTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphTensor {
+		return &GraphTensor{inner: raw.MPSGraphTensorFromID(purego.Retain(_id))}
 	})
 }
 
 // TargetTensors returns the collection as a Go slice.
-func (x *GraphExecutable) TargetTensors() []*raw.MPSGraphTensor {
+func (x *GraphExecutable) TargetTensors() []*GraphTensor {
 	arr := x.inner.TargetTensors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSGraphTensor {
-		return raw.MPSGraphTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphTensor {
+		return &GraphTensor{inner: raw.MPSGraphTensorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -129,8 +129,8 @@ type GraphExecutableable interface {
 	SerializeToMPSGraphPackageAtURLDescriptor(url string, descriptor *raw.MPSGraphExecutableSerializationDescriptor)
 	Options() raw.MPSGraphOptions
 	SetOptions(options raw.MPSGraphOptions)
-	FeedTensors() []*raw.MPSGraphTensor
-	TargetTensors() []*raw.MPSGraphTensor
+	FeedTensors() []*GraphTensor
+	TargetTensors() []*GraphTensor
 }
 
 var _ GraphExecutableable = (*GraphExecutable)(nil)

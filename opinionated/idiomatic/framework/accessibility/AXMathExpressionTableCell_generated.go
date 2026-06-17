@@ -39,13 +39,13 @@ func NewMathExpressionTableCellWithExpressions(expressions *foundation.NSArray[*
 }
 
 // Expressions returns the collection as a Go slice.
-func (x *MathExpressionTableCell) Expressions() []*raw.AXMathExpression {
+func (x *MathExpressionTableCell) Expressions() []*MathExpression {
 	arr := x.inner.Expressions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
-		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
+		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *MathExpressionTableCell) asMathExpression() *raw.AXMathExpression { ret
 // MathExpressionTableCellable is the interface implemented by [MathExpressionTableCell], for mocking and DI.
 type MathExpressionTableCellable interface {
 	Unwrap() *raw.AXMathExpressionTableCell
-	Expressions() []*raw.AXMathExpression
+	Expressions() []*MathExpression
 }
 
 var _ MathExpressionTableCellable = (*MathExpressionTableCell)(nil)

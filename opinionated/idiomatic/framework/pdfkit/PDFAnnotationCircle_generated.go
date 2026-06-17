@@ -40,8 +40,8 @@ func NewAnnotationCircle() *AnnotationCircle {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationCircle) WithPage(page *raw.PDFPage) *AnnotationCircle {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationCircle) WithPage(page *Page) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -262,8 +262,8 @@ func (x *AnnotationCircle) WithOpen(open bool) *AnnotationCircle {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationCircle) WithDestination(destination *raw.PDFDestination) *AnnotationCircle {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationCircle) WithDestination(destination *Destination) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -302,7 +302,7 @@ func (x *AnnotationCircle) asAnnotation() *raw.PDFAnnotation { return &x.inner.P
 // AnnotationCircleable is the interface implemented by [AnnotationCircle], for mocking and DI.
 type AnnotationCircleable interface {
 	Unwrap() *raw.PDFAnnotationCircle
-	WithPage(page *raw.PDFPage) *AnnotationCircle
+	WithPage(page *Page) *AnnotationCircle
 	WithType(type_ string) *AnnotationCircle
 	WithBounds(bounds corefoundation.CGRect) *AnnotationCircle
 	WithShouldDisplay(shouldDisplay bool) *AnnotationCircle
@@ -334,7 +334,7 @@ type AnnotationCircleable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationCircle
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationCircle
 	WithOpen(open bool) *AnnotationCircle
-	WithDestination(destination *raw.PDFDestination) *AnnotationCircle
+	WithDestination(destination *Destination) *AnnotationCircle
 	WithURL(uRL string) *AnnotationCircle
 	WithFieldName(fieldName string) *AnnotationCircle
 	WithCaption(caption string) *AnnotationCircle

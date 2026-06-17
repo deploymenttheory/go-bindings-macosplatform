@@ -77,13 +77,13 @@ func (x *MTL4StaticLinkingDescriptor) WithGroups(groups *foundation.NSDictionary
 }
 
 // FunctionDescriptors returns the collection as a Go slice.
-func (x *MTL4StaticLinkingDescriptor) FunctionDescriptors() []*raw.MTL4FunctionDescriptor {
+func (x *MTL4StaticLinkingDescriptor) FunctionDescriptors() []*MTL4FunctionDescriptor {
 	arr := x.inner.FunctionDescriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTL4FunctionDescriptor {
-		return raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTL4FunctionDescriptor {
+		return &MTL4FunctionDescriptor{inner: raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -93,13 +93,13 @@ func (x *MTL4StaticLinkingDescriptor) SetFunctionDescriptors(functionDescriptors
 }
 
 // PrivateFunctionDescriptors returns the collection as a Go slice.
-func (x *MTL4StaticLinkingDescriptor) PrivateFunctionDescriptors() []*raw.MTL4FunctionDescriptor {
+func (x *MTL4StaticLinkingDescriptor) PrivateFunctionDescriptors() []*MTL4FunctionDescriptor {
 	arr := x.inner.PrivateFunctionDescriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTL4FunctionDescriptor {
-		return raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTL4FunctionDescriptor {
+		return &MTL4FunctionDescriptor{inner: raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -124,9 +124,9 @@ type MTL4StaticLinkingDescriptorable interface {
 	WithFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor
 	WithPrivateFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor
 	WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTL4StaticLinkingDescriptor
-	FunctionDescriptors() []*raw.MTL4FunctionDescriptor
+	FunctionDescriptors() []*MTL4FunctionDescriptor
 	SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor])
-	PrivateFunctionDescriptors() []*raw.MTL4FunctionDescriptor
+	PrivateFunctionDescriptors() []*MTL4FunctionDescriptor
 	SetPrivateFunctionDescriptors(privateFunctionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor])
 	Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID])

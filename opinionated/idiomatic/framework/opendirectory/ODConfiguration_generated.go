@@ -51,8 +51,8 @@ func (x *Configuration) WithComment(comment string) *Configuration {
 }
 
 // WithDefaultMappings sets the defaultMappings property and returns the receiver for chaining.
-func (x *Configuration) WithDefaultMappings(defaultMappings *raw.ODMappings) *Configuration {
-	x.inner.SetDefaultMappings(defaultMappings)
+func (x *Configuration) WithDefaultMappings(defaultMappings *Mappings) *Configuration {
+	x.inner.SetDefaultMappings(defaultMappings.Unwrap())
 	return x
 }
 
@@ -387,7 +387,7 @@ type Configurationable interface {
 	Unwrap() *raw.ODConfiguration
 	WithNodeName(nodeName string) *Configuration
 	WithComment(comment string) *Configuration
-	WithDefaultMappings(defaultMappings *raw.ODMappings) *Configuration
+	WithDefaultMappings(defaultMappings *Mappings) *Configuration
 	WithTemplateName(templateName string) *Configuration
 	WithHideRegistration(hideRegistration bool) *Configuration
 	WithPreferredDestinationHostName(preferredDestinationHostName string) *Configuration

@@ -682,13 +682,13 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetGroupResponseClaim
 }
 
 // KerberosTicketMappings returns the collection as a Go slice.
-func (x *AuthorizationProviderExtensionLoginConfiguration) KerberosTicketMappings() []*raw.ASAuthorizationProviderExtensionKerberosMapping {
+func (x *AuthorizationProviderExtensionLoginConfiguration) KerberosTicketMappings() []*AuthorizationProviderExtensionKerberosMapping {
 	arr := x.inner.KerberosTicketMappings()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationProviderExtensionKerberosMapping {
-		return raw.ASAuthorizationProviderExtensionKerberosMappingFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AuthorizationProviderExtensionKerberosMapping {
+		return &AuthorizationProviderExtensionKerberosMapping{inner: raw.ASAuthorizationProviderExtensionKerberosMappingFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1029,7 +1029,7 @@ type AuthorizationProviderExtensionLoginConfigurationable interface {
 	SetGroupRequestClaimName(groupRequestClaimName string)
 	GroupResponseClaimName() string
 	SetGroupResponseClaimName(groupResponseClaimName string)
-	KerberosTicketMappings() []*raw.ASAuthorizationProviderExtensionKerberosMapping
+	KerberosTicketMappings() []*AuthorizationProviderExtensionKerberosMapping
 	SetKerberosTicketMappings(kerberosTicketMappings *foundation.NSArray[*raw.ASAuthorizationProviderExtensionKerberosMapping])
 	RefreshEndpointURL() *foundation.NSURL
 	SetRefreshEndpointURL(refreshEndpointURL string)

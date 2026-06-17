@@ -149,13 +149,13 @@ func (x *TileDefinition) WithFlipHorizontally(flipHorizontally bool) *TileDefini
 }
 
 // Textures returns the collection as a Go slice.
-func (x *TileDefinition) Textures() []*raw.SKTexture {
+func (x *TileDefinition) Textures() []*Texture {
 	arr := x.inner.Textures()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKTexture {
-		return raw.SKTextureFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Texture {
+		return &Texture{inner: raw.SKTextureFromID(purego.Retain(_id))}
 	})
 }
 
@@ -165,13 +165,13 @@ func (x *TileDefinition) SetTextures(textures *foundation.NSArray[*raw.SKTexture
 }
 
 // NormalTextures returns the collection as a Go slice.
-func (x *TileDefinition) NormalTextures() []*raw.SKTexture {
+func (x *TileDefinition) NormalTextures() []*Texture {
 	arr := x.inner.NormalTextures()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKTexture {
-		return raw.SKTextureFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Texture {
+		return &Texture{inner: raw.SKTextureFromID(purego.Retain(_id))}
 	})
 }
 
@@ -277,9 +277,9 @@ type TileDefinitionable interface {
 	WithRotation(rotation raw.SKTileDefinitionRotation) *TileDefinition
 	WithFlipVertically(flipVertically bool) *TileDefinition
 	WithFlipHorizontally(flipHorizontally bool) *TileDefinition
-	Textures() []*raw.SKTexture
+	Textures() []*Texture
 	SetTextures(textures *foundation.NSArray[*raw.SKTexture])
-	NormalTextures() []*raw.SKTexture
+	NormalTextures() []*Texture
 	SetNormalTextures(normalTextures *foundation.NSArray[*raw.SKTexture])
 	UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID]
 	SetUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID])

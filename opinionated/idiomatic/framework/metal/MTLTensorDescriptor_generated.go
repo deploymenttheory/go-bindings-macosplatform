@@ -36,14 +36,14 @@ func NewTensorDescriptor() *TensorDescriptor {
 }
 
 // WithDimensions sets the dimensions property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithDimensions(dimensions *raw.MTLTensorExtents) *TensorDescriptor {
-	x.inner.SetDimensions(dimensions)
+func (x *TensorDescriptor) WithDimensions(dimensions *TensorExtents) *TensorDescriptor {
+	x.inner.SetDimensions(dimensions.Unwrap())
 	return x
 }
 
 // WithStrides sets the strides property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithStrides(strides *raw.MTLTensorExtents) *TensorDescriptor {
-	x.inner.SetStrides(strides)
+func (x *TensorDescriptor) WithStrides(strides *TensorExtents) *TensorDescriptor {
+	x.inner.SetStrides(strides.Unwrap())
 	return x
 }
 
@@ -174,8 +174,8 @@ func (x *TensorDescriptor) SetHazardTrackingMode(hazardTrackingMode raw.MTLHazar
 // TensorDescriptorable is the interface implemented by [TensorDescriptor], for mocking and DI.
 type TensorDescriptorable interface {
 	Unwrap() *raw.MTLTensorDescriptor
-	WithDimensions(dimensions *raw.MTLTensorExtents) *TensorDescriptor
-	WithStrides(strides *raw.MTLTensorExtents) *TensorDescriptor
+	WithDimensions(dimensions *TensorExtents) *TensorDescriptor
+	WithStrides(strides *TensorExtents) *TensorDescriptor
 	WithDataType(dataType raw.MTLTensorDataType) *TensorDescriptor
 	WithUsage(usage raw.MTLTensorUsage) *TensorDescriptor
 	WithResourceOptions(resourceOptions raw.MTLResourceOptions) *TensorDescriptor

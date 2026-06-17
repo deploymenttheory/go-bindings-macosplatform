@@ -38,8 +38,8 @@ func NewModuleEntry() *ModuleEntry {
 }
 
 // WithMappings sets the mappings property and returns the receiver for chaining.
-func (x *ModuleEntry) WithMappings(mappings *raw.ODMappings) *ModuleEntry {
-	x.inner.SetMappings(mappings)
+func (x *ModuleEntry) WithMappings(mappings *Mappings) *ModuleEntry {
+	x.inner.SetMappings(mappings.Unwrap())
 	return x
 }
 
@@ -135,7 +135,7 @@ func (x *ModuleEntry) SetUuidString(uuidString string) {
 // ModuleEntryable is the interface implemented by [ModuleEntry], for mocking and DI.
 type ModuleEntryable interface {
 	Unwrap() *raw.ODModuleEntry
-	WithMappings(mappings *raw.ODMappings) *ModuleEntry
+	WithMappings(mappings *Mappings) *ModuleEntry
 	WithName(name string) *ModuleEntry
 	WithXpcServiceName(xpcServiceName string) *ModuleEntry
 	WithUuidString(uuidString string) *ModuleEntry

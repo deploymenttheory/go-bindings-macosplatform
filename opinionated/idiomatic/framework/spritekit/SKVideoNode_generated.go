@@ -154,8 +154,8 @@ func (x *VideoNode) WithName(name string) *VideoNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *VideoNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *VideoNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *VideoNode) WithPhysicsBody(physicsBody *PhysicsBody) *VideoNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -166,8 +166,8 @@ func (x *VideoNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *VideoNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *VideoNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *VideoNode) WithReachConstraints(reachConstraints *ReachConstraints) *VideoNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -295,9 +295,9 @@ type VideoNodeable interface {
 	WithHidden(hidden bool) *VideoNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *VideoNode
 	WithName(name string) *VideoNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *VideoNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *VideoNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *VideoNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *VideoNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *VideoNode
 	WithConstraints(items ...*raw.SKConstraint) *VideoNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *VideoNode
 	WithAccessibilityElement(accessibilityElement bool) *VideoNode

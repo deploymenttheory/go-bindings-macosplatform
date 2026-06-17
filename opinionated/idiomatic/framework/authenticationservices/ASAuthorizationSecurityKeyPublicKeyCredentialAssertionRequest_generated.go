@@ -61,19 +61,19 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAppID(
 }
 
 // WithPrf sets the prf property and returns the receiver for chaining.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
-	x.inner.SetPrf(prf)
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+	x.inner.SetPrf(prf.Unwrap())
 	return x
 }
 
 // AllowedCredentials returns the collection as a Go slice.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AllowedCredentials() []*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AllowedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	arr := x.inner.AllowedCredentials()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor {
-		return raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+		return &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -117,8 +117,8 @@ type AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable interface {
 	Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
 	WithAllowedCredentials(items ...*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
 	WithAppID(appID string) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
-	WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
-	AllowedCredentials() []*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor
+	WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
+	AllowedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor
 	SetAllowedCredentials(allowedCredentials *foundation.NSArray[*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor])
 	AppID() string
 	SetAppID(appID string)

@@ -110,13 +110,13 @@ func (x *LayoutAnchor) HasAmbiguousLayout() bool {
 }
 
 // ConstraintsAffectingLayout returns the collection as a Go slice.
-func (x *LayoutAnchor) ConstraintsAffectingLayout() []*raw.NSLayoutConstraint {
+func (x *LayoutAnchor) ConstraintsAffectingLayout() []*LayoutConstraint {
 	arr := x.inner.ConstraintsAffectingLayout()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSLayoutConstraint {
-		return raw.NSLayoutConstraintFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LayoutConstraint {
+		return &LayoutConstraint{inner: raw.NSLayoutConstraintFromID(purego.Retain(_id))}
 	})
 }
 
@@ -134,7 +134,7 @@ type LayoutAnchorable interface {
 	Name() string
 	Item() objc.ID
 	HasAmbiguousLayout() bool
-	ConstraintsAffectingLayout() []*raw.NSLayoutConstraint
+	ConstraintsAffectingLayout() []*LayoutConstraint
 }
 
 var _ LayoutAnchorable = (*LayoutAnchor)(nil)

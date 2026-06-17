@@ -87,13 +87,13 @@ func (x *UMPMutableEndpoint) SetEnabledError(isEnabled bool) (bool, error) {
 }
 
 // MutableFunctionBlocks returns the collection as a Go slice.
-func (x *UMPMutableEndpoint) MutableFunctionBlocks() []*raw.MIDIUMPMutableFunctionBlock {
+func (x *UMPMutableEndpoint) MutableFunctionBlocks() []*UMPMutableFunctionBlock {
 	arr := x.inner.MutableFunctionBlocks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDIUMPMutableFunctionBlock {
-		return raw.MIDIUMPMutableFunctionBlockFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UMPMutableFunctionBlock {
+		return &UMPMutableFunctionBlock{inner: raw.MIDIUMPMutableFunctionBlockFromID(purego.Retain(_id))}
 	})
 }
 
@@ -117,7 +117,7 @@ type UMPMutableEndpointable interface {
 	SetNameError(name string) (bool, error)
 	RegisterFunctionBlocksMarkAsStaticError(functionBlocks *foundation.NSArray[*raw.MIDIUMPMutableFunctionBlock], markAsStatic bool) (bool, error)
 	SetEnabledError(isEnabled bool) (bool, error)
-	MutableFunctionBlocks() []*raw.MIDIUMPMutableFunctionBlock
+	MutableFunctionBlocks() []*UMPMutableFunctionBlock
 	SetMutableFunctionBlocks(mutableFunctionBlocks *foundation.NSArray[*raw.MIDIUMPMutableFunctionBlock])
 	IsEnabled() bool
 }

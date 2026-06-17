@@ -56,13 +56,13 @@ func (x *Selection) RangeAtIndexOnPage(index uint, page *raw.PDFPage) foundation
 }
 
 // SelectionsByLine returns the collection as a Go slice.
-func (x *Selection) SelectionsByLine() []*raw.PDFSelection {
+func (x *Selection) SelectionsByLine() []*Selection {
 	arr := x.inner.SelectionsByLine()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PDFSelection {
-		return raw.PDFSelectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Selection {
+		return &Selection{inner: raw.PDFSelectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -102,13 +102,13 @@ func (x *Selection) DrawForPageWithBoxActive(page *raw.PDFPage, box raw.PDFDispl
 }
 
 // Pages returns the collection as a Go slice.
-func (x *Selection) Pages() []*raw.PDFPage {
+func (x *Selection) Pages() []*Page {
 	arr := x.inner.Pages()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PDFPage {
-		return raw.PDFPageFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Page {
+		return &Page{inner: raw.PDFPageFromID(purego.Retain(_id))}
 	})
 }
 
@@ -142,7 +142,7 @@ type Selectionable interface {
 	BoundsForPage(page *raw.PDFPage) corefoundation.CGRect
 	NumberOfTextRangesOnPage(page *raw.PDFPage) uint
 	RangeAtIndexOnPage(index uint, page *raw.PDFPage) foundation.NSRange
-	SelectionsByLine() []*raw.PDFSelection
+	SelectionsByLine() []*Selection
 	AddSelection(selection *raw.PDFSelection)
 	AddSelections(selections *foundation.NSArray[*raw.PDFSelection])
 	ExtendSelectionAtEnd(succeed int)
@@ -150,7 +150,7 @@ type Selectionable interface {
 	ExtendSelectionForLineBoundaries()
 	DrawForPageActive(page *raw.PDFPage, active bool)
 	DrawForPageWithBoxActive(page *raw.PDFPage, box raw.PDFDisplayBox, active bool)
-	Pages() []*raw.PDFPage
+	Pages() []*Page
 	Color() unsafe.Pointer
 	SetColor(color unsafe.Pointer)
 	String() string

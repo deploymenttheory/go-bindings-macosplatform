@@ -249,13 +249,13 @@ func (x *XMLElement) NormalizeAdjacentTextNodesPreservingCDATA(preserve bool) {
 }
 
 // Attributes returns the collection as a Go slice.
-func (x *XMLElement) Attributes() []*raw.NSXMLNode {
+func (x *XMLElement) Attributes() []*XMLNode {
 	arr := x.inner.Attributes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSXMLNode {
-		return raw.NSXMLNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *XMLNode {
+		return &XMLNode{inner: raw.NSXMLNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -265,13 +265,13 @@ func (x *XMLElement) SetAttributes(attributes *raw.NSArray[*raw.NSXMLNode]) {
 }
 
 // Namespaces returns the collection as a Go slice.
-func (x *XMLElement) Namespaces() []*raw.NSXMLNode {
+func (x *XMLElement) Namespaces() []*XMLNode {
 	arr := x.inner.Namespaces()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSXMLNode {
-		return raw.NSXMLNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *XMLNode {
+		return &XMLNode{inner: raw.NSXMLNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -318,9 +318,9 @@ type XMLElementable interface {
 	AddChild(child *raw.NSXMLNode)
 	ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode)
 	NormalizeAdjacentTextNodesPreservingCDATA(preserve bool)
-	Attributes() []*raw.NSXMLNode
+	Attributes() []*XMLNode
 	SetAttributes(attributes *raw.NSArray[*raw.NSXMLNode])
-	Namespaces() []*raw.NSXMLNode
+	Namespaces() []*XMLNode
 	SetNamespaces(namespaces *raw.NSArray[*raw.NSXMLNode])
 	SetAttributesAsDictionary(attributes *raw.NSDictionary[objc.ID, objc.ID])
 }

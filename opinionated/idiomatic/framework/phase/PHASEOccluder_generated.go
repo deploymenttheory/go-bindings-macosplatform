@@ -39,13 +39,13 @@ func NewOccluderWithEngineShapes(engine *raw.PHASEEngine, shapes *foundation.NSA
 }
 
 // Shapes returns the collection as a Go slice.
-func (x *Occluder) Shapes() []*raw.PHASEShape {
+func (x *Occluder) Shapes() []*Shape {
 	arr := x.inner.Shapes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEShape {
-		return raw.PHASEShapeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Shape {
+		return &Shape{inner: raw.PHASEShapeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *Occluder) asObject() *raw.PHASEObject { return &x.inner.PHASEObject }
 // Occluderable is the interface implemented by [Occluder], for mocking and DI.
 type Occluderable interface {
 	Unwrap() *raw.PHASEOccluder
-	Shapes() []*raw.PHASEShape
+	Shapes() []*Shape
 }
 
 var _ Occluderable = (*Occluder)(nil)

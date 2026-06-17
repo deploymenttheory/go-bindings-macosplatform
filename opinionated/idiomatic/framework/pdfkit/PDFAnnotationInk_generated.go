@@ -40,8 +40,8 @@ func NewAnnotationInk() *AnnotationInk {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationInk) WithPage(page *raw.PDFPage) *AnnotationInk {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationInk) WithPage(page *Page) *AnnotationInk {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -262,8 +262,8 @@ func (x *AnnotationInk) WithOpen(open bool) *AnnotationInk {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationInk) WithDestination(destination *raw.PDFDestination) *AnnotationInk {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationInk) WithDestination(destination *Destination) *AnnotationInk {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -302,7 +302,7 @@ func (x *AnnotationInk) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFA
 // AnnotationInkable is the interface implemented by [AnnotationInk], for mocking and DI.
 type AnnotationInkable interface {
 	Unwrap() *raw.PDFAnnotationInk
-	WithPage(page *raw.PDFPage) *AnnotationInk
+	WithPage(page *Page) *AnnotationInk
 	WithType(type_ string) *AnnotationInk
 	WithBounds(bounds corefoundation.CGRect) *AnnotationInk
 	WithShouldDisplay(shouldDisplay bool) *AnnotationInk
@@ -334,7 +334,7 @@ type AnnotationInkable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationInk
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationInk
 	WithOpen(open bool) *AnnotationInk
-	WithDestination(destination *raw.PDFDestination) *AnnotationInk
+	WithDestination(destination *Destination) *AnnotationInk
 	WithURL(uRL string) *AnnotationInk
 	WithFieldName(fieldName string) *AnnotationInk
 	WithCaption(caption string) *AnnotationInk

@@ -42,14 +42,14 @@ func (x *TextureSampler) WithTexture(texture TextureProvider) *TextureSampler {
 }
 
 // WithHardwareFilter sets the hardwareFilter property and returns the receiver for chaining.
-func (x *TextureSampler) WithHardwareFilter(hardwareFilter *raw.MDLTextureFilter) *TextureSampler {
-	x.inner.SetHardwareFilter(hardwareFilter)
+func (x *TextureSampler) WithHardwareFilter(hardwareFilter *TextureFilter) *TextureSampler {
+	x.inner.SetHardwareFilter(hardwareFilter.Unwrap())
 	return x
 }
 
 // WithTransform sets the transform property and returns the receiver for chaining.
-func (x *TextureSampler) WithTransform(transform *raw.MDLTransform) *TextureSampler {
-	x.inner.SetTransform(transform)
+func (x *TextureSampler) WithTransform(transform *Transform) *TextureSampler {
+	x.inner.SetTransform(transform.Unwrap())
 	return x
 }
 
@@ -99,8 +99,8 @@ func (x *TextureSampler) SetTransform(transform *raw.MDLTransform) {
 type TextureSamplerable interface {
 	Unwrap() *raw.MDLTextureSampler
 	WithTexture(texture TextureProvider) *TextureSampler
-	WithHardwareFilter(hardwareFilter *raw.MDLTextureFilter) *TextureSampler
-	WithTransform(transform *raw.MDLTransform) *TextureSampler
+	WithHardwareFilter(hardwareFilter *TextureFilter) *TextureSampler
+	WithTransform(transform *Transform) *TextureSampler
 	Texture() *Texture
 	SetTexture(texture *raw.MDLTexture)
 	HardwareFilter() *TextureFilter

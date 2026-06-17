@@ -105,8 +105,8 @@ func (x *CameraNode) WithName(name string) *CameraNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *CameraNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *CameraNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *CameraNode) WithPhysicsBody(physicsBody *PhysicsBody) *CameraNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -117,8 +117,8 @@ func (x *CameraNode) WithUserData(userData *foundation.NSMutableDictionary[objc.
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *CameraNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *CameraNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *CameraNode) WithReachConstraints(reachConstraints *ReachConstraints) *CameraNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -224,9 +224,9 @@ type CameraNodeable interface {
 	WithHidden(hidden bool) *CameraNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *CameraNode
 	WithName(name string) *CameraNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *CameraNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *CameraNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CameraNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *CameraNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *CameraNode
 	WithConstraints(items ...*raw.SKConstraint) *CameraNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CameraNode
 	WithAccessibilityElement(accessibilityElement bool) *CameraNode

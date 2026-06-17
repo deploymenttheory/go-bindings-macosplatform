@@ -102,13 +102,13 @@ func (x *ParagraphStyle) UsesDefaultHyphenation() bool {
 }
 
 // TabStops returns the collection as a Go slice.
-func (x *ParagraphStyle) TabStops() []*raw.NSTextTab {
+func (x *ParagraphStyle) TabStops() []*TextTab {
 	arr := x.inner.TabStops()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextTab {
-		return raw.NSTextTabFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextTab {
+		return &TextTab{inner: raw.NSTextTabFromID(purego.Retain(_id))}
 	})
 }
 
@@ -118,13 +118,13 @@ func (x *ParagraphStyle) DefaultTabInterval() float64 {
 }
 
 // TextLists returns the collection as a Go slice.
-func (x *ParagraphStyle) TextLists() []*raw.NSTextList {
+func (x *ParagraphStyle) TextLists() []*TextList {
 	arr := x.inner.TextLists()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextList {
-		return raw.NSTextListFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextList {
+		return &TextList{inner: raw.NSTextListFromID(purego.Retain(_id))}
 	})
 }
 
@@ -149,13 +149,13 @@ func (x *ParagraphStyle) TighteningFactorForTruncation() float32 {
 }
 
 // TextBlocks returns the collection as a Go slice.
-func (x *ParagraphStyle) TextBlocks() []*raw.NSTextBlock {
+func (x *ParagraphStyle) TextBlocks() []*TextBlock {
 	arr := x.inner.TextBlocks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextBlock {
-		return raw.NSTextBlockFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextBlock {
+		return &TextBlock{inner: raw.NSTextBlockFromID(purego.Retain(_id))}
 	})
 }
 
@@ -182,14 +182,14 @@ type ParagraphStyleable interface {
 	ParagraphSpacingBefore() float64
 	HyphenationFactor() float32
 	UsesDefaultHyphenation() bool
-	TabStops() []*raw.NSTextTab
+	TabStops() []*TextTab
 	DefaultTabInterval() float64
-	TextLists() []*raw.NSTextList
+	TextLists() []*TextList
 	AllowsDefaultTighteningForTruncation() bool
 	LineBreakStrategy() raw.NSLineBreakStrategy
 	Alignment() raw.NSTextAlignment
 	TighteningFactorForTruncation() float32
-	TextBlocks() []*raw.NSTextBlock
+	TextBlocks() []*TextBlock
 	HeaderLevel() int
 }
 

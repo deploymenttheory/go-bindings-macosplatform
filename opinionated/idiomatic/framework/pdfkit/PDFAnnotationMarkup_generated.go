@@ -40,8 +40,8 @@ func NewAnnotationMarkup() *AnnotationMarkup {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationMarkup) WithPage(page *raw.PDFPage) *AnnotationMarkup {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationMarkup) WithPage(page *Page) *AnnotationMarkup {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -262,8 +262,8 @@ func (x *AnnotationMarkup) WithOpen(open bool) *AnnotationMarkup {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationMarkup) WithDestination(destination *raw.PDFDestination) *AnnotationMarkup {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationMarkup) WithDestination(destination *Destination) *AnnotationMarkup {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -302,7 +302,7 @@ func (x *AnnotationMarkup) asAnnotation() *raw.PDFAnnotation { return &x.inner.P
 // AnnotationMarkupable is the interface implemented by [AnnotationMarkup], for mocking and DI.
 type AnnotationMarkupable interface {
 	Unwrap() *raw.PDFAnnotationMarkup
-	WithPage(page *raw.PDFPage) *AnnotationMarkup
+	WithPage(page *Page) *AnnotationMarkup
 	WithType(type_ string) *AnnotationMarkup
 	WithBounds(bounds corefoundation.CGRect) *AnnotationMarkup
 	WithShouldDisplay(shouldDisplay bool) *AnnotationMarkup
@@ -334,7 +334,7 @@ type AnnotationMarkupable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationMarkup
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationMarkup
 	WithOpen(open bool) *AnnotationMarkup
-	WithDestination(destination *raw.PDFDestination) *AnnotationMarkup
+	WithDestination(destination *Destination) *AnnotationMarkup
 	WithURL(uRL string) *AnnotationMarkup
 	WithFieldName(fieldName string) *AnnotationMarkup
 	WithCaption(caption string) *AnnotationMarkup

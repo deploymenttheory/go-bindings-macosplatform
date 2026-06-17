@@ -243,13 +243,13 @@ func (x *MTRCommissioningParameters) SetReadEndpointInformation(readEndpointInfo
 }
 
 // ExtraAttributesToRead returns the collection as a Go slice.
-func (x *MTRCommissioningParameters) ExtraAttributesToRead() []*raw.MTRAttributeRequestPath {
+func (x *MTRCommissioningParameters) ExtraAttributesToRead() []*MTRAttributeRequestPath {
 	arr := x.inner.ExtraAttributesToRead()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRAttributeRequestPath {
-		return raw.MTRAttributeRequestPathFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRAttributeRequestPath {
+		return &MTRAttributeRequestPath{inner: raw.MTRAttributeRequestPathFromID(purego.Retain(_id))}
 	})
 }
 
@@ -336,7 +336,7 @@ type MTRCommissioningParametersable interface {
 	SetCountryCode(countryCode string)
 	ReadEndpointInformation() bool
 	SetReadEndpointInformation(readEndpointInformation bool)
-	ExtraAttributesToRead() []*raw.MTRAttributeRequestPath
+	ExtraAttributesToRead() []*MTRAttributeRequestPath
 	SetExtraAttributesToRead(extraAttributesToRead *foundation.NSArray[*raw.MTRAttributeRequestPath])
 	ForceWiFiScan() bool
 	SetForceWiFiScan(forceWiFiScan bool)

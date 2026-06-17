@@ -79,13 +79,13 @@ func (x *StartCallIntent) DestinationType() raw.INCallDestinationType {
 }
 
 // Contacts returns the collection as a Go slice.
-func (x *StartCallIntent) Contacts() []*raw.INPerson {
+func (x *StartCallIntent) Contacts() []*Person {
 	arr := x.inner.Contacts()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INPerson {
-		return raw.INPersonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Person {
+		return &Person{inner: raw.INPersonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -105,7 +105,7 @@ type StartCallIntentable interface {
 	CallRecordToCallBack() *CallRecord
 	AudioRoute() raw.INCallAudioRoute
 	DestinationType() raw.INCallDestinationType
-	Contacts() []*raw.INPerson
+	Contacts() []*Person
 	CallCapability() raw.INCallCapability
 }
 

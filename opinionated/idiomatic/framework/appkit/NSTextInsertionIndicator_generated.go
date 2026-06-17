@@ -48,8 +48,8 @@ func (x *TextInsertionIndicator) WithDisplayMode(displayMode raw.NSTextInsertion
 }
 
 // WithColor sets the color property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithColor(color *raw.NSColor) *TextInsertionIndicator {
-	x.inner.SetColor(color)
+func (x *TextInsertionIndicator) WithColor(color *Color) *TextInsertionIndicator {
+	x.inner.SetColor(color.Unwrap())
 	return x
 }
 
@@ -246,8 +246,8 @@ func (x *TextInsertionIndicator) WithContentFilters(items ...*coreimage.CIFilter
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithShadow(shadow *raw.NSShadow) *TextInsertionIndicator {
-	x.inner.NSView.SetShadow(shadow)
+func (x *TextInsertionIndicator) WithShadow(shadow *Shadow) *TextInsertionIndicator {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -328,8 +328,8 @@ func (x *TextInsertionIndicator) WithPrefersCompactControlSizeMetrics(prefersCom
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TextInsertionIndicator {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *TextInsertionIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextInsertionIndicator {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -370,8 +370,8 @@ func (x *TextInsertionIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(want
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TextInsertionIndicator {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *TextInsertionIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextInsertionIndicator {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -382,8 +382,8 @@ func (x *TextInsertionIndicator) WithNextResponder(nextResponder ResponderProvid
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithMenu(menu *raw.NSMenu) *TextInsertionIndicator {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *TextInsertionIndicator) WithMenu(menu *Menu) *TextInsertionIndicator {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -394,8 +394,8 @@ func (x *TextInsertionIndicator) WithUserActivity(userActivity *foundation.NSUse
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithTouchBar(touchBar *raw.NSTouchBar) *TextInsertionIndicator {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *TextInsertionIndicator) WithTouchBar(touchBar *TouchBar) *TextInsertionIndicator {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -469,7 +469,7 @@ func (x *TextInsertionIndicator) asResponder() *raw.NSResponder { return &x.inne
 type TextInsertionIndicatorable interface {
 	Unwrap() *raw.NSTextInsertionIndicator
 	WithDisplayMode(displayMode raw.NSTextInsertionIndicatorDisplayMode) *TextInsertionIndicator
-	WithColor(color *raw.NSColor) *TextInsertionIndicator
+	WithColor(color *Color) *TextInsertionIndicator
 	WithAutomaticModeOptions(automaticModeOptions raw.NSTextInsertionIndicatorAutomaticModeOptions) *TextInsertionIndicator
 	WithEffectsViewInserter(effectsViewInserter func(*raw.NSView)) *TextInsertionIndicator
 	WithSubviews(items ...ViewProvider) *TextInsertionIndicator
@@ -497,7 +497,7 @@ type TextInsertionIndicatorable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *TextInsertionIndicator
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TextInsertionIndicator
 	WithContentFilters(items ...*coreimage.CIFilter) *TextInsertionIndicator
-	WithShadow(shadow *raw.NSShadow) *TextInsertionIndicator
+	WithShadow(shadow *Shadow) *TextInsertionIndicator
 	WithClipsToBounds(clipsToBounds bool) *TextInsertionIndicator
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextInsertionIndicator
 	WithToolTip(toolTip string) *TextInsertionIndicator
@@ -509,18 +509,18 @@ type TextInsertionIndicatorable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextInsertionIndicator
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextInsertionIndicator
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextInsertionIndicator
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TextInsertionIndicator
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextInsertionIndicator
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextInsertionIndicator
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextInsertionIndicator
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextInsertionIndicator
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextInsertionIndicator
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextInsertionIndicator
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextInsertionIndicator
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TextInsertionIndicator
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextInsertionIndicator
 	WithNextResponder(nextResponder ResponderProvider) *TextInsertionIndicator
-	WithMenu(menu *raw.NSMenu) *TextInsertionIndicator
+	WithMenu(menu *Menu) *TextInsertionIndicator
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TextInsertionIndicator
-	WithTouchBar(touchBar *raw.NSTouchBar) *TextInsertionIndicator
+	WithTouchBar(touchBar *TouchBar) *TextInsertionIndicator
 	DisplayMode() raw.NSTextInsertionIndicatorDisplayMode
 	SetDisplayMode(displayMode raw.NSTextInsertionIndicatorDisplayMode)
 	Color() *Color

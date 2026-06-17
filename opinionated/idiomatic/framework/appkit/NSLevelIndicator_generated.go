@@ -95,20 +95,20 @@ func (x *LevelIndicator) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) 
 }
 
 // WithFillColor sets the fillColor property and returns the receiver for chaining.
-func (x *LevelIndicator) WithFillColor(fillColor *raw.NSColor) *LevelIndicator {
-	x.inner.SetFillColor(fillColor)
+func (x *LevelIndicator) WithFillColor(fillColor *Color) *LevelIndicator {
+	x.inner.SetFillColor(fillColor.Unwrap())
 	return x
 }
 
 // WithWarningFillColor sets the warningFillColor property and returns the receiver for chaining.
-func (x *LevelIndicator) WithWarningFillColor(warningFillColor *raw.NSColor) *LevelIndicator {
-	x.inner.SetWarningFillColor(warningFillColor)
+func (x *LevelIndicator) WithWarningFillColor(warningFillColor *Color) *LevelIndicator {
+	x.inner.SetWarningFillColor(warningFillColor.Unwrap())
 	return x
 }
 
 // WithCriticalFillColor sets the criticalFillColor property and returns the receiver for chaining.
-func (x *LevelIndicator) WithCriticalFillColor(criticalFillColor *raw.NSColor) *LevelIndicator {
-	x.inner.SetCriticalFillColor(criticalFillColor)
+func (x *LevelIndicator) WithCriticalFillColor(criticalFillColor *Color) *LevelIndicator {
+	x.inner.SetCriticalFillColor(criticalFillColor.Unwrap())
 	return x
 }
 
@@ -125,14 +125,14 @@ func (x *LevelIndicator) WithPlaceholderVisibility(placeholderVisibility raw.NSL
 }
 
 // WithRatingImage sets the ratingImage property and returns the receiver for chaining.
-func (x *LevelIndicator) WithRatingImage(ratingImage *raw.NSImage) *LevelIndicator {
-	x.inner.SetRatingImage(ratingImage)
+func (x *LevelIndicator) WithRatingImage(ratingImage *Image) *LevelIndicator {
+	x.inner.SetRatingImage(ratingImage.Unwrap())
 	return x
 }
 
 // WithRatingPlaceholderImage sets the ratingPlaceholderImage property and returns the receiver for chaining.
-func (x *LevelIndicator) WithRatingPlaceholderImage(ratingPlaceholderImage *raw.NSImage) *LevelIndicator {
-	x.inner.SetRatingPlaceholderImage(ratingPlaceholderImage)
+func (x *LevelIndicator) WithRatingPlaceholderImage(ratingPlaceholderImage *Image) *LevelIndicator {
+	x.inner.SetRatingPlaceholderImage(ratingPlaceholderImage.Unwrap())
 	return x
 }
 
@@ -239,8 +239,8 @@ func (x *LevelIndicator) WithDoubleValue(doubleValue float64) *LevelIndicator {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *LevelIndicator) WithFont(font *raw.NSFont) *LevelIndicator {
-	x.inner.NSControl.SetFont(font)
+func (x *LevelIndicator) WithFont(font *Font) *LevelIndicator {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -461,8 +461,8 @@ func (x *LevelIndicator) WithContentFilters(items ...*coreimage.CIFilter) *Level
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *LevelIndicator) WithShadow(shadow *raw.NSShadow) *LevelIndicator {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *LevelIndicator) WithShadow(shadow *Shadow) *LevelIndicator {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -543,8 +543,8 @@ func (x *LevelIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactCont
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *LevelIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *LevelIndicator {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *LevelIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *LevelIndicator {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -585,8 +585,8 @@ func (x *LevelIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtende
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *LevelIndicator) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *LevelIndicator {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *LevelIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *LevelIndicator {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -597,8 +597,8 @@ func (x *LevelIndicator) WithNextResponder(nextResponder ResponderProvider) *Lev
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *LevelIndicator) WithMenu(menu *raw.NSMenu) *LevelIndicator {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *LevelIndicator) WithMenu(menu *Menu) *LevelIndicator {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -609,8 +609,8 @@ func (x *LevelIndicator) WithUserActivity(userActivity *foundation.NSUserActivit
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *LevelIndicator) WithTouchBar(touchBar *raw.NSTouchBar) *LevelIndicator {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *LevelIndicator) WithTouchBar(touchBar *TouchBar) *LevelIndicator {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -822,13 +822,13 @@ type LevelIndicatorable interface {
 	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *LevelIndicator
 	WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicator
 	WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicator
-	WithFillColor(fillColor *raw.NSColor) *LevelIndicator
-	WithWarningFillColor(warningFillColor *raw.NSColor) *LevelIndicator
-	WithCriticalFillColor(criticalFillColor *raw.NSColor) *LevelIndicator
+	WithFillColor(fillColor *Color) *LevelIndicator
+	WithWarningFillColor(warningFillColor *Color) *LevelIndicator
+	WithCriticalFillColor(criticalFillColor *Color) *LevelIndicator
 	WithDrawsTieredCapacityLevels(drawsTieredCapacityLevels bool) *LevelIndicator
 	WithPlaceholderVisibility(placeholderVisibility raw.NSLevelIndicatorPlaceholderVisibility) *LevelIndicator
-	WithRatingImage(ratingImage *raw.NSImage) *LevelIndicator
-	WithRatingPlaceholderImage(ratingPlaceholderImage *raw.NSImage) *LevelIndicator
+	WithRatingImage(ratingImage *Image) *LevelIndicator
+	WithRatingPlaceholderImage(ratingPlaceholderImage *Image) *LevelIndicator
 	WithTarget(target objc.ID) *LevelIndicator
 	WithAction(action objc.SEL) *LevelIndicator
 	WithTag(tag int) *LevelIndicator
@@ -846,7 +846,7 @@ type LevelIndicatorable interface {
 	WithIntegerValue(integerValue int) *LevelIndicator
 	WithFloatValue(floatValue float32) *LevelIndicator
 	WithDoubleValue(doubleValue float64) *LevelIndicator
-	WithFont(font *raw.NSFont) *LevelIndicator
+	WithFont(font *Font) *LevelIndicator
 	WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicator
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *LevelIndicator
 	WithAlignment(alignment raw.NSTextAlignment) *LevelIndicator
@@ -878,7 +878,7 @@ type LevelIndicatorable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *LevelIndicator
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *LevelIndicator
 	WithContentFilters(items ...*coreimage.CIFilter) *LevelIndicator
-	WithShadow(shadow *raw.NSShadow) *LevelIndicator
+	WithShadow(shadow *Shadow) *LevelIndicator
 	WithClipsToBounds(clipsToBounds bool) *LevelIndicator
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *LevelIndicator
 	WithToolTip(toolTip string) *LevelIndicator
@@ -890,18 +890,18 @@ type LevelIndicatorable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *LevelIndicator
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *LevelIndicator
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *LevelIndicator
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *LevelIndicator
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *LevelIndicator
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *LevelIndicator
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *LevelIndicator
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *LevelIndicator
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *LevelIndicator
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *LevelIndicator
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *LevelIndicator
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *LevelIndicator
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *LevelIndicator
 	WithNextResponder(nextResponder ResponderProvider) *LevelIndicator
-	WithMenu(menu *raw.NSMenu) *LevelIndicator
+	WithMenu(menu *Menu) *LevelIndicator
 	WithUserActivity(userActivity *foundation.NSUserActivity) *LevelIndicator
-	WithTouchBar(touchBar *raw.NSTouchBar) *LevelIndicator
+	WithTouchBar(touchBar *TouchBar) *LevelIndicator
 	TickMarkValueAtIndex(index int) float64
 	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
 	LevelIndicatorStyle() raw.NSLevelIndicatorStyle

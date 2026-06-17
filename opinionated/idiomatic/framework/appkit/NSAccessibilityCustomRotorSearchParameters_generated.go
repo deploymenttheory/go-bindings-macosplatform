@@ -38,8 +38,8 @@ func NewAccessibilityCustomRotorSearchParameters() *AccessibilityCustomRotorSear
 }
 
 // WithCurrentItem sets the currentItem property and returns the receiver for chaining.
-func (x *AccessibilityCustomRotorSearchParameters) WithCurrentItem(currentItem *raw.NSAccessibilityCustomRotorItemResult) *AccessibilityCustomRotorSearchParameters {
-	x.inner.SetCurrentItem(currentItem)
+func (x *AccessibilityCustomRotorSearchParameters) WithCurrentItem(currentItem *AccessibilityCustomRotorItemResult) *AccessibilityCustomRotorSearchParameters {
+	x.inner.SetCurrentItem(currentItem.Unwrap())
 	return x
 }
 
@@ -96,7 +96,7 @@ func (x *AccessibilityCustomRotorSearchParameters) SetFilterString(filterString 
 // AccessibilityCustomRotorSearchParametersable is the interface implemented by [AccessibilityCustomRotorSearchParameters], for mocking and DI.
 type AccessibilityCustomRotorSearchParametersable interface {
 	Unwrap() *raw.NSAccessibilityCustomRotorSearchParameters
-	WithCurrentItem(currentItem *raw.NSAccessibilityCustomRotorItemResult) *AccessibilityCustomRotorSearchParameters
+	WithCurrentItem(currentItem *AccessibilityCustomRotorItemResult) *AccessibilityCustomRotorSearchParameters
 	WithSearchDirection(searchDirection raw.NSAccessibilityCustomRotorSearchDirection) *AccessibilityCustomRotorSearchParameters
 	WithFilterString(filterString string) *AccessibilityCustomRotorSearchParameters
 	CurrentItem() *AccessibilityCustomRotorItemResult

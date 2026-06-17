@@ -39,8 +39,8 @@ func NewCalendarItem() *CalendarItem {
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *CalendarItem) WithCalendar(calendar *raw.EKCalendar) *CalendarItem {
-	x.inner.SetCalendar(calendar)
+func (x *CalendarItem) WithCalendar(calendar *Calendar) *CalendarItem {
+	x.inner.SetCalendar(calendar.Unwrap())
 	return x
 }
 
@@ -251,24 +251,24 @@ func (x *CalendarItem) HasNotes() bool {
 }
 
 // Attendees returns the collection as a Go slice.
-func (x *CalendarItem) Attendees() []*raw.EKParticipant {
+func (x *CalendarItem) Attendees() []*Participant {
 	arr := x.inner.Attendees()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKParticipant {
-		return raw.EKParticipantFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Participant {
+		return &Participant{inner: raw.EKParticipantFromID(purego.Retain(_id))}
 	})
 }
 
 // Alarms returns the collection as a Go slice.
-func (x *CalendarItem) Alarms() []*raw.EKAlarm {
+func (x *CalendarItem) Alarms() []*Alarm {
 	arr := x.inner.Alarms()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKAlarm {
-		return raw.EKAlarmFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Alarm {
+		return &Alarm{inner: raw.EKAlarmFromID(purego.Retain(_id))}
 	})
 }
 
@@ -278,13 +278,13 @@ func (x *CalendarItem) SetAlarms(alarms *foundation.NSArray[*raw.EKAlarm]) {
 }
 
 // RecurrenceRules returns the collection as a Go slice.
-func (x *CalendarItem) RecurrenceRules() []*raw.EKRecurrenceRule {
+func (x *CalendarItem) RecurrenceRules() []*RecurrenceRule {
 	arr := x.inner.RecurrenceRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKRecurrenceRule {
-		return raw.EKRecurrenceRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecurrenceRule {
+		return &RecurrenceRule{inner: raw.EKRecurrenceRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -300,7 +300,7 @@ func (x *CalendarItem) asObject() *raw.EKObject { return &x.inner.EKObject }
 // CalendarItemable is the interface implemented by [CalendarItem], for mocking and DI.
 type CalendarItemable interface {
 	Unwrap() *raw.EKCalendarItem
-	WithCalendar(calendar *raw.EKCalendar) *CalendarItem
+	WithCalendar(calendar *Calendar) *CalendarItem
 	WithTitle(title string) *CalendarItem
 	WithLocation(location string) *CalendarItem
 	WithNotes(notes string) *CalendarItem
@@ -332,10 +332,10 @@ type CalendarItemable interface {
 	HasRecurrenceRules() bool
 	HasAttendees() bool
 	HasNotes() bool
-	Attendees() []*raw.EKParticipant
-	Alarms() []*raw.EKAlarm
+	Attendees() []*Participant
+	Alarms() []*Alarm
 	SetAlarms(alarms *foundation.NSArray[*raw.EKAlarm])
-	RecurrenceRules() []*raw.EKRecurrenceRule
+	RecurrenceRules() []*RecurrenceRule
 	SetRecurrenceRules(recurrenceRules *foundation.NSArray[*raw.EKRecurrenceRule])
 }
 

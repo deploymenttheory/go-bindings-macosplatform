@@ -83,8 +83,8 @@ func (x *MTRDeviceControllerParameters) WithConcurrentSubscriptionEstablishments
 }
 
 // WithStorageBehaviorConfiguration sets the storageBehaviorConfiguration property and returns the receiver for chaining.
-func (x *MTRDeviceControllerParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters {
-	x.inner.SetStorageBehaviorConfiguration(storageBehaviorConfiguration)
+func (x *MTRDeviceControllerParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters {
+	x.inner.SetStorageBehaviorConfiguration(storageBehaviorConfiguration.Unwrap())
 	return x
 }
 
@@ -181,7 +181,7 @@ type MTRDeviceControllerParametersable interface {
 	WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerParameters
 	WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerParameters
 	WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerParameters
-	WithStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters
+	WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters
 	WithStartSuspended(startSuspended bool) *MTRDeviceControllerParameters
 	SetOperationalCertificateIssuerQueue(operationalCertificateIssuer raw.MTROperationalCertificateIssuer, queue *foundation.NSObject)
 	SetOTAProviderDelegateQueue(otaProviderDelegate raw.MTROTAProviderDelegate, queue *foundation.NSObject)

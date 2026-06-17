@@ -49,8 +49,8 @@ func (x *CollectionLayoutDecorationItem) WithContentInsets(contentInsets raw.NSD
 }
 
 // WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
-func (x *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
-	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing)
+func (x *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
+	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing.Unwrap())
 	return x
 }
 
@@ -80,7 +80,7 @@ type CollectionLayoutDecorationItemable interface {
 	Unwrap() *raw.NSCollectionLayoutDecorationItem
 	WithZIndex(zIndex int) *CollectionLayoutDecorationItem
 	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutDecorationItem
-	WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem
+	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem
 	ZIndex() int
 	SetZIndex(zIndex int)
 	ElementKind() string

@@ -332,13 +332,13 @@ func (x *Context) Parent() *Context {
 }
 
 // NavigationChildContexts returns the collection as a Go slice.
-func (x *Context) NavigationChildContexts() []*raw.CLSContext {
+func (x *Context) NavigationChildContexts() []*Context {
 	arr := x.inner.NavigationChildContexts()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CLSContext {
-		return raw.CLSContextFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Context {
+		return &Context{inner: raw.CLSContextFromID(purego.Retain(_id))}
 	})
 }
 
@@ -411,7 +411,7 @@ type Contextable interface {
 	AddNavigationChildContext(child *raw.CLSContext)
 	RemoveNavigationChildContext(child *raw.CLSContext)
 	Parent() *Context
-	NavigationChildContexts() []*raw.CLSContext
+	NavigationChildContexts() []*Context
 	CreateNewActivity() *Activity
 	CurrentActivity() *Activity
 }

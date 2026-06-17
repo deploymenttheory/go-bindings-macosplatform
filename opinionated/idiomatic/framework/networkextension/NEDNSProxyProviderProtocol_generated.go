@@ -92,8 +92,8 @@ func (x *NEDNSProxyProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep boo
 }
 
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
-func (x *NEDNSProxyProviderProtocol) WithProxySettings(proxySettings *raw.NEProxySettings) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetProxySettings(proxySettings)
+func (x *NEDNSProxyProviderProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
@@ -171,7 +171,7 @@ type NEDNSProxyProviderProtocolable interface {
 	WithIdentityData(identityData *foundation.NSData) *NEDNSProxyProviderProtocol
 	WithIdentityDataPassword(identityDataPassword string) *NEDNSProxyProviderProtocol
 	WithDisconnectOnSleep(disconnectOnSleep bool) *NEDNSProxyProviderProtocol
-	WithProxySettings(proxySettings *raw.NEProxySettings) *NEDNSProxyProviderProtocol
+	WithProxySettings(proxySettings *NEProxySettings) *NEDNSProxyProviderProtocol
 	WithIncludeAllNetworks(includeAllNetworks bool) *NEDNSProxyProviderProtocol
 	WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEDNSProxyProviderProtocol
 	WithExcludeCellularServices(excludeCellularServices bool) *NEDNSProxyProviderProtocol

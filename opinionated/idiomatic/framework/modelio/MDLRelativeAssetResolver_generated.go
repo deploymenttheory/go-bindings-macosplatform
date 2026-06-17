@@ -37,8 +37,8 @@ func NewRelativeAssetResolverWithAsset(asset *raw.MDLAsset) *RelativeAssetResolv
 }
 
 // WithAsset sets the asset property and returns the receiver for chaining.
-func (x *RelativeAssetResolver) WithAsset(asset *raw.MDLAsset) *RelativeAssetResolver {
-	x.inner.SetAsset(asset)
+func (x *RelativeAssetResolver) WithAsset(asset *Asset) *RelativeAssetResolver {
+	x.inner.SetAsset(asset.Unwrap())
 	return x
 }
 
@@ -59,7 +59,7 @@ func (x *RelativeAssetResolver) SetAsset(asset *raw.MDLAsset) {
 // RelativeAssetResolverable is the interface implemented by [RelativeAssetResolver], for mocking and DI.
 type RelativeAssetResolverable interface {
 	Unwrap() *raw.MDLRelativeAssetResolver
-	WithAsset(asset *raw.MDLAsset) *RelativeAssetResolver
+	WithAsset(asset *Asset) *RelativeAssetResolver
 	Asset() *Asset
 	SetAsset(asset *raw.MDLAsset)
 }

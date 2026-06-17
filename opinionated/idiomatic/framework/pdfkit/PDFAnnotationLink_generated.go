@@ -40,8 +40,8 @@ func NewAnnotationLink() *AnnotationLink {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationLink) WithPage(page *raw.PDFPage) *AnnotationLink {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationLink) WithPage(page *Page) *AnnotationLink {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -262,8 +262,8 @@ func (x *AnnotationLink) WithOpen(open bool) *AnnotationLink {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationLink) WithDestination(destination *raw.PDFDestination) *AnnotationLink {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationLink) WithDestination(destination *Destination) *AnnotationLink {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -302,7 +302,7 @@ func (x *AnnotationLink) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDF
 // AnnotationLinkable is the interface implemented by [AnnotationLink], for mocking and DI.
 type AnnotationLinkable interface {
 	Unwrap() *raw.PDFAnnotationLink
-	WithPage(page *raw.PDFPage) *AnnotationLink
+	WithPage(page *Page) *AnnotationLink
 	WithType(type_ string) *AnnotationLink
 	WithBounds(bounds corefoundation.CGRect) *AnnotationLink
 	WithShouldDisplay(shouldDisplay bool) *AnnotationLink
@@ -334,7 +334,7 @@ type AnnotationLinkable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationLink
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationLink
 	WithOpen(open bool) *AnnotationLink
-	WithDestination(destination *raw.PDFDestination) *AnnotationLink
+	WithDestination(destination *Destination) *AnnotationLink
 	WithURL(uRL string) *AnnotationLink
 	WithFieldName(fieldName string) *AnnotationLink
 	WithCaption(caption string) *AnnotationLink

@@ -71,13 +71,13 @@ func (x *SpeechSynthesisProviderAudioUnit) CancelSpeechRequest() {
 }
 
 // SpeechVoices returns the collection as a Go slice.
-func (x *SpeechSynthesisProviderAudioUnit) SpeechVoices() []*raw.AVSpeechSynthesisProviderVoice {
+func (x *SpeechSynthesisProviderAudioUnit) SpeechVoices() []*SpeechSynthesisProviderVoice {
 	arr := x.inner.SpeechVoices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVSpeechSynthesisProviderVoice {
-		return raw.AVSpeechSynthesisProviderVoiceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SpeechSynthesisProviderVoice {
+		return &SpeechSynthesisProviderVoice{inner: raw.AVSpeechSynthesisProviderVoiceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -103,7 +103,7 @@ type SpeechSynthesisProviderAudioUnitable interface {
 	WithSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker], *raw.AVSpeechSynthesisProviderRequest)) *SpeechSynthesisProviderAudioUnit
 	SynthesizeSpeechRequest(speechRequest *raw.AVSpeechSynthesisProviderRequest)
 	CancelSpeechRequest()
-	SpeechVoices() []*raw.AVSpeechSynthesisProviderVoice
+	SpeechVoices() []*SpeechSynthesisProviderVoice
 	SetSpeechVoices(speechVoices *foundation.NSArray[*raw.AVSpeechSynthesisProviderVoice])
 	SpeechSynthesisOutputMetadataBlock() objc.Block
 	SetSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker], *raw.AVSpeechSynthesisProviderRequest))

@@ -91,8 +91,8 @@ func (x *TextContainer) WithHeightTracksTextView(heightTracksTextView bool) *Tex
 }
 
 // WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
-func (x *TextContainer) WithLayoutManager(layoutManager *raw.NSLayoutManager) *TextContainer {
-	x.inner.SetLayoutManager(layoutManager)
+func (x *TextContainer) WithLayoutManager(layoutManager *LayoutManager) *TextContainer {
+	x.inner.SetLayoutManager(layoutManager.Unwrap())
 	return x
 }
 
@@ -113,8 +113,8 @@ func (x *TextContainer) WithExclusionPaths(items ...*raw.NSBezierPath) *TextCont
 }
 
 // WithTextView sets the textView property and returns the receiver for chaining.
-func (x *TextContainer) WithTextView(textView *raw.NSTextView) *TextContainer {
-	x.inner.SetTextView(textView)
+func (x *TextContainer) WithTextView(textView *TextView) *TextContainer {
+	x.inner.SetTextView(textView.Unwrap())
 	return x
 }
 
@@ -223,13 +223,13 @@ func (x *TextContainer) ReplaceLayoutManager(newLayoutManager *raw.NSLayoutManag
 }
 
 // ExclusionPaths returns the collection as a Go slice.
-func (x *TextContainer) ExclusionPaths() []*raw.NSBezierPath {
+func (x *TextContainer) ExclusionPaths() []*BezierPath {
 	arr := x.inner.ExclusionPaths()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSBezierPath {
-		return raw.NSBezierPathFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *BezierPath {
+		return &BezierPath{inner: raw.NSBezierPathFromID(purego.Retain(_id))}
 	})
 }
 
@@ -281,9 +281,9 @@ type TextContainerable interface {
 	WithMaximumNumberOfLines(maximumNumberOfLines uint) *TextContainer
 	WithWidthTracksTextView(widthTracksTextView bool) *TextContainer
 	WithHeightTracksTextView(heightTracksTextView bool) *TextContainer
-	WithLayoutManager(layoutManager *raw.NSLayoutManager) *TextContainer
+	WithLayoutManager(layoutManager *LayoutManager) *TextContainer
 	WithExclusionPaths(items ...*raw.NSBezierPath) *TextContainer
-	WithTextView(textView *raw.NSTextView) *TextContainer
+	WithTextView(textView *TextView) *TextContainer
 	WithContainerSize(containerSize corefoundation.CGSize) *TextContainer
 	LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection raw.NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect
 	TextLayoutManager() *TextLayoutManager
@@ -303,7 +303,7 @@ type TextContainerable interface {
 	LayoutManager() *LayoutManager
 	SetLayoutManager(layoutManager *raw.NSLayoutManager)
 	ReplaceLayoutManager(newLayoutManager *raw.NSLayoutManager)
-	ExclusionPaths() []*raw.NSBezierPath
+	ExclusionPaths() []*BezierPath
 	SetExclusionPaths(exclusionPaths *foundation.NSArray[*raw.NSBezierPath])
 	TextView() *TextView
 	SetTextView(textView *raw.NSTextView)

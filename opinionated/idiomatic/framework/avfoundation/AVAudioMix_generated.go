@@ -37,13 +37,13 @@ func NewAudioMix() *AudioMix {
 }
 
 // InputParameters returns the collection as a Go slice.
-func (x *AudioMix) InputParameters() []*raw.AVAudioMixInputParameters {
+func (x *AudioMix) InputParameters() []*AudioMixInputParameters {
 	arr := x.inner.InputParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAudioMixInputParameters {
-		return raw.AVAudioMixInputParametersFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudioMixInputParameters {
+		return &AudioMixInputParameters{inner: raw.AVAudioMixInputParametersFromID(purego.Retain(_id))}
 	})
 }
 
@@ -52,7 +52,7 @@ func (x *AudioMix) asAudioMix() *raw.AVAudioMix { return x.inner }
 // AudioMixable is the interface implemented by [AudioMix], for mocking and DI.
 type AudioMixable interface {
 	Unwrap() *raw.AVAudioMix
-	InputParameters() []*raw.AVAudioMixInputParameters
+	InputParameters() []*AudioMixInputParameters
 }
 
 var _ AudioMixable = (*AudioMix)(nil)

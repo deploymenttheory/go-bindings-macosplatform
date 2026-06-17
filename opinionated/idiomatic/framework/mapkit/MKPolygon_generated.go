@@ -50,13 +50,13 @@ func (x *Polygon) WithSubtitle(subtitle string) *Polygon {
 }
 
 // InteriorPolygons returns the collection as a Go slice.
-func (x *Polygon) InteriorPolygons() []*raw.MKPolygon {
+func (x *Polygon) InteriorPolygons() []*Polygon {
 	arr := x.inner.InteriorPolygons()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKPolygon {
-		return raw.MKPolygonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Polygon {
+		return &Polygon{inner: raw.MKPolygonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -69,7 +69,7 @@ type Polygonable interface {
 	Unwrap() *raw.MKPolygon
 	WithTitle(title string) *Polygon
 	WithSubtitle(subtitle string) *Polygon
-	InteriorPolygons() []*raw.MKPolygon
+	InteriorPolygons() []*Polygon
 }
 
 var _ Polygonable = (*Polygon)(nil)

@@ -90,8 +90,8 @@ func (x *ButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle *foun
 }
 
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
-func (x *ButtonCell) WithAlternateImage(alternateImage *raw.NSImage) *ButtonCell {
-	x.inner.SetAlternateImage(alternateImage)
+func (x *ButtonCell) WithAlternateImage(alternateImage *Image) *ButtonCell {
+	x.inner.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
@@ -138,14 +138,14 @@ func (x *ButtonCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMou
 }
 
 // WithSound sets the sound property and returns the receiver for chaining.
-func (x *ButtonCell) WithSound(sound *raw.NSSound) *ButtonCell {
-	x.inner.SetSound(sound)
+func (x *ButtonCell) WithSound(sound *Sound) *ButtonCell {
+	x.inner.SetSound(sound.Unwrap())
 	return x
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *ButtonCell) WithBackgroundColor(backgroundColor *raw.NSColor) *ButtonCell {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *ButtonCell) WithBackgroundColor(backgroundColor *Color) *ButtonCell {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -156,8 +156,8 @@ func (x *ButtonCell) WithGradientType(gradientType raw.NSGradientType) *ButtonCe
 }
 
 // WithKeyEquivalentFont sets the keyEquivalentFont property and returns the receiver for chaining.
-func (x *ButtonCell) WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *ButtonCell {
-	x.inner.SetKeyEquivalentFont(keyEquivalentFont)
+func (x *ButtonCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *ButtonCell {
+	x.inner.SetKeyEquivalentFont(keyEquivalentFont.Unwrap())
 	return x
 }
 
@@ -264,8 +264,8 @@ func (x *ButtonCell) WithWraps(wraps bool) *ButtonCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *ButtonCell) WithFont(font *raw.NSFont) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetFont(font)
+func (x *ButtonCell) WithFont(font *Font) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -312,8 +312,8 @@ func (x *ButtonCell) WithIntegerValue(integerValue int) *ButtonCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *ButtonCell) WithImage(image *raw.NSImage) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetImage(image)
+func (x *ButtonCell) WithImage(image *Image) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -330,8 +330,8 @@ func (x *ButtonCell) WithRepresentedObject(representedObject objc.ID) *ButtonCel
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ButtonCell) WithMenu(menu *raw.NSMenu) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu)
+func (x *ButtonCell) WithMenu(menu *Menu) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -705,7 +705,7 @@ type ButtonCellable interface {
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ButtonCell
 	WithAlternateTitle(alternateTitle string) *ButtonCell
 	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *ButtonCell
-	WithAlternateImage(alternateImage *raw.NSImage) *ButtonCell
+	WithAlternateImage(alternateImage *Image) *ButtonCell
 	WithImagePosition(imagePosition raw.NSCellImagePosition) *ButtonCell
 	WithImageScaling(imageScaling raw.NSImageScaling) *ButtonCell
 	WithKeyEquivalent(keyEquivalent string) *ButtonCell
@@ -713,10 +713,10 @@ type ButtonCellable interface {
 	WithTransparent(transparent bool) *ButtonCell
 	WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *ButtonCell
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *ButtonCell
-	WithSound(sound *raw.NSSound) *ButtonCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *ButtonCell
+	WithSound(sound *Sound) *ButtonCell
+	WithBackgroundColor(backgroundColor *Color) *ButtonCell
 	WithGradientType(gradientType raw.NSGradientType) *ButtonCell
-	WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *ButtonCell
+	WithKeyEquivalentFont(keyEquivalentFont *Font) *ButtonCell
 	WithControlView(controlView ViewProvider) *ButtonCell
 	WithType(type_ raw.NSCellType) *ButtonCell
 	WithState(state int) *ButtonCell
@@ -734,7 +734,7 @@ type ButtonCellable interface {
 	WithHighlighted(highlighted bool) *ButtonCell
 	WithAlignment(alignment raw.NSTextAlignment) *ButtonCell
 	WithWraps(wraps bool) *ButtonCell
-	WithFont(font *raw.NSFont) *ButtonCell
+	WithFont(font *Font) *ButtonCell
 	WithFormatter(formatter *foundation.NSFormatter) *ButtonCell
 	WithObjectValue(objectValue objc.ID) *ButtonCell
 	WithStringValue(stringValue string) *ButtonCell
@@ -742,10 +742,10 @@ type ButtonCellable interface {
 	WithFloatValue(floatValue float32) *ButtonCell
 	WithDoubleValue(doubleValue float64) *ButtonCell
 	WithIntegerValue(integerValue int) *ButtonCell
-	WithImage(image *raw.NSImage) *ButtonCell
+	WithImage(image *Image) *ButtonCell
 	WithControlSize(controlSize raw.NSControlSize) *ButtonCell
 	WithRepresentedObject(representedObject objc.ID) *ButtonCell
-	WithMenu(menu *raw.NSMenu) *ButtonCell
+	WithMenu(menu *Menu) *ButtonCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ButtonCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ButtonCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ButtonCell

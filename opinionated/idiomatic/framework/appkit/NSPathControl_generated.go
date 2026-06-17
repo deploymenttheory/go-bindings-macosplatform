@@ -110,8 +110,8 @@ func (x *PathControl) WithPathItems(items ...*raw.NSPathControlItem) *PathContro
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *PathControl) WithBackgroundColor(backgroundColor *raw.NSColor) *PathControl {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *PathControl) WithBackgroundColor(backgroundColor *Color) *PathControl {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -224,8 +224,8 @@ func (x *PathControl) WithDoubleValue(doubleValue float64) *PathControl {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *PathControl) WithFont(font *raw.NSFont) *PathControl {
-	x.inner.NSControl.SetFont(font)
+func (x *PathControl) WithFont(font *Font) *PathControl {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -446,8 +446,8 @@ func (x *PathControl) WithContentFilters(items ...*coreimage.CIFilter) *PathCont
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *PathControl) WithShadow(shadow *raw.NSShadow) *PathControl {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *PathControl) WithShadow(shadow *Shadow) *PathControl {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -528,8 +528,8 @@ func (x *PathControl) WithPrefersCompactControlSizeMetrics(prefersCompactControl
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *PathControl) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *PathControl {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *PathControl) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PathControl {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -570,8 +570,8 @@ func (x *PathControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDy
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *PathControl) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PathControl {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *PathControl) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PathControl {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -582,8 +582,8 @@ func (x *PathControl) WithNextResponder(nextResponder ResponderProvider) *PathCo
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *PathControl) WithMenu(menu *raw.NSMenu) *PathControl {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *PathControl) WithMenu(menu *Menu) *PathControl {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -594,8 +594,8 @@ func (x *PathControl) WithUserActivity(userActivity *foundation.NSUserActivity) 
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *PathControl) WithTouchBar(touchBar *raw.NSTouchBar) *PathControl {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *PathControl) WithTouchBar(touchBar *TouchBar) *PathControl {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -694,13 +694,13 @@ func (x *PathControl) ClickedPathItem() *PathControlItem {
 }
 
 // PathItems returns the collection as a Go slice.
-func (x *PathControl) PathItems() []*raw.NSPathControlItem {
+func (x *PathControl) PathItems() []*PathControlItem {
 	arr := x.inner.PathItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPathControlItem {
-		return raw.NSPathControlItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PathControlItem {
+		return &PathControlItem{inner: raw.NSPathControlItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -743,13 +743,13 @@ func (x *PathControl) ClickedPathComponentCell() *PathComponentCell {
 }
 
 // PathComponentCells returns the collection as a Go slice.
-func (x *PathControl) PathComponentCells() []*raw.NSPathComponentCell {
+func (x *PathControl) PathComponentCells() []*PathComponentCell {
 	arr := x.inner.PathComponentCells()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPathComponentCell {
-		return raw.NSPathComponentCellFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PathComponentCell {
+		return &PathComponentCell{inner: raw.NSPathComponentCellFromID(purego.Retain(_id))}
 	})
 }
 
@@ -775,7 +775,7 @@ type PathControlable interface {
 	WithDoubleAction(doubleAction objc.SEL) *PathControl
 	WithPathStyle(pathStyle raw.NSPathStyle) *PathControl
 	WithPathItems(items ...*raw.NSPathControlItem) *PathControl
-	WithBackgroundColor(backgroundColor *raw.NSColor) *PathControl
+	WithBackgroundColor(backgroundColor *Color) *PathControl
 	WithDelegate(delegate raw.NSPathControlDelegate) *PathControl
 	WithTarget(target objc.ID) *PathControl
 	WithAction(action objc.SEL) *PathControl
@@ -794,7 +794,7 @@ type PathControlable interface {
 	WithIntegerValue(integerValue int) *PathControl
 	WithFloatValue(floatValue float32) *PathControl
 	WithDoubleValue(doubleValue float64) *PathControl
-	WithFont(font *raw.NSFont) *PathControl
+	WithFont(font *Font) *PathControl
 	WithUsesSingleLineMode(usesSingleLineMode bool) *PathControl
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathControl
 	WithAlignment(alignment raw.NSTextAlignment) *PathControl
@@ -826,7 +826,7 @@ type PathControlable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *PathControl
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PathControl
 	WithContentFilters(items ...*coreimage.CIFilter) *PathControl
-	WithShadow(shadow *raw.NSShadow) *PathControl
+	WithShadow(shadow *Shadow) *PathControl
 	WithClipsToBounds(clipsToBounds bool) *PathControl
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PathControl
 	WithToolTip(toolTip string) *PathControl
@@ -838,18 +838,18 @@ type PathControlable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PathControl
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PathControl
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PathControl
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *PathControl
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PathControl
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PathControl
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PathControl
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PathControl
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PathControl
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PathControl
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PathControl
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PathControl
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PathControl
 	WithNextResponder(nextResponder ResponderProvider) *PathControl
-	WithMenu(menu *raw.NSMenu) *PathControl
+	WithMenu(menu *Menu) *PathControl
 	WithUserActivity(userActivity *foundation.NSUserActivity) *PathControl
-	WithTouchBar(touchBar *raw.NSTouchBar) *PathControl
+	WithTouchBar(touchBar *TouchBar) *PathControl
 	SetDraggingSourceOperationMaskForLocal(mask raw.NSDragOperation, isLocal bool)
 	IsEditable() bool
 	SetEditable(editable bool)
@@ -866,14 +866,14 @@ type PathControlable interface {
 	PathStyle() raw.NSPathStyle
 	SetPathStyle(pathStyle raw.NSPathStyle)
 	ClickedPathItem() *PathControlItem
-	PathItems() []*raw.NSPathControlItem
+	PathItems() []*PathControlItem
 	SetPathItems(pathItems *foundation.NSArray[*raw.NSPathControlItem])
 	BackgroundColor() *Color
 	SetBackgroundColor(backgroundColor *raw.NSColor)
 	Delegate() raw.NSPathControlDelegate
 	SetDelegate(delegate raw.NSPathControlDelegate)
 	ClickedPathComponentCell() *PathComponentCell
-	PathComponentCells() []*raw.NSPathComponentCell
+	PathComponentCells() []*PathComponentCell
 	SetPathComponentCells(cells *foundation.NSArray[*raw.NSPathComponentCell])
 }
 

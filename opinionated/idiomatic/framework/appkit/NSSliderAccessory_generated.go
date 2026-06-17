@@ -36,8 +36,8 @@ func NewSliderAccessory() *SliderAccessory {
 }
 
 // WithBehavior sets the behavior property and returns the receiver for chaining.
-func (x *SliderAccessory) WithBehavior(behavior *raw.NSSliderAccessoryBehavior) *SliderAccessory {
-	x.inner.SetBehavior(behavior)
+func (x *SliderAccessory) WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory {
+	x.inner.SetBehavior(behavior.Unwrap())
 	return x
 }
 
@@ -74,7 +74,7 @@ func (x *SliderAccessory) SetEnabled(enabled bool) {
 // SliderAccessoryable is the interface implemented by [SliderAccessory], for mocking and DI.
 type SliderAccessoryable interface {
 	Unwrap() *raw.NSSliderAccessory
-	WithBehavior(behavior *raw.NSSliderAccessoryBehavior) *SliderAccessory
+	WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory
 	WithEnabled(enabled bool) *SliderAccessory
 	Behavior() *SliderAccessoryBehavior
 	SetBehavior(behavior *raw.NSSliderAccessoryBehavior)

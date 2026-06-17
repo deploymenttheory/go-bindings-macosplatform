@@ -58,8 +58,8 @@ func NewCollectionViewCompositionalLayoutWithSectionProviderConfiguration(sectio
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *CollectionViewCompositionalLayout) WithConfiguration(configuration *raw.NSCollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
-	x.inner.SetConfiguration(configuration)
+func (x *CollectionViewCompositionalLayout) WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
+	x.inner.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
@@ -82,7 +82,7 @@ func (x *CollectionViewCompositionalLayout) asCollectionViewLayout() *raw.NSColl
 // CollectionViewCompositionalLayoutable is the interface implemented by [CollectionViewCompositionalLayout], for mocking and DI.
 type CollectionViewCompositionalLayoutable interface {
 	Unwrap() *raw.NSCollectionViewCompositionalLayout
-	WithConfiguration(configuration *raw.NSCollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout
+	WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout
 	Configuration() *CollectionViewCompositionalLayoutConfiguration
 	SetConfiguration(configuration *raw.NSCollectionViewCompositionalLayoutConfiguration)
 }

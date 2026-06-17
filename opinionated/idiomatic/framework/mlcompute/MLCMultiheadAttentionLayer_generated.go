@@ -59,57 +59,57 @@ func (x *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
 }
 
 // Weights returns the collection as a Go slice.
-func (x *MultiheadAttentionLayer) Weights() []*raw.MLCTensor {
+func (x *MultiheadAttentionLayer) Weights() []*Tensor {
 	arr := x.inner.Weights()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
-		return raw.MLCTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Tensor {
+		return &Tensor{inner: raw.MLCTensorFromID(purego.Retain(_id))}
 	})
 }
 
 // Biases returns the collection as a Go slice.
-func (x *MultiheadAttentionLayer) Biases() []*raw.MLCTensor {
+func (x *MultiheadAttentionLayer) Biases() []*Tensor {
 	arr := x.inner.Biases()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
-		return raw.MLCTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Tensor {
+		return &Tensor{inner: raw.MLCTensorFromID(purego.Retain(_id))}
 	})
 }
 
 // AttentionBiases returns the collection as a Go slice.
-func (x *MultiheadAttentionLayer) AttentionBiases() []*raw.MLCTensor {
+func (x *MultiheadAttentionLayer) AttentionBiases() []*Tensor {
 	arr := x.inner.AttentionBiases()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
-		return raw.MLCTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Tensor {
+		return &Tensor{inner: raw.MLCTensorFromID(purego.Retain(_id))}
 	})
 }
 
 // WeightsParameters returns the collection as a Go slice.
-func (x *MultiheadAttentionLayer) WeightsParameters() []*raw.MLCTensorParameter {
+func (x *MultiheadAttentionLayer) WeightsParameters() []*TensorParameter {
 	arr := x.inner.WeightsParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
-		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorParameter {
+		return &TensorParameter{inner: raw.MLCTensorParameterFromID(purego.Retain(_id))}
 	})
 }
 
 // BiasesParameters returns the collection as a Go slice.
-func (x *MultiheadAttentionLayer) BiasesParameters() []*raw.MLCTensorParameter {
+func (x *MultiheadAttentionLayer) BiasesParameters() []*TensorParameter {
 	arr := x.inner.BiasesParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
-		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorParameter {
+		return &TensorParameter{inner: raw.MLCTensorParameterFromID(purego.Retain(_id))}
 	})
 }
 
@@ -121,11 +121,11 @@ type MultiheadAttentionLayerable interface {
 	WithLabel(label string) *MultiheadAttentionLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer
 	Descriptor() *MultiheadAttentionDescriptor
-	Weights() []*raw.MLCTensor
-	Biases() []*raw.MLCTensor
-	AttentionBiases() []*raw.MLCTensor
-	WeightsParameters() []*raw.MLCTensorParameter
-	BiasesParameters() []*raw.MLCTensorParameter
+	Weights() []*Tensor
+	Biases() []*Tensor
+	AttentionBiases() []*Tensor
+	WeightsParameters() []*TensorParameter
+	BiasesParameters() []*TensorParameter
 }
 
 var _ MultiheadAttentionLayerable = (*MultiheadAttentionLayer)(nil)

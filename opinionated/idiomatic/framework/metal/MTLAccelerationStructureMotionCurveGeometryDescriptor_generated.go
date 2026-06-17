@@ -197,13 +197,13 @@ func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithPrimitiveDataEl
 }
 
 // ControlPointBuffers returns the collection as a Go slice.
-func (x *AccelerationStructureMotionCurveGeometryDescriptor) ControlPointBuffers() []*raw.MTLMotionKeyframeData {
+func (x *AccelerationStructureMotionCurveGeometryDescriptor) ControlPointBuffers() []*MotionKeyframeData {
 	arr := x.inner.ControlPointBuffers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLMotionKeyframeData {
-		return raw.MTLMotionKeyframeDataFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MotionKeyframeData {
+		return &MotionKeyframeData{inner: raw.MTLMotionKeyframeDataFromID(purego.Retain(_id))}
 	})
 }
 
@@ -243,13 +243,13 @@ func (x *AccelerationStructureMotionCurveGeometryDescriptor) SetControlPointForm
 }
 
 // RadiusBuffers returns the collection as a Go slice.
-func (x *AccelerationStructureMotionCurveGeometryDescriptor) RadiusBuffers() []*raw.MTLMotionKeyframeData {
+func (x *AccelerationStructureMotionCurveGeometryDescriptor) RadiusBuffers() []*MotionKeyframeData {
 	arr := x.inner.RadiusBuffers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLMotionKeyframeData {
-		return raw.MTLMotionKeyframeDataFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MotionKeyframeData {
+		return &MotionKeyframeData{inner: raw.MTLMotionKeyframeDataFromID(purego.Retain(_id))}
 	})
 }
 
@@ -386,7 +386,7 @@ type AccelerationStructureMotionCurveGeometryDescriptorable interface {
 	WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureMotionCurveGeometryDescriptor
 	WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureMotionCurveGeometryDescriptor
 	WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureMotionCurveGeometryDescriptor
-	ControlPointBuffers() []*raw.MTLMotionKeyframeData
+	ControlPointBuffers() []*MotionKeyframeData
 	SetControlPointBuffers(controlPointBuffers *foundation.NSArray[*raw.MTLMotionKeyframeData])
 	ControlPointCount() uint
 	SetControlPointCount(controlPointCount uint)
@@ -394,7 +394,7 @@ type AccelerationStructureMotionCurveGeometryDescriptorable interface {
 	SetControlPointStride(controlPointStride uint)
 	ControlPointFormat() raw.MTLAttributeFormat
 	SetControlPointFormat(controlPointFormat raw.MTLAttributeFormat)
-	RadiusBuffers() []*raw.MTLMotionKeyframeData
+	RadiusBuffers() []*MotionKeyframeData
 	SetRadiusBuffers(radiusBuffers *foundation.NSArray[*raw.MTLMotionKeyframeData])
 	RadiusFormat() raw.MTLAttributeFormat
 	SetRadiusFormat(radiusFormat raw.MTLAttributeFormat)

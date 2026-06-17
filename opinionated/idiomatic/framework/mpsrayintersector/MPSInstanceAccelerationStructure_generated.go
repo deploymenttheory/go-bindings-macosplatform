@@ -110,13 +110,13 @@ func (x *InstanceAccelerationStructure) WithUsage(usage raw.MPSAccelerationStruc
 }
 
 // AccelerationStructures returns the collection as a Go slice.
-func (x *InstanceAccelerationStructure) AccelerationStructures() []*raw.MPSPolygonAccelerationStructure {
+func (x *InstanceAccelerationStructure) AccelerationStructures() []*PolygonAccelerationStructure {
 	arr := x.inner.AccelerationStructures()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSPolygonAccelerationStructure {
-		return raw.MPSPolygonAccelerationStructureFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PolygonAccelerationStructure {
+		return &PolygonAccelerationStructure{inner: raw.MPSPolygonAccelerationStructureFromID(purego.Retain(_id))}
 	})
 }
 
@@ -220,7 +220,7 @@ type InstanceAccelerationStructureable interface {
 	WithMaskBufferOffset(maskBufferOffset uint) *InstanceAccelerationStructure
 	WithInstanceCount(instanceCount uint) *InstanceAccelerationStructure
 	WithUsage(usage raw.MPSAccelerationStructureUsage) *InstanceAccelerationStructure
-	AccelerationStructures() []*raw.MPSPolygonAccelerationStructure
+	AccelerationStructures() []*PolygonAccelerationStructure
 	SetAccelerationStructures(accelerationStructures *foundation.NSArray[*raw.MPSPolygonAccelerationStructure])
 	InstanceBuffer() metal.MTLBuffer
 	SetInstanceBuffer(instanceBuffer metal.MTLBuffer)

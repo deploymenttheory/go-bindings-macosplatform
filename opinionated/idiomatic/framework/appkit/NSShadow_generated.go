@@ -49,8 +49,8 @@ func (x *Shadow) WithShadowBlurRadius(shadowBlurRadius float64) *Shadow {
 }
 
 // WithShadowColor sets the shadowColor property and returns the receiver for chaining.
-func (x *Shadow) WithShadowColor(shadowColor *raw.NSColor) *Shadow {
-	x.inner.SetShadowColor(shadowColor)
+func (x *Shadow) WithShadowColor(shadowColor *Color) *Shadow {
+	x.inner.SetShadowColor(shadowColor.Unwrap())
 	return x
 }
 
@@ -98,7 +98,7 @@ type Shadowable interface {
 	Unwrap() *raw.NSShadow
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *Shadow
 	WithShadowBlurRadius(shadowBlurRadius float64) *Shadow
-	WithShadowColor(shadowColor *raw.NSColor) *Shadow
+	WithShadowColor(shadowColor *Color) *Shadow
 	Set()
 	ShadowOffset() corefoundation.CGSize
 	SetShadowOffset(shadowOffset corefoundation.CGSize)

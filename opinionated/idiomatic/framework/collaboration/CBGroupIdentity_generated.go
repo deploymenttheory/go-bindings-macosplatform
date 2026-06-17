@@ -48,13 +48,13 @@ func (x *GroupIdentity) Members() *foundation.NSArray[objc.ID] {
 }
 
 // MemberIdentities returns the collection as a Go slice.
-func (x *GroupIdentity) MemberIdentities() []*raw.CBIdentity {
+func (x *GroupIdentity) MemberIdentities() []*Identity {
 	arr := x.inner.MemberIdentities()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBIdentity {
-		return raw.CBIdentityFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Identity {
+		return &Identity{inner: raw.CBIdentityFromID(purego.Retain(_id))}
 	})
 }
 
@@ -65,7 +65,7 @@ type GroupIdentityable interface {
 	Unwrap() *raw.CBGroupIdentity
 	PosixGID() uint
 	Members() *foundation.NSArray[objc.ID]
-	MemberIdentities() []*raw.CBIdentity
+	MemberIdentities() []*Identity
 }
 
 var _ GroupIdentityable = (*GroupIdentity)(nil)

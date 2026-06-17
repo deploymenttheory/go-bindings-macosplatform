@@ -54,13 +54,13 @@ func (x *FragmentedMovieMinder) RemoveFragmentedMovie(movie *raw.AVFragmentedMov
 }
 
 // Movies returns the collection as a Go slice.
-func (x *FragmentedMovieMinder) Movies() []*raw.AVFragmentedMovie {
+func (x *FragmentedMovieMinder) Movies() []*FragmentedMovie {
 	arr := x.inner.Movies()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVFragmentedMovie {
-		return raw.AVFragmentedMovieFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FragmentedMovie {
+		return &FragmentedMovie{inner: raw.AVFragmentedMovieFromID(purego.Retain(_id))}
 	})
 }
 
@@ -72,7 +72,7 @@ type FragmentedMovieMinderable interface {
 	WithMindingInterval(mindingInterval float64) *FragmentedMovieMinder
 	AddFragmentedMovie(movie *raw.AVFragmentedMovie)
 	RemoveFragmentedMovie(movie *raw.AVFragmentedMovie)
-	Movies() []*raw.AVFragmentedMovie
+	Movies() []*FragmentedMovie
 }
 
 var _ FragmentedMovieMinderable = (*FragmentedMovieMinder)(nil)

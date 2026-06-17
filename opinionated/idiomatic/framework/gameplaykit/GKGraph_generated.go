@@ -59,13 +59,13 @@ func (x *Graph) FindPathFromNodeToNode(startNode *raw.GKGraphNode, endNode *raw.
 }
 
 // Nodes returns the collection as a Go slice.
-func (x *Graph) Nodes() []*raw.GKGraphNode {
+func (x *Graph) Nodes() []*GraphNode {
 	arr := x.inner.Nodes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKGraphNode {
-		return raw.GKGraphNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphNode {
+		return &GraphNode{inner: raw.GKGraphNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -78,7 +78,7 @@ type Graphable interface {
 	RemoveNodes(nodes *foundation.NSArray[*raw.GKGraphNode])
 	AddNodes(nodes *foundation.NSArray[*raw.GKGraphNode])
 	FindPathFromNodeToNode(startNode *raw.GKGraphNode, endNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode]
-	Nodes() []*raw.GKGraphNode
+	Nodes() []*GraphNode
 }
 
 var _ Graphable = (*Graph)(nil)

@@ -36,8 +36,8 @@ func NewCompassButton() *CompassButton {
 }
 
 // WithMapView sets the mapView property and returns the receiver for chaining.
-func (x *CompassButton) WithMapView(mapView *raw.MKMapView) *CompassButton {
-	x.inner.SetMapView(mapView)
+func (x *CompassButton) WithMapView(mapView *MapView) *CompassButton {
+	x.inner.SetMapView(mapView.Unwrap())
 	return x
 }
 
@@ -74,7 +74,7 @@ func (x *CompassButton) SetCompassVisibility(compassVisibility raw.MKFeatureVisi
 // CompassButtonable is the interface implemented by [CompassButton], for mocking and DI.
 type CompassButtonable interface {
 	Unwrap() *raw.MKCompassButton
-	WithMapView(mapView *raw.MKMapView) *CompassButton
+	WithMapView(mapView *MapView) *CompassButton
 	WithCompassVisibility(compassVisibility raw.MKFeatureVisibility) *CompassButton
 	MapView() *MapView
 	SetMapView(mapView *raw.MKMapView)

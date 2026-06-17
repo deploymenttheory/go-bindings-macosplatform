@@ -107,13 +107,13 @@ func (x *Expression) Operand() *Expression {
 }
 
 // Arguments returns the collection as a Go slice.
-func (x *Expression) Arguments() []*raw.NSExpression {
+func (x *Expression) Arguments() []*Expression {
 	arr := x.inner.Arguments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSExpression {
-		return raw.NSExpressionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Expression {
+		return &Expression{inner: raw.NSExpressionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -186,7 +186,7 @@ type Expressionable interface {
 	Function() *String
 	Variable() *String
 	Operand() *Expression
-	Arguments() []*raw.NSExpression
+	Arguments() []*Expression
 	Collection() objc.ID
 	Predicate() *Predicate
 	LeftExpression() *Expression

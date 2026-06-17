@@ -210,13 +210,13 @@ func (x *XMLNode) ChildCount() uint {
 }
 
 // Children returns the collection as a Go slice.
-func (x *XMLNode) Children() []*raw.NSXMLNode {
+func (x *XMLNode) Children() []*XMLNode {
 	arr := x.inner.Children()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSXMLNode {
-		return raw.NSXMLNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *XMLNode {
+		return &XMLNode{inner: raw.NSXMLNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -338,7 +338,7 @@ type XMLNodeable interface {
 	RootDocument() *XMLDocument
 	Parent() *XMLNode
 	ChildCount() uint
-	Children() []*raw.NSXMLNode
+	Children() []*XMLNode
 	PreviousSibling() *XMLNode
 	NextSibling() *XMLNode
 	PreviousNode() *XMLNode

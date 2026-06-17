@@ -72,13 +72,13 @@ func (x *PresentationIntent) Ordinal() int {
 }
 
 // ColumnAlignments returns the collection as a Go slice.
-func (x *PresentationIntent) ColumnAlignments() []*raw.NSNumber {
+func (x *PresentationIntent) ColumnAlignments() []*Number {
 	arr := x.inner.ColumnAlignments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSNumber {
-		return raw.NSNumberFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Number {
+		return &Number{inner: raw.NSNumberFromID(purego.Retain(_id))}
 	})
 }
 
@@ -127,7 +127,7 @@ type PresentationIntentable interface {
 	ParentIntent() *PresentationIntent
 	Identity() int
 	Ordinal() int
-	ColumnAlignments() []*raw.NSNumber
+	ColumnAlignments() []*Number
 	ColumnCount() int
 	HeaderLevel() int
 	LanguageHint() *String

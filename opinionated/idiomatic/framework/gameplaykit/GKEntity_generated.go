@@ -61,13 +61,13 @@ func (x *Entity) ComponentForClass(componentClass objc.Class) *Component {
 }
 
 // Components returns the collection as a Go slice.
-func (x *Entity) Components() []*raw.GKComponent {
+func (x *Entity) Components() []*Component {
 	arr := x.inner.Components()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKComponent {
-		return raw.GKComponentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Component {
+		return &Component{inner: raw.GKComponentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -78,7 +78,7 @@ type Entityable interface {
 	AddComponent(component *raw.GKComponent)
 	RemoveComponentForClass(componentClass objc.Class)
 	ComponentForClass(componentClass objc.Class) *Component
-	Components() []*raw.GKComponent
+	Components() []*Component
 }
 
 var _ Entityable = (*Entity)(nil)

@@ -111,8 +111,8 @@ func (x *QueuePlayer) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgro
 }
 
 // WithVideoOutput sets the videoOutput property and returns the receiver for chaining.
-func (x *QueuePlayer) WithVideoOutput(videoOutput *raw.AVPlayerVideoOutput) *QueuePlayer {
-	x.inner.AVPlayer.SetVideoOutput(videoOutput)
+func (x *QueuePlayer) WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePlayer {
+	x.inner.AVPlayer.SetVideoOutput(videoOutput.Unwrap())
 	return x
 }
 
@@ -135,13 +135,13 @@ func (x *QueuePlayer) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnable
 }
 
 // Items returns the collection as a Go slice.
-func (x *QueuePlayer) Items() []*raw.AVPlayerItem {
+func (x *QueuePlayer) Items() []*PlayerItem {
 	arr := x.inner.Items()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItem {
-		return raw.AVPlayerItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItem {
+		return &PlayerItem{inner: raw.AVPlayerItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -187,11 +187,11 @@ type QueuePlayerable interface {
 	WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *QueuePlayer
 	WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *QueuePlayer
 	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer
-	WithVideoOutput(videoOutput *raw.AVPlayerVideoOutput) *QueuePlayer
+	WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePlayer
 	WithNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) *QueuePlayer
 	WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *QueuePlayer
 	WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *QueuePlayer
-	Items() []*raw.AVPlayerItem
+	Items() []*PlayerItem
 	AdvanceToNextItem()
 	CanInsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem) bool
 	InsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem)

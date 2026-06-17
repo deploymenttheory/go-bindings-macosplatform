@@ -103,8 +103,8 @@ func (x *XMLDocument) WithMIMEType(mIMEType string) *XMLDocument {
 }
 
 // WithDTD sets the dTD property and returns the receiver for chaining.
-func (x *XMLDocument) WithDTD(dTD *raw.NSXMLDTD) *XMLDocument {
-	x.inner.SetDTD(dTD)
+func (x *XMLDocument) WithDTD(dTD *XMLDTD) *XMLDocument {
+	x.inner.SetDTD(dTD.Unwrap())
 	return x
 }
 
@@ -294,7 +294,7 @@ type XMLDocumentable interface {
 	WithStandalone(standalone bool) *XMLDocument
 	WithDocumentContentKind(documentContentKind raw.NSXMLDocumentContentKind) *XMLDocument
 	WithMIMEType(mIMEType string) *XMLDocument
-	WithDTD(dTD *raw.NSXMLDTD) *XMLDocument
+	WithDTD(dTD *XMLDTD) *XMLDocument
 	WithName(name string) *XMLDocument
 	WithObjectValue(objectValue objc.ID) *XMLDocument
 	WithStringValue(stringValue string) *XMLDocument

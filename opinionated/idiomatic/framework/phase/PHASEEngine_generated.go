@@ -46,8 +46,8 @@ func (x *Engine) WithOutputSpatializationMode(outputSpatializationMode raw.PHASE
 }
 
 // WithDefaultMedium sets the defaultMedium property and returns the receiver for chaining.
-func (x *Engine) WithDefaultMedium(defaultMedium *raw.PHASEMedium) *Engine {
-	x.inner.SetDefaultMedium(defaultMedium)
+func (x *Engine) WithDefaultMedium(defaultMedium *Medium) *Engine {
+	x.inner.SetDefaultMedium(defaultMedium.Unwrap())
 	return x
 }
 
@@ -168,13 +168,13 @@ func (x *Engine) AssetRegistry() *AssetRegistry {
 }
 
 // SoundEvents returns the collection as a Go slice.
-func (x *Engine) SoundEvents() []*raw.PHASESoundEvent {
+func (x *Engine) SoundEvents() []*SoundEvent {
 	arr := x.inner.SoundEvents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASESoundEvent {
-		return raw.PHASESoundEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SoundEvent {
+		return &SoundEvent{inner: raw.PHASESoundEventFromID(purego.Retain(_id))}
 	})
 }
 
@@ -184,13 +184,13 @@ func (x *Engine) Groups() *foundation.NSDictionary[*foundation.NSString, *raw.PH
 }
 
 // Duckers returns the collection as a Go slice.
-func (x *Engine) Duckers() []*raw.PHASEDucker {
+func (x *Engine) Duckers() []*Ducker {
 	arr := x.inner.Duckers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEDucker {
-		return raw.PHASEDuckerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Ducker {
+		return &Ducker{inner: raw.PHASEDuckerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -212,7 +212,7 @@ func (x *Engine) LastRenderTime() *avfaudio.AVAudioTime {
 type Engineable interface {
 	Unwrap() *raw.PHASEEngine
 	WithOutputSpatializationMode(outputSpatializationMode raw.PHASESpatializationMode) *Engine
-	WithDefaultMedium(defaultMedium *raw.PHASEMedium) *Engine
+	WithDefaultMedium(defaultMedium *Medium) *Engine
 	WithDefaultReverbPreset(defaultReverbPreset raw.PHASEReverbPreset) *Engine
 	WithUnitsPerSecond(unitsPerSecond float64) *Engine
 	WithUnitsPerMeter(unitsPerMeter float64) *Engine
@@ -233,9 +233,9 @@ type Engineable interface {
 	UnitsPerMeter() float64
 	SetUnitsPerMeter(unitsPerMeter float64)
 	AssetRegistry() *AssetRegistry
-	SoundEvents() []*raw.PHASESoundEvent
+	SoundEvents() []*SoundEvent
 	Groups() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroup]
-	Duckers() []*raw.PHASEDucker
+	Duckers() []*Ducker
 	ActiveGroupPreset() *GroupPreset
 	LastRenderTime() *avfaudio.AVAudioTime
 }

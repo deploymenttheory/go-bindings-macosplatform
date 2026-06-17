@@ -45,13 +45,13 @@ func (x *PassLibrary) IsPaymentPassActivationAvailable() bool {
 }
 
 // Passes returns the collection as a Go slice.
-func (x *PassLibrary) Passes() []*raw.PKPass {
+func (x *PassLibrary) Passes() []*Pass {
 	arr := x.inner.Passes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPass {
-		return raw.PKPassFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Pass {
+		return &Pass{inner: raw.PKPassFromID(purego.Retain(_id))}
 	})
 }
 
@@ -75,13 +75,13 @@ func (x *PassLibrary) PassesOfType(passType raw.PKPassType) *foundation.NSArray[
 }
 
 // RemotePaymentPasses returns the collection as a Go slice.
-func (x *PassLibrary) RemotePaymentPasses() []*raw.PKPaymentPass {
+func (x *PassLibrary) RemotePaymentPasses() []*PaymentPass {
 	arr := x.inner.RemotePaymentPasses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPaymentPass {
-		return raw.PKPaymentPassFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PaymentPass {
+		return &PaymentPass{inner: raw.PKPaymentPassFromID(purego.Retain(_id))}
 	})
 }
 
@@ -205,13 +205,13 @@ func (x *PassLibrary) IsSecureElementPassActivationAvailable() bool {
 }
 
 // RemoteSecureElementPasses returns the collection as a Go slice.
-func (x *PassLibrary) RemoteSecureElementPasses() []*raw.PKSecureElementPass {
+func (x *PassLibrary) RemoteSecureElementPasses() []*SecureElementPass {
 	arr := x.inner.RemoteSecureElementPasses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKSecureElementPass {
-		return raw.PKSecureElementPassFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SecureElementPass {
+		return &SecureElementPass{inner: raw.PKSecureElementPassFromID(purego.Retain(_id))}
 	})
 }
 
@@ -219,11 +219,11 @@ func (x *PassLibrary) RemoteSecureElementPasses() []*raw.PKSecureElementPass {
 type PassLibraryable interface {
 	Unwrap() *raw.PKPassLibrary
 	IsPaymentPassActivationAvailable() bool
-	Passes() []*raw.PKPass
+	Passes() []*Pass
 	PassWithPassTypeIdentifierSerialNumber(identifier string, serialNumber string) *Pass
 	PassesWithReaderIdentifier(readerIdentifier string) *foundation.NSSet[*raw.PKSecureElementPass]
 	PassesOfType(passType raw.PKPassType) *foundation.NSArray[*raw.PKPass]
-	RemotePaymentPasses() []*raw.PKPaymentPass
+	RemotePaymentPasses() []*PaymentPass
 	RemovePass(pass *raw.PKPass)
 	ContainsPass(pass *raw.PKPass) bool
 	ReplacePassWithPass(pass *raw.PKPass) bool
@@ -244,7 +244,7 @@ type PassLibraryable interface {
 	AuthorizationStatusForCapability(capability raw.PKPassLibraryCapability) raw.PKPassLibraryAuthorizationStatus
 	RequestAuthorizationForCapabilityCompletion(capability raw.PKPassLibraryCapability, completion func(raw.PKPassLibraryAuthorizationStatus))
 	IsSecureElementPassActivationAvailable() bool
-	RemoteSecureElementPasses() []*raw.PKSecureElementPass
+	RemoteSecureElementPasses() []*SecureElementPass
 }
 
 var _ PassLibraryable = (*PassLibrary)(nil)

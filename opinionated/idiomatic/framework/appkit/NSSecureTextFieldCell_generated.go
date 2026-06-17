@@ -44,8 +44,8 @@ func (x *SecureTextFieldCell) WithEchosBullets(echosBullets bool) *SecureTextFie
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithBackgroundColor(backgroundColor *raw.NSColor) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor)
+func (x *SecureTextFieldCell) WithBackgroundColor(backgroundColor *Color) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -56,8 +56,8 @@ func (x *SecureTextFieldCell) WithDrawsBackground(drawsBackground bool) *SecureT
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithTextColor(textColor *raw.NSColor) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.SetTextColor(textColor)
+func (x *SecureTextFieldCell) WithTextColor(textColor *Color) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -198,8 +198,8 @@ func (x *SecureTextFieldCell) WithWraps(wraps bool) *SecureTextFieldCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithFont(font *raw.NSFont) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font)
+func (x *SecureTextFieldCell) WithFont(font *Font) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -246,8 +246,8 @@ func (x *SecureTextFieldCell) WithIntegerValue(integerValue int) *SecureTextFiel
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithImage(image *raw.NSImage) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image)
+func (x *SecureTextFieldCell) WithImage(image *Image) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -264,8 +264,8 @@ func (x *SecureTextFieldCell) WithRepresentedObject(representedObject objc.ID) *
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithMenu(menu *raw.NSMenu) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu)
+func (x *SecureTextFieldCell) WithMenu(menu *Menu) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -385,9 +385,9 @@ func (x *SecureTextFieldCell) asCell() *raw.NSCell { return &x.inner.NSTextField
 type SecureTextFieldCellable interface {
 	Unwrap() *raw.NSSecureTextFieldCell
 	WithEchosBullets(echosBullets bool) *SecureTextFieldCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *SecureTextFieldCell
+	WithBackgroundColor(backgroundColor *Color) *SecureTextFieldCell
 	WithDrawsBackground(drawsBackground bool) *SecureTextFieldCell
-	WithTextColor(textColor *raw.NSColor) *SecureTextFieldCell
+	WithTextColor(textColor *Color) *SecureTextFieldCell
 	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SecureTextFieldCell
 	WithPlaceholderString(placeholderString string) *SecureTextFieldCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SecureTextFieldCell
@@ -409,7 +409,7 @@ type SecureTextFieldCellable interface {
 	WithHighlighted(highlighted bool) *SecureTextFieldCell
 	WithAlignment(alignment raw.NSTextAlignment) *SecureTextFieldCell
 	WithWraps(wraps bool) *SecureTextFieldCell
-	WithFont(font *raw.NSFont) *SecureTextFieldCell
+	WithFont(font *Font) *SecureTextFieldCell
 	WithFormatter(formatter *foundation.NSFormatter) *SecureTextFieldCell
 	WithObjectValue(objectValue objc.ID) *SecureTextFieldCell
 	WithStringValue(stringValue string) *SecureTextFieldCell
@@ -417,10 +417,10 @@ type SecureTextFieldCellable interface {
 	WithFloatValue(floatValue float32) *SecureTextFieldCell
 	WithDoubleValue(doubleValue float64) *SecureTextFieldCell
 	WithIntegerValue(integerValue int) *SecureTextFieldCell
-	WithImage(image *raw.NSImage) *SecureTextFieldCell
+	WithImage(image *Image) *SecureTextFieldCell
 	WithControlSize(controlSize raw.NSControlSize) *SecureTextFieldCell
 	WithRepresentedObject(representedObject objc.ID) *SecureTextFieldCell
-	WithMenu(menu *raw.NSMenu) *SecureTextFieldCell
+	WithMenu(menu *Menu) *SecureTextFieldCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SecureTextFieldCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SecureTextFieldCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SecureTextFieldCell

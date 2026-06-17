@@ -66,13 +66,13 @@ func (x *AuthorizationController) Cancel() {
 }
 
 // AuthorizationRequests returns the collection as a Go slice.
-func (x *AuthorizationController) AuthorizationRequests() []*raw.ASAuthorizationRequest {
+func (x *AuthorizationController) AuthorizationRequests() []*AuthorizationRequest {
 	arr := x.inner.AuthorizationRequests()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationRequest {
-		return raw.ASAuthorizationRequestFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AuthorizationRequest {
+		return &AuthorizationRequest{inner: raw.ASAuthorizationRequestFromID(purego.Retain(_id))}
 	})
 }
 
@@ -104,7 +104,7 @@ type AuthorizationControllerable interface {
 	PerformRequests()
 	PerformRequestsWithOptions(options raw.ASAuthorizationControllerRequestOptions)
 	Cancel()
-	AuthorizationRequests() []*raw.ASAuthorizationRequest
+	AuthorizationRequests() []*AuthorizationRequest
 	Delegate() raw.ASAuthorizationControllerDelegate
 	SetDelegate(delegate raw.ASAuthorizationControllerDelegate)
 	PresentationContextProvider() raw.ASAuthorizationControllerPresentationContextProviding

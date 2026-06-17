@@ -61,13 +61,13 @@ func (x *StitchedLibraryDescriptor) WithOptions(options raw.MTLStitchedLibraryOp
 }
 
 // FunctionGraphs returns the collection as a Go slice.
-func (x *StitchedLibraryDescriptor) FunctionGraphs() []*raw.MTLFunctionStitchingGraph {
+func (x *StitchedLibraryDescriptor) FunctionGraphs() []*FunctionStitchingGraph {
 	arr := x.inner.FunctionGraphs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLFunctionStitchingGraph {
-		return raw.MTLFunctionStitchingGraphFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FunctionStitchingGraph {
+		return &FunctionStitchingGraph{inner: raw.MTLFunctionStitchingGraphFromID(purego.Retain(_id))}
 	})
 }
 
@@ -111,7 +111,7 @@ type StitchedLibraryDescriptorable interface {
 	Unwrap() *raw.MTLStitchedLibraryDescriptor
 	WithFunctionGraphs(items ...*raw.MTLFunctionStitchingGraph) *StitchedLibraryDescriptor
 	WithOptions(options raw.MTLStitchedLibraryOptions) *StitchedLibraryDescriptor
-	FunctionGraphs() []*raw.MTLFunctionStitchingGraph
+	FunctionGraphs() []*FunctionStitchingGraph
 	SetFunctionGraphs(functionGraphs *foundation.NSArray[*raw.MTLFunctionStitchingGraph])
 	Functions() *foundation.NSArray[raw.MTLFunction]
 	SetFunctions(functions *foundation.NSArray[raw.MTLFunction])

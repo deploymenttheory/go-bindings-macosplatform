@@ -49,62 +49,62 @@ func (x *ActivitySummary) WithPaused(paused bool) *ActivitySummary {
 }
 
 // WithActiveEnergyBurned sets the activeEnergyBurned property and returns the receiver for chaining.
-func (x *ActivitySummary) WithActiveEnergyBurned(activeEnergyBurned *raw.HKQuantity) *ActivitySummary {
-	x.inner.SetActiveEnergyBurned(activeEnergyBurned)
+func (x *ActivitySummary) WithActiveEnergyBurned(activeEnergyBurned *Quantity) *ActivitySummary {
+	x.inner.SetActiveEnergyBurned(activeEnergyBurned.Unwrap())
 	return x
 }
 
 // WithAppleMoveTime sets the appleMoveTime property and returns the receiver for chaining.
-func (x *ActivitySummary) WithAppleMoveTime(appleMoveTime *raw.HKQuantity) *ActivitySummary {
-	x.inner.SetAppleMoveTime(appleMoveTime)
+func (x *ActivitySummary) WithAppleMoveTime(appleMoveTime *Quantity) *ActivitySummary {
+	x.inner.SetAppleMoveTime(appleMoveTime.Unwrap())
 	return x
 }
 
 // WithAppleExerciseTime sets the appleExerciseTime property and returns the receiver for chaining.
-func (x *ActivitySummary) WithAppleExerciseTime(appleExerciseTime *raw.HKQuantity) *ActivitySummary {
-	x.inner.SetAppleExerciseTime(appleExerciseTime)
+func (x *ActivitySummary) WithAppleExerciseTime(appleExerciseTime *Quantity) *ActivitySummary {
+	x.inner.SetAppleExerciseTime(appleExerciseTime.Unwrap())
 	return x
 }
 
 // WithAppleStandHours sets the appleStandHours property and returns the receiver for chaining.
-func (x *ActivitySummary) WithAppleStandHours(appleStandHours *raw.HKQuantity) *ActivitySummary {
-	x.inner.SetAppleStandHours(appleStandHours)
+func (x *ActivitySummary) WithAppleStandHours(appleStandHours *Quantity) *ActivitySummary {
+	x.inner.SetAppleStandHours(appleStandHours.Unwrap())
 	return x
 }
 
 // WithActiveEnergyBurnedGoal sets the activeEnergyBurnedGoal property and returns the receiver for chaining.
-func (x *ActivitySummary) WithActiveEnergyBurnedGoal(activeEnergyBurnedGoal *raw.HKQuantity) *ActivitySummary {
-	x.inner.SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal)
+func (x *ActivitySummary) WithActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Quantity) *ActivitySummary {
+	x.inner.SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal.Unwrap())
 	return x
 }
 
 // WithAppleMoveTimeGoal sets the appleMoveTimeGoal property and returns the receiver for chaining.
-func (x *ActivitySummary) WithAppleMoveTimeGoal(appleMoveTimeGoal *raw.HKQuantity) *ActivitySummary {
-	x.inner.SetAppleMoveTimeGoal(appleMoveTimeGoal)
+func (x *ActivitySummary) WithAppleMoveTimeGoal(appleMoveTimeGoal *Quantity) *ActivitySummary {
+	x.inner.SetAppleMoveTimeGoal(appleMoveTimeGoal.Unwrap())
 	return x
 }
 
 // WithAppleExerciseTimeGoal sets the appleExerciseTimeGoal property and returns the receiver for chaining.
-func (x *ActivitySummary) WithAppleExerciseTimeGoal(appleExerciseTimeGoal *raw.HKQuantity) *ActivitySummary {
-	x.inner.SetAppleExerciseTimeGoal(appleExerciseTimeGoal)
+func (x *ActivitySummary) WithAppleExerciseTimeGoal(appleExerciseTimeGoal *Quantity) *ActivitySummary {
+	x.inner.SetAppleExerciseTimeGoal(appleExerciseTimeGoal.Unwrap())
 	return x
 }
 
 // WithExerciseTimeGoal sets the exerciseTimeGoal property and returns the receiver for chaining.
-func (x *ActivitySummary) WithExerciseTimeGoal(exerciseTimeGoal *raw.HKQuantity) *ActivitySummary {
-	x.inner.SetExerciseTimeGoal(exerciseTimeGoal)
+func (x *ActivitySummary) WithExerciseTimeGoal(exerciseTimeGoal *Quantity) *ActivitySummary {
+	x.inner.SetExerciseTimeGoal(exerciseTimeGoal.Unwrap())
 	return x
 }
 
 // WithAppleStandHoursGoal sets the appleStandHoursGoal property and returns the receiver for chaining.
-func (x *ActivitySummary) WithAppleStandHoursGoal(appleStandHoursGoal *raw.HKQuantity) *ActivitySummary {
-	x.inner.SetAppleStandHoursGoal(appleStandHoursGoal)
+func (x *ActivitySummary) WithAppleStandHoursGoal(appleStandHoursGoal *Quantity) *ActivitySummary {
+	x.inner.SetAppleStandHoursGoal(appleStandHoursGoal.Unwrap())
 	return x
 }
 
 // WithStandHoursGoal sets the standHoursGoal property and returns the receiver for chaining.
-func (x *ActivitySummary) WithStandHoursGoal(standHoursGoal *raw.HKQuantity) *ActivitySummary {
-	x.inner.SetStandHoursGoal(standHoursGoal)
+func (x *ActivitySummary) WithStandHoursGoal(standHoursGoal *Quantity) *ActivitySummary {
+	x.inner.SetStandHoursGoal(standHoursGoal.Unwrap())
 	return x
 }
 
@@ -278,16 +278,16 @@ type ActivitySummaryable interface {
 	Unwrap() *raw.HKActivitySummary
 	WithActivityMoveMode(activityMoveMode raw.HKActivityMoveMode) *ActivitySummary
 	WithPaused(paused bool) *ActivitySummary
-	WithActiveEnergyBurned(activeEnergyBurned *raw.HKQuantity) *ActivitySummary
-	WithAppleMoveTime(appleMoveTime *raw.HKQuantity) *ActivitySummary
-	WithAppleExerciseTime(appleExerciseTime *raw.HKQuantity) *ActivitySummary
-	WithAppleStandHours(appleStandHours *raw.HKQuantity) *ActivitySummary
-	WithActiveEnergyBurnedGoal(activeEnergyBurnedGoal *raw.HKQuantity) *ActivitySummary
-	WithAppleMoveTimeGoal(appleMoveTimeGoal *raw.HKQuantity) *ActivitySummary
-	WithAppleExerciseTimeGoal(appleExerciseTimeGoal *raw.HKQuantity) *ActivitySummary
-	WithExerciseTimeGoal(exerciseTimeGoal *raw.HKQuantity) *ActivitySummary
-	WithAppleStandHoursGoal(appleStandHoursGoal *raw.HKQuantity) *ActivitySummary
-	WithStandHoursGoal(standHoursGoal *raw.HKQuantity) *ActivitySummary
+	WithActiveEnergyBurned(activeEnergyBurned *Quantity) *ActivitySummary
+	WithAppleMoveTime(appleMoveTime *Quantity) *ActivitySummary
+	WithAppleExerciseTime(appleExerciseTime *Quantity) *ActivitySummary
+	WithAppleStandHours(appleStandHours *Quantity) *ActivitySummary
+	WithActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Quantity) *ActivitySummary
+	WithAppleMoveTimeGoal(appleMoveTimeGoal *Quantity) *ActivitySummary
+	WithAppleExerciseTimeGoal(appleExerciseTimeGoal *Quantity) *ActivitySummary
+	WithExerciseTimeGoal(exerciseTimeGoal *Quantity) *ActivitySummary
+	WithAppleStandHoursGoal(appleStandHoursGoal *Quantity) *ActivitySummary
+	WithStandHoursGoal(standHoursGoal *Quantity) *ActivitySummary
 	DateComponentsForCalendar(calendar *foundation.NSCalendar) *foundation.NSDateComponents
 	ActivityMoveMode() raw.HKActivityMoveMode
 	SetActivityMoveMode(activityMoveMode raw.HKActivityMoveMode)

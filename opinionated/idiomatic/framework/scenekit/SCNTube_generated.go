@@ -90,8 +90,8 @@ func (x *Tube) WithMaterials(items ...*raw.SCNMaterial) *Tube {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Tube) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Tube {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Tube) WithFirstMaterial(firstMaterial *Material) *Tube {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -112,8 +112,8 @@ func (x *Tube) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Tube {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Tube) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Tube {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Tube) WithTessellator(tessellator *GeometryTessellator) *Tube {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -130,14 +130,14 @@ func (x *Tube) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tube
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Tube) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Tube {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Tube) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Tube {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Tube) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Tube {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Tube) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Tube {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -203,13 +203,13 @@ type Tubeable interface {
 	WithHeightSegmentCount(heightSegmentCount int) *Tube
 	WithName(name string) *Tube
 	WithMaterials(items ...*raw.SCNMaterial) *Tube
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Tube
+	WithFirstMaterial(firstMaterial *Material) *Tube
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Tube
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Tube
+	WithTessellator(tessellator *GeometryTessellator) *Tube
 	WithSubdivisionLevel(subdivisionLevel uint) *Tube
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tube
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Tube
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Tube
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Tube
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Tube
 	InnerRadius() float64
 	SetInnerRadius(innerRadius float64)
 	OuterRadius() float64

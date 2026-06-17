@@ -55,13 +55,13 @@ func (x *PersistentStoreRequest) WithAffectedStores(items ...PersistentStoreProv
 }
 
 // AffectedStores returns the collection as a Go slice.
-func (x *PersistentStoreRequest) AffectedStores() []*raw.NSPersistentStore {
+func (x *PersistentStoreRequest) AffectedStores() []*PersistentStore {
 	arr := x.inner.AffectedStores()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPersistentStore {
-		return raw.NSPersistentStoreFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersistentStore {
+		return &PersistentStore{inner: raw.NSPersistentStoreFromID(purego.Retain(_id))}
 	})
 }
 
@@ -81,7 +81,7 @@ func (x *PersistentStoreRequest) asPersistentStoreRequest() *raw.NSPersistentSto
 type PersistentStoreRequestable interface {
 	Unwrap() *raw.NSPersistentStoreRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest
-	AffectedStores() []*raw.NSPersistentStore
+	AffectedStores() []*PersistentStore
 	SetAffectedStores(affectedStores *foundation.NSArray[*raw.NSPersistentStore])
 	RequestType() raw.NSPersistentStoreRequestType
 }

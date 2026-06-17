@@ -45,8 +45,8 @@ func NewPictureInPictureControllerWithPlayerLayer(playerLayer *avfoundation.AVPl
 }
 
 // WithContentSource sets the contentSource property and returns the receiver for chaining.
-func (x *PictureInPictureController) WithContentSource(contentSource *raw.AVPictureInPictureControllerContentSource) *PictureInPictureController {
-	x.inner.SetContentSource(contentSource)
+func (x *PictureInPictureController) WithContentSource(contentSource *PictureInPictureControllerContentSource) *PictureInPictureController {
+	x.inner.SetContentSource(contentSource.Unwrap())
 	return x
 }
 
@@ -134,7 +134,7 @@ func (x *PictureInPictureController) InvalidatePlaybackState() {
 // PictureInPictureControllerable is the interface implemented by [PictureInPictureController], for mocking and DI.
 type PictureInPictureControllerable interface {
 	Unwrap() *raw.AVPictureInPictureController
-	WithContentSource(contentSource *raw.AVPictureInPictureControllerContentSource) *PictureInPictureController
+	WithContentSource(contentSource *PictureInPictureControllerContentSource) *PictureInPictureController
 	WithDelegate(delegate raw.AVPictureInPictureControllerDelegate) *PictureInPictureController
 	WithRequiresLinearPlayback(requiresLinearPlayback bool) *PictureInPictureController
 	StartPictureInPicture()

@@ -117,8 +117,8 @@ func (x *TransformNode) WithName(name string) *TransformNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *TransformNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *TransformNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *TransformNode) WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -129,8 +129,8 @@ func (x *TransformNode) WithUserData(userData *foundation.NSMutableDictionary[ob
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *TransformNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *TransformNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *TransformNode) WithReachConstraints(reachConstraints *ReachConstraints) *TransformNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -278,9 +278,9 @@ type TransformNodeable interface {
 	WithHidden(hidden bool) *TransformNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *TransformNode
 	WithName(name string) *TransformNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *TransformNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TransformNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *TransformNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *TransformNode
 	WithConstraints(items ...*raw.SKConstraint) *TransformNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *TransformNode
 	WithAccessibilityElement(accessibilityElement bool) *TransformNode

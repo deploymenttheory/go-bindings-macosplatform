@@ -152,8 +152,8 @@ func (x *Control) WithDoubleValue(doubleValue float64) *Control {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Control) WithFont(font *raw.NSFont) *Control {
-	x.inner.SetFont(font)
+func (x *Control) WithFont(font *Font) *Control {
+	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
@@ -374,8 +374,8 @@ func (x *Control) WithContentFilters(items ...*coreimage.CIFilter) *Control {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Control) WithShadow(shadow *raw.NSShadow) *Control {
-	x.inner.NSView.SetShadow(shadow)
+func (x *Control) WithShadow(shadow *Shadow) *Control {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -456,8 +456,8 @@ func (x *Control) WithPrefersCompactControlSizeMetrics(prefersCompactControlSize
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Control) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Control {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Control) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Control {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -498,8 +498,8 @@ func (x *Control) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynami
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Control) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Control {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Control) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Control {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -510,8 +510,8 @@ func (x *Control) WithNextResponder(nextResponder ResponderProvider) *Control {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Control) WithMenu(menu *raw.NSMenu) *Control {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *Control) WithMenu(menu *Menu) *Control {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -522,8 +522,8 @@ func (x *Control) WithUserActivity(userActivity *foundation.NSUserActivity) *Con
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Control) WithTouchBar(touchBar *raw.NSTouchBar) *Control {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Control) WithTouchBar(touchBar *TouchBar) *Control {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -958,7 +958,7 @@ type Controlable interface {
 	WithIntegerValue(integerValue int) *Control
 	WithFloatValue(floatValue float32) *Control
 	WithDoubleValue(doubleValue float64) *Control
-	WithFont(font *raw.NSFont) *Control
+	WithFont(font *Font) *Control
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Control
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Control
 	WithAlignment(alignment raw.NSTextAlignment) *Control
@@ -990,7 +990,7 @@ type Controlable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Control
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Control
 	WithContentFilters(items ...*coreimage.CIFilter) *Control
-	WithShadow(shadow *raw.NSShadow) *Control
+	WithShadow(shadow *Shadow) *Control
 	WithClipsToBounds(clipsToBounds bool) *Control
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Control
 	WithToolTip(toolTip string) *Control
@@ -1002,18 +1002,18 @@ type Controlable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Control
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Control
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Control
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Control
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Control
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Control
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Control
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Control
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Control
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Control
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Control
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Control
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Control
 	WithNextResponder(nextResponder ResponderProvider) *Control
-	WithMenu(menu *raw.NSMenu) *Control
+	WithMenu(menu *Menu) *Control
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Control
-	WithTouchBar(touchBar *raw.NSTouchBar) *Control
+	WithTouchBar(touchBar *TouchBar) *Control
 	SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize
 	SizeToFit()
 	SendActionOn(mask raw.NSEventMask) int

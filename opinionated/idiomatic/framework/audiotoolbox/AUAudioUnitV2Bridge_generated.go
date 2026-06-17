@@ -52,8 +52,8 @@ func (x *AudioUnitV2Bridge) WithMaximumFramesToRender(maximumFramesToRender uint
 }
 
 // WithParameterTree sets the parameterTree property and returns the receiver for chaining.
-func (x *AudioUnitV2Bridge) WithParameterTree(parameterTree *raw.AUParameterTree) *AudioUnitV2Bridge {
-	x.inner.AUAudioUnit.SetParameterTree(parameterTree)
+func (x *AudioUnitV2Bridge) WithParameterTree(parameterTree *ParameterTree) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetParameterTree(parameterTree.Unwrap())
 	return x
 }
 
@@ -88,8 +88,8 @@ func (x *AudioUnitV2Bridge) WithFullStateForDocument(fullStateForDocument *found
 }
 
 // WithCurrentPreset sets the currentPreset property and returns the receiver for chaining.
-func (x *AudioUnitV2Bridge) WithCurrentPreset(currentPreset *raw.AUAudioUnitPreset) *AudioUnitV2Bridge {
-	x.inner.AUAudioUnit.SetCurrentPreset(currentPreset)
+func (x *AudioUnitV2Bridge) WithCurrentPreset(currentPreset *AudioUnitPreset) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetCurrentPreset(currentPreset.Unwrap())
 	return x
 }
 
@@ -187,13 +187,13 @@ type AudioUnitV2Bridgeable interface {
 	Unwrap() *raw.AUAudioUnitV2Bridge
 	WithRenderResourcesAllocated(renderResourcesAllocated bool) *AudioUnitV2Bridge
 	WithMaximumFramesToRender(maximumFramesToRender uint32) *AudioUnitV2Bridge
-	WithParameterTree(parameterTree *raw.AUParameterTree) *AudioUnitV2Bridge
+	WithParameterTree(parameterTree *ParameterTree) *AudioUnitV2Bridge
 	WithMIDIOutputEventBlock(mIDIOutputEventBlock func(int64, uint8, int, unsafe.Pointer) int) *AudioUnitV2Bridge
 	WithMIDIOutputEventListBlock(mIDIOutputEventListBlock func(int64, uint8, unsafe.Pointer) int) *AudioUnitV2Bridge
 	WithHostMIDIProtocol(hostMIDIProtocol objc.ID) *AudioUnitV2Bridge
 	WithFullState(fullState *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnitV2Bridge
 	WithFullStateForDocument(fullStateForDocument *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnitV2Bridge
-	WithCurrentPreset(currentPreset *raw.AUAudioUnitPreset) *AudioUnitV2Bridge
+	WithCurrentPreset(currentPreset *AudioUnitPreset) *AudioUnitV2Bridge
 	WithRenderQuality(renderQuality int) *AudioUnitV2Bridge
 	WithShouldBypassEffect(shouldBypassEffect bool) *AudioUnitV2Bridge
 	WithRenderingOffline(renderingOffline bool) *AudioUnitV2Bridge

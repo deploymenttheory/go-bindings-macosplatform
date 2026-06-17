@@ -75,14 +75,14 @@ func (x *ShareRequestAccessOperation) WithShareRequestAccessCompletionBlock(shar
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *ShareRequestAccessOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetConfiguration(configuration)
+func (x *ShareRequestAccessOperation) WithConfiguration(configuration *OperationConfiguration) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *ShareRequestAccessOperation) WithGroup(group *raw.CKOperationGroup) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetGroup(group)
+func (x *ShareRequestAccessOperation) WithGroup(group *OperationGroup) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -93,8 +93,8 @@ func (x *ShareRequestAccessOperation) WithLongLivedOperationWasPersistedBlock(lo
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *ShareRequestAccessOperation) WithContainer(container *raw.CKContainer) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetContainer(container)
+func (x *ShareRequestAccessOperation) WithContainer(container *Container) *ShareRequestAccessOperation {
+	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -198,10 +198,10 @@ type ShareRequestAccessOperationable interface {
 	WithShareURLs(items ...*foundation.NSURL) *ShareRequestAccessOperation
 	WithPerShareAccessRequestCompletionBlock(perShareAccessRequestCompletionBlock func(*foundation.NSURL, unsafe.Pointer)) *ShareRequestAccessOperation
 	WithShareRequestAccessCompletionBlock(shareRequestAccessCompletionBlock func(unsafe.Pointer)) *ShareRequestAccessOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *ShareRequestAccessOperation
-	WithGroup(group *raw.CKOperationGroup) *ShareRequestAccessOperation
+	WithConfiguration(configuration *OperationConfiguration) *ShareRequestAccessOperation
+	WithGroup(group *OperationGroup) *ShareRequestAccessOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ShareRequestAccessOperation
-	WithContainer(container *raw.CKContainer) *ShareRequestAccessOperation
+	WithContainer(container *Container) *ShareRequestAccessOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *ShareRequestAccessOperation
 	WithLongLived(longLived bool) *ShareRequestAccessOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ShareRequestAccessOperation

@@ -88,13 +88,13 @@ func (x *Activity) SetPrimaryActivityItem(primaryActivityItem *raw.CLSActivityIt
 }
 
 // AdditionalActivityItems returns the collection as a Go slice.
-func (x *Activity) AdditionalActivityItems() []*raw.CLSActivityItem {
+func (x *Activity) AdditionalActivityItems() []*ActivityItem {
 	arr := x.inner.AdditionalActivityItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CLSActivityItem {
-		return raw.CLSActivityItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ActivityItem {
+		return &ActivityItem{inner: raw.CLSActivityItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -132,7 +132,7 @@ type Activityable interface {
 	Duration() float64
 	PrimaryActivityItem() *ActivityItem
 	SetPrimaryActivityItem(primaryActivityItem *raw.CLSActivityItem)
-	AdditionalActivityItems() []*raw.CLSActivityItem
+	AdditionalActivityItems() []*ActivityItem
 	Start()
 	Stop()
 	RemoveAllActivityItems()

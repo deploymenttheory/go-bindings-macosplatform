@@ -55,8 +55,8 @@ func (x *Scene) WithScaleMode(scaleMode raw.SKSceneScaleMode) *Scene {
 }
 
 // WithCamera sets the camera property and returns the receiver for chaining.
-func (x *Scene) WithCamera(camera *raw.SKCameraNode) *Scene {
-	x.inner.SetCamera(camera)
+func (x *Scene) WithCamera(camera *CameraNode) *Scene {
+	x.inner.SetCamera(camera.Unwrap())
 	return x
 }
 
@@ -115,8 +115,8 @@ func (x *Scene) WithBlendMode(blendMode raw.SKBlendMode) *Scene {
 }
 
 // WithShader sets the shader property and returns the receiver for chaining.
-func (x *Scene) WithShader(shader *raw.SKShader) *Scene {
-	x.inner.SKEffectNode.SetShader(shader)
+func (x *Scene) WithShader(shader *Shader) *Scene {
+	x.inner.SKEffectNode.SetShader(shader.Unwrap())
 	return x
 }
 
@@ -187,8 +187,8 @@ func (x *Scene) WithName(name string) *Scene {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *Scene) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *Scene {
-	x.inner.SKEffectNode.SKNode.SetPhysicsBody(physicsBody)
+func (x *Scene) WithPhysicsBody(physicsBody *PhysicsBody) *Scene {
+	x.inner.SKEffectNode.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -199,8 +199,8 @@ func (x *Scene) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, o
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *Scene) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *Scene {
-	x.inner.SKEffectNode.SKNode.SetReachConstraints(reachConstraints)
+func (x *Scene) WithReachConstraints(reachConstraints *ReachConstraints) *Scene {
+	x.inner.SKEffectNode.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -445,7 +445,7 @@ type Sceneable interface {
 	Unwrap() *raw.SKScene
 	WithSize(size corefoundation.CGSize) *Scene
 	WithScaleMode(scaleMode raw.SKSceneScaleMode) *Scene
-	WithCamera(camera *raw.SKCameraNode) *Scene
+	WithCamera(camera *CameraNode) *Scene
 	WithListener(listener NodeProvider) *Scene
 	WithBackgroundColor(backgroundColor *appkit.NSColor) *Scene
 	WithDelegate(delegate raw.SKSceneDelegate) *Scene
@@ -455,7 +455,7 @@ type Sceneable interface {
 	WithShouldEnableEffects(shouldEnableEffects bool) *Scene
 	WithShouldRasterize(shouldRasterize bool) *Scene
 	WithBlendMode(blendMode raw.SKBlendMode) *Scene
-	WithShader(shader *raw.SKShader) *Scene
+	WithShader(shader *Shader) *Scene
 	WithPosition(position corefoundation.CGPoint) *Scene
 	WithZPosition(zPosition float64) *Scene
 	WithZRotation(zRotation float64) *Scene
@@ -467,9 +467,9 @@ type Sceneable interface {
 	WithHidden(hidden bool) *Scene
 	WithUserInteractionEnabled(userInteractionEnabled bool) *Scene
 	WithName(name string) *Scene
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *Scene
+	WithPhysicsBody(physicsBody *PhysicsBody) *Scene
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Scene
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *Scene
+	WithReachConstraints(reachConstraints *ReachConstraints) *Scene
 	WithConstraints(items ...*raw.SKConstraint) *Scene
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Scene
 	WithAccessibilityElement(accessibilityElement bool) *Scene

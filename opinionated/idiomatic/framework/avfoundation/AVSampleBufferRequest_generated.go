@@ -44,8 +44,8 @@ func (x *SampleBufferRequest) WithDirection(direction raw.AVSampleBufferRequestD
 }
 
 // WithLimitCursor sets the limitCursor property and returns the receiver for chaining.
-func (x *SampleBufferRequest) WithLimitCursor(limitCursor *raw.AVSampleCursor) *SampleBufferRequest {
-	x.inner.SetLimitCursor(limitCursor)
+func (x *SampleBufferRequest) WithLimitCursor(limitCursor *SampleCursor) *SampleBufferRequest {
+	x.inner.SetLimitCursor(limitCursor.Unwrap())
 	return x
 }
 
@@ -150,7 +150,7 @@ func (x *SampleBufferRequest) SetOverrideTime(overrideTime coremedia.CMTime) {
 type SampleBufferRequestable interface {
 	Unwrap() *raw.AVSampleBufferRequest
 	WithDirection(direction raw.AVSampleBufferRequestDirection) *SampleBufferRequest
-	WithLimitCursor(limitCursor *raw.AVSampleCursor) *SampleBufferRequest
+	WithLimitCursor(limitCursor *SampleCursor) *SampleBufferRequest
 	WithPreferredMinSampleCount(preferredMinSampleCount int) *SampleBufferRequest
 	WithMaxSampleCount(maxSampleCount int) *SampleBufferRequest
 	WithMode(mode raw.AVSampleBufferRequestMode) *SampleBufferRequest

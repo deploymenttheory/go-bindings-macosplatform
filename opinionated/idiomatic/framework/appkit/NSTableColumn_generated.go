@@ -82,8 +82,8 @@ func (x *TableColumn) WithTitle(title string) *TableColumn {
 }
 
 // WithHeaderCell sets the headerCell property and returns the receiver for chaining.
-func (x *TableColumn) WithHeaderCell(headerCell *raw.NSTableHeaderCell) *TableColumn {
-	x.inner.SetHeaderCell(headerCell)
+func (x *TableColumn) WithHeaderCell(headerCell *TableHeaderCell) *TableColumn {
+	x.inner.SetHeaderCell(headerCell.Unwrap())
 	return x
 }
 
@@ -302,7 +302,7 @@ type TableColumnable interface {
 	WithMinWidth(minWidth float64) *TableColumn
 	WithMaxWidth(maxWidth float64) *TableColumn
 	WithTitle(title string) *TableColumn
-	WithHeaderCell(headerCell *raw.NSTableHeaderCell) *TableColumn
+	WithHeaderCell(headerCell *TableHeaderCell) *TableColumn
 	WithEditable(editable bool) *TableColumn
 	WithSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor) *TableColumn
 	WithResizingMask(resizingMask raw.NSTableColumnResizingOptions) *TableColumn

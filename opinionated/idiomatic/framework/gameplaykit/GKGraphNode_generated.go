@@ -68,13 +68,13 @@ func (x *GraphNode) FindPathFromNode(startNode *raw.GKGraphNode) *foundation.NSA
 }
 
 // ConnectedNodes returns the collection as a Go slice.
-func (x *GraphNode) ConnectedNodes() []*raw.GKGraphNode {
+func (x *GraphNode) ConnectedNodes() []*GraphNode {
 	arr := x.inner.ConnectedNodes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKGraphNode {
-		return raw.GKGraphNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphNode {
+		return &GraphNode{inner: raw.GKGraphNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -89,7 +89,7 @@ type GraphNodeable interface {
 	CostToNode(node *raw.GKGraphNode) float32
 	FindPathToNode(goalNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode]
 	FindPathFromNode(startNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode]
-	ConnectedNodes() []*raw.GKGraphNode
+	ConnectedNodes() []*GraphNode
 }
 
 var _ GraphNodeable = (*GraphNode)(nil)

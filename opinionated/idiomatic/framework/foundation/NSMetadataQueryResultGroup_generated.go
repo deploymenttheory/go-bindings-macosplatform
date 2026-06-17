@@ -62,13 +62,13 @@ func (x *MetadataQueryResultGroup) Value() objc.ID {
 }
 
 // Subgroups returns the collection as a Go slice.
-func (x *MetadataQueryResultGroup) Subgroups() []*raw.NSMetadataQueryResultGroup {
+func (x *MetadataQueryResultGroup) Subgroups() []*MetadataQueryResultGroup {
 	arr := x.inner.Subgroups()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMetadataQueryResultGroup {
-		return raw.NSMetadataQueryResultGroupFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataQueryResultGroup {
+		return &MetadataQueryResultGroup{inner: raw.NSMetadataQueryResultGroupFromID(purego.Retain(_id))}
 	})
 }
 
@@ -91,7 +91,7 @@ type MetadataQueryResultGroupable interface {
 	ResultAtIndex(idx uint) objc.ID
 	Attribute() *String
 	Value() objc.ID
-	Subgroups() []*raw.NSMetadataQueryResultGroup
+	Subgroups() []*MetadataQueryResultGroup
 	ResultCount() uint
 	Results() *raw.NSArray[objc.ID]
 }

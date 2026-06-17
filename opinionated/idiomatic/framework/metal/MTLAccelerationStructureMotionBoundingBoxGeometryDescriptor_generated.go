@@ -115,13 +115,13 @@ func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithPrimitive
 }
 
 // BoundingBoxBuffers returns the collection as a Go slice.
-func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxBuffers() []*raw.MTLMotionKeyframeData {
+func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxBuffers() []*MotionKeyframeData {
 	arr := x.inner.BoundingBoxBuffers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLMotionKeyframeData {
-		return raw.MTLMotionKeyframeDataFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MotionKeyframeData {
+		return &MotionKeyframeData{inner: raw.MTLMotionKeyframeDataFromID(purego.Retain(_id))}
 	})
 }
 
@@ -166,7 +166,7 @@ type AccelerationStructureMotionBoundingBoxGeometryDescriptorable interface {
 	WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureMotionBoundingBoxGeometryDescriptor
 	WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureMotionBoundingBoxGeometryDescriptor
 	WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureMotionBoundingBoxGeometryDescriptor
-	BoundingBoxBuffers() []*raw.MTLMotionKeyframeData
+	BoundingBoxBuffers() []*MotionKeyframeData
 	SetBoundingBoxBuffers(boundingBoxBuffers *foundation.NSArray[*raw.MTLMotionKeyframeData])
 	BoundingBoxStride() uint
 	SetBoundingBoxStride(boundingBoxStride uint)

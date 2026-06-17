@@ -39,13 +39,13 @@ func NewCustomDetectionTrackWithDetectionsSmooth(detections *foundation.NSArray[
 }
 
 // AllDetections returns the collection as a Go slice.
-func (x *CustomDetectionTrack) AllDetections() []*raw.CNDetection {
+func (x *CustomDetectionTrack) AllDetections() []*Detection {
 	arr := x.inner.AllDetections()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CNDetection {
-		return raw.CNDetectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Detection {
+		return &Detection{inner: raw.CNDetectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *CustomDetectionTrack) asDetectionTrack() *raw.CNDetectionTrack { return
 // CustomDetectionTrackable is the interface implemented by [CustomDetectionTrack], for mocking and DI.
 type CustomDetectionTrackable interface {
 	Unwrap() *raw.CNCustomDetectionTrack
-	AllDetections() []*raw.CNDetection
+	AllDetections() []*Detection
 }
 
 var _ CustomDetectionTrackable = (*CustomDetectionTrack)(nil)

@@ -51,13 +51,13 @@ func (x *ProjectInfo) ProjectType() string {
 }
 
 // Sections returns the collection as a Go slice.
-func (x *ProjectInfo) Sections() []*raw.PHProjectSection {
+func (x *ProjectInfo) Sections() []*ProjectSection {
 	arr := x.inner.Sections()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHProjectSection {
-		return raw.PHProjectSectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ProjectSection {
+		return &ProjectSection{inner: raw.PHProjectSectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -94,7 +94,7 @@ type ProjectInfoable interface {
 	Unwrap() *raw.PHProjectInfo
 	CreationSource() raw.PHProjectCreationSource
 	ProjectType() string
-	Sections() []*raw.PHProjectSection
+	Sections() []*ProjectSection
 	BrandingEnabled() bool
 	PageNumbersEnabled() bool
 	ProductIdentifier() string

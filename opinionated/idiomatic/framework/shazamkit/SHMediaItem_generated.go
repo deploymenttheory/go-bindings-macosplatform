@@ -138,24 +138,24 @@ func (x *MediaItem) Isrc() string {
 }
 
 // TimeRanges returns the collection as a Go slice.
-func (x *MediaItem) TimeRanges() []*raw.SHRange {
+func (x *MediaItem) TimeRanges() []*Range {
 	arr := x.inner.TimeRanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SHRange {
-		return raw.SHRangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Range {
+		return &Range{inner: raw.SHRangeFromID(purego.Retain(_id))}
 	})
 }
 
 // FrequencySkewRanges returns the collection as a Go slice.
-func (x *MediaItem) FrequencySkewRanges() []*raw.SHRange {
+func (x *MediaItem) FrequencySkewRanges() []*Range {
 	arr := x.inner.FrequencySkewRanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SHRange {
-		return raw.SHRangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Range {
+		return &Range{inner: raw.SHRangeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -183,8 +183,8 @@ type MediaItemable interface {
 	VideoURL() *foundation.NSURL
 	ExplicitContent() bool
 	Isrc() string
-	TimeRanges() []*raw.SHRange
-	FrequencySkewRanges() []*raw.SHRange
+	TimeRanges() []*Range
+	FrequencySkewRanges() []*Range
 	CreationDate() *foundation.NSDate
 }
 

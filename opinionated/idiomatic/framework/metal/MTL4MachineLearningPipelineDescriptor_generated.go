@@ -49,8 +49,8 @@ func (x *MTL4MachineLearningPipelineDescriptor) WithLabel(label string) *MTL4Mac
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *MTL4MachineLearningPipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor {
-	x.inner.MTL4PipelineDescriptor.SetOptions(options)
+func (x *MTL4MachineLearningPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetOptions(options.Unwrap())
 	return x
 }
 
@@ -99,7 +99,7 @@ type MTL4MachineLearningPipelineDescriptorable interface {
 	Unwrap() *raw.MTL4MachineLearningPipelineDescriptor
 	WithMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4MachineLearningPipelineDescriptor
 	WithLabel(label string) *MTL4MachineLearningPipelineDescriptor
-	WithOptions(options *raw.MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor
+	WithOptions(options *MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor
 	SetInputDimensionsAtBufferIndex(dimensions *raw.MTLTensorExtents, bufferIndex int)
 	SetInputDimensionsWithRange(dimensions *foundation.NSArray[*raw.MTLTensorExtents], range_ foundation.NSRange)
 	InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents

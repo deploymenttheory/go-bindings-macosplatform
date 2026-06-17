@@ -54,8 +54,8 @@ func (x *TableCellView) WithTextField(textField TextFieldProvider) *TableCellVie
 }
 
 // WithImageView sets the imageView property and returns the receiver for chaining.
-func (x *TableCellView) WithImageView(imageView *raw.NSImageView) *TableCellView {
-	x.inner.SetImageView(imageView)
+func (x *TableCellView) WithImageView(imageView *ImageView) *TableCellView {
+	x.inner.SetImageView(imageView.Unwrap())
 	return x
 }
 
@@ -252,8 +252,8 @@ func (x *TableCellView) WithContentFilters(items ...*coreimage.CIFilter) *TableC
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *TableCellView) WithShadow(shadow *raw.NSShadow) *TableCellView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *TableCellView) WithShadow(shadow *Shadow) *TableCellView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -334,8 +334,8 @@ func (x *TableCellView) WithPrefersCompactControlSizeMetrics(prefersCompactContr
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *TableCellView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableCellView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *TableCellView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableCellView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -376,8 +376,8 @@ func (x *TableCellView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtended
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *TableCellView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableCellView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *TableCellView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableCellView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -388,8 +388,8 @@ func (x *TableCellView) WithNextResponder(nextResponder ResponderProvider) *Tabl
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TableCellView) WithMenu(menu *raw.NSMenu) *TableCellView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *TableCellView) WithMenu(menu *Menu) *TableCellView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -400,8 +400,8 @@ func (x *TableCellView) WithUserActivity(userActivity *foundation.NSUserActivity
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TableCellView) WithTouchBar(touchBar *raw.NSTouchBar) *TableCellView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *TableCellView) WithTouchBar(touchBar *TouchBar) *TableCellView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -464,13 +464,13 @@ func (x *TableCellView) SetRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle
 }
 
 // DraggingImageComponents returns the collection as a Go slice.
-func (x *TableCellView) DraggingImageComponents() []*raw.NSDraggingImageComponent {
+func (x *TableCellView) DraggingImageComponents() []*DraggingImageComponent {
 	arr := x.inner.DraggingImageComponents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSDraggingImageComponent {
-		return raw.NSDraggingImageComponentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DraggingImageComponent {
+		return &DraggingImageComponent{inner: raw.NSDraggingImageComponentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -483,7 +483,7 @@ type TableCellViewable interface {
 	Unwrap() *raw.NSTableCellView
 	WithObjectValue(objectValue objc.ID) *TableCellView
 	WithTextField(textField TextFieldProvider) *TableCellView
-	WithImageView(imageView *raw.NSImageView) *TableCellView
+	WithImageView(imageView *ImageView) *TableCellView
 	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TableCellView
 	WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *TableCellView
 	WithSubviews(items ...ViewProvider) *TableCellView
@@ -511,7 +511,7 @@ type TableCellViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *TableCellView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TableCellView
 	WithContentFilters(items ...*coreimage.CIFilter) *TableCellView
-	WithShadow(shadow *raw.NSShadow) *TableCellView
+	WithShadow(shadow *Shadow) *TableCellView
 	WithClipsToBounds(clipsToBounds bool) *TableCellView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableCellView
 	WithToolTip(toolTip string) *TableCellView
@@ -523,18 +523,18 @@ type TableCellViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableCellView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableCellView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableCellView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableCellView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableCellView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableCellView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableCellView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableCellView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableCellView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableCellView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableCellView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableCellView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableCellView
 	WithNextResponder(nextResponder ResponderProvider) *TableCellView
-	WithMenu(menu *raw.NSMenu) *TableCellView
+	WithMenu(menu *Menu) *TableCellView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TableCellView
-	WithTouchBar(touchBar *raw.NSTouchBar) *TableCellView
+	WithTouchBar(touchBar *TouchBar) *TableCellView
 	ObjectValue() objc.ID
 	SetObjectValue(objectValue objc.ID)
 	TextField() *TextField
@@ -545,7 +545,7 @@ type TableCellViewable interface {
 	SetBackgroundStyle(backgroundStyle raw.NSBackgroundStyle)
 	RowSizeStyle() raw.NSTableViewRowSizeStyle
 	SetRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle)
-	DraggingImageComponents() []*raw.NSDraggingImageComponent
+	DraggingImageComponents() []*DraggingImageComponent
 }
 
 var _ TableCellViewable = (*TableCellView)(nil)

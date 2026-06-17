@@ -187,13 +187,13 @@ func (x *AssetWriterInput) SourceFormatHint() unsafe.Pointer {
 }
 
 // Metadata returns the collection as a Go slice.
-func (x *AssetWriterInput) Metadata() []*raw.AVMetadataItem {
+func (x *AssetWriterInput) Metadata() []*MetadataItem {
 	arr := x.inner.Metadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -406,7 +406,7 @@ type AssetWriterInputable interface {
 	MediaType() string
 	OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SourceFormatHint() unsafe.Pointer
-	Metadata() []*raw.AVMetadataItem
+	Metadata() []*MetadataItem
 	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
 	IsReadyForMoreMediaData() bool
 	ExpectsMediaDataInRealTime() bool

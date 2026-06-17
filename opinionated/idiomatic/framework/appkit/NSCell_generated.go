@@ -162,8 +162,8 @@ func (x *Cell) WithWraps(wraps bool) *Cell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Cell) WithFont(font *raw.NSFont) *Cell {
-	x.inner.SetFont(font)
+func (x *Cell) WithFont(font *Font) *Cell {
+	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
@@ -210,8 +210,8 @@ func (x *Cell) WithIntegerValue(integerValue int) *Cell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *Cell) WithImage(image *raw.NSImage) *Cell {
-	x.inner.SetImage(image)
+func (x *Cell) WithImage(image *Image) *Cell {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -228,8 +228,8 @@ func (x *Cell) WithRepresentedObject(representedObject objc.ID) *Cell {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Cell) WithMenu(menu *raw.NSMenu) *Cell {
-	x.inner.SetMenu(menu)
+func (x *Cell) WithMenu(menu *Menu) *Cell {
+	x.inner.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -1129,7 +1129,7 @@ type Cellable interface {
 	WithHighlighted(highlighted bool) *Cell
 	WithAlignment(alignment raw.NSTextAlignment) *Cell
 	WithWraps(wraps bool) *Cell
-	WithFont(font *raw.NSFont) *Cell
+	WithFont(font *Font) *Cell
 	WithFormatter(formatter *foundation.NSFormatter) *Cell
 	WithObjectValue(objectValue objc.ID) *Cell
 	WithStringValue(stringValue string) *Cell
@@ -1137,10 +1137,10 @@ type Cellable interface {
 	WithFloatValue(floatValue float32) *Cell
 	WithDoubleValue(doubleValue float64) *Cell
 	WithIntegerValue(integerValue int) *Cell
-	WithImage(image *raw.NSImage) *Cell
+	WithImage(image *Image) *Cell
 	WithControlSize(controlSize raw.NSControlSize) *Cell
 	WithRepresentedObject(representedObject objc.ID) *Cell
-	WithMenu(menu *raw.NSMenu) *Cell
+	WithMenu(menu *Menu) *Cell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *Cell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Cell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Cell

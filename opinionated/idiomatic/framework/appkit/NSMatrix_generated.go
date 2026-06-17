@@ -93,14 +93,14 @@ func (x *Matrix) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *M
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *Matrix) WithBackgroundColor(backgroundColor *raw.NSColor) *Matrix {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *Matrix) WithBackgroundColor(backgroundColor *Color) *Matrix {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
 // WithCellBackgroundColor sets the cellBackgroundColor property and returns the receiver for chaining.
-func (x *Matrix) WithCellBackgroundColor(cellBackgroundColor *raw.NSColor) *Matrix {
-	x.inner.SetCellBackgroundColor(cellBackgroundColor)
+func (x *Matrix) WithCellBackgroundColor(cellBackgroundColor *Color) *Matrix {
+	x.inner.SetCellBackgroundColor(cellBackgroundColor.Unwrap())
 	return x
 }
 
@@ -261,8 +261,8 @@ func (x *Matrix) WithDoubleValue(doubleValue float64) *Matrix {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Matrix) WithFont(font *raw.NSFont) *Matrix {
-	x.inner.NSControl.SetFont(font)
+func (x *Matrix) WithFont(font *Font) *Matrix {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -483,8 +483,8 @@ func (x *Matrix) WithContentFilters(items ...*coreimage.CIFilter) *Matrix {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Matrix) WithShadow(shadow *raw.NSShadow) *Matrix {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *Matrix) WithShadow(shadow *Shadow) *Matrix {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -565,8 +565,8 @@ func (x *Matrix) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeM
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Matrix) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Matrix {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Matrix) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Matrix {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -607,8 +607,8 @@ func (x *Matrix) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamic
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Matrix) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Matrix {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Matrix) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Matrix {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -619,8 +619,8 @@ func (x *Matrix) WithNextResponder(nextResponder ResponderProvider) *Matrix {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Matrix) WithMenu(menu *raw.NSMenu) *Matrix {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *Matrix) WithMenu(menu *Menu) *Matrix {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -631,8 +631,8 @@ func (x *Matrix) WithUserActivity(userActivity *foundation.NSUserActivity) *Matr
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Matrix) WithTouchBar(touchBar *raw.NSTouchBar) *Matrix {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Matrix) WithTouchBar(touchBar *TouchBar) *Matrix {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -921,24 +921,24 @@ func (x *Matrix) SetAllowsEmptySelection(allowsEmptySelection bool) {
 }
 
 // Cells returns the collection as a Go slice.
-func (x *Matrix) Cells() []*raw.NSCell {
+func (x *Matrix) Cells() []*Cell {
 	arr := x.inner.Cells()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCell {
-		return raw.NSCellFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Cell {
+		return &Cell{inner: raw.NSCellFromID(purego.Retain(_id))}
 	})
 }
 
 // SelectedCells returns the collection as a Go slice.
-func (x *Matrix) SelectedCells() []*raw.NSCell {
+func (x *Matrix) SelectedCells() []*Cell {
 	arr := x.inner.SelectedCells()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCell {
-		return raw.NSCellFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Cell {
+		return &Cell{inner: raw.NSCellFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1136,8 +1136,8 @@ type Matrixable interface {
 	WithSelectionByRect(selectionByRect bool) *Matrix
 	WithCellSize(cellSize corefoundation.CGSize) *Matrix
 	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Matrix
-	WithBackgroundColor(backgroundColor *raw.NSColor) *Matrix
-	WithCellBackgroundColor(cellBackgroundColor *raw.NSColor) *Matrix
+	WithBackgroundColor(backgroundColor *Color) *Matrix
+	WithCellBackgroundColor(cellBackgroundColor *Color) *Matrix
 	WithDrawsCellBackground(drawsCellBackground bool) *Matrix
 	WithDrawsBackground(drawsBackground bool) *Matrix
 	WithDoubleAction(doubleAction objc.SEL) *Matrix
@@ -1164,7 +1164,7 @@ type Matrixable interface {
 	WithIntegerValue(integerValue int) *Matrix
 	WithFloatValue(floatValue float32) *Matrix
 	WithDoubleValue(doubleValue float64) *Matrix
-	WithFont(font *raw.NSFont) *Matrix
+	WithFont(font *Font) *Matrix
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Matrix
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Matrix
 	WithAlignment(alignment raw.NSTextAlignment) *Matrix
@@ -1196,7 +1196,7 @@ type Matrixable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Matrix
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Matrix
 	WithContentFilters(items ...*coreimage.CIFilter) *Matrix
-	WithShadow(shadow *raw.NSShadow) *Matrix
+	WithShadow(shadow *Shadow) *Matrix
 	WithClipsToBounds(clipsToBounds bool) *Matrix
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Matrix
 	WithToolTip(toolTip string) *Matrix
@@ -1208,18 +1208,18 @@ type Matrixable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Matrix
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Matrix
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Matrix
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Matrix
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Matrix
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Matrix
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Matrix
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Matrix
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Matrix
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Matrix
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Matrix
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Matrix
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Matrix
 	WithNextResponder(nextResponder ResponderProvider) *Matrix
-	WithMenu(menu *raw.NSMenu) *Matrix
+	WithMenu(menu *Menu) *Matrix
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Matrix
-	WithTouchBar(touchBar *raw.NSTouchBar) *Matrix
+	WithTouchBar(touchBar *TouchBar) *Matrix
 	MakeCellAtRowColumn(row int, col int) *Cell
 	SendActionToForAllCells(selector objc.SEL, object objc.ID, flag bool)
 	SortUsingSelector(comparator objc.SEL)
@@ -1272,8 +1272,8 @@ type Matrixable interface {
 	SetMode(mode raw.NSMatrixMode)
 	AllowsEmptySelection() bool
 	SetAllowsEmptySelection(allowsEmptySelection bool)
-	Cells() []*raw.NSCell
-	SelectedCells() []*raw.NSCell
+	Cells() []*Cell
+	SelectedCells() []*Cell
 	SelectedRow() int
 	SelectedColumn() int
 	IsSelectionByRect() bool

@@ -233,24 +233,24 @@ func (x *EventStore) EventStoreIdentifier() string {
 }
 
 // DelegateSources returns the collection as a Go slice.
-func (x *EventStore) DelegateSources() []*raw.EKSource {
+func (x *EventStore) DelegateSources() []*Source {
 	arr := x.inner.DelegateSources()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKSource {
-		return raw.EKSourceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Source {
+		return &Source{inner: raw.EKSourceFromID(purego.Retain(_id))}
 	})
 }
 
 // Sources returns the collection as a Go slice.
-func (x *EventStore) Sources() []*raw.EKSource {
+func (x *EventStore) Sources() []*Source {
 	arr := x.inner.Sources()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKSource {
-		return raw.EKSourceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Source {
+		return &Source{inner: raw.EKSourceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -297,8 +297,8 @@ type EventStoreable interface {
 	Reset()
 	RefreshSourcesIfNecessary()
 	EventStoreIdentifier() string
-	DelegateSources() []*raw.EKSource
-	Sources() []*raw.EKSource
+	DelegateSources() []*Source
+	Sources() []*Source
 	DefaultCalendarForNewEvents() *Calendar
 }
 

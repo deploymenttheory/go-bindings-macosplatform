@@ -93,8 +93,8 @@ func (x *CNNConvolutionDescriptor) WithDilationRateY(dilationRateY uint) *CNNCon
 }
 
 // WithFusedNeuronDescriptor sets the fusedNeuronDescriptor property and returns the receiver for chaining.
-func (x *CNNConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *raw.MPSNNNeuronDescriptor) *CNNConvolutionDescriptor {
-	x.inner.SetFusedNeuronDescriptor(fusedNeuronDescriptor)
+func (x *CNNConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNConvolutionDescriptor {
+	x.inner.SetFusedNeuronDescriptor(fusedNeuronDescriptor.Unwrap())
 	return x
 }
 
@@ -261,7 +261,7 @@ type CNNConvolutionDescriptorable interface {
 	WithGroups(groups uint) *CNNConvolutionDescriptor
 	WithDilationRateX(dilationRateX uint) *CNNConvolutionDescriptor
 	WithDilationRateY(dilationRateY uint) *CNNConvolutionDescriptor
-	WithFusedNeuronDescriptor(fusedNeuronDescriptor *raw.MPSNNNeuronDescriptor) *CNNConvolutionDescriptor
+	WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNConvolutionDescriptor
 	EncodeWithCoder(aCoder *foundation.NSCoder)
 	SetBatchNormalizationParametersForInferenceWithMeanVarianceGammaBetaEpsilon(mean *float32, variance *float32, gamma *float32, beta *float32, epsilon unsafe.Pointer)
 	SetNeuronTypeParameterAParameterB(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32)

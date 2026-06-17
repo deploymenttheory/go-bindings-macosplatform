@@ -49,8 +49,8 @@ func (x *MTL4RenderPipelineDescriptor) WithFragmentFunctionDescriptor(fragmentFu
 }
 
 // WithVertexDescriptor sets the vertexDescriptor property and returns the receiver for chaining.
-func (x *MTL4RenderPipelineDescriptor) WithVertexDescriptor(vertexDescriptor *raw.MTLVertexDescriptor) *MTL4RenderPipelineDescriptor {
-	x.inner.SetVertexDescriptor(vertexDescriptor)
+func (x *MTL4RenderPipelineDescriptor) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *MTL4RenderPipelineDescriptor {
+	x.inner.SetVertexDescriptor(vertexDescriptor.Unwrap())
 	return x
 }
 
@@ -91,14 +91,14 @@ func (x *MTL4RenderPipelineDescriptor) WithInputPrimitiveTopology(inputPrimitive
 }
 
 // WithVertexStaticLinkingDescriptor sets the vertexStaticLinkingDescriptor property and returns the receiver for chaining.
-func (x *MTL4RenderPipelineDescriptor) WithVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor {
-	x.inner.SetVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor)
+func (x *MTL4RenderPipelineDescriptor) WithVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor {
+	x.inner.SetVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor.Unwrap())
 	return x
 }
 
 // WithFragmentStaticLinkingDescriptor sets the fragmentStaticLinkingDescriptor property and returns the receiver for chaining.
-func (x *MTL4RenderPipelineDescriptor) WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor {
-	x.inner.SetFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor)
+func (x *MTL4RenderPipelineDescriptor) WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor {
+	x.inner.SetFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor.Unwrap())
 	return x
 }
 
@@ -133,8 +133,8 @@ func (x *MTL4RenderPipelineDescriptor) WithLabel(label string) *MTL4RenderPipeli
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *MTL4RenderPipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *MTL4RenderPipelineDescriptor {
-	x.inner.MTL4PipelineDescriptor.SetOptions(options)
+func (x *MTL4RenderPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4RenderPipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetOptions(options.Unwrap())
 	return x
 }
 
@@ -329,21 +329,21 @@ type MTL4RenderPipelineDescriptorable interface {
 	Unwrap() *raw.MTL4RenderPipelineDescriptor
 	WithVertexFunctionDescriptor(vertexFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4RenderPipelineDescriptor
 	WithFragmentFunctionDescriptor(fragmentFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4RenderPipelineDescriptor
-	WithVertexDescriptor(vertexDescriptor *raw.MTLVertexDescriptor) *MTL4RenderPipelineDescriptor
+	WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *MTL4RenderPipelineDescriptor
 	WithRasterSampleCount(rasterSampleCount uint) *MTL4RenderPipelineDescriptor
 	WithAlphaToCoverageState(alphaToCoverageState raw.MTL4AlphaToCoverageState) *MTL4RenderPipelineDescriptor
 	WithAlphaToOneState(alphaToOneState raw.MTL4AlphaToOneState) *MTL4RenderPipelineDescriptor
 	WithRasterizationEnabled(rasterizationEnabled bool) *MTL4RenderPipelineDescriptor
 	WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *MTL4RenderPipelineDescriptor
 	WithInputPrimitiveTopology(inputPrimitiveTopology raw.MTLPrimitiveTopologyClass) *MTL4RenderPipelineDescriptor
-	WithVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor
-	WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor
+	WithVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor
+	WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor
 	WithSupportVertexBinaryLinking(supportVertexBinaryLinking bool) *MTL4RenderPipelineDescriptor
 	WithSupportFragmentBinaryLinking(supportFragmentBinaryLinking bool) *MTL4RenderPipelineDescriptor
 	WithColorAttachmentMappingState(colorAttachmentMappingState raw.MTL4LogicalToPhysicalColorAttachmentMappingState) *MTL4RenderPipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4RenderPipelineDescriptor
 	WithLabel(label string) *MTL4RenderPipelineDescriptor
-	WithOptions(options *raw.MTL4PipelineOptions) *MTL4RenderPipelineDescriptor
+	WithOptions(options *MTL4PipelineOptions) *MTL4RenderPipelineDescriptor
 	Reset()
 	VertexFunctionDescriptor() *MTL4FunctionDescriptor
 	SetVertexFunctionDescriptor(vertexFunctionDescriptor *raw.MTL4FunctionDescriptor)

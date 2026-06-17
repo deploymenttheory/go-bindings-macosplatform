@@ -36,14 +36,14 @@ func NewRenderPassDescriptor() *RenderPassDescriptor {
 }
 
 // WithDepthAttachment sets the depthAttachment property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithDepthAttachment(depthAttachment *raw.MTLRenderPassDepthAttachmentDescriptor) *RenderPassDescriptor {
-	x.inner.SetDepthAttachment(depthAttachment)
+func (x *RenderPassDescriptor) WithDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor) *RenderPassDescriptor {
+	x.inner.SetDepthAttachment(depthAttachment.Unwrap())
 	return x
 }
 
 // WithStencilAttachment sets the stencilAttachment property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithStencilAttachment(stencilAttachment *raw.MTLRenderPassStencilAttachmentDescriptor) *RenderPassDescriptor {
-	x.inner.SetStencilAttachment(stencilAttachment)
+func (x *RenderPassDescriptor) WithStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor) *RenderPassDescriptor {
+	x.inner.SetStencilAttachment(stencilAttachment.Unwrap())
 	return x
 }
 
@@ -298,8 +298,8 @@ func (x *RenderPassDescriptor) SetSupportColorAttachmentMapping(supportColorAtta
 // RenderPassDescriptorable is the interface implemented by [RenderPassDescriptor], for mocking and DI.
 type RenderPassDescriptorable interface {
 	Unwrap() *raw.MTLRenderPassDescriptor
-	WithDepthAttachment(depthAttachment *raw.MTLRenderPassDepthAttachmentDescriptor) *RenderPassDescriptor
-	WithStencilAttachment(stencilAttachment *raw.MTLRenderPassStencilAttachmentDescriptor) *RenderPassDescriptor
+	WithDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor) *RenderPassDescriptor
+	WithStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor) *RenderPassDescriptor
 	WithVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer) *RenderPassDescriptor
 	WithRenderTargetArrayLength(renderTargetArrayLength uint) *RenderPassDescriptor
 	WithImageblockSampleLength(imageblockSampleLength uint) *RenderPassDescriptor

@@ -159,24 +159,24 @@ func (x *Asset) LoadTracksWithMediaCharacteristic(ctx context.Context, mediaChar
 }
 
 // Tracks returns the collection as a Go slice.
-func (x *Asset) Tracks() []*raw.AVAssetTrack {
+func (x *Asset) Tracks() []*AssetTrack {
 	arr := x.inner.Tracks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetTrack {
-		return raw.AVAssetTrackFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetTrack {
+		return &AssetTrack{inner: raw.AVAssetTrackFromID(purego.Retain(_id))}
 	})
 }
 
 // TrackGroups returns the collection as a Go slice.
-func (x *Asset) TrackGroups() []*raw.AVAssetTrackGroup {
+func (x *Asset) TrackGroups() []*AssetTrackGroup {
 	arr := x.inner.TrackGroups()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetTrackGroup {
-		return raw.AVAssetTrackGroupFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetTrackGroup {
+		return &AssetTrackGroup{inner: raw.AVAssetTrackGroupFromID(purego.Retain(_id))}
 	})
 }
 
@@ -228,24 +228,24 @@ func (x *Asset) Lyrics() string {
 }
 
 // CommonMetadata returns the collection as a Go slice.
-func (x *Asset) CommonMetadata() []*raw.AVMetadataItem {
+func (x *Asset) CommonMetadata() []*MetadataItem {
 	arr := x.inner.CommonMetadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
 // Metadata returns the collection as a Go slice.
-func (x *Asset) Metadata() []*raw.AVMetadataItem {
+func (x *Asset) Metadata() []*MetadataItem {
 	arr := x.inner.Metadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -364,13 +364,13 @@ func (x *Asset) PreferredMediaSelection() *MediaSelection {
 }
 
 // AllMediaSelections returns the collection as a Go slice.
-func (x *Asset) AllMediaSelections() []*raw.AVMediaSelection {
+func (x *Asset) AllMediaSelections() []*MediaSelection {
 	arr := x.inner.AllMediaSelections()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMediaSelection {
-		return raw.AVMediaSelectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaSelection {
+		return &MediaSelection{inner: raw.AVMediaSelectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -449,14 +449,14 @@ type Assetable interface {
 	LoadTracksWithMediaType(ctx context.Context, mediaType *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error)
 	TracksWithMediaCharacteristic(mediaCharacteristic *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack]
 	LoadTracksWithMediaCharacteristic(ctx context.Context, mediaCharacteristic *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error)
-	Tracks() []*raw.AVAssetTrack
-	TrackGroups() []*raw.AVAssetTrackGroup
+	Tracks() []*AssetTrack
+	TrackGroups() []*AssetTrackGroup
 	MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*raw.AVMetadataItem]
 	LoadMetadataForFormat(ctx context.Context, format *foundation.NSString) (*foundation.NSArray[*raw.AVMetadataItem], error)
 	CreationDate() *MetadataItem
 	Lyrics() string
-	CommonMetadata() []*raw.AVMetadataItem
-	Metadata() []*raw.AVMetadataItem
+	CommonMetadata() []*MetadataItem
+	Metadata() []*MetadataItem
 	AvailableMetadataFormats() []*foundation.NSString
 	ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(locale *foundation.NSLocale, commonKeys *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.AVTimedMetadataGroup]
 	LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(ctx context.Context, locale *foundation.NSLocale, commonKeys *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.AVTimedMetadataGroup], error)
@@ -467,7 +467,7 @@ type Assetable interface {
 	LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler(mediaCharacteristic *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer))
 	AvailableMediaCharacteristicsWithMediaSelectionOptions() []*foundation.NSString
 	PreferredMediaSelection() *MediaSelection
-	AllMediaSelections() []*raw.AVMediaSelection
+	AllMediaSelections() []*MediaSelection
 	HasProtectedContent() bool
 	CanContainFragments() bool
 	ContainsFragments() bool

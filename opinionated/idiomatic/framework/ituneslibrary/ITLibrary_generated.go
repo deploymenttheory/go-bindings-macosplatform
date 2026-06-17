@@ -113,24 +113,24 @@ func (x *Library) ShouldShowContentRating() bool {
 }
 
 // AllMediaItems returns the collection as a Go slice.
-func (x *Library) AllMediaItems() []*raw.ITLibMediaItem {
+func (x *Library) AllMediaItems() []*LibMediaItem {
 	arr := x.inner.AllMediaItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ITLibMediaItem {
-		return raw.ITLibMediaItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LibMediaItem {
+		return &LibMediaItem{inner: raw.ITLibMediaItemFromID(purego.Retain(_id))}
 	})
 }
 
 // AllPlaylists returns the collection as a Go slice.
-func (x *Library) AllPlaylists() []*raw.ITLibPlaylist {
+func (x *Library) AllPlaylists() []*LibPlaylist {
 	arr := x.inner.AllPlaylists()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ITLibPlaylist {
-		return raw.ITLibPlaylistFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LibPlaylist {
+		return &LibPlaylist{inner: raw.ITLibPlaylistFromID(purego.Retain(_id))}
 	})
 }
 
@@ -147,8 +147,8 @@ type Libraryable interface {
 	MediaFolderLocation() unsafe.Pointer
 	MusicFolderLocation() *foundation.NSURL
 	ShouldShowContentRating() bool
-	AllMediaItems() []*raw.ITLibMediaItem
-	AllPlaylists() []*raw.ITLibPlaylist
+	AllMediaItems() []*LibMediaItem
+	AllPlaylists() []*LibPlaylist
 }
 
 var _ Libraryable = (*Library)(nil)

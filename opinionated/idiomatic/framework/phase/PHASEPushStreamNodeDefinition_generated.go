@@ -58,8 +58,8 @@ func (x *PushStreamNodeDefinition) WithRate(rate float64) *PushStreamNodeDefinit
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *PushStreamNodeDefinition) WithGroup(group *raw.PHASEGroup) *PushStreamNodeDefinition {
-	x.inner.PHASEGeneratorNodeDefinition.SetGroup(group)
+func (x *PushStreamNodeDefinition) WithGroup(group *Group) *PushStreamNodeDefinition {
+	x.inner.PHASEGeneratorNodeDefinition.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -101,7 +101,7 @@ type PushStreamNodeDefinitionable interface {
 	Unwrap() *raw.PHASEPushStreamNodeDefinition
 	WithNormalize(normalize bool) *PushStreamNodeDefinition
 	WithRate(rate float64) *PushStreamNodeDefinition
-	WithGroup(group *raw.PHASEGroup) *PushStreamNodeDefinition
+	WithGroup(group *Group) *PushStreamNodeDefinition
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition
 	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition
 	Format() *avfaudio.AVAudioFormat

@@ -90,8 +90,8 @@ func (x *CNNDepthWiseConvolutionDescriptor) WithDilationRateY(dilationRateY uint
 }
 
 // WithFusedNeuronDescriptor sets the fusedNeuronDescriptor property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *raw.MPSNNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetFusedNeuronDescriptor(fusedNeuronDescriptor)
+func (x *CNNDepthWiseConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetFusedNeuronDescriptor(fusedNeuronDescriptor.Unwrap())
 	return x
 }
 
@@ -114,7 +114,7 @@ type CNNDepthWiseConvolutionDescriptorable interface {
 	WithGroups(groups uint) *CNNDepthWiseConvolutionDescriptor
 	WithDilationRateX(dilationRateX uint) *CNNDepthWiseConvolutionDescriptor
 	WithDilationRateY(dilationRateY uint) *CNNDepthWiseConvolutionDescriptor
-	WithFusedNeuronDescriptor(fusedNeuronDescriptor *raw.MPSNNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor
+	WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor
 	ChannelMultiplier() uint
 }
 

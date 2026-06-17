@@ -38,8 +38,8 @@ func NewCalCalendarItem() *CalCalendarItem {
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *CalCalendarItem) WithCalendar(calendar *raw.CalCalendar) *CalCalendarItem {
-	x.inner.SetCalendar(calendar)
+func (x *CalCalendarItem) WithCalendar(calendar *CalCalendar) *CalCalendarItem {
+	x.inner.SetCalendar(calendar.Unwrap())
 	return x
 }
 
@@ -172,7 +172,7 @@ func (x *CalCalendarItem) asCalCalendarItem() *raw.CalCalendarItem { return x.in
 // CalCalendarItemable is the interface implemented by [CalCalendarItem], for mocking and DI.
 type CalCalendarItemable interface {
 	Unwrap() *raw.CalCalendarItem
-	WithCalendar(calendar *raw.CalCalendar) *CalCalendarItem
+	WithCalendar(calendar *CalCalendar) *CalCalendarItem
 	WithNotes(notes string) *CalCalendarItem
 	WithUrl(url string) *CalCalendarItem
 	WithTitle(title string) *CalCalendarItem

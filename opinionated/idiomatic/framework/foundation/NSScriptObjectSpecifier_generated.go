@@ -82,8 +82,8 @@ func (x *ScriptObjectSpecifier) WithKey(key string) *ScriptObjectSpecifier {
 }
 
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
-func (x *ScriptObjectSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *ScriptObjectSpecifier {
-	x.inner.SetContainerClassDescription(containerClassDescription)
+func (x *ScriptObjectSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *ScriptObjectSpecifier {
+	x.inner.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
@@ -239,7 +239,7 @@ type ScriptObjectSpecifierable interface {
 	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *ScriptObjectSpecifier
 	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *ScriptObjectSpecifier
 	WithKey(key string) *ScriptObjectSpecifier
-	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *ScriptObjectSpecifier
+	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *ScriptObjectSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *ScriptObjectSpecifier
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptObjectSpecifier
 	IndicesOfObjectsByEvaluatingWithContainerCount(container objc.ID, count *int64) *int64

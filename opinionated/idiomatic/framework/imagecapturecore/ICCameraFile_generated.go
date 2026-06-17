@@ -272,13 +272,13 @@ func (x *CameraFile) BurstPicked() bool {
 }
 
 // SidecarFiles returns the collection as a Go slice.
-func (x *CameraFile) SidecarFiles() []*raw.ICCameraItem {
+func (x *CameraFile) SidecarFiles() []*CameraItem {
 	arr := x.inner.SidecarFiles()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ICCameraItem {
-		return raw.ICCameraItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CameraItem {
+		return &CameraItem{inner: raw.ICCameraItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -350,7 +350,7 @@ type CameraFileable interface {
 	BurstUUID() string
 	BurstFavorite() bool
 	BurstPicked() bool
-	SidecarFiles() []*raw.ICCameraItem
+	SidecarFiles() []*CameraItem
 	PairedRawImage() *CameraFile
 	FileCreationDate() *foundation.NSDate
 	FileModificationDate() *foundation.NSDate

@@ -45,8 +45,8 @@ func NewLocalPointsOfInterestRequestWithCoordinateRegion(region raw.MKCoordinate
 }
 
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
-func (x *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LocalPointsOfInterestRequest {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
@@ -82,7 +82,7 @@ func (x *LocalPointsOfInterestRequest) SetPointOfInterestFilter(pointOfInterestF
 // LocalPointsOfInterestRequestable is the interface implemented by [LocalPointsOfInterestRequest], for mocking and DI.
 type LocalPointsOfInterestRequestable interface {
 	Unwrap() *raw.MKLocalPointsOfInterestRequest
-	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LocalPointsOfInterestRequest
+	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest
 	Coordinate() unsafe.Pointer
 	Radius() unsafe.Pointer
 	Region() raw.MKCoordinateRegion

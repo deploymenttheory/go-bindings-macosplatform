@@ -55,13 +55,13 @@ func (x *DirectionsResponse) Destination() *MapItem {
 }
 
 // Routes returns the collection as a Go slice.
-func (x *DirectionsResponse) Routes() []*raw.MKRoute {
+func (x *DirectionsResponse) Routes() []*Route {
 	arr := x.inner.Routes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKRoute {
-		return raw.MKRouteFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Route {
+		return &Route{inner: raw.MKRouteFromID(purego.Retain(_id))}
 	})
 }
 
@@ -70,7 +70,7 @@ type DirectionsResponseable interface {
 	Unwrap() *raw.MKDirectionsResponse
 	Source() *MapItem
 	Destination() *MapItem
-	Routes() []*raw.MKRoute
+	Routes() []*Route
 }
 
 var _ DirectionsResponseable = (*DirectionsResponse)(nil)

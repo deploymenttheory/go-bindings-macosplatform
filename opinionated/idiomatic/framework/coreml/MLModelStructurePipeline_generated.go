@@ -48,13 +48,13 @@ func (x *ModelStructurePipeline) SubModelNames() []string {
 }
 
 // SubModels returns the collection as a Go slice.
-func (x *ModelStructurePipeline) SubModels() []*raw.MLModelStructure {
+func (x *ModelStructurePipeline) SubModels() []*ModelStructure {
 	arr := x.inner.SubModels()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructure {
-		return raw.MLModelStructureFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructure {
+		return &ModelStructure{inner: raw.MLModelStructureFromID(purego.Retain(_id))}
 	})
 }
 
@@ -62,7 +62,7 @@ func (x *ModelStructurePipeline) SubModels() []*raw.MLModelStructure {
 type ModelStructurePipelineable interface {
 	Unwrap() *raw.MLModelStructurePipeline
 	SubModelNames() []string
-	SubModels() []*raw.MLModelStructure
+	SubModels() []*ModelStructure
 }
 
 var _ ModelStructurePipelineable = (*ModelStructurePipeline)(nil)

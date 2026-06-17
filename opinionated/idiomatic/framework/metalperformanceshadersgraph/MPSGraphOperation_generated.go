@@ -37,35 +37,35 @@ func NewGraphOperation() *GraphOperation {
 }
 
 // InputTensors returns the collection as a Go slice.
-func (x *GraphOperation) InputTensors() []*raw.MPSGraphTensor {
+func (x *GraphOperation) InputTensors() []*GraphTensor {
 	arr := x.inner.InputTensors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSGraphTensor {
-		return raw.MPSGraphTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphTensor {
+		return &GraphTensor{inner: raw.MPSGraphTensorFromID(purego.Retain(_id))}
 	})
 }
 
 // OutputTensors returns the collection as a Go slice.
-func (x *GraphOperation) OutputTensors() []*raw.MPSGraphTensor {
+func (x *GraphOperation) OutputTensors() []*GraphTensor {
 	arr := x.inner.OutputTensors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSGraphTensor {
-		return raw.MPSGraphTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphTensor {
+		return &GraphTensor{inner: raw.MPSGraphTensorFromID(purego.Retain(_id))}
 	})
 }
 
 // ControlDependencies returns the collection as a Go slice.
-func (x *GraphOperation) ControlDependencies() []*raw.MPSGraphOperation {
+func (x *GraphOperation) ControlDependencies() []*GraphOperation {
 	arr := x.inner.ControlDependencies()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSGraphOperation {
-		return raw.MPSGraphOperationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphOperation {
+		return &GraphOperation{inner: raw.MPSGraphOperationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -94,9 +94,9 @@ func (x *GraphOperation) asGraphObject() *raw.MPSGraphObject { return &x.inner.M
 // GraphOperationable is the interface implemented by [GraphOperation], for mocking and DI.
 type GraphOperationable interface {
 	Unwrap() *raw.MPSGraphOperation
-	InputTensors() []*raw.MPSGraphTensor
-	OutputTensors() []*raw.MPSGraphTensor
-	ControlDependencies() []*raw.MPSGraphOperation
+	InputTensors() []*GraphTensor
+	OutputTensors() []*GraphTensor
+	ControlDependencies() []*GraphOperation
 	Graph() *Graph
 	Name() string
 }

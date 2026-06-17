@@ -41,8 +41,8 @@ func NewAnnotationChoiceWidget() *AnnotationChoiceWidget {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationChoiceWidget) WithPage(page *raw.PDFPage) *AnnotationChoiceWidget {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationChoiceWidget) WithPage(page *Page) *AnnotationChoiceWidget {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -263,8 +263,8 @@ func (x *AnnotationChoiceWidget) WithOpen(open bool) *AnnotationChoiceWidget {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationChoiceWidget) WithDestination(destination *raw.PDFDestination) *AnnotationChoiceWidget {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationChoiceWidget) WithDestination(destination *Destination) *AnnotationChoiceWidget {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -322,7 +322,7 @@ func (x *AnnotationChoiceWidget) asAnnotation() *raw.PDFAnnotation { return &x.i
 // AnnotationChoiceWidgetable is the interface implemented by [AnnotationChoiceWidget], for mocking and DI.
 type AnnotationChoiceWidgetable interface {
 	Unwrap() *raw.PDFAnnotationChoiceWidget
-	WithPage(page *raw.PDFPage) *AnnotationChoiceWidget
+	WithPage(page *Page) *AnnotationChoiceWidget
 	WithType(type_ string) *AnnotationChoiceWidget
 	WithBounds(bounds corefoundation.CGRect) *AnnotationChoiceWidget
 	WithShouldDisplay(shouldDisplay bool) *AnnotationChoiceWidget
@@ -354,7 +354,7 @@ type AnnotationChoiceWidgetable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationChoiceWidget
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationChoiceWidget
 	WithOpen(open bool) *AnnotationChoiceWidget
-	WithDestination(destination *raw.PDFDestination) *AnnotationChoiceWidget
+	WithDestination(destination *Destination) *AnnotationChoiceWidget
 	WithURL(uRL string) *AnnotationChoiceWidget
 	WithFieldName(fieldName string) *AnnotationChoiceWidget
 	WithCaption(caption string) *AnnotationChoiceWidget

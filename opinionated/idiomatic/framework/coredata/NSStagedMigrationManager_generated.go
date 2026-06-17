@@ -39,13 +39,13 @@ func NewStagedMigrationManagerWithMigrationStages(stages *foundation.NSArray[*ra
 }
 
 // Stages returns the collection as a Go slice.
-func (x *StagedMigrationManager) Stages() []*raw.NSMigrationStage {
+func (x *StagedMigrationManager) Stages() []*MigrationStage {
 	arr := x.inner.Stages()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMigrationStage {
-		return raw.NSMigrationStageFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MigrationStage {
+		return &MigrationStage{inner: raw.NSMigrationStageFromID(purego.Retain(_id))}
 	})
 }
 
@@ -61,7 +61,7 @@ func (x *StagedMigrationManager) Container() *PersistentContainer {
 // StagedMigrationManagerable is the interface implemented by [StagedMigrationManager], for mocking and DI.
 type StagedMigrationManagerable interface {
 	Unwrap() *raw.NSStagedMigrationManager
-	Stages() []*raw.NSMigrationStage
+	Stages() []*MigrationStage
 	Container() *PersistentContainer
 }
 

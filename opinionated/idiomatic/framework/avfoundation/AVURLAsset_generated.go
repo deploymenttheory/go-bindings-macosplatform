@@ -82,13 +82,13 @@ func (x *URLAsset) FindCompatibleTrackForCompositionTrackCompletionHandler(compo
 }
 
 // Variants returns the collection as a Go slice.
-func (x *URLAsset) Variants() []*raw.AVAssetVariant {
+func (x *URLAsset) Variants() []*AssetVariant {
 	arr := x.inner.Variants()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetVariant {
-		return raw.AVAssetVariantFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetVariant {
+		return &AssetVariant{inner: raw.AVAssetVariantFromID(purego.Retain(_id))}
 	})
 }
 
@@ -124,7 +124,7 @@ type URLAssetable interface {
 	AssetCache() *AssetCache
 	CompatibleTrackForCompositionTrack(compositionTrack *raw.AVCompositionTrack) *AssetTrack
 	FindCompatibleTrackForCompositionTrackCompletionHandler(compositionTrack *raw.AVCompositionTrack, completionHandler func(unsafe.Pointer, unsafe.Pointer))
-	Variants() []*raw.AVAssetVariant
+	Variants() []*AssetVariant
 	MediaExtensionProperties() *MediaExtensionProperties
 	SidecarURL() *foundation.NSURL
 	MayRequireContentKeysForMediaDataProcessing() bool

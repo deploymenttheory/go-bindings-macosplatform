@@ -105,13 +105,13 @@ func (x *CollaborationOptionsGroup) SetFooter(footer string) {
 }
 
 // Options returns the collection as a Go slice.
-func (x *CollaborationOptionsGroup) Options() []*raw.SWCollaborationOption {
+func (x *CollaborationOptionsGroup) Options() []*CollaborationOption {
 	arr := x.inner.Options()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SWCollaborationOption {
-		return raw.SWCollaborationOptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollaborationOption {
+		return &CollaborationOption{inner: raw.SWCollaborationOptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -133,7 +133,7 @@ type CollaborationOptionsGroupable interface {
 	Identifier() string
 	Footer() string
 	SetFooter(footer string)
-	Options() []*raw.SWCollaborationOption
+	Options() []*CollaborationOption
 	SetOptions(options *foundation.NSArray[*raw.SWCollaborationOption])
 }
 

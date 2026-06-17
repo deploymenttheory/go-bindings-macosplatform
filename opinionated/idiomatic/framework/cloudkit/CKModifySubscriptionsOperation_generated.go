@@ -97,20 +97,20 @@ func (x *ModifySubscriptionsOperation) WithModifySubscriptionsCompletionBlock(mo
 }
 
 // WithDatabase sets the database property and returns the receiver for chaining.
-func (x *ModifySubscriptionsOperation) WithDatabase(database *raw.CKDatabase) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database)
+func (x *ModifySubscriptionsOperation) WithDatabase(database *Database) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *ModifySubscriptionsOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+func (x *ModifySubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *ModifySubscriptionsOperation) WithGroup(group *raw.CKOperationGroup) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+func (x *ModifySubscriptionsOperation) WithGroup(group *OperationGroup) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -121,8 +121,8 @@ func (x *ModifySubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(l
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *ModifySubscriptionsOperation) WithContainer(container *raw.CKContainer) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+func (x *ModifySubscriptionsOperation) WithContainer(container *Container) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -151,13 +151,13 @@ func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForResource(timeoutInt
 }
 
 // SubscriptionsToSave returns the collection as a Go slice.
-func (x *ModifySubscriptionsOperation) SubscriptionsToSave() []*raw.CKSubscription {
+func (x *ModifySubscriptionsOperation) SubscriptionsToSave() []*Subscription {
 	arr := x.inner.SubscriptionsToSave()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKSubscription {
-		return raw.CKSubscriptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Subscription {
+		return &Subscription{inner: raw.CKSubscriptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -245,16 +245,16 @@ type ModifySubscriptionsOperationable interface {
 	WithPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) *ModifySubscriptionsOperation
 	WithPerSubscriptionDeleteBlock(perSubscriptionDeleteBlock func(*foundation.NSString, unsafe.Pointer)) *ModifySubscriptionsOperation
 	WithModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock objc.Block) *ModifySubscriptionsOperation
-	WithDatabase(database *raw.CKDatabase) *ModifySubscriptionsOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifySubscriptionsOperation
-	WithGroup(group *raw.CKOperationGroup) *ModifySubscriptionsOperation
+	WithDatabase(database *Database) *ModifySubscriptionsOperation
+	WithConfiguration(configuration *OperationConfiguration) *ModifySubscriptionsOperation
+	WithGroup(group *OperationGroup) *ModifySubscriptionsOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifySubscriptionsOperation
-	WithContainer(container *raw.CKContainer) *ModifySubscriptionsOperation
+	WithContainer(container *Container) *ModifySubscriptionsOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *ModifySubscriptionsOperation
 	WithLongLived(longLived bool) *ModifySubscriptionsOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation
-	SubscriptionsToSave() []*raw.CKSubscription
+	SubscriptionsToSave() []*Subscription
 	SetSubscriptionsToSave(subscriptionsToSave *foundation.NSArray[*raw.CKSubscription])
 	SubscriptionIDsToDelete() []*foundation.NSString
 	SetSubscriptionIDsToDelete(subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString])

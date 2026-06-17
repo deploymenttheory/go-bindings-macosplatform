@@ -111,8 +111,8 @@ func (x *CropNode) WithName(name string) *CropNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *CropNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *CropNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *CropNode) WithPhysicsBody(physicsBody *PhysicsBody) *CropNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -123,8 +123,8 @@ func (x *CropNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *CropNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *CropNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *CropNode) WithReachConstraints(reachConstraints *ReachConstraints) *CropNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -235,9 +235,9 @@ type CropNodeable interface {
 	WithHidden(hidden bool) *CropNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *CropNode
 	WithName(name string) *CropNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *CropNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *CropNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CropNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *CropNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *CropNode
 	WithConstraints(items ...*raw.SKConstraint) *CropNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CropNode
 	WithAccessibilityElement(accessibilityElement bool) *CropNode

@@ -44,14 +44,14 @@ func (x *ButtonTouchBarItem) WithTitle(title string) *ButtonTouchBarItem {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *ButtonTouchBarItem) WithImage(image *raw.NSImage) *ButtonTouchBarItem {
-	x.inner.SetImage(image)
+func (x *ButtonTouchBarItem) WithImage(image *Image) *ButtonTouchBarItem {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
 // WithBezelColor sets the bezelColor property and returns the receiver for chaining.
-func (x *ButtonTouchBarItem) WithBezelColor(bezelColor *raw.NSColor) *ButtonTouchBarItem {
-	x.inner.SetBezelColor(bezelColor)
+func (x *ButtonTouchBarItem) WithBezelColor(bezelColor *Color) *ButtonTouchBarItem {
+	x.inner.SetBezelColor(bezelColor.Unwrap())
 	return x
 }
 
@@ -168,8 +168,8 @@ func (x *ButtonTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.in
 type ButtonTouchBarItemable interface {
 	Unwrap() *raw.NSButtonTouchBarItem
 	WithTitle(title string) *ButtonTouchBarItem
-	WithImage(image *raw.NSImage) *ButtonTouchBarItem
-	WithBezelColor(bezelColor *raw.NSColor) *ButtonTouchBarItem
+	WithImage(image *Image) *ButtonTouchBarItem
+	WithBezelColor(bezelColor *Color) *ButtonTouchBarItem
 	WithTarget(target objc.ID) *ButtonTouchBarItem
 	WithAction(action objc.SEL) *ButtonTouchBarItem
 	WithEnabled(enabled bool) *ButtonTouchBarItem

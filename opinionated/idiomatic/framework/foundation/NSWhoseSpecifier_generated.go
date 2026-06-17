@@ -105,8 +105,8 @@ func (x *WhoseSpecifier) WithKey(key string) *WhoseSpecifier {
 }
 
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
-func (x *WhoseSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *WhoseSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+func (x *WhoseSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *WhoseSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
@@ -193,7 +193,7 @@ type WhoseSpecifierable interface {
 	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *WhoseSpecifier
 	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *WhoseSpecifier
 	WithKey(key string) *WhoseSpecifier
-	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *WhoseSpecifier
+	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *WhoseSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *WhoseSpecifier
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *WhoseSpecifier
 	Test() *ScriptWhoseTest

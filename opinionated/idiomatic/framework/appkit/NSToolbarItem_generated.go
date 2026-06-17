@@ -64,8 +64,8 @@ func (x *ToolbarItem) WithToolTip(toolTip string) *ToolbarItem {
 }
 
 // WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
-func (x *ToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *ToolbarItem {
-	x.inner.SetMenuFormRepresentation(menuFormRepresentation)
+func (x *ToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItem {
+	x.inner.SetMenuFormRepresentation(menuFormRepresentation.Unwrap())
 	return x
 }
 
@@ -94,8 +94,8 @@ func (x *ToolbarItem) WithEnabled(enabled bool) *ToolbarItem {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *ToolbarItem) WithImage(image *raw.NSImage) *ToolbarItem {
-	x.inner.SetImage(image)
+func (x *ToolbarItem) WithImage(image *Image) *ToolbarItem {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -112,8 +112,8 @@ func (x *ToolbarItem) WithBordered(bordered bool) *ToolbarItem {
 }
 
 // WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
-func (x *ToolbarItem) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *ToolbarItem {
-	x.inner.SetBackgroundTintColor(backgroundTintColor)
+func (x *ToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItem {
+	x.inner.SetBackgroundTintColor(backgroundTintColor.Unwrap())
 	return x
 }
 
@@ -160,8 +160,8 @@ func (x *ToolbarItem) WithVisibilityPriority(visibilityPriority int) *ToolbarIte
 }
 
 // WithBadge sets the badge property and returns the receiver for chaining.
-func (x *ToolbarItem) WithBadge(badge *raw.NSItemBadge) *ToolbarItem {
-	x.inner.SetBadge(badge)
+func (x *ToolbarItem) WithBadge(badge *ItemBadge) *ToolbarItem {
+	x.inner.SetBadge(badge.Unwrap())
 	return x
 }
 
@@ -469,15 +469,15 @@ type ToolbarItemable interface {
 	WithPaletteLabel(paletteLabel string) *ToolbarItem
 	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *ToolbarItem
 	WithToolTip(toolTip string) *ToolbarItem
-	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *ToolbarItem
+	WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItem
 	WithTag(tag int) *ToolbarItem
 	WithTarget(target objc.ID) *ToolbarItem
 	WithAction(action objc.SEL) *ToolbarItem
 	WithEnabled(enabled bool) *ToolbarItem
-	WithImage(image *raw.NSImage) *ToolbarItem
+	WithImage(image *Image) *ToolbarItem
 	WithTitle(title string) *ToolbarItem
 	WithBordered(bordered bool) *ToolbarItem
-	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *ToolbarItem
+	WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItem
 	WithStyle(style raw.NSToolbarItemStyle) *ToolbarItem
 	WithNavigational(navigational bool) *ToolbarItem
 	WithView(view ViewProvider) *ToolbarItem
@@ -485,7 +485,7 @@ type ToolbarItemable interface {
 	WithMinSize(minSize corefoundation.CGSize) *ToolbarItem
 	WithMaxSize(maxSize corefoundation.CGSize) *ToolbarItem
 	WithVisibilityPriority(visibilityPriority int) *ToolbarItem
-	WithBadge(badge *raw.NSItemBadge) *ToolbarItem
+	WithBadge(badge *ItemBadge) *ToolbarItem
 	WithAutovalidates(autovalidates bool) *ToolbarItem
 	Validate()
 	ItemIdentifier() string

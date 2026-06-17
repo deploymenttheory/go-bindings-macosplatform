@@ -72,13 +72,13 @@ func (x *CaptureTimecodeGenerator) GenerateInitialTimecode() raw.AVCaptureTimeco
 }
 
 // AvailableSources returns the collection as a Go slice.
-func (x *CaptureTimecodeGenerator) AvailableSources() []*raw.AVCaptureTimecodeSource {
+func (x *CaptureTimecodeGenerator) AvailableSources() []*CaptureTimecodeSource {
 	arr := x.inner.AvailableSources()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureTimecodeSource {
-		return raw.AVCaptureTimecodeSourceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureTimecodeSource {
+		return &CaptureTimecodeSource{inner: raw.AVCaptureTimecodeSourceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -140,7 +140,7 @@ type CaptureTimecodeGeneratorable interface {
 	SetDelegateQueue(delegate raw.AVCaptureTimecodeGeneratorDelegate, callbackQueue *foundation.NSObject)
 	StartSynchronizationWithTimecodeSource(source *raw.AVCaptureTimecodeSource)
 	GenerateInitialTimecode() raw.AVCaptureTimecode
-	AvailableSources() []*raw.AVCaptureTimecodeSource
+	AvailableSources() []*CaptureTimecodeSource
 	CurrentSource() *CaptureTimecodeSource
 	Delegate() raw.AVCaptureTimecodeGeneratorDelegate
 	DelegateCallbackQueue() *foundation.NSObject

@@ -44,8 +44,8 @@ func (x *TextParagraph) WithTextContentManager(textContentManager TextContentMan
 }
 
 // WithElementRange sets the elementRange property and returns the receiver for chaining.
-func (x *TextParagraph) WithElementRange(elementRange *raw.NSTextRange) *TextParagraph {
-	x.inner.NSTextElement.SetElementRange(elementRange)
+func (x *TextParagraph) WithElementRange(elementRange *TextRange) *TextParagraph {
+	x.inner.NSTextElement.SetElementRange(elementRange.Unwrap())
 	return x
 }
 
@@ -80,7 +80,7 @@ func (x *TextParagraph) asTextElement() *raw.NSTextElement { return &x.inner.NST
 type TextParagraphable interface {
 	Unwrap() *raw.NSTextParagraph
 	WithTextContentManager(textContentManager TextContentManagerProvider) *TextParagraph
-	WithElementRange(elementRange *raw.NSTextRange) *TextParagraph
+	WithElementRange(elementRange *TextRange) *TextParagraph
 	AttributedString() *foundation.NSAttributedString
 	ParagraphContentRange() *TextRange
 	ParagraphSeparatorRange() *TextRange

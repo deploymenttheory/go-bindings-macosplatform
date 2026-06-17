@@ -56,8 +56,8 @@ func NewAnnotationWithBounds(bounds corefoundation.CGRect) *Annotation {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *Annotation) WithPage(page *raw.PDFPage) *Annotation {
-	x.inner.SetPage(page)
+func (x *Annotation) WithPage(page *Page) *Annotation {
+	x.inner.SetPage(page.Unwrap())
 	return x
 }
 
@@ -278,8 +278,8 @@ func (x *Annotation) WithOpen(open bool) *Annotation {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *Annotation) WithDestination(destination *raw.PDFDestination) *Annotation {
-	x.inner.SetDestination(destination)
+func (x *Annotation) WithDestination(destination *Destination) *Annotation {
+	x.inner.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -932,7 +932,7 @@ func (x *Annotation) asAnnotation() *raw.PDFAnnotation { return x.inner }
 // Annotationable is the interface implemented by [Annotation], for mocking and DI.
 type Annotationable interface {
 	Unwrap() *raw.PDFAnnotation
-	WithPage(page *raw.PDFPage) *Annotation
+	WithPage(page *Page) *Annotation
 	WithType(type_ string) *Annotation
 	WithBounds(bounds corefoundation.CGRect) *Annotation
 	WithShouldDisplay(shouldDisplay bool) *Annotation
@@ -964,7 +964,7 @@ type Annotationable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *Annotation
 	WithButtonWidgetStateString(buttonWidgetStateString string) *Annotation
 	WithOpen(open bool) *Annotation
-	WithDestination(destination *raw.PDFDestination) *Annotation
+	WithDestination(destination *Destination) *Annotation
 	WithURL(uRL string) *Annotation
 	WithFieldName(fieldName string) *Annotation
 	WithCaption(caption string) *Annotation

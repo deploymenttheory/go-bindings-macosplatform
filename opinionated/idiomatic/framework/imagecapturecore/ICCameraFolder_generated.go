@@ -37,13 +37,13 @@ func NewCameraFolder() *CameraFolder {
 }
 
 // Contents returns the collection as a Go slice.
-func (x *CameraFolder) Contents() []*raw.ICCameraItem {
+func (x *CameraFolder) Contents() []*CameraItem {
 	arr := x.inner.Contents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ICCameraItem {
-		return raw.ICCameraItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CameraItem {
+		return &CameraItem{inner: raw.ICCameraItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -52,7 +52,7 @@ func (x *CameraFolder) asCameraItem() *raw.ICCameraItem { return &x.inner.ICCame
 // CameraFolderable is the interface implemented by [CameraFolder], for mocking and DI.
 type CameraFolderable interface {
 	Unwrap() *raw.ICCameraFolder
-	Contents() []*raw.ICCameraItem
+	Contents() []*CameraItem
 }
 
 var _ CameraFolderable = (*CameraFolder)(nil)

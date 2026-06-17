@@ -43,13 +43,13 @@ func (x *MTREndpointInfo) EndpointID() *foundation.NSNumber {
 }
 
 // DeviceTypes returns the collection as a Go slice.
-func (x *MTREndpointInfo) DeviceTypes() []*raw.MTRDeviceTypeRevision {
+func (x *MTREndpointInfo) DeviceTypes() []*MTRDeviceTypeRevision {
 	arr := x.inner.DeviceTypes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRDeviceTypeRevision {
-		return raw.MTRDeviceTypeRevisionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRDeviceTypeRevision {
+		return &MTRDeviceTypeRevision{inner: raw.MTRDeviceTypeRevisionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -65,13 +65,13 @@ func (x *MTREndpointInfo) PartsList() []*foundation.NSNumber {
 }
 
 // Children returns the collection as a Go slice.
-func (x *MTREndpointInfo) Children() []*raw.MTREndpointInfo {
+func (x *MTREndpointInfo) Children() []*MTREndpointInfo {
 	arr := x.inner.Children()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTREndpointInfo {
-		return raw.MTREndpointInfoFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTREndpointInfo {
+		return &MTREndpointInfo{inner: raw.MTREndpointInfoFromID(purego.Retain(_id))}
 	})
 }
 
@@ -79,9 +79,9 @@ func (x *MTREndpointInfo) Children() []*raw.MTREndpointInfo {
 type MTREndpointInfoable interface {
 	Unwrap() *raw.MTREndpointInfo
 	EndpointID() *foundation.NSNumber
-	DeviceTypes() []*raw.MTRDeviceTypeRevision
+	DeviceTypes() []*MTRDeviceTypeRevision
 	PartsList() []*foundation.NSNumber
-	Children() []*raw.MTREndpointInfo
+	Children() []*MTREndpointInfo
 }
 
 var _ MTREndpointInfoable = (*MTREndpointInfo)(nil)

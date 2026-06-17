@@ -194,8 +194,8 @@ func (x *SliderCell) WithWraps(wraps bool) *SliderCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *SliderCell) WithFont(font *raw.NSFont) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetFont(font)
+func (x *SliderCell) WithFont(font *Font) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -242,8 +242,8 @@ func (x *SliderCell) WithIntegerValue(integerValue int) *SliderCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *SliderCell) WithImage(image *raw.NSImage) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetImage(image)
+func (x *SliderCell) WithImage(image *Image) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -260,8 +260,8 @@ func (x *SliderCell) WithRepresentedObject(representedObject objc.ID) *SliderCel
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SliderCell) WithMenu(menu *raw.NSMenu) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu)
+func (x *SliderCell) WithMenu(menu *Menu) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -577,7 +577,7 @@ type SliderCellable interface {
 	WithHighlighted(highlighted bool) *SliderCell
 	WithAlignment(alignment raw.NSTextAlignment) *SliderCell
 	WithWraps(wraps bool) *SliderCell
-	WithFont(font *raw.NSFont) *SliderCell
+	WithFont(font *Font) *SliderCell
 	WithFormatter(formatter *foundation.NSFormatter) *SliderCell
 	WithObjectValue(objectValue objc.ID) *SliderCell
 	WithStringValue(stringValue string) *SliderCell
@@ -585,10 +585,10 @@ type SliderCellable interface {
 	WithFloatValue(floatValue float32) *SliderCell
 	WithDoubleValue(doubleValue float64) *SliderCell
 	WithIntegerValue(integerValue int) *SliderCell
-	WithImage(image *raw.NSImage) *SliderCell
+	WithImage(image *Image) *SliderCell
 	WithControlSize(controlSize raw.NSControlSize) *SliderCell
 	WithRepresentedObject(representedObject objc.ID) *SliderCell
-	WithMenu(menu *raw.NSMenu) *SliderCell
+	WithMenu(menu *Menu) *SliderCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SliderCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SliderCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SliderCell

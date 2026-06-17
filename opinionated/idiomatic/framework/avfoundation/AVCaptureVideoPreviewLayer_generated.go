@@ -47,8 +47,8 @@ func NewCaptureVideoPreviewLayerWithSessionWithNoConnection(session *raw.AVCaptu
 }
 
 // WithSession sets the session property and returns the receiver for chaining.
-func (x *CaptureVideoPreviewLayer) WithSession(session *raw.AVCaptureSession) *CaptureVideoPreviewLayer {
-	x.inner.SetSession(session)
+func (x *CaptureVideoPreviewLayer) WithSession(session *CaptureSession) *CaptureVideoPreviewLayer {
+	x.inner.SetSession(session.Unwrap())
 	return x
 }
 
@@ -153,7 +153,7 @@ func (x *CaptureVideoPreviewLayer) SetDeferredStartEnabled(deferredStartEnabled 
 // CaptureVideoPreviewLayerable is the interface implemented by [CaptureVideoPreviewLayer], for mocking and DI.
 type CaptureVideoPreviewLayerable interface {
 	Unwrap() *raw.AVCaptureVideoPreviewLayer
-	WithSession(session *raw.AVCaptureSession) *CaptureVideoPreviewLayer
+	WithSession(session *CaptureSession) *CaptureVideoPreviewLayer
 	WithVideoGravity(videoGravity *foundation.NSString) *CaptureVideoPreviewLayer
 	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureVideoPreviewLayer
 	SetSessionWithNoConnection(session *raw.AVCaptureSession)

@@ -250,13 +250,13 @@ func (x *Scene) RemoveParticleSystem(system *raw.SCNParticleSystem) {
 }
 
 // ParticleSystems returns the collection as a Go slice.
-func (x *Scene) ParticleSystems() []*raw.SCNParticleSystem {
+func (x *Scene) ParticleSystems() []*ParticleSystem {
 	arr := x.inner.ParticleSystems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNParticleSystem {
-		return raw.SCNParticleSystemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ParticleSystem {
+		return &ParticleSystem{inner: raw.SCNParticleSystemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -300,7 +300,7 @@ type Sceneable interface {
 	AddParticleSystemWithTransform(system *raw.SCNParticleSystem, transform quartzcore.CATransform3D)
 	RemoveAllParticleSystems()
 	RemoveParticleSystem(system *raw.SCNParticleSystem)
-	ParticleSystems() []*raw.SCNParticleSystem
+	ParticleSystems() []*ParticleSystem
 }
 
 var _ Sceneable = (*Scene)(nil)

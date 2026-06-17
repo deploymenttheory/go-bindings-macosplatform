@@ -37,14 +37,14 @@ func NewWKWebExtensionControllerConfiguration() *WKWebExtensionControllerConfigu
 }
 
 // WithWebViewConfiguration sets the webViewConfiguration property and returns the receiver for chaining.
-func (x *WKWebExtensionControllerConfiguration) WithWebViewConfiguration(webViewConfiguration *raw.WKWebViewConfiguration) *WKWebExtensionControllerConfiguration {
-	x.inner.SetWebViewConfiguration(webViewConfiguration)
+func (x *WKWebExtensionControllerConfiguration) WithWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) *WKWebExtensionControllerConfiguration {
+	x.inner.SetWebViewConfiguration(webViewConfiguration.Unwrap())
 	return x
 }
 
 // WithDefaultWebsiteDataStore sets the defaultWebsiteDataStore property and returns the receiver for chaining.
-func (x *WKWebExtensionControllerConfiguration) WithDefaultWebsiteDataStore(defaultWebsiteDataStore *raw.WKWebsiteDataStore) *WKWebExtensionControllerConfiguration {
-	x.inner.SetDefaultWebsiteDataStore(defaultWebsiteDataStore)
+func (x *WKWebExtensionControllerConfiguration) WithDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) *WKWebExtensionControllerConfiguration {
+	x.inner.SetDefaultWebsiteDataStore(defaultWebsiteDataStore.Unwrap())
 	return x
 }
 
@@ -89,8 +89,8 @@ func (x *WKWebExtensionControllerConfiguration) SetDefaultWebsiteDataStore(defau
 // WKWebExtensionControllerConfigurationable is the interface implemented by [WKWebExtensionControllerConfiguration], for mocking and DI.
 type WKWebExtensionControllerConfigurationable interface {
 	Unwrap() *raw.WKWebExtensionControllerConfiguration
-	WithWebViewConfiguration(webViewConfiguration *raw.WKWebViewConfiguration) *WKWebExtensionControllerConfiguration
-	WithDefaultWebsiteDataStore(defaultWebsiteDataStore *raw.WKWebsiteDataStore) *WKWebExtensionControllerConfiguration
+	WithWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) *WKWebExtensionControllerConfiguration
+	WithDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) *WKWebExtensionControllerConfiguration
 	IsPersistent() bool
 	Identifier() *foundation.NSUUID
 	WebViewConfiguration() *WKWebViewConfiguration

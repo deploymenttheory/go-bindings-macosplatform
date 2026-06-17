@@ -382,13 +382,13 @@ func (x *TurnBasedMatch) CreationDate() *foundation.NSDate {
 }
 
 // Participants returns the collection as a Go slice.
-func (x *TurnBasedMatch) Participants() []*raw.GKTurnBasedParticipant {
+func (x *TurnBasedMatch) Participants() []*TurnBasedParticipant {
 	arr := x.inner.Participants()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKTurnBasedParticipant {
-		return raw.GKTurnBasedParticipantFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TurnBasedParticipant {
+		return &TurnBasedParticipant{inner: raw.GKTurnBasedParticipantFromID(purego.Retain(_id))}
 	})
 }
 
@@ -431,35 +431,35 @@ func (x *TurnBasedMatch) MatchDataMaximumSize() uint {
 }
 
 // Exchanges returns the collection as a Go slice.
-func (x *TurnBasedMatch) Exchanges() []*raw.GKTurnBasedExchange {
+func (x *TurnBasedMatch) Exchanges() []*TurnBasedExchange {
 	arr := x.inner.Exchanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKTurnBasedExchange {
-		return raw.GKTurnBasedExchangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TurnBasedExchange {
+		return &TurnBasedExchange{inner: raw.GKTurnBasedExchangeFromID(purego.Retain(_id))}
 	})
 }
 
 // ActiveExchanges returns the collection as a Go slice.
-func (x *TurnBasedMatch) ActiveExchanges() []*raw.GKTurnBasedExchange {
+func (x *TurnBasedMatch) ActiveExchanges() []*TurnBasedExchange {
 	arr := x.inner.ActiveExchanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKTurnBasedExchange {
-		return raw.GKTurnBasedExchangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TurnBasedExchange {
+		return &TurnBasedExchange{inner: raw.GKTurnBasedExchangeFromID(purego.Retain(_id))}
 	})
 }
 
 // CompletedExchanges returns the collection as a Go slice.
-func (x *TurnBasedMatch) CompletedExchanges() []*raw.GKTurnBasedExchange {
+func (x *TurnBasedMatch) CompletedExchanges() []*TurnBasedExchange {
 	arr := x.inner.CompletedExchanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKTurnBasedExchange {
-		return raw.GKTurnBasedExchangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TurnBasedExchange {
+		return &TurnBasedExchange{inner: raw.GKTurnBasedExchangeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -497,16 +497,16 @@ type TurnBasedMatchable interface {
 	ParticipantQuitInTurnWithOutcomeNextParticipantMatchData(ctx context.Context, matchOutcome raw.GKTurnBasedMatchOutcome, nextParticipant *raw.GKTurnBasedParticipant, matchData *foundation.NSData) error
 	MatchID() string
 	CreationDate() *foundation.NSDate
-	Participants() []*raw.GKTurnBasedParticipant
+	Participants() []*TurnBasedParticipant
 	Status() raw.GKTurnBasedMatchStatus
 	CurrentParticipant() *TurnBasedParticipant
 	MatchData() *foundation.NSData
 	Message() string
 	SetMessage(message string)
 	MatchDataMaximumSize() uint
-	Exchanges() []*raw.GKTurnBasedExchange
-	ActiveExchanges() []*raw.GKTurnBasedExchange
-	CompletedExchanges() []*raw.GKTurnBasedExchange
+	Exchanges() []*TurnBasedExchange
+	ActiveExchanges() []*TurnBasedExchange
+	CompletedExchanges() []*TurnBasedExchange
 	ExchangeDataMaximumSize() uint
 	ExchangeMaxInitiatedExchangesPerPlayer() uint
 }

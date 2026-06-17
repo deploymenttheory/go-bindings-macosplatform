@@ -80,13 +80,13 @@ func (x *Stroke) RenderBounds() corefoundation.CGRect {
 }
 
 // MaskedPathRanges returns the collection as a Go slice.
-func (x *Stroke) MaskedPathRanges() []*raw.PKFloatRange {
+func (x *Stroke) MaskedPathRanges() []*FloatRange {
 	arr := x.inner.MaskedPathRanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKFloatRange {
-		return raw.PKFloatRangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FloatRange {
+		return &FloatRange{inner: raw.PKFloatRangeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -108,7 +108,7 @@ type Strokeable interface {
 	Path() *StrokePath
 	Mask() *appkit.NSBezierPath
 	RenderBounds() corefoundation.CGRect
-	MaskedPathRanges() []*raw.PKFloatRange
+	MaskedPathRanges() []*FloatRange
 	RandomSeed() uint32
 	RequiredContentVersion() raw.PKContentVersion
 }

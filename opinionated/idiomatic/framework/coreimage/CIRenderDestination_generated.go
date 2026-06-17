@@ -99,8 +99,8 @@ func (x *RenderDestination) WithClamped(clamped bool) *RenderDestination {
 }
 
 // WithBlendKernel sets the blendKernel property and returns the receiver for chaining.
-func (x *RenderDestination) WithBlendKernel(blendKernel *raw.CIBlendKernel) *RenderDestination {
-	x.inner.SetBlendKernel(blendKernel)
+func (x *RenderDestination) WithBlendKernel(blendKernel *BlendKernel) *RenderDestination {
+	x.inner.SetBlendKernel(blendKernel.Unwrap())
 	return x
 }
 
@@ -217,7 +217,7 @@ type RenderDestinationable interface {
 	WithFlipped(flipped bool) *RenderDestination
 	WithDithered(dithered bool) *RenderDestination
 	WithClamped(clamped bool) *RenderDestination
-	WithBlendKernel(blendKernel *raw.CIBlendKernel) *RenderDestination
+	WithBlendKernel(blendKernel *BlendKernel) *RenderDestination
 	WithBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) *RenderDestination
 	WithCaptureTraceURL(captureTraceURL string) *RenderDestination
 	Width() uint

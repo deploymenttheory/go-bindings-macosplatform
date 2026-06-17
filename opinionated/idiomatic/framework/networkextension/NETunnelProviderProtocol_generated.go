@@ -92,8 +92,8 @@ func (x *NETunnelProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep bool)
 }
 
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
-func (x *NETunnelProviderProtocol) WithProxySettings(proxySettings *raw.NEProxySettings) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetProxySettings(proxySettings)
+func (x *NETunnelProviderProtocol) WithProxySettings(proxySettings *NEProxySettings) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
@@ -171,7 +171,7 @@ type NETunnelProviderProtocolable interface {
 	WithIdentityData(identityData *foundation.NSData) *NETunnelProviderProtocol
 	WithIdentityDataPassword(identityDataPassword string) *NETunnelProviderProtocol
 	WithDisconnectOnSleep(disconnectOnSleep bool) *NETunnelProviderProtocol
-	WithProxySettings(proxySettings *raw.NEProxySettings) *NETunnelProviderProtocol
+	WithProxySettings(proxySettings *NEProxySettings) *NETunnelProviderProtocol
 	WithIncludeAllNetworks(includeAllNetworks bool) *NETunnelProviderProtocol
 	WithExcludeLocalNetworks(excludeLocalNetworks bool) *NETunnelProviderProtocol
 	WithExcludeCellularServices(excludeCellularServices bool) *NETunnelProviderProtocol

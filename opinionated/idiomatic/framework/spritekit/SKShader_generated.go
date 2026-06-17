@@ -118,13 +118,13 @@ func (x *Shader) SetSource(source string) {
 }
 
 // Uniforms returns the collection as a Go slice.
-func (x *Shader) Uniforms() []*raw.SKUniform {
+func (x *Shader) Uniforms() []*Uniform {
 	arr := x.inner.Uniforms()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKUniform {
-		return raw.SKUniformFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Uniform {
+		return &Uniform{inner: raw.SKUniformFromID(purego.Retain(_id))}
 	})
 }
 
@@ -134,13 +134,13 @@ func (x *Shader) SetUniforms(uniforms *foundation.NSArray[*raw.SKUniform]) {
 }
 
 // Attributes returns the collection as a Go slice.
-func (x *Shader) Attributes() []*raw.SKAttribute {
+func (x *Shader) Attributes() []*Attribute {
 	arr := x.inner.Attributes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKAttribute {
-		return raw.SKAttributeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Attribute {
+		return &Attribute{inner: raw.SKAttributeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -160,9 +160,9 @@ type Shaderable interface {
 	RemoveUniformNamed(name string)
 	Source() string
 	SetSource(source string)
-	Uniforms() []*raw.SKUniform
+	Uniforms() []*Uniform
 	SetUniforms(uniforms *foundation.NSArray[*raw.SKUniform])
-	Attributes() []*raw.SKAttribute
+	Attributes() []*Attribute
 	SetAttributes(attributes *foundation.NSArray[*raw.SKAttribute])
 }
 

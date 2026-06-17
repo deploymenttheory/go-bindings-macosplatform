@@ -216,8 +216,8 @@ func (x *RuleEditor) WithDoubleValue(doubleValue float64) *RuleEditor {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *RuleEditor) WithFont(font *raw.NSFont) *RuleEditor {
-	x.inner.NSControl.SetFont(font)
+func (x *RuleEditor) WithFont(font *Font) *RuleEditor {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -438,8 +438,8 @@ func (x *RuleEditor) WithContentFilters(items ...*coreimage.CIFilter) *RuleEdito
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *RuleEditor) WithShadow(shadow *raw.NSShadow) *RuleEditor {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *RuleEditor) WithShadow(shadow *Shadow) *RuleEditor {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -520,8 +520,8 @@ func (x *RuleEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *RuleEditor) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *RuleEditor {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *RuleEditor) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RuleEditor {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -562,8 +562,8 @@ func (x *RuleEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *RuleEditor) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RuleEditor {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *RuleEditor) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RuleEditor {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -574,8 +574,8 @@ func (x *RuleEditor) WithNextResponder(nextResponder ResponderProvider) *RuleEdi
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *RuleEditor) WithMenu(menu *raw.NSMenu) *RuleEditor {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *RuleEditor) WithMenu(menu *Menu) *RuleEditor {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -586,8 +586,8 @@ func (x *RuleEditor) WithUserActivity(userActivity *foundation.NSUserActivity) *
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *RuleEditor) WithTouchBar(touchBar *raw.NSTouchBar) *RuleEditor {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *RuleEditor) WithTouchBar(touchBar *TouchBar) *RuleEditor {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -861,7 +861,7 @@ type RuleEditorable interface {
 	WithIntegerValue(integerValue int) *RuleEditor
 	WithFloatValue(floatValue float32) *RuleEditor
 	WithDoubleValue(doubleValue float64) *RuleEditor
-	WithFont(font *raw.NSFont) *RuleEditor
+	WithFont(font *Font) *RuleEditor
 	WithUsesSingleLineMode(usesSingleLineMode bool) *RuleEditor
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *RuleEditor
 	WithAlignment(alignment raw.NSTextAlignment) *RuleEditor
@@ -893,7 +893,7 @@ type RuleEditorable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *RuleEditor
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *RuleEditor
 	WithContentFilters(items ...*coreimage.CIFilter) *RuleEditor
-	WithShadow(shadow *raw.NSShadow) *RuleEditor
+	WithShadow(shadow *Shadow) *RuleEditor
 	WithClipsToBounds(clipsToBounds bool) *RuleEditor
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RuleEditor
 	WithToolTip(toolTip string) *RuleEditor
@@ -905,18 +905,18 @@ type RuleEditorable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RuleEditor
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RuleEditor
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RuleEditor
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *RuleEditor
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RuleEditor
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RuleEditor
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RuleEditor
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RuleEditor
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RuleEditor
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RuleEditor
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RuleEditor
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RuleEditor
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RuleEditor
 	WithNextResponder(nextResponder ResponderProvider) *RuleEditor
-	WithMenu(menu *raw.NSMenu) *RuleEditor
+	WithMenu(menu *Menu) *RuleEditor
 	WithUserActivity(userActivity *foundation.NSUserActivity) *RuleEditor
-	WithTouchBar(touchBar *raw.NSTouchBar) *RuleEditor
+	WithTouchBar(touchBar *TouchBar) *RuleEditor
 	ReloadCriteria()
 	ReloadPredicate()
 	PredicateForRow(row int) *foundation.NSPredicate

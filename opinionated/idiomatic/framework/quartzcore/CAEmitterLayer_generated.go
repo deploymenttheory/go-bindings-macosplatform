@@ -466,13 +466,13 @@ func (x *EmitterLayer) WithConstraints(items ...*raw.CAConstraint) *EmitterLayer
 }
 
 // EmitterCells returns the collection as a Go slice.
-func (x *EmitterLayer) EmitterCells() []*raw.CAEmitterCell {
+func (x *EmitterLayer) EmitterCells() []*EmitterCell {
 	arr := x.inner.EmitterCells()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CAEmitterCell {
-		return raw.CAEmitterCellFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmitterCell {
+		return &EmitterCell{inner: raw.CAEmitterCellFromID(purego.Retain(_id))}
 	})
 }
 
@@ -704,7 +704,7 @@ type EmitterLayerable interface {
 	WithDelegate(delegate raw.CALayerDelegate) *EmitterLayer
 	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *EmitterLayer
 	WithConstraints(items ...*raw.CAConstraint) *EmitterLayer
-	EmitterCells() []*raw.CAEmitterCell
+	EmitterCells() []*EmitterCell
 	SetEmitterCells(emitterCells *foundation.NSArray[*raw.CAEmitterCell])
 	BirthRate() float32
 	SetBirthRate(birthRate float32)

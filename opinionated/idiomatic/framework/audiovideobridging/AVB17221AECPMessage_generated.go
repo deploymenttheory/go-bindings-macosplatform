@@ -67,8 +67,8 @@ func (x *AVB17221AECPMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPMes
 }
 
 // WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
-func (x *AVB17221AECPMessage) WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPMessage {
-	x.inner.SetSourceMAC(sourceMAC)
+func (x *AVB17221AECPMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPMessage {
+	x.inner.SetSourceMAC(sourceMAC.Unwrap())
 	return x
 }
 
@@ -151,7 +151,7 @@ type AVB17221AECPMessageable interface {
 	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPMessage
 	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPMessage
 	WithSequenceID(sequenceID uint16) *AVB17221AECPMessage
-	WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPMessage
+	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPMessage
 	ErrorForStatusCode() unsafe.Pointer
 	MessageType() raw.AVB17221AECPMessageType
 	SetMessageType(messageType raw.AVB17221AECPMessageType)

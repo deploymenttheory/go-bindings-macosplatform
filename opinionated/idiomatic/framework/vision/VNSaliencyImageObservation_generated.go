@@ -37,13 +37,13 @@ func NewSaliencyImageObservation() *SaliencyImageObservation {
 }
 
 // SalientObjects returns the collection as a Go slice.
-func (x *SaliencyImageObservation) SalientObjects() []*raw.VNRectangleObservation {
+func (x *SaliencyImageObservation) SalientObjects() []*RectangleObservation {
 	arr := x.inner.SalientObjects()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNRectangleObservation {
-		return raw.VNRectangleObservationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RectangleObservation {
+		return &RectangleObservation{inner: raw.VNRectangleObservationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *SaliencyImageObservation) asObservation() *raw.VNObservation { return &
 // SaliencyImageObservationable is the interface implemented by [SaliencyImageObservation], for mocking and DI.
 type SaliencyImageObservationable interface {
 	Unwrap() *raw.VNSaliencyImageObservation
-	SalientObjects() []*raw.VNRectangleObservation
+	SalientObjects() []*RectangleObservation
 }
 
 var _ SaliencyImageObservationable = (*SaliencyImageObservation)(nil)

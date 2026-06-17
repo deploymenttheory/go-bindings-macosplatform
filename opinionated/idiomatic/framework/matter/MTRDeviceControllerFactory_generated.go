@@ -81,13 +81,13 @@ func (x *MTRDeviceControllerFactory) IsRunning() bool {
 }
 
 // KnownFabrics returns the collection as a Go slice.
-func (x *MTRDeviceControllerFactory) KnownFabrics() []*raw.MTRFabricInfo {
+func (x *MTRDeviceControllerFactory) KnownFabrics() []*MTRFabricInfo {
 	arr := x.inner.KnownFabrics()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRFabricInfo {
-		return raw.MTRFabricInfoFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRFabricInfo {
+		return &MTRFabricInfo{inner: raw.MTRFabricInfoFromID(purego.Retain(_id))}
 	})
 }
 
@@ -100,7 +100,7 @@ type MTRDeviceControllerFactoryable interface {
 	CreateControllerOnNewFabricError(startupParams *raw.MTRDeviceControllerStartupParams) (*MTRDeviceController, error)
 	PreWarmCommissioningSession()
 	IsRunning() bool
-	KnownFabrics() []*raw.MTRFabricInfo
+	KnownFabrics() []*MTRFabricInfo
 }
 
 var _ MTRDeviceControllerFactoryable = (*MTRDeviceControllerFactory)(nil)

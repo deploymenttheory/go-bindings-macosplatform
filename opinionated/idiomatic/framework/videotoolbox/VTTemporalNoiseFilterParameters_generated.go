@@ -60,24 +60,24 @@ func (x *TemporalNoiseFilterParameters) SourceFrame() *FrameProcessorFrame {
 }
 
 // NextFrames returns the collection as a Go slice.
-func (x *TemporalNoiseFilterParameters) NextFrames() []*raw.VTFrameProcessorFrame {
+func (x *TemporalNoiseFilterParameters) NextFrames() []*FrameProcessorFrame {
 	arr := x.inner.NextFrames()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VTFrameProcessorFrame {
-		return raw.VTFrameProcessorFrameFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FrameProcessorFrame {
+		return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(purego.Retain(_id))}
 	})
 }
 
 // PreviousFrames returns the collection as a Go slice.
-func (x *TemporalNoiseFilterParameters) PreviousFrames() []*raw.VTFrameProcessorFrame {
+func (x *TemporalNoiseFilterParameters) PreviousFrames() []*FrameProcessorFrame {
 	arr := x.inner.PreviousFrames()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VTFrameProcessorFrame {
-		return raw.VTFrameProcessorFrameFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FrameProcessorFrame {
+		return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(purego.Retain(_id))}
 	})
 }
 
@@ -116,8 +116,8 @@ type TemporalNoiseFilterParametersable interface {
 	WithFilterStrength(filterStrength float32) *TemporalNoiseFilterParameters
 	WithHasDiscontinuity(hasDiscontinuity bool) *TemporalNoiseFilterParameters
 	SourceFrame() *FrameProcessorFrame
-	NextFrames() []*raw.VTFrameProcessorFrame
-	PreviousFrames() []*raw.VTFrameProcessorFrame
+	NextFrames() []*FrameProcessorFrame
+	PreviousFrames() []*FrameProcessorFrame
 	FilterStrength() float32
 	SetFilterStrength(filterStrength float32)
 	HasDiscontinuity() bool

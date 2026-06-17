@@ -64,13 +64,13 @@ func (x *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
 }
 
 // Tests returns the collection as a Go slice.
-func (x *AudiogramSensitivityPoint) Tests() []*raw.HKAudiogramSensitivityTest {
+func (x *AudiogramSensitivityPoint) Tests() []*AudiogramSensitivityTest {
 	arr := x.inner.Tests()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKAudiogramSensitivityTest {
-		return raw.HKAudiogramSensitivityTestFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudiogramSensitivityTest {
+		return &AudiogramSensitivityTest{inner: raw.HKAudiogramSensitivityTestFromID(purego.Retain(_id))}
 	})
 }
 
@@ -80,7 +80,7 @@ type AudiogramSensitivityPointable interface {
 	Frequency() *Quantity
 	LeftEarSensitivity() *Quantity
 	RightEarSensitivity() *Quantity
-	Tests() []*raw.HKAudiogramSensitivityTest
+	Tests() []*AudiogramSensitivityTest
 }
 
 var _ AudiogramSensitivityPointable = (*AudiogramSensitivityPoint)(nil)

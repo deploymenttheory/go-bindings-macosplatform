@@ -39,13 +39,13 @@ func NewMathExpressionRootWithRadicandExpressionsRootIndexExpression(radicandExp
 }
 
 // RadicandExpressions returns the collection as a Go slice.
-func (x *MathExpressionRoot) RadicandExpressions() []*raw.AXMathExpression {
+func (x *MathExpressionRoot) RadicandExpressions() []*MathExpression {
 	arr := x.inner.RadicandExpressions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
-		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
+		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -63,7 +63,7 @@ func (x *MathExpressionRoot) asMathExpression() *raw.AXMathExpression { return &
 // MathExpressionRootable is the interface implemented by [MathExpressionRoot], for mocking and DI.
 type MathExpressionRootable interface {
 	Unwrap() *raw.AXMathExpressionRoot
-	RadicandExpressions() []*raw.AXMathExpression
+	RadicandExpressions() []*MathExpression
 	RootIndexExpression() *MathExpression
 }
 

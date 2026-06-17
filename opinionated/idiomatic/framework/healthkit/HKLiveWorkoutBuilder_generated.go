@@ -48,8 +48,8 @@ func (x *LiveWorkoutBuilder) WithShouldCollectWorkoutEvents(shouldCollectWorkout
 }
 
 // WithDataSource sets the dataSource property and returns the receiver for chaining.
-func (x *LiveWorkoutBuilder) WithDataSource(dataSource *raw.HKLiveWorkoutDataSource) *LiveWorkoutBuilder {
-	x.inner.SetDataSource(dataSource)
+func (x *LiveWorkoutBuilder) WithDataSource(dataSource *LiveWorkoutDataSource) *LiveWorkoutBuilder {
+	x.inner.SetDataSource(dataSource.Unwrap())
 	return x
 }
 
@@ -117,7 +117,7 @@ type LiveWorkoutBuilderable interface {
 	Unwrap() *raw.HKLiveWorkoutBuilder
 	WithDelegate(delegate raw.HKLiveWorkoutBuilderDelegate) *LiveWorkoutBuilder
 	WithShouldCollectWorkoutEvents(shouldCollectWorkoutEvents bool) *LiveWorkoutBuilder
-	WithDataSource(dataSource *raw.HKLiveWorkoutDataSource) *LiveWorkoutBuilder
+	WithDataSource(dataSource *LiveWorkoutDataSource) *LiveWorkoutBuilder
 	Delegate() raw.HKLiveWorkoutBuilderDelegate
 	SetDelegate(delegate raw.HKLiveWorkoutBuilderDelegate)
 	WorkoutSession() *WorkoutSession

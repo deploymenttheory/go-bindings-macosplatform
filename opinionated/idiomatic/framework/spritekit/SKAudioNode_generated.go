@@ -146,8 +146,8 @@ func (x *AudioNode) WithName(name string) *AudioNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *AudioNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *AudioNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *AudioNode) WithPhysicsBody(physicsBody *PhysicsBody) *AudioNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -158,8 +158,8 @@ func (x *AudioNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *AudioNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *AudioNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *AudioNode) WithReachConstraints(reachConstraints *ReachConstraints) *AudioNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -288,9 +288,9 @@ type AudioNodeable interface {
 	WithHidden(hidden bool) *AudioNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *AudioNode
 	WithName(name string) *AudioNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *AudioNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *AudioNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *AudioNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *AudioNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *AudioNode
 	WithConstraints(items ...*raw.SKConstraint) *AudioNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *AudioNode
 	WithAccessibilityElement(accessibilityElement bool) *AudioNode

@@ -56,14 +56,14 @@ func (x *PropertyAnimation) WithCumulative(cumulative bool) *PropertyAnimation {
 }
 
 // WithValueFunction sets the valueFunction property and returns the receiver for chaining.
-func (x *PropertyAnimation) WithValueFunction(valueFunction *raw.CAValueFunction) *PropertyAnimation {
-	x.inner.SetValueFunction(valueFunction)
+func (x *PropertyAnimation) WithValueFunction(valueFunction *ValueFunction) *PropertyAnimation {
+	x.inner.SetValueFunction(valueFunction.Unwrap())
 	return x
 }
 
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *PropertyAnimation) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *PropertyAnimation {
-	x.inner.CAAnimation.SetTimingFunction(timingFunction)
+func (x *PropertyAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *PropertyAnimation {
+	x.inner.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
@@ -143,8 +143,8 @@ type PropertyAnimationable interface {
 	WithKeyPath(keyPath string) *PropertyAnimation
 	WithAdditive(additive bool) *PropertyAnimation
 	WithCumulative(cumulative bool) *PropertyAnimation
-	WithValueFunction(valueFunction *raw.CAValueFunction) *PropertyAnimation
-	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *PropertyAnimation
+	WithValueFunction(valueFunction *ValueFunction) *PropertyAnimation
+	WithTimingFunction(timingFunction *MediaTimingFunction) *PropertyAnimation
 	WithDelegate(delegate raw.CAAnimationDelegate) *PropertyAnimation
 	WithRemovedOnCompletion(removedOnCompletion bool) *PropertyAnimation
 	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *PropertyAnimation

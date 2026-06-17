@@ -69,8 +69,8 @@ func (x *InstallerPane) WithLastKeyView(lastKeyView *appkit.NSView) *InstallerPa
 }
 
 // WithNextPane sets the nextPane property and returns the receiver for chaining.
-func (x *InstallerPane) WithNextPane(nextPane *raw.InstallerPane) *InstallerPane {
-	x.inner.SetNextPane(nextPane)
+func (x *InstallerPane) WithNextPane(nextPane *InstallerPane) *InstallerPane {
+	x.inner.SetNextPane(nextPane.Unwrap())
 	return x
 }
 
@@ -215,7 +215,7 @@ type InstallerPaneable interface {
 	WithInitialKeyView(initialKeyView *appkit.NSView) *InstallerPane
 	WithFirstKeyView(firstKeyView *appkit.NSView) *InstallerPane
 	WithLastKeyView(lastKeyView *appkit.NSView) *InstallerPane
-	WithNextPane(nextPane *raw.InstallerPane) *InstallerPane
+	WithNextPane(nextPane *InstallerPane) *InstallerPane
 	WithNextEnabled(nextEnabled bool) *InstallerPane
 	WithPreviousEnabled(previousEnabled bool) *InstallerPane
 	ContentView() *appkit.NSView

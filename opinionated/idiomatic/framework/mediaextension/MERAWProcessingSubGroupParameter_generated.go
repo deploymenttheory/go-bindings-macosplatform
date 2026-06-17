@@ -45,13 +45,13 @@ func (x *RAWProcessingSubGroupParameter) WithEnabled(enabled bool) *RAWProcessin
 }
 
 // SubGroupParameters returns the collection as a Go slice.
-func (x *RAWProcessingSubGroupParameter) SubGroupParameters() []*raw.MERAWProcessingParameter {
+func (x *RAWProcessingSubGroupParameter) SubGroupParameters() []*RAWProcessingParameter {
 	arr := x.inner.SubGroupParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MERAWProcessingParameter {
-		return raw.MERAWProcessingParameterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RAWProcessingParameter {
+		return &RAWProcessingParameter{inner: raw.MERAWProcessingParameterFromID(purego.Retain(_id))}
 	})
 }
 
@@ -61,7 +61,7 @@ func (x *RAWProcessingSubGroupParameter) asRAWProcessingParameter() *raw.MERAWPr
 type RAWProcessingSubGroupParameterable interface {
 	Unwrap() *raw.MERAWProcessingSubGroupParameter
 	WithEnabled(enabled bool) *RAWProcessingSubGroupParameter
-	SubGroupParameters() []*raw.MERAWProcessingParameter
+	SubGroupParameters() []*RAWProcessingParameter
 }
 
 var _ RAWProcessingSubGroupParameterable = (*RAWProcessingSubGroupParameter)(nil)

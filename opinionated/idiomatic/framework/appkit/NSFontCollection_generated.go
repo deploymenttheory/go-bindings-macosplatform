@@ -53,35 +53,35 @@ func (x *FontCollection) MatchingDescriptorsForFamilyOptions(family string, opti
 }
 
 // QueryDescriptors returns the collection as a Go slice.
-func (x *FontCollection) QueryDescriptors() []*raw.NSFontDescriptor {
+func (x *FontCollection) QueryDescriptors() []*FontDescriptor {
 	arr := x.inner.QueryDescriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFontDescriptor {
-		return raw.NSFontDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FontDescriptor {
+		return &FontDescriptor{inner: raw.NSFontDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
 // ExclusionDescriptors returns the collection as a Go slice.
-func (x *FontCollection) ExclusionDescriptors() []*raw.NSFontDescriptor {
+func (x *FontCollection) ExclusionDescriptors() []*FontDescriptor {
 	arr := x.inner.ExclusionDescriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFontDescriptor {
-		return raw.NSFontDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FontDescriptor {
+		return &FontDescriptor{inner: raw.NSFontDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
 // MatchingDescriptors returns the collection as a Go slice.
-func (x *FontCollection) MatchingDescriptors() []*raw.NSFontDescriptor {
+func (x *FontCollection) MatchingDescriptors() []*FontDescriptor {
 	arr := x.inner.MatchingDescriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFontDescriptor {
-		return raw.NSFontDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FontDescriptor {
+		return &FontDescriptor{inner: raw.NSFontDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -93,9 +93,9 @@ type FontCollectionable interface {
 	MatchingDescriptorsWithOptions(options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *foundation.NSArray[*raw.NSFontDescriptor]
 	MatchingDescriptorsForFamily(family string) *foundation.NSArray[*raw.NSFontDescriptor]
 	MatchingDescriptorsForFamilyOptions(family string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *foundation.NSArray[*raw.NSFontDescriptor]
-	QueryDescriptors() []*raw.NSFontDescriptor
-	ExclusionDescriptors() []*raw.NSFontDescriptor
-	MatchingDescriptors() []*raw.NSFontDescriptor
+	QueryDescriptors() []*FontDescriptor
+	ExclusionDescriptors() []*FontDescriptor
+	MatchingDescriptors() []*FontDescriptor
 }
 
 var _ FontCollectionable = (*FontCollection)(nil)

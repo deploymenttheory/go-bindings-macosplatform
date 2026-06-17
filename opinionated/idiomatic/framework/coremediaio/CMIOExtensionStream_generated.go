@@ -105,13 +105,13 @@ func (x *ExtensionStream) Source() raw.CMIOExtensionStreamSource {
 }
 
 // StreamingClients returns the collection as a Go slice.
-func (x *ExtensionStream) StreamingClients() []*raw.CMIOExtensionClient {
+func (x *ExtensionStream) StreamingClients() []*ExtensionClient {
 	arr := x.inner.StreamingClients()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CMIOExtensionClient {
-		return raw.CMIOExtensionClientFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExtensionClient {
+		return &ExtensionClient{inner: raw.CMIOExtensionClientFromID(purego.Retain(_id))}
 	})
 }
 
@@ -128,7 +128,7 @@ type ExtensionStreamable interface {
 	ClockType() raw.CMIOExtensionStreamClockType
 	CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration
 	Source() raw.CMIOExtensionStreamSource
-	StreamingClients() []*raw.CMIOExtensionClient
+	StreamingClients() []*ExtensionClient
 }
 
 var _ ExtensionStreamable = (*ExtensionStream)(nil)

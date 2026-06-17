@@ -59,20 +59,20 @@ func (x *FetchWebAuthTokenOperation) WithFetchWebAuthTokenCompletionBlock(fetchW
 }
 
 // WithDatabase sets the database property and returns the receiver for chaining.
-func (x *FetchWebAuthTokenOperation) WithDatabase(database *raw.CKDatabase) *FetchWebAuthTokenOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database)
+func (x *FetchWebAuthTokenOperation) WithDatabase(database *Database) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *FetchWebAuthTokenOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchWebAuthTokenOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+func (x *FetchWebAuthTokenOperation) WithConfiguration(configuration *OperationConfiguration) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *FetchWebAuthTokenOperation) WithGroup(group *raw.CKOperationGroup) *FetchWebAuthTokenOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+func (x *FetchWebAuthTokenOperation) WithGroup(group *OperationGroup) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -83,8 +83,8 @@ func (x *FetchWebAuthTokenOperation) WithLongLivedOperationWasPersistedBlock(lon
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *FetchWebAuthTokenOperation) WithContainer(container *raw.CKContainer) *FetchWebAuthTokenOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+func (x *FetchWebAuthTokenOperation) WithContainer(container *Container) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -166,11 +166,11 @@ type FetchWebAuthTokenOperationable interface {
 	Unwrap() *raw.CKFetchWebAuthTokenOperation
 	WithAPIToken(aPIToken string) *FetchWebAuthTokenOperation
 	WithFetchWebAuthTokenCompletionBlock(fetchWebAuthTokenCompletionBlock func(*foundation.NSString, unsafe.Pointer)) *FetchWebAuthTokenOperation
-	WithDatabase(database *raw.CKDatabase) *FetchWebAuthTokenOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchWebAuthTokenOperation
-	WithGroup(group *raw.CKOperationGroup) *FetchWebAuthTokenOperation
+	WithDatabase(database *Database) *FetchWebAuthTokenOperation
+	WithConfiguration(configuration *OperationConfiguration) *FetchWebAuthTokenOperation
+	WithGroup(group *OperationGroup) *FetchWebAuthTokenOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchWebAuthTokenOperation
-	WithContainer(container *raw.CKContainer) *FetchWebAuthTokenOperation
+	WithContainer(container *Container) *FetchWebAuthTokenOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchWebAuthTokenOperation
 	WithLongLived(longLived bool) *FetchWebAuthTokenOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchWebAuthTokenOperation

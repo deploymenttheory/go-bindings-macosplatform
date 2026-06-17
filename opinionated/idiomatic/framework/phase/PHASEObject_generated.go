@@ -63,13 +63,13 @@ func (x *Object) Parent() *Object {
 }
 
 // Children returns the collection as a Go slice.
-func (x *Object) Children() []*raw.PHASEObject {
+func (x *Object) Children() []*Object {
 	arr := x.inner.Children()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEObject {
-		return raw.PHASEObjectFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Object {
+		return &Object{inner: raw.PHASEObjectFromID(purego.Retain(_id))}
 	})
 }
 
@@ -102,7 +102,7 @@ type Objectable interface {
 	RemoveChild(child *raw.PHASEObject)
 	RemoveChildren()
 	Parent() *Object
-	Children() []*raw.PHASEObject
+	Children() []*Object
 	Transform() unsafe.Pointer
 	SetTransform(transform unsafe.Pointer)
 	WorldTransform() unsafe.Pointer

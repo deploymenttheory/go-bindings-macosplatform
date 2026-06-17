@@ -135,8 +135,8 @@ func (x *SpriteNode) WithSize(size corefoundation.CGSize) *SpriteNode {
 }
 
 // WithShader sets the shader property and returns the receiver for chaining.
-func (x *SpriteNode) WithShader(shader *raw.SKShader) *SpriteNode {
-	x.inner.SetShader(shader)
+func (x *SpriteNode) WithShader(shader *Shader) *SpriteNode {
+	x.inner.SetShader(shader.Unwrap())
 	return x
 }
 
@@ -207,8 +207,8 @@ func (x *SpriteNode) WithName(name string) *SpriteNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *SpriteNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *SpriteNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *SpriteNode) WithPhysicsBody(physicsBody *PhysicsBody) *SpriteNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -219,8 +219,8 @@ func (x *SpriteNode) WithUserData(userData *foundation.NSMutableDictionary[objc.
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *SpriteNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *SpriteNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *SpriteNode) WithReachConstraints(reachConstraints *ReachConstraints) *SpriteNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -453,7 +453,7 @@ type SpriteNodeable interface {
 	WithBlendMode(blendMode raw.SKBlendMode) *SpriteNode
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *SpriteNode
 	WithSize(size corefoundation.CGSize) *SpriteNode
-	WithShader(shader *raw.SKShader) *SpriteNode
+	WithShader(shader *Shader) *SpriteNode
 	WithPosition(position corefoundation.CGPoint) *SpriteNode
 	WithZPosition(zPosition float64) *SpriteNode
 	WithZRotation(zRotation float64) *SpriteNode
@@ -465,9 +465,9 @@ type SpriteNodeable interface {
 	WithHidden(hidden bool) *SpriteNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *SpriteNode
 	WithName(name string) *SpriteNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *SpriteNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *SpriteNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *SpriteNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *SpriteNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *SpriteNode
 	WithConstraints(items ...*raw.SKConstraint) *SpriteNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *SpriteNode
 	WithAccessibilityElement(accessibilityElement bool) *SpriteNode

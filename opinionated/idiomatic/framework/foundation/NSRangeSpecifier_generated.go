@@ -87,8 +87,8 @@ func (x *RangeSpecifier) WithKey(key string) *RangeSpecifier {
 }
 
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
-func (x *RangeSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *RangeSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+func (x *RangeSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RangeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
@@ -146,7 +146,7 @@ type RangeSpecifierable interface {
 	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RangeSpecifier
 	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RangeSpecifier
 	WithKey(key string) *RangeSpecifier
-	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *RangeSpecifier
+	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RangeSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *RangeSpecifier
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RangeSpecifier
 	StartSpecifier() *ScriptObjectSpecifier

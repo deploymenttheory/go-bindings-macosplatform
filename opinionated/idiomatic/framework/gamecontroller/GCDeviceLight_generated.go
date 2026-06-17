@@ -36,8 +36,8 @@ func NewDeviceLight() *DeviceLight {
 }
 
 // WithColor sets the color property and returns the receiver for chaining.
-func (x *DeviceLight) WithColor(color *raw.GCColor) *DeviceLight {
-	x.inner.SetColor(color)
+func (x *DeviceLight) WithColor(color *Color) *DeviceLight {
+	x.inner.SetColor(color.Unwrap())
 	return x
 }
 
@@ -58,7 +58,7 @@ func (x *DeviceLight) SetColor(color *raw.GCColor) {
 // DeviceLightable is the interface implemented by [DeviceLight], for mocking and DI.
 type DeviceLightable interface {
 	Unwrap() *raw.GCDeviceLight
-	WithColor(color *raw.GCColor) *DeviceLight
+	WithColor(color *Color) *DeviceLight
 	Color() *Color
 	SetColor(color *raw.GCColor)
 }

@@ -75,14 +75,14 @@ func (x *DiscoverUserIdentitiesOperation) WithDiscoverUserIdentitiesCompletionBl
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *DiscoverUserIdentitiesOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *DiscoverUserIdentitiesOperation {
-	x.inner.CKOperation.SetConfiguration(configuration)
+func (x *DiscoverUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *DiscoverUserIdentitiesOperation) WithGroup(group *raw.CKOperationGroup) *DiscoverUserIdentitiesOperation {
-	x.inner.CKOperation.SetGroup(group)
+func (x *DiscoverUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -93,8 +93,8 @@ func (x *DiscoverUserIdentitiesOperation) WithLongLivedOperationWasPersistedBloc
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *DiscoverUserIdentitiesOperation) WithContainer(container *raw.CKContainer) *DiscoverUserIdentitiesOperation {
-	x.inner.CKOperation.SetContainer(container)
+func (x *DiscoverUserIdentitiesOperation) WithContainer(container *Container) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -123,13 +123,13 @@ func (x *DiscoverUserIdentitiesOperation) WithTimeoutIntervalForResource(timeout
 }
 
 // UserIdentityLookupInfos returns the collection as a Go slice.
-func (x *DiscoverUserIdentitiesOperation) UserIdentityLookupInfos() []*raw.CKUserIdentityLookupInfo {
+func (x *DiscoverUserIdentitiesOperation) UserIdentityLookupInfos() []*UserIdentityLookupInfo {
 	arr := x.inner.UserIdentityLookupInfos()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKUserIdentityLookupInfo {
-		return raw.CKUserIdentityLookupInfoFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UserIdentityLookupInfo {
+		return &UserIdentityLookupInfo{inner: raw.CKUserIdentityLookupInfoFromID(purego.Retain(_id))}
 	})
 }
 
@@ -179,15 +179,15 @@ type DiscoverUserIdentitiesOperationable interface {
 	WithUserIdentityLookupInfos(items ...*raw.CKUserIdentityLookupInfo) *DiscoverUserIdentitiesOperation
 	WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity, *raw.CKUserIdentityLookupInfo)) *DiscoverUserIdentitiesOperation
 	WithDiscoverUserIdentitiesCompletionBlock(discoverUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverUserIdentitiesOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *DiscoverUserIdentitiesOperation
-	WithGroup(group *raw.CKOperationGroup) *DiscoverUserIdentitiesOperation
+	WithConfiguration(configuration *OperationConfiguration) *DiscoverUserIdentitiesOperation
+	WithGroup(group *OperationGroup) *DiscoverUserIdentitiesOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverUserIdentitiesOperation
-	WithContainer(container *raw.CKContainer) *DiscoverUserIdentitiesOperation
+	WithContainer(container *Container) *DiscoverUserIdentitiesOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverUserIdentitiesOperation
 	WithLongLived(longLived bool) *DiscoverUserIdentitiesOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverUserIdentitiesOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverUserIdentitiesOperation
-	UserIdentityLookupInfos() []*raw.CKUserIdentityLookupInfo
+	UserIdentityLookupInfos() []*UserIdentityLookupInfo
 	SetUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*raw.CKUserIdentityLookupInfo])
 	UserIdentityDiscoveredBlock() objc.Block
 	SetUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity, *raw.CKUserIdentityLookupInfo))

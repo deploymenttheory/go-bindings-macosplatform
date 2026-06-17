@@ -72,8 +72,8 @@ func (x *SegmentedControl) WithTrackingMode(trackingMode raw.NSSegmentSwitchTrac
 }
 
 // WithSelectedSegmentBezelColor sets the selectedSegmentBezelColor property and returns the receiver for chaining.
-func (x *SegmentedControl) WithSelectedSegmentBezelColor(selectedSegmentBezelColor *raw.NSColor) *SegmentedControl {
-	x.inner.SetSelectedSegmentBezelColor(selectedSegmentBezelColor)
+func (x *SegmentedControl) WithSelectedSegmentBezelColor(selectedSegmentBezelColor *Color) *SegmentedControl {
+	x.inner.SetSelectedSegmentBezelColor(selectedSegmentBezelColor.Unwrap())
 	return x
 }
 
@@ -192,8 +192,8 @@ func (x *SegmentedControl) WithDoubleValue(doubleValue float64) *SegmentedContro
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *SegmentedControl) WithFont(font *raw.NSFont) *SegmentedControl {
-	x.inner.NSControl.SetFont(font)
+func (x *SegmentedControl) WithFont(font *Font) *SegmentedControl {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -414,8 +414,8 @@ func (x *SegmentedControl) WithContentFilters(items ...*coreimage.CIFilter) *Seg
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *SegmentedControl) WithShadow(shadow *raw.NSShadow) *SegmentedControl {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *SegmentedControl) WithShadow(shadow *Shadow) *SegmentedControl {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -496,8 +496,8 @@ func (x *SegmentedControl) WithPrefersCompactControlSizeMetrics(prefersCompactCo
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *SegmentedControl) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *SegmentedControl {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *SegmentedControl) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SegmentedControl {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -538,8 +538,8 @@ func (x *SegmentedControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExten
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *SegmentedControl) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *SegmentedControl {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *SegmentedControl) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SegmentedControl {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -550,8 +550,8 @@ func (x *SegmentedControl) WithNextResponder(nextResponder ResponderProvider) *S
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SegmentedControl) WithMenu(menu *raw.NSMenu) *SegmentedControl {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *SegmentedControl) WithMenu(menu *Menu) *SegmentedControl {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -562,8 +562,8 @@ func (x *SegmentedControl) WithUserActivity(userActivity *foundation.NSUserActiv
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *SegmentedControl) WithTouchBar(touchBar *raw.NSTouchBar) *SegmentedControl {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *SegmentedControl) WithTouchBar(touchBar *TouchBar) *SegmentedControl {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -825,7 +825,7 @@ type SegmentedControlable interface {
 	WithSegmentStyle(segmentStyle raw.NSSegmentStyle) *SegmentedControl
 	WithSpringLoaded(springLoaded bool) *SegmentedControl
 	WithTrackingMode(trackingMode raw.NSSegmentSwitchTracking) *SegmentedControl
-	WithSelectedSegmentBezelColor(selectedSegmentBezelColor *raw.NSColor) *SegmentedControl
+	WithSelectedSegmentBezelColor(selectedSegmentBezelColor *Color) *SegmentedControl
 	WithSegmentDistribution(segmentDistribution raw.NSSegmentDistribution) *SegmentedControl
 	WithBorderShape(borderShape raw.NSControlBorderShape) *SegmentedControl
 	WithTarget(target objc.ID) *SegmentedControl
@@ -845,7 +845,7 @@ type SegmentedControlable interface {
 	WithIntegerValue(integerValue int) *SegmentedControl
 	WithFloatValue(floatValue float32) *SegmentedControl
 	WithDoubleValue(doubleValue float64) *SegmentedControl
-	WithFont(font *raw.NSFont) *SegmentedControl
+	WithFont(font *Font) *SegmentedControl
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedControl
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SegmentedControl
 	WithAlignment(alignment raw.NSTextAlignment) *SegmentedControl
@@ -877,7 +877,7 @@ type SegmentedControlable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *SegmentedControl
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *SegmentedControl
 	WithContentFilters(items ...*coreimage.CIFilter) *SegmentedControl
-	WithShadow(shadow *raw.NSShadow) *SegmentedControl
+	WithShadow(shadow *Shadow) *SegmentedControl
 	WithClipsToBounds(clipsToBounds bool) *SegmentedControl
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SegmentedControl
 	WithToolTip(toolTip string) *SegmentedControl
@@ -889,18 +889,18 @@ type SegmentedControlable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SegmentedControl
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SegmentedControl
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SegmentedControl
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *SegmentedControl
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SegmentedControl
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SegmentedControl
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SegmentedControl
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SegmentedControl
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SegmentedControl
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SegmentedControl
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SegmentedControl
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *SegmentedControl
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SegmentedControl
 	WithNextResponder(nextResponder ResponderProvider) *SegmentedControl
-	WithMenu(menu *raw.NSMenu) *SegmentedControl
+	WithMenu(menu *Menu) *SegmentedControl
 	WithUserActivity(userActivity *foundation.NSUserActivity) *SegmentedControl
-	WithTouchBar(touchBar *raw.NSTouchBar) *SegmentedControl
+	WithTouchBar(touchBar *TouchBar) *SegmentedControl
 	SelectSegmentWithTag(tag int) bool
 	SetWidthForSegment(width float64, segment int)
 	WidthForSegment(segment int) float64

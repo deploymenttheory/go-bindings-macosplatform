@@ -52,13 +52,13 @@ func (x *CaptionGroup) TimeRange() coremedia.CMTimeRange {
 }
 
 // Captions returns the collection as a Go slice.
-func (x *CaptionGroup) Captions() []*raw.AVCaption {
+func (x *CaptionGroup) Captions() []*Caption {
 	arr := x.inner.Captions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaption {
-		return raw.AVCaptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Caption {
+		return &Caption{inner: raw.AVCaptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -66,7 +66,7 @@ func (x *CaptionGroup) Captions() []*raw.AVCaption {
 type CaptionGroupable interface {
 	Unwrap() *raw.AVCaptionGroup
 	TimeRange() coremedia.CMTimeRange
-	Captions() []*raw.AVCaption
+	Captions() []*Caption
 }
 
 var _ CaptionGroupable = (*CaptionGroup)(nil)

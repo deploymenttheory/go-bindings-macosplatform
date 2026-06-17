@@ -69,13 +69,13 @@ func (x *ConstraintConflict) DatabaseSnapshot() *foundation.NSDictionary[*founda
 }
 
 // ConflictingObjects returns the collection as a Go slice.
-func (x *ConstraintConflict) ConflictingObjects() []*raw.NSManagedObject {
+func (x *ConstraintConflict) ConflictingObjects() []*ManagedObject {
 	arr := x.inner.ConflictingObjects()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSManagedObject {
-		return raw.NSManagedObjectFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ManagedObject {
+		return &ManagedObject{inner: raw.NSManagedObjectFromID(purego.Retain(_id))}
 	})
 }
 
@@ -91,7 +91,7 @@ type ConstraintConflictable interface {
 	ConstraintValues() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	DatabaseObject() *ManagedObject
 	DatabaseSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ConflictingObjects() []*raw.NSManagedObject
+	ConflictingObjects() []*ManagedObject
 	ConflictingSnapshots() *foundation.NSArray[objc.ID]
 }
 

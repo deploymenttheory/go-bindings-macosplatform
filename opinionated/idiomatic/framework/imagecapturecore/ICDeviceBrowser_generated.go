@@ -85,13 +85,13 @@ func (x *DeviceBrowser) SetBrowsedDeviceTypeMask(browsedDeviceTypeMask raw.ICDev
 }
 
 // Devices returns the collection as a Go slice.
-func (x *DeviceBrowser) Devices() []*raw.ICDevice {
+func (x *DeviceBrowser) Devices() []*Device {
 	arr := x.inner.Devices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ICDevice {
-		return raw.ICDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Device {
+		return &Device{inner: raw.ICDeviceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -112,7 +112,7 @@ type DeviceBrowserable interface {
 	IsBrowsing() bool
 	BrowsedDeviceTypeMask() raw.ICDeviceTypeMask
 	SetBrowsedDeviceTypeMask(browsedDeviceTypeMask raw.ICDeviceTypeMask)
-	Devices() []*raw.ICDevice
+	Devices() []*Device
 	PreferredDevice() unsafe.Pointer
 }
 

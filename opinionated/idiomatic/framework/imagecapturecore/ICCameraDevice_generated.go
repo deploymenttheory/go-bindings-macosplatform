@@ -133,24 +133,24 @@ func (x *CameraDevice) ContentCatalogPercentCompleted() uint {
 }
 
 // Contents returns the collection as a Go slice.
-func (x *CameraDevice) Contents() []*raw.ICCameraItem {
+func (x *CameraDevice) Contents() []*CameraItem {
 	arr := x.inner.Contents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ICCameraItem {
-		return raw.ICCameraItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CameraItem {
+		return &CameraItem{inner: raw.ICCameraItemFromID(purego.Retain(_id))}
 	})
 }
 
 // MediaFiles returns the collection as a Go slice.
-func (x *CameraDevice) MediaFiles() []*raw.ICCameraItem {
+func (x *CameraDevice) MediaFiles() []*CameraItem {
 	arr := x.inner.MediaFiles()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ICCameraItem {
-		return raw.ICCameraItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CameraItem {
+		return &CameraItem{inner: raw.ICCameraItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -258,8 +258,8 @@ type CameraDeviceable interface {
 	RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo(command *foundation.NSData, data *foundation.NSData, sendCommandDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer)
 	RequestSendPTPCommandOutDataCompletion(ptpCommand *foundation.NSData, ptpData *foundation.NSData, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer))
 	ContentCatalogPercentCompleted() uint
-	Contents() []*raw.ICCameraItem
-	MediaFiles() []*raw.ICCameraItem
+	Contents() []*CameraItem
+	MediaFiles() []*CameraItem
 	IsEjectable() bool
 	IsLocked() bool
 	IsAccessRestrictedAppleDevice() bool

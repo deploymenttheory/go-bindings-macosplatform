@@ -37,13 +37,13 @@ func NewLocalSearchResponse() *LocalSearchResponse {
 }
 
 // MapItems returns the collection as a Go slice.
-func (x *LocalSearchResponse) MapItems() []*raw.MKMapItem {
+func (x *LocalSearchResponse) MapItems() []*MapItem {
 	arr := x.inner.MapItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKMapItem {
-		return raw.MKMapItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MapItem {
+		return &MapItem{inner: raw.MKMapItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -55,7 +55,7 @@ func (x *LocalSearchResponse) BoundingRegion() raw.MKCoordinateRegion {
 // LocalSearchResponseable is the interface implemented by [LocalSearchResponse], for mocking and DI.
 type LocalSearchResponseable interface {
 	Unwrap() *raw.MKLocalSearchResponse
-	MapItems() []*raw.MKMapItem
+	MapItems() []*MapItem
 	BoundingRegion() raw.MKCoordinateRegion
 }
 

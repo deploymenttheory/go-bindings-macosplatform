@@ -280,13 +280,13 @@ func (x *Leaderboard) SetRange(range_ foundation.NSRange) {
 }
 
 // Scores returns the collection as a Go slice.
-func (x *Leaderboard) Scores() []*raw.GKScore {
+func (x *Leaderboard) Scores() []*Score {
 	arr := x.inner.Scores()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKScore {
-		return raw.GKScoreFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Score {
+		return &Score{inner: raw.GKScoreFromID(purego.Retain(_id))}
 	})
 }
 
@@ -368,7 +368,7 @@ type Leaderboardable interface {
 	SetIdentifier(identifier string)
 	Range() foundation.NSRange
 	SetRange(range_ foundation.NSRange)
-	Scores() []*raw.GKScore
+	Scores() []*Score
 	MaxRange() uint
 	LocalPlayerScore() *Score
 	IsLoading() bool

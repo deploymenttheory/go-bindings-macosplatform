@@ -39,13 +39,13 @@ func NewProjectSectionContent() *ProjectSectionContent {
 }
 
 // Elements returns the collection as a Go slice.
-func (x *ProjectSectionContent) Elements() []*raw.PHProjectElement {
+func (x *ProjectSectionContent) Elements() []*ProjectElement {
 	arr := x.inner.Elements()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHProjectElement {
-		return raw.PHProjectElementFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ProjectElement {
+		return &ProjectElement{inner: raw.PHProjectElementFromID(purego.Retain(_id))}
 	})
 }
 
@@ -78,7 +78,7 @@ func (x *ProjectSectionContent) BackgroundColor() *appkit.NSColor {
 // ProjectSectionContentable is the interface implemented by [ProjectSectionContent], for mocking and DI.
 type ProjectSectionContentable interface {
 	Unwrap() *raw.PHProjectSectionContent
-	Elements() []*raw.PHProjectElement
+	Elements() []*ProjectElement
 	NumberOfColumns() int
 	AspectRatio() float64
 	CloudAssetIdentifiers() []*photos.PHCloudIdentifier

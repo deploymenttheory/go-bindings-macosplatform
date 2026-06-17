@@ -60,14 +60,14 @@ func NewSubmeshWithMDLSubmeshIndexTypeGeometryType(submesh *raw.MDLSubmesh, inde
 }
 
 // WithMaterial sets the material property and returns the receiver for chaining.
-func (x *Submesh) WithMaterial(material *raw.MDLMaterial) *Submesh {
-	x.inner.SetMaterial(material)
+func (x *Submesh) WithMaterial(material *Material) *Submesh {
+	x.inner.SetMaterial(material.Unwrap())
 	return x
 }
 
 // WithTopology sets the topology property and returns the receiver for chaining.
-func (x *Submesh) WithTopology(topology *raw.MDLSubmeshTopology) *Submesh {
-	x.inner.SetTopology(topology)
+func (x *Submesh) WithTopology(topology *SubmeshTopology) *Submesh {
+	x.inner.SetTopology(topology.Unwrap())
 	return x
 }
 
@@ -147,8 +147,8 @@ func (x *Submesh) SetName(name string) {
 // Submeshable is the interface implemented by [Submesh], for mocking and DI.
 type Submeshable interface {
 	Unwrap() *raw.MDLSubmesh
-	WithMaterial(material *raw.MDLMaterial) *Submesh
-	WithTopology(topology *raw.MDLSubmeshTopology) *Submesh
+	WithMaterial(material *Material) *Submesh
+	WithTopology(topology *SubmeshTopology) *Submesh
 	WithName(name string) *Submesh
 	IndexBufferAsIndexType(indexType raw.MDLIndexBitDepth) raw.MDLMeshBuffer
 	IndexBuffer() raw.MDLMeshBuffer

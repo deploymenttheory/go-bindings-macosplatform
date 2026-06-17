@@ -210,13 +210,13 @@ func (x *Script) SetFNumber(fNumber float32) {
 }
 
 // AddedDetectionTracks returns the collection as a Go slice.
-func (x *Script) AddedDetectionTracks() []*raw.CNDetectionTrack {
+func (x *Script) AddedDetectionTracks() []*DetectionTrack {
 	arr := x.inner.AddedDetectionTracks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CNDetectionTrack {
-		return raw.CNDetectionTrackFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DetectionTrack {
+		return &DetectionTrack{inner: raw.CNDetectionTrackFromID(purego.Retain(_id))}
 	})
 }
 
@@ -249,7 +249,7 @@ type Scriptable interface {
 	TimeRange() coremedia.CMTimeRange
 	FNumber() float32
 	SetFNumber(fNumber float32)
-	AddedDetectionTracks() []*raw.CNDetectionTrack
+	AddedDetectionTracks() []*DetectionTrack
 }
 
 var _ Scriptable = (*Script)(nil)

@@ -37,13 +37,13 @@ func NewGraphicsDevice() *GraphicsDevice {
 }
 
 // Displays returns the collection as a Go slice.
-func (x *GraphicsDevice) Displays() []*raw.VZGraphicsDisplay {
+func (x *GraphicsDevice) Displays() []*GraphicsDisplay {
 	arr := x.inner.Displays()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZGraphicsDisplay {
-		return raw.VZGraphicsDisplayFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphicsDisplay {
+		return &GraphicsDisplay{inner: raw.VZGraphicsDisplayFromID(purego.Retain(_id))}
 	})
 }
 
@@ -52,7 +52,7 @@ func (x *GraphicsDevice) asGraphicsDevice() *raw.VZGraphicsDevice { return x.inn
 // GraphicsDeviceable is the interface implemented by [GraphicsDevice], for mocking and DI.
 type GraphicsDeviceable interface {
 	Unwrap() *raw.VZGraphicsDevice
-	Displays() []*raw.VZGraphicsDisplay
+	Displays() []*GraphicsDisplay
 }
 
 var _ GraphicsDeviceable = (*GraphicsDevice)(nil)

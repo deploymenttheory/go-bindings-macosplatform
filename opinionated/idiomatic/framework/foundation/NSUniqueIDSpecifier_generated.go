@@ -81,8 +81,8 @@ func (x *UniqueIDSpecifier) WithKey(key string) *UniqueIDSpecifier {
 }
 
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
-func (x *UniqueIDSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *UniqueIDSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+func (x *UniqueIDSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *UniqueIDSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
@@ -121,7 +121,7 @@ type UniqueIDSpecifierable interface {
 	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *UniqueIDSpecifier
 	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *UniqueIDSpecifier
 	WithKey(key string) *UniqueIDSpecifier
-	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *UniqueIDSpecifier
+	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *UniqueIDSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *UniqueIDSpecifier
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UniqueIDSpecifier
 	UniqueID() objc.ID

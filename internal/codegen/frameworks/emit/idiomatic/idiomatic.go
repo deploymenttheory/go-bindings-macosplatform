@@ -1128,7 +1128,7 @@ func buildWithSetter(
 	ctx typemap.Context,
 	m *typemap.Mapper,
 	rawPkgAlias string,
-	_ trialNameMap,
+	trialNames trialNameMap,
 	_ string,
 	abstractBases abstractBaseIndex,
 ) *withEntry {
@@ -1282,6 +1282,24 @@ func buildWithSetter(
 				rawExpr: pName + "." + methName + "()",
 			},
 			extraImports: extraImports,
+		}
+	}
+
+	// Concrete object property → accept the idiomatic wrapper and unwrap it for
+	// the raw setter, so callers pass the wrapper rather than the raw type.
+	// (Abstract bases already used the provider interface above.)
+	if base, ok := trialWrapClass(goType, rawPkgAlias); ok {
+		if tt, has := trialNames[base]; has {
+			return &withEntry{
+				goName:          goWithName,
+				rawSetterGoName: rawSetterGoName,
+				param: withParam{
+					goName:  pName,
+					goType:  "*" + tt,
+					rawExpr: pName + ".Unwrap()",
+				},
+				extraImports: extraImports,
+			}
 		}
 	}
 
@@ -1594,7 +1612,7 @@ func buildMethod(
 	// NSArray → slice (no params, getter only). Fall through to a plain wrapper
 	// when the element type can't be resolved.
 	if looksLikeNSArray(method.Return.ObjCType) && len(method.Params) == 0 {
-		if e := buildSliceMethod(method, rawGoName, fw, ctx, m, rawPkgAlias); e != nil {
+		if e := buildSliceMethod(method, rawGoName, fw, ctx, m, rawPkgAlias, trialNames); e != nil {
 			return e
 		}
 	}
@@ -1613,6 +1631,7 @@ func buildSliceMethod(
 	ctx typemap.Context,
 	m *typemap.Mapper,
 	rawPkgAlias string,
+	trialNames trialNameMap,
 ) *methodEntry {
 	elemObjC := extractNSArrayElem(method.Return.ObjCType)
 	if elemObjC == "" {
@@ -1645,6 +1664,15 @@ func buildSliceMethod(
 		// retain). Mirrors the hand-written iteration consumers used to write.
 		maps.Copy(extraImports, impSet)
 		elemGoType, convFmt = goElem, fromID+"(purego.Retain(%s))"
+		// When the element is a class in this framework that has an idiomatic
+		// wrapper, hand back the wrapper ([]*Trial) rather than the raw pointer,
+		// so callers iterating the slice stay on the idiomatic layer.
+		if base, ok := trialWrapClass(goElem, rawPkgAlias); ok {
+			if tt, has := trialNames[base]; has {
+				elemGoType = "*" + tt
+				convFmt = "&" + tt + "{inner: " + fromID + "(purego.Retain(%s))}"
+			}
+		}
 	}
 	// The conversion closure reads objc.ID elements via the purego collections
 	// helper, which sidesteps the ABI-unsafe typed-NSArray element accessor.

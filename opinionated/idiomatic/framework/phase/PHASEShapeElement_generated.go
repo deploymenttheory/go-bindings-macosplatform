@@ -36,8 +36,8 @@ func NewShapeElement() *ShapeElement {
 }
 
 // WithMaterial sets the material property and returns the receiver for chaining.
-func (x *ShapeElement) WithMaterial(material *raw.PHASEMaterial) *ShapeElement {
-	x.inner.SetMaterial(material)
+func (x *ShapeElement) WithMaterial(material *Material) *ShapeElement {
+	x.inner.SetMaterial(material.Unwrap())
 	return x
 }
 
@@ -58,7 +58,7 @@ func (x *ShapeElement) SetMaterial(material *raw.PHASEMaterial) {
 // ShapeElementable is the interface implemented by [ShapeElement], for mocking and DI.
 type ShapeElementable interface {
 	Unwrap() *raw.PHASEShapeElement
-	WithMaterial(material *raw.PHASEMaterial) *ShapeElement
+	WithMaterial(material *Material) *ShapeElement
 	Material() *Material
 	SetMaterial(material *raw.PHASEMaterial)
 }

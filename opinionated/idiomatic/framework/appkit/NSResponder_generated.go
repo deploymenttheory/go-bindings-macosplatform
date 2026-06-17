@@ -51,8 +51,8 @@ func (x *Responder) WithNextResponder(nextResponder ResponderProvider) *Responde
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Responder) WithMenu(menu *raw.NSMenu) *Responder {
-	x.inner.SetMenu(menu)
+func (x *Responder) WithMenu(menu *Menu) *Responder {
+	x.inner.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -63,8 +63,8 @@ func (x *Responder) WithUserActivity(userActivity *foundation.NSUserActivity) *R
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Responder) WithTouchBar(touchBar *raw.NSTouchBar) *Responder {
-	x.inner.SetTouchBar(touchBar)
+func (x *Responder) WithTouchBar(touchBar *TouchBar) *Responder {
+	x.inner.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -460,9 +460,9 @@ func (x *Responder) asResponder() *raw.NSResponder { return x.inner }
 type Responderable interface {
 	Unwrap() *raw.NSResponder
 	WithNextResponder(nextResponder ResponderProvider) *Responder
-	WithMenu(menu *raw.NSMenu) *Responder
+	WithMenu(menu *Menu) *Responder
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Responder
-	WithTouchBar(touchBar *raw.NSTouchBar) *Responder
+	WithTouchBar(touchBar *TouchBar) *Responder
 	TryToPerformWith(action objc.SEL, object objc.ID) bool
 	PerformKeyEquivalent(event *raw.NSEvent) bool
 	ValidRequestorForSendTypeReturnType(sendType *foundation.NSString, returnType *foundation.NSString) objc.ID

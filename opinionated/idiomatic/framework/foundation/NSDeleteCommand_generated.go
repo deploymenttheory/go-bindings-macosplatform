@@ -61,14 +61,14 @@ func (x *DeleteCommand) WithScriptErrorNumber(scriptErrorNumber int) *DeleteComm
 }
 
 // WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
-func (x *DeleteCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *DeleteCommand {
-	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor)
+func (x *DeleteCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *DeleteCommand {
+	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor.Unwrap())
 	return x
 }
 
 // WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
-func (x *DeleteCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *DeleteCommand {
-	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor)
+func (x *DeleteCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *DeleteCommand {
+	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor.Unwrap())
 	return x
 }
 
@@ -104,8 +104,8 @@ type DeleteCommandable interface {
 	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *DeleteCommand
 	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *DeleteCommand
 	WithScriptErrorNumber(scriptErrorNumber int) *DeleteCommand
-	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *DeleteCommand
-	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *DeleteCommand
+	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *DeleteCommand
+	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *DeleteCommand
 	WithScriptErrorString(scriptErrorString string) *DeleteCommand
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DeleteCommand
 	KeySpecifier() *ScriptObjectSpecifier

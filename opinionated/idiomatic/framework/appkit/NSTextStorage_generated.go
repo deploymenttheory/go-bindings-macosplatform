@@ -115,14 +115,14 @@ func (x *TextStorage) WithCharacters(items ...*raw.NSTextStorage) *TextStorage {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *TextStorage) WithFont(font *raw.NSFont) *TextStorage {
-	x.inner.SetFont(font)
+func (x *TextStorage) WithFont(font *Font) *TextStorage {
+	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
 // WithForegroundColor sets the foregroundColor property and returns the receiver for chaining.
-func (x *TextStorage) WithForegroundColor(foregroundColor *raw.NSColor) *TextStorage {
-	x.inner.SetForegroundColor(foregroundColor)
+func (x *TextStorage) WithForegroundColor(foregroundColor *Color) *TextStorage {
+	x.inner.SetForegroundColor(foregroundColor.Unwrap())
 	return x
 }
 
@@ -157,13 +157,13 @@ func (x *TextStorage) EnsureAttributesAreFixedInRange(range_ foundation.NSRange)
 }
 
 // LayoutManagers returns the collection as a Go slice.
-func (x *TextStorage) LayoutManagers() []*raw.NSLayoutManager {
+func (x *TextStorage) LayoutManagers() []*LayoutManager {
 	arr := x.inner.LayoutManagers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSLayoutManager {
-		return raw.NSLayoutManagerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LayoutManager {
+		return &LayoutManager{inner: raw.NSLayoutManagerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -208,13 +208,13 @@ func (x *TextStorage) SetTextStorageObserver(textStorageObserver raw.NSTextStora
 }
 
 // AttributeRuns returns the collection as a Go slice.
-func (x *TextStorage) AttributeRuns() []*raw.NSTextStorage {
+func (x *TextStorage) AttributeRuns() []*TextStorage {
 	arr := x.inner.AttributeRuns()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextStorage {
-		return raw.NSTextStorageFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextStorage {
+		return &TextStorage{inner: raw.NSTextStorageFromID(purego.Retain(_id))}
 	})
 }
 
@@ -224,13 +224,13 @@ func (x *TextStorage) SetAttributeRuns(attributeRuns *foundation.NSArray[*raw.NS
 }
 
 // Paragraphs returns the collection as a Go slice.
-func (x *TextStorage) Paragraphs() []*raw.NSTextStorage {
+func (x *TextStorage) Paragraphs() []*TextStorage {
 	arr := x.inner.Paragraphs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextStorage {
-		return raw.NSTextStorageFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextStorage {
+		return &TextStorage{inner: raw.NSTextStorageFromID(purego.Retain(_id))}
 	})
 }
 
@@ -240,13 +240,13 @@ func (x *TextStorage) SetParagraphs(paragraphs *foundation.NSArray[*raw.NSTextSt
 }
 
 // Words returns the collection as a Go slice.
-func (x *TextStorage) Words() []*raw.NSTextStorage {
+func (x *TextStorage) Words() []*TextStorage {
 	arr := x.inner.Words()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextStorage {
-		return raw.NSTextStorageFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextStorage {
+		return &TextStorage{inner: raw.NSTextStorageFromID(purego.Retain(_id))}
 	})
 }
 
@@ -256,13 +256,13 @@ func (x *TextStorage) SetWords(words *foundation.NSArray[*raw.NSTextStorage]) {
 }
 
 // Characters returns the collection as a Go slice.
-func (x *TextStorage) Characters() []*raw.NSTextStorage {
+func (x *TextStorage) Characters() []*TextStorage {
 	arr := x.inner.Characters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextStorage {
-		return raw.NSTextStorageFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextStorage {
+		return &TextStorage{inner: raw.NSTextStorageFromID(purego.Retain(_id))}
 	})
 }
 
@@ -308,15 +308,15 @@ type TextStorageable interface {
 	WithParagraphs(items ...*raw.NSTextStorage) *TextStorage
 	WithWords(items ...*raw.NSTextStorage) *TextStorage
 	WithCharacters(items ...*raw.NSTextStorage) *TextStorage
-	WithFont(font *raw.NSFont) *TextStorage
-	WithForegroundColor(foregroundColor *raw.NSColor) *TextStorage
+	WithFont(font *Font) *TextStorage
+	WithForegroundColor(foregroundColor *Color) *TextStorage
 	AddLayoutManager(aLayoutManager *raw.NSLayoutManager)
 	RemoveLayoutManager(aLayoutManager *raw.NSLayoutManager)
 	EditedRangeChangeInLength(editedMask raw.NSTextStorageEditActions, editedRange foundation.NSRange, delta int)
 	ProcessEditing()
 	InvalidateAttributesInRange(range_ foundation.NSRange)
 	EnsureAttributesAreFixedInRange(range_ foundation.NSRange)
-	LayoutManagers() []*raw.NSLayoutManager
+	LayoutManagers() []*LayoutManager
 	EditedMask() raw.NSTextStorageEditActions
 	EditedRange() foundation.NSRange
 	ChangeInLength() int
@@ -325,13 +325,13 @@ type TextStorageable interface {
 	FixesAttributesLazily() bool
 	TextStorageObserver() raw.NSTextStorageObserving
 	SetTextStorageObserver(textStorageObserver raw.NSTextStorageObserving)
-	AttributeRuns() []*raw.NSTextStorage
+	AttributeRuns() []*TextStorage
 	SetAttributeRuns(attributeRuns *foundation.NSArray[*raw.NSTextStorage])
-	Paragraphs() []*raw.NSTextStorage
+	Paragraphs() []*TextStorage
 	SetParagraphs(paragraphs *foundation.NSArray[*raw.NSTextStorage])
-	Words() []*raw.NSTextStorage
+	Words() []*TextStorage
 	SetWords(words *foundation.NSArray[*raw.NSTextStorage])
-	Characters() []*raw.NSTextStorage
+	Characters() []*TextStorage
 	SetCharacters(characters *foundation.NSArray[*raw.NSTextStorage])
 	Font() *Font
 	SetFont(font *raw.NSFont)

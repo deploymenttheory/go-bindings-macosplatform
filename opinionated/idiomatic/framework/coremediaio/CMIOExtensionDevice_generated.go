@@ -82,13 +82,13 @@ func (x *ExtensionDevice) Source() raw.CMIOExtensionDeviceSource {
 }
 
 // Streams returns the collection as a Go slice.
-func (x *ExtensionDevice) Streams() []*raw.CMIOExtensionStream {
+func (x *ExtensionDevice) Streams() []*ExtensionStream {
 	arr := x.inner.Streams()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CMIOExtensionStream {
-		return raw.CMIOExtensionStreamFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExtensionStream {
+		return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(purego.Retain(_id))}
 	})
 }
 
@@ -102,7 +102,7 @@ type ExtensionDeviceable interface {
 	DeviceID() *foundation.NSUUID
 	LegacyDeviceID() string
 	Source() raw.CMIOExtensionDeviceSource
-	Streams() []*raw.CMIOExtensionStream
+	Streams() []*ExtensionStream
 }
 
 var _ ExtensionDeviceable = (*ExtensionDevice)(nil)

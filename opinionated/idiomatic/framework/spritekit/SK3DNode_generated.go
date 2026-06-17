@@ -156,8 +156,8 @@ func (x *SK3DNode) WithName(name string) *SK3DNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *SK3DNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *SK3DNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *SK3DNode) WithPhysicsBody(physicsBody *PhysicsBody) *SK3DNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -168,8 +168,8 @@ func (x *SK3DNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *SK3DNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *SK3DNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *SK3DNode) WithReachConstraints(reachConstraints *ReachConstraints) *SK3DNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -357,9 +357,9 @@ type SK3DNodeable interface {
 	WithHidden(hidden bool) *SK3DNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *SK3DNode
 	WithName(name string) *SK3DNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *SK3DNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *SK3DNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *SK3DNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *SK3DNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *SK3DNode
 	WithConstraints(items ...*raw.SKConstraint) *SK3DNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *SK3DNode
 	WithAccessibilityElement(accessibilityElement bool) *SK3DNode

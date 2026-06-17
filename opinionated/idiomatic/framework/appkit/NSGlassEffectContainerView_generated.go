@@ -233,8 +233,8 @@ func (x *GlassEffectContainerView) WithContentFilters(items ...*coreimage.CIFilt
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithShadow(shadow *raw.NSShadow) *GlassEffectContainerView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *GlassEffectContainerView) WithShadow(shadow *Shadow) *GlassEffectContainerView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -315,8 +315,8 @@ func (x *GlassEffectContainerView) WithPrefersCompactControlSizeMetrics(prefersC
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *GlassEffectContainerView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *GlassEffectContainerView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectContainerView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -357,8 +357,8 @@ func (x *GlassEffectContainerView) WithWantsExtendedDynamicRangeOpenGLSurface(wa
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GlassEffectContainerView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *GlassEffectContainerView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectContainerView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -369,8 +369,8 @@ func (x *GlassEffectContainerView) WithNextResponder(nextResponder ResponderProv
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithMenu(menu *raw.NSMenu) *GlassEffectContainerView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *GlassEffectContainerView) WithMenu(menu *Menu) *GlassEffectContainerView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -381,8 +381,8 @@ func (x *GlassEffectContainerView) WithUserActivity(userActivity *foundation.NSU
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithTouchBar(touchBar *raw.NSTouchBar) *GlassEffectContainerView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *GlassEffectContainerView) WithTouchBar(touchBar *TouchBar) *GlassEffectContainerView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -444,7 +444,7 @@ type GlassEffectContainerViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *GlassEffectContainerView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *GlassEffectContainerView
 	WithContentFilters(items ...*coreimage.CIFilter) *GlassEffectContainerView
-	WithShadow(shadow *raw.NSShadow) *GlassEffectContainerView
+	WithShadow(shadow *Shadow) *GlassEffectContainerView
 	WithClipsToBounds(clipsToBounds bool) *GlassEffectContainerView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GlassEffectContainerView
 	WithToolTip(toolTip string) *GlassEffectContainerView
@@ -456,18 +456,18 @@ type GlassEffectContainerViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GlassEffectContainerView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GlassEffectContainerView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectContainerView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *GlassEffectContainerView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectContainerView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GlassEffectContainerView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GlassEffectContainerView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GlassEffectContainerView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GlassEffectContainerView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GlassEffectContainerView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GlassEffectContainerView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GlassEffectContainerView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectContainerView
 	WithNextResponder(nextResponder ResponderProvider) *GlassEffectContainerView
-	WithMenu(menu *raw.NSMenu) *GlassEffectContainerView
+	WithMenu(menu *Menu) *GlassEffectContainerView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *GlassEffectContainerView
-	WithTouchBar(touchBar *raw.NSTouchBar) *GlassEffectContainerView
+	WithTouchBar(touchBar *TouchBar) *GlassEffectContainerView
 	ContentView() *View
 	SetContentView(contentView *raw.NSView)
 	Spacing() float64

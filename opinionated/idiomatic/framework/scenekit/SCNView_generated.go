@@ -41,8 +41,8 @@ func NewViewWithFrameOptions(frame corefoundation.CGRect, options *foundation.NS
 }
 
 // WithScene sets the scene property and returns the receiver for chaining.
-func (x *View) WithScene(scene *raw.SCNScene) *View {
-	x.inner.SetScene(scene)
+func (x *View) WithScene(scene *Scene) *View {
+	x.inner.SetScene(scene.Unwrap())
 	return x
 }
 
@@ -213,7 +213,7 @@ func (x *View) SetPixelFormat(pixelFormat unsafe.Pointer) {
 // Viewable is the interface implemented by [View], for mocking and DI.
 type Viewable interface {
 	Unwrap() *raw.SCNView
-	WithScene(scene *raw.SCNScene) *View
+	WithScene(scene *Scene) *View
 	WithRendersContinuously(rendersContinuously bool) *View
 	WithBackgroundColor(backgroundColor *appkit.NSColor) *View
 	WithAllowsCameraControl(allowsCameraControl bool) *View

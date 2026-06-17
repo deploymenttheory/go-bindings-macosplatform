@@ -122,13 +122,13 @@ func (x *UMPEndpoint) EndpointType() raw.MIDIUMPCIObjectBackingType {
 }
 
 // FunctionBlocks returns the collection as a Go slice.
-func (x *UMPEndpoint) FunctionBlocks() []*raw.MIDIUMPFunctionBlock {
+func (x *UMPEndpoint) FunctionBlocks() []*UMPFunctionBlock {
 	arr := x.inner.FunctionBlocks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDIUMPFunctionBlock {
-		return raw.MIDIUMPFunctionBlockFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UMPFunctionBlock {
+		return &UMPFunctionBlock{inner: raw.MIDIUMPFunctionBlockFromID(purego.Retain(_id))}
 	})
 }
 
@@ -154,7 +154,7 @@ type UMPEndpointable interface {
 	HasJRTSReceiveCapability() bool
 	HasJRTSTransmitCapability() bool
 	EndpointType() raw.MIDIUMPCIObjectBackingType
-	FunctionBlocks() []*raw.MIDIUMPFunctionBlock
+	FunctionBlocks() []*UMPFunctionBlock
 	SetFunctionBlocks(functionBlocks *foundation.NSArray[*raw.MIDIUMPFunctionBlock])
 }
 

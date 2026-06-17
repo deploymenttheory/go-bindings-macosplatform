@@ -37,14 +37,14 @@ func NewNEPacketTunnelNetworkSettings() *NEPacketTunnelNetworkSettings {
 }
 
 // WithIPv4Settings sets the iPv4Settings property and returns the receiver for chaining.
-func (x *NEPacketTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *raw.NEIPv4Settings) *NEPacketTunnelNetworkSettings {
-	x.inner.SetIPv4Settings(iPv4Settings)
+func (x *NEPacketTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEPacketTunnelNetworkSettings {
+	x.inner.SetIPv4Settings(iPv4Settings.Unwrap())
 	return x
 }
 
 // WithIPv6Settings sets the iPv6Settings property and returns the receiver for chaining.
-func (x *NEPacketTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *raw.NEIPv6Settings) *NEPacketTunnelNetworkSettings {
-	x.inner.SetIPv6Settings(iPv6Settings)
+func (x *NEPacketTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEPacketTunnelNetworkSettings {
+	x.inner.SetIPv6Settings(iPv6Settings.Unwrap())
 	return x
 }
 
@@ -67,8 +67,8 @@ func (x *NEPacketTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSetting
 }
 
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
-func (x *NEPacketTunnelNetworkSettings) WithProxySettings(proxySettings *raw.NEProxySettings) *NEPacketTunnelNetworkSettings {
-	x.inner.NETunnelNetworkSettings.SetProxySettings(proxySettings)
+func (x *NEPacketTunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NEPacketTunnelNetworkSettings {
+	x.inner.NETunnelNetworkSettings.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
@@ -127,12 +127,12 @@ func (x *NEPacketTunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunne
 // NEPacketTunnelNetworkSettingsable is the interface implemented by [NEPacketTunnelNetworkSettings], for mocking and DI.
 type NEPacketTunnelNetworkSettingsable interface {
 	Unwrap() *raw.NEPacketTunnelNetworkSettings
-	WithIPv4Settings(iPv4Settings *raw.NEIPv4Settings) *NEPacketTunnelNetworkSettings
-	WithIPv6Settings(iPv6Settings *raw.NEIPv6Settings) *NEPacketTunnelNetworkSettings
+	WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEPacketTunnelNetworkSettings
+	WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEPacketTunnelNetworkSettings
 	WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEPacketTunnelNetworkSettings
 	WithMTU(mTU *foundation.NSNumber) *NEPacketTunnelNetworkSettings
 	WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEPacketTunnelNetworkSettings
-	WithProxySettings(proxySettings *raw.NEProxySettings) *NEPacketTunnelNetworkSettings
+	WithProxySettings(proxySettings *NEProxySettings) *NEPacketTunnelNetworkSettings
 	IPv4Settings() *NEIPv4Settings
 	SetIPv4Settings(iPv4Settings *raw.NEIPv4Settings)
 	IPv6Settings() *NEIPv6Settings

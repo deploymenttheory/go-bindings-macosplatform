@@ -47,13 +47,13 @@ func NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionEr
 }
 
 // Signers returns the collection as a Go slice.
-func (x *MessageSecurityInformation) Signers() []*raw.MEMessageSigner {
+func (x *MessageSecurityInformation) Signers() []*MessageSigner {
 	arr := x.inner.Signers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEMessageSigner {
-		return raw.MEMessageSignerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MessageSigner {
+		return &MessageSigner{inner: raw.MEMessageSignerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -89,7 +89,7 @@ func (x *MessageSecurityInformation) LocalizedRemoteContentBlockingReason() stri
 // MessageSecurityInformationable is the interface implemented by [MessageSecurityInformation], for mocking and DI.
 type MessageSecurityInformationable interface {
 	Unwrap() *raw.MEMessageSecurityInformation
-	Signers() []*raw.MEMessageSigner
+	Signers() []*MessageSigner
 	IsEncrypted() bool
 	SigningError() unsafe.Pointer
 	EncryptionError() unsafe.Pointer

@@ -55,13 +55,13 @@ func (x *VirtioSoundDeviceConfiguration) WithStreams(items ...VirtioSoundDeviceS
 }
 
 // Streams returns the collection as a Go slice.
-func (x *VirtioSoundDeviceConfiguration) Streams() []*raw.VZVirtioSoundDeviceStreamConfiguration {
+func (x *VirtioSoundDeviceConfiguration) Streams() []*VirtioSoundDeviceStreamConfiguration {
 	arr := x.inner.Streams()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZVirtioSoundDeviceStreamConfiguration {
-		return raw.VZVirtioSoundDeviceStreamConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VirtioSoundDeviceStreamConfiguration {
+		return &VirtioSoundDeviceStreamConfiguration{inner: raw.VZVirtioSoundDeviceStreamConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -76,7 +76,7 @@ func (x *VirtioSoundDeviceConfiguration) asAudioDeviceConfiguration() *raw.VZAud
 type VirtioSoundDeviceConfigurationable interface {
 	Unwrap() *raw.VZVirtioSoundDeviceConfiguration
 	WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration
-	Streams() []*raw.VZVirtioSoundDeviceStreamConfiguration
+	Streams() []*VirtioSoundDeviceStreamConfiguration
 	SetStreams(streams *foundation.NSArray[*raw.VZVirtioSoundDeviceStreamConfiguration])
 }
 

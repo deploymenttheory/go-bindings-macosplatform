@@ -36,14 +36,14 @@ func NewDateComponents() *DateComponents {
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *DateComponents) WithCalendar(calendar *raw.NSCalendar) *DateComponents {
-	x.inner.SetCalendar(calendar)
+func (x *DateComponents) WithCalendar(calendar *Calendar) *DateComponents {
+	x.inner.SetCalendar(calendar.Unwrap())
 	return x
 }
 
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
-func (x *DateComponents) WithTimeZone(timeZone *raw.NSTimeZone) *DateComponents {
-	x.inner.SetTimeZone(timeZone)
+func (x *DateComponents) WithTimeZone(timeZone *TimeZone) *DateComponents {
+	x.inner.SetTimeZone(timeZone.Unwrap())
 	return x
 }
 
@@ -397,8 +397,8 @@ func (x *DateComponents) asObject() *raw.NSObject { return &x.inner.NSObject }
 // DateComponentsable is the interface implemented by [DateComponents], for mocking and DI.
 type DateComponentsable interface {
 	Unwrap() *raw.NSDateComponents
-	WithCalendar(calendar *raw.NSCalendar) *DateComponents
-	WithTimeZone(timeZone *raw.NSTimeZone) *DateComponents
+	WithCalendar(calendar *Calendar) *DateComponents
+	WithTimeZone(timeZone *TimeZone) *DateComponents
 	WithEra(era int) *DateComponents
 	WithYear(year int) *DateComponents
 	WithMonth(month int) *DateComponents

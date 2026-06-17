@@ -334,13 +334,13 @@ func (x *SplitViewItem) SetAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjus
 }
 
 // TopAlignedAccessoryViewControllers returns the collection as a Go slice.
-func (x *SplitViewItem) TopAlignedAccessoryViewControllers() []*raw.NSSplitViewItemAccessoryViewController {
+func (x *SplitViewItem) TopAlignedAccessoryViewControllers() []*SplitViewItemAccessoryViewController {
 	arr := x.inner.TopAlignedAccessoryViewControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSSplitViewItemAccessoryViewController {
-		return raw.NSSplitViewItemAccessoryViewControllerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SplitViewItemAccessoryViewController {
+		return &SplitViewItemAccessoryViewController{inner: raw.NSSplitViewItemAccessoryViewControllerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -350,13 +350,13 @@ func (x *SplitViewItem) SetTopAlignedAccessoryViewControllers(topAlignedAccessor
 }
 
 // BottomAlignedAccessoryViewControllers returns the collection as a Go slice.
-func (x *SplitViewItem) BottomAlignedAccessoryViewControllers() []*raw.NSSplitViewItemAccessoryViewController {
+func (x *SplitViewItem) BottomAlignedAccessoryViewControllers() []*SplitViewItemAccessoryViewController {
 	arr := x.inner.BottomAlignedAccessoryViewControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSSplitViewItemAccessoryViewController {
-		return raw.NSSplitViewItemAccessoryViewControllerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SplitViewItemAccessoryViewController {
+		return &SplitViewItemAccessoryViewController{inner: raw.NSSplitViewItemAccessoryViewControllerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -419,9 +419,9 @@ type SplitViewItemable interface {
 	SetTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle)
 	AutomaticallyAdjustsSafeAreaInsets() bool
 	SetAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjustsSafeAreaInsets bool)
-	TopAlignedAccessoryViewControllers() []*raw.NSSplitViewItemAccessoryViewController
+	TopAlignedAccessoryViewControllers() []*SplitViewItemAccessoryViewController
 	SetTopAlignedAccessoryViewControllers(topAlignedAccessoryViewControllers *foundation.NSArray[*raw.NSSplitViewItemAccessoryViewController])
-	BottomAlignedAccessoryViewControllers() []*raw.NSSplitViewItemAccessoryViewController
+	BottomAlignedAccessoryViewControllers() []*SplitViewItemAccessoryViewController
 	SetBottomAlignedAccessoryViewControllers(bottomAlignedAccessoryViewControllers *foundation.NSArray[*raw.NSSplitViewItemAccessoryViewController])
 }
 

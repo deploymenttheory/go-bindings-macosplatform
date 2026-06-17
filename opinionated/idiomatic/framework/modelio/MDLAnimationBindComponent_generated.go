@@ -39,8 +39,8 @@ func NewAnimationBindComponent() *AnimationBindComponent {
 }
 
 // WithSkeleton sets the skeleton property and returns the receiver for chaining.
-func (x *AnimationBindComponent) WithSkeleton(skeleton *raw.MDLSkeleton) *AnimationBindComponent {
-	x.inner.SetSkeleton(skeleton)
+func (x *AnimationBindComponent) WithSkeleton(skeleton *Skeleton) *AnimationBindComponent {
+	x.inner.SetSkeleton(skeleton.Unwrap())
 	return x
 }
 
@@ -119,7 +119,7 @@ func (x *AnimationBindComponent) SetGeometryBindTransform(geometryBindTransform 
 // AnimationBindComponentable is the interface implemented by [AnimationBindComponent], for mocking and DI.
 type AnimationBindComponentable interface {
 	Unwrap() *raw.MDLAnimationBindComponent
-	WithSkeleton(skeleton *raw.MDLSkeleton) *AnimationBindComponent
+	WithSkeleton(skeleton *Skeleton) *AnimationBindComponent
 	WithJointAnimation(jointAnimation raw.MDLJointAnimation) *AnimationBindComponent
 	WithJointPaths(items ...*foundation.NSString) *AnimationBindComponent
 	Skeleton() *Skeleton

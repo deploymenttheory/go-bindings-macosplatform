@@ -97,13 +97,13 @@ func (x *AssetDownloadConfiguration) PrimaryContentConfiguration() *AssetDownloa
 }
 
 // AuxiliaryContentConfigurations returns the collection as a Go slice.
-func (x *AssetDownloadConfiguration) AuxiliaryContentConfigurations() []*raw.AVAssetDownloadContentConfiguration {
+func (x *AssetDownloadConfiguration) AuxiliaryContentConfigurations() []*AssetDownloadContentConfiguration {
 	arr := x.inner.AuxiliaryContentConfigurations()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetDownloadContentConfiguration {
-		return raw.AVAssetDownloadContentConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetDownloadContentConfiguration {
+		return &AssetDownloadContentConfiguration{inner: raw.AVAssetDownloadContentConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -143,7 +143,7 @@ type AssetDownloadConfigurationable interface {
 	ArtworkData() *foundation.NSData
 	SetArtworkData(artworkData *foundation.NSData)
 	PrimaryContentConfiguration() *AssetDownloadContentConfiguration
-	AuxiliaryContentConfigurations() []*raw.AVAssetDownloadContentConfiguration
+	AuxiliaryContentConfigurations() []*AssetDownloadContentConfiguration
 	SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations *foundation.NSArray[*raw.AVAssetDownloadContentConfiguration])
 	OptimizesAuxiliaryContentConfigurations() bool
 	SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool)

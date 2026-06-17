@@ -39,8 +39,8 @@ func NewTableHeaderCell() *TableHeaderCell {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithBackgroundColor(backgroundColor *raw.NSColor) *TableHeaderCell {
-	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor)
+func (x *TableHeaderCell) WithBackgroundColor(backgroundColor *Color) *TableHeaderCell {
+	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -51,8 +51,8 @@ func (x *TableHeaderCell) WithDrawsBackground(drawsBackground bool) *TableHeader
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithTextColor(textColor *raw.NSColor) *TableHeaderCell {
-	x.inner.NSTextFieldCell.SetTextColor(textColor)
+func (x *TableHeaderCell) WithTextColor(textColor *Color) *TableHeaderCell {
+	x.inner.NSTextFieldCell.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -193,8 +193,8 @@ func (x *TableHeaderCell) WithWraps(wraps bool) *TableHeaderCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithFont(font *raw.NSFont) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font)
+func (x *TableHeaderCell) WithFont(font *Font) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -241,8 +241,8 @@ func (x *TableHeaderCell) WithIntegerValue(integerValue int) *TableHeaderCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithImage(image *raw.NSImage) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image)
+func (x *TableHeaderCell) WithImage(image *Image) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -259,8 +259,8 @@ func (x *TableHeaderCell) WithRepresentedObject(representedObject objc.ID) *Tabl
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithMenu(menu *raw.NSMenu) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu)
+func (x *TableHeaderCell) WithMenu(menu *Menu) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -379,9 +379,9 @@ func (x *TableHeaderCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell
 // TableHeaderCellable is the interface implemented by [TableHeaderCell], for mocking and DI.
 type TableHeaderCellable interface {
 	Unwrap() *raw.NSTableHeaderCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TableHeaderCell
+	WithBackgroundColor(backgroundColor *Color) *TableHeaderCell
 	WithDrawsBackground(drawsBackground bool) *TableHeaderCell
-	WithTextColor(textColor *raw.NSColor) *TableHeaderCell
+	WithTextColor(textColor *Color) *TableHeaderCell
 	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TableHeaderCell
 	WithPlaceholderString(placeholderString string) *TableHeaderCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TableHeaderCell
@@ -403,7 +403,7 @@ type TableHeaderCellable interface {
 	WithHighlighted(highlighted bool) *TableHeaderCell
 	WithAlignment(alignment raw.NSTextAlignment) *TableHeaderCell
 	WithWraps(wraps bool) *TableHeaderCell
-	WithFont(font *raw.NSFont) *TableHeaderCell
+	WithFont(font *Font) *TableHeaderCell
 	WithFormatter(formatter *foundation.NSFormatter) *TableHeaderCell
 	WithObjectValue(objectValue objc.ID) *TableHeaderCell
 	WithStringValue(stringValue string) *TableHeaderCell
@@ -411,10 +411,10 @@ type TableHeaderCellable interface {
 	WithFloatValue(floatValue float32) *TableHeaderCell
 	WithDoubleValue(doubleValue float64) *TableHeaderCell
 	WithIntegerValue(integerValue int) *TableHeaderCell
-	WithImage(image *raw.NSImage) *TableHeaderCell
+	WithImage(image *Image) *TableHeaderCell
 	WithControlSize(controlSize raw.NSControlSize) *TableHeaderCell
 	WithRepresentedObject(representedObject objc.ID) *TableHeaderCell
-	WithMenu(menu *raw.NSMenu) *TableHeaderCell
+	WithMenu(menu *Menu) *TableHeaderCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TableHeaderCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TableHeaderCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TableHeaderCell

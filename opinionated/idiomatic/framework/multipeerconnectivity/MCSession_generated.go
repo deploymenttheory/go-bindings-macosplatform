@@ -103,13 +103,13 @@ func (x *Session) EncryptionPreference() raw.MCEncryptionPreference {
 }
 
 // ConnectedPeers returns the collection as a Go slice.
-func (x *Session) ConnectedPeers() []*raw.MCPeerID {
+func (x *Session) ConnectedPeers() []*PeerID {
 	arr := x.inner.ConnectedPeers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MCPeerID {
-		return raw.MCPeerIDFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PeerID {
+		return &PeerID{inner: raw.MCPeerIDFromID(purego.Retain(_id))}
 	})
 }
 
@@ -160,7 +160,7 @@ type Sessionable interface {
 	MyPeerID() *PeerID
 	SecurityIdentity() *foundation.NSArray[objc.ID]
 	EncryptionPreference() raw.MCEncryptionPreference
-	ConnectedPeers() []*raw.MCPeerID
+	ConnectedPeers() []*PeerID
 	NearbyConnectionDataForPeer(ctx context.Context, peerID *raw.MCPeerID) (*foundation.NSData, error)
 	ConnectPeerWithNearbyConnectionData(peerID *raw.MCPeerID, data *foundation.NSData)
 	CancelConnectPeer(peerID *raw.MCPeerID)

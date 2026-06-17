@@ -64,24 +64,24 @@ func (x *ExtensionProvider) ClientQueue() *foundation.NSObject {
 }
 
 // ConnectedClients returns the collection as a Go slice.
-func (x *ExtensionProvider) ConnectedClients() []*raw.CMIOExtensionClient {
+func (x *ExtensionProvider) ConnectedClients() []*ExtensionClient {
 	arr := x.inner.ConnectedClients()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CMIOExtensionClient {
-		return raw.CMIOExtensionClientFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExtensionClient {
+		return &ExtensionClient{inner: raw.CMIOExtensionClientFromID(purego.Retain(_id))}
 	})
 }
 
 // Devices returns the collection as a Go slice.
-func (x *ExtensionProvider) Devices() []*raw.CMIOExtensionDevice {
+func (x *ExtensionProvider) Devices() []*ExtensionDevice {
 	arr := x.inner.Devices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CMIOExtensionDevice {
-		return raw.CMIOExtensionDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExtensionDevice {
+		return &ExtensionDevice{inner: raw.CMIOExtensionDeviceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -93,8 +93,8 @@ type ExtensionProviderable interface {
 	NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID])
 	Source() raw.CMIOExtensionProviderSource
 	ClientQueue() *foundation.NSObject
-	ConnectedClients() []*raw.CMIOExtensionClient
-	Devices() []*raw.CMIOExtensionDevice
+	ConnectedClients() []*ExtensionClient
+	Devices() []*ExtensionDevice
 }
 
 var _ ExtensionProviderable = (*ExtensionProvider)(nil)

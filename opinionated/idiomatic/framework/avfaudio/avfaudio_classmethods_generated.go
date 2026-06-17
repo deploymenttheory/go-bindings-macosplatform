@@ -142,13 +142,13 @@ func UpdateSpeechVoices() {
 }
 
 // SpeechVoices returns the collection as a Go slice.
-func SpeechVoices() []*raw.AVSpeechSynthesisVoice {
+func SpeechVoices() []*SpeechSynthesisVoice {
 	arr := raw.AVSpeechSynthesisVoiceSpeechVoices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVSpeechSynthesisVoice {
-		return raw.AVSpeechSynthesisVoiceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SpeechSynthesisVoice {
+		return &SpeechSynthesisVoice{inner: raw.AVSpeechSynthesisVoiceFromID(purego.Retain(_id))}
 	})
 }
 

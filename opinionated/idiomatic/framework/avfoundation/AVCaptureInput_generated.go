@@ -37,13 +37,13 @@ func NewCaptureInput() *CaptureInput {
 }
 
 // Ports returns the collection as a Go slice.
-func (x *CaptureInput) Ports() []*raw.AVCaptureInputPort {
+func (x *CaptureInput) Ports() []*CaptureInputPort {
 	arr := x.inner.Ports()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureInputPort {
-		return raw.AVCaptureInputPortFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureInputPort {
+		return &CaptureInputPort{inner: raw.AVCaptureInputPortFromID(purego.Retain(_id))}
 	})
 }
 
@@ -52,7 +52,7 @@ func (x *CaptureInput) asCaptureInput() *raw.AVCaptureInput { return x.inner }
 // CaptureInputable is the interface implemented by [CaptureInput], for mocking and DI.
 type CaptureInputable interface {
 	Unwrap() *raw.AVCaptureInput
-	Ports() []*raw.AVCaptureInputPort
+	Ports() []*CaptureInputPort
 }
 
 var _ CaptureInputable = (*CaptureInput)(nil)

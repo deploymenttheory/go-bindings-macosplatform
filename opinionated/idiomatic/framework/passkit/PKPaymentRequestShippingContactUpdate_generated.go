@@ -93,20 +93,20 @@ func (x *PaymentRequestShippingContactUpdate) WithMultiTokenContexts(items ...*r
 }
 
 // WithRecurringPaymentRequest sets the recurringPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequestShippingContactUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) *PaymentRequestShippingContactUpdate {
-	x.inner.PKPaymentRequestUpdate.SetRecurringPaymentRequest(recurringPaymentRequest)
+func (x *PaymentRequestShippingContactUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingContactUpdate {
+	x.inner.PKPaymentRequestUpdate.SetRecurringPaymentRequest(recurringPaymentRequest.Unwrap())
 	return x
 }
 
 // WithAutomaticReloadPaymentRequest sets the automaticReloadPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequestShippingContactUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) *PaymentRequestShippingContactUpdate {
-	x.inner.PKPaymentRequestUpdate.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest)
+func (x *PaymentRequestShippingContactUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingContactUpdate {
+	x.inner.PKPaymentRequestUpdate.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest.Unwrap())
 	return x
 }
 
 // WithDeferredPaymentRequest sets the deferredPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequestShippingContactUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) *PaymentRequestShippingContactUpdate {
-	x.inner.PKPaymentRequestUpdate.SetDeferredPaymentRequest(deferredPaymentRequest)
+func (x *PaymentRequestShippingContactUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingContactUpdate {
+	x.inner.PKPaymentRequestUpdate.SetDeferredPaymentRequest(deferredPaymentRequest.Unwrap())
 	return x
 }
 
@@ -129,9 +129,9 @@ type PaymentRequestShippingContactUpdateable interface {
 	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingContactUpdate
 	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestShippingContactUpdate
 	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestShippingContactUpdate
-	WithRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) *PaymentRequestShippingContactUpdate
-	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) *PaymentRequestShippingContactUpdate
-	WithDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) *PaymentRequestShippingContactUpdate
+	WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingContactUpdate
+	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingContactUpdate
+	WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingContactUpdate
 	Errors() *foundation.NSArray[objc.ID]
 	SetErrors() error
 }

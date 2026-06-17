@@ -151,13 +151,13 @@ func (x *AddPaymentPassRequestConfiguration) SetPrimaryAccountSuffix(primaryAcco
 }
 
 // CardDetails returns the collection as a Go slice.
-func (x *AddPaymentPassRequestConfiguration) CardDetails() []*raw.PKLabeledValue {
+func (x *AddPaymentPassRequestConfiguration) CardDetails() []*LabeledValue {
 	arr := x.inner.CardDetails()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKLabeledValue {
-		return raw.PKLabeledValueFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LabeledValue {
+		return &LabeledValue{inner: raw.PKLabeledValueFromID(purego.Retain(_id))}
 	})
 }
 
@@ -247,7 +247,7 @@ type AddPaymentPassRequestConfigurationable interface {
 	SetCardholderName(cardholderName string)
 	PrimaryAccountSuffix() string
 	SetPrimaryAccountSuffix(primaryAccountSuffix string)
-	CardDetails() []*raw.PKLabeledValue
+	CardDetails() []*LabeledValue
 	SetCardDetails(cardDetails *foundation.NSArray[*raw.PKLabeledValue])
 	LocalizedDescription() string
 	SetLocalizedDescription(localizedDescription string)

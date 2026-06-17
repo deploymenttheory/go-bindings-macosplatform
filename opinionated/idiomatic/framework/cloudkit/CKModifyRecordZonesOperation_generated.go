@@ -97,20 +97,20 @@ func (x *ModifyRecordZonesOperation) WithModifyRecordZonesCompletionBlock(modify
 }
 
 // WithDatabase sets the database property and returns the receiver for chaining.
-func (x *ModifyRecordZonesOperation) WithDatabase(database *raw.CKDatabase) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database)
+func (x *ModifyRecordZonesOperation) WithDatabase(database *Database) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *ModifyRecordZonesOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+func (x *ModifyRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *ModifyRecordZonesOperation) WithGroup(group *raw.CKOperationGroup) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+func (x *ModifyRecordZonesOperation) WithGroup(group *OperationGroup) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -121,8 +121,8 @@ func (x *ModifyRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(lon
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *ModifyRecordZonesOperation) WithContainer(container *raw.CKContainer) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+func (x *ModifyRecordZonesOperation) WithContainer(container *Container) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -151,13 +151,13 @@ func (x *ModifyRecordZonesOperation) WithTimeoutIntervalForResource(timeoutInter
 }
 
 // RecordZonesToSave returns the collection as a Go slice.
-func (x *ModifyRecordZonesOperation) RecordZonesToSave() []*raw.CKRecordZone {
+func (x *ModifyRecordZonesOperation) RecordZonesToSave() []*RecordZone {
 	arr := x.inner.RecordZonesToSave()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZone {
-		return raw.CKRecordZoneFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZone {
+		return &RecordZone{inner: raw.CKRecordZoneFromID(purego.Retain(_id))}
 	})
 }
 
@@ -167,13 +167,13 @@ func (x *ModifyRecordZonesOperation) SetRecordZonesToSave(recordZonesToSave *fou
 }
 
 // RecordZoneIDsToDelete returns the collection as a Go slice.
-func (x *ModifyRecordZonesOperation) RecordZoneIDsToDelete() []*raw.CKRecordZoneID {
+func (x *ModifyRecordZonesOperation) RecordZoneIDsToDelete() []*RecordZoneID {
 	arr := x.inner.RecordZoneIDsToDelete()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZoneID {
-		return raw.CKRecordZoneIDFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZoneID {
+		return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(purego.Retain(_id))}
 	})
 }
 
@@ -245,18 +245,18 @@ type ModifyRecordZonesOperationable interface {
 	WithPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) *ModifyRecordZonesOperation
 	WithPerRecordZoneDeleteBlock(perRecordZoneDeleteBlock func(*raw.CKRecordZoneID, unsafe.Pointer)) *ModifyRecordZonesOperation
 	WithModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(*foundation.NSArray[*raw.CKRecordZone], *foundation.NSArray[*raw.CKRecordZoneID], unsafe.Pointer)) *ModifyRecordZonesOperation
-	WithDatabase(database *raw.CKDatabase) *ModifyRecordZonesOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifyRecordZonesOperation
-	WithGroup(group *raw.CKOperationGroup) *ModifyRecordZonesOperation
+	WithDatabase(database *Database) *ModifyRecordZonesOperation
+	WithConfiguration(configuration *OperationConfiguration) *ModifyRecordZonesOperation
+	WithGroup(group *OperationGroup) *ModifyRecordZonesOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordZonesOperation
-	WithContainer(container *raw.CKContainer) *ModifyRecordZonesOperation
+	WithContainer(container *Container) *ModifyRecordZonesOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordZonesOperation
 	WithLongLived(longLived bool) *ModifyRecordZonesOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordZonesOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordZonesOperation
-	RecordZonesToSave() []*raw.CKRecordZone
+	RecordZonesToSave() []*RecordZone
 	SetRecordZonesToSave(recordZonesToSave *foundation.NSArray[*raw.CKRecordZone])
-	RecordZoneIDsToDelete() []*raw.CKRecordZoneID
+	RecordZoneIDsToDelete() []*RecordZoneID
 	SetRecordZoneIDsToDelete(recordZoneIDsToDelete *foundation.NSArray[*raw.CKRecordZoneID])
 	PerRecordZoneSaveBlock() objc.Block
 	SetPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer))

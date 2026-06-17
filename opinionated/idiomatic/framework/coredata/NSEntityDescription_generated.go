@@ -223,13 +223,13 @@ func (x *EntityDescription) SubentitiesByName() *foundation.NSDictionary[*founda
 }
 
 // Subentities returns the collection as a Go slice.
-func (x *EntityDescription) Subentities() []*raw.NSEntityDescription {
+func (x *EntityDescription) Subentities() []*EntityDescription {
 	arr := x.inner.Subentities()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSEntityDescription {
-		return raw.NSEntityDescriptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EntityDescription {
+		return &EntityDescription{inner: raw.NSEntityDescriptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -253,13 +253,13 @@ func (x *EntityDescription) PropertiesByName() *foundation.NSDictionary[*foundat
 }
 
 // Properties returns the collection as a Go slice.
-func (x *EntityDescription) Properties() []*raw.NSPropertyDescription {
+func (x *EntityDescription) Properties() []*PropertyDescription {
 	arr := x.inner.Properties()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPropertyDescription {
-		return raw.NSPropertyDescriptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PropertyDescription {
+		return &PropertyDescription{inner: raw.NSPropertyDescriptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -322,13 +322,13 @@ func (x *EntityDescription) SetRenamingIdentifier(renamingIdentifier string) {
 }
 
 // Indexes returns the collection as a Go slice.
-func (x *EntityDescription) Indexes() []*raw.NSFetchIndexDescription {
+func (x *EntityDescription) Indexes() []*FetchIndexDescription {
 	arr := x.inner.Indexes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFetchIndexDescription {
-		return raw.NSFetchIndexDescriptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FetchIndexDescription {
+		return &FetchIndexDescription{inner: raw.NSFetchIndexDescriptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -392,11 +392,11 @@ type EntityDescriptionable interface {
 	IsAbstract() bool
 	SetAbstract(abstract bool)
 	SubentitiesByName() *foundation.NSDictionary[*foundation.NSString, *raw.NSEntityDescription]
-	Subentities() []*raw.NSEntityDescription
+	Subentities() []*EntityDescription
 	SetSubentities(subentities *foundation.NSArray[*raw.NSEntityDescription])
 	Superentity() *EntityDescription
 	PropertiesByName() *foundation.NSDictionary[*foundation.NSString, *raw.NSPropertyDescription]
-	Properties() []*raw.NSPropertyDescription
+	Properties() []*PropertyDescription
 	SetProperties(properties *foundation.NSArray[*raw.NSPropertyDescription])
 	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
 	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
@@ -407,7 +407,7 @@ type EntityDescriptionable interface {
 	SetVersionHashModifier(versionHashModifier string)
 	RenamingIdentifier() string
 	SetRenamingIdentifier(renamingIdentifier string)
-	Indexes() []*raw.NSFetchIndexDescription
+	Indexes() []*FetchIndexDescription
 	SetIndexes(indexes *foundation.NSArray[*raw.NSFetchIndexDescription])
 	UniquenessConstraints() *foundation.NSArray[objc.ID]
 	SetUniquenessConstraints(uniquenessConstraints *foundation.NSArray[objc.ID])

@@ -44,8 +44,8 @@ func NewMTRRVCOperationalStateClusterOperationalCommandResponseParamsWithRespons
 }
 
 // WithCommandResponseState sets the commandResponseState property and returns the receiver for chaining.
-func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *raw.MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalCommandResponseParams {
-	x.inner.SetCommandResponseState(commandResponseState)
+func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalCommandResponseParams {
+	x.inner.SetCommandResponseState(commandResponseState.Unwrap())
 	return x
 }
 
@@ -66,7 +66,7 @@ func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) SetComma
 // MTRRVCOperationalStateClusterOperationalCommandResponseParamsable is the interface implemented by [MTRRVCOperationalStateClusterOperationalCommandResponseParams], for mocking and DI.
 type MTRRVCOperationalStateClusterOperationalCommandResponseParamsable interface {
 	Unwrap() *raw.MTRRVCOperationalStateClusterOperationalCommandResponseParams
-	WithCommandResponseState(commandResponseState *raw.MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalCommandResponseParams
+	WithCommandResponseState(commandResponseState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 	CommandResponseState() *MTRRVCOperationalStateClusterErrorStateStruct
 	SetCommandResponseState(commandResponseState *raw.MTRRVCOperationalStateClusterErrorStateStruct)
 }

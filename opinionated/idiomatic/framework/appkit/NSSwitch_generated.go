@@ -149,8 +149,8 @@ func (x *Switch) WithDoubleValue(doubleValue float64) *Switch {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Switch) WithFont(font *raw.NSFont) *Switch {
-	x.inner.NSControl.SetFont(font)
+func (x *Switch) WithFont(font *Font) *Switch {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -371,8 +371,8 @@ func (x *Switch) WithContentFilters(items ...*coreimage.CIFilter) *Switch {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Switch) WithShadow(shadow *raw.NSShadow) *Switch {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *Switch) WithShadow(shadow *Shadow) *Switch {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -453,8 +453,8 @@ func (x *Switch) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeM
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Switch) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Switch {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Switch) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Switch {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -495,8 +495,8 @@ func (x *Switch) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamic
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Switch) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Switch {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Switch) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Switch {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -507,8 +507,8 @@ func (x *Switch) WithNextResponder(nextResponder ResponderProvider) *Switch {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Switch) WithMenu(menu *raw.NSMenu) *Switch {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *Switch) WithMenu(menu *Menu) *Switch {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -519,8 +519,8 @@ func (x *Switch) WithUserActivity(userActivity *foundation.NSUserActivity) *Swit
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Switch) WithTouchBar(touchBar *raw.NSTouchBar) *Switch {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Switch) WithTouchBar(touchBar *TouchBar) *Switch {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -561,7 +561,7 @@ type Switchable interface {
 	WithIntegerValue(integerValue int) *Switch
 	WithFloatValue(floatValue float32) *Switch
 	WithDoubleValue(doubleValue float64) *Switch
-	WithFont(font *raw.NSFont) *Switch
+	WithFont(font *Font) *Switch
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Switch
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Switch
 	WithAlignment(alignment raw.NSTextAlignment) *Switch
@@ -593,7 +593,7 @@ type Switchable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Switch
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Switch
 	WithContentFilters(items ...*coreimage.CIFilter) *Switch
-	WithShadow(shadow *raw.NSShadow) *Switch
+	WithShadow(shadow *Shadow) *Switch
 	WithClipsToBounds(clipsToBounds bool) *Switch
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Switch
 	WithToolTip(toolTip string) *Switch
@@ -605,18 +605,18 @@ type Switchable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Switch
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Switch
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Switch
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Switch
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Switch
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Switch
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Switch
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Switch
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Switch
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Switch
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Switch
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Switch
 	WithNextResponder(nextResponder ResponderProvider) *Switch
-	WithMenu(menu *raw.NSMenu) *Switch
+	WithMenu(menu *Menu) *Switch
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Switch
-	WithTouchBar(touchBar *raw.NSTouchBar) *Switch
+	WithTouchBar(touchBar *TouchBar) *Switch
 	State() int
 	SetState(state int)
 }

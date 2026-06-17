@@ -104,8 +104,8 @@ func (x *Text) WithDrawsBackground(drawsBackground bool) *Text {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *Text) WithBackgroundColor(backgroundColor *raw.NSColor) *Text {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *Text) WithBackgroundColor(backgroundColor *Color) *Text {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -116,14 +116,14 @@ func (x *Text) WithSelectedRange(selectedRange foundation.NSRange) *Text {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Text) WithFont(font *raw.NSFont) *Text {
-	x.inner.SetFont(font)
+func (x *Text) WithFont(font *Font) *Text {
+	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *Text) WithTextColor(textColor *raw.NSColor) *Text {
-	x.inner.SetTextColor(textColor)
+func (x *Text) WithTextColor(textColor *Color) *Text {
+	x.inner.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -344,8 +344,8 @@ func (x *Text) WithContentFilters(items ...*coreimage.CIFilter) *Text {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Text) WithShadow(shadow *raw.NSShadow) *Text {
-	x.inner.NSView.SetShadow(shadow)
+func (x *Text) WithShadow(shadow *Shadow) *Text {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -426,8 +426,8 @@ func (x *Text) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMet
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Text) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Text {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Text) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Text {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -468,8 +468,8 @@ func (x *Text) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRa
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Text) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Text {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Text) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Text {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -480,8 +480,8 @@ func (x *Text) WithNextResponder(nextResponder ResponderProvider) *Text {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Text) WithMenu(menu *raw.NSMenu) *Text {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *Text) WithMenu(menu *Menu) *Text {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -492,8 +492,8 @@ func (x *Text) WithUserActivity(userActivity *foundation.NSUserActivity) *Text {
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Text) WithTouchBar(touchBar *raw.NSTouchBar) *Text {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Text) WithTouchBar(touchBar *TouchBar) *Text {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -881,10 +881,10 @@ type Textable interface {
 	WithFieldEditor(fieldEditor bool) *Text
 	WithUsesFontPanel(usesFontPanel bool) *Text
 	WithDrawsBackground(drawsBackground bool) *Text
-	WithBackgroundColor(backgroundColor *raw.NSColor) *Text
+	WithBackgroundColor(backgroundColor *Color) *Text
 	WithSelectedRange(selectedRange foundation.NSRange) *Text
-	WithFont(font *raw.NSFont) *Text
-	WithTextColor(textColor *raw.NSColor) *Text
+	WithFont(font *Font) *Text
+	WithTextColor(textColor *Color) *Text
 	WithAlignment(alignment raw.NSTextAlignment) *Text
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Text
 	WithMaxSize(maxSize corefoundation.CGSize) *Text
@@ -916,7 +916,7 @@ type Textable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Text
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Text
 	WithContentFilters(items ...*coreimage.CIFilter) *Text
-	WithShadow(shadow *raw.NSShadow) *Text
+	WithShadow(shadow *Shadow) *Text
 	WithClipsToBounds(clipsToBounds bool) *Text
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Text
 	WithToolTip(toolTip string) *Text
@@ -928,18 +928,18 @@ type Textable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Text
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Text
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Text
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Text
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Text
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Text
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Text
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Text
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Text
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Text
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Text
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Text
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Text
 	WithNextResponder(nextResponder ResponderProvider) *Text
-	WithMenu(menu *raw.NSMenu) *Text
+	WithMenu(menu *Menu) *Text
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Text
-	WithTouchBar(touchBar *raw.NSTouchBar) *Text
+	WithTouchBar(touchBar *TouchBar) *Text
 	ReplaceCharactersInRangeWithString(range_ foundation.NSRange, string_ string)
 	ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData *foundation.NSData)
 	ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData *foundation.NSData)

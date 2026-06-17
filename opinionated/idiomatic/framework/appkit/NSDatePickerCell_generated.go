@@ -57,14 +57,14 @@ func (x *DatePickerCell) WithDrawsBackground(drawsBackground bool) *DatePickerCe
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *DatePickerCell) WithBackgroundColor(backgroundColor *raw.NSColor) *DatePickerCell {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *DatePickerCell) WithBackgroundColor(backgroundColor *Color) *DatePickerCell {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *DatePickerCell) WithTextColor(textColor *raw.NSColor) *DatePickerCell {
-	x.inner.SetTextColor(textColor)
+func (x *DatePickerCell) WithTextColor(textColor *Color) *DatePickerCell {
+	x.inner.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -231,8 +231,8 @@ func (x *DatePickerCell) WithWraps(wraps bool) *DatePickerCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *DatePickerCell) WithFont(font *raw.NSFont) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetFont(font)
+func (x *DatePickerCell) WithFont(font *Font) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -279,8 +279,8 @@ func (x *DatePickerCell) WithIntegerValue(integerValue int) *DatePickerCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *DatePickerCell) WithImage(image *raw.NSImage) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetImage(image)
+func (x *DatePickerCell) WithImage(image *Image) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -297,8 +297,8 @@ func (x *DatePickerCell) WithRepresentedObject(representedObject objc.ID) *DateP
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *DatePickerCell) WithMenu(menu *raw.NSMenu) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu)
+func (x *DatePickerCell) WithMenu(menu *Menu) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -555,8 +555,8 @@ type DatePickerCellable interface {
 	Unwrap() *raw.NSDatePickerCell
 	WithDatePickerStyle(datePickerStyle raw.NSDatePickerStyle) *DatePickerCell
 	WithDrawsBackground(drawsBackground bool) *DatePickerCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *DatePickerCell
-	WithTextColor(textColor *raw.NSColor) *DatePickerCell
+	WithBackgroundColor(backgroundColor *Color) *DatePickerCell
+	WithTextColor(textColor *Color) *DatePickerCell
 	WithDatePickerMode(datePickerMode raw.NSDatePickerMode) *DatePickerCell
 	WithDatePickerElements(datePickerElements raw.NSDatePickerElementFlags) *DatePickerCell
 	WithCalendar(calendar *foundation.NSCalendar) *DatePickerCell
@@ -584,7 +584,7 @@ type DatePickerCellable interface {
 	WithHighlighted(highlighted bool) *DatePickerCell
 	WithAlignment(alignment raw.NSTextAlignment) *DatePickerCell
 	WithWraps(wraps bool) *DatePickerCell
-	WithFont(font *raw.NSFont) *DatePickerCell
+	WithFont(font *Font) *DatePickerCell
 	WithFormatter(formatter *foundation.NSFormatter) *DatePickerCell
 	WithObjectValue(objectValue objc.ID) *DatePickerCell
 	WithStringValue(stringValue string) *DatePickerCell
@@ -592,10 +592,10 @@ type DatePickerCellable interface {
 	WithFloatValue(floatValue float32) *DatePickerCell
 	WithDoubleValue(doubleValue float64) *DatePickerCell
 	WithIntegerValue(integerValue int) *DatePickerCell
-	WithImage(image *raw.NSImage) *DatePickerCell
+	WithImage(image *Image) *DatePickerCell
 	WithControlSize(controlSize raw.NSControlSize) *DatePickerCell
 	WithRepresentedObject(representedObject objc.ID) *DatePickerCell
-	WithMenu(menu *raw.NSMenu) *DatePickerCell
+	WithMenu(menu *Menu) *DatePickerCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *DatePickerCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *DatePickerCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *DatePickerCell

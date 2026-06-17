@@ -69,13 +69,13 @@ func (x *AssetVariantVideoAttributes) NominalFrameRate() float64 {
 }
 
 // VideoLayoutAttributes returns the collection as a Go slice.
-func (x *AssetVariantVideoAttributes) VideoLayoutAttributes() []*raw.AVAssetVariantVideoLayoutAttributes {
+func (x *AssetVariantVideoAttributes) VideoLayoutAttributes() []*AssetVariantVideoLayoutAttributes {
 	arr := x.inner.VideoLayoutAttributes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetVariantVideoLayoutAttributes {
-		return raw.AVAssetVariantVideoLayoutAttributesFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetVariantVideoLayoutAttributes {
+		return &AssetVariantVideoLayoutAttributes{inner: raw.AVAssetVariantVideoLayoutAttributesFromID(purego.Retain(_id))}
 	})
 }
 
@@ -86,7 +86,7 @@ type AssetVariantVideoAttributesable interface {
 	CodecTypes() []*foundation.NSNumber
 	PresentationSize() corefoundation.CGSize
 	NominalFrameRate() float64
-	VideoLayoutAttributes() []*raw.AVAssetVariantVideoLayoutAttributes
+	VideoLayoutAttributes() []*AssetVariantVideoLayoutAttributes
 }
 
 var _ AssetVariantVideoAttributesable = (*AssetVariantVideoAttributes)(nil)

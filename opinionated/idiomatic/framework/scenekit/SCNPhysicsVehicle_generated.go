@@ -57,13 +57,13 @@ func (x *PhysicsVehicle) SpeedInKilometersPerHour() float64 {
 }
 
 // Wheels returns the collection as a Go slice.
-func (x *PhysicsVehicle) Wheels() []*raw.SCNPhysicsVehicleWheel {
+func (x *PhysicsVehicle) Wheels() []*PhysicsVehicleWheel {
 	arr := x.inner.Wheels()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNPhysicsVehicleWheel {
-		return raw.SCNPhysicsVehicleWheelFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PhysicsVehicleWheel {
+		return &PhysicsVehicleWheel{inner: raw.SCNPhysicsVehicleWheelFromID(purego.Retain(_id))}
 	})
 }
 
@@ -85,7 +85,7 @@ type PhysicsVehicleable interface {
 	SetSteeringAngleForWheelAtIndex(value float64, index int)
 	ApplyBrakingForceForWheelAtIndex(value float64, index int)
 	SpeedInKilometersPerHour() float64
-	Wheels() []*raw.SCNPhysicsVehicleWheel
+	Wheels() []*PhysicsVehicleWheel
 	ChassisBody() *PhysicsBody
 }
 

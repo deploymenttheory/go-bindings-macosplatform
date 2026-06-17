@@ -327,13 +327,13 @@ func (x *VSAccountMetadataRequest) SetAccountProviderAuthenticationToken(account
 }
 
 // ApplicationAccountProviders returns the collection as a Go slice.
-func (x *VSAccountMetadataRequest) ApplicationAccountProviders() []*raw.VSAccountApplicationProvider {
+func (x *VSAccountMetadataRequest) ApplicationAccountProviders() []*VSAccountApplicationProvider {
 	arr := x.inner.ApplicationAccountProviders()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VSAccountApplicationProvider {
-		return raw.VSAccountApplicationProviderFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VSAccountApplicationProvider {
+		return &VSAccountApplicationProvider{inner: raw.VSAccountApplicationProviderFromID(purego.Retain(_id))}
 	})
 }
 
@@ -382,7 +382,7 @@ type VSAccountMetadataRequestable interface {
 	SetSupportedAuthenticationSchemes(supportedAuthenticationSchemes *foundation.NSArray[*foundation.NSString])
 	AccountProviderAuthenticationToken() string
 	SetAccountProviderAuthenticationToken(accountProviderAuthenticationToken string)
-	ApplicationAccountProviders() []*raw.VSAccountApplicationProvider
+	ApplicationAccountProviders() []*VSAccountApplicationProvider
 	SetApplicationAccountProviders(applicationAccountProviders *foundation.NSArray[*raw.VSAccountApplicationProvider])
 }
 

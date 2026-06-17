@@ -327,8 +327,8 @@ func (x *SavePanel) WithReleasedWhenClosed(releasedWhenClosed bool) *SavePanel {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *SavePanel) WithBackgroundColor(backgroundColor *raw.NSColor) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetBackgroundColor(backgroundColor)
+func (x *SavePanel) WithBackgroundColor(backgroundColor *Color) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -357,8 +357,8 @@ func (x *SavePanel) WithCanHide(canHide bool) *SavePanel {
 }
 
 // WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
-func (x *SavePanel) WithMiniwindowImage(miniwindowImage *raw.NSImage) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage)
+func (x *SavePanel) WithMiniwindowImage(miniwindowImage *Image) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage.Unwrap())
 	return x
 }
 
@@ -501,8 +501,8 @@ func (x *SavePanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefo
 }
 
 // WithWindowController sets the windowController property and returns the receiver for chaining.
-func (x *SavePanel) WithWindowController(windowController *raw.NSWindowController) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetWindowController(windowController)
+func (x *SavePanel) WithWindowController(windowController *WindowController) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetWindowController(windowController.Unwrap())
 	return x
 }
 
@@ -519,8 +519,8 @@ func (x *SavePanel) WithAppearanceSource(appearanceSource *foundation.NSObject) 
 }
 
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
-func (x *SavePanel) WithColorSpace(colorSpace *raw.NSColorSpace) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetColorSpace(colorSpace)
+func (x *SavePanel) WithColorSpace(colorSpace *ColorSpace) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetColorSpace(colorSpace.Unwrap())
 	return x
 }
 
@@ -555,8 +555,8 @@ func (x *SavePanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop 
 }
 
 // WithToolbar sets the toolbar property and returns the receiver for chaining.
-func (x *SavePanel) WithToolbar(toolbar *raw.NSToolbar) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetToolbar(toolbar)
+func (x *SavePanel) WithToolbar(toolbar *Toolbar) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetToolbar(toolbar.Unwrap())
 	return x
 }
 
@@ -633,8 +633,8 @@ func (x *SavePanel) WithNextResponder(nextResponder ResponderProvider) *SavePane
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SavePanel) WithMenu(menu *raw.NSMenu) *SavePanel {
-	x.inner.NSPanel.NSWindow.NSResponder.SetMenu(menu)
+func (x *SavePanel) WithMenu(menu *Menu) *SavePanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -645,8 +645,8 @@ func (x *SavePanel) WithUserActivity(userActivity *foundation.NSUserActivity) *S
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *SavePanel) WithTouchBar(touchBar *raw.NSTouchBar) *SavePanel {
-	x.inner.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar)
+func (x *SavePanel) WithTouchBar(touchBar *TouchBar) *SavePanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -1026,12 +1026,12 @@ type SavePanelable interface {
 	WithViewsNeedDisplay(viewsNeedDisplay bool) *SavePanel
 	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *SavePanel
 	WithReleasedWhenClosed(releasedWhenClosed bool) *SavePanel
-	WithBackgroundColor(backgroundColor *raw.NSColor) *SavePanel
+	WithBackgroundColor(backgroundColor *Color) *SavePanel
 	WithMovable(movable bool) *SavePanel
 	WithMovableByWindowBackground(movableByWindowBackground bool) *SavePanel
 	WithHidesOnDeactivate(hidesOnDeactivate bool) *SavePanel
 	WithCanHide(canHide bool) *SavePanel
-	WithMiniwindowImage(miniwindowImage *raw.NSImage) *SavePanel
+	WithMiniwindowImage(miniwindowImage *Image) *SavePanel
 	WithMiniwindowTitle(miniwindowTitle string) *SavePanel
 	WithDocumentEdited(documentEdited bool) *SavePanel
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *SavePanel
@@ -1055,16 +1055,16 @@ type SavePanelable interface {
 	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *SavePanel
 	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *SavePanel
 	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *SavePanel
-	WithWindowController(windowController *raw.NSWindowController) *SavePanel
+	WithWindowController(windowController *WindowController) *SavePanel
 	WithParentWindow(parentWindow WindowProvider) *SavePanel
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *SavePanel
-	WithColorSpace(colorSpace *raw.NSColorSpace) *SavePanel
+	WithColorSpace(colorSpace *ColorSpace) *SavePanel
 	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *SavePanel
 	WithContentViewController(contentViewController ViewControllerProvider) *SavePanel
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *SavePanel
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *SavePanel
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *SavePanel
-	WithToolbar(toolbar *raw.NSToolbar) *SavePanel
+	WithToolbar(toolbar *Toolbar) *SavePanel
 	WithShowsToolbarButton(showsToolbarButton bool) *SavePanel
 	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *SavePanel
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *SavePanel
@@ -1077,9 +1077,9 @@ type SavePanelable interface {
 	WithOrderedIndex(orderedIndex int) *SavePanel
 	WithRestorable(restorable bool) *SavePanel
 	WithNextResponder(nextResponder ResponderProvider) *SavePanel
-	WithMenu(menu *raw.NSMenu) *SavePanel
+	WithMenu(menu *Menu) *SavePanel
 	WithUserActivity(userActivity *foundation.NSUserActivity) *SavePanel
-	WithTouchBar(touchBar *raw.NSTouchBar) *SavePanel
+	WithTouchBar(touchBar *TouchBar) *SavePanel
 	ValidateVisibleColumns()
 	Ok(sender objc.ID)
 	Cancel(sender objc.ID)

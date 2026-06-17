@@ -81,8 +81,8 @@ func (x *NameSpecifier) WithKey(key string) *NameSpecifier {
 }
 
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
-func (x *NameSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *NameSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+func (x *NameSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *NameSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
@@ -125,7 +125,7 @@ type NameSpecifierable interface {
 	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *NameSpecifier
 	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *NameSpecifier
 	WithKey(key string) *NameSpecifier
-	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *NameSpecifier
+	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *NameSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *NameSpecifier
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NameSpecifier
 	Name() *String

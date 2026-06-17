@@ -37,20 +37,20 @@ func NewExternalSyncDeviceDiscoverySession() *ExternalSyncDeviceDiscoverySession
 }
 
 // Devices returns the collection as a Go slice.
-func (x *ExternalSyncDeviceDiscoverySession) Devices() []*raw.AVExternalSyncDevice {
+func (x *ExternalSyncDeviceDiscoverySession) Devices() []*ExternalSyncDevice {
 	arr := x.inner.Devices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVExternalSyncDevice {
-		return raw.AVExternalSyncDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExternalSyncDevice {
+		return &ExternalSyncDevice{inner: raw.AVExternalSyncDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // ExternalSyncDeviceDiscoverySessionable is the interface implemented by [ExternalSyncDeviceDiscoverySession], for mocking and DI.
 type ExternalSyncDeviceDiscoverySessionable interface {
 	Unwrap() *raw.AVExternalSyncDeviceDiscoverySession
-	Devices() []*raw.AVExternalSyncDevice
+	Devices() []*ExternalSyncDevice
 }
 
 var _ ExternalSyncDeviceDiscoverySessionable = (*ExternalSyncDeviceDiscoverySession)(nil)

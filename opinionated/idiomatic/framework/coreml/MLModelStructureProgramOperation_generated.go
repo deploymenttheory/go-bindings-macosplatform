@@ -52,24 +52,24 @@ func (x *ModelStructureProgramOperation) Inputs() *foundation.NSDictionary[*foun
 }
 
 // Outputs returns the collection as a Go slice.
-func (x *ModelStructureProgramOperation) Outputs() []*raw.MLModelStructureProgramNamedValueType {
+func (x *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNamedValueType {
 	arr := x.inner.Outputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramNamedValueType {
-		return raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureProgramNamedValueType {
+		return &ModelStructureProgramNamedValueType{inner: raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))}
 	})
 }
 
 // Blocks returns the collection as a Go slice.
-func (x *ModelStructureProgramOperation) Blocks() []*raw.MLModelStructureProgramBlock {
+func (x *ModelStructureProgramOperation) Blocks() []*ModelStructureProgramBlock {
 	arr := x.inner.Blocks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramBlock {
-		return raw.MLModelStructureProgramBlockFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureProgramBlock {
+		return &ModelStructureProgramBlock{inner: raw.MLModelStructureProgramBlockFromID(purego.Retain(_id))}
 	})
 }
 
@@ -78,8 +78,8 @@ type ModelStructureProgramOperationable interface {
 	Unwrap() *raw.MLModelStructureProgramOperation
 	OperatorName() string
 	Inputs() *foundation.NSDictionary[*foundation.NSString, *raw.MLModelStructureProgramArgument]
-	Outputs() []*raw.MLModelStructureProgramNamedValueType
-	Blocks() []*raw.MLModelStructureProgramBlock
+	Outputs() []*ModelStructureProgramNamedValueType
+	Blocks() []*ModelStructureProgramBlock
 }
 
 var _ ModelStructureProgramOperationable = (*ModelStructureProgramOperation)(nil)

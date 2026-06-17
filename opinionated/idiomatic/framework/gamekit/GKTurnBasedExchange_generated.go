@@ -94,13 +94,13 @@ func (x *TurnBasedExchange) Sender() *TurnBasedParticipant {
 }
 
 // Recipients returns the collection as a Go slice.
-func (x *TurnBasedExchange) Recipients() []*raw.GKTurnBasedParticipant {
+func (x *TurnBasedExchange) Recipients() []*TurnBasedParticipant {
 	arr := x.inner.Recipients()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKTurnBasedParticipant {
-		return raw.GKTurnBasedParticipantFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TurnBasedParticipant {
+		return &TurnBasedParticipant{inner: raw.GKTurnBasedParticipantFromID(purego.Retain(_id))}
 	})
 }
 
@@ -139,13 +139,13 @@ func (x *TurnBasedExchange) CompletionDate() *foundation.NSDate {
 }
 
 // Replies returns the collection as a Go slice.
-func (x *TurnBasedExchange) Replies() []*raw.GKTurnBasedExchangeReply {
+func (x *TurnBasedExchange) Replies() []*TurnBasedExchangeReply {
 	arr := x.inner.Replies()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKTurnBasedExchangeReply {
-		return raw.GKTurnBasedExchangeReplyFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TurnBasedExchangeReply {
+		return &TurnBasedExchangeReply{inner: raw.GKTurnBasedExchangeReplyFromID(purego.Retain(_id))}
 	})
 }
 
@@ -156,14 +156,14 @@ type TurnBasedExchangeable interface {
 	ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData) error
 	ExchangeID() string
 	Sender() *TurnBasedParticipant
-	Recipients() []*raw.GKTurnBasedParticipant
+	Recipients() []*TurnBasedParticipant
 	Status() raw.GKTurnBasedExchangeStatus
 	Message() string
 	Data() *foundation.NSData
 	SendDate() *foundation.NSDate
 	TimeoutDate() *foundation.NSDate
 	CompletionDate() *foundation.NSDate
-	Replies() []*raw.GKTurnBasedExchangeReply
+	Replies() []*TurnBasedExchangeReply
 }
 
 var _ TurnBasedExchangeable = (*TurnBasedExchange)(nil)

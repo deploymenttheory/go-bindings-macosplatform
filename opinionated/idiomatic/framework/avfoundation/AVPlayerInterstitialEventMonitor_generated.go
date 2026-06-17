@@ -56,13 +56,13 @@ func (x *PlayerInterstitialEventMonitor) InterstitialPlayer() *QueuePlayer {
 }
 
 // Events returns the collection as a Go slice.
-func (x *PlayerInterstitialEventMonitor) Events() []*raw.AVPlayerInterstitialEvent {
+func (x *PlayerInterstitialEventMonitor) Events() []*PlayerInterstitialEvent {
 	arr := x.inner.Events()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerInterstitialEvent {
-		return raw.AVPlayerInterstitialEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerInterstitialEvent {
+		return &PlayerInterstitialEvent{inner: raw.AVPlayerInterstitialEventFromID(purego.Retain(_id))}
 	})
 }
 
@@ -96,7 +96,7 @@ type PlayerInterstitialEventMonitorable interface {
 	Unwrap() *raw.AVPlayerInterstitialEventMonitor
 	PrimaryPlayer() *Player
 	InterstitialPlayer() *QueuePlayer
-	Events() []*raw.AVPlayerInterstitialEvent
+	Events() []*PlayerInterstitialEvent
 	CurrentEvent() *PlayerInterstitialEvent
 	CurrentEventSkippableState() raw.AVPlayerInterstitialEventSkippableEventState
 	CurrentEventSkipControlLabel() string

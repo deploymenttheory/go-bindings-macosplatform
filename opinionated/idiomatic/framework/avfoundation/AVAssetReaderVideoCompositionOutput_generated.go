@@ -57,13 +57,13 @@ func (x *AssetReaderVideoCompositionOutput) WithSupportsRandomAccess(supportsRan
 }
 
 // VideoTracks returns the collection as a Go slice.
-func (x *AssetReaderVideoCompositionOutput) VideoTracks() []*raw.AVAssetTrack {
+func (x *AssetReaderVideoCompositionOutput) VideoTracks() []*AssetTrack {
 	arr := x.inner.VideoTracks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetTrack {
-		return raw.AVAssetTrackFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetTrack {
+		return &AssetTrack{inner: raw.AVAssetTrackFromID(purego.Retain(_id))}
 	})
 }
 
@@ -99,7 +99,7 @@ type AssetReaderVideoCompositionOutputable interface {
 	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetReaderVideoCompositionOutput
 	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderVideoCompositionOutput
 	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderVideoCompositionOutput
-	VideoTracks() []*raw.AVAssetTrack
+	VideoTracks() []*AssetTrack
 	VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	VideoComposition() *VideoComposition
 	SetVideoComposition(videoComposition *raw.AVVideoComposition)

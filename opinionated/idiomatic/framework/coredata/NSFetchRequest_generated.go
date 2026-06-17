@@ -46,8 +46,8 @@ func NewFetchRequestWithEntityName(entityName string) *FetchRequest {
 }
 
 // WithEntity sets the entity property and returns the receiver for chaining.
-func (x *FetchRequest) WithEntity(entity *raw.NSEntityDescription) *FetchRequest {
-	x.inner.SetEntity(entity)
+func (x *FetchRequest) WithEntity(entity *EntityDescription) *FetchRequest {
+	x.inner.SetEntity(entity.Unwrap())
 	return x
 }
 
@@ -376,7 +376,7 @@ func (x *FetchRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest 
 // FetchRequestable is the interface implemented by [FetchRequest], for mocking and DI.
 type FetchRequestable interface {
 	Unwrap() *raw.NSFetchRequest[objc.ID]
-	WithEntity(entity *raw.NSEntityDescription) *FetchRequest
+	WithEntity(entity *EntityDescription) *FetchRequest
 	WithPredicate(predicate *foundation.NSPredicate) *FetchRequest
 	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchRequest
 	WithFetchLimit(fetchLimit uint) *FetchRequest

@@ -45,8 +45,8 @@ func (x *StatusItem) WithLength(length float64) *StatusItem {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *StatusItem) WithMenu(menu *raw.NSMenu) *StatusItem {
-	x.inner.SetMenu(menu)
+func (x *StatusItem) WithMenu(menu *Menu) *StatusItem {
+	x.inner.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -99,14 +99,14 @@ func (x *StatusItem) WithAttributedTitle(attributedTitle *foundation.NSAttribute
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *StatusItem) WithImage(image *raw.NSImage) *StatusItem {
-	x.inner.SetImage(image)
+func (x *StatusItem) WithImage(image *Image) *StatusItem {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
-func (x *StatusItem) WithAlternateImage(alternateImage *raw.NSImage) *StatusItem {
-	x.inner.SetAlternateImage(alternateImage)
+func (x *StatusItem) WithAlternateImage(alternateImage *Image) *StatusItem {
+	x.inner.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
@@ -359,7 +359,7 @@ func (x *StatusItem) SetView(view *raw.NSView) {
 type StatusItemable interface {
 	Unwrap() *raw.NSStatusItem
 	WithLength(length float64) *StatusItem
-	WithMenu(menu *raw.NSMenu) *StatusItem
+	WithMenu(menu *Menu) *StatusItem
 	WithBehavior(behavior raw.NSStatusItemBehavior) *StatusItem
 	WithVisible(visible bool) *StatusItem
 	WithAutosaveName(autosaveName *foundation.NSString) *StatusItem
@@ -368,8 +368,8 @@ type StatusItemable interface {
 	WithTarget(target objc.ID) *StatusItem
 	WithTitle(title string) *StatusItem
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *StatusItem
-	WithImage(image *raw.NSImage) *StatusItem
-	WithAlternateImage(alternateImage *raw.NSImage) *StatusItem
+	WithImage(image *Image) *StatusItem
+	WithAlternateImage(alternateImage *Image) *StatusItem
 	WithEnabled(enabled bool) *StatusItem
 	WithHighlightMode(highlightMode bool) *StatusItem
 	WithToolTip(toolTip string) *StatusItem

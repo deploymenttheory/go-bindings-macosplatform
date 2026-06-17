@@ -36,8 +36,8 @@ func NewPitchControl() *PitchControl {
 }
 
 // WithMapView sets the mapView property and returns the receiver for chaining.
-func (x *PitchControl) WithMapView(mapView *raw.MKMapView) *PitchControl {
-	x.inner.SetMapView(mapView)
+func (x *PitchControl) WithMapView(mapView *MapView) *PitchControl {
+	x.inner.SetMapView(mapView.Unwrap())
 	return x
 }
 
@@ -58,7 +58,7 @@ func (x *PitchControl) SetMapView(mapView *raw.MKMapView) {
 // PitchControlable is the interface implemented by [PitchControl], for mocking and DI.
 type PitchControlable interface {
 	Unwrap() *raw.MKPitchControl
-	WithMapView(mapView *raw.MKMapView) *PitchControl
+	WithMapView(mapView *MapView) *PitchControl
 	MapView() *MapView
 	SetMapView(mapView *raw.MKMapView)
 }

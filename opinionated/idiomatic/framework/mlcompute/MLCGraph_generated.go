@@ -167,13 +167,13 @@ func (x *Graph) Device() *Device {
 }
 
 // Layers returns the collection as a Go slice.
-func (x *Graph) Layers() []*raw.MLCLayer {
+func (x *Graph) Layers() []*Layer {
 	arr := x.inner.Layers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCLayer {
-		return raw.MLCLayerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Layer {
+		return &Layer{inner: raw.MLCLayerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -208,7 +208,7 @@ type Graphable interface {
 	SourceTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor]
 	ResultTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor]
 	Device() *Device
-	Layers() []*raw.MLCLayer
+	Layers() []*Layer
 	SummarizedDOTDescription() string
 }
 

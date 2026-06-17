@@ -73,8 +73,8 @@ func (x *EffectPropertyLight) WithQuadraticAttenuation(quadraticAttenuation floa
 }
 
 // WithTransform sets the transform property and returns the receiver for chaining.
-func (x *EffectPropertyLight) WithTransform(transform *raw.GLKEffectPropertyTransform) *EffectPropertyLight {
-	x.inner.SetTransform(transform)
+func (x *EffectPropertyLight) WithTransform(transform *EffectPropertyTransform) *EffectPropertyLight {
+	x.inner.SetTransform(transform.Unwrap())
 	return x
 }
 
@@ -213,7 +213,7 @@ type EffectPropertyLightable interface {
 	WithConstantAttenuation(constantAttenuation float32) *EffectPropertyLight
 	WithLinearAttenuation(linearAttenuation float32) *EffectPropertyLight
 	WithQuadraticAttenuation(quadraticAttenuation float32) *EffectPropertyLight
-	WithTransform(transform *raw.GLKEffectPropertyTransform) *EffectPropertyLight
+	WithTransform(transform *EffectPropertyTransform) *EffectPropertyLight
 	Enabled() uint8
 	SetEnabled(enabled uint8)
 	Position() unsafe.Pointer

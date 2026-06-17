@@ -139,8 +139,8 @@ func (x *TextAttachmentCell) WithWraps(wraps bool) *TextAttachmentCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithFont(font *raw.NSFont) *TextAttachmentCell {
-	x.inner.NSCell.SetFont(font)
+func (x *TextAttachmentCell) WithFont(font *Font) *TextAttachmentCell {
+	x.inner.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -187,8 +187,8 @@ func (x *TextAttachmentCell) WithIntegerValue(integerValue int) *TextAttachmentC
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithImage(image *raw.NSImage) *TextAttachmentCell {
-	x.inner.NSCell.SetImage(image)
+func (x *TextAttachmentCell) WithImage(image *Image) *TextAttachmentCell {
+	x.inner.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -205,8 +205,8 @@ func (x *TextAttachmentCell) WithRepresentedObject(representedObject objc.ID) *T
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithMenu(menu *raw.NSMenu) *TextAttachmentCell {
-	x.inner.NSCell.SetMenu(menu)
+func (x *TextAttachmentCell) WithMenu(menu *Menu) *TextAttachmentCell {
+	x.inner.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -328,7 +328,7 @@ type TextAttachmentCellable interface {
 	WithHighlighted(highlighted bool) *TextAttachmentCell
 	WithAlignment(alignment raw.NSTextAlignment) *TextAttachmentCell
 	WithWraps(wraps bool) *TextAttachmentCell
-	WithFont(font *raw.NSFont) *TextAttachmentCell
+	WithFont(font *Font) *TextAttachmentCell
 	WithFormatter(formatter *foundation.NSFormatter) *TextAttachmentCell
 	WithObjectValue(objectValue objc.ID) *TextAttachmentCell
 	WithStringValue(stringValue string) *TextAttachmentCell
@@ -336,10 +336,10 @@ type TextAttachmentCellable interface {
 	WithFloatValue(floatValue float32) *TextAttachmentCell
 	WithDoubleValue(doubleValue float64) *TextAttachmentCell
 	WithIntegerValue(integerValue int) *TextAttachmentCell
-	WithImage(image *raw.NSImage) *TextAttachmentCell
+	WithImage(image *Image) *TextAttachmentCell
 	WithControlSize(controlSize raw.NSControlSize) *TextAttachmentCell
 	WithRepresentedObject(representedObject objc.ID) *TextAttachmentCell
-	WithMenu(menu *raw.NSMenu) *TextAttachmentCell
+	WithMenu(menu *Menu) *TextAttachmentCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextAttachmentCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextAttachmentCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextAttachmentCell

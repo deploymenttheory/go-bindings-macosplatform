@@ -101,8 +101,8 @@ func (x *ComboBox) WithPlaceholderAttributedString(placeholderAttributedString *
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *ComboBox) WithBackgroundColor(backgroundColor *raw.NSColor) *ComboBox {
-	x.inner.NSTextField.SetBackgroundColor(backgroundColor)
+func (x *ComboBox) WithBackgroundColor(backgroundColor *Color) *ComboBox {
+	x.inner.NSTextField.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -113,8 +113,8 @@ func (x *ComboBox) WithDrawsBackground(drawsBackground bool) *ComboBox {
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *ComboBox) WithTextColor(textColor *raw.NSColor) *ComboBox {
-	x.inner.NSTextField.SetTextColor(textColor)
+func (x *ComboBox) WithTextColor(textColor *Color) *ComboBox {
+	x.inner.NSTextField.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -355,8 +355,8 @@ func (x *ComboBox) WithDoubleValue(doubleValue float64) *ComboBox {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *ComboBox) WithFont(font *raw.NSFont) *ComboBox {
-	x.inner.NSTextField.NSControl.SetFont(font)
+func (x *ComboBox) WithFont(font *Font) *ComboBox {
+	x.inner.NSTextField.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -577,8 +577,8 @@ func (x *ComboBox) WithContentFilters(items ...*coreimage.CIFilter) *ComboBox {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ComboBox) WithShadow(shadow *raw.NSShadow) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.SetShadow(shadow)
+func (x *ComboBox) WithShadow(shadow *Shadow) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -659,8 +659,8 @@ func (x *ComboBox) WithPrefersCompactControlSizeMetrics(prefersCompactControlSiz
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ComboBox) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *ComboBox) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -701,8 +701,8 @@ func (x *ComboBox) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynam
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ComboBox) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *ComboBox) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -713,8 +713,8 @@ func (x *ComboBox) WithNextResponder(nextResponder ResponderProvider) *ComboBox 
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ComboBox) WithMenu(menu *raw.NSMenu) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *ComboBox) WithMenu(menu *Menu) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -725,8 +725,8 @@ func (x *ComboBox) WithUserActivity(userActivity *foundation.NSUserActivity) *Co
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ComboBox) WithTouchBar(touchBar *raw.NSTouchBar) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *ComboBox) WithTouchBar(touchBar *TouchBar) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -926,9 +926,9 @@ type ComboBoxable interface {
 	WithDataSource(dataSource raw.NSComboBoxDataSource) *ComboBox
 	WithPlaceholderString(placeholderString string) *ComboBox
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *ComboBox
-	WithBackgroundColor(backgroundColor *raw.NSColor) *ComboBox
+	WithBackgroundColor(backgroundColor *Color) *ComboBox
 	WithDrawsBackground(drawsBackground bool) *ComboBox
-	WithTextColor(textColor *raw.NSColor) *ComboBox
+	WithTextColor(textColor *Color) *ComboBox
 	WithBordered(bordered bool) *ComboBox
 	WithBezeled(bezeled bool) *ComboBox
 	WithEditable(editable bool) *ComboBox
@@ -965,7 +965,7 @@ type ComboBoxable interface {
 	WithIntegerValue(integerValue int) *ComboBox
 	WithFloatValue(floatValue float32) *ComboBox
 	WithDoubleValue(doubleValue float64) *ComboBox
-	WithFont(font *raw.NSFont) *ComboBox
+	WithFont(font *Font) *ComboBox
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ComboBox
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ComboBox
 	WithAlignment(alignment raw.NSTextAlignment) *ComboBox
@@ -997,7 +997,7 @@ type ComboBoxable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *ComboBox
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ComboBox
 	WithContentFilters(items ...*coreimage.CIFilter) *ComboBox
-	WithShadow(shadow *raw.NSShadow) *ComboBox
+	WithShadow(shadow *Shadow) *ComboBox
 	WithClipsToBounds(clipsToBounds bool) *ComboBox
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboBox
 	WithToolTip(toolTip string) *ComboBox
@@ -1009,18 +1009,18 @@ type ComboBoxable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ComboBox
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboBox
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboBox
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ComboBox
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboBox
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ComboBox
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ComboBox
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ComboBox
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboBox
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ComboBox
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ComboBox
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ComboBox
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboBox
 	WithNextResponder(nextResponder ResponderProvider) *ComboBox
-	WithMenu(menu *raw.NSMenu) *ComboBox
+	WithMenu(menu *Menu) *ComboBox
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ComboBox
-	WithTouchBar(touchBar *raw.NSTouchBar) *ComboBox
+	WithTouchBar(touchBar *TouchBar) *ComboBox
 	ReloadData()
 	NoteNumberOfItemsChanged()
 	ScrollItemAtIndexToTop(index int)

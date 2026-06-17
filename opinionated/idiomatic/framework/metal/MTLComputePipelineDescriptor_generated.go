@@ -62,8 +62,8 @@ func (x *ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalTh
 }
 
 // WithStageInputDescriptor sets the stageInputDescriptor property and returns the receiver for chaining.
-func (x *ComputePipelineDescriptor) WithStageInputDescriptor(stageInputDescriptor *raw.MTLStageInputOutputDescriptor) *ComputePipelineDescriptor {
-	x.inner.SetStageInputDescriptor(stageInputDescriptor)
+func (x *ComputePipelineDescriptor) WithStageInputDescriptor(stageInputDescriptor *StageInputOutputDescriptor) *ComputePipelineDescriptor {
+	x.inner.SetStageInputDescriptor(stageInputDescriptor.Unwrap())
 	return x
 }
 
@@ -74,8 +74,8 @@ func (x *ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportInd
 }
 
 // WithLinkedFunctions sets the linkedFunctions property and returns the receiver for chaining.
-func (x *ComputePipelineDescriptor) WithLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) *ComputePipelineDescriptor {
-	x.inner.SetLinkedFunctions(linkedFunctions)
+func (x *ComputePipelineDescriptor) WithLinkedFunctions(linkedFunctions *LinkedFunctions) *ComputePipelineDescriptor {
+	x.inner.SetLinkedFunctions(linkedFunctions.Unwrap())
 	return x
 }
 
@@ -276,9 +276,9 @@ type ComputePipelineDescriptorable interface {
 	WithComputeFunction(computeFunction raw.MTLFunction) *ComputePipelineDescriptor
 	WithThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) *ComputePipelineDescriptor
 	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *ComputePipelineDescriptor
-	WithStageInputDescriptor(stageInputDescriptor *raw.MTLStageInputOutputDescriptor) *ComputePipelineDescriptor
+	WithStageInputDescriptor(stageInputDescriptor *StageInputOutputDescriptor) *ComputePipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *ComputePipelineDescriptor
-	WithLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) *ComputePipelineDescriptor
+	WithLinkedFunctions(linkedFunctions *LinkedFunctions) *ComputePipelineDescriptor
 	WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *ComputePipelineDescriptor
 	WithMaxCallStackDepth(maxCallStackDepth uint) *ComputePipelineDescriptor
 	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *ComputePipelineDescriptor

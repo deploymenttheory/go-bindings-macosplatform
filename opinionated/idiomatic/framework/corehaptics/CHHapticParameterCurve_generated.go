@@ -64,13 +64,13 @@ func (x *HapticParameterCurve) SetRelativeTime(relativeTime float64) {
 }
 
 // ControlPoints returns the collection as a Go slice.
-func (x *HapticParameterCurve) ControlPoints() []*raw.CHHapticParameterCurveControlPoint {
+func (x *HapticParameterCurve) ControlPoints() []*HapticParameterCurveControlPoint {
 	arr := x.inner.ControlPoints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CHHapticParameterCurveControlPoint {
-		return raw.CHHapticParameterCurveControlPointFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *HapticParameterCurveControlPoint {
+		return &HapticParameterCurveControlPoint{inner: raw.CHHapticParameterCurveControlPointFromID(purego.Retain(_id))}
 	})
 }
 
@@ -81,7 +81,7 @@ type HapticParameterCurveable interface {
 	ParameterID() string
 	RelativeTime() float64
 	SetRelativeTime(relativeTime float64)
-	ControlPoints() []*raw.CHHapticParameterCurveControlPoint
+	ControlPoints() []*HapticParameterCurveControlPoint
 }
 
 var _ HapticParameterCurveable = (*HapticParameterCurve)(nil)

@@ -85,8 +85,8 @@ func (x *ClickGestureRecognizer) WithEnabled(enabled bool) *ClickGestureRecogniz
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ClickGestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ClickGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration)
+func (x *ClickGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -181,7 +181,7 @@ type ClickGestureRecognizerable interface {
 	WithState(state raw.NSGestureRecognizerState) *ClickGestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *ClickGestureRecognizer
 	WithEnabled(enabled bool) *ClickGestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ClickGestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClickGestureRecognizer
 	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *ClickGestureRecognizer
 	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *ClickGestureRecognizer
 	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *ClickGestureRecognizer

@@ -232,8 +232,8 @@ func (x *PredicateEditor) WithDoubleValue(doubleValue float64) *PredicateEditor 
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *PredicateEditor) WithFont(font *raw.NSFont) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetFont(font)
+func (x *PredicateEditor) WithFont(font *Font) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -454,8 +454,8 @@ func (x *PredicateEditor) WithContentFilters(items ...*coreimage.CIFilter) *Pred
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *PredicateEditor) WithShadow(shadow *raw.NSShadow) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetShadow(shadow)
+func (x *PredicateEditor) WithShadow(shadow *Shadow) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -536,8 +536,8 @@ func (x *PredicateEditor) WithPrefersCompactControlSizeMetrics(prefersCompactCon
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *PredicateEditor) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *PredicateEditor) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -578,8 +578,8 @@ func (x *PredicateEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtend
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *PredicateEditor) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *PredicateEditor) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -590,8 +590,8 @@ func (x *PredicateEditor) WithNextResponder(nextResponder ResponderProvider) *Pr
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *PredicateEditor) WithMenu(menu *raw.NSMenu) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *PredicateEditor) WithMenu(menu *Menu) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -602,19 +602,19 @@ func (x *PredicateEditor) WithUserActivity(userActivity *foundation.NSUserActivi
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *PredicateEditor) WithTouchBar(touchBar *raw.NSTouchBar) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *PredicateEditor) WithTouchBar(touchBar *TouchBar) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
 // RowTemplates returns the collection as a Go slice.
-func (x *PredicateEditor) RowTemplates() []*raw.NSPredicateEditorRowTemplate {
+func (x *PredicateEditor) RowTemplates() []*PredicateEditorRowTemplate {
 	arr := x.inner.RowTemplates()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPredicateEditorRowTemplate {
-		return raw.NSPredicateEditorRowTemplateFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PredicateEditorRowTemplate {
+		return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(purego.Retain(_id))}
 	})
 }
 
@@ -664,7 +664,7 @@ type PredicateEditorable interface {
 	WithIntegerValue(integerValue int) *PredicateEditor
 	WithFloatValue(floatValue float32) *PredicateEditor
 	WithDoubleValue(doubleValue float64) *PredicateEditor
-	WithFont(font *raw.NSFont) *PredicateEditor
+	WithFont(font *Font) *PredicateEditor
 	WithUsesSingleLineMode(usesSingleLineMode bool) *PredicateEditor
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PredicateEditor
 	WithAlignment(alignment raw.NSTextAlignment) *PredicateEditor
@@ -696,7 +696,7 @@ type PredicateEditorable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *PredicateEditor
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PredicateEditor
 	WithContentFilters(items ...*coreimage.CIFilter) *PredicateEditor
-	WithShadow(shadow *raw.NSShadow) *PredicateEditor
+	WithShadow(shadow *Shadow) *PredicateEditor
 	WithClipsToBounds(clipsToBounds bool) *PredicateEditor
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PredicateEditor
 	WithToolTip(toolTip string) *PredicateEditor
@@ -708,19 +708,19 @@ type PredicateEditorable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PredicateEditor
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PredicateEditor
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PredicateEditor
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *PredicateEditor
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PredicateEditor
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PredicateEditor
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PredicateEditor
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PredicateEditor
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PredicateEditor
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PredicateEditor
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PredicateEditor
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PredicateEditor
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PredicateEditor
 	WithNextResponder(nextResponder ResponderProvider) *PredicateEditor
-	WithMenu(menu *raw.NSMenu) *PredicateEditor
+	WithMenu(menu *Menu) *PredicateEditor
 	WithUserActivity(userActivity *foundation.NSUserActivity) *PredicateEditor
-	WithTouchBar(touchBar *raw.NSTouchBar) *PredicateEditor
-	RowTemplates() []*raw.NSPredicateEditorRowTemplate
+	WithTouchBar(touchBar *TouchBar) *PredicateEditor
+	RowTemplates() []*PredicateEditorRowTemplate
 	SetRowTemplates(rowTemplates *foundation.NSArray[*raw.NSPredicateEditorRowTemplate])
 }
 

@@ -37,20 +37,20 @@ func NewCIDeviceManager() *CIDeviceManager {
 }
 
 // DiscoveredCIDevices returns the collection as a Go slice.
-func (x *CIDeviceManager) DiscoveredCIDevices() []*raw.MIDICIDevice {
+func (x *CIDeviceManager) DiscoveredCIDevices() []*CIDevice {
 	arr := x.inner.DiscoveredCIDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDICIDevice {
-		return raw.MIDICIDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CIDevice {
+		return &CIDevice{inner: raw.MIDICIDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // CIDeviceManagerable is the interface implemented by [CIDeviceManager], for mocking and DI.
 type CIDeviceManagerable interface {
 	Unwrap() *raw.MIDICIDeviceManager
-	DiscoveredCIDevices() []*raw.MIDICIDevice
+	DiscoveredCIDevices() []*CIDevice
 }
 
 var _ CIDeviceManagerable = (*CIDeviceManager)(nil)

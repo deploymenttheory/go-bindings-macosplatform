@@ -50,8 +50,8 @@ func (x *PickerTouchBarItem) WithCollapsedRepresentationLabel(collapsedRepresent
 }
 
 // WithCollapsedRepresentationImage sets the collapsedRepresentationImage property and returns the receiver for chaining.
-func (x *PickerTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage) *PickerTouchBarItem {
-	x.inner.SetCollapsedRepresentationImage(collapsedRepresentationImage)
+func (x *PickerTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PickerTouchBarItem {
+	x.inner.SetCollapsedRepresentationImage(collapsedRepresentationImage.Unwrap())
 	return x
 }
 
@@ -62,8 +62,8 @@ func (x *PickerTouchBarItem) WithSelectedIndex(selectedIndex int) *PickerTouchBa
 }
 
 // WithSelectionColor sets the selectionColor property and returns the receiver for chaining.
-func (x *PickerTouchBarItem) WithSelectionColor(selectionColor *raw.NSColor) *PickerTouchBarItem {
-	x.inner.SetSelectionColor(selectionColor)
+func (x *PickerTouchBarItem) WithSelectionColor(selectionColor *Color) *PickerTouchBarItem {
+	x.inner.SetSelectionColor(selectionColor.Unwrap())
 	return x
 }
 
@@ -271,9 +271,9 @@ type PickerTouchBarItemable interface {
 	Unwrap() *raw.NSPickerTouchBarItem
 	WithControlRepresentation(controlRepresentation raw.NSPickerTouchBarItemControlRepresentation) *PickerTouchBarItem
 	WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PickerTouchBarItem
-	WithCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage) *PickerTouchBarItem
+	WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PickerTouchBarItem
 	WithSelectedIndex(selectedIndex int) *PickerTouchBarItem
-	WithSelectionColor(selectionColor *raw.NSColor) *PickerTouchBarItem
+	WithSelectionColor(selectionColor *Color) *PickerTouchBarItem
 	WithSelectionMode(selectionMode raw.NSPickerTouchBarItemSelectionMode) *PickerTouchBarItem
 	WithNumberOfOptions(numberOfOptions int) *PickerTouchBarItem
 	WithTarget(target objc.ID) *PickerTouchBarItem

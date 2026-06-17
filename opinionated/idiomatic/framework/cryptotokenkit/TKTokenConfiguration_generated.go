@@ -104,13 +104,13 @@ func (x *TokenConfiguration) SetConfigurationData(configurationData *foundation.
 }
 
 // KeychainItems returns the collection as a Go slice.
-func (x *TokenConfiguration) KeychainItems() []*raw.TKTokenKeychainItem {
+func (x *TokenConfiguration) KeychainItems() []*TokenKeychainItem {
 	arr := x.inner.KeychainItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.TKTokenKeychainItem {
-		return raw.TKTokenKeychainItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TokenKeychainItem {
+		return &TokenKeychainItem{inner: raw.TKTokenKeychainItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -129,7 +129,7 @@ type TokenConfigurationable interface {
 	InstanceID() string
 	ConfigurationData() *foundation.NSData
 	SetConfigurationData(configurationData *foundation.NSData)
-	KeychainItems() []*raw.TKTokenKeychainItem
+	KeychainItems() []*TokenKeychainItem
 	SetKeychainItems(keychainItems *foundation.NSArray[*raw.TKTokenKeychainItem])
 }
 

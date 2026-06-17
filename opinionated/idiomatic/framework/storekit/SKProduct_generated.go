@@ -148,13 +148,13 @@ func (x *Product) SubscriptionGroupIdentifier() string {
 }
 
 // Discounts returns the collection as a Go slice.
-func (x *Product) Discounts() []*raw.SKProductDiscount {
+func (x *Product) Discounts() []*ProductDiscount {
 	arr := x.inner.Discounts()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKProductDiscount {
-		return raw.SKProductDiscountFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ProductDiscount {
+		return &ProductDiscount{inner: raw.SKProductDiscountFromID(purego.Retain(_id))}
 	})
 }
 
@@ -176,7 +176,7 @@ type Productable interface {
 	SubscriptionPeriod() *ProductSubscriptionPeriod
 	IntroductoryPrice() *ProductDiscount
 	SubscriptionGroupIdentifier() string
-	Discounts() []*raw.SKProductDiscount
+	Discounts() []*ProductDiscount
 }
 
 var _ Productable = (*Product)(nil)

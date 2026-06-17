@@ -113,13 +113,13 @@ func (x *URLProtectionSpace) AuthenticationMethod() *String {
 }
 
 // DistinguishedNames returns the collection as a Go slice.
-func (x *URLProtectionSpace) DistinguishedNames() []*raw.NSData {
+func (x *URLProtectionSpace) DistinguishedNames() []*Data {
 	arr := x.inner.DistinguishedNames()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSData {
-		return raw.NSDataFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Data {
+		return &Data{inner: raw.NSDataFromID(purego.Retain(_id))}
 	})
 }
 
@@ -142,7 +142,7 @@ type URLProtectionSpaceable interface {
 	ProxyType() *String
 	Protocol() *String
 	AuthenticationMethod() *String
-	DistinguishedNames() []*raw.NSData
+	DistinguishedNames() []*Data
 	ServerTrust() unsafe.Pointer
 }
 

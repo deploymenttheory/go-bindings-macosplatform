@@ -54,8 +54,8 @@ func (x *TextField) WithPlaceholderAttributedString(placeholderAttributedString 
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TextField) WithBackgroundColor(backgroundColor *raw.NSColor) *TextField {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *TextField) WithBackgroundColor(backgroundColor *Color) *TextField {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -66,8 +66,8 @@ func (x *TextField) WithDrawsBackground(drawsBackground bool) *TextField {
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *TextField) WithTextColor(textColor *raw.NSColor) *TextField {
-	x.inner.SetTextColor(textColor)
+func (x *TextField) WithTextColor(textColor *Color) *TextField {
+	x.inner.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -308,8 +308,8 @@ func (x *TextField) WithDoubleValue(doubleValue float64) *TextField {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *TextField) WithFont(font *raw.NSFont) *TextField {
-	x.inner.NSControl.SetFont(font)
+func (x *TextField) WithFont(font *Font) *TextField {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -530,8 +530,8 @@ func (x *TextField) WithContentFilters(items ...*coreimage.CIFilter) *TextField 
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *TextField) WithShadow(shadow *raw.NSShadow) *TextField {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *TextField) WithShadow(shadow *Shadow) *TextField {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -612,8 +612,8 @@ func (x *TextField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *TextField) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TextField {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *TextField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextField {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -654,8 +654,8 @@ func (x *TextField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *TextField) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TextField {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *TextField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextField {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -666,8 +666,8 @@ func (x *TextField) WithNextResponder(nextResponder ResponderProvider) *TextFiel
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TextField) WithMenu(menu *raw.NSMenu) *TextField {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *TextField) WithMenu(menu *Menu) *TextField {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -678,8 +678,8 @@ func (x *TextField) WithUserActivity(userActivity *foundation.NSUserActivity) *T
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TextField) WithTouchBar(touchBar *raw.NSTouchBar) *TextField {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *TextField) WithTouchBar(touchBar *TouchBar) *TextField {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -995,9 +995,9 @@ type TextFieldable interface {
 	Unwrap() *raw.NSTextField
 	WithPlaceholderString(placeholderString string) *TextField
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TextField
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TextField
+	WithBackgroundColor(backgroundColor *Color) *TextField
 	WithDrawsBackground(drawsBackground bool) *TextField
-	WithTextColor(textColor *raw.NSColor) *TextField
+	WithTextColor(textColor *Color) *TextField
 	WithBordered(bordered bool) *TextField
 	WithBezeled(bezeled bool) *TextField
 	WithEditable(editable bool) *TextField
@@ -1034,7 +1034,7 @@ type TextFieldable interface {
 	WithIntegerValue(integerValue int) *TextField
 	WithFloatValue(floatValue float32) *TextField
 	WithDoubleValue(doubleValue float64) *TextField
-	WithFont(font *raw.NSFont) *TextField
+	WithFont(font *Font) *TextField
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TextField
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextField
 	WithAlignment(alignment raw.NSTextAlignment) *TextField
@@ -1066,7 +1066,7 @@ type TextFieldable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *TextField
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TextField
 	WithContentFilters(items ...*coreimage.CIFilter) *TextField
-	WithShadow(shadow *raw.NSShadow) *TextField
+	WithShadow(shadow *Shadow) *TextField
 	WithClipsToBounds(clipsToBounds bool) *TextField
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextField
 	WithToolTip(toolTip string) *TextField
@@ -1078,18 +1078,18 @@ type TextFieldable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextField
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextField
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TextField
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextField
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextField
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextField
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextField
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextField
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextField
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextField
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TextField
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextField
 	WithNextResponder(nextResponder ResponderProvider) *TextField
-	WithMenu(menu *raw.NSMenu) *TextField
+	WithMenu(menu *Menu) *TextField
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TextField
-	WithTouchBar(touchBar *raw.NSTouchBar) *TextField
+	WithTouchBar(touchBar *TouchBar) *TextField
 	SelectText(sender objc.ID)
 	TextShouldBeginEditing(textObject *raw.NSText) bool
 	TextShouldEndEditing(textObject *raw.NSText) bool

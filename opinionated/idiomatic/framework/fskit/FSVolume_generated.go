@@ -37,8 +37,8 @@ func NewVolumeWithVolumeIDVolumeName(volumeID *raw.FSVolumeIdentifier, volumeNam
 }
 
 // WithName sets the name property and returns the receiver for chaining.
-func (x *Volume) WithName(name *raw.FSFileName) *Volume {
-	x.inner.SetName(name)
+func (x *Volume) WithName(name *FileName) *Volume {
+	x.inner.SetName(name.Unwrap())
 	return x
 }
 
@@ -68,7 +68,7 @@ func (x *Volume) SetName(name *raw.FSFileName) {
 // Volumeable is the interface implemented by [Volume], for mocking and DI.
 type Volumeable interface {
 	Unwrap() *raw.FSVolume
-	WithName(name *raw.FSFileName) *Volume
+	WithName(name *FileName) *Volume
 	VolumeID() *VolumeIdentifier
 	Name() *FileName
 	SetName(name *raw.FSFileName)

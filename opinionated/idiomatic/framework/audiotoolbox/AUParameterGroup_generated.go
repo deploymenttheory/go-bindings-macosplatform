@@ -67,24 +67,24 @@ func (x *ParameterGroup) WithImplementorDisplayNameWithLengthCallback(implemento
 }
 
 // Children returns the collection as a Go slice.
-func (x *ParameterGroup) Children() []*raw.AUParameterNode {
+func (x *ParameterGroup) Children() []*ParameterNode {
 	arr := x.inner.Children()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AUParameterNode {
-		return raw.AUParameterNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ParameterNode {
+		return &ParameterNode{inner: raw.AUParameterNodeFromID(purego.Retain(_id))}
 	})
 }
 
 // AllParameters returns the collection as a Go slice.
-func (x *ParameterGroup) AllParameters() []*raw.AUParameter {
+func (x *ParameterGroup) AllParameters() []*Parameter {
 	arr := x.inner.AllParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AUParameter {
-		return raw.AUParameterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Parameter {
+		return &Parameter{inner: raw.AUParameterFromID(purego.Retain(_id))}
 	})
 }
 
@@ -100,8 +100,8 @@ type ParameterGroupable interface {
 	WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterGroup
 	WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterGroup
 	WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterGroup
-	Children() []*raw.AUParameterNode
-	AllParameters() []*raw.AUParameter
+	Children() []*ParameterNode
+	AllParameters() []*Parameter
 }
 
 var _ ParameterGroupable = (*ParameterGroup)(nil)

@@ -103,13 +103,13 @@ func (x *Morpher) WeightForTargetNamed(targetName string) float64 {
 }
 
 // Targets returns the collection as a Go slice.
-func (x *Morpher) Targets() []*raw.SCNGeometry {
+func (x *Morpher) Targets() []*Geometry {
 	arr := x.inner.Targets()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNGeometry {
-		return raw.SCNGeometryFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Geometry {
+		return &Geometry{inner: raw.SCNGeometryFromID(purego.Retain(_id))}
 	})
 }
 
@@ -165,7 +165,7 @@ type Morpherable interface {
 	WeightForTargetAtIndex(targetIndex uint) float64
 	SetWeightForTargetNamed(weight float64, targetName string)
 	WeightForTargetNamed(targetName string) float64
-	Targets() []*raw.SCNGeometry
+	Targets() []*Geometry
 	SetTargets(targets *foundation.NSArray[*raw.SCNGeometry])
 	Weights() []*foundation.NSNumber
 	SetWeights(weights *foundation.NSArray[*foundation.NSNumber])

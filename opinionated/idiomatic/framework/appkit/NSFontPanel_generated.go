@@ -193,8 +193,8 @@ func (x *FontPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *FontPanel {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *FontPanel) WithBackgroundColor(backgroundColor *raw.NSColor) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetBackgroundColor(backgroundColor)
+func (x *FontPanel) WithBackgroundColor(backgroundColor *Color) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -223,8 +223,8 @@ func (x *FontPanel) WithCanHide(canHide bool) *FontPanel {
 }
 
 // WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
-func (x *FontPanel) WithMiniwindowImage(miniwindowImage *raw.NSImage) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage)
+func (x *FontPanel) WithMiniwindowImage(miniwindowImage *Image) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage.Unwrap())
 	return x
 }
 
@@ -367,8 +367,8 @@ func (x *FontPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefo
 }
 
 // WithWindowController sets the windowController property and returns the receiver for chaining.
-func (x *FontPanel) WithWindowController(windowController *raw.NSWindowController) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetWindowController(windowController)
+func (x *FontPanel) WithWindowController(windowController *WindowController) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetWindowController(windowController.Unwrap())
 	return x
 }
 
@@ -385,8 +385,8 @@ func (x *FontPanel) WithAppearanceSource(appearanceSource *foundation.NSObject) 
 }
 
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
-func (x *FontPanel) WithColorSpace(colorSpace *raw.NSColorSpace) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetColorSpace(colorSpace)
+func (x *FontPanel) WithColorSpace(colorSpace *ColorSpace) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetColorSpace(colorSpace.Unwrap())
 	return x
 }
 
@@ -421,8 +421,8 @@ func (x *FontPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop 
 }
 
 // WithToolbar sets the toolbar property and returns the receiver for chaining.
-func (x *FontPanel) WithToolbar(toolbar *raw.NSToolbar) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetToolbar(toolbar)
+func (x *FontPanel) WithToolbar(toolbar *Toolbar) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetToolbar(toolbar.Unwrap())
 	return x
 }
 
@@ -499,8 +499,8 @@ func (x *FontPanel) WithNextResponder(nextResponder ResponderProvider) *FontPane
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *FontPanel) WithMenu(menu *raw.NSMenu) *FontPanel {
-	x.inner.NSPanel.NSWindow.NSResponder.SetMenu(menu)
+func (x *FontPanel) WithMenu(menu *Menu) *FontPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -511,8 +511,8 @@ func (x *FontPanel) WithUserActivity(userActivity *foundation.NSUserActivity) *F
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *FontPanel) WithTouchBar(touchBar *raw.NSTouchBar) *FontPanel {
-	x.inner.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar)
+func (x *FontPanel) WithTouchBar(touchBar *TouchBar) *FontPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -592,12 +592,12 @@ type FontPanelable interface {
 	WithViewsNeedDisplay(viewsNeedDisplay bool) *FontPanel
 	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *FontPanel
 	WithReleasedWhenClosed(releasedWhenClosed bool) *FontPanel
-	WithBackgroundColor(backgroundColor *raw.NSColor) *FontPanel
+	WithBackgroundColor(backgroundColor *Color) *FontPanel
 	WithMovable(movable bool) *FontPanel
 	WithMovableByWindowBackground(movableByWindowBackground bool) *FontPanel
 	WithHidesOnDeactivate(hidesOnDeactivate bool) *FontPanel
 	WithCanHide(canHide bool) *FontPanel
-	WithMiniwindowImage(miniwindowImage *raw.NSImage) *FontPanel
+	WithMiniwindowImage(miniwindowImage *Image) *FontPanel
 	WithMiniwindowTitle(miniwindowTitle string) *FontPanel
 	WithDocumentEdited(documentEdited bool) *FontPanel
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *FontPanel
@@ -621,16 +621,16 @@ type FontPanelable interface {
 	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *FontPanel
 	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *FontPanel
 	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *FontPanel
-	WithWindowController(windowController *raw.NSWindowController) *FontPanel
+	WithWindowController(windowController *WindowController) *FontPanel
 	WithParentWindow(parentWindow WindowProvider) *FontPanel
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *FontPanel
-	WithColorSpace(colorSpace *raw.NSColorSpace) *FontPanel
+	WithColorSpace(colorSpace *ColorSpace) *FontPanel
 	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *FontPanel
 	WithContentViewController(contentViewController ViewControllerProvider) *FontPanel
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *FontPanel
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *FontPanel
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *FontPanel
-	WithToolbar(toolbar *raw.NSToolbar) *FontPanel
+	WithToolbar(toolbar *Toolbar) *FontPanel
 	WithShowsToolbarButton(showsToolbarButton bool) *FontPanel
 	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *FontPanel
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *FontPanel
@@ -643,9 +643,9 @@ type FontPanelable interface {
 	WithOrderedIndex(orderedIndex int) *FontPanel
 	WithRestorable(restorable bool) *FontPanel
 	WithNextResponder(nextResponder ResponderProvider) *FontPanel
-	WithMenu(menu *raw.NSMenu) *FontPanel
+	WithMenu(menu *Menu) *FontPanel
 	WithUserActivity(userActivity *foundation.NSUserActivity) *FontPanel
-	WithTouchBar(touchBar *raw.NSTouchBar) *FontPanel
+	WithTouchBar(touchBar *TouchBar) *FontPanel
 	SetPanelFontIsMultiple(fontObj *raw.NSFont, flag bool)
 	PanelConvertFont(fontObj *raw.NSFont) *Font
 	ReloadDefaultFontFamilies()

@@ -77,14 +77,14 @@ func (x *Form) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *For
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *Form) WithBackgroundColor(backgroundColor *raw.NSColor) *Form {
-	x.inner.NSMatrix.SetBackgroundColor(backgroundColor)
+func (x *Form) WithBackgroundColor(backgroundColor *Color) *Form {
+	x.inner.NSMatrix.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
 // WithCellBackgroundColor sets the cellBackgroundColor property and returns the receiver for chaining.
-func (x *Form) WithCellBackgroundColor(cellBackgroundColor *raw.NSColor) *Form {
-	x.inner.NSMatrix.SetCellBackgroundColor(cellBackgroundColor)
+func (x *Form) WithCellBackgroundColor(cellBackgroundColor *Color) *Form {
+	x.inner.NSMatrix.SetCellBackgroundColor(cellBackgroundColor.Unwrap())
 	return x
 }
 
@@ -245,8 +245,8 @@ func (x *Form) WithDoubleValue(doubleValue float64) *Form {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Form) WithFont(font *raw.NSFont) *Form {
-	x.inner.NSMatrix.NSControl.SetFont(font)
+func (x *Form) WithFont(font *Font) *Form {
+	x.inner.NSMatrix.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -467,8 +467,8 @@ func (x *Form) WithContentFilters(items ...*coreimage.CIFilter) *Form {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Form) WithShadow(shadow *raw.NSShadow) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetShadow(shadow)
+func (x *Form) WithShadow(shadow *Shadow) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -549,8 +549,8 @@ func (x *Form) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMet
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Form) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Form) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -591,8 +591,8 @@ func (x *Form) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRa
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Form) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Form) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -603,8 +603,8 @@ func (x *Form) WithNextResponder(nextResponder ResponderProvider) *Form {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Form) WithMenu(menu *raw.NSMenu) *Form {
-	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *Form) WithMenu(menu *Menu) *Form {
+	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -615,8 +615,8 @@ func (x *Form) WithUserActivity(userActivity *foundation.NSUserActivity) *Form {
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Form) WithTouchBar(touchBar *raw.NSTouchBar) *Form {
-	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Form) WithTouchBar(touchBar *TouchBar) *Form {
+	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -745,8 +745,8 @@ type Formable interface {
 	WithSelectionByRect(selectionByRect bool) *Form
 	WithCellSize(cellSize corefoundation.CGSize) *Form
 	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Form
-	WithBackgroundColor(backgroundColor *raw.NSColor) *Form
-	WithCellBackgroundColor(cellBackgroundColor *raw.NSColor) *Form
+	WithBackgroundColor(backgroundColor *Color) *Form
+	WithCellBackgroundColor(cellBackgroundColor *Color) *Form
 	WithDrawsCellBackground(drawsCellBackground bool) *Form
 	WithDrawsBackground(drawsBackground bool) *Form
 	WithDoubleAction(doubleAction objc.SEL) *Form
@@ -773,7 +773,7 @@ type Formable interface {
 	WithIntegerValue(integerValue int) *Form
 	WithFloatValue(floatValue float32) *Form
 	WithDoubleValue(doubleValue float64) *Form
-	WithFont(font *raw.NSFont) *Form
+	WithFont(font *Font) *Form
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Form
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Form
 	WithAlignment(alignment raw.NSTextAlignment) *Form
@@ -805,7 +805,7 @@ type Formable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Form
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Form
 	WithContentFilters(items ...*coreimage.CIFilter) *Form
-	WithShadow(shadow *raw.NSShadow) *Form
+	WithShadow(shadow *Shadow) *Form
 	WithClipsToBounds(clipsToBounds bool) *Form
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Form
 	WithToolTip(toolTip string) *Form
@@ -817,18 +817,18 @@ type Formable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Form
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Form
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Form
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Form
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Form
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Form
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Form
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Form
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Form
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Form
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Form
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Form
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Form
 	WithNextResponder(nextResponder ResponderProvider) *Form
-	WithMenu(menu *raw.NSMenu) *Form
+	WithMenu(menu *Menu) *Form
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Form
-	WithTouchBar(touchBar *raw.NSTouchBar) *Form
+	WithTouchBar(touchBar *TouchBar) *Form
 	IndexOfSelectedItem() int
 	SetEntryWidth(width float64)
 	SetInterlineSpacing(spacing float64)

@@ -37,13 +37,13 @@ func NewProductsResponse() *ProductsResponse {
 }
 
 // Products returns the collection as a Go slice.
-func (x *ProductsResponse) Products() []*raw.SKProduct {
+func (x *ProductsResponse) Products() []*Product {
 	arr := x.inner.Products()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKProduct {
-		return raw.SKProductFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Product {
+		return &Product{inner: raw.SKProductFromID(purego.Retain(_id))}
 	})
 }
 
@@ -61,7 +61,7 @@ func (x *ProductsResponse) InvalidProductIdentifiers() []string {
 // ProductsResponseable is the interface implemented by [ProductsResponse], for mocking and DI.
 type ProductsResponseable interface {
 	Unwrap() *raw.SKProductsResponse
-	Products() []*raw.SKProduct
+	Products() []*Product
 	InvalidProductIdentifiers() []string
 }
 

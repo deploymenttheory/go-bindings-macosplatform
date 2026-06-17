@@ -82,13 +82,13 @@ func (x *Route) Polyline() *Polyline {
 }
 
 // Steps returns the collection as a Go slice.
-func (x *Route) Steps() []*raw.MKRouteStep {
+func (x *Route) Steps() []*RouteStep {
 	arr := x.inner.Steps()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKRouteStep {
-		return raw.MKRouteStepFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RouteStep {
+		return &RouteStep{inner: raw.MKRouteStepFromID(purego.Retain(_id))}
 	})
 }
 
@@ -111,7 +111,7 @@ type Routeable interface {
 	ExpectedTravelTime() float64
 	TransportType() raw.MKDirectionsTransportType
 	Polyline() *Polyline
-	Steps() []*raw.MKRouteStep
+	Steps() []*RouteStep
 	HasTolls() bool
 	HasHighways() bool
 }

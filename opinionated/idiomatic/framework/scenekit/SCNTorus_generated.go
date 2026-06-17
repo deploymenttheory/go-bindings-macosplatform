@@ -84,8 +84,8 @@ func (x *Torus) WithMaterials(items ...*raw.SCNMaterial) *Torus {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Torus) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Torus {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Torus) WithFirstMaterial(firstMaterial *Material) *Torus {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -106,8 +106,8 @@ func (x *Torus) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Torus {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Torus) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Torus {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Torus) WithTessellator(tessellator *GeometryTessellator) *Torus {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -124,14 +124,14 @@ func (x *Torus) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tor
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Torus) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Torus {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Torus) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Torus {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Torus) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Torus {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Torus) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Torus {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -186,13 +186,13 @@ type Torusable interface {
 	WithPipeSegmentCount(pipeSegmentCount int) *Torus
 	WithName(name string) *Torus
 	WithMaterials(items ...*raw.SCNMaterial) *Torus
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Torus
+	WithFirstMaterial(firstMaterial *Material) *Torus
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Torus
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Torus
+	WithTessellator(tessellator *GeometryTessellator) *Torus
 	WithSubdivisionLevel(subdivisionLevel uint) *Torus
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Torus
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Torus
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Torus
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Torus
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Torus
 	RingRadius() float64
 	SetRingRadius(ringRadius float64)
 	PipeRadius() float64

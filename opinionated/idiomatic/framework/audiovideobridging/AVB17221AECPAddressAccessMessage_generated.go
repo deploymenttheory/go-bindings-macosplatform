@@ -85,19 +85,19 @@ func (x *AVB17221AECPAddressAccessMessage) WithSequenceID(sequenceID uint16) *AV
 }
 
 // WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
-func (x *AVB17221AECPAddressAccessMessage) WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPAddressAccessMessage {
-	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC)
+func (x *AVB17221AECPAddressAccessMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAddressAccessMessage {
+	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC.Unwrap())
 	return x
 }
 
 // Tlvs returns the collection as a Go slice.
-func (x *AVB17221AECPAddressAccessMessage) Tlvs() []*raw.AVB17221AECPAddressAccessTLV {
+func (x *AVB17221AECPAddressAccessMessage) Tlvs() []*AVB17221AECPAddressAccessTLV {
 	arr := x.inner.Tlvs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVB17221AECPAddressAccessTLV {
-		return raw.AVB17221AECPAddressAccessTLVFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AVB17221AECPAddressAccessTLV {
+		return &AVB17221AECPAddressAccessTLV{inner: raw.AVB17221AECPAddressAccessTLVFromID(purego.Retain(_id))}
 	})
 }
 
@@ -117,8 +117,8 @@ type AVB17221AECPAddressAccessMessageable interface {
 	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAddressAccessMessage
 	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAddressAccessMessage
 	WithSequenceID(sequenceID uint16) *AVB17221AECPAddressAccessMessage
-	WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPAddressAccessMessage
-	Tlvs() []*raw.AVB17221AECPAddressAccessTLV
+	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAddressAccessMessage
+	Tlvs() []*AVB17221AECPAddressAccessTLV
 	SetTlvs(tlvs *foundation.NSArray[*raw.AVB17221AECPAddressAccessTLV])
 }
 

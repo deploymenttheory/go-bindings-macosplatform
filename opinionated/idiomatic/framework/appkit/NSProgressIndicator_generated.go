@@ -287,8 +287,8 @@ func (x *ProgressIndicator) WithContentFilters(items ...*coreimage.CIFilter) *Pr
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithShadow(shadow *raw.NSShadow) *ProgressIndicator {
-	x.inner.NSView.SetShadow(shadow)
+func (x *ProgressIndicator) WithShadow(shadow *Shadow) *ProgressIndicator {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -369,8 +369,8 @@ func (x *ProgressIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactC
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ProgressIndicator {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *ProgressIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ProgressIndicator {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -411,8 +411,8 @@ func (x *ProgressIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExte
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ProgressIndicator {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *ProgressIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ProgressIndicator {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -423,8 +423,8 @@ func (x *ProgressIndicator) WithNextResponder(nextResponder ResponderProvider) *
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithMenu(menu *raw.NSMenu) *ProgressIndicator {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *ProgressIndicator) WithMenu(menu *Menu) *ProgressIndicator {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -435,8 +435,8 @@ func (x *ProgressIndicator) WithUserActivity(userActivity *foundation.NSUserActi
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithTouchBar(touchBar *raw.NSTouchBar) *ProgressIndicator {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *ProgressIndicator) WithTouchBar(touchBar *TouchBar) *ProgressIndicator {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -628,7 +628,7 @@ type ProgressIndicatorable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *ProgressIndicator
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ProgressIndicator
 	WithContentFilters(items ...*coreimage.CIFilter) *ProgressIndicator
-	WithShadow(shadow *raw.NSShadow) *ProgressIndicator
+	WithShadow(shadow *Shadow) *ProgressIndicator
 	WithClipsToBounds(clipsToBounds bool) *ProgressIndicator
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ProgressIndicator
 	WithToolTip(toolTip string) *ProgressIndicator
@@ -640,18 +640,18 @@ type ProgressIndicatorable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ProgressIndicator
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ProgressIndicator
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ProgressIndicator
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ProgressIndicator
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ProgressIndicator
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ProgressIndicator
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ProgressIndicator
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ProgressIndicator
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ProgressIndicator
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ProgressIndicator
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ProgressIndicator
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ProgressIndicator
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ProgressIndicator
 	WithNextResponder(nextResponder ResponderProvider) *ProgressIndicator
-	WithMenu(menu *raw.NSMenu) *ProgressIndicator
+	WithMenu(menu *Menu) *ProgressIndicator
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ProgressIndicator
-	WithTouchBar(touchBar *raw.NSTouchBar) *ProgressIndicator
+	WithTouchBar(touchBar *TouchBar) *ProgressIndicator
 	IncrementBy(delta float64)
 	StartAnimation(sender objc.ID)
 	StopAnimation(sender objc.ID)

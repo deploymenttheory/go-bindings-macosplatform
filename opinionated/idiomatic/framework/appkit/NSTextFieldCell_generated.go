@@ -47,8 +47,8 @@ func NewTextFieldCellWithCoder(coder *foundation.NSCoder) *TextFieldCell {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TextFieldCell) WithBackgroundColor(backgroundColor *raw.NSColor) *TextFieldCell {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *TextFieldCell) WithBackgroundColor(backgroundColor *Color) *TextFieldCell {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -59,8 +59,8 @@ func (x *TextFieldCell) WithDrawsBackground(drawsBackground bool) *TextFieldCell
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *TextFieldCell) WithTextColor(textColor *raw.NSColor) *TextFieldCell {
-	x.inner.SetTextColor(textColor)
+func (x *TextFieldCell) WithTextColor(textColor *Color) *TextFieldCell {
+	x.inner.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -201,8 +201,8 @@ func (x *TextFieldCell) WithWraps(wraps bool) *TextFieldCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *TextFieldCell) WithFont(font *raw.NSFont) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetFont(font)
+func (x *TextFieldCell) WithFont(font *Font) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -249,8 +249,8 @@ func (x *TextFieldCell) WithIntegerValue(integerValue int) *TextFieldCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *TextFieldCell) WithImage(image *raw.NSImage) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetImage(image)
+func (x *TextFieldCell) WithImage(image *Image) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -267,8 +267,8 @@ func (x *TextFieldCell) WithRepresentedObject(representedObject objc.ID) *TextFi
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TextFieldCell) WithMenu(menu *raw.NSMenu) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu)
+func (x *TextFieldCell) WithMenu(menu *Menu) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -470,9 +470,9 @@ func (x *TextFieldCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCe
 // TextFieldCellable is the interface implemented by [TextFieldCell], for mocking and DI.
 type TextFieldCellable interface {
 	Unwrap() *raw.NSTextFieldCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TextFieldCell
+	WithBackgroundColor(backgroundColor *Color) *TextFieldCell
 	WithDrawsBackground(drawsBackground bool) *TextFieldCell
-	WithTextColor(textColor *raw.NSColor) *TextFieldCell
+	WithTextColor(textColor *Color) *TextFieldCell
 	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TextFieldCell
 	WithPlaceholderString(placeholderString string) *TextFieldCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TextFieldCell
@@ -494,7 +494,7 @@ type TextFieldCellable interface {
 	WithHighlighted(highlighted bool) *TextFieldCell
 	WithAlignment(alignment raw.NSTextAlignment) *TextFieldCell
 	WithWraps(wraps bool) *TextFieldCell
-	WithFont(font *raw.NSFont) *TextFieldCell
+	WithFont(font *Font) *TextFieldCell
 	WithFormatter(formatter *foundation.NSFormatter) *TextFieldCell
 	WithObjectValue(objectValue objc.ID) *TextFieldCell
 	WithStringValue(stringValue string) *TextFieldCell
@@ -502,10 +502,10 @@ type TextFieldCellable interface {
 	WithFloatValue(floatValue float32) *TextFieldCell
 	WithDoubleValue(doubleValue float64) *TextFieldCell
 	WithIntegerValue(integerValue int) *TextFieldCell
-	WithImage(image *raw.NSImage) *TextFieldCell
+	WithImage(image *Image) *TextFieldCell
 	WithControlSize(controlSize raw.NSControlSize) *TextFieldCell
 	WithRepresentedObject(representedObject objc.ID) *TextFieldCell
-	WithMenu(menu *raw.NSMenu) *TextFieldCell
+	WithMenu(menu *Menu) *TextFieldCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextFieldCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextFieldCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextFieldCell

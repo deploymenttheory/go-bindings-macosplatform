@@ -64,8 +64,8 @@ func (x *MutableVideoComposition) WithRenderScale(renderScale float32) *MutableV
 }
 
 // WithAnimationTool sets the animationTool property and returns the receiver for chaining.
-func (x *MutableVideoComposition) WithAnimationTool(animationTool *raw.AVVideoCompositionCoreAnimationTool) *MutableVideoComposition {
-	x.inner.SetAnimationTool(animationTool)
+func (x *MutableVideoComposition) WithAnimationTool(animationTool *VideoCompositionCoreAnimationTool) *MutableVideoComposition {
+	x.inner.SetAnimationTool(animationTool.Unwrap())
 	return x
 }
 
@@ -183,7 +183,7 @@ type MutableVideoCompositionable interface {
 	WithSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) *MutableVideoComposition
 	WithRenderSize(renderSize corefoundation.CGSize) *MutableVideoComposition
 	WithRenderScale(renderScale float32) *MutableVideoComposition
-	WithAnimationTool(animationTool *raw.AVVideoCompositionCoreAnimationTool) *MutableVideoComposition
+	WithAnimationTool(animationTool *VideoCompositionCoreAnimationTool) *MutableVideoComposition
 	WithSourceSampleDataTrackIDs(items ...*foundation.NSNumber) *MutableVideoComposition
 	WithColorPrimaries(colorPrimaries string) *MutableVideoComposition
 	WithColorYCbCrMatrix(colorYCbCrMatrix string) *MutableVideoComposition

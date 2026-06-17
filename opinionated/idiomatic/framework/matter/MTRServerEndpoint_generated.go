@@ -59,35 +59,35 @@ func (x *MTRServerEndpoint) EndpointID() *foundation.NSNumber {
 }
 
 // DeviceTypes returns the collection as a Go slice.
-func (x *MTRServerEndpoint) DeviceTypes() []*raw.MTRDeviceTypeRevision {
+func (x *MTRServerEndpoint) DeviceTypes() []*MTRDeviceTypeRevision {
 	arr := x.inner.DeviceTypes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRDeviceTypeRevision {
-		return raw.MTRDeviceTypeRevisionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRDeviceTypeRevision {
+		return &MTRDeviceTypeRevision{inner: raw.MTRDeviceTypeRevisionFromID(purego.Retain(_id))}
 	})
 }
 
 // AccessGrants returns the collection as a Go slice.
-func (x *MTRServerEndpoint) AccessGrants() []*raw.MTRAccessGrant {
+func (x *MTRServerEndpoint) AccessGrants() []*MTRAccessGrant {
 	arr := x.inner.AccessGrants()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRAccessGrant {
-		return raw.MTRAccessGrantFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRAccessGrant {
+		return &MTRAccessGrant{inner: raw.MTRAccessGrantFromID(purego.Retain(_id))}
 	})
 }
 
 // ServerClusters returns the collection as a Go slice.
-func (x *MTRServerEndpoint) ServerClusters() []*raw.MTRServerCluster {
+func (x *MTRServerEndpoint) ServerClusters() []*MTRServerCluster {
 	arr := x.inner.ServerClusters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRServerCluster {
-		return raw.MTRServerClusterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRServerCluster {
+		return &MTRServerCluster{inner: raw.MTRServerClusterFromID(purego.Retain(_id))}
 	})
 }
 
@@ -98,9 +98,9 @@ type MTRServerEndpointable interface {
 	RemoveAccessGrant(accessGrant *raw.MTRAccessGrant)
 	AddServerCluster(serverCluster *raw.MTRServerCluster) bool
 	EndpointID() *foundation.NSNumber
-	DeviceTypes() []*raw.MTRDeviceTypeRevision
-	AccessGrants() []*raw.MTRAccessGrant
-	ServerClusters() []*raw.MTRServerCluster
+	DeviceTypes() []*MTRDeviceTypeRevision
+	AccessGrants() []*MTRAccessGrant
+	ServerClusters() []*MTRServerCluster
 }
 
 var _ MTRServerEndpointable = (*MTRServerEndpoint)(nil)

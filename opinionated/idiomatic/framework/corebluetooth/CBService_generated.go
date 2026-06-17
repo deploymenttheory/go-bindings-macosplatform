@@ -51,24 +51,24 @@ func (x *Service) IsPrimary() bool {
 }
 
 // IncludedServices returns the collection as a Go slice.
-func (x *Service) IncludedServices() []*raw.CBService {
+func (x *Service) IncludedServices() []*Service {
 	arr := x.inner.IncludedServices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBService {
-		return raw.CBServiceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Service {
+		return &Service{inner: raw.CBServiceFromID(purego.Retain(_id))}
 	})
 }
 
 // Characteristics returns the collection as a Go slice.
-func (x *Service) Characteristics() []*raw.CBCharacteristic {
+func (x *Service) Characteristics() []*Characteristic {
 	arr := x.inner.Characteristics()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBCharacteristic {
-		return raw.CBCharacteristicFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Characteristic {
+		return &Characteristic{inner: raw.CBCharacteristicFromID(purego.Retain(_id))}
 	})
 }
 
@@ -81,8 +81,8 @@ type Serviceable interface {
 	Unwrap() *raw.CBService
 	Peripheral() *Peripheral
 	IsPrimary() bool
-	IncludedServices() []*raw.CBService
-	Characteristics() []*raw.CBCharacteristic
+	IncludedServices() []*Service
+	Characteristics() []*Characteristic
 }
 
 var _ Serviceable = (*Service)(nil)

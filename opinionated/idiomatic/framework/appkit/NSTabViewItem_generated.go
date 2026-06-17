@@ -52,8 +52,8 @@ func (x *TabViewItem) WithIdentifier(identifier objc.ID) *TabViewItem {
 }
 
 // WithColor sets the color property and returns the receiver for chaining.
-func (x *TabViewItem) WithColor(color *raw.NSColor) *TabViewItem {
-	x.inner.SetColor(color)
+func (x *TabViewItem) WithColor(color *Color) *TabViewItem {
+	x.inner.SetColor(color.Unwrap())
 	return x
 }
 
@@ -64,8 +64,8 @@ func (x *TabViewItem) WithLabel(label string) *TabViewItem {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *TabViewItem) WithImage(image *raw.NSImage) *TabViewItem {
-	x.inner.SetImage(image)
+func (x *TabViewItem) WithImage(image *Image) *TabViewItem {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -220,9 +220,9 @@ func (x *TabViewItem) SetToolTip(toolTip string) {
 type TabViewItemable interface {
 	Unwrap() *raw.NSTabViewItem
 	WithIdentifier(identifier objc.ID) *TabViewItem
-	WithColor(color *raw.NSColor) *TabViewItem
+	WithColor(color *Color) *TabViewItem
 	WithLabel(label string) *TabViewItem
-	WithImage(image *raw.NSImage) *TabViewItem
+	WithImage(image *Image) *TabViewItem
 	WithView(view ViewProvider) *TabViewItem
 	WithViewController(viewController ViewControllerProvider) *TabViewItem
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *TabViewItem

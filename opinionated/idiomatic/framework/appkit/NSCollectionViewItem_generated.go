@@ -52,8 +52,8 @@ func (x *CollectionViewItem) WithHighlightState(highlightState raw.NSCollectionV
 }
 
 // WithImageView sets the imageView property and returns the receiver for chaining.
-func (x *CollectionViewItem) WithImageView(imageView *raw.NSImageView) *CollectionViewItem {
-	x.inner.SetImageView(imageView)
+func (x *CollectionViewItem) WithImageView(imageView *ImageView) *CollectionViewItem {
+	x.inner.SetImageView(imageView.Unwrap())
 	return x
 }
 
@@ -122,8 +122,8 @@ func (x *CollectionViewItem) WithNextResponder(nextResponder ResponderProvider) 
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *CollectionViewItem) WithMenu(menu *raw.NSMenu) *CollectionViewItem {
-	x.inner.NSViewController.NSResponder.SetMenu(menu)
+func (x *CollectionViewItem) WithMenu(menu *Menu) *CollectionViewItem {
+	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -134,8 +134,8 @@ func (x *CollectionViewItem) WithUserActivity(userActivity *foundation.NSUserAct
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *CollectionViewItem) WithTouchBar(touchBar *raw.NSTouchBar) *CollectionViewItem {
-	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
+func (x *CollectionViewItem) WithTouchBar(touchBar *TouchBar) *CollectionViewItem {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -197,13 +197,13 @@ func (x *CollectionViewItem) SetTextField(textField *raw.NSTextField) {
 }
 
 // DraggingImageComponents returns the collection as a Go slice.
-func (x *CollectionViewItem) DraggingImageComponents() []*raw.NSDraggingImageComponent {
+func (x *CollectionViewItem) DraggingImageComponents() []*DraggingImageComponent {
 	arr := x.inner.DraggingImageComponents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSDraggingImageComponent {
-		return raw.NSDraggingImageComponentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DraggingImageComponent {
+		return &DraggingImageComponent{inner: raw.NSDraggingImageComponentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -216,7 +216,7 @@ type CollectionViewItemable interface {
 	Unwrap() *raw.NSCollectionViewItem
 	WithSelected(selected bool) *CollectionViewItem
 	WithHighlightState(highlightState raw.NSCollectionViewItemHighlightState) *CollectionViewItem
-	WithImageView(imageView *raw.NSImageView) *CollectionViewItem
+	WithImageView(imageView *ImageView) *CollectionViewItem
 	WithTextField(textField TextFieldProvider) *CollectionViewItem
 	WithRepresentedObject(representedObject objc.ID) *CollectionViewItem
 	WithTitle(title string) *CollectionViewItem
@@ -226,9 +226,9 @@ type CollectionViewItemable interface {
 	WithSourceItemView(sourceItemView ViewProvider) *CollectionViewItem
 	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *CollectionViewItem
 	WithNextResponder(nextResponder ResponderProvider) *CollectionViewItem
-	WithMenu(menu *raw.NSMenu) *CollectionViewItem
+	WithMenu(menu *Menu) *CollectionViewItem
 	WithUserActivity(userActivity *foundation.NSUserActivity) *CollectionViewItem
-	WithTouchBar(touchBar *raw.NSTouchBar) *CollectionViewItem
+	WithTouchBar(touchBar *TouchBar) *CollectionViewItem
 	CollectionView() *CollectionView
 	IsSelected() bool
 	SetSelected(selected bool)
@@ -238,7 +238,7 @@ type CollectionViewItemable interface {
 	SetImageView(imageView *raw.NSImageView)
 	TextField() *TextField
 	SetTextField(textField *raw.NSTextField)
-	DraggingImageComponents() []*raw.NSDraggingImageComponent
+	DraggingImageComponents() []*DraggingImageComponent
 }
 
 var _ CollectionViewItemable = (*CollectionViewItem)(nil)

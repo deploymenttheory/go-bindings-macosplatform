@@ -27,13 +27,13 @@ func PictureInPictureButtonStopImage() *appkit.NSImage {
 }
 
 // SystemDefaultSpeeds returns the collection as a Go slice.
-func SystemDefaultSpeeds() []*raw.AVPlaybackSpeed {
+func SystemDefaultSpeeds() []*PlaybackSpeed {
 	arr := raw.AVPlaybackSpeedSystemDefaultSpeeds()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlaybackSpeed {
-		return raw.AVPlaybackSpeedFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlaybackSpeed {
+		return &PlaybackSpeed{inner: raw.AVPlaybackSpeedFromID(purego.Retain(_id))}
 	})
 }
 

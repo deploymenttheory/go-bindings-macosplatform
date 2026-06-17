@@ -77,8 +77,8 @@ func (x *TextLayoutManager) WithResolvesNaturalAlignmentWithBaseWritingDirection
 }
 
 // WithTextContainer sets the textContainer property and returns the receiver for chaining.
-func (x *TextLayoutManager) WithTextContainer(textContainer *raw.NSTextContainer) *TextLayoutManager {
-	x.inner.SetTextContainer(textContainer)
+func (x *TextLayoutManager) WithTextContainer(textContainer *TextContainer) *TextLayoutManager {
+	x.inner.SetTextContainer(textContainer.Unwrap())
 	return x
 }
 
@@ -105,8 +105,8 @@ func (x *TextLayoutManager) WithTextSelections(items ...*raw.NSTextSelection) *T
 }
 
 // WithTextSelectionNavigation sets the textSelectionNavigation property and returns the receiver for chaining.
-func (x *TextLayoutManager) WithTextSelectionNavigation(textSelectionNavigation *raw.NSTextSelectionNavigation) *TextLayoutManager {
-	x.inner.SetTextSelectionNavigation(textSelectionNavigation)
+func (x *TextLayoutManager) WithTextSelectionNavigation(textSelectionNavigation *TextSelectionNavigation) *TextLayoutManager {
+	x.inner.SetTextSelectionNavigation(textSelectionNavigation.Unwrap())
 	return x
 }
 
@@ -302,13 +302,13 @@ func (x *TextLayoutManager) SetLayoutQueue(layoutQueue *foundation.NSOperationQu
 }
 
 // TextSelections returns the collection as a Go slice.
-func (x *TextLayoutManager) TextSelections() []*raw.NSTextSelection {
+func (x *TextLayoutManager) TextSelections() []*TextSelection {
 	arr := x.inner.TextSelections()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextSelection {
-		return raw.NSTextSelectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextSelection {
+		return &TextSelection{inner: raw.NSTextSelectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -349,10 +349,10 @@ type TextLayoutManagerable interface {
 	WithLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) *TextLayoutManager
 	WithUsesHyphenation(usesHyphenation bool) *TextLayoutManager
 	WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextLayoutManager
-	WithTextContainer(textContainer *raw.NSTextContainer) *TextLayoutManager
+	WithTextContainer(textContainer *TextContainer) *TextLayoutManager
 	WithLayoutQueue(layoutQueue *foundation.NSOperationQueue) *TextLayoutManager
 	WithTextSelections(items ...*raw.NSTextSelection) *TextLayoutManager
-	WithTextSelectionNavigation(textSelectionNavigation *raw.NSTextSelectionNavigation) *TextLayoutManager
+	WithTextSelectionNavigation(textSelectionNavigation *TextSelectionNavigation) *TextLayoutManager
 	WithRenderingAttributesValidator(renderingAttributesValidator func(*raw.NSTextLayoutManager, *raw.NSTextLayoutFragment)) *TextLayoutManager
 	ReplaceTextContentManager(textContentManager *raw.NSTextContentManager)
 	EnsureLayoutForRange(range_ *raw.NSTextRange)
@@ -387,7 +387,7 @@ type TextLayoutManagerable interface {
 	TextViewportLayoutController() *TextViewportLayoutController
 	LayoutQueue() *foundation.NSOperationQueue
 	SetLayoutQueue(layoutQueue *foundation.NSOperationQueue)
-	TextSelections() []*raw.NSTextSelection
+	TextSelections() []*TextSelection
 	SetTextSelections(textSelections *foundation.NSArray[*raw.NSTextSelection])
 	TextSelectionNavigation() *TextSelectionNavigation
 	SetTextSelectionNavigation(textSelectionNavigation *raw.NSTextSelectionNavigation)

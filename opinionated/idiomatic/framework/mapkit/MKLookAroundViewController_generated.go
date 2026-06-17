@@ -58,8 +58,8 @@ func (x *LookAroundViewController) WithDelegate(delegate raw.MKLookAroundViewCon
 }
 
 // WithScene sets the scene property and returns the receiver for chaining.
-func (x *LookAroundViewController) WithScene(scene *raw.MKLookAroundScene) *LookAroundViewController {
-	x.inner.SetScene(scene)
+func (x *LookAroundViewController) WithScene(scene *LookAroundScene) *LookAroundViewController {
+	x.inner.SetScene(scene.Unwrap())
 	return x
 }
 
@@ -76,8 +76,8 @@ func (x *LookAroundViewController) WithShowsRoadLabels(showsRoadLabels bool) *Lo
 }
 
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
-func (x *LookAroundViewController) WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LookAroundViewController {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *LookAroundViewController) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundViewController {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
@@ -159,10 +159,10 @@ func (x *LookAroundViewController) SetBadgePosition(badgePosition raw.MKLookArou
 type LookAroundViewControllerable interface {
 	Unwrap() *raw.MKLookAroundViewController
 	WithDelegate(delegate raw.MKLookAroundViewControllerDelegate) *LookAroundViewController
-	WithScene(scene *raw.MKLookAroundScene) *LookAroundViewController
+	WithScene(scene *LookAroundScene) *LookAroundViewController
 	WithNavigationEnabled(navigationEnabled bool) *LookAroundViewController
 	WithShowsRoadLabels(showsRoadLabels bool) *LookAroundViewController
-	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LookAroundViewController
+	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundViewController
 	WithBadgePosition(badgePosition raw.MKLookAroundBadgePosition) *LookAroundViewController
 	Delegate() raw.MKLookAroundViewControllerDelegate
 	SetDelegate(delegate raw.MKLookAroundViewControllerDelegate)

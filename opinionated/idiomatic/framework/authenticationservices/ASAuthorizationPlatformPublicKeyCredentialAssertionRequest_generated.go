@@ -55,25 +55,25 @@ func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithAllowedCr
 }
 
 // WithLargeBlob sets the largeBlob property and returns the receiver for chaining.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
-	x.inner.SetLargeBlob(largeBlob)
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
+	x.inner.SetLargeBlob(largeBlob.Unwrap())
 	return x
 }
 
 // WithPrf sets the prf property and returns the receiver for chaining.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
-	x.inner.SetPrf(prf)
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
+	x.inner.SetPrf(prf.Unwrap())
 	return x
 }
 
 // AllowedCredentials returns the collection as a Go slice.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) AllowedCredentials() []*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor {
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) AllowedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor {
 	arr := x.inner.AllowedCredentials()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor {
-		return raw.ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AuthorizationPlatformPublicKeyCredentialDescriptor {
+		return &AuthorizationPlatformPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -116,9 +116,9 @@ func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) asAuthorizati
 type AuthorizationPlatformPublicKeyCredentialAssertionRequestable interface {
 	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest
 	WithAllowedCredentials(items ...*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
-	WithLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
-	WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
-	AllowedCredentials() []*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor
+	WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
+	WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
+	AllowedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor
 	SetAllowedCredentials(allowedCredentials *foundation.NSArray[*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor])
 	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
 	SetLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput)

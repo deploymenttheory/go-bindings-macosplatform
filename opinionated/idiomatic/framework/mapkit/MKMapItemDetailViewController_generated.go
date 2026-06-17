@@ -44,8 +44,8 @@ func NewMapItemDetailViewControllerWithMapItem(mapItem *raw.MKMapItem) *MapItemD
 }
 
 // WithMapItem sets the mapItem property and returns the receiver for chaining.
-func (x *MapItemDetailViewController) WithMapItem(mapItem *raw.MKMapItem) *MapItemDetailViewController {
-	x.inner.SetMapItem(mapItem)
+func (x *MapItemDetailViewController) WithMapItem(mapItem *MapItem) *MapItemDetailViewController {
+	x.inner.SetMapItem(mapItem.Unwrap())
 	return x
 }
 
@@ -82,7 +82,7 @@ func (x *MapItemDetailViewController) SetDelegate(delegate raw.MKMapItemDetailVi
 // MapItemDetailViewControllerable is the interface implemented by [MapItemDetailViewController], for mocking and DI.
 type MapItemDetailViewControllerable interface {
 	Unwrap() *raw.MKMapItemDetailViewController
-	WithMapItem(mapItem *raw.MKMapItem) *MapItemDetailViewController
+	WithMapItem(mapItem *MapItem) *MapItemDetailViewController
 	WithDelegate(delegate raw.MKMapItemDetailViewControllerDelegate) *MapItemDetailViewController
 	MapItem() *MapItem
 	SetMapItem(mapItem *raw.MKMapItem)

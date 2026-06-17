@@ -50,13 +50,13 @@ func (x *AudioUnitEQ) WithBypass(bypass bool) *AudioUnitEQ {
 }
 
 // Bands returns the collection as a Go slice.
-func (x *AudioUnitEQ) Bands() []*raw.AVAudioUnitEQFilterParameters {
+func (x *AudioUnitEQ) Bands() []*AudioUnitEQFilterParameters {
 	arr := x.inner.Bands()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAudioUnitEQFilterParameters {
-		return raw.AVAudioUnitEQFilterParametersFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudioUnitEQFilterParameters {
+		return &AudioUnitEQFilterParameters{inner: raw.AVAudioUnitEQFilterParametersFromID(purego.Retain(_id))}
 	})
 }
 
@@ -81,7 +81,7 @@ type AudioUnitEQable interface {
 	Unwrap() *raw.AVAudioUnitEQ
 	WithGlobalGain(globalGain float32) *AudioUnitEQ
 	WithBypass(bypass bool) *AudioUnitEQ
-	Bands() []*raw.AVAudioUnitEQFilterParameters
+	Bands() []*AudioUnitEQFilterParameters
 	GlobalGain() float32
 	SetGlobalGain(globalGain float32)
 }

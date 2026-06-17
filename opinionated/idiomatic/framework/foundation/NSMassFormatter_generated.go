@@ -36,8 +36,8 @@ func NewMassFormatter() *MassFormatter {
 }
 
 // WithNumberFormatter sets the numberFormatter property and returns the receiver for chaining.
-func (x *MassFormatter) WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *MassFormatter {
-	x.inner.SetNumberFormatter(numberFormatter)
+func (x *MassFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MassFormatter {
+	x.inner.SetNumberFormatter(numberFormatter.Unwrap())
 	return x
 }
 
@@ -136,7 +136,7 @@ func (x *MassFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.N
 // MassFormatterable is the interface implemented by [MassFormatter], for mocking and DI.
 type MassFormatterable interface {
 	Unwrap() *raw.NSMassFormatter
-	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *MassFormatter
+	WithNumberFormatter(numberFormatter *NumberFormatter) *MassFormatter
 	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *MassFormatter
 	WithForPersonMassUse(forPersonMassUse bool) *MassFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MassFormatter

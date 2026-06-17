@@ -107,8 +107,8 @@ func (x *WebView) WithMediaStyle(mediaStyle string) *WebView {
 }
 
 // WithPreferences sets the preferences property and returns the receiver for chaining.
-func (x *WebView) WithPreferences(preferences *raw.WebPreferences) *WebView {
-	x.inner.SetPreferences(preferences)
+func (x *WebView) WithPreferences(preferences *WebPreferences) *WebView {
+	x.inner.SetPreferences(preferences.Unwrap())
 	return x
 }
 
@@ -155,8 +155,8 @@ func (x *WebView) WithEditable(editable bool) *WebView {
 }
 
 // WithTypingStyle sets the typingStyle property and returns the receiver for chaining.
-func (x *WebView) WithTypingStyle(typingStyle *raw.DOMCSSStyleDeclaration) *WebView {
-	x.inner.SetTypingStyle(typingStyle)
+func (x *WebView) WithTypingStyle(typingStyle *DOMCSSStyleDeclaration) *WebView {
+	x.inner.SetTypingStyle(typingStyle.Unwrap())
 	return x
 }
 
@@ -916,7 +916,7 @@ type WebViewable interface {
 	WithCustomUserAgent(customUserAgent string) *WebView
 	WithCustomTextEncodingName(customTextEncodingName string) *WebView
 	WithMediaStyle(mediaStyle string) *WebView
-	WithPreferences(preferences *raw.WebPreferences) *WebView
+	WithPreferences(preferences *WebPreferences) *WebView
 	WithPreferencesIdentifier(preferencesIdentifier string) *WebView
 	WithHostWindow(hostWindow *appkit.NSWindow) *WebView
 	WithGroupName(groupName string) *WebView
@@ -924,7 +924,7 @@ type WebViewable interface {
 	WithShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen bool) *WebView
 	WithMainFrameURL(mainFrameURL string) *WebView
 	WithEditable(editable bool) *WebView
-	WithTypingStyle(typingStyle *raw.DOMCSSStyleDeclaration) *WebView
+	WithTypingStyle(typingStyle *DOMCSSStyleDeclaration) *WebView
 	WithSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) *WebView
 	WithContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) *WebView
 	WithEditingDelegate(editingDelegate raw.WebEditingDelegate) *WebView

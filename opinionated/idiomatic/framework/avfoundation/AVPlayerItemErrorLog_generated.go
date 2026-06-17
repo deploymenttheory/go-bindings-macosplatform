@@ -48,13 +48,13 @@ func (x *PlayerItemErrorLog) ExtendedLogDataStringEncoding() uint {
 }
 
 // Events returns the collection as a Go slice.
-func (x *PlayerItemErrorLog) Events() []*raw.AVPlayerItemErrorLogEvent {
+func (x *PlayerItemErrorLog) Events() []*PlayerItemErrorLogEvent {
 	arr := x.inner.Events()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemErrorLogEvent {
-		return raw.AVPlayerItemErrorLogEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemErrorLogEvent {
+		return &PlayerItemErrorLogEvent{inner: raw.AVPlayerItemErrorLogEventFromID(purego.Retain(_id))}
 	})
 }
 
@@ -63,7 +63,7 @@ type PlayerItemErrorLogable interface {
 	Unwrap() *raw.AVPlayerItemErrorLog
 	ExtendedLogData() *foundation.NSData
 	ExtendedLogDataStringEncoding() uint
-	Events() []*raw.AVPlayerItemErrorLogEvent
+	Events() []*PlayerItemErrorLogEvent
 }
 
 var _ PlayerItemErrorLogable = (*PlayerItemErrorLog)(nil)

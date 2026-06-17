@@ -110,13 +110,13 @@ func (x *MediaSelectionOption) Locale() *foundation.NSLocale {
 }
 
 // CommonMetadata returns the collection as a Go slice.
-func (x *MediaSelectionOption) CommonMetadata() []*raw.AVMetadataItem {
+func (x *MediaSelectionOption) CommonMetadata() []*MetadataItem {
 	arr := x.inner.CommonMetadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -153,7 +153,7 @@ type MediaSelectionOptionable interface {
 	IsPlayable() bool
 	ExtendedLanguageTag() string
 	Locale() *foundation.NSLocale
-	CommonMetadata() []*raw.AVMetadataItem
+	CommonMetadata() []*MetadataItem
 	AvailableMetadataFormats() []string
 	DisplayName() string
 }

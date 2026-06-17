@@ -52,24 +52,24 @@ func (x *SyncEngineRecordZoneChangeBatch) WithAtomicByZone(atomicByZone bool) *S
 }
 
 // RecordsToSave returns the collection as a Go slice.
-func (x *SyncEngineRecordZoneChangeBatch) RecordsToSave() []*raw.CKRecord {
+func (x *SyncEngineRecordZoneChangeBatch) RecordsToSave() []*Record {
 	arr := x.inner.RecordsToSave()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecord {
-		return raw.CKRecordFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Record {
+		return &Record{inner: raw.CKRecordFromID(purego.Retain(_id))}
 	})
 }
 
 // RecordIDsToDelete returns the collection as a Go slice.
-func (x *SyncEngineRecordZoneChangeBatch) RecordIDsToDelete() []*raw.CKRecordID {
+func (x *SyncEngineRecordZoneChangeBatch) RecordIDsToDelete() []*RecordID {
 	arr := x.inner.RecordIDsToDelete()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordID {
-		return raw.CKRecordIDFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordID {
+		return &RecordID{inner: raw.CKRecordIDFromID(purego.Retain(_id))}
 	})
 }
 
@@ -87,8 +87,8 @@ func (x *SyncEngineRecordZoneChangeBatch) SetAtomicByZone(atomicByZone bool) {
 type SyncEngineRecordZoneChangeBatchable interface {
 	Unwrap() *raw.CKSyncEngineRecordZoneChangeBatch
 	WithAtomicByZone(atomicByZone bool) *SyncEngineRecordZoneChangeBatch
-	RecordsToSave() []*raw.CKRecord
-	RecordIDsToDelete() []*raw.CKRecordID
+	RecordsToSave() []*Record
+	RecordIDsToDelete() []*RecordID
 	AtomicByZone() bool
 	SetAtomicByZone(atomicByZone bool)
 }

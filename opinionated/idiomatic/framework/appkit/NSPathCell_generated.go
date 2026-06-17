@@ -96,8 +96,8 @@ func (x *PathCell) WithDoubleAction(doubleAction objc.SEL) *PathCell {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *PathCell) WithBackgroundColor(backgroundColor *raw.NSColor) *PathCell {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *PathCell) WithBackgroundColor(backgroundColor *Color) *PathCell {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -216,8 +216,8 @@ func (x *PathCell) WithWraps(wraps bool) *PathCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *PathCell) WithFont(font *raw.NSFont) *PathCell {
-	x.inner.NSActionCell.NSCell.SetFont(font)
+func (x *PathCell) WithFont(font *Font) *PathCell {
+	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -264,8 +264,8 @@ func (x *PathCell) WithIntegerValue(integerValue int) *PathCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *PathCell) WithImage(image *raw.NSImage) *PathCell {
-	x.inner.NSActionCell.NSCell.SetImage(image)
+func (x *PathCell) WithImage(image *Image) *PathCell {
+	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -282,8 +282,8 @@ func (x *PathCell) WithRepresentedObject(representedObject objc.ID) *PathCell {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *PathCell) WithMenu(menu *raw.NSMenu) *PathCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu)
+func (x *PathCell) WithMenu(menu *Menu) *PathCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -454,13 +454,13 @@ func (x *PathCell) SetDelegate(delegate raw.NSPathCellDelegate) {
 }
 
 // PathComponentCells returns the collection as a Go slice.
-func (x *PathCell) PathComponentCells() []*raw.NSPathComponentCell {
+func (x *PathCell) PathComponentCells() []*PathComponentCell {
 	arr := x.inner.PathComponentCells()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPathComponentCell {
-		return raw.NSPathComponentCellFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PathComponentCell {
+		return &PathComponentCell{inner: raw.NSPathComponentCellFromID(purego.Retain(_id))}
 	})
 }
 
@@ -539,7 +539,7 @@ type PathCellable interface {
 	WithDelegate(delegate raw.NSPathCellDelegate) *PathCell
 	WithPathComponentCells(items ...*raw.NSPathComponentCell) *PathCell
 	WithDoubleAction(doubleAction objc.SEL) *PathCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *PathCell
+	WithBackgroundColor(backgroundColor *Color) *PathCell
 	WithPlaceholderString(placeholderString string) *PathCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *PathCell
 	WithControlView(controlView ViewProvider) *PathCell
@@ -559,7 +559,7 @@ type PathCellable interface {
 	WithHighlighted(highlighted bool) *PathCell
 	WithAlignment(alignment raw.NSTextAlignment) *PathCell
 	WithWraps(wraps bool) *PathCell
-	WithFont(font *raw.NSFont) *PathCell
+	WithFont(font *Font) *PathCell
 	WithFormatter(formatter *foundation.NSFormatter) *PathCell
 	WithObjectValue(objectValue objc.ID) *PathCell
 	WithStringValue(stringValue string) *PathCell
@@ -567,10 +567,10 @@ type PathCellable interface {
 	WithFloatValue(floatValue float32) *PathCell
 	WithDoubleValue(doubleValue float64) *PathCell
 	WithIntegerValue(integerValue int) *PathCell
-	WithImage(image *raw.NSImage) *PathCell
+	WithImage(image *Image) *PathCell
 	WithControlSize(controlSize raw.NSControlSize) *PathCell
 	WithRepresentedObject(representedObject objc.ID) *PathCell
-	WithMenu(menu *raw.NSMenu) *PathCell
+	WithMenu(menu *Menu) *PathCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PathCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathCell
@@ -599,7 +599,7 @@ type PathCellable interface {
 	SetAllowedTypes(allowedTypes *foundation.NSArray[*foundation.NSString])
 	Delegate() raw.NSPathCellDelegate
 	SetDelegate(delegate raw.NSPathCellDelegate)
-	PathComponentCells() []*raw.NSPathComponentCell
+	PathComponentCells() []*PathComponentCell
 	SetPathComponentCells(pathComponentCells *foundation.NSArray[*raw.NSPathComponentCell])
 	ClickedPathComponentCell() *PathComponentCell
 	DoubleAction() objc.SEL

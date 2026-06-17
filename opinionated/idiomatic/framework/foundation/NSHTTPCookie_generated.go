@@ -127,13 +127,13 @@ func (x *HTTPCookie) CommentURL() *URL {
 }
 
 // PortList returns the collection as a Go slice.
-func (x *HTTPCookie) PortList() []*raw.NSNumber {
+func (x *HTTPCookie) PortList() []*Number {
 	arr := x.inner.PortList()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSNumber {
-		return raw.NSNumberFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Number {
+		return &Number{inner: raw.NSNumberFromID(purego.Retain(_id))}
 	})
 }
 
@@ -163,7 +163,7 @@ type HTTPCookieable interface {
 	IsHTTPOnly() bool
 	Comment() *String
 	CommentURL() *URL
-	PortList() []*raw.NSNumber
+	PortList() []*Number
 	SameSitePolicy() *String
 }
 

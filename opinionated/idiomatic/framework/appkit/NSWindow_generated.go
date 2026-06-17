@@ -187,8 +187,8 @@ func (x *Window) WithReleasedWhenClosed(releasedWhenClosed bool) *Window {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *Window) WithBackgroundColor(backgroundColor *raw.NSColor) *Window {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *Window) WithBackgroundColor(backgroundColor *Color) *Window {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -217,8 +217,8 @@ func (x *Window) WithCanHide(canHide bool) *Window {
 }
 
 // WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
-func (x *Window) WithMiniwindowImage(miniwindowImage *raw.NSImage) *Window {
-	x.inner.SetMiniwindowImage(miniwindowImage)
+func (x *Window) WithMiniwindowImage(miniwindowImage *Image) *Window {
+	x.inner.SetMiniwindowImage(miniwindowImage.Unwrap())
 	return x
 }
 
@@ -361,8 +361,8 @@ func (x *Window) WithMaxFullScreenContentSize(maxFullScreenContentSize corefound
 }
 
 // WithWindowController sets the windowController property and returns the receiver for chaining.
-func (x *Window) WithWindowController(windowController *raw.NSWindowController) *Window {
-	x.inner.SetWindowController(windowController)
+func (x *Window) WithWindowController(windowController *WindowController) *Window {
+	x.inner.SetWindowController(windowController.Unwrap())
 	return x
 }
 
@@ -379,8 +379,8 @@ func (x *Window) WithAppearanceSource(appearanceSource *foundation.NSObject) *Wi
 }
 
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
-func (x *Window) WithColorSpace(colorSpace *raw.NSColorSpace) *Window {
-	x.inner.SetColorSpace(colorSpace)
+func (x *Window) WithColorSpace(colorSpace *ColorSpace) *Window {
+	x.inner.SetColorSpace(colorSpace.Unwrap())
 	return x
 }
 
@@ -415,8 +415,8 @@ func (x *Window) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop boo
 }
 
 // WithToolbar sets the toolbar property and returns the receiver for chaining.
-func (x *Window) WithToolbar(toolbar *raw.NSToolbar) *Window {
-	x.inner.SetToolbar(toolbar)
+func (x *Window) WithToolbar(toolbar *Toolbar) *Window {
+	x.inner.SetToolbar(toolbar.Unwrap())
 	return x
 }
 
@@ -493,8 +493,8 @@ func (x *Window) WithNextResponder(nextResponder ResponderProvider) *Window {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Window) WithMenu(menu *raw.NSMenu) *Window {
-	x.inner.NSResponder.SetMenu(menu)
+func (x *Window) WithMenu(menu *Menu) *Window {
+	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -505,8 +505,8 @@ func (x *Window) WithUserActivity(userActivity *foundation.NSUserActivity) *Wind
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Window) WithTouchBar(touchBar *raw.NSTouchBar) *Window {
-	x.inner.NSResponder.SetTouchBar(touchBar)
+func (x *Window) WithTouchBar(touchBar *TouchBar) *Window {
+	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -1086,13 +1086,13 @@ func (x *Window) ContentLayoutGuide() objc.ID {
 }
 
 // TitlebarAccessoryViewControllers returns the collection as a Go slice.
-func (x *Window) TitlebarAccessoryViewControllers() []*raw.NSTitlebarAccessoryViewController {
+func (x *Window) TitlebarAccessoryViewControllers() []*TitlebarAccessoryViewController {
 	arr := x.inner.TitlebarAccessoryViewControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTitlebarAccessoryViewController {
-		return raw.NSTitlebarAccessoryViewControllerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TitlebarAccessoryViewController {
+		return &TitlebarAccessoryViewController{inner: raw.NSTitlebarAccessoryViewControllerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1685,13 +1685,13 @@ func (x *Window) SetWindowController(windowController *raw.NSWindowController) {
 }
 
 // Sheets returns the collection as a Go slice.
-func (x *Window) Sheets() []*raw.NSWindow {
+func (x *Window) Sheets() []*Window {
 	arr := x.inner.Sheets()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSWindow {
-		return raw.NSWindowFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
+		return &Window{inner: raw.NSWindowFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1719,13 +1719,13 @@ func (x *Window) SheetParent() *Window {
 }
 
 // ChildWindows returns the collection as a Go slice.
-func (x *Window) ChildWindows() []*raw.NSWindow {
+func (x *Window) ChildWindows() []*Window {
 	arr := x.inner.ChildWindows()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSWindow {
-		return raw.NSWindowFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
+		return &Window{inner: raw.NSWindowFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1879,13 +1879,13 @@ func (x *Window) SetTabbingIdentifier(tabbingIdentifier *foundation.NSString) {
 }
 
 // TabbedWindows returns the collection as a Go slice.
-func (x *Window) TabbedWindows() []*raw.NSWindow {
+func (x *Window) TabbedWindows() []*Window {
 	arr := x.inner.TabbedWindows()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSWindow {
-		return raw.NSWindowFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
+		return &Window{inner: raw.NSWindowFromID(purego.Retain(_id))}
 	})
 }
 
@@ -2208,13 +2208,13 @@ func (x *Window) VisualizeConstraints(constraints *foundation.NSArray[*raw.NSLay
 }
 
 // Drawers returns the collection as a Go slice.
-func (x *Window) Drawers() []*raw.NSDrawer {
+func (x *Window) Drawers() []*Drawer {
 	arr := x.inner.Drawers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSDrawer {
-		return raw.NSDrawerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Drawer {
+		return &Drawer{inner: raw.NSDrawerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -2349,12 +2349,12 @@ type Windowable interface {
 	WithViewsNeedDisplay(viewsNeedDisplay bool) *Window
 	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *Window
 	WithReleasedWhenClosed(releasedWhenClosed bool) *Window
-	WithBackgroundColor(backgroundColor *raw.NSColor) *Window
+	WithBackgroundColor(backgroundColor *Color) *Window
 	WithMovable(movable bool) *Window
 	WithMovableByWindowBackground(movableByWindowBackground bool) *Window
 	WithHidesOnDeactivate(hidesOnDeactivate bool) *Window
 	WithCanHide(canHide bool) *Window
-	WithMiniwindowImage(miniwindowImage *raw.NSImage) *Window
+	WithMiniwindowImage(miniwindowImage *Image) *Window
 	WithMiniwindowTitle(miniwindowTitle string) *Window
 	WithDocumentEdited(documentEdited bool) *Window
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *Window
@@ -2378,16 +2378,16 @@ type Windowable interface {
 	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *Window
 	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *Window
 	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *Window
-	WithWindowController(windowController *raw.NSWindowController) *Window
+	WithWindowController(windowController *WindowController) *Window
 	WithParentWindow(parentWindow WindowProvider) *Window
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *Window
-	WithColorSpace(colorSpace *raw.NSColorSpace) *Window
+	WithColorSpace(colorSpace *ColorSpace) *Window
 	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *Window
 	WithContentViewController(contentViewController ViewControllerProvider) *Window
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *Window
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *Window
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *Window
-	WithToolbar(toolbar *raw.NSToolbar) *Window
+	WithToolbar(toolbar *Toolbar) *Window
 	WithShowsToolbarButton(showsToolbarButton bool) *Window
 	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *Window
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *Window
@@ -2400,9 +2400,9 @@ type Windowable interface {
 	WithOrderedIndex(orderedIndex int) *Window
 	WithRestorable(restorable bool) *Window
 	WithNextResponder(nextResponder ResponderProvider) *Window
-	WithMenu(menu *raw.NSMenu) *Window
+	WithMenu(menu *Menu) *Window
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Window
-	WithTouchBar(touchBar *raw.NSTouchBar) *Window
+	WithTouchBar(touchBar *TouchBar) *Window
 	FrameRectForContentRect(contentRect corefoundation.CGRect) corefoundation.CGRect
 	ContentRectForFrameRect(frameRect corefoundation.CGRect) corefoundation.CGRect
 	AddTitlebarAccessoryViewController(childViewController *raw.NSTitlebarAccessoryViewController)
@@ -2507,7 +2507,7 @@ type Windowable interface {
 	SetToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle)
 	ContentLayoutRect() corefoundation.CGRect
 	ContentLayoutGuide() objc.ID
-	TitlebarAccessoryViewControllers() []*raw.NSTitlebarAccessoryViewController
+	TitlebarAccessoryViewControllers() []*TitlebarAccessoryViewController
 	SetTitlebarAccessoryViewControllers(titlebarAccessoryViewControllers *foundation.NSArray[*raw.NSTitlebarAccessoryViewController])
 	RepresentedURL() *foundation.NSURL
 	SetRepresentedURL(representedURL string)
@@ -2616,11 +2616,11 @@ type Windowable interface {
 	DeviceDescription() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	WindowController() *WindowController
 	SetWindowController(windowController *raw.NSWindowController)
-	Sheets() []*raw.NSWindow
+	Sheets() []*Window
 	AttachedSheet() *Window
 	IsSheet() bool
 	SheetParent() *Window
-	ChildWindows() []*raw.NSWindow
+	ChildWindows() []*Window
 	ParentWindow() *Window
 	SetParentWindow(parentWindow *raw.NSWindow)
 	AppearanceSource() *foundation.NSObject
@@ -2646,7 +2646,7 @@ type Windowable interface {
 	SetTabbingMode(tabbingMode raw.NSWindowTabbingMode)
 	TabbingIdentifier() string
 	SetTabbingIdentifier(tabbingIdentifier *foundation.NSString)
-	TabbedWindows() []*raw.NSWindow
+	TabbedWindows() []*Window
 	Tab() *WindowTab
 	TabGroup() *WindowTabGroup
 	HasActiveWindowSharingSession() bool
@@ -2705,7 +2705,7 @@ type Windowable interface {
 	AnchorAttributeForOrientation(orientation raw.NSLayoutConstraintOrientation) raw.NSLayoutAttribute
 	SetAnchorAttributeForOrientation(attr raw.NSLayoutAttribute, orientation raw.NSLayoutConstraintOrientation)
 	VisualizeConstraints(constraints *foundation.NSArray[*raw.NSLayoutConstraint])
-	Drawers() []*raw.NSDrawer
+	Drawers() []*Drawer
 	SetIsMiniaturized(flag bool)
 	SetIsVisible(flag bool)
 	SetIsZoomed(flag bool)

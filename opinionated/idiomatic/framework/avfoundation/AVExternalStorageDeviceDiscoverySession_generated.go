@@ -37,20 +37,20 @@ func NewExternalStorageDeviceDiscoverySession() *ExternalStorageDeviceDiscoveryS
 }
 
 // ExternalStorageDevices returns the collection as a Go slice.
-func (x *ExternalStorageDeviceDiscoverySession) ExternalStorageDevices() []*raw.AVExternalStorageDevice {
+func (x *ExternalStorageDeviceDiscoverySession) ExternalStorageDevices() []*ExternalStorageDevice {
 	arr := x.inner.ExternalStorageDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVExternalStorageDevice {
-		return raw.AVExternalStorageDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExternalStorageDevice {
+		return &ExternalStorageDevice{inner: raw.AVExternalStorageDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // ExternalStorageDeviceDiscoverySessionable is the interface implemented by [ExternalStorageDeviceDiscoverySession], for mocking and DI.
 type ExternalStorageDeviceDiscoverySessionable interface {
 	Unwrap() *raw.AVExternalStorageDeviceDiscoverySession
-	ExternalStorageDevices() []*raw.AVExternalStorageDevice
+	ExternalStorageDevices() []*ExternalStorageDevice
 }
 
 var _ ExternalStorageDeviceDiscoverySessionable = (*ExternalStorageDeviceDiscoverySession)(nil)

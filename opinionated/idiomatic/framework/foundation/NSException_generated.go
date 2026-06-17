@@ -73,13 +73,13 @@ func (x *Exception) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
 }
 
 // CallStackReturnAddresses returns the collection as a Go slice.
-func (x *Exception) CallStackReturnAddresses() []*raw.NSNumber {
+func (x *Exception) CallStackReturnAddresses() []*Number {
 	arr := x.inner.CallStackReturnAddresses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSNumber {
-		return raw.NSNumberFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Number {
+		return &Number{inner: raw.NSNumberFromID(purego.Retain(_id))}
 	})
 }
 
@@ -104,7 +104,7 @@ type Exceptionable interface {
 	Name() *String
 	Reason() *String
 	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
-	CallStackReturnAddresses() []*raw.NSNumber
+	CallStackReturnAddresses() []*Number
 	CallStackSymbols() []string
 }
 

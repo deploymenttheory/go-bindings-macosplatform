@@ -197,13 +197,13 @@ func (x *NETunnelProviderManager) WithEnabled(enabled bool) *NETunnelProviderMan
 }
 
 // CopyAppRules returns the collection as a Go slice.
-func (x *NETunnelProviderManager) CopyAppRules() []*raw.NEAppRule {
+func (x *NETunnelProviderManager) CopyAppRules() []*NEAppRule {
 	arr := x.inner.CopyAppRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEAppRule {
-		return raw.NEAppRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEAppRule {
+		return &NEAppRule{inner: raw.NEAppRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -277,13 +277,13 @@ func (x *NETunnelProviderManager) SetContactsDomains(contactsDomains *foundation
 }
 
 // AppRules returns the collection as a Go slice.
-func (x *NETunnelProviderManager) AppRules() []*raw.NEAppRule {
+func (x *NETunnelProviderManager) AppRules() []*NEAppRule {
 	arr := x.inner.AppRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEAppRule {
-		return raw.NEAppRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEAppRule {
+		return &NEAppRule{inner: raw.NEAppRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -344,7 +344,7 @@ type NETunnelProviderManagerable interface {
 	WithProtocol(protocol NEVPNProtocolProvider) *NETunnelProviderManager
 	WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETunnelProviderManager
 	WithEnabled(enabled bool) *NETunnelProviderManager
-	CopyAppRules() []*raw.NEAppRule
+	CopyAppRules() []*NEAppRule
 	RoutingMethod() raw.NETunnelProviderRoutingMethod
 	SafariDomains() []string
 	SetSafariDomains(safariDomains *foundation.NSArray[*foundation.NSString])
@@ -354,7 +354,7 @@ type NETunnelProviderManagerable interface {
 	SetCalendarDomains(calendarDomains *foundation.NSArray[*foundation.NSString])
 	ContactsDomains() []string
 	SetContactsDomains(contactsDomains *foundation.NSArray[*foundation.NSString])
-	AppRules() []*raw.NEAppRule
+	AppRules() []*NEAppRule
 	SetAppRules(appRules *foundation.NSArray[*raw.NEAppRule])
 	ExcludedDomains() []string
 	SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString])

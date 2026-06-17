@@ -271,13 +271,13 @@ func (x *DocumentController) ValidateUserInterfaceItem(item raw.NSValidatedUserI
 }
 
 // Documents returns the collection as a Go slice.
-func (x *DocumentController) Documents() []*raw.NSDocument {
+func (x *DocumentController) Documents() []*Document {
 	arr := x.inner.Documents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSDocument {
-		return raw.NSDocumentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Document {
+		return &Document{inner: raw.NSDocumentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -464,7 +464,7 @@ type DocumentControllerable interface {
 	DocumentClassForType(typeName string) objc.Class
 	DisplayNameForType(typeName string) string
 	ValidateUserInterfaceItem(item raw.NSValidatedUserInterfaceItem) bool
-	Documents() []*raw.NSDocument
+	Documents() []*Document
 	CurrentDocument() *Document
 	CurrentDirectory() string
 	AutosavingDelay() float64

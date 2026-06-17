@@ -117,8 +117,8 @@ func (x *Document) WithAutosavedContentsFileURL(autosavedContentsFileURL string)
 }
 
 // WithPrintInfo sets the printInfo property and returns the receiver for chaining.
-func (x *Document) WithPrintInfo(printInfo *raw.NSPrintInfo) *Document {
-	x.inner.SetPrintInfo(printInfo)
+func (x *Document) WithPrintInfo(printInfo *PrintInfo) *Document {
+	x.inner.SetPrintInfo(printInfo.Unwrap())
 	return x
 }
 
@@ -942,13 +942,13 @@ func (x *Document) WindowNibName() string {
 }
 
 // WindowControllers returns the collection as a Go slice.
-func (x *Document) WindowControllers() []*raw.NSWindowController {
+func (x *Document) WindowControllers() []*WindowController {
 	arr := x.inner.WindowControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSWindowController {
-		return raw.NSWindowControllerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WindowController {
+		return &WindowController{inner: raw.NSWindowControllerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1184,7 +1184,7 @@ type Documentable interface {
 	WithFileModificationDate(fileModificationDate *foundation.NSDate) *Document
 	WithDraft(draft bool) *Document
 	WithAutosavedContentsFileURL(autosavedContentsFileURL string) *Document
-	WithPrintInfo(printInfo *raw.NSPrintInfo) *Document
+	WithPrintInfo(printInfo *PrintInfo) *Document
 	WithUndoManager(undoManager *foundation.NSUndoManager) *Document
 	WithHasUndoManager(hasUndoManager bool) *Document
 	WithDisplayName(displayName string) *Document
@@ -1313,7 +1313,7 @@ type Documentable interface {
 	HasUndoManager() bool
 	SetHasUndoManager(hasUndoManager bool)
 	WindowNibName() string
-	WindowControllers() []*raw.NSWindowController
+	WindowControllers() []*WindowController
 	DisplayName() string
 	WindowForSheet() *Window
 	PresentedItemURL() *foundation.NSURL

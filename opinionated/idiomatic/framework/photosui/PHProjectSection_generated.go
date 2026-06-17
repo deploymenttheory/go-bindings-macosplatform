@@ -37,13 +37,13 @@ func NewProjectSection() *ProjectSection {
 }
 
 // SectionContents returns the collection as a Go slice.
-func (x *ProjectSection) SectionContents() []*raw.PHProjectSectionContent {
+func (x *ProjectSection) SectionContents() []*ProjectSectionContent {
 	arr := x.inner.SectionContents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHProjectSectionContent {
-		return raw.PHProjectSectionContentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ProjectSectionContent {
+		return &ProjectSectionContent{inner: raw.PHProjectSectionContentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -64,7 +64,7 @@ func (x *ProjectSection) Title() string {
 // ProjectSectionable is the interface implemented by [ProjectSection], for mocking and DI.
 type ProjectSectionable interface {
 	Unwrap() *raw.PHProjectSection
-	SectionContents() []*raw.PHProjectSectionContent
+	SectionContents() []*ProjectSectionContent
 	SectionType() raw.PHProjectSectionType
 	Title() string
 }

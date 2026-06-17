@@ -133,13 +133,13 @@ func (x *Peripheral) State() raw.CBPeripheralState {
 }
 
 // Services returns the collection as a Go slice.
-func (x *Peripheral) Services() []*raw.CBService {
+func (x *Peripheral) Services() []*Service {
 	arr := x.inner.Services()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBService {
-		return raw.CBServiceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Service {
+		return &Service{inner: raw.CBServiceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -171,7 +171,7 @@ type Peripheralable interface {
 	Name() string
 	RSSI() *foundation.NSNumber
 	State() raw.CBPeripheralState
-	Services() []*raw.CBService
+	Services() []*Service
 	CanSendWriteWithoutResponse() bool
 }
 

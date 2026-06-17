@@ -36,14 +36,14 @@ func NewPhysicsJointFixed() *PhysicsJointFixed {
 }
 
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
-func (x *PhysicsJointFixed) WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJointFixed {
-	x.inner.SKPhysicsJoint.SetBodyA(bodyA)
+func (x *PhysicsJointFixed) WithBodyA(bodyA *PhysicsBody) *PhysicsJointFixed {
+	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
-func (x *PhysicsJointFixed) WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJointFixed {
-	x.inner.SKPhysicsJoint.SetBodyB(bodyB)
+func (x *PhysicsJointFixed) WithBodyB(bodyB *PhysicsBody) *PhysicsJointFixed {
+	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())
 	return x
 }
 
@@ -52,8 +52,8 @@ func (x *PhysicsJointFixed) asPhysicsJoint() *raw.SKPhysicsJoint { return &x.inn
 // PhysicsJointFixedable is the interface implemented by [PhysicsJointFixed], for mocking and DI.
 type PhysicsJointFixedable interface {
 	Unwrap() *raw.SKPhysicsJointFixed
-	WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJointFixed
-	WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJointFixed
+	WithBodyA(bodyA *PhysicsBody) *PhysicsJointFixed
+	WithBodyB(bodyB *PhysicsBody) *PhysicsJointFixed
 }
 
 var _ PhysicsJointFixedable = (*PhysicsJointFixed)(nil)

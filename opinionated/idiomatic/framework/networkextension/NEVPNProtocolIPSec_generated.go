@@ -110,8 +110,8 @@ func (x *NEVPNProtocolIPSec) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVP
 }
 
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
-func (x *NEVPNProtocolIPSec) WithProxySettings(proxySettings *raw.NEProxySettings) *NEVPNProtocolIPSec {
-	x.inner.NEVPNProtocol.SetProxySettings(proxySettings)
+func (x *NEVPNProtocolIPSec) WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocolIPSec {
+	x.inner.NEVPNProtocol.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
@@ -228,7 +228,7 @@ type NEVPNProtocolIPSecable interface {
 	WithIdentityData(identityData *foundation.NSData) *NEVPNProtocolIPSec
 	WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocolIPSec
 	WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocolIPSec
-	WithProxySettings(proxySettings *raw.NEProxySettings) *NEVPNProtocolIPSec
+	WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocolIPSec
 	WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNProtocolIPSec
 	WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEVPNProtocolIPSec
 	WithExcludeCellularServices(excludeCellularServices bool) *NEVPNProtocolIPSec

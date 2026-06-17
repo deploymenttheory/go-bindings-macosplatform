@@ -73,8 +73,8 @@ func (x *AVB17221AECPAVCMessage) WithSequenceID(sequenceID uint16) *AVB17221AECP
 }
 
 // WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
-func (x *AVB17221AECPAVCMessage) WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPAVCMessage {
-	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC)
+func (x *AVB17221AECPAVCMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAVCMessage {
+	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC.Unwrap())
 	return x
 }
 
@@ -99,7 +99,7 @@ type AVB17221AECPAVCMessageable interface {
 	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAVCMessage
 	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAVCMessage
 	WithSequenceID(sequenceID uint16) *AVB17221AECPAVCMessage
-	WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPAVCMessage
+	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAVCMessage
 	CommandResponse() *foundation.NSData
 	SetCommandResponse(commandResponse *foundation.NSData)
 }

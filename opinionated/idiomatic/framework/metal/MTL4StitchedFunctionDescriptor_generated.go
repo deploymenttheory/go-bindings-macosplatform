@@ -39,8 +39,8 @@ func NewMTL4StitchedFunctionDescriptor() *MTL4StitchedFunctionDescriptor {
 }
 
 // WithFunctionGraph sets the functionGraph property and returns the receiver for chaining.
-func (x *MTL4StitchedFunctionDescriptor) WithFunctionGraph(functionGraph *raw.MTLFunctionStitchingGraph) *MTL4StitchedFunctionDescriptor {
-	x.inner.SetFunctionGraph(functionGraph)
+func (x *MTL4StitchedFunctionDescriptor) WithFunctionGraph(functionGraph *FunctionStitchingGraph) *MTL4StitchedFunctionDescriptor {
+	x.inner.SetFunctionGraph(functionGraph.Unwrap())
 	return x
 }
 
@@ -75,13 +75,13 @@ func (x *MTL4StitchedFunctionDescriptor) SetFunctionGraph(functionGraph *raw.MTL
 }
 
 // FunctionDescriptors returns the collection as a Go slice.
-func (x *MTL4StitchedFunctionDescriptor) FunctionDescriptors() []*raw.MTL4FunctionDescriptor {
+func (x *MTL4StitchedFunctionDescriptor) FunctionDescriptors() []*MTL4FunctionDescriptor {
 	arr := x.inner.FunctionDescriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTL4FunctionDescriptor {
-		return raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTL4FunctionDescriptor {
+		return &MTL4FunctionDescriptor{inner: raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -95,11 +95,11 @@ func (x *MTL4StitchedFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4Fun
 // MTL4StitchedFunctionDescriptorable is the interface implemented by [MTL4StitchedFunctionDescriptor], for mocking and DI.
 type MTL4StitchedFunctionDescriptorable interface {
 	Unwrap() *raw.MTL4StitchedFunctionDescriptor
-	WithFunctionGraph(functionGraph *raw.MTLFunctionStitchingGraph) *MTL4StitchedFunctionDescriptor
+	WithFunctionGraph(functionGraph *FunctionStitchingGraph) *MTL4StitchedFunctionDescriptor
 	WithFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StitchedFunctionDescriptor
 	FunctionGraph() *FunctionStitchingGraph
 	SetFunctionGraph(functionGraph *raw.MTLFunctionStitchingGraph)
-	FunctionDescriptors() []*raw.MTL4FunctionDescriptor
+	FunctionDescriptors() []*MTL4FunctionDescriptor
 	SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor])
 }
 

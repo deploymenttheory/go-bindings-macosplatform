@@ -42,14 +42,14 @@ func (x *PhysicsJointLimit) WithMaxLength(maxLength float64) *PhysicsJointLimit 
 }
 
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
-func (x *PhysicsJointLimit) WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJointLimit {
-	x.inner.SKPhysicsJoint.SetBodyA(bodyA)
+func (x *PhysicsJointLimit) WithBodyA(bodyA *PhysicsBody) *PhysicsJointLimit {
+	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
-func (x *PhysicsJointLimit) WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJointLimit {
-	x.inner.SKPhysicsJoint.SetBodyB(bodyB)
+func (x *PhysicsJointLimit) WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit {
+	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())
 	return x
 }
 
@@ -69,8 +69,8 @@ func (x *PhysicsJointLimit) asPhysicsJoint() *raw.SKPhysicsJoint { return &x.inn
 type PhysicsJointLimitable interface {
 	Unwrap() *raw.SKPhysicsJointLimit
 	WithMaxLength(maxLength float64) *PhysicsJointLimit
-	WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJointLimit
-	WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJointLimit
+	WithBodyA(bodyA *PhysicsBody) *PhysicsJointLimit
+	WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit
 	MaxLength() float64
 	SetMaxLength(maxLength float64)
 }

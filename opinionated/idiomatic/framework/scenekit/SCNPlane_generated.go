@@ -96,8 +96,8 @@ func (x *Plane) WithMaterials(items ...*raw.SCNMaterial) *Plane {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Plane) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Plane {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Plane) WithFirstMaterial(firstMaterial *Material) *Plane {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -118,8 +118,8 @@ func (x *Plane) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Plane {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Plane) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Plane {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Plane) WithTessellator(tessellator *GeometryTessellator) *Plane {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -136,14 +136,14 @@ func (x *Plane) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Pla
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Plane) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Plane {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Plane) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Plane {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Plane) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Plane {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Plane) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Plane {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -220,13 +220,13 @@ type Planeable interface {
 	WithCornerSegmentCount(cornerSegmentCount int) *Plane
 	WithName(name string) *Plane
 	WithMaterials(items ...*raw.SCNMaterial) *Plane
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Plane
+	WithFirstMaterial(firstMaterial *Material) *Plane
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Plane
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Plane
+	WithTessellator(tessellator *GeometryTessellator) *Plane
 	WithSubdivisionLevel(subdivisionLevel uint) *Plane
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Plane
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Plane
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Plane
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Plane
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Plane
 	Width() float64
 	SetWidth(width float64)
 	Height() float64

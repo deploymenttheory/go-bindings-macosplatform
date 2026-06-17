@@ -67,13 +67,13 @@ func (x *AnswerCallIntentResponse) Code() raw.INAnswerCallIntentResponseCode {
 }
 
 // CallRecords returns the collection as a Go slice.
-func (x *AnswerCallIntentResponse) CallRecords() []*raw.INCallRecord {
+func (x *AnswerCallIntentResponse) CallRecords() []*CallRecord {
 	arr := x.inner.CallRecords()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INCallRecord {
-		return raw.INCallRecordFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CallRecord {
+		return &CallRecord{inner: raw.INCallRecordFromID(purego.Retain(_id))}
 	})
 }
 
@@ -90,7 +90,7 @@ type AnswerCallIntentResponseable interface {
 	WithCallRecords(items ...*raw.INCallRecord) *AnswerCallIntentResponse
 	WithUserActivity(userActivity *foundation.NSUserActivity) *AnswerCallIntentResponse
 	Code() raw.INAnswerCallIntentResponseCode
-	CallRecords() []*raw.INCallRecord
+	CallRecords() []*CallRecord
 	SetCallRecords(callRecords *foundation.NSArray[*raw.INCallRecord])
 }
 

@@ -45,7 +45,7 @@ func (x *DownloadManager) WithDelegate(delegate raw.BADownloadManagerDelegate) *
 }
 
 // FetchCurrentDownloads returns the collection as a Go slice.
-func (x *DownloadManager) FetchCurrentDownloads() ([]*raw.BADownload, error) {
+func (x *DownloadManager) FetchCurrentDownloads() ([]*Download, error) {
 	arr, err := x.inner.FetchCurrentDownloads()
 	if err != nil {
 		return nil, err
@@ -53,8 +53,8 @@ func (x *DownloadManager) FetchCurrentDownloads() ([]*raw.BADownload, error) {
 	if arr == nil {
 		return nil, nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.BADownload {
-		return raw.BADownloadFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Download {
+		return &Download{inner: raw.BADownloadFromID(purego.Retain(_id))}
 	}), nil
 }
 
@@ -97,7 +97,7 @@ func (x *DownloadManager) SetDelegate(delegate raw.BADownloadManagerDelegate) {
 type DownloadManagerable interface {
 	Unwrap() *raw.BADownloadManager
 	WithDelegate(delegate raw.BADownloadManagerDelegate) *DownloadManager
-	FetchCurrentDownloads() ([]*raw.BADownload, error)
+	FetchCurrentDownloads() ([]*Download, error)
 	ScheduleDownloadError(download *raw.BADownload) (bool, error)
 	PerformWithExclusiveControl(performHandler func(bool, unsafe.Pointer))
 	PerformWithExclusiveControlBeforeDatePerformHandler(date *foundation.NSDate, performHandler func(bool, unsafe.Pointer))

@@ -37,13 +37,13 @@ func NewTextObservation() *TextObservation {
 }
 
 // CharacterBoxes returns the collection as a Go slice.
-func (x *TextObservation) CharacterBoxes() []*raw.VNRectangleObservation {
+func (x *TextObservation) CharacterBoxes() []*RectangleObservation {
 	arr := x.inner.CharacterBoxes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNRectangleObservation {
-		return raw.VNRectangleObservationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RectangleObservation {
+		return &RectangleObservation{inner: raw.VNRectangleObservationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -56,7 +56,7 @@ func (x *TextObservation) asObservation() *raw.VNObservation { return &x.inner.V
 // TextObservationable is the interface implemented by [TextObservation], for mocking and DI.
 type TextObservationable interface {
 	Unwrap() *raw.VNTextObservation
-	CharacterBoxes() []*raw.VNRectangleObservation
+	CharacterBoxes() []*RectangleObservation
 }
 
 var _ TextObservationable = (*TextObservation)(nil)

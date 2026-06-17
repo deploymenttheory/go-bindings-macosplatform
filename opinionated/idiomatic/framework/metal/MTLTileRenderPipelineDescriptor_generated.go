@@ -68,8 +68,8 @@ func (x *TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTota
 }
 
 // WithLinkedFunctions sets the linkedFunctions property and returns the receiver for chaining.
-func (x *TileRenderPipelineDescriptor) WithLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) *TileRenderPipelineDescriptor {
-	x.inner.SetLinkedFunctions(linkedFunctions)
+func (x *TileRenderPipelineDescriptor) WithLinkedFunctions(linkedFunctions *LinkedFunctions) *TileRenderPipelineDescriptor {
+	x.inner.SetLinkedFunctions(linkedFunctions.Unwrap())
 	return x
 }
 
@@ -256,7 +256,7 @@ type TileRenderPipelineDescriptorable interface {
 	WithRasterSampleCount(rasterSampleCount uint) *TileRenderPipelineDescriptor
 	WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *TileRenderPipelineDescriptor
 	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *TileRenderPipelineDescriptor
-	WithLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) *TileRenderPipelineDescriptor
+	WithLinkedFunctions(linkedFunctions *LinkedFunctions) *TileRenderPipelineDescriptor
 	WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *TileRenderPipelineDescriptor
 	WithMaxCallStackDepth(maxCallStackDepth uint) *TileRenderPipelineDescriptor
 	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *TileRenderPipelineDescriptor

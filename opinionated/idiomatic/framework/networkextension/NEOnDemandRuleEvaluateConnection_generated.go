@@ -115,13 +115,13 @@ func (x *NEOnDemandRuleEvaluateConnection) WithProbeURL(probeURL string) *NEOnDe
 }
 
 // ConnectionRules returns the collection as a Go slice.
-func (x *NEOnDemandRuleEvaluateConnection) ConnectionRules() []*raw.NEEvaluateConnectionRule {
+func (x *NEOnDemandRuleEvaluateConnection) ConnectionRules() []*NEEvaluateConnectionRule {
 	arr := x.inner.ConnectionRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEEvaluateConnectionRule {
-		return raw.NEEvaluateConnectionRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEEvaluateConnectionRule {
+		return &NEEvaluateConnectionRule{inner: raw.NEEvaluateConnectionRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -141,7 +141,7 @@ type NEOnDemandRuleEvaluateConnectionable interface {
 	WithInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection
 	WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection
 	WithProbeURL(probeURL string) *NEOnDemandRuleEvaluateConnection
-	ConnectionRules() []*raw.NEEvaluateConnectionRule
+	ConnectionRules() []*NEEvaluateConnectionRule
 	SetConnectionRules(connectionRules *foundation.NSArray[*raw.NEEvaluateConnectionRule])
 }
 

@@ -68,8 +68,8 @@ func (x *Transition) WithFilter(filter objc.ID) *Transition {
 }
 
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *Transition) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *Transition {
-	x.inner.CAAnimation.SetTimingFunction(timingFunction)
+func (x *Transition) WithTimingFunction(timingFunction *MediaTimingFunction) *Transition {
+	x.inner.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
@@ -159,7 +159,7 @@ type Transitionable interface {
 	WithStartProgress(startProgress float32) *Transition
 	WithEndProgress(endProgress float32) *Transition
 	WithFilter(filter objc.ID) *Transition
-	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *Transition
+	WithTimingFunction(timingFunction *MediaTimingFunction) *Transition
 	WithDelegate(delegate raw.CAAnimationDelegate) *Transition
 	WithRemovedOnCompletion(removedOnCompletion bool) *Transition
 	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *Transition

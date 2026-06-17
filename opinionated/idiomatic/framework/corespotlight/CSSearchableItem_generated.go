@@ -57,8 +57,8 @@ func (x *SearchableItem) WithExpirationDate(expirationDate *foundation.NSDate) *
 }
 
 // WithAttributeSet sets the attributeSet property and returns the receiver for chaining.
-func (x *SearchableItem) WithAttributeSet(attributeSet *raw.CSSearchableItemAttributeSet) *SearchableItem {
-	x.inner.SetAttributeSet(attributeSet)
+func (x *SearchableItem) WithAttributeSet(attributeSet *SearchableItemAttributeSet) *SearchableItem {
+	x.inner.SetAttributeSet(attributeSet.Unwrap())
 	return x
 }
 
@@ -157,7 +157,7 @@ type SearchableItemable interface {
 	WithUniqueIdentifier(uniqueIdentifier string) *SearchableItem
 	WithDomainIdentifier(domainIdentifier string) *SearchableItem
 	WithExpirationDate(expirationDate *foundation.NSDate) *SearchableItem
-	WithAttributeSet(attributeSet *raw.CSSearchableItemAttributeSet) *SearchableItem
+	WithAttributeSet(attributeSet *SearchableItemAttributeSet) *SearchableItem
 	WithIsUpdate(isUpdate bool) *SearchableItem
 	WithUpdateListenerOptions(updateListenerOptions raw.CSSearchableItemUpdateListenerOptions) *SearchableItem
 	CompareByRank(other *raw.CSSearchableItem) foundation.NSComparisonResult

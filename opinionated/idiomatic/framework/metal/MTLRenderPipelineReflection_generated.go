@@ -63,35 +63,35 @@ func (x *RenderPipelineReflection) MeshBindings() *foundation.NSArray[raw.MTLBin
 }
 
 // VertexArguments returns the collection as a Go slice.
-func (x *RenderPipelineReflection) VertexArguments() []*raw.MTLArgument {
+func (x *RenderPipelineReflection) VertexArguments() []*Argument {
 	arr := x.inner.VertexArguments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLArgument {
-		return raw.MTLArgumentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Argument {
+		return &Argument{inner: raw.MTLArgumentFromID(purego.Retain(_id))}
 	})
 }
 
 // FragmentArguments returns the collection as a Go slice.
-func (x *RenderPipelineReflection) FragmentArguments() []*raw.MTLArgument {
+func (x *RenderPipelineReflection) FragmentArguments() []*Argument {
 	arr := x.inner.FragmentArguments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLArgument {
-		return raw.MTLArgumentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Argument {
+		return &Argument{inner: raw.MTLArgumentFromID(purego.Retain(_id))}
 	})
 }
 
 // TileArguments returns the collection as a Go slice.
-func (x *RenderPipelineReflection) TileArguments() []*raw.MTLArgument {
+func (x *RenderPipelineReflection) TileArguments() []*Argument {
 	arr := x.inner.TileArguments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLArgument {
-		return raw.MTLArgumentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Argument {
+		return &Argument{inner: raw.MTLArgumentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -103,9 +103,9 @@ type RenderPipelineReflectionable interface {
 	TileBindings() *foundation.NSArray[raw.MTLBinding]
 	ObjectBindings() *foundation.NSArray[raw.MTLBinding]
 	MeshBindings() *foundation.NSArray[raw.MTLBinding]
-	VertexArguments() []*raw.MTLArgument
-	FragmentArguments() []*raw.MTLArgument
-	TileArguments() []*raw.MTLArgument
+	VertexArguments() []*Argument
+	FragmentArguments() []*Argument
+	TileArguments() []*Argument
 }
 
 var _ RenderPipelineReflectionable = (*RenderPipelineReflection)(nil)

@@ -48,13 +48,13 @@ func (x *PlayerItemAccessLog) ExtendedLogDataStringEncoding() uint {
 }
 
 // Events returns the collection as a Go slice.
-func (x *PlayerItemAccessLog) Events() []*raw.AVPlayerItemAccessLogEvent {
+func (x *PlayerItemAccessLog) Events() []*PlayerItemAccessLogEvent {
 	arr := x.inner.Events()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemAccessLogEvent {
-		return raw.AVPlayerItemAccessLogEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemAccessLogEvent {
+		return &PlayerItemAccessLogEvent{inner: raw.AVPlayerItemAccessLogEventFromID(purego.Retain(_id))}
 	})
 }
 
@@ -63,7 +63,7 @@ type PlayerItemAccessLogable interface {
 	Unwrap() *raw.AVPlayerItemAccessLog
 	ExtendedLogData() *foundation.NSData
 	ExtendedLogDataStringEncoding() uint
-	Events() []*raw.AVPlayerItemAccessLogEvent
+	Events() []*PlayerItemAccessLogEvent
 }
 
 var _ PlayerItemAccessLogable = (*PlayerItemAccessLog)(nil)

@@ -54,20 +54,20 @@ func NewQueryOperationWithCursor(cursor *raw.CKQueryCursor) *QueryOperation {
 }
 
 // WithQuery sets the query property and returns the receiver for chaining.
-func (x *QueryOperation) WithQuery(query *raw.CKQuery) *QueryOperation {
-	x.inner.SetQuery(query)
+func (x *QueryOperation) WithQuery(query *Query) *QueryOperation {
+	x.inner.SetQuery(query.Unwrap())
 	return x
 }
 
 // WithCursor sets the cursor property and returns the receiver for chaining.
-func (x *QueryOperation) WithCursor(cursor *raw.CKQueryCursor) *QueryOperation {
-	x.inner.SetCursor(cursor)
+func (x *QueryOperation) WithCursor(cursor *QueryCursor) *QueryOperation {
+	x.inner.SetCursor(cursor.Unwrap())
 	return x
 }
 
 // WithZoneID sets the zoneID property and returns the receiver for chaining.
-func (x *QueryOperation) WithZoneID(zoneID *raw.CKRecordZoneID) *QueryOperation {
-	x.inner.SetZoneID(zoneID)
+func (x *QueryOperation) WithZoneID(zoneID *RecordZoneID) *QueryOperation {
+	x.inner.SetZoneID(zoneID.Unwrap())
 	return x
 }
 
@@ -112,20 +112,20 @@ func (x *QueryOperation) WithQueryCompletionBlock(queryCompletionBlock func(*raw
 }
 
 // WithDatabase sets the database property and returns the receiver for chaining.
-func (x *QueryOperation) WithDatabase(database *raw.CKDatabase) *QueryOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database)
+func (x *QueryOperation) WithDatabase(database *Database) *QueryOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *QueryOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+func (x *QueryOperation) WithConfiguration(configuration *OperationConfiguration) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *QueryOperation) WithGroup(group *raw.CKOperationGroup) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+func (x *QueryOperation) WithGroup(group *OperationGroup) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -136,8 +136,8 @@ func (x *QueryOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperat
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *QueryOperation) WithContainer(container *raw.CKContainer) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+func (x *QueryOperation) WithContainer(container *Container) *QueryOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -309,19 +309,19 @@ func (x *QueryOperation) asOperation() *raw.CKOperation { return &x.inner.CKData
 // QueryOperationable is the interface implemented by [QueryOperation], for mocking and DI.
 type QueryOperationable interface {
 	Unwrap() *raw.CKQueryOperation
-	WithQuery(query *raw.CKQuery) *QueryOperation
-	WithCursor(cursor *raw.CKQueryCursor) *QueryOperation
-	WithZoneID(zoneID *raw.CKRecordZoneID) *QueryOperation
+	WithQuery(query *Query) *QueryOperation
+	WithCursor(cursor *QueryCursor) *QueryOperation
+	WithZoneID(zoneID *RecordZoneID) *QueryOperation
 	WithResultsLimit(resultsLimit uint) *QueryOperation
 	WithDesiredKeys(items ...*foundation.NSString) *QueryOperation
 	WithRecordFetchedBlock(recordFetchedBlock func(*raw.CKRecord)) *QueryOperation
 	WithRecordMatchedBlock(recordMatchedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *QueryOperation
 	WithQueryCompletionBlock(queryCompletionBlock func(*raw.CKQueryCursor, unsafe.Pointer)) *QueryOperation
-	WithDatabase(database *raw.CKDatabase) *QueryOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *QueryOperation
-	WithGroup(group *raw.CKOperationGroup) *QueryOperation
+	WithDatabase(database *Database) *QueryOperation
+	WithConfiguration(configuration *OperationConfiguration) *QueryOperation
+	WithGroup(group *OperationGroup) *QueryOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *QueryOperation
-	WithContainer(container *raw.CKContainer) *QueryOperation
+	WithContainer(container *Container) *QueryOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *QueryOperation
 	WithLongLived(longLived bool) *QueryOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *QueryOperation

@@ -46,13 +46,13 @@ func (x *Transcription) FormattedString() string {
 }
 
 // Segments returns the collection as a Go slice.
-func (x *Transcription) Segments() []*raw.SFTranscriptionSegment {
+func (x *Transcription) Segments() []*TranscriptionSegment {
 	arr := x.inner.Segments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SFTranscriptionSegment {
-		return raw.SFTranscriptionSegmentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TranscriptionSegment {
+		return &TranscriptionSegment{inner: raw.SFTranscriptionSegmentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -70,7 +70,7 @@ func (x *Transcription) AveragePauseDuration() float64 {
 type Transcriptionable interface {
 	Unwrap() *raw.SFTranscription
 	FormattedString() string
-	Segments() []*raw.SFTranscriptionSegment
+	Segments() []*TranscriptionSegment
 	SpeakingRate() float64
 	AveragePauseDuration() float64
 }

@@ -73,13 +73,13 @@ func (x *CaptionRenderer) RenderInContextForTime(ctx unsafe.Pointer, time_ corem
 }
 
 // Captions returns the collection as a Go slice.
-func (x *CaptionRenderer) Captions() []*raw.AVCaption {
+func (x *CaptionRenderer) Captions() []*Caption {
 	arr := x.inner.Captions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaption {
-		return raw.AVCaptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Caption {
+		return &Caption{inner: raw.AVCaptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -105,7 +105,7 @@ type CaptionRendererable interface {
 	WithBounds(bounds corefoundation.CGRect) *CaptionRenderer
 	CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.AVCaptionRendererScene]
 	RenderInContextForTime(ctx unsafe.Pointer, time_ coremedia.CMTime)
-	Captions() []*raw.AVCaption
+	Captions() []*Caption
 	SetCaptions(captions *foundation.NSArray[*raw.AVCaption])
 	Bounds() corefoundation.CGRect
 	SetBounds(bounds corefoundation.CGRect)

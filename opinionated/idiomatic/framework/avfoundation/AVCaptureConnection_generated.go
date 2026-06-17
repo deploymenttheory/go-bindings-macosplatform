@@ -100,13 +100,13 @@ func (x *CaptureConnection) IsVideoRotationAngleSupported(videoRotationAngle flo
 }
 
 // InputPorts returns the collection as a Go slice.
-func (x *CaptureConnection) InputPorts() []*raw.AVCaptureInputPort {
+func (x *CaptureConnection) InputPorts() []*CaptureInputPort {
 	arr := x.inner.InputPorts()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureInputPort {
-		return raw.AVCaptureInputPortFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureInputPort {
+		return &CaptureInputPort{inner: raw.AVCaptureInputPortFromID(purego.Retain(_id))}
 	})
 }
 
@@ -144,13 +144,13 @@ func (x *CaptureConnection) IsActive() bool {
 }
 
 // AudioChannels returns the collection as a Go slice.
-func (x *CaptureConnection) AudioChannels() []*raw.AVCaptureAudioChannel {
+func (x *CaptureConnection) AudioChannels() []*CaptureAudioChannel {
 	arr := x.inner.AudioChannels()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureAudioChannel {
-		return raw.AVCaptureAudioChannelFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureAudioChannel {
+		return &CaptureAudioChannel{inner: raw.AVCaptureAudioChannelFromID(purego.Retain(_id))}
 	})
 }
 
@@ -261,13 +261,13 @@ type CaptureConnectionable interface {
 	WithVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime) *CaptureConnection
 	WithVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) *CaptureConnection
 	IsVideoRotationAngleSupported(videoRotationAngle float64) bool
-	InputPorts() []*raw.AVCaptureInputPort
+	InputPorts() []*CaptureInputPort
 	Output() *CaptureOutput
 	VideoPreviewLayer() *CaptureVideoPreviewLayer
 	IsEnabled() bool
 	SetEnabled(enabled bool)
 	IsActive() bool
-	AudioChannels() []*raw.AVCaptureAudioChannel
+	AudioChannels() []*CaptureAudioChannel
 	IsVideoMirroringSupported() bool
 	IsVideoMirrored() bool
 	SetVideoMirrored(videoMirrored bool)

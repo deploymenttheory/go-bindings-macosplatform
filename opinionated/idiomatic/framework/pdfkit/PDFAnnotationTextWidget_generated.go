@@ -41,8 +41,8 @@ func NewAnnotationTextWidget() *AnnotationTextWidget {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationTextWidget) WithPage(page *raw.PDFPage) *AnnotationTextWidget {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationTextWidget) WithPage(page *Page) *AnnotationTextWidget {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -263,8 +263,8 @@ func (x *AnnotationTextWidget) WithOpen(open bool) *AnnotationTextWidget {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationTextWidget) WithDestination(destination *raw.PDFDestination) *AnnotationTextWidget {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationTextWidget) WithDestination(destination *Destination) *AnnotationTextWidget {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -342,7 +342,7 @@ func (x *AnnotationTextWidget) asAnnotation() *raw.PDFAnnotation { return &x.inn
 // AnnotationTextWidgetable is the interface implemented by [AnnotationTextWidget], for mocking and DI.
 type AnnotationTextWidgetable interface {
 	Unwrap() *raw.PDFAnnotationTextWidget
-	WithPage(page *raw.PDFPage) *AnnotationTextWidget
+	WithPage(page *Page) *AnnotationTextWidget
 	WithType(type_ string) *AnnotationTextWidget
 	WithBounds(bounds corefoundation.CGRect) *AnnotationTextWidget
 	WithShouldDisplay(shouldDisplay bool) *AnnotationTextWidget
@@ -374,7 +374,7 @@ type AnnotationTextWidgetable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationTextWidget
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationTextWidget
 	WithOpen(open bool) *AnnotationTextWidget
-	WithDestination(destination *raw.PDFDestination) *AnnotationTextWidget
+	WithDestination(destination *Destination) *AnnotationTextWidget
 	WithURL(uRL string) *AnnotationTextWidget
 	WithFieldName(fieldName string) *AnnotationTextWidget
 	WithCaption(caption string) *AnnotationTextWidget

@@ -91,8 +91,8 @@ func (x *Shape) WithMaterials(items ...*raw.SCNMaterial) *Shape {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Shape) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Shape {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Shape) WithFirstMaterial(firstMaterial *Material) *Shape {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -113,8 +113,8 @@ func (x *Shape) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Shape {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Shape) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Shape {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Shape) WithTessellator(tessellator *GeometryTessellator) *Shape {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -131,14 +131,14 @@ func (x *Shape) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Sha
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Shape) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Shape {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Shape) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Shape {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Shape) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Shape {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Shape) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Shape {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -204,13 +204,13 @@ type Shapeable interface {
 	WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Shape
 	WithName(name string) *Shape
 	WithMaterials(items ...*raw.SCNMaterial) *Shape
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Shape
+	WithFirstMaterial(firstMaterial *Material) *Shape
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Shape
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Shape
+	WithTessellator(tessellator *GeometryTessellator) *Shape
 	WithSubdivisionLevel(subdivisionLevel uint) *Shape
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Shape
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Shape
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Shape
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Shape
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Shape
 	Path() *appkit.NSBezierPath
 	SetPath(path *appkit.NSBezierPath)
 	ExtrusionDepth() float64

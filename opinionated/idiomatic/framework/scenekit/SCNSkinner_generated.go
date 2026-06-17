@@ -106,13 +106,13 @@ func (x *Skinner) BoneInverseBindTransforms() []*foundation.NSValue {
 }
 
 // Bones returns the collection as a Go slice.
-func (x *Skinner) Bones() []*raw.SCNNode {
+func (x *Skinner) Bones() []*Node {
 	arr := x.inner.Bones()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNNode {
-		return raw.SCNNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Node {
+		return &Node{inner: raw.SCNNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -147,7 +147,7 @@ type Skinnerable interface {
 	BaseGeometryBindTransform() quartzcore.CATransform3D
 	SetBaseGeometryBindTransform(baseGeometryBindTransform quartzcore.CATransform3D)
 	BoneInverseBindTransforms() []*foundation.NSValue
-	Bones() []*raw.SCNNode
+	Bones() []*Node
 	BoneWeights() *GeometrySource
 	BoneIndices() *GeometrySource
 }

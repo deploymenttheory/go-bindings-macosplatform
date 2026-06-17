@@ -75,14 +75,14 @@ func (x *UserNotification) WithDeliveryDate(deliveryDate DateProvider) *UserNoti
 }
 
 // WithDeliveryTimeZone sets the deliveryTimeZone property and returns the receiver for chaining.
-func (x *UserNotification) WithDeliveryTimeZone(deliveryTimeZone *raw.NSTimeZone) *UserNotification {
-	x.inner.SetDeliveryTimeZone(deliveryTimeZone)
+func (x *UserNotification) WithDeliveryTimeZone(deliveryTimeZone *TimeZone) *UserNotification {
+	x.inner.SetDeliveryTimeZone(deliveryTimeZone.Unwrap())
 	return x
 }
 
 // WithDeliveryRepeatInterval sets the deliveryRepeatInterval property and returns the receiver for chaining.
-func (x *UserNotification) WithDeliveryRepeatInterval(deliveryRepeatInterval *raw.NSDateComponents) *UserNotification {
-	x.inner.SetDeliveryRepeatInterval(deliveryRepeatInterval)
+func (x *UserNotification) WithDeliveryRepeatInterval(deliveryRepeatInterval *DateComponents) *UserNotification {
+	x.inner.SetDeliveryRepeatInterval(deliveryRepeatInterval.Unwrap())
 	return x
 }
 
@@ -378,13 +378,13 @@ func (x *UserNotification) Response() *AttributedString {
 }
 
 // AdditionalActions returns the collection as a Go slice.
-func (x *UserNotification) AdditionalActions() []*raw.NSUserNotificationAction {
+func (x *UserNotification) AdditionalActions() []*UserNotificationAction {
 	arr := x.inner.AdditionalActions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSUserNotificationAction {
-		return raw.NSUserNotificationActionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UserNotificationAction {
+		return &UserNotificationAction{inner: raw.NSUserNotificationActionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -413,8 +413,8 @@ type UserNotificationable interface {
 	WithActionButtonTitle(actionButtonTitle string) *UserNotification
 	WithUserInfo(userInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotification
 	WithDeliveryDate(deliveryDate DateProvider) *UserNotification
-	WithDeliveryTimeZone(deliveryTimeZone *raw.NSTimeZone) *UserNotification
-	WithDeliveryRepeatInterval(deliveryRepeatInterval *raw.NSDateComponents) *UserNotification
+	WithDeliveryTimeZone(deliveryTimeZone *TimeZone) *UserNotification
+	WithDeliveryRepeatInterval(deliveryRepeatInterval *DateComponents) *UserNotification
 	WithSoundName(soundName string) *UserNotification
 	WithHasActionButton(hasActionButton bool) *UserNotification
 	WithOtherButtonTitle(otherButtonTitle string) *UserNotification
@@ -459,7 +459,7 @@ type UserNotificationable interface {
 	ResponsePlaceholder() *String
 	SetResponsePlaceholder(responsePlaceholder string)
 	Response() *AttributedString
-	AdditionalActions() []*raw.NSUserNotificationAction
+	AdditionalActions() []*UserNotificationAction
 	SetAdditionalActions(additionalActions *raw.NSArray[*raw.NSUserNotificationAction])
 	AdditionalActivationAction() *UserNotificationAction
 }

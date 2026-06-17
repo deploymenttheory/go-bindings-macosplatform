@@ -36,8 +36,8 @@ func NewMTRRVCOperationalStateClusterOperationalErrorEvent() *MTRRVCOperationalS
 }
 
 // WithErrorState sets the errorState property and returns the receiver for chaining.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *raw.MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent {
-	x.inner.SetErrorState(errorState)
+func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent {
+	x.inner.SetErrorState(errorState.Unwrap())
 	return x
 }
 
@@ -58,7 +58,7 @@ func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) SetErrorState(error
 // MTRRVCOperationalStateClusterOperationalErrorEventable is the interface implemented by [MTRRVCOperationalStateClusterOperationalErrorEvent], for mocking and DI.
 type MTRRVCOperationalStateClusterOperationalErrorEventable interface {
 	Unwrap() *raw.MTRRVCOperationalStateClusterOperationalErrorEvent
-	WithErrorState(errorState *raw.MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent
+	WithErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent
 	ErrorState() *MTRRVCOperationalStateClusterErrorStateStruct
 	SetErrorState(errorState *raw.MTRRVCOperationalStateClusterErrorStateStruct)
 }

@@ -52,8 +52,8 @@ func (x *RulerMarker) WithMarkerLocation(markerLocation float64) *RulerMarker {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *RulerMarker) WithImage(image *raw.NSImage) *RulerMarker {
-	x.inner.SetImage(image)
+func (x *RulerMarker) WithImage(image *Image) *RulerMarker {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -183,7 +183,7 @@ func (x *RulerMarker) ThicknessRequiredInRuler() float64 {
 type RulerMarkerable interface {
 	Unwrap() *raw.NSRulerMarker
 	WithMarkerLocation(markerLocation float64) *RulerMarker
-	WithImage(image *raw.NSImage) *RulerMarker
+	WithImage(image *Image) *RulerMarker
 	WithImageOrigin(imageOrigin corefoundation.CGPoint) *RulerMarker
 	WithMovable(movable bool) *RulerMarker
 	WithRemovable(removable bool) *RulerMarker

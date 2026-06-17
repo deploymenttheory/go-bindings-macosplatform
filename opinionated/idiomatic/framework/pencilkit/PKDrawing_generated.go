@@ -96,13 +96,13 @@ func (x *Drawing) DrawingByAppendingStrokes(strokes *foundation.NSArray[*raw.PKS
 }
 
 // Strokes returns the collection as a Go slice.
-func (x *Drawing) Strokes() []*raw.PKStroke {
+func (x *Drawing) Strokes() []*Stroke {
 	arr := x.inner.Strokes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKStroke {
-		return raw.PKStrokeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Stroke {
+		return &Stroke{inner: raw.PKStrokeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -124,7 +124,7 @@ type Drawingable interface {
 	DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing
 	DrawingByAppendingDrawing(drawing *raw.PKDrawing) *Drawing
 	DrawingByAppendingStrokes(strokes *foundation.NSArray[*raw.PKStroke]) *Drawing
-	Strokes() []*raw.PKStroke
+	Strokes() []*Stroke
 	Bounds() corefoundation.CGRect
 	RequiredContentVersion() raw.PKContentVersion
 }

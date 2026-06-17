@@ -61,8 +61,8 @@ func (x *CollectionLayoutBoundarySupplementaryItem) WithContentInsets(contentIns
 }
 
 // WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
-func (x *CollectionLayoutBoundarySupplementaryItem) WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem {
-	x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing)
+func (x *CollectionLayoutBoundarySupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem {
+	x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing.Unwrap())
 	return x
 }
 
@@ -107,7 +107,7 @@ type CollectionLayoutBoundarySupplementaryItemable interface {
 	WithPinToVisibleBounds(pinToVisibleBounds bool) *CollectionLayoutBoundarySupplementaryItem
 	WithZIndex(zIndex int) *CollectionLayoutBoundarySupplementaryItem
 	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutBoundarySupplementaryItem
-	WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem
+	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem
 	ExtendsBoundary() bool
 	SetExtendsBoundary(extendsBoundary bool)
 	PinToVisibleBounds() bool

@@ -39,32 +39,32 @@ func NewWKWebViewConfiguration() *WKWebViewConfiguration {
 }
 
 // WithProcessPool sets the processPool property and returns the receiver for chaining.
-func (x *WKWebViewConfiguration) WithProcessPool(processPool *raw.WKProcessPool) *WKWebViewConfiguration {
-	x.inner.SetProcessPool(processPool)
+func (x *WKWebViewConfiguration) WithProcessPool(processPool *WKProcessPool) *WKWebViewConfiguration {
+	x.inner.SetProcessPool(processPool.Unwrap())
 	return x
 }
 
 // WithPreferences sets the preferences property and returns the receiver for chaining.
-func (x *WKWebViewConfiguration) WithPreferences(preferences *raw.WKPreferences) *WKWebViewConfiguration {
-	x.inner.SetPreferences(preferences)
+func (x *WKWebViewConfiguration) WithPreferences(preferences *WKPreferences) *WKWebViewConfiguration {
+	x.inner.SetPreferences(preferences.Unwrap())
 	return x
 }
 
 // WithUserContentController sets the userContentController property and returns the receiver for chaining.
-func (x *WKWebViewConfiguration) WithUserContentController(userContentController *raw.WKUserContentController) *WKWebViewConfiguration {
-	x.inner.SetUserContentController(userContentController)
+func (x *WKWebViewConfiguration) WithUserContentController(userContentController *WKUserContentController) *WKWebViewConfiguration {
+	x.inner.SetUserContentController(userContentController.Unwrap())
 	return x
 }
 
 // WithWebExtensionController sets the webExtensionController property and returns the receiver for chaining.
-func (x *WKWebViewConfiguration) WithWebExtensionController(webExtensionController *raw.WKWebExtensionController) *WKWebViewConfiguration {
-	x.inner.SetWebExtensionController(webExtensionController)
+func (x *WKWebViewConfiguration) WithWebExtensionController(webExtensionController *WKWebExtensionController) *WKWebViewConfiguration {
+	x.inner.SetWebExtensionController(webExtensionController.Unwrap())
 	return x
 }
 
 // WithWebsiteDataStore sets the websiteDataStore property and returns the receiver for chaining.
-func (x *WKWebViewConfiguration) WithWebsiteDataStore(websiteDataStore *raw.WKWebsiteDataStore) *WKWebViewConfiguration {
-	x.inner.SetWebsiteDataStore(websiteDataStore)
+func (x *WKWebViewConfiguration) WithWebsiteDataStore(websiteDataStore *WKWebsiteDataStore) *WKWebViewConfiguration {
+	x.inner.SetWebsiteDataStore(websiteDataStore.Unwrap())
 	return x
 }
 
@@ -105,8 +105,8 @@ func (x *WKWebViewConfiguration) WithMediaTypesRequiringUserActionForPlayback(me
 }
 
 // WithDefaultWebpagePreferences sets the defaultWebpagePreferences property and returns the receiver for chaining.
-func (x *WKWebViewConfiguration) WithDefaultWebpagePreferences(defaultWebpagePreferences *raw.WKWebpagePreferences) *WKWebViewConfiguration {
-	x.inner.SetDefaultWebpagePreferences(defaultWebpagePreferences)
+func (x *WKWebViewConfiguration) WithDefaultWebpagePreferences(defaultWebpagePreferences *WKWebpagePreferences) *WKWebViewConfiguration {
+	x.inner.SetDefaultWebpagePreferences(defaultWebpagePreferences.Unwrap())
 	return x
 }
 
@@ -351,18 +351,18 @@ func (x *WKWebViewConfiguration) SetWritingToolsBehavior(writingToolsBehavior ap
 // WKWebViewConfigurationable is the interface implemented by [WKWebViewConfiguration], for mocking and DI.
 type WKWebViewConfigurationable interface {
 	Unwrap() *raw.WKWebViewConfiguration
-	WithProcessPool(processPool *raw.WKProcessPool) *WKWebViewConfiguration
-	WithPreferences(preferences *raw.WKPreferences) *WKWebViewConfiguration
-	WithUserContentController(userContentController *raw.WKUserContentController) *WKWebViewConfiguration
-	WithWebExtensionController(webExtensionController *raw.WKWebExtensionController) *WKWebViewConfiguration
-	WithWebsiteDataStore(websiteDataStore *raw.WKWebsiteDataStore) *WKWebViewConfiguration
+	WithProcessPool(processPool *WKProcessPool) *WKWebViewConfiguration
+	WithPreferences(preferences *WKPreferences) *WKWebViewConfiguration
+	WithUserContentController(userContentController *WKUserContentController) *WKWebViewConfiguration
+	WithWebExtensionController(webExtensionController *WKWebExtensionController) *WKWebViewConfiguration
+	WithWebsiteDataStore(websiteDataStore *WKWebsiteDataStore) *WKWebViewConfiguration
 	WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WKWebViewConfiguration
 	WithApplicationNameForUserAgent(applicationNameForUserAgent string) *WKWebViewConfiguration
 	WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WKWebViewConfiguration
 	WithShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView bool) *WKWebViewConfiguration
 	WithUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool) *WKWebViewConfiguration
 	WithMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback raw.WKAudiovisualMediaTypes) *WKWebViewConfiguration
-	WithDefaultWebpagePreferences(defaultWebpagePreferences *raw.WKWebpagePreferences) *WKWebViewConfiguration
+	WithDefaultWebpagePreferences(defaultWebpagePreferences *WKWebpagePreferences) *WKWebViewConfiguration
 	WithLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains bool) *WKWebViewConfiguration
 	WithAllowsInlinePredictions(allowsInlinePredictions bool) *WKWebViewConfiguration
 	WithUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy raw.WKUserInterfaceDirectionPolicy) *WKWebViewConfiguration

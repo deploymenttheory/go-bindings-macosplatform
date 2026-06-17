@@ -44,8 +44,8 @@ func (x *MutablePayment) WithApplicationUsername(applicationUsername string) *Mu
 }
 
 // WithPaymentDiscount sets the paymentDiscount property and returns the receiver for chaining.
-func (x *MutablePayment) WithPaymentDiscount(paymentDiscount *raw.SKPaymentDiscount) *MutablePayment {
-	x.inner.SetPaymentDiscount(paymentDiscount)
+func (x *MutablePayment) WithPaymentDiscount(paymentDiscount *PaymentDiscount) *MutablePayment {
+	x.inner.SetPaymentDiscount(paymentDiscount.Unwrap())
 	return x
 }
 
@@ -118,7 +118,7 @@ func (x *MutablePayment) asPayment() *raw.SKPayment { return &x.inner.SKPayment 
 type MutablePaymentable interface {
 	Unwrap() *raw.SKMutablePayment
 	WithApplicationUsername(applicationUsername string) *MutablePayment
-	WithPaymentDiscount(paymentDiscount *raw.SKPaymentDiscount) *MutablePayment
+	WithPaymentDiscount(paymentDiscount *PaymentDiscount) *MutablePayment
 	WithProductIdentifier(productIdentifier string) *MutablePayment
 	WithQuantity(quantity int) *MutablePayment
 	WithRequestData(requestData *foundation.NSData) *MutablePayment

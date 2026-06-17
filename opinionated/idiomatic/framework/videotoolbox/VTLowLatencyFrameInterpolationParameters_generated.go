@@ -68,13 +68,13 @@ func (x *LowLatencyFrameInterpolationParameters) InterpolationPhase() []*foundat
 }
 
 // DestinationFrames returns the collection as a Go slice.
-func (x *LowLatencyFrameInterpolationParameters) DestinationFrames() []*raw.VTFrameProcessorFrame {
+func (x *LowLatencyFrameInterpolationParameters) DestinationFrames() []*FrameProcessorFrame {
 	arr := x.inner.DestinationFrames()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VTFrameProcessorFrame {
-		return raw.VTFrameProcessorFrameFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FrameProcessorFrame {
+		return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(purego.Retain(_id))}
 	})
 }
 
@@ -84,7 +84,7 @@ type LowLatencyFrameInterpolationParametersable interface {
 	SourceFrame() *FrameProcessorFrame
 	PreviousFrame() *FrameProcessorFrame
 	InterpolationPhase() []*foundation.NSNumber
-	DestinationFrames() []*raw.VTFrameProcessorFrame
+	DestinationFrames() []*FrameProcessorFrame
 }
 
 var _ LowLatencyFrameInterpolationParametersable = (*LowLatencyFrameInterpolationParameters)(nil)

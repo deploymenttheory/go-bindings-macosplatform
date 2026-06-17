@@ -55,8 +55,8 @@ func (x *AssetCreationRequest) WithHidden(hidden bool) *AssetCreationRequest {
 }
 
 // WithContentEditingOutput sets the contentEditingOutput property and returns the receiver for chaining.
-func (x *AssetCreationRequest) WithContentEditingOutput(contentEditingOutput *raw.PHContentEditingOutput) *AssetCreationRequest {
-	x.inner.PHAssetChangeRequest.SetContentEditingOutput(contentEditingOutput)
+func (x *AssetCreationRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest {
+	x.inner.PHAssetChangeRequest.SetContentEditingOutput(contentEditingOutput.Unwrap())
 	return x
 }
 
@@ -80,7 +80,7 @@ type AssetCreationRequestable interface {
 	WithCreationDate(creationDate *foundation.NSDate) *AssetCreationRequest
 	WithFavorite(favorite bool) *AssetCreationRequest
 	WithHidden(hidden bool) *AssetCreationRequest
-	WithContentEditingOutput(contentEditingOutput *raw.PHContentEditingOutput) *AssetCreationRequest
+	WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest
 	AddResourceWithTypeFileURLOptions(type_ raw.PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions)
 	AddResourceWithTypeDataOptions(type_ raw.PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions)
 }

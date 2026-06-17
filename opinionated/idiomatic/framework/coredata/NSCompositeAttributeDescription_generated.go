@@ -151,13 +151,13 @@ func (x *CompositeAttributeDescription) WithRenamingIdentifier(renamingIdentifie
 }
 
 // Elements returns the collection as a Go slice.
-func (x *CompositeAttributeDescription) Elements() []*raw.NSAttributeDescription {
+func (x *CompositeAttributeDescription) Elements() []*AttributeDescription {
 	arr := x.inner.Elements()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSAttributeDescription {
-		return raw.NSAttributeDescriptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AttributeDescription {
+		return &AttributeDescription{inner: raw.NSAttributeDescriptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -190,7 +190,7 @@ type CompositeAttributeDescriptionable interface {
 	WithIndexedBySpotlight(indexedBySpotlight bool) *CompositeAttributeDescription
 	WithStoredInExternalRecord(storedInExternalRecord bool) *CompositeAttributeDescription
 	WithRenamingIdentifier(renamingIdentifier string) *CompositeAttributeDescription
-	Elements() []*raw.NSAttributeDescription
+	Elements() []*AttributeDescription
 	SetElements(elements *foundation.NSArray[*raw.NSAttributeDescription])
 }
 

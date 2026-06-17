@@ -106,8 +106,8 @@ func (x *EmitterNode) WithParticleColorAlphaSpeed(particleColorAlphaSpeed float6
 }
 
 // WithParticleColorSequence sets the particleColorSequence property and returns the receiver for chaining.
-func (x *EmitterNode) WithParticleColorSequence(particleColorSequence *raw.SKKeyframeSequence) *EmitterNode {
-	x.inner.SetParticleColorSequence(particleColorSequence)
+func (x *EmitterNode) WithParticleColorSequence(particleColorSequence *KeyframeSequence) *EmitterNode {
+	x.inner.SetParticleColorSequence(particleColorSequence.Unwrap())
 	return x
 }
 
@@ -130,8 +130,8 @@ func (x *EmitterNode) WithParticleColorBlendFactorSpeed(particleColorBlendFactor
 }
 
 // WithParticleColorBlendFactorSequence sets the particleColorBlendFactorSequence property and returns the receiver for chaining.
-func (x *EmitterNode) WithParticleColorBlendFactorSequence(particleColorBlendFactorSequence *raw.SKKeyframeSequence) *EmitterNode {
-	x.inner.SetParticleColorBlendFactorSequence(particleColorBlendFactorSequence)
+func (x *EmitterNode) WithParticleColorBlendFactorSequence(particleColorBlendFactorSequence *KeyframeSequence) *EmitterNode {
+	x.inner.SetParticleColorBlendFactorSequence(particleColorBlendFactorSequence.Unwrap())
 	return x
 }
 
@@ -250,8 +250,8 @@ func (x *EmitterNode) WithParticleScaleSpeed(particleScaleSpeed float64) *Emitte
 }
 
 // WithParticleScaleSequence sets the particleScaleSequence property and returns the receiver for chaining.
-func (x *EmitterNode) WithParticleScaleSequence(particleScaleSequence *raw.SKKeyframeSequence) *EmitterNode {
-	x.inner.SetParticleScaleSequence(particleScaleSequence)
+func (x *EmitterNode) WithParticleScaleSequence(particleScaleSequence *KeyframeSequence) *EmitterNode {
+	x.inner.SetParticleScaleSequence(particleScaleSequence.Unwrap())
 	return x
 }
 
@@ -274,14 +274,14 @@ func (x *EmitterNode) WithParticleAlphaSpeed(particleAlphaSpeed float64) *Emitte
 }
 
 // WithParticleAlphaSequence sets the particleAlphaSequence property and returns the receiver for chaining.
-func (x *EmitterNode) WithParticleAlphaSequence(particleAlphaSequence *raw.SKKeyframeSequence) *EmitterNode {
-	x.inner.SetParticleAlphaSequence(particleAlphaSequence)
+func (x *EmitterNode) WithParticleAlphaSequence(particleAlphaSequence *KeyframeSequence) *EmitterNode {
+	x.inner.SetParticleAlphaSequence(particleAlphaSequence.Unwrap())
 	return x
 }
 
 // WithParticleAction sets the particleAction property and returns the receiver for chaining.
-func (x *EmitterNode) WithParticleAction(particleAction *raw.SKAction) *EmitterNode {
-	x.inner.SetParticleAction(particleAction)
+func (x *EmitterNode) WithParticleAction(particleAction *Action) *EmitterNode {
+	x.inner.SetParticleAction(particleAction.Unwrap())
 	return x
 }
 
@@ -298,8 +298,8 @@ func (x *EmitterNode) WithTargetNode(targetNode NodeProvider) *EmitterNode {
 }
 
 // WithShader sets the shader property and returns the receiver for chaining.
-func (x *EmitterNode) WithShader(shader *raw.SKShader) *EmitterNode {
-	x.inner.SetShader(shader)
+func (x *EmitterNode) WithShader(shader *Shader) *EmitterNode {
+	x.inner.SetShader(shader.Unwrap())
 	return x
 }
 
@@ -394,8 +394,8 @@ func (x *EmitterNode) WithName(name string) *EmitterNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *EmitterNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *EmitterNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *EmitterNode) WithPhysicsBody(physicsBody *PhysicsBody) *EmitterNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -406,8 +406,8 @@ func (x *EmitterNode) WithUserData(userData *foundation.NSMutableDictionary[objc
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *EmitterNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *EmitterNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *EmitterNode) WithReachConstraints(reachConstraints *ReachConstraints) *EmitterNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -1025,11 +1025,11 @@ type EmitterNodeable interface {
 	WithParticleColorGreenSpeed(particleColorGreenSpeed float64) *EmitterNode
 	WithParticleColorBlueSpeed(particleColorBlueSpeed float64) *EmitterNode
 	WithParticleColorAlphaSpeed(particleColorAlphaSpeed float64) *EmitterNode
-	WithParticleColorSequence(particleColorSequence *raw.SKKeyframeSequence) *EmitterNode
+	WithParticleColorSequence(particleColorSequence *KeyframeSequence) *EmitterNode
 	WithParticleColorBlendFactor(particleColorBlendFactor float64) *EmitterNode
 	WithParticleColorBlendFactorRange(particleColorBlendFactorRange float64) *EmitterNode
 	WithParticleColorBlendFactorSpeed(particleColorBlendFactorSpeed float64) *EmitterNode
-	WithParticleColorBlendFactorSequence(particleColorBlendFactorSequence *raw.SKKeyframeSequence) *EmitterNode
+	WithParticleColorBlendFactorSequence(particleColorBlendFactorSequence *KeyframeSequence) *EmitterNode
 	WithParticlePosition(particlePosition corefoundation.CGPoint) *EmitterNode
 	WithParticlePositionRange(particlePositionRange corefoundation.CGVector) *EmitterNode
 	WithParticleSpeed(particleSpeed float64) *EmitterNode
@@ -1049,15 +1049,15 @@ type EmitterNodeable interface {
 	WithParticleScale(particleScale float64) *EmitterNode
 	WithParticleScaleRange(particleScaleRange float64) *EmitterNode
 	WithParticleScaleSpeed(particleScaleSpeed float64) *EmitterNode
-	WithParticleScaleSequence(particleScaleSequence *raw.SKKeyframeSequence) *EmitterNode
+	WithParticleScaleSequence(particleScaleSequence *KeyframeSequence) *EmitterNode
 	WithParticleAlpha(particleAlpha float64) *EmitterNode
 	WithParticleAlphaRange(particleAlphaRange float64) *EmitterNode
 	WithParticleAlphaSpeed(particleAlphaSpeed float64) *EmitterNode
-	WithParticleAlphaSequence(particleAlphaSequence *raw.SKKeyframeSequence) *EmitterNode
-	WithParticleAction(particleAction *raw.SKAction) *EmitterNode
+	WithParticleAlphaSequence(particleAlphaSequence *KeyframeSequence) *EmitterNode
+	WithParticleAction(particleAction *Action) *EmitterNode
 	WithFieldBitMask(fieldBitMask uint32) *EmitterNode
 	WithTargetNode(targetNode NodeProvider) *EmitterNode
-	WithShader(shader *raw.SKShader) *EmitterNode
+	WithShader(shader *Shader) *EmitterNode
 	WithParticleZPosition(particleZPosition float64) *EmitterNode
 	WithParticleRenderOrder(particleRenderOrder raw.SKParticleRenderOrder) *EmitterNode
 	WithParticleZPositionRange(particleZPositionRange float64) *EmitterNode
@@ -1073,9 +1073,9 @@ type EmitterNodeable interface {
 	WithHidden(hidden bool) *EmitterNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *EmitterNode
 	WithName(name string) *EmitterNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *EmitterNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *EmitterNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EmitterNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *EmitterNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *EmitterNode
 	WithConstraints(items ...*raw.SKConstraint) *EmitterNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EmitterNode
 	WithAccessibilityElement(accessibilityElement bool) *EmitterNode

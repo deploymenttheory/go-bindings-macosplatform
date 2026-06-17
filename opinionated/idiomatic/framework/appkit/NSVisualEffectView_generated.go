@@ -59,8 +59,8 @@ func (x *VisualEffectView) WithState(state raw.NSVisualEffectState) *VisualEffec
 }
 
 // WithMaskImage sets the maskImage property and returns the receiver for chaining.
-func (x *VisualEffectView) WithMaskImage(maskImage *raw.NSImage) *VisualEffectView {
-	x.inner.SetMaskImage(maskImage)
+func (x *VisualEffectView) WithMaskImage(maskImage *Image) *VisualEffectView {
+	x.inner.SetMaskImage(maskImage.Unwrap())
 	return x
 }
 
@@ -251,8 +251,8 @@ func (x *VisualEffectView) WithContentFilters(items ...*coreimage.CIFilter) *Vis
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *VisualEffectView) WithShadow(shadow *raw.NSShadow) *VisualEffectView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *VisualEffectView) WithShadow(shadow *Shadow) *VisualEffectView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -333,8 +333,8 @@ func (x *VisualEffectView) WithPrefersCompactControlSizeMetrics(prefersCompactCo
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *VisualEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *VisualEffectView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *VisualEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *VisualEffectView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -375,8 +375,8 @@ func (x *VisualEffectView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExten
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *VisualEffectView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *VisualEffectView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *VisualEffectView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *VisualEffectView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -387,8 +387,8 @@ func (x *VisualEffectView) WithNextResponder(nextResponder ResponderProvider) *V
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *VisualEffectView) WithMenu(menu *raw.NSMenu) *VisualEffectView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *VisualEffectView) WithMenu(menu *Menu) *VisualEffectView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -399,8 +399,8 @@ func (x *VisualEffectView) WithUserActivity(userActivity *foundation.NSUserActiv
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *VisualEffectView) WithTouchBar(touchBar *raw.NSTouchBar) *VisualEffectView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *VisualEffectView) WithTouchBar(touchBar *TouchBar) *VisualEffectView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -473,7 +473,7 @@ type VisualEffectViewable interface {
 	WithMaterial(material raw.NSVisualEffectMaterial) *VisualEffectView
 	WithBlendingMode(blendingMode raw.NSVisualEffectBlendingMode) *VisualEffectView
 	WithState(state raw.NSVisualEffectState) *VisualEffectView
-	WithMaskImage(maskImage *raw.NSImage) *VisualEffectView
+	WithMaskImage(maskImage *Image) *VisualEffectView
 	WithEmphasized(emphasized bool) *VisualEffectView
 	WithSubviews(items ...ViewProvider) *VisualEffectView
 	WithHidden(hidden bool) *VisualEffectView
@@ -500,7 +500,7 @@ type VisualEffectViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *VisualEffectView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *VisualEffectView
 	WithContentFilters(items ...*coreimage.CIFilter) *VisualEffectView
-	WithShadow(shadow *raw.NSShadow) *VisualEffectView
+	WithShadow(shadow *Shadow) *VisualEffectView
 	WithClipsToBounds(clipsToBounds bool) *VisualEffectView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *VisualEffectView
 	WithToolTip(toolTip string) *VisualEffectView
@@ -512,18 +512,18 @@ type VisualEffectViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *VisualEffectView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *VisualEffectView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *VisualEffectView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *VisualEffectView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *VisualEffectView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *VisualEffectView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *VisualEffectView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *VisualEffectView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *VisualEffectView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *VisualEffectView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *VisualEffectView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *VisualEffectView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *VisualEffectView
 	WithNextResponder(nextResponder ResponderProvider) *VisualEffectView
-	WithMenu(menu *raw.NSMenu) *VisualEffectView
+	WithMenu(menu *Menu) *VisualEffectView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *VisualEffectView
-	WithTouchBar(touchBar *raw.NSTouchBar) *VisualEffectView
+	WithTouchBar(touchBar *TouchBar) *VisualEffectView
 	Material() raw.NSVisualEffectMaterial
 	SetMaterial(material raw.NSVisualEffectMaterial)
 	InteriorBackgroundStyle() raw.NSBackgroundStyle

@@ -56,8 +56,8 @@ func (x *GraphExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted boo
 }
 
 // WithCompilationDescriptor sets the compilationDescriptor property and returns the receiver for chaining.
-func (x *GraphExecutionDescriptor) WithCompilationDescriptor(compilationDescriptor *raw.MPSGraphCompilationDescriptor) *GraphExecutionDescriptor {
-	x.inner.SetCompilationDescriptor(compilationDescriptor)
+func (x *GraphExecutionDescriptor) WithCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) *GraphExecutionDescriptor {
+	x.inner.SetCompilationDescriptor(compilationDescriptor.Unwrap())
 	return x
 }
 
@@ -123,7 +123,7 @@ type GraphExecutionDescriptorable interface {
 	WithScheduledHandler(scheduledHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor
 	WithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor
 	WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutionDescriptor
-	WithCompilationDescriptor(compilationDescriptor *raw.MPSGraphCompilationDescriptor) *GraphExecutionDescriptor
+	WithCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) *GraphExecutionDescriptor
 	WaitForEventValue(event metal.MTLSharedEvent, value uint64)
 	SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage raw.MPSGraphExecutionStage, value uint64)
 	ScheduledHandler() objc.Block

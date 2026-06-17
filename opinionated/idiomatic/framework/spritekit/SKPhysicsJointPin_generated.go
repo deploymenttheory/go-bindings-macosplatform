@@ -66,14 +66,14 @@ func (x *PhysicsJointPin) WithRotationSpeed(rotationSpeed float64) *PhysicsJoint
 }
 
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
-func (x *PhysicsJointPin) WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJointPin {
-	x.inner.SKPhysicsJoint.SetBodyA(bodyA)
+func (x *PhysicsJointPin) WithBodyA(bodyA *PhysicsBody) *PhysicsJointPin {
+	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
-func (x *PhysicsJointPin) WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJointPin {
-	x.inner.SKPhysicsJoint.SetBodyB(bodyB)
+func (x *PhysicsJointPin) WithBodyB(bodyB *PhysicsBody) *PhysicsJointPin {
+	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())
 	return x
 }
 
@@ -137,8 +137,8 @@ type PhysicsJointPinable interface {
 	WithUpperAngleLimit(upperAngleLimit float64) *PhysicsJointPin
 	WithFrictionTorque(frictionTorque float64) *PhysicsJointPin
 	WithRotationSpeed(rotationSpeed float64) *PhysicsJointPin
-	WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJointPin
-	WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJointPin
+	WithBodyA(bodyA *PhysicsBody) *PhysicsJointPin
+	WithBodyB(bodyB *PhysicsBody) *PhysicsJointPin
 	ShouldEnableLimits() bool
 	SetShouldEnableLimits(shouldEnableLimits bool)
 	LowerAngleLimit() float64

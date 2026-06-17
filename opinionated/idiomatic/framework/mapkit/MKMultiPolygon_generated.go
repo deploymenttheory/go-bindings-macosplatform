@@ -51,13 +51,13 @@ func (x *MultiPolygon) WithSubtitle(subtitle string) *MultiPolygon {
 }
 
 // Polygons returns the collection as a Go slice.
-func (x *MultiPolygon) Polygons() []*raw.MKPolygon {
+func (x *MultiPolygon) Polygons() []*Polygon {
 	arr := x.inner.Polygons()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKPolygon {
-		return raw.MKPolygonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Polygon {
+		return &Polygon{inner: raw.MKPolygonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -68,7 +68,7 @@ type MultiPolygonable interface {
 	Unwrap() *raw.MKMultiPolygon
 	WithTitle(title string) *MultiPolygon
 	WithSubtitle(subtitle string) *MultiPolygon
-	Polygons() []*raw.MKPolygon
+	Polygons() []*Polygon
 }
 
 var _ MultiPolygonable = (*MultiPolygon)(nil)

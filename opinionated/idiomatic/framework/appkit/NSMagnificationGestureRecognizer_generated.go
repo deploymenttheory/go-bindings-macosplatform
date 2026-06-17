@@ -73,8 +73,8 @@ func (x *MagnificationGestureRecognizer) WithEnabled(enabled bool) *Magnificatio
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *MagnificationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *MagnificationGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration)
+func (x *MagnificationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -147,7 +147,7 @@ type MagnificationGestureRecognizerable interface {
 	WithState(state raw.NSGestureRecognizerState) *MagnificationGestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *MagnificationGestureRecognizer
 	WithEnabled(enabled bool) *MagnificationGestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *MagnificationGestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *MagnificationGestureRecognizer
 	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *MagnificationGestureRecognizer
 	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *MagnificationGestureRecognizer
 	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *MagnificationGestureRecognizer

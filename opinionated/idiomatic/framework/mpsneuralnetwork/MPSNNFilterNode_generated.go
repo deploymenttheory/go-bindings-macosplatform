@@ -101,13 +101,13 @@ func (x *NNFilterNode) ResultState() *NNStateNode {
 }
 
 // ResultStates returns the collection as a Go slice.
-func (x *NNFilterNode) ResultStates() []*raw.MPSNNStateNode {
+func (x *NNFilterNode) ResultStates() []*NNStateNode {
 	arr := x.inner.ResultStates()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSNNStateNode {
-		return raw.MPSNNStateNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NNStateNode {
+		return &NNStateNode{inner: raw.MPSNNStateNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -149,7 +149,7 @@ type NNFilterNodeable interface {
 	TrainingGraphWithSourceGradientNodeHandler(gradientImage *raw.MPSNNImageNode, nodeHandler func(*raw.MPSNNFilterNode, *raw.MPSNNFilterNode, *raw.MPSNNImageNode, *raw.MPSNNImageNode)) *foundation.NSArray[*raw.MPSNNFilterNode]
 	ResultImage() *NNImageNode
 	ResultState() *NNStateNode
-	ResultStates() []*raw.MPSNNStateNode
+	ResultStates() []*NNStateNode
 	PaddingPolicy() raw.MPSNNPadding
 	SetPaddingPolicy(paddingPolicy raw.MPSNNPadding)
 	Label() string

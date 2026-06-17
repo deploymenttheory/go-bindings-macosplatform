@@ -91,8 +91,8 @@ func (x *AVB17221AECPAEMMessage) WithSequenceID(sequenceID uint16) *AVB17221AECP
 }
 
 // WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
-func (x *AVB17221AECPAEMMessage) WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPAEMMessage {
-	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC)
+func (x *AVB17221AECPAEMMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAEMMessage {
+	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC.Unwrap())
 	return x
 }
 
@@ -150,7 +150,7 @@ type AVB17221AECPAEMMessageable interface {
 	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAEMMessage
 	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAEMMessage
 	WithSequenceID(sequenceID uint16) *AVB17221AECPAEMMessage
-	WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPAEMMessage
+	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAEMMessage
 	CommandType() raw.AVB17221AEMCommandType
 	SetCommandType(commandType raw.AVB17221AEMCommandType)
 	IsUnsolicited() bool

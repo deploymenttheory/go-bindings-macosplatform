@@ -101,13 +101,13 @@ func (x *PrintPanel) RunModal() int {
 }
 
 // AccessoryControllers returns the collection as a Go slice.
-func (x *PrintPanel) AccessoryControllers() []*raw.NSViewController {
+func (x *PrintPanel) AccessoryControllers() []*ViewController {
 	arr := x.inner.AccessoryControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSViewController {
-		return raw.NSViewControllerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ViewController {
+		return &ViewController{inner: raw.NSViewControllerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -196,7 +196,7 @@ type PrintPanelable interface {
 	BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *raw.NSPrintInfo, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
 	RunModalWithPrintInfo(printInfo *raw.NSPrintInfo) int
 	RunModal() int
-	AccessoryControllers() []*raw.NSViewController
+	AccessoryControllers() []*ViewController
 	Options() raw.NSPrintPanelOptions
 	SetOptions(options raw.NSPrintPanelOptions)
 	HelpAnchor() string

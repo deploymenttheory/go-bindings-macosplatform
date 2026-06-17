@@ -47,8 +47,8 @@ func (x *ColorWell) WithBordered(bordered bool) *ColorWell {
 }
 
 // WithColor sets the color property and returns the receiver for chaining.
-func (x *ColorWell) WithColor(color *raw.NSColor) *ColorWell {
-	x.inner.SetColor(color)
+func (x *ColorWell) WithColor(color *Color) *ColorWell {
+	x.inner.SetColor(color.Unwrap())
 	return x
 }
 
@@ -59,8 +59,8 @@ func (x *ColorWell) WithColorWellStyle(colorWellStyle raw.NSColorWellStyle) *Col
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *ColorWell) WithImage(image *raw.NSImage) *ColorWell {
-	x.inner.SetImage(image)
+func (x *ColorWell) WithImage(image *Image) *ColorWell {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -191,8 +191,8 @@ func (x *ColorWell) WithDoubleValue(doubleValue float64) *ColorWell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *ColorWell) WithFont(font *raw.NSFont) *ColorWell {
-	x.inner.NSControl.SetFont(font)
+func (x *ColorWell) WithFont(font *Font) *ColorWell {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -413,8 +413,8 @@ func (x *ColorWell) WithContentFilters(items ...*coreimage.CIFilter) *ColorWell 
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ColorWell) WithShadow(shadow *raw.NSShadow) *ColorWell {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *ColorWell) WithShadow(shadow *Shadow) *ColorWell {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -495,8 +495,8 @@ func (x *ColorWell) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ColorWell) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ColorWell {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *ColorWell) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ColorWell {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -537,8 +537,8 @@ func (x *ColorWell) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ColorWell) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ColorWell {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *ColorWell) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ColorWell {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -549,8 +549,8 @@ func (x *ColorWell) WithNextResponder(nextResponder ResponderProvider) *ColorWel
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ColorWell) WithMenu(menu *raw.NSMenu) *ColorWell {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *ColorWell) WithMenu(menu *Menu) *ColorWell {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -561,8 +561,8 @@ func (x *ColorWell) WithUserActivity(userActivity *foundation.NSUserActivity) *C
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ColorWell) WithTouchBar(touchBar *raw.NSTouchBar) *ColorWell {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *ColorWell) WithTouchBar(touchBar *TouchBar) *ColorWell {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -689,9 +689,9 @@ func (x *ColorWell) asResponder() *raw.NSResponder { return &x.inner.NSControl.N
 type ColorWellable interface {
 	Unwrap() *raw.NSColorWell
 	WithBordered(bordered bool) *ColorWell
-	WithColor(color *raw.NSColor) *ColorWell
+	WithColor(color *Color) *ColorWell
 	WithColorWellStyle(colorWellStyle raw.NSColorWellStyle) *ColorWell
-	WithImage(image *raw.NSImage) *ColorWell
+	WithImage(image *Image) *ColorWell
 	WithPulldownTarget(pulldownTarget objc.ID) *ColorWell
 	WithPulldownAction(pulldownAction objc.SEL) *ColorWell
 	WithSupportsAlpha(supportsAlpha bool) *ColorWell
@@ -713,7 +713,7 @@ type ColorWellable interface {
 	WithIntegerValue(integerValue int) *ColorWell
 	WithFloatValue(floatValue float32) *ColorWell
 	WithDoubleValue(doubleValue float64) *ColorWell
-	WithFont(font *raw.NSFont) *ColorWell
+	WithFont(font *Font) *ColorWell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ColorWell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ColorWell
 	WithAlignment(alignment raw.NSTextAlignment) *ColorWell
@@ -745,7 +745,7 @@ type ColorWellable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *ColorWell
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ColorWell
 	WithContentFilters(items ...*coreimage.CIFilter) *ColorWell
-	WithShadow(shadow *raw.NSShadow) *ColorWell
+	WithShadow(shadow *Shadow) *ColorWell
 	WithClipsToBounds(clipsToBounds bool) *ColorWell
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ColorWell
 	WithToolTip(toolTip string) *ColorWell
@@ -757,18 +757,18 @@ type ColorWellable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ColorWell
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ColorWell
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ColorWell
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ColorWell
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ColorWell
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ColorWell
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ColorWell
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ColorWell
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ColorWell
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ColorWell
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ColorWell
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ColorWell
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ColorWell
 	WithNextResponder(nextResponder ResponderProvider) *ColorWell
-	WithMenu(menu *raw.NSMenu) *ColorWell
+	WithMenu(menu *Menu) *ColorWell
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ColorWell
-	WithTouchBar(touchBar *raw.NSTouchBar) *ColorWell
+	WithTouchBar(touchBar *TouchBar) *ColorWell
 	Deactivate()
 	Activate(exclusive bool)
 	DrawWellInside(insideRect corefoundation.CGRect)

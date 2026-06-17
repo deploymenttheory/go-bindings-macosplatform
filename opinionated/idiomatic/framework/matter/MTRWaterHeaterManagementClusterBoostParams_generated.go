@@ -37,8 +37,8 @@ func NewMTRWaterHeaterManagementClusterBoostParams() *MTRWaterHeaterManagementCl
 }
 
 // WithBoostInfo sets the boostInfo property and returns the receiver for chaining.
-func (x *MTRWaterHeaterManagementClusterBoostParams) WithBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostParams {
-	x.inner.SetBoostInfo(boostInfo)
+func (x *MTRWaterHeaterManagementClusterBoostParams) WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostParams {
+	x.inner.SetBoostInfo(boostInfo.Unwrap())
 	return x
 }
 
@@ -91,7 +91,7 @@ func (x *MTRWaterHeaterManagementClusterBoostParams) SetServerSideProcessingTime
 // MTRWaterHeaterManagementClusterBoostParamsable is the interface implemented by [MTRWaterHeaterManagementClusterBoostParams], for mocking and DI.
 type MTRWaterHeaterManagementClusterBoostParamsable interface {
 	Unwrap() *raw.MTRWaterHeaterManagementClusterBoostParams
-	WithBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostParams
+	WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostParams
 	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWaterHeaterManagementClusterBoostParams
 	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWaterHeaterManagementClusterBoostParams
 	BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct

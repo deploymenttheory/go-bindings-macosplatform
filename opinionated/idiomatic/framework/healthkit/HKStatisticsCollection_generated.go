@@ -52,13 +52,13 @@ func (x *StatisticsCollection) EnumerateStatisticsFromDateToDateWith(startDate *
 }
 
 // Statistics returns the collection as a Go slice.
-func (x *StatisticsCollection) Statistics() []*raw.HKStatistics {
+func (x *StatisticsCollection) Statistics() []*Statistics {
 	arr := x.inner.Statistics()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKStatistics {
-		return raw.HKStatisticsFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Statistics {
+		return &Statistics{inner: raw.HKStatisticsFromID(purego.Retain(_id))}
 	})
 }
 
@@ -72,7 +72,7 @@ type StatisticsCollectionable interface {
 	Unwrap() *raw.HKStatisticsCollection
 	StatisticsForDate(date *foundation.NSDate) *Statistics
 	EnumerateStatisticsFromDateToDateWith(startDate *foundation.NSDate, endDate *foundation.NSDate, block func(*raw.HKStatistics, *bool))
-	Statistics() []*raw.HKStatistics
+	Statistics() []*Statistics
 	Sources() *foundation.NSSet[*raw.HKSource]
 }
 

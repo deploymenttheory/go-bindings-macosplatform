@@ -37,20 +37,20 @@ func NewPlaybackCoordinationMedium() *PlaybackCoordinationMedium {
 }
 
 // ConnectedPlaybackCoordinators returns the collection as a Go slice.
-func (x *PlaybackCoordinationMedium) ConnectedPlaybackCoordinators() []*raw.AVPlayerPlaybackCoordinator {
+func (x *PlaybackCoordinationMedium) ConnectedPlaybackCoordinators() []*PlayerPlaybackCoordinator {
 	arr := x.inner.ConnectedPlaybackCoordinators()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerPlaybackCoordinator {
-		return raw.AVPlayerPlaybackCoordinatorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerPlaybackCoordinator {
+		return &PlayerPlaybackCoordinator{inner: raw.AVPlayerPlaybackCoordinatorFromID(purego.Retain(_id))}
 	})
 }
 
 // PlaybackCoordinationMediumable is the interface implemented by [PlaybackCoordinationMedium], for mocking and DI.
 type PlaybackCoordinationMediumable interface {
 	Unwrap() *raw.AVPlaybackCoordinationMedium
-	ConnectedPlaybackCoordinators() []*raw.AVPlayerPlaybackCoordinator
+	ConnectedPlaybackCoordinators() []*PlayerPlaybackCoordinator
 }
 
 var _ PlaybackCoordinationMediumable = (*PlaybackCoordinationMedium)(nil)

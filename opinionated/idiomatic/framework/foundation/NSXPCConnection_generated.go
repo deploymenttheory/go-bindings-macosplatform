@@ -54,8 +54,8 @@ func NewXPCConnectionWithListenerEndpoint(endpoint *raw.NSXPCListenerEndpoint) *
 }
 
 // WithExportedInterface sets the exportedInterface property and returns the receiver for chaining.
-func (x *XPCConnection) WithExportedInterface(exportedInterface *raw.NSXPCInterface) *XPCConnection {
-	x.inner.SetExportedInterface(exportedInterface)
+func (x *XPCConnection) WithExportedInterface(exportedInterface *XPCInterface) *XPCConnection {
+	x.inner.SetExportedInterface(exportedInterface.Unwrap())
 	return x
 }
 
@@ -66,8 +66,8 @@ func (x *XPCConnection) WithExportedObject(exportedObject objc.ID) *XPCConnectio
 }
 
 // WithRemoteObjectInterface sets the remoteObjectInterface property and returns the receiver for chaining.
-func (x *XPCConnection) WithRemoteObjectInterface(remoteObjectInterface *raw.NSXPCInterface) *XPCConnection {
-	x.inner.SetRemoteObjectInterface(remoteObjectInterface)
+func (x *XPCConnection) WithRemoteObjectInterface(remoteObjectInterface *XPCInterface) *XPCConnection {
+	x.inner.SetRemoteObjectInterface(remoteObjectInterface.Unwrap())
 	return x
 }
 
@@ -262,9 +262,9 @@ func (x *XPCConnection) asObject() *raw.NSObject { return &x.inner.NSObject }
 // XPCConnectionable is the interface implemented by [XPCConnection], for mocking and DI.
 type XPCConnectionable interface {
 	Unwrap() *raw.NSXPCConnection
-	WithExportedInterface(exportedInterface *raw.NSXPCInterface) *XPCConnection
+	WithExportedInterface(exportedInterface *XPCInterface) *XPCConnection
 	WithExportedObject(exportedObject objc.ID) *XPCConnection
-	WithRemoteObjectInterface(remoteObjectInterface *raw.NSXPCInterface) *XPCConnection
+	WithRemoteObjectInterface(remoteObjectInterface *XPCInterface) *XPCConnection
 	WithInterruptionHandler(interruptionHandler func()) *XPCConnection
 	WithInvalidationHandler(invalidationHandler func()) *XPCConnection
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCConnection

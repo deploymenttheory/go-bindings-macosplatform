@@ -53,8 +53,8 @@ func (x *FormCell) WithTitleWidth(titleWidth float64) *FormCell {
 }
 
 // WithTitleFont sets the titleFont property and returns the receiver for chaining.
-func (x *FormCell) WithTitleFont(titleFont *raw.NSFont) *FormCell {
-	x.inner.SetTitleFont(titleFont)
+func (x *FormCell) WithTitleFont(titleFont *Font) *FormCell {
+	x.inner.SetTitleFont(titleFont.Unwrap())
 	return x
 }
 
@@ -197,8 +197,8 @@ func (x *FormCell) WithWraps(wraps bool) *FormCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *FormCell) WithFont(font *raw.NSFont) *FormCell {
-	x.inner.NSActionCell.NSCell.SetFont(font)
+func (x *FormCell) WithFont(font *Font) *FormCell {
+	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -245,8 +245,8 @@ func (x *FormCell) WithIntegerValue(integerValue int) *FormCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *FormCell) WithImage(image *raw.NSImage) *FormCell {
-	x.inner.NSActionCell.NSCell.SetImage(image)
+func (x *FormCell) WithImage(image *Image) *FormCell {
+	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -263,8 +263,8 @@ func (x *FormCell) WithRepresentedObject(representedObject objc.ID) *FormCell {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *FormCell) WithMenu(menu *raw.NSMenu) *FormCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu)
+func (x *FormCell) WithMenu(menu *Menu) *FormCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -465,7 +465,7 @@ func (x *FormCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
 type FormCellable interface {
 	Unwrap() *raw.NSFormCell
 	WithTitleWidth(titleWidth float64) *FormCell
-	WithTitleFont(titleFont *raw.NSFont) *FormCell
+	WithTitleFont(titleFont *Font) *FormCell
 	WithPlaceholderString(placeholderString string) *FormCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *FormCell
 	WithTitleAlignment(titleAlignment raw.NSTextAlignment) *FormCell
@@ -489,7 +489,7 @@ type FormCellable interface {
 	WithHighlighted(highlighted bool) *FormCell
 	WithAlignment(alignment raw.NSTextAlignment) *FormCell
 	WithWraps(wraps bool) *FormCell
-	WithFont(font *raw.NSFont) *FormCell
+	WithFont(font *Font) *FormCell
 	WithFormatter(formatter *foundation.NSFormatter) *FormCell
 	WithObjectValue(objectValue objc.ID) *FormCell
 	WithStringValue(stringValue string) *FormCell
@@ -497,10 +497,10 @@ type FormCellable interface {
 	WithFloatValue(floatValue float32) *FormCell
 	WithDoubleValue(doubleValue float64) *FormCell
 	WithIntegerValue(integerValue int) *FormCell
-	WithImage(image *raw.NSImage) *FormCell
+	WithImage(image *Image) *FormCell
 	WithControlSize(controlSize raw.NSControlSize) *FormCell
 	WithRepresentedObject(representedObject objc.ID) *FormCell
-	WithMenu(menu *raw.NSMenu) *FormCell
+	WithMenu(menu *Menu) *FormCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *FormCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *FormCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *FormCell

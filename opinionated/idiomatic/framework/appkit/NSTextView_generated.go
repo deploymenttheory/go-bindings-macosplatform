@@ -64,8 +64,8 @@ func NewTextViewUsingTextLayoutManager(usingTextLayoutManager bool) *TextView {
 }
 
 // WithTextContainer sets the textContainer property and returns the receiver for chaining.
-func (x *TextView) WithTextContainer(textContainer *raw.NSTextContainer) *TextView {
-	x.inner.SetTextContainer(textContainer)
+func (x *TextView) WithTextContainer(textContainer *TextContainer) *TextView {
+	x.inner.SetTextContainer(textContainer.Unwrap())
 	return x
 }
 
@@ -110,8 +110,8 @@ func (x *TextView) WithSelectedTextAttributes(selectedTextAttributes *foundation
 }
 
 // WithInsertionPointColor sets the insertionPointColor property and returns the receiver for chaining.
-func (x *TextView) WithInsertionPointColor(insertionPointColor *raw.NSColor) *TextView {
-	x.inner.SetInsertionPointColor(insertionPointColor)
+func (x *TextView) WithInsertionPointColor(insertionPointColor *Color) *TextView {
+	x.inner.SetInsertionPointColor(insertionPointColor.Unwrap())
 	return x
 }
 
@@ -384,8 +384,8 @@ func (x *TextView) WithDrawsBackground(drawsBackground bool) *TextView {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TextView) WithBackgroundColor(backgroundColor *raw.NSColor) *TextView {
-	x.inner.NSText.SetBackgroundColor(backgroundColor)
+func (x *TextView) WithBackgroundColor(backgroundColor *Color) *TextView {
+	x.inner.NSText.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -396,14 +396,14 @@ func (x *TextView) WithSelectedRange(selectedRange foundation.NSRange) *TextView
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *TextView) WithFont(font *raw.NSFont) *TextView {
-	x.inner.NSText.SetFont(font)
+func (x *TextView) WithFont(font *Font) *TextView {
+	x.inner.NSText.SetFont(font.Unwrap())
 	return x
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *TextView) WithTextColor(textColor *raw.NSColor) *TextView {
-	x.inner.NSText.SetTextColor(textColor)
+func (x *TextView) WithTextColor(textColor *Color) *TextView {
+	x.inner.NSText.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -624,8 +624,8 @@ func (x *TextView) WithContentFilters(items ...*coreimage.CIFilter) *TextView {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *TextView) WithShadow(shadow *raw.NSShadow) *TextView {
-	x.inner.NSText.NSView.SetShadow(shadow)
+func (x *TextView) WithShadow(shadow *Shadow) *TextView {
+	x.inner.NSText.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -706,8 +706,8 @@ func (x *TextView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSiz
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *TextView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TextView {
-	x.inner.NSText.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *TextView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextView {
+	x.inner.NSText.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -748,8 +748,8 @@ func (x *TextView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynam
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *TextView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TextView {
-	x.inner.NSText.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *TextView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextView {
+	x.inner.NSText.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -760,8 +760,8 @@ func (x *TextView) WithNextResponder(nextResponder ResponderProvider) *TextView 
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TextView) WithMenu(menu *raw.NSMenu) *TextView {
-	x.inner.NSText.NSView.NSResponder.SetMenu(menu)
+func (x *TextView) WithMenu(menu *Menu) *TextView {
+	x.inner.NSText.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -772,8 +772,8 @@ func (x *TextView) WithUserActivity(userActivity *foundation.NSUserActivity) *Te
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TextView) WithTouchBar(touchBar *raw.NSTouchBar) *TextView {
-	x.inner.NSText.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *TextView) WithTouchBar(touchBar *TouchBar) *TextView {
+	x.inner.NSText.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -1843,13 +1843,13 @@ func (x *TextView) asResponder() *raw.NSResponder { return &x.inner.NSText.NSVie
 // TextViewable is the interface implemented by [TextView], for mocking and DI.
 type TextViewable interface {
 	Unwrap() *raw.NSTextView
-	WithTextContainer(textContainer *raw.NSTextContainer) *TextView
+	WithTextContainer(textContainer *TextContainer) *TextView
 	WithTextContainerInset(textContainerInset corefoundation.CGSize) *TextView
 	WithUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance bool) *TextView
 	WithSelectedRanges(items ...*foundation.NSValue) *TextView
 	WithSelectionGranularity(selectionGranularity raw.NSSelectionGranularity) *TextView
 	WithSelectedTextAttributes(selectedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
-	WithInsertionPointColor(insertionPointColor *raw.NSColor) *TextView
+	WithInsertionPointColor(insertionPointColor *Color) *TextView
 	WithMarkedTextAttributes(markedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
 	WithLinkTextAttributes(linkTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
 	WithDisplaysLinkToolTips(displaysLinkToolTips bool) *TextView
@@ -1893,10 +1893,10 @@ type TextViewable interface {
 	WithFieldEditor(fieldEditor bool) *TextView
 	WithUsesFontPanel(usesFontPanel bool) *TextView
 	WithDrawsBackground(drawsBackground bool) *TextView
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TextView
+	WithBackgroundColor(backgroundColor *Color) *TextView
 	WithSelectedRange(selectedRange foundation.NSRange) *TextView
-	WithFont(font *raw.NSFont) *TextView
-	WithTextColor(textColor *raw.NSColor) *TextView
+	WithFont(font *Font) *TextView
+	WithTextColor(textColor *Color) *TextView
 	WithAlignment(alignment raw.NSTextAlignment) *TextView
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextView
 	WithMaxSize(maxSize corefoundation.CGSize) *TextView
@@ -1928,7 +1928,7 @@ type TextViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *TextView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TextView
 	WithContentFilters(items ...*coreimage.CIFilter) *TextView
-	WithShadow(shadow *raw.NSShadow) *TextView
+	WithShadow(shadow *Shadow) *TextView
 	WithClipsToBounds(clipsToBounds bool) *TextView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextView
 	WithToolTip(toolTip string) *TextView
@@ -1940,18 +1940,18 @@ type TextViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TextView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TextView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextView
 	WithNextResponder(nextResponder ResponderProvider) *TextView
-	WithMenu(menu *raw.NSMenu) *TextView
+	WithMenu(menu *Menu) *TextView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TextView
-	WithTouchBar(touchBar *raw.NSTouchBar) *TextView
+	WithTouchBar(touchBar *TouchBar) *TextView
 	ReplaceTextContainer(newContainer *raw.NSTextContainer)
 	InvalidateTextContainerOrigin()
 	InsertText(insertString objc.ID)

@@ -103,8 +103,8 @@ func (x *PopUpButton) WithHasDestructiveAction(hasDestructiveAction bool) *PopUp
 }
 
 // WithSound sets the sound property and returns the receiver for chaining.
-func (x *PopUpButton) WithSound(sound *raw.NSSound) *PopUpButton {
-	x.inner.NSButton.SetSound(sound)
+func (x *PopUpButton) WithSound(sound *Sound) *PopUpButton {
+	x.inner.NSButton.SetSound(sound.Unwrap())
 	return x
 }
 
@@ -145,14 +145,14 @@ func (x *PopUpButton) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMo
 }
 
 // WithBezelColor sets the bezelColor property and returns the receiver for chaining.
-func (x *PopUpButton) WithBezelColor(bezelColor *raw.NSColor) *PopUpButton {
-	x.inner.NSButton.SetBezelColor(bezelColor)
+func (x *PopUpButton) WithBezelColor(bezelColor *Color) *PopUpButton {
+	x.inner.NSButton.SetBezelColor(bezelColor.Unwrap())
 	return x
 }
 
 // WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
-func (x *PopUpButton) WithContentTintColor(contentTintColor *raw.NSColor) *PopUpButton {
-	x.inner.NSButton.SetContentTintColor(contentTintColor)
+func (x *PopUpButton) WithContentTintColor(contentTintColor *Color) *PopUpButton {
+	x.inner.NSButton.SetContentTintColor(contentTintColor.Unwrap())
 	return x
 }
 
@@ -163,14 +163,14 @@ func (x *PopUpButton) WithTintProminence(tintProminence raw.NSTintProminence) *P
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *PopUpButton) WithImage(image *raw.NSImage) *PopUpButton {
-	x.inner.NSButton.SetImage(image)
+func (x *PopUpButton) WithImage(image *Image) *PopUpButton {
+	x.inner.NSButton.SetImage(image.Unwrap())
 	return x
 }
 
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
-func (x *PopUpButton) WithAlternateImage(alternateImage *raw.NSImage) *PopUpButton {
-	x.inner.NSButton.SetAlternateImage(alternateImage)
+func (x *PopUpButton) WithAlternateImage(alternateImage *Image) *PopUpButton {
+	x.inner.NSButton.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
@@ -193,8 +193,8 @@ func (x *PopUpButton) WithImageHugsTitle(imageHugsTitle bool) *PopUpButton {
 }
 
 // WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
-func (x *PopUpButton) WithSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) *PopUpButton {
-	x.inner.NSButton.SetSymbolConfiguration(symbolConfiguration)
+func (x *PopUpButton) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *PopUpButton {
+	x.inner.NSButton.SetSymbolConfiguration(symbolConfiguration.Unwrap())
 	return x
 }
 
@@ -331,8 +331,8 @@ func (x *PopUpButton) WithDoubleValue(doubleValue float64) *PopUpButton {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *PopUpButton) WithFont(font *raw.NSFont) *PopUpButton {
-	x.inner.NSButton.NSControl.SetFont(font)
+func (x *PopUpButton) WithFont(font *Font) *PopUpButton {
+	x.inner.NSButton.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -553,8 +553,8 @@ func (x *PopUpButton) WithContentFilters(items ...*coreimage.CIFilter) *PopUpBut
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *PopUpButton) WithShadow(shadow *raw.NSShadow) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetShadow(shadow)
+func (x *PopUpButton) WithShadow(shadow *Shadow) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -635,8 +635,8 @@ func (x *PopUpButton) WithPrefersCompactControlSizeMetrics(prefersCompactControl
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *PopUpButton) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *PopUpButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -677,8 +677,8 @@ func (x *PopUpButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDy
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *PopUpButton) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *PopUpButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -689,8 +689,8 @@ func (x *PopUpButton) WithNextResponder(nextResponder ResponderProvider) *PopUpB
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *PopUpButton) WithMenu(menu *raw.NSMenu) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *PopUpButton) WithMenu(menu *Menu) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -701,8 +701,8 @@ func (x *PopUpButton) WithUserActivity(userActivity *foundation.NSUserActivity) 
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *PopUpButton) WithTouchBar(touchBar *raw.NSTouchBar) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *PopUpButton) WithTouchBar(touchBar *TouchBar) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -864,13 +864,13 @@ func (x *PopUpButton) SetAltersStateOfSelectedItem(altersStateOfSelectedItem boo
 }
 
 // ItemArray returns the collection as a Go slice.
-func (x *PopUpButton) ItemArray() []*raw.NSMenuItem {
+func (x *PopUpButton) ItemArray() []*MenuItem {
 	arr := x.inner.ItemArray()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMenuItem {
-		return raw.NSMenuItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MenuItem {
+		return &MenuItem{inner: raw.NSMenuItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -943,22 +943,22 @@ type PopUpButtonable interface {
 	WithAlternateTitle(alternateTitle string) *PopUpButton
 	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *PopUpButton
 	WithHasDestructiveAction(hasDestructiveAction bool) *PopUpButton
-	WithSound(sound *raw.NSSound) *PopUpButton
+	WithSound(sound *Sound) *PopUpButton
 	WithSpringLoaded(springLoaded bool) *PopUpButton
 	WithMaxAcceleratorLevel(maxAcceleratorLevel int) *PopUpButton
 	WithBezelStyle(bezelStyle raw.NSBezelStyle) *PopUpButton
 	WithBordered(bordered bool) *PopUpButton
 	WithTransparent(transparent bool) *PopUpButton
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButton
-	WithBezelColor(bezelColor *raw.NSColor) *PopUpButton
-	WithContentTintColor(contentTintColor *raw.NSColor) *PopUpButton
+	WithBezelColor(bezelColor *Color) *PopUpButton
+	WithContentTintColor(contentTintColor *Color) *PopUpButton
 	WithTintProminence(tintProminence raw.NSTintProminence) *PopUpButton
-	WithImage(image *raw.NSImage) *PopUpButton
-	WithAlternateImage(alternateImage *raw.NSImage) *PopUpButton
+	WithImage(image *Image) *PopUpButton
+	WithAlternateImage(alternateImage *Image) *PopUpButton
 	WithImagePosition(imagePosition raw.NSCellImagePosition) *PopUpButton
 	WithImageScaling(imageScaling raw.NSImageScaling) *PopUpButton
 	WithImageHugsTitle(imageHugsTitle bool) *PopUpButton
-	WithSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) *PopUpButton
+	WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *PopUpButton
 	WithState(state int) *PopUpButton
 	WithAllowsMixedState(allowsMixedState bool) *PopUpButton
 	WithKeyEquivalent(keyEquivalent string) *PopUpButton
@@ -981,7 +981,7 @@ type PopUpButtonable interface {
 	WithIntegerValue(integerValue int) *PopUpButton
 	WithFloatValue(floatValue float32) *PopUpButton
 	WithDoubleValue(doubleValue float64) *PopUpButton
-	WithFont(font *raw.NSFont) *PopUpButton
+	WithFont(font *Font) *PopUpButton
 	WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButton
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PopUpButton
 	WithAlignment(alignment raw.NSTextAlignment) *PopUpButton
@@ -1013,7 +1013,7 @@ type PopUpButtonable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *PopUpButton
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PopUpButton
 	WithContentFilters(items ...*coreimage.CIFilter) *PopUpButton
-	WithShadow(shadow *raw.NSShadow) *PopUpButton
+	WithShadow(shadow *Shadow) *PopUpButton
 	WithClipsToBounds(clipsToBounds bool) *PopUpButton
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PopUpButton
 	WithToolTip(toolTip string) *PopUpButton
@@ -1025,18 +1025,18 @@ type PopUpButtonable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PopUpButton
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PopUpButton
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PopUpButton
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *PopUpButton
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PopUpButton
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PopUpButton
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PopUpButton
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PopUpButton
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PopUpButton
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PopUpButton
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PopUpButton
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PopUpButton
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PopUpButton
 	WithNextResponder(nextResponder ResponderProvider) *PopUpButton
-	WithMenu(menu *raw.NSMenu) *PopUpButton
+	WithMenu(menu *Menu) *PopUpButton
 	WithUserActivity(userActivity *foundation.NSUserActivity) *PopUpButton
-	WithTouchBar(touchBar *raw.NSTouchBar) *PopUpButton
+	WithTouchBar(touchBar *TouchBar) *PopUpButton
 	AddItemWithTitle(title string)
 	AddItemsWithTitles(itemTitles *foundation.NSArray[*foundation.NSString])
 	InsertItemWithTitleAtIndex(title string, index int)
@@ -1066,7 +1066,7 @@ type PopUpButtonable interface {
 	SetUsesItemFromMenu(usesItemFromMenu bool)
 	AltersStateOfSelectedItem() bool
 	SetAltersStateOfSelectedItem(altersStateOfSelectedItem bool)
-	ItemArray() []*raw.NSMenuItem
+	ItemArray() []*MenuItem
 	NumberOfItems() int
 	LastItem() *MenuItem
 	SelectedItem() *MenuItem

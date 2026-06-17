@@ -42,8 +42,8 @@ func (x *WorkflowView) WithEditable(editable bool) *WorkflowView {
 }
 
 // WithWorkflowController sets the workflowController property and returns the receiver for chaining.
-func (x *WorkflowView) WithWorkflowController(workflowController *raw.AMWorkflowController) *WorkflowView {
-	x.inner.SetWorkflowController(workflowController)
+func (x *WorkflowView) WithWorkflowController(workflowController *WorkflowController) *WorkflowView {
+	x.inner.SetWorkflowController(workflowController.Unwrap())
 	return x
 }
 
@@ -75,7 +75,7 @@ func (x *WorkflowView) SetWorkflowController(workflowController *raw.AMWorkflowC
 type WorkflowViewable interface {
 	Unwrap() *raw.AMWorkflowView
 	WithEditable(editable bool) *WorkflowView
-	WithWorkflowController(workflowController *raw.AMWorkflowController) *WorkflowView
+	WithWorkflowController(workflowController *WorkflowController) *WorkflowView
 	IsEditable() bool
 	SetEditable(editable bool)
 	WorkflowController() *WorkflowController

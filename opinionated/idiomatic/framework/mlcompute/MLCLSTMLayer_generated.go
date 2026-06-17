@@ -59,13 +59,13 @@ func (x *LSTMLayer) Descriptor() *LSTMDescriptor {
 }
 
 // GateActivations returns the collection as a Go slice.
-func (x *LSTMLayer) GateActivations() []*raw.MLCActivationDescriptor {
+func (x *LSTMLayer) GateActivations() []*ActivationDescriptor {
 	arr := x.inner.GateActivations()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCActivationDescriptor {
-		return raw.MLCActivationDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ActivationDescriptor {
+		return &ActivationDescriptor{inner: raw.MLCActivationDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -79,90 +79,90 @@ func (x *LSTMLayer) OutputResultActivation() *ActivationDescriptor {
 }
 
 // InputWeights returns the collection as a Go slice.
-func (x *LSTMLayer) InputWeights() []*raw.MLCTensor {
+func (x *LSTMLayer) InputWeights() []*Tensor {
 	arr := x.inner.InputWeights()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
-		return raw.MLCTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Tensor {
+		return &Tensor{inner: raw.MLCTensorFromID(purego.Retain(_id))}
 	})
 }
 
 // HiddenWeights returns the collection as a Go slice.
-func (x *LSTMLayer) HiddenWeights() []*raw.MLCTensor {
+func (x *LSTMLayer) HiddenWeights() []*Tensor {
 	arr := x.inner.HiddenWeights()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
-		return raw.MLCTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Tensor {
+		return &Tensor{inner: raw.MLCTensorFromID(purego.Retain(_id))}
 	})
 }
 
 // PeepholeWeights returns the collection as a Go slice.
-func (x *LSTMLayer) PeepholeWeights() []*raw.MLCTensor {
+func (x *LSTMLayer) PeepholeWeights() []*Tensor {
 	arr := x.inner.PeepholeWeights()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
-		return raw.MLCTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Tensor {
+		return &Tensor{inner: raw.MLCTensorFromID(purego.Retain(_id))}
 	})
 }
 
 // Biases returns the collection as a Go slice.
-func (x *LSTMLayer) Biases() []*raw.MLCTensor {
+func (x *LSTMLayer) Biases() []*Tensor {
 	arr := x.inner.Biases()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
-		return raw.MLCTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Tensor {
+		return &Tensor{inner: raw.MLCTensorFromID(purego.Retain(_id))}
 	})
 }
 
 // InputWeightsParameters returns the collection as a Go slice.
-func (x *LSTMLayer) InputWeightsParameters() []*raw.MLCTensorParameter {
+func (x *LSTMLayer) InputWeightsParameters() []*TensorParameter {
 	arr := x.inner.InputWeightsParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
-		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorParameter {
+		return &TensorParameter{inner: raw.MLCTensorParameterFromID(purego.Retain(_id))}
 	})
 }
 
 // HiddenWeightsParameters returns the collection as a Go slice.
-func (x *LSTMLayer) HiddenWeightsParameters() []*raw.MLCTensorParameter {
+func (x *LSTMLayer) HiddenWeightsParameters() []*TensorParameter {
 	arr := x.inner.HiddenWeightsParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
-		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorParameter {
+		return &TensorParameter{inner: raw.MLCTensorParameterFromID(purego.Retain(_id))}
 	})
 }
 
 // PeepholeWeightsParameters returns the collection as a Go slice.
-func (x *LSTMLayer) PeepholeWeightsParameters() []*raw.MLCTensorParameter {
+func (x *LSTMLayer) PeepholeWeightsParameters() []*TensorParameter {
 	arr := x.inner.PeepholeWeightsParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
-		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorParameter {
+		return &TensorParameter{inner: raw.MLCTensorParameterFromID(purego.Retain(_id))}
 	})
 }
 
 // BiasesParameters returns the collection as a Go slice.
-func (x *LSTMLayer) BiasesParameters() []*raw.MLCTensorParameter {
+func (x *LSTMLayer) BiasesParameters() []*TensorParameter {
 	arr := x.inner.BiasesParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
-		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorParameter {
+		return &TensorParameter{inner: raw.MLCTensorParameterFromID(purego.Retain(_id))}
 	})
 }
 
@@ -174,16 +174,16 @@ type LSTMLayerable interface {
 	WithLabel(label string) *LSTMLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *LSTMLayer
 	Descriptor() *LSTMDescriptor
-	GateActivations() []*raw.MLCActivationDescriptor
+	GateActivations() []*ActivationDescriptor
 	OutputResultActivation() *ActivationDescriptor
-	InputWeights() []*raw.MLCTensor
-	HiddenWeights() []*raw.MLCTensor
-	PeepholeWeights() []*raw.MLCTensor
-	Biases() []*raw.MLCTensor
-	InputWeightsParameters() []*raw.MLCTensorParameter
-	HiddenWeightsParameters() []*raw.MLCTensorParameter
-	PeepholeWeightsParameters() []*raw.MLCTensorParameter
-	BiasesParameters() []*raw.MLCTensorParameter
+	InputWeights() []*Tensor
+	HiddenWeights() []*Tensor
+	PeepholeWeights() []*Tensor
+	Biases() []*Tensor
+	InputWeightsParameters() []*TensorParameter
+	HiddenWeightsParameters() []*TensorParameter
+	PeepholeWeightsParameters() []*TensorParameter
+	BiasesParameters() []*TensorParameter
 }
 
 var _ LSTMLayerable = (*LSTMLayer)(nil)

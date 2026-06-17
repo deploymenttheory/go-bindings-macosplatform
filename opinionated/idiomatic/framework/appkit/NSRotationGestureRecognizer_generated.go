@@ -79,8 +79,8 @@ func (x *RotationGestureRecognizer) WithEnabled(enabled bool) *RotationGestureRe
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *RotationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RotationGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration)
+func (x *RotationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -164,7 +164,7 @@ type RotationGestureRecognizerable interface {
 	WithState(state raw.NSGestureRecognizerState) *RotationGestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *RotationGestureRecognizer
 	WithEnabled(enabled bool) *RotationGestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RotationGestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RotationGestureRecognizer
 	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *RotationGestureRecognizer
 	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *RotationGestureRecognizer
 	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *RotationGestureRecognizer

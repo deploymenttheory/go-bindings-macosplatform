@@ -97,13 +97,13 @@ func (x *CaptureAudioFileOutput) StartRecordingToOutputFileURLOutputFileTypeReco
 }
 
 // Metadata returns the collection as a Go slice.
-func (x *CaptureAudioFileOutput) Metadata() []*raw.AVMetadataItem {
+func (x *CaptureAudioFileOutput) Metadata() []*MetadataItem {
 	arr := x.inner.Metadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -137,7 +137,7 @@ type CaptureAudioFileOutputable interface {
 	WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureAudioFileOutput
 	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioFileOutput
 	StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(outputFileURL string, fileType *foundation.NSString, delegate raw.AVCaptureFileOutputRecordingDelegate)
-	Metadata() []*raw.AVMetadataItem
+	Metadata() []*MetadataItem
 	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
 	AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID])

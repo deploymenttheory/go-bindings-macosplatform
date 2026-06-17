@@ -45,8 +45,8 @@ func NewOperationGroupWithCoder(aDecoder *foundation.NSCoder) *OperationGroup {
 }
 
 // WithDefaultConfiguration sets the defaultConfiguration property and returns the receiver for chaining.
-func (x *OperationGroup) WithDefaultConfiguration(defaultConfiguration *raw.CKOperationConfiguration) *OperationGroup {
-	x.inner.SetDefaultConfiguration(defaultConfiguration)
+func (x *OperationGroup) WithDefaultConfiguration(defaultConfiguration *OperationConfiguration) *OperationGroup {
+	x.inner.SetDefaultConfiguration(defaultConfiguration.Unwrap())
 	return x
 }
 
@@ -144,7 +144,7 @@ func (x *OperationGroup) SetExpectedReceiveSize(expectedReceiveSize raw.CKOperat
 // OperationGroupable is the interface implemented by [OperationGroup], for mocking and DI.
 type OperationGroupable interface {
 	Unwrap() *raw.CKOperationGroup
-	WithDefaultConfiguration(defaultConfiguration *raw.CKOperationConfiguration) *OperationGroup
+	WithDefaultConfiguration(defaultConfiguration *OperationConfiguration) *OperationGroup
 	WithName(name string) *OperationGroup
 	WithQuantity(quantity uint) *OperationGroup
 	WithExpectedSendSize(expectedSendSize raw.CKOperationGroupTransferSize) *OperationGroup

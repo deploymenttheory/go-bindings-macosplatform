@@ -56,13 +56,13 @@ func (x *MappingModel) WithEntityMappings(items ...*raw.NSEntityMapping) *Mappin
 }
 
 // EntityMappings returns the collection as a Go slice.
-func (x *MappingModel) EntityMappings() []*raw.NSEntityMapping {
+func (x *MappingModel) EntityMappings() []*EntityMapping {
 	arr := x.inner.EntityMappings()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSEntityMapping {
-		return raw.NSEntityMappingFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EntityMapping {
+		return &EntityMapping{inner: raw.NSEntityMappingFromID(purego.Retain(_id))}
 	})
 }
 
@@ -80,7 +80,7 @@ func (x *MappingModel) EntityMappingsByName() *foundation.NSDictionary[*foundati
 type MappingModelable interface {
 	Unwrap() *raw.NSMappingModel
 	WithEntityMappings(items ...*raw.NSEntityMapping) *MappingModel
-	EntityMappings() []*raw.NSEntityMapping
+	EntityMappings() []*EntityMapping
 	SetEntityMappings(entityMappings *foundation.NSArray[*raw.NSEntityMapping])
 	EntityMappingsByName() *foundation.NSDictionary[*foundation.NSString, *raw.NSEntityMapping]
 }

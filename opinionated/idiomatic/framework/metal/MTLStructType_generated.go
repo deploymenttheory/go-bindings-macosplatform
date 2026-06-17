@@ -47,13 +47,13 @@ func (x *StructType) MemberByName(name string) *StructMember {
 }
 
 // Members returns the collection as a Go slice.
-func (x *StructType) Members() []*raw.MTLStructMember {
+func (x *StructType) Members() []*StructMember {
 	arr := x.inner.Members()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLStructMember {
-		return raw.MTLStructMemberFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *StructMember {
+		return &StructMember{inner: raw.MTLStructMemberFromID(purego.Retain(_id))}
 	})
 }
 
@@ -63,7 +63,7 @@ func (x *StructType) asType() *raw.MTLType { return &x.inner.MTLType }
 type StructTypeable interface {
 	Unwrap() *raw.MTLStructType
 	MemberByName(name string) *StructMember
-	Members() []*raw.MTLStructMember
+	Members() []*StructMember
 }
 
 var _ StructTypeable = (*StructType)(nil)

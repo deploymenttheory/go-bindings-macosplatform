@@ -64,8 +64,8 @@ func (x *SamplerNodeDefinition) WithRate(rate float64) *SamplerNodeDefinition {
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *SamplerNodeDefinition) WithGroup(group *raw.PHASEGroup) *SamplerNodeDefinition {
-	x.inner.PHASEGeneratorNodeDefinition.SetGroup(group)
+func (x *SamplerNodeDefinition) WithGroup(group *Group) *SamplerNodeDefinition {
+	x.inner.PHASEGeneratorNodeDefinition.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -122,7 +122,7 @@ type SamplerNodeDefinitionable interface {
 	WithCullOption(cullOption raw.PHASECullOption) *SamplerNodeDefinition
 	WithPlaybackMode(playbackMode raw.PHASEPlaybackMode) *SamplerNodeDefinition
 	WithRate(rate float64) *SamplerNodeDefinition
-	WithGroup(group *raw.PHASEGroup) *SamplerNodeDefinition
+	WithGroup(group *Group) *SamplerNodeDefinition
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition
 	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition
 	AssetIdentifier() string

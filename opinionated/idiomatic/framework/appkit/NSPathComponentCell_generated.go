@@ -44,8 +44,8 @@ func (x *PathComponentCell) WithURL(uRL string) *PathComponentCell {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *PathComponentCell) WithBackgroundColor(backgroundColor *raw.NSColor) *PathComponentCell {
-	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor)
+func (x *PathComponentCell) WithBackgroundColor(backgroundColor *Color) *PathComponentCell {
+	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -56,8 +56,8 @@ func (x *PathComponentCell) WithDrawsBackground(drawsBackground bool) *PathCompo
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *PathComponentCell) WithTextColor(textColor *raw.NSColor) *PathComponentCell {
-	x.inner.NSTextFieldCell.SetTextColor(textColor)
+func (x *PathComponentCell) WithTextColor(textColor *Color) *PathComponentCell {
+	x.inner.NSTextFieldCell.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -198,8 +198,8 @@ func (x *PathComponentCell) WithWraps(wraps bool) *PathComponentCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *PathComponentCell) WithFont(font *raw.NSFont) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font)
+func (x *PathComponentCell) WithFont(font *Font) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -246,8 +246,8 @@ func (x *PathComponentCell) WithIntegerValue(integerValue int) *PathComponentCel
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *PathComponentCell) WithImage(image *raw.NSImage) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image)
+func (x *PathComponentCell) WithImage(image *Image) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -264,8 +264,8 @@ func (x *PathComponentCell) WithRepresentedObject(representedObject objc.ID) *Pa
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *PathComponentCell) WithMenu(menu *raw.NSMenu) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu)
+func (x *PathComponentCell) WithMenu(menu *Menu) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -385,9 +385,9 @@ func (x *PathComponentCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCe
 type PathComponentCellable interface {
 	Unwrap() *raw.NSPathComponentCell
 	WithURL(uRL string) *PathComponentCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *PathComponentCell
+	WithBackgroundColor(backgroundColor *Color) *PathComponentCell
 	WithDrawsBackground(drawsBackground bool) *PathComponentCell
-	WithTextColor(textColor *raw.NSColor) *PathComponentCell
+	WithTextColor(textColor *Color) *PathComponentCell
 	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *PathComponentCell
 	WithPlaceholderString(placeholderString string) *PathComponentCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *PathComponentCell
@@ -409,7 +409,7 @@ type PathComponentCellable interface {
 	WithHighlighted(highlighted bool) *PathComponentCell
 	WithAlignment(alignment raw.NSTextAlignment) *PathComponentCell
 	WithWraps(wraps bool) *PathComponentCell
-	WithFont(font *raw.NSFont) *PathComponentCell
+	WithFont(font *Font) *PathComponentCell
 	WithFormatter(formatter *foundation.NSFormatter) *PathComponentCell
 	WithObjectValue(objectValue objc.ID) *PathComponentCell
 	WithStringValue(stringValue string) *PathComponentCell
@@ -417,10 +417,10 @@ type PathComponentCellable interface {
 	WithFloatValue(floatValue float32) *PathComponentCell
 	WithDoubleValue(doubleValue float64) *PathComponentCell
 	WithIntegerValue(integerValue int) *PathComponentCell
-	WithImage(image *raw.NSImage) *PathComponentCell
+	WithImage(image *Image) *PathComponentCell
 	WithControlSize(controlSize raw.NSControlSize) *PathComponentCell
 	WithRepresentedObject(representedObject objc.ID) *PathComponentCell
-	WithMenu(menu *raw.NSMenu) *PathComponentCell
+	WithMenu(menu *Menu) *PathComponentCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathComponentCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PathComponentCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathComponentCell

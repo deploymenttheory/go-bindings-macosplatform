@@ -157,13 +157,13 @@ func (x *AccelerationStructureMotionTriangleGeometryDescriptor) WithPrimitiveDat
 }
 
 // VertexBuffers returns the collection as a Go slice.
-func (x *AccelerationStructureMotionTriangleGeometryDescriptor) VertexBuffers() []*raw.MTLMotionKeyframeData {
+func (x *AccelerationStructureMotionTriangleGeometryDescriptor) VertexBuffers() []*MotionKeyframeData {
 	arr := x.inner.VertexBuffers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLMotionKeyframeData {
-		return raw.MTLMotionKeyframeDataFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MotionKeyframeData {
+		return &MotionKeyframeData{inner: raw.MTLMotionKeyframeDataFromID(purego.Retain(_id))}
 	})
 }
 
@@ -285,7 +285,7 @@ type AccelerationStructureMotionTriangleGeometryDescriptorable interface {
 	WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureMotionTriangleGeometryDescriptor
 	WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureMotionTriangleGeometryDescriptor
 	WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureMotionTriangleGeometryDescriptor
-	VertexBuffers() []*raw.MTLMotionKeyframeData
+	VertexBuffers() []*MotionKeyframeData
 	SetVertexBuffers(vertexBuffers *foundation.NSArray[*raw.MTLMotionKeyframeData])
 	VertexFormat() raw.MTLAttributeFormat
 	SetVertexFormat(vertexFormat raw.MTLAttributeFormat)

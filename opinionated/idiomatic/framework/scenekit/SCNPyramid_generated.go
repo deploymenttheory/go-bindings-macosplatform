@@ -96,8 +96,8 @@ func (x *Pyramid) WithMaterials(items ...*raw.SCNMaterial) *Pyramid {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Pyramid) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Pyramid {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Pyramid) WithFirstMaterial(firstMaterial *Material) *Pyramid {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -118,8 +118,8 @@ func (x *Pyramid) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Pyramid {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Pyramid) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Pyramid {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Pyramid) WithTessellator(tessellator *GeometryTessellator) *Pyramid {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -136,14 +136,14 @@ func (x *Pyramid) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *P
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Pyramid) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Pyramid {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Pyramid) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Pyramid {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Pyramid) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Pyramid {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Pyramid) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Pyramid {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -220,13 +220,13 @@ type Pyramidable interface {
 	WithLengthSegmentCount(lengthSegmentCount int) *Pyramid
 	WithName(name string) *Pyramid
 	WithMaterials(items ...*raw.SCNMaterial) *Pyramid
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Pyramid
+	WithFirstMaterial(firstMaterial *Material) *Pyramid
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Pyramid
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Pyramid
+	WithTessellator(tessellator *GeometryTessellator) *Pyramid
 	WithSubdivisionLevel(subdivisionLevel uint) *Pyramid
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Pyramid
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Pyramid
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Pyramid
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Pyramid
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Pyramid
 	Width() float64
 	SetWidth(width float64)
 	Height() float64

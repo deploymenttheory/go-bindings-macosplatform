@@ -62,8 +62,8 @@ func (x *TableView) WithDelegate(delegate raw.NSTableViewDelegate) *TableView {
 }
 
 // WithHeaderView sets the headerView property and returns the receiver for chaining.
-func (x *TableView) WithHeaderView(headerView *raw.NSTableHeaderView) *TableView {
-	x.inner.SetHeaderView(headerView)
+func (x *TableView) WithHeaderView(headerView *TableHeaderView) *TableView {
+	x.inner.SetHeaderView(headerView.Unwrap())
 	return x
 }
 
@@ -110,14 +110,14 @@ func (x *TableView) WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBac
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TableView) WithBackgroundColor(backgroundColor *raw.NSColor) *TableView {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *TableView) WithBackgroundColor(backgroundColor *Color) *TableView {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
 // WithGridColor sets the gridColor property and returns the receiver for chaining.
-func (x *TableView) WithGridColor(gridColor *raw.NSColor) *TableView {
-	x.inner.SetGridColor(gridColor)
+func (x *TableView) WithGridColor(gridColor *Color) *TableView {
+	x.inner.SetGridColor(gridColor.Unwrap())
 	return x
 }
 
@@ -156,8 +156,8 @@ func (x *TableView) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *
 }
 
 // WithHighlightedTableColumn sets the highlightedTableColumn property and returns the receiver for chaining.
-func (x *TableView) WithHighlightedTableColumn(highlightedTableColumn *raw.NSTableColumn) *TableView {
-	x.inner.SetHighlightedTableColumn(highlightedTableColumn)
+func (x *TableView) WithHighlightedTableColumn(highlightedTableColumn *TableColumn) *TableView {
+	x.inner.SetHighlightedTableColumn(highlightedTableColumn.Unwrap())
 	return x
 }
 
@@ -348,8 +348,8 @@ func (x *TableView) WithDoubleValue(doubleValue float64) *TableView {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *TableView) WithFont(font *raw.NSFont) *TableView {
-	x.inner.NSControl.SetFont(font)
+func (x *TableView) WithFont(font *Font) *TableView {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -570,8 +570,8 @@ func (x *TableView) WithContentFilters(items ...*coreimage.CIFilter) *TableView 
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *TableView) WithShadow(shadow *raw.NSShadow) *TableView {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *TableView) WithShadow(shadow *Shadow) *TableView {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -652,8 +652,8 @@ func (x *TableView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *TableView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableView {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *TableView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableView {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -694,8 +694,8 @@ func (x *TableView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *TableView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableView {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *TableView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableView {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -706,8 +706,8 @@ func (x *TableView) WithNextResponder(nextResponder ResponderProvider) *TableVie
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TableView) WithMenu(menu *raw.NSMenu) *TableView {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *TableView) WithMenu(menu *Menu) *TableView {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -718,8 +718,8 @@ func (x *TableView) WithUserActivity(userActivity *foundation.NSUserActivity) *T
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TableView) WithTouchBar(touchBar *raw.NSTouchBar) *TableView {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *TableView) WithTouchBar(touchBar *TouchBar) *TableView {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -1184,13 +1184,13 @@ func (x *TableView) SetRowHeight(rowHeight float64) {
 }
 
 // TableColumns returns the collection as a Go slice.
-func (x *TableView) TableColumns() []*raw.NSTableColumn {
+func (x *TableView) TableColumns() []*TableColumn {
 	arr := x.inner.TableColumns()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTableColumn {
-		return raw.NSTableColumnFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TableColumn {
+		return &TableColumn{inner: raw.NSTableColumnFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1574,7 +1574,7 @@ type TableViewable interface {
 	Unwrap() *raw.NSTableView
 	WithDataSource(dataSource raw.NSTableViewDataSource) *TableView
 	WithDelegate(delegate raw.NSTableViewDelegate) *TableView
-	WithHeaderView(headerView *raw.NSTableHeaderView) *TableView
+	WithHeaderView(headerView *TableHeaderView) *TableView
 	WithCornerView(cornerView ViewProvider) *TableView
 	WithAllowsColumnReordering(allowsColumnReordering bool) *TableView
 	WithAllowsColumnResizing(allowsColumnResizing bool) *TableView
@@ -1582,13 +1582,13 @@ type TableViewable interface {
 	WithGridStyleMask(gridStyleMask raw.NSTableViewGridLineStyle) *TableView
 	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *TableView
 	WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors bool) *TableView
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TableView
-	WithGridColor(gridColor *raw.NSColor) *TableView
+	WithBackgroundColor(backgroundColor *Color) *TableView
+	WithGridColor(gridColor *Color) *TableView
 	WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *TableView
 	WithRowHeight(rowHeight float64) *TableView
 	WithDoubleAction(doubleAction objc.SEL) *TableView
 	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *TableView
-	WithHighlightedTableColumn(highlightedTableColumn *raw.NSTableColumn) *TableView
+	WithHighlightedTableColumn(highlightedTableColumn *TableColumn) *TableView
 	WithVerticalMotionCanBeginDrag(verticalMotionCanBeginDrag bool) *TableView
 	WithAllowsMultipleSelection(allowsMultipleSelection bool) *TableView
 	WithAllowsEmptySelection(allowsEmptySelection bool) *TableView
@@ -1620,7 +1620,7 @@ type TableViewable interface {
 	WithIntegerValue(integerValue int) *TableView
 	WithFloatValue(floatValue float32) *TableView
 	WithDoubleValue(doubleValue float64) *TableView
-	WithFont(font *raw.NSFont) *TableView
+	WithFont(font *Font) *TableView
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TableView
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TableView
 	WithAlignment(alignment raw.NSTextAlignment) *TableView
@@ -1652,7 +1652,7 @@ type TableViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *TableView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TableView
 	WithContentFilters(items ...*coreimage.CIFilter) *TableView
-	WithShadow(shadow *raw.NSShadow) *TableView
+	WithShadow(shadow *Shadow) *TableView
 	WithClipsToBounds(clipsToBounds bool) *TableView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableView
 	WithToolTip(toolTip string) *TableView
@@ -1664,18 +1664,18 @@ type TableViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableView
 	WithNextResponder(nextResponder ResponderProvider) *TableView
-	WithMenu(menu *raw.NSMenu) *TableView
+	WithMenu(menu *Menu) *TableView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TableView
-	WithTouchBar(touchBar *raw.NSTouchBar) *TableView
+	WithTouchBar(touchBar *TouchBar) *TableView
 	NoteHeightOfRowsWithIndexesChanged(indexSet *foundation.NSIndexSet)
 	AddTableColumn(tableColumn *raw.NSTableColumn)
 	RemoveTableColumn(tableColumn *raw.NSTableColumn)
@@ -1760,7 +1760,7 @@ type TableViewable interface {
 	EffectiveRowSizeStyle() raw.NSTableViewRowSizeStyle
 	RowHeight() float64
 	SetRowHeight(rowHeight float64)
-	TableColumns() []*raw.NSTableColumn
+	TableColumns() []*TableColumn
 	NumberOfColumns() int
 	NumberOfRows() int
 	EditedColumn() int

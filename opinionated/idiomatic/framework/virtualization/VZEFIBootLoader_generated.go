@@ -36,8 +36,8 @@ func NewEFIBootLoader() *EFIBootLoader {
 }
 
 // WithVariableStore sets the variableStore property and returns the receiver for chaining.
-func (x *EFIBootLoader) WithVariableStore(variableStore *raw.VZEFIVariableStore) *EFIBootLoader {
-	x.inner.SetVariableStore(variableStore)
+func (x *EFIBootLoader) WithVariableStore(variableStore *EFIVariableStore) *EFIBootLoader {
+	x.inner.SetVariableStore(variableStore.Unwrap())
 	return x
 }
 
@@ -60,7 +60,7 @@ func (x *EFIBootLoader) asBootLoader() *raw.VZBootLoader { return &x.inner.VZBoo
 // EFIBootLoaderable is the interface implemented by [EFIBootLoader], for mocking and DI.
 type EFIBootLoaderable interface {
 	Unwrap() *raw.VZEFIBootLoader
-	WithVariableStore(variableStore *raw.VZEFIVariableStore) *EFIBootLoader
+	WithVariableStore(variableStore *EFIVariableStore) *EFIBootLoader
 	VariableStore() *EFIVariableStore
 	SetVariableStore(variableStore *raw.VZEFIVariableStore)
 }

@@ -204,13 +204,13 @@ func (x *Page) SetRotation(rotation int) {
 }
 
 // Annotations returns the collection as a Go slice.
-func (x *Page) Annotations() []*raw.PDFAnnotation {
+func (x *Page) Annotations() []*Annotation {
 	arr := x.inner.Annotations()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PDFAnnotation {
-		return raw.PDFAnnotationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Annotation {
+		return &Annotation{inner: raw.PDFAnnotationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -284,7 +284,7 @@ type Pageable interface {
 	Label() string
 	Rotation() int
 	SetRotation(rotation int)
-	Annotations() []*raw.PDFAnnotation
+	Annotations() []*Annotation
 	DisplaysAnnotations() bool
 	SetDisplaysAnnotations(displaysAnnotations bool)
 	NumberOfCharacters() uint

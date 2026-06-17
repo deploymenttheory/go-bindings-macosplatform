@@ -40,8 +40,8 @@ func NewView() *View {
 }
 
 // WithDocument sets the document property and returns the receiver for chaining.
-func (x *View) WithDocument(document *raw.PDFDocument) *View {
-	x.inner.SetDocument(document)
+func (x *View) WithDocument(document *Document) *View {
+	x.inner.SetDocument(document.Unwrap())
 	return x
 }
 
@@ -136,8 +136,8 @@ func (x *View) WithAutoScales(autoScales bool) *View {
 }
 
 // WithCurrentSelection sets the currentSelection property and returns the receiver for chaining.
-func (x *View) WithCurrentSelection(currentSelection *raw.PDFSelection) *View {
-	x.inner.SetCurrentSelection(currentSelection)
+func (x *View) WithCurrentSelection(currentSelection *Selection) *View {
+	x.inner.SetCurrentSelection(currentSelection.Unwrap())
 	return x
 }
 
@@ -700,7 +700,7 @@ func (x *View) SetAllowsDragging(allowsDragging bool) {
 // Viewable is the interface implemented by [View], for mocking and DI.
 type Viewable interface {
 	Unwrap() *raw.PDFView
-	WithDocument(document *raw.PDFDocument) *View
+	WithDocument(document *Document) *View
 	WithDisplayMode(displayMode raw.PDFDisplayMode) *View
 	WithDisplayDirection(displayDirection raw.PDFDisplayDirection) *View
 	WithDisplaysPageBreaks(displaysPageBreaks bool) *View
@@ -716,7 +716,7 @@ type Viewable interface {
 	WithMinScaleFactor(minScaleFactor float64) *View
 	WithMaxScaleFactor(maxScaleFactor float64) *View
 	WithAutoScales(autoScales bool) *View
-	WithCurrentSelection(currentSelection *raw.PDFSelection) *View
+	WithCurrentSelection(currentSelection *Selection) *View
 	WithAcceptsDraggedFiles(acceptsDraggedFiles bool) *View
 	WithEnableDataDetectors(enableDataDetectors bool) *View
 	WithInMarkupMode(inMarkupMode bool) *View

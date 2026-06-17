@@ -255,24 +255,24 @@ func (x *Toolbar) Identifier() string {
 }
 
 // Items returns the collection as a Go slice.
-func (x *Toolbar) Items() []*raw.NSToolbarItem {
+func (x *Toolbar) Items() []*ToolbarItem {
 	arr := x.inner.Items()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSToolbarItem {
-		return raw.NSToolbarItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ToolbarItem {
+		return &ToolbarItem{inner: raw.NSToolbarItemFromID(purego.Retain(_id))}
 	})
 }
 
 // VisibleItems returns the collection as a Go slice.
-func (x *Toolbar) VisibleItems() []*raw.NSToolbarItem {
+func (x *Toolbar) VisibleItems() []*ToolbarItem {
 	arr := x.inner.VisibleItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSToolbarItem {
-		return raw.NSToolbarItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ToolbarItem {
+		return &ToolbarItem{inner: raw.NSToolbarItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -438,8 +438,8 @@ type Toolbarable interface {
 	AllowsDisplayModeCustomization() bool
 	SetAllowsDisplayModeCustomization(allowsDisplayModeCustomization bool)
 	Identifier() string
-	Items() []*raw.NSToolbarItem
-	VisibleItems() []*raw.NSToolbarItem
+	Items() []*ToolbarItem
+	VisibleItems() []*ToolbarItem
 	ItemIdentifiers() []*foundation.NSString
 	SetItemIdentifiers(itemIdentifiers *foundation.NSArray[*foundation.NSString])
 	CenteredItemIdentifiers() *foundation.NSSet[*foundation.NSString]

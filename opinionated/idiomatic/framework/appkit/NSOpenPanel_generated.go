@@ -369,8 +369,8 @@ func (x *OpenPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *OpenPanel {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *OpenPanel) WithBackgroundColor(backgroundColor *raw.NSColor) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetBackgroundColor(backgroundColor)
+func (x *OpenPanel) WithBackgroundColor(backgroundColor *Color) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -399,8 +399,8 @@ func (x *OpenPanel) WithCanHide(canHide bool) *OpenPanel {
 }
 
 // WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
-func (x *OpenPanel) WithMiniwindowImage(miniwindowImage *raw.NSImage) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage)
+func (x *OpenPanel) WithMiniwindowImage(miniwindowImage *Image) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage.Unwrap())
 	return x
 }
 
@@ -543,8 +543,8 @@ func (x *OpenPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefo
 }
 
 // WithWindowController sets the windowController property and returns the receiver for chaining.
-func (x *OpenPanel) WithWindowController(windowController *raw.NSWindowController) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetWindowController(windowController)
+func (x *OpenPanel) WithWindowController(windowController *WindowController) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetWindowController(windowController.Unwrap())
 	return x
 }
 
@@ -561,8 +561,8 @@ func (x *OpenPanel) WithAppearanceSource(appearanceSource *foundation.NSObject) 
 }
 
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
-func (x *OpenPanel) WithColorSpace(colorSpace *raw.NSColorSpace) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetColorSpace(colorSpace)
+func (x *OpenPanel) WithColorSpace(colorSpace *ColorSpace) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetColorSpace(colorSpace.Unwrap())
 	return x
 }
 
@@ -597,8 +597,8 @@ func (x *OpenPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop 
 }
 
 // WithToolbar sets the toolbar property and returns the receiver for chaining.
-func (x *OpenPanel) WithToolbar(toolbar *raw.NSToolbar) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetToolbar(toolbar)
+func (x *OpenPanel) WithToolbar(toolbar *Toolbar) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetToolbar(toolbar.Unwrap())
 	return x
 }
 
@@ -675,8 +675,8 @@ func (x *OpenPanel) WithNextResponder(nextResponder ResponderProvider) *OpenPane
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *OpenPanel) WithMenu(menu *raw.NSMenu) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetMenu(menu)
+func (x *OpenPanel) WithMenu(menu *Menu) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -687,8 +687,8 @@ func (x *OpenPanel) WithUserActivity(userActivity *foundation.NSUserActivity) *O
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *OpenPanel) WithTouchBar(touchBar *raw.NSTouchBar) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar)
+func (x *OpenPanel) WithTouchBar(touchBar *TouchBar) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -857,12 +857,12 @@ type OpenPanelable interface {
 	WithViewsNeedDisplay(viewsNeedDisplay bool) *OpenPanel
 	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *OpenPanel
 	WithReleasedWhenClosed(releasedWhenClosed bool) *OpenPanel
-	WithBackgroundColor(backgroundColor *raw.NSColor) *OpenPanel
+	WithBackgroundColor(backgroundColor *Color) *OpenPanel
 	WithMovable(movable bool) *OpenPanel
 	WithMovableByWindowBackground(movableByWindowBackground bool) *OpenPanel
 	WithHidesOnDeactivate(hidesOnDeactivate bool) *OpenPanel
 	WithCanHide(canHide bool) *OpenPanel
-	WithMiniwindowImage(miniwindowImage *raw.NSImage) *OpenPanel
+	WithMiniwindowImage(miniwindowImage *Image) *OpenPanel
 	WithMiniwindowTitle(miniwindowTitle string) *OpenPanel
 	WithDocumentEdited(documentEdited bool) *OpenPanel
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *OpenPanel
@@ -886,16 +886,16 @@ type OpenPanelable interface {
 	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *OpenPanel
 	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *OpenPanel
 	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *OpenPanel
-	WithWindowController(windowController *raw.NSWindowController) *OpenPanel
+	WithWindowController(windowController *WindowController) *OpenPanel
 	WithParentWindow(parentWindow WindowProvider) *OpenPanel
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *OpenPanel
-	WithColorSpace(colorSpace *raw.NSColorSpace) *OpenPanel
+	WithColorSpace(colorSpace *ColorSpace) *OpenPanel
 	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *OpenPanel
 	WithContentViewController(contentViewController ViewControllerProvider) *OpenPanel
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *OpenPanel
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *OpenPanel
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *OpenPanel
-	WithToolbar(toolbar *raw.NSToolbar) *OpenPanel
+	WithToolbar(toolbar *Toolbar) *OpenPanel
 	WithShowsToolbarButton(showsToolbarButton bool) *OpenPanel
 	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *OpenPanel
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *OpenPanel
@@ -908,9 +908,9 @@ type OpenPanelable interface {
 	WithOrderedIndex(orderedIndex int) *OpenPanel
 	WithRestorable(restorable bool) *OpenPanel
 	WithNextResponder(nextResponder ResponderProvider) *OpenPanel
-	WithMenu(menu *raw.NSMenu) *OpenPanel
+	WithMenu(menu *Menu) *OpenPanel
 	WithUserActivity(userActivity *foundation.NSUserActivity) *OpenPanel
-	WithTouchBar(touchBar *raw.NSTouchBar) *OpenPanel
+	WithTouchBar(touchBar *TouchBar) *OpenPanel
 	URLs() []*foundation.NSURL
 	ResolvesAliases() bool
 	SetResolvesAliases(resolvesAliases bool)

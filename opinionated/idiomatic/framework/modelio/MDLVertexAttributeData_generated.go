@@ -37,8 +37,8 @@ func NewVertexAttributeData() *VertexAttributeData {
 }
 
 // WithMap sets the map_ property and returns the receiver for chaining.
-func (x *VertexAttributeData) WithMap(map_ *raw.MDLMeshBufferMap) *VertexAttributeData {
-	x.inner.SetMap(map_)
+func (x *VertexAttributeData) WithMap(map_ *MeshBufferMap) *VertexAttributeData {
+	x.inner.SetMap(map_.Unwrap())
 	return x
 }
 
@@ -117,7 +117,7 @@ func (x *VertexAttributeData) SetBufferSize(bufferSize uint) {
 // VertexAttributeDataable is the interface implemented by [VertexAttributeData], for mocking and DI.
 type VertexAttributeDataable interface {
 	Unwrap() *raw.MDLVertexAttributeData
-	WithMap(map_ *raw.MDLMeshBufferMap) *VertexAttributeData
+	WithMap(map_ *MeshBufferMap) *VertexAttributeData
 	WithStride(stride uint) *VertexAttributeData
 	WithFormat(format raw.MDLVertexFormat) *VertexAttributeData
 	WithBufferSize(bufferSize uint) *VertexAttributeData

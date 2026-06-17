@@ -139,8 +139,8 @@ func (x *MutableURLRequest) WithHTTPBody(hTTPBody DataProvider) *MutableURLReque
 }
 
 // WithHTTPBodyStream sets the hTTPBodyStream property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithHTTPBodyStream(hTTPBodyStream *raw.NSInputStream) *MutableURLRequest {
-	x.inner.SetHTTPBodyStream(hTTPBodyStream)
+func (x *MutableURLRequest) WithHTTPBodyStream(hTTPBodyStream *InputStream) *MutableURLRequest {
+	x.inner.SetHTTPBodyStream(hTTPBodyStream.Unwrap())
 	return x
 }
 
@@ -296,7 +296,7 @@ type MutableURLRequestable interface {
 	WithHTTPMethod(hTTPMethod string) *MutableURLRequest
 	WithAllHTTPHeaderFields(allHTTPHeaderFields *raw.NSDictionary[*raw.NSString, *raw.NSString]) *MutableURLRequest
 	WithHTTPBody(hTTPBody DataProvider) *MutableURLRequest
-	WithHTTPBodyStream(hTTPBodyStream *raw.NSInputStream) *MutableURLRequest
+	WithHTTPBodyStream(hTTPBodyStream *InputStream) *MutableURLRequest
 	WithHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) *MutableURLRequest
 	WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableURLRequest

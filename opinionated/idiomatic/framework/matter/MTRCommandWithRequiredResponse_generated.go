@@ -38,8 +38,8 @@ func NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse(path
 }
 
 // WithPath sets the path property and returns the receiver for chaining.
-func (x *MTRCommandWithRequiredResponse) WithPath(path *raw.MTRCommandPath) *MTRCommandWithRequiredResponse {
-	x.inner.SetPath(path)
+func (x *MTRCommandWithRequiredResponse) WithPath(path *MTRCommandPath) *MTRCommandWithRequiredResponse {
+	x.inner.SetPath(path.Unwrap())
 	return x
 }
 
@@ -92,7 +92,7 @@ func (x *MTRCommandWithRequiredResponse) SetRequiredResponse(requiredResponse *f
 // MTRCommandWithRequiredResponseable is the interface implemented by [MTRCommandWithRequiredResponse], for mocking and DI.
 type MTRCommandWithRequiredResponseable interface {
 	Unwrap() *raw.MTRCommandWithRequiredResponse
-	WithPath(path *raw.MTRCommandPath) *MTRCommandWithRequiredResponse
+	WithPath(path *MTRCommandPath) *MTRCommandWithRequiredResponse
 	WithCommandFields(commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRCommandWithRequiredResponse
 	WithRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *MTRCommandWithRequiredResponse
 	Path() *MTRCommandPath

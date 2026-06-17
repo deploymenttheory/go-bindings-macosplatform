@@ -48,13 +48,13 @@ func (x *ClassificationResult) ClassificationForIdentifier(identifier string) *C
 }
 
 // Classifications returns the collection as a Go slice.
-func (x *ClassificationResult) Classifications() []*raw.SNClassification {
+func (x *ClassificationResult) Classifications() []*Classification {
 	arr := x.inner.Classifications()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SNClassification {
-		return raw.SNClassificationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Classification {
+		return &Classification{inner: raw.SNClassificationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -67,7 +67,7 @@ func (x *ClassificationResult) TimeRange() coremedia.CMTimeRange {
 type ClassificationResultable interface {
 	Unwrap() *raw.SNClassificationResult
 	ClassificationForIdentifier(identifier string) *Classification
-	Classifications() []*raw.SNClassification
+	Classifications() []*Classification
 	TimeRange() coremedia.CMTimeRange
 }
 

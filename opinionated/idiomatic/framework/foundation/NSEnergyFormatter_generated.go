@@ -36,8 +36,8 @@ func NewEnergyFormatter() *EnergyFormatter {
 }
 
 // WithNumberFormatter sets the numberFormatter property and returns the receiver for chaining.
-func (x *EnergyFormatter) WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *EnergyFormatter {
-	x.inner.SetNumberFormatter(numberFormatter)
+func (x *EnergyFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *EnergyFormatter {
+	x.inner.SetNumberFormatter(numberFormatter.Unwrap())
 	return x
 }
 
@@ -136,7 +136,7 @@ func (x *EnergyFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter
 // EnergyFormatterable is the interface implemented by [EnergyFormatter], for mocking and DI.
 type EnergyFormatterable interface {
 	Unwrap() *raw.NSEnergyFormatter
-	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *EnergyFormatter
+	WithNumberFormatter(numberFormatter *NumberFormatter) *EnergyFormatter
 	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *EnergyFormatter
 	WithForFoodEnergyUse(forFoodEnergyUse bool) *EnergyFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *EnergyFormatter

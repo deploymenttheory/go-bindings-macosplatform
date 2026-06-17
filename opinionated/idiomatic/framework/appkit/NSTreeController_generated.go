@@ -403,13 +403,13 @@ func (x *TreeController) SelectionIndexPath() *foundation.NSIndexPath {
 }
 
 // SelectedNodes returns the collection as a Go slice.
-func (x *TreeController) SelectedNodes() []*raw.NSTreeNode {
+func (x *TreeController) SelectedNodes() []*TreeNode {
 	arr := x.inner.SelectedNodes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTreeNode {
-		return raw.NSTreeNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TreeNode {
+		return &TreeNode{inner: raw.NSTreeNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -477,7 +477,7 @@ type TreeControllerable interface {
 	SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool)
 	SelectionIndexPaths() []*foundation.NSIndexPath
 	SelectionIndexPath() *foundation.NSIndexPath
-	SelectedNodes() []*raw.NSTreeNode
+	SelectedNodes() []*TreeNode
 }
 
 var _ TreeControllerable = (*TreeController)(nil)

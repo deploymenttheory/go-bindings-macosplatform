@@ -39,13 +39,13 @@ func NewConeDirectivityModelParametersWithSubbandParameters(subbandParameters *f
 }
 
 // SubbandParameters returns the collection as a Go slice.
-func (x *ConeDirectivityModelParameters) SubbandParameters() []*raw.PHASEConeDirectivityModelSubbandParameters {
+func (x *ConeDirectivityModelParameters) SubbandParameters() []*ConeDirectivityModelSubbandParameters {
 	arr := x.inner.SubbandParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEConeDirectivityModelSubbandParameters {
-		return raw.PHASEConeDirectivityModelSubbandParametersFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ConeDirectivityModelSubbandParameters {
+		return &ConeDirectivityModelSubbandParameters{inner: raw.PHASEConeDirectivityModelSubbandParametersFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *ConeDirectivityModelParameters) asDirectivityModelParameters() *raw.PHA
 // ConeDirectivityModelParametersable is the interface implemented by [ConeDirectivityModelParameters], for mocking and DI.
 type ConeDirectivityModelParametersable interface {
 	Unwrap() *raw.PHASEConeDirectivityModelParameters
-	SubbandParameters() []*raw.PHASEConeDirectivityModelSubbandParameters
+	SubbandParameters() []*ConeDirectivityModelSubbandParameters
 }
 
 var _ ConeDirectivityModelParametersable = (*ConeDirectivityModelParameters)(nil)

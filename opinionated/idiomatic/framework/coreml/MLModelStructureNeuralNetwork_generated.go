@@ -37,20 +37,20 @@ func NewModelStructureNeuralNetwork() *ModelStructureNeuralNetwork {
 }
 
 // Layers returns the collection as a Go slice.
-func (x *ModelStructureNeuralNetwork) Layers() []*raw.MLModelStructureNeuralNetworkLayer {
+func (x *ModelStructureNeuralNetwork) Layers() []*ModelStructureNeuralNetworkLayer {
 	arr := x.inner.Layers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureNeuralNetworkLayer {
-		return raw.MLModelStructureNeuralNetworkLayerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureNeuralNetworkLayer {
+		return &ModelStructureNeuralNetworkLayer{inner: raw.MLModelStructureNeuralNetworkLayerFromID(purego.Retain(_id))}
 	})
 }
 
 // ModelStructureNeuralNetworkable is the interface implemented by [ModelStructureNeuralNetwork], for mocking and DI.
 type ModelStructureNeuralNetworkable interface {
 	Unwrap() *raw.MLModelStructureNeuralNetwork
-	Layers() []*raw.MLModelStructureNeuralNetworkLayer
+	Layers() []*ModelStructureNeuralNetworkLayer
 }
 
 var _ ModelStructureNeuralNetworkable = (*ModelStructureNeuralNetwork)(nil)

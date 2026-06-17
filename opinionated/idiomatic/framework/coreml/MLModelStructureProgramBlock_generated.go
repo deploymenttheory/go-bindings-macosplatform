@@ -37,13 +37,13 @@ func NewModelStructureProgramBlock() *ModelStructureProgramBlock {
 }
 
 // Inputs returns the collection as a Go slice.
-func (x *ModelStructureProgramBlock) Inputs() []*raw.MLModelStructureProgramNamedValueType {
+func (x *ModelStructureProgramBlock) Inputs() []*ModelStructureProgramNamedValueType {
 	arr := x.inner.Inputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramNamedValueType {
-		return raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureProgramNamedValueType {
+		return &ModelStructureProgramNamedValueType{inner: raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -59,22 +59,22 @@ func (x *ModelStructureProgramBlock) OutputNames() []string {
 }
 
 // Operations returns the collection as a Go slice.
-func (x *ModelStructureProgramBlock) Operations() []*raw.MLModelStructureProgramOperation {
+func (x *ModelStructureProgramBlock) Operations() []*ModelStructureProgramOperation {
 	arr := x.inner.Operations()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramOperation {
-		return raw.MLModelStructureProgramOperationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureProgramOperation {
+		return &ModelStructureProgramOperation{inner: raw.MLModelStructureProgramOperationFromID(purego.Retain(_id))}
 	})
 }
 
 // ModelStructureProgramBlockable is the interface implemented by [ModelStructureProgramBlock], for mocking and DI.
 type ModelStructureProgramBlockable interface {
 	Unwrap() *raw.MLModelStructureProgramBlock
-	Inputs() []*raw.MLModelStructureProgramNamedValueType
+	Inputs() []*ModelStructureProgramNamedValueType
 	OutputNames() []string
-	Operations() []*raw.MLModelStructureProgramOperation
+	Operations() []*ModelStructureProgramOperation
 }
 
 var _ ModelStructureProgramBlockable = (*ModelStructureProgramBlock)(nil)

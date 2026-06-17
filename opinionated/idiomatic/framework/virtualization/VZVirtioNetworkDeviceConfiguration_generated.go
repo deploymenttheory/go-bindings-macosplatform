@@ -36,8 +36,8 @@ func NewVirtioNetworkDeviceConfiguration() *VirtioNetworkDeviceConfiguration {
 }
 
 // WithMACAddress sets the mACAddress property and returns the receiver for chaining.
-func (x *VirtioNetworkDeviceConfiguration) WithMACAddress(mACAddress *raw.VZMACAddress) *VirtioNetworkDeviceConfiguration {
-	x.inner.VZNetworkDeviceConfiguration.SetMACAddress(mACAddress)
+func (x *VirtioNetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *VirtioNetworkDeviceConfiguration {
+	x.inner.VZNetworkDeviceConfiguration.SetMACAddress(mACAddress.Unwrap())
 	return x
 }
 
@@ -52,7 +52,7 @@ func (x *VirtioNetworkDeviceConfiguration) asNetworkDeviceConfiguration() *raw.V
 // VirtioNetworkDeviceConfigurationable is the interface implemented by [VirtioNetworkDeviceConfiguration], for mocking and DI.
 type VirtioNetworkDeviceConfigurationable interface {
 	Unwrap() *raw.VZVirtioNetworkDeviceConfiguration
-	WithMACAddress(mACAddress *raw.VZMACAddress) *VirtioNetworkDeviceConfiguration
+	WithMACAddress(mACAddress *MACAddress) *VirtioNetworkDeviceConfiguration
 	WithAttachment(attachment NetworkDeviceAttachmentProvider) *VirtioNetworkDeviceConfiguration
 }
 

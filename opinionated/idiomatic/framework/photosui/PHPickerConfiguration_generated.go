@@ -66,8 +66,8 @@ func (x *PickerConfiguration) WithSelectionLimit(selectionLimit int) *PickerConf
 }
 
 // WithFilter sets the filter property and returns the receiver for chaining.
-func (x *PickerConfiguration) WithFilter(filter *raw.PHPickerFilter) *PickerConfiguration {
-	x.inner.SetFilter(filter)
+func (x *PickerConfiguration) WithFilter(filter *PickerFilter) *PickerConfiguration {
+	x.inner.SetFilter(filter.Unwrap())
 	return x
 }
 
@@ -201,7 +201,7 @@ type PickerConfigurationable interface {
 	WithPreferredAssetRepresentationMode(preferredAssetRepresentationMode raw.PHPickerConfigurationAssetRepresentationMode) *PickerConfiguration
 	WithSelection(selection raw.PHPickerConfigurationSelection) *PickerConfiguration
 	WithSelectionLimit(selectionLimit int) *PickerConfiguration
-	WithFilter(filter *raw.PHPickerFilter) *PickerConfiguration
+	WithFilter(filter *PickerFilter) *PickerConfiguration
 	WithPreselectedAssetIdentifiers(items ...*foundation.NSString) *PickerConfiguration
 	WithMode(mode raw.PHPickerMode) *PickerConfiguration
 	WithEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) *PickerConfiguration

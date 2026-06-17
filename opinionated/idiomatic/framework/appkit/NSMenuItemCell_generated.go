@@ -46,8 +46,8 @@ func NewMenuItemCellWithCoder(coder *foundation.NSCoder) *MenuItemCell {
 }
 
 // WithMenuItem sets the menuItem property and returns the receiver for chaining.
-func (x *MenuItemCell) WithMenuItem(menuItem *raw.NSMenuItem) *MenuItemCell {
-	x.inner.SetMenuItem(menuItem)
+func (x *MenuItemCell) WithMenuItem(menuItem *MenuItem) *MenuItemCell {
+	x.inner.SetMenuItem(menuItem.Unwrap())
 	return x
 }
 
@@ -100,8 +100,8 @@ func (x *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle *fo
 }
 
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
-func (x *MenuItemCell) WithAlternateImage(alternateImage *raw.NSImage) *MenuItemCell {
-	x.inner.NSButtonCell.SetAlternateImage(alternateImage)
+func (x *MenuItemCell) WithAlternateImage(alternateImage *Image) *MenuItemCell {
+	x.inner.NSButtonCell.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
@@ -148,14 +148,14 @@ func (x *MenuItemCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileM
 }
 
 // WithSound sets the sound property and returns the receiver for chaining.
-func (x *MenuItemCell) WithSound(sound *raw.NSSound) *MenuItemCell {
-	x.inner.NSButtonCell.SetSound(sound)
+func (x *MenuItemCell) WithSound(sound *Sound) *MenuItemCell {
+	x.inner.NSButtonCell.SetSound(sound.Unwrap())
 	return x
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *MenuItemCell) WithBackgroundColor(backgroundColor *raw.NSColor) *MenuItemCell {
-	x.inner.NSButtonCell.SetBackgroundColor(backgroundColor)
+func (x *MenuItemCell) WithBackgroundColor(backgroundColor *Color) *MenuItemCell {
+	x.inner.NSButtonCell.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -166,8 +166,8 @@ func (x *MenuItemCell) WithGradientType(gradientType raw.NSGradientType) *MenuIt
 }
 
 // WithKeyEquivalentFont sets the keyEquivalentFont property and returns the receiver for chaining.
-func (x *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *MenuItemCell {
-	x.inner.NSButtonCell.SetKeyEquivalentFont(keyEquivalentFont)
+func (x *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell {
+	x.inner.NSButtonCell.SetKeyEquivalentFont(keyEquivalentFont.Unwrap())
 	return x
 }
 
@@ -274,8 +274,8 @@ func (x *MenuItemCell) WithWraps(wraps bool) *MenuItemCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *MenuItemCell) WithFont(font *raw.NSFont) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetFont(font)
+func (x *MenuItemCell) WithFont(font *Font) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -322,8 +322,8 @@ func (x *MenuItemCell) WithIntegerValue(integerValue int) *MenuItemCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *MenuItemCell) WithImage(image *raw.NSImage) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetImage(image)
+func (x *MenuItemCell) WithImage(image *Image) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -340,8 +340,8 @@ func (x *MenuItemCell) WithRepresentedObject(representedObject objc.ID) *MenuIte
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *MenuItemCell) WithMenu(menu *raw.NSMenu) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetMenu(menu)
+func (x *MenuItemCell) WithMenu(menu *Menu) *MenuItemCell {
+	x.inner.NSButtonCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -551,7 +551,7 @@ func (x *MenuItemCell) asCell() *raw.NSCell { return &x.inner.NSButtonCell.NSAct
 // MenuItemCellable is the interface implemented by [MenuItemCell], for mocking and DI.
 type MenuItemCellable interface {
 	Unwrap() *raw.NSMenuItemCell
-	WithMenuItem(menuItem *raw.NSMenuItem) *MenuItemCell
+	WithMenuItem(menuItem *MenuItem) *MenuItemCell
 	WithNeedsSizing(needsSizing bool) *MenuItemCell
 	WithNeedsDisplay(needsDisplay bool) *MenuItemCell
 	WithBezelStyle(bezelStyle raw.NSBezelStyle) *MenuItemCell
@@ -560,7 +560,7 @@ type MenuItemCellable interface {
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *MenuItemCell
 	WithAlternateTitle(alternateTitle string) *MenuItemCell
 	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *MenuItemCell
-	WithAlternateImage(alternateImage *raw.NSImage) *MenuItemCell
+	WithAlternateImage(alternateImage *Image) *MenuItemCell
 	WithImagePosition(imagePosition raw.NSCellImagePosition) *MenuItemCell
 	WithImageScaling(imageScaling raw.NSImageScaling) *MenuItemCell
 	WithKeyEquivalent(keyEquivalent string) *MenuItemCell
@@ -568,10 +568,10 @@ type MenuItemCellable interface {
 	WithTransparent(transparent bool) *MenuItemCell
 	WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell
-	WithSound(sound *raw.NSSound) *MenuItemCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *MenuItemCell
+	WithSound(sound *Sound) *MenuItemCell
+	WithBackgroundColor(backgroundColor *Color) *MenuItemCell
 	WithGradientType(gradientType raw.NSGradientType) *MenuItemCell
-	WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *MenuItemCell
+	WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell
 	WithControlView(controlView ViewProvider) *MenuItemCell
 	WithType(type_ raw.NSCellType) *MenuItemCell
 	WithState(state int) *MenuItemCell
@@ -589,7 +589,7 @@ type MenuItemCellable interface {
 	WithHighlighted(highlighted bool) *MenuItemCell
 	WithAlignment(alignment raw.NSTextAlignment) *MenuItemCell
 	WithWraps(wraps bool) *MenuItemCell
-	WithFont(font *raw.NSFont) *MenuItemCell
+	WithFont(font *Font) *MenuItemCell
 	WithFormatter(formatter *foundation.NSFormatter) *MenuItemCell
 	WithObjectValue(objectValue objc.ID) *MenuItemCell
 	WithStringValue(stringValue string) *MenuItemCell
@@ -597,10 +597,10 @@ type MenuItemCellable interface {
 	WithFloatValue(floatValue float32) *MenuItemCell
 	WithDoubleValue(doubleValue float64) *MenuItemCell
 	WithIntegerValue(integerValue int) *MenuItemCell
-	WithImage(image *raw.NSImage) *MenuItemCell
+	WithImage(image *Image) *MenuItemCell
 	WithControlSize(controlSize raw.NSControlSize) *MenuItemCell
 	WithRepresentedObject(representedObject objc.ID) *MenuItemCell
-	WithMenu(menu *raw.NSMenu) *MenuItemCell
+	WithMenu(menu *Menu) *MenuItemCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *MenuItemCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *MenuItemCell

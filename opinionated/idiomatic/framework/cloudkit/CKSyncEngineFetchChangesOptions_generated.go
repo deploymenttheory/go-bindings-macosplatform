@@ -40,14 +40,14 @@ func NewSyncEngineFetchChangesOptionsWithScope(scope *raw.CKSyncEngineFetchChang
 }
 
 // WithScope sets the scope property and returns the receiver for chaining.
-func (x *SyncEngineFetchChangesOptions) WithScope(scope *raw.CKSyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions {
-	x.inner.SetScope(scope)
+func (x *SyncEngineFetchChangesOptions) WithScope(scope *SyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions {
+	x.inner.SetScope(scope.Unwrap())
 	return x
 }
 
 // WithOperationGroup sets the operationGroup property and returns the receiver for chaining.
-func (x *SyncEngineFetchChangesOptions) WithOperationGroup(operationGroup *raw.CKOperationGroup) *SyncEngineFetchChangesOptions {
-	x.inner.SetOperationGroup(operationGroup)
+func (x *SyncEngineFetchChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineFetchChangesOptions {
+	x.inner.SetOperationGroup(operationGroup.Unwrap())
 	return x
 }
 
@@ -96,13 +96,13 @@ func (x *SyncEngineFetchChangesOptions) SetOperationGroup(operationGroup *raw.CK
 }
 
 // PrioritizedZoneIDs returns the collection as a Go slice.
-func (x *SyncEngineFetchChangesOptions) PrioritizedZoneIDs() []*raw.CKRecordZoneID {
+func (x *SyncEngineFetchChangesOptions) PrioritizedZoneIDs() []*RecordZoneID {
 	arr := x.inner.PrioritizedZoneIDs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZoneID {
-		return raw.CKRecordZoneIDFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZoneID {
+		return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(purego.Retain(_id))}
 	})
 }
 
@@ -114,14 +114,14 @@ func (x *SyncEngineFetchChangesOptions) SetPrioritizedZoneIDs(prioritizedZoneIDs
 // SyncEngineFetchChangesOptionsable is the interface implemented by [SyncEngineFetchChangesOptions], for mocking and DI.
 type SyncEngineFetchChangesOptionsable interface {
 	Unwrap() *raw.CKSyncEngineFetchChangesOptions
-	WithScope(scope *raw.CKSyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions
-	WithOperationGroup(operationGroup *raw.CKOperationGroup) *SyncEngineFetchChangesOptions
+	WithScope(scope *SyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions
+	WithOperationGroup(operationGroup *OperationGroup) *SyncEngineFetchChangesOptions
 	WithPrioritizedZoneIDs(items ...*raw.CKRecordZoneID) *SyncEngineFetchChangesOptions
 	Scope() *SyncEngineFetchChangesScope
 	SetScope(scope *raw.CKSyncEngineFetchChangesScope)
 	OperationGroup() *OperationGroup
 	SetOperationGroup(operationGroup *raw.CKOperationGroup)
-	PrioritizedZoneIDs() []*raw.CKRecordZoneID
+	PrioritizedZoneIDs() []*RecordZoneID
 	SetPrioritizedZoneIDs(prioritizedZoneIDs *foundation.NSArray[*raw.CKRecordZoneID])
 }
 

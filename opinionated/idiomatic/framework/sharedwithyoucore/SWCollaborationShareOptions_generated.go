@@ -76,13 +76,13 @@ func (x *CollaborationShareOptions) WithSummary(summary string) *CollaborationSh
 }
 
 // OptionsGroups returns the collection as a Go slice.
-func (x *CollaborationShareOptions) OptionsGroups() []*raw.SWCollaborationOptionsGroup {
+func (x *CollaborationShareOptions) OptionsGroups() []*CollaborationOptionsGroup {
 	arr := x.inner.OptionsGroups()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SWCollaborationOptionsGroup {
-		return raw.SWCollaborationOptionsGroupFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollaborationOptionsGroup {
+		return &CollaborationOptionsGroup{inner: raw.SWCollaborationOptionsGroupFromID(purego.Retain(_id))}
 	})
 }
 
@@ -110,7 +110,7 @@ type CollaborationShareOptionsable interface {
 	Unwrap() *raw.SWCollaborationShareOptions
 	WithOptionsGroups(items ...CollaborationOptionsGroupProvider) *CollaborationShareOptions
 	WithSummary(summary string) *CollaborationShareOptions
-	OptionsGroups() []*raw.SWCollaborationOptionsGroup
+	OptionsGroups() []*CollaborationOptionsGroup
 	SetOptionsGroups(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup])
 	Summary() string
 	SetSummary(summary string)

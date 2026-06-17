@@ -48,14 +48,14 @@ func (x *MeasurementFormatter) WithUnitStyle(unitStyle raw.NSFormattingUnitStyle
 }
 
 // WithLocale sets the locale property and returns the receiver for chaining.
-func (x *MeasurementFormatter) WithLocale(locale *raw.NSLocale) *MeasurementFormatter {
-	x.inner.SetLocale(locale)
+func (x *MeasurementFormatter) WithLocale(locale *Locale) *MeasurementFormatter {
+	x.inner.SetLocale(locale.Unwrap())
 	return x
 }
 
 // WithNumberFormatter sets the numberFormatter property and returns the receiver for chaining.
-func (x *MeasurementFormatter) WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *MeasurementFormatter {
-	x.inner.SetNumberFormatter(numberFormatter)
+func (x *MeasurementFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MeasurementFormatter {
+	x.inner.SetNumberFormatter(numberFormatter.Unwrap())
 	return x
 }
 
@@ -140,8 +140,8 @@ type MeasurementFormatterable interface {
 	Unwrap() *raw.NSMeasurementFormatter
 	WithUnitOptions(unitOptions raw.NSMeasurementFormatterUnitOptions) *MeasurementFormatter
 	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *MeasurementFormatter
-	WithLocale(locale *raw.NSLocale) *MeasurementFormatter
-	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *MeasurementFormatter
+	WithLocale(locale *Locale) *MeasurementFormatter
+	WithNumberFormatter(numberFormatter *NumberFormatter) *MeasurementFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MeasurementFormatter
 	StringFromMeasurement(measurement *raw.NSMeasurement[objc.ID]) *String
 	StringFromUnit(unit *raw.NSUnit) *String

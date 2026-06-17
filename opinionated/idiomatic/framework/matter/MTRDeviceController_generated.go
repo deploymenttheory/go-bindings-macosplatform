@@ -171,13 +171,13 @@ func (x *MTRDeviceController) ControllerNodeID() *foundation.NSNumber {
 }
 
 // Devices returns the collection as a Go slice.
-func (x *MTRDeviceController) Devices() []*raw.MTRDevice {
+func (x *MTRDeviceController) Devices() []*MTRDevice {
 	arr := x.inner.Devices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRDevice {
-		return raw.MTRDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRDevice {
+		return &MTRDevice{inner: raw.MTRDeviceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -303,7 +303,7 @@ type MTRDeviceControllerable interface {
 	IsSuspended() bool
 	UniqueIdentifier() *foundation.NSUUID
 	ControllerNodeID() *foundation.NSNumber
-	Devices() []*raw.MTRDevice
+	Devices() []*MTRDevice
 	NodesWithStoredData() []*foundation.NSNumber
 	FetchAttestationChallengeForDeviceId(deviceId uint64) *foundation.NSData
 	GetBaseDeviceQueueCompletionHandler(deviceID uint64, queue *foundation.NSObject, completionHandler func(*raw.MTRBaseDevice, unsafe.Pointer)) bool

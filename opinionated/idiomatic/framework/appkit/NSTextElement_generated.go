@@ -44,8 +44,8 @@ func (x *TextElement) WithTextContentManager(textContentManager TextContentManag
 }
 
 // WithElementRange sets the elementRange property and returns the receiver for chaining.
-func (x *TextElement) WithElementRange(elementRange *raw.NSTextRange) *TextElement {
-	x.inner.SetElementRange(elementRange)
+func (x *TextElement) WithElementRange(elementRange *TextRange) *TextElement {
+	x.inner.SetElementRange(elementRange.Unwrap())
 	return x
 }
 
@@ -78,13 +78,13 @@ func (x *TextElement) SetElementRange(elementRange *raw.NSTextRange) {
 }
 
 // ChildElements returns the collection as a Go slice.
-func (x *TextElement) ChildElements() []*raw.NSTextElement {
+func (x *TextElement) ChildElements() []*TextElement {
 	arr := x.inner.ChildElements()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextElement {
-		return raw.NSTextElementFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextElement {
+		return &TextElement{inner: raw.NSTextElementFromID(purego.Retain(_id))}
 	})
 }
 
@@ -108,12 +108,12 @@ func (x *TextElement) asTextElement() *raw.NSTextElement { return x.inner }
 type TextElementable interface {
 	Unwrap() *raw.NSTextElement
 	WithTextContentManager(textContentManager TextContentManagerProvider) *TextElement
-	WithElementRange(elementRange *raw.NSTextRange) *TextElement
+	WithElementRange(elementRange *TextRange) *TextElement
 	TextContentManager() *TextContentManager
 	SetTextContentManager(textContentManager *raw.NSTextContentManager)
 	ElementRange() *TextRange
 	SetElementRange(elementRange *raw.NSTextRange)
-	ChildElements() []*raw.NSTextElement
+	ChildElements() []*TextElement
 	ParentElement() *TextElement
 	IsRepresentedElement() bool
 }

@@ -49,8 +49,8 @@ func (x *MTRServiceAreaClusterAreaStruct) WithMapID(mapID *foundation.NSNumber) 
 }
 
 // WithAreaInfo sets the areaInfo property and returns the receiver for chaining.
-func (x *MTRServiceAreaClusterAreaStruct) WithAreaInfo(areaInfo *raw.MTRServiceAreaClusterAreaInfoStruct) *MTRServiceAreaClusterAreaStruct {
-	x.inner.SetAreaInfo(areaInfo)
+func (x *MTRServiceAreaClusterAreaStruct) WithAreaInfo(areaInfo *MTRServiceAreaClusterAreaInfoStruct) *MTRServiceAreaClusterAreaStruct {
+	x.inner.SetAreaInfo(areaInfo.Unwrap())
 	return x
 }
 
@@ -93,7 +93,7 @@ type MTRServiceAreaClusterAreaStructable interface {
 	Unwrap() *raw.MTRServiceAreaClusterAreaStruct
 	WithAreaID(areaID *foundation.NSNumber) *MTRServiceAreaClusterAreaStruct
 	WithMapID(mapID *foundation.NSNumber) *MTRServiceAreaClusterAreaStruct
-	WithAreaInfo(areaInfo *raw.MTRServiceAreaClusterAreaInfoStruct) *MTRServiceAreaClusterAreaStruct
+	WithAreaInfo(areaInfo *MTRServiceAreaClusterAreaInfoStruct) *MTRServiceAreaClusterAreaStruct
 	AreaID() *foundation.NSNumber
 	SetAreaID(areaID *foundation.NSNumber)
 	MapID() *foundation.NSNumber

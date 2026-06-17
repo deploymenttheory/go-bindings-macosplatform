@@ -36,8 +36,8 @@ func NewVirtualMachineView() *VirtualMachineView {
 }
 
 // WithVirtualMachine sets the virtualMachine property and returns the receiver for chaining.
-func (x *VirtualMachineView) WithVirtualMachine(virtualMachine *raw.VZVirtualMachine) *VirtualMachineView {
-	x.inner.SetVirtualMachine(virtualMachine)
+func (x *VirtualMachineView) WithVirtualMachine(virtualMachine *VirtualMachine) *VirtualMachineView {
+	x.inner.SetVirtualMachine(virtualMachine.Unwrap())
 	return x
 }
 
@@ -90,7 +90,7 @@ func (x *VirtualMachineView) SetAutomaticallyReconfiguresDisplay(automaticallyRe
 // VirtualMachineViewable is the interface implemented by [VirtualMachineView], for mocking and DI.
 type VirtualMachineViewable interface {
 	Unwrap() *raw.VZVirtualMachineView
-	WithVirtualMachine(virtualMachine *raw.VZVirtualMachine) *VirtualMachineView
+	WithVirtualMachine(virtualMachine *VirtualMachine) *VirtualMachineView
 	WithCapturesSystemKeys(capturesSystemKeys bool) *VirtualMachineView
 	WithAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool) *VirtualMachineView
 	VirtualMachine() *VirtualMachine

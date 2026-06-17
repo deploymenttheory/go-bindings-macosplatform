@@ -93,13 +93,13 @@ func (x *TextSelection) TextSelectionWithTextRanges(textRanges *foundation.NSArr
 }
 
 // TextRanges returns the collection as a Go slice.
-func (x *TextSelection) TextRanges() []*raw.NSTextRange {
+func (x *TextSelection) TextRanges() []*TextRange {
 	arr := x.inner.TextRanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextRange {
-		return raw.NSTextRangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextRange {
+		return &TextRange{inner: raw.NSTextRangeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -166,7 +166,7 @@ type TextSelectionable interface {
 	WithSecondarySelectionLocation(secondarySelectionLocation raw.NSTextLocation) *TextSelection
 	WithTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextSelection
 	TextSelectionWithTextRanges(textRanges *foundation.NSArray[*raw.NSTextRange]) *TextSelection
-	TextRanges() []*raw.NSTextRange
+	TextRanges() []*TextRange
 	Granularity() raw.NSTextSelectionGranularity
 	Affinity() raw.NSTextSelectionAffinity
 	IsTransient() bool

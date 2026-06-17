@@ -42,13 +42,13 @@ func (x *AssetSegmentReport) SegmentType() raw.AVAssetSegmentType {
 }
 
 // TrackReports returns the collection as a Go slice.
-func (x *AssetSegmentReport) TrackReports() []*raw.AVAssetSegmentTrackReport {
+func (x *AssetSegmentReport) TrackReports() []*AssetSegmentTrackReport {
 	arr := x.inner.TrackReports()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetSegmentTrackReport {
-		return raw.AVAssetSegmentTrackReportFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetSegmentTrackReport {
+		return &AssetSegmentTrackReport{inner: raw.AVAssetSegmentTrackReportFromID(purego.Retain(_id))}
 	})
 }
 
@@ -56,7 +56,7 @@ func (x *AssetSegmentReport) TrackReports() []*raw.AVAssetSegmentTrackReport {
 type AssetSegmentReportable interface {
 	Unwrap() *raw.AVAssetSegmentReport
 	SegmentType() raw.AVAssetSegmentType
-	TrackReports() []*raw.AVAssetSegmentTrackReport
+	TrackReports() []*AssetSegmentTrackReport
 }
 
 var _ AssetSegmentReportable = (*AssetSegmentReport)(nil)

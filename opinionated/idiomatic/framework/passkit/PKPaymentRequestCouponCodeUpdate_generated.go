@@ -93,20 +93,20 @@ func (x *PaymentRequestCouponCodeUpdate) WithMultiTokenContexts(items ...*raw.PK
 }
 
 // WithRecurringPaymentRequest sets the recurringPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequestCouponCodeUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) *PaymentRequestCouponCodeUpdate {
-	x.inner.PKPaymentRequestUpdate.SetRecurringPaymentRequest(recurringPaymentRequest)
+func (x *PaymentRequestCouponCodeUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestCouponCodeUpdate {
+	x.inner.PKPaymentRequestUpdate.SetRecurringPaymentRequest(recurringPaymentRequest.Unwrap())
 	return x
 }
 
 // WithAutomaticReloadPaymentRequest sets the automaticReloadPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequestCouponCodeUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) *PaymentRequestCouponCodeUpdate {
-	x.inner.PKPaymentRequestUpdate.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest)
+func (x *PaymentRequestCouponCodeUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestCouponCodeUpdate {
+	x.inner.PKPaymentRequestUpdate.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest.Unwrap())
 	return x
 }
 
 // WithDeferredPaymentRequest sets the deferredPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequestCouponCodeUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) *PaymentRequestCouponCodeUpdate {
-	x.inner.PKPaymentRequestUpdate.SetDeferredPaymentRequest(deferredPaymentRequest)
+func (x *PaymentRequestCouponCodeUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestCouponCodeUpdate {
+	x.inner.PKPaymentRequestUpdate.SetDeferredPaymentRequest(deferredPaymentRequest.Unwrap())
 	return x
 }
 
@@ -129,9 +129,9 @@ type PaymentRequestCouponCodeUpdateable interface {
 	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestCouponCodeUpdate
 	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestCouponCodeUpdate
 	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestCouponCodeUpdate
-	WithRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) *PaymentRequestCouponCodeUpdate
-	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) *PaymentRequestCouponCodeUpdate
-	WithDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) *PaymentRequestCouponCodeUpdate
+	WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestCouponCodeUpdate
+	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestCouponCodeUpdate
+	WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestCouponCodeUpdate
 	Errors() *foundation.NSArray[objc.ID]
 	SetErrors() error
 }

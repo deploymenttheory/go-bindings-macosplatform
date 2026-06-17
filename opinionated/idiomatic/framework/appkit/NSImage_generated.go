@@ -117,8 +117,8 @@ func (x *Image) WithSize(size corefoundation.CGSize) *Image {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *Image) WithBackgroundColor(backgroundColor *raw.NSColor) *Image {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *Image) WithBackgroundColor(backgroundColor *Color) *Image {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -369,13 +369,13 @@ func (x *Image) TIFFRepresentation() *foundation.NSData {
 }
 
 // Representations returns the collection as a Go slice.
-func (x *Image) Representations() []*raw.NSImageRep {
+func (x *Image) Representations() []*ImageRep {
 	arr := x.inner.Representations()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSImageRep {
-		return raw.NSImageRepFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ImageRep {
+		return &ImageRep{inner: raw.NSImageRepFromID(purego.Retain(_id))}
 	})
 }
 
@@ -590,7 +590,7 @@ func (x *Image) CancelIncrementalLoad() {
 type Imageable interface {
 	Unwrap() *raw.NSImage
 	WithSize(size corefoundation.CGSize) *Image
-	WithBackgroundColor(backgroundColor *raw.NSColor) *Image
+	WithBackgroundColor(backgroundColor *Color) *Image
 	WithUsesEPSOnResolutionMismatch(usesEPSOnResolutionMismatch bool) *Image
 	WithPrefersColorMatch(prefersColorMatch bool) *Image
 	WithMatchesOnMultipleResolution(matchesOnMultipleResolution bool) *Image
@@ -634,7 +634,7 @@ type Imageable interface {
 	MatchesOnlyOnBestFittingAxis() bool
 	SetMatchesOnlyOnBestFittingAxis(matchesOnlyOnBestFittingAxis bool)
 	TIFFRepresentation() *foundation.NSData
-	Representations() []*raw.NSImageRep
+	Representations() []*ImageRep
 	IsValid() bool
 	Delegate() raw.NSImageDelegate
 	SetDelegate(delegate raw.NSImageDelegate)

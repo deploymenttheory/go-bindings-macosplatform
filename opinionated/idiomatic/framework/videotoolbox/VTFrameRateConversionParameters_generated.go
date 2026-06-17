@@ -82,13 +82,13 @@ func (x *FrameRateConversionParameters) SubmissionMode() raw.VTFrameRateConversi
 }
 
 // DestinationFrames returns the collection as a Go slice.
-func (x *FrameRateConversionParameters) DestinationFrames() []*raw.VTFrameProcessorFrame {
+func (x *FrameRateConversionParameters) DestinationFrames() []*FrameProcessorFrame {
 	arr := x.inner.DestinationFrames()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VTFrameProcessorFrame {
-		return raw.VTFrameProcessorFrameFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FrameProcessorFrame {
+		return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(purego.Retain(_id))}
 	})
 }
 
@@ -100,7 +100,7 @@ type FrameRateConversionParametersable interface {
 	OpticalFlow() *FrameProcessorOpticalFlow
 	InterpolationPhase() []*foundation.NSNumber
 	SubmissionMode() raw.VTFrameRateConversionParametersSubmissionMode
-	DestinationFrames() []*raw.VTFrameProcessorFrame
+	DestinationFrames() []*FrameProcessorFrame
 }
 
 var _ FrameRateConversionParametersable = (*FrameRateConversionParameters)(nil)

@@ -173,8 +173,8 @@ func (x *Stepper) WithDoubleValue(doubleValue float64) *Stepper {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Stepper) WithFont(font *raw.NSFont) *Stepper {
-	x.inner.NSControl.SetFont(font)
+func (x *Stepper) WithFont(font *Font) *Stepper {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -395,8 +395,8 @@ func (x *Stepper) WithContentFilters(items ...*coreimage.CIFilter) *Stepper {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Stepper) WithShadow(shadow *raw.NSShadow) *Stepper {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *Stepper) WithShadow(shadow *Shadow) *Stepper {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -477,8 +477,8 @@ func (x *Stepper) WithPrefersCompactControlSizeMetrics(prefersCompactControlSize
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Stepper) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Stepper {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Stepper) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Stepper {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -519,8 +519,8 @@ func (x *Stepper) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynami
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Stepper) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Stepper {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Stepper) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Stepper {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -531,8 +531,8 @@ func (x *Stepper) WithNextResponder(nextResponder ResponderProvider) *Stepper {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Stepper) WithMenu(menu *raw.NSMenu) *Stepper {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *Stepper) WithMenu(menu *Menu) *Stepper {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -543,8 +543,8 @@ func (x *Stepper) WithUserActivity(userActivity *foundation.NSUserActivity) *Ste
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Stepper) WithTouchBar(touchBar *raw.NSTouchBar) *Stepper {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Stepper) WithTouchBar(touchBar *TouchBar) *Stepper {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -629,7 +629,7 @@ type Stepperable interface {
 	WithIntegerValue(integerValue int) *Stepper
 	WithFloatValue(floatValue float32) *Stepper
 	WithDoubleValue(doubleValue float64) *Stepper
-	WithFont(font *raw.NSFont) *Stepper
+	WithFont(font *Font) *Stepper
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Stepper
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Stepper
 	WithAlignment(alignment raw.NSTextAlignment) *Stepper
@@ -661,7 +661,7 @@ type Stepperable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Stepper
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Stepper
 	WithContentFilters(items ...*coreimage.CIFilter) *Stepper
-	WithShadow(shadow *raw.NSShadow) *Stepper
+	WithShadow(shadow *Shadow) *Stepper
 	WithClipsToBounds(clipsToBounds bool) *Stepper
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Stepper
 	WithToolTip(toolTip string) *Stepper
@@ -673,18 +673,18 @@ type Stepperable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Stepper
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Stepper
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Stepper
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Stepper
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Stepper
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Stepper
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Stepper
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Stepper
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Stepper
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Stepper
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Stepper
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Stepper
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Stepper
 	WithNextResponder(nextResponder ResponderProvider) *Stepper
-	WithMenu(menu *raw.NSMenu) *Stepper
+	WithMenu(menu *Menu) *Stepper
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Stepper
-	WithTouchBar(touchBar *raw.NSTouchBar) *Stepper
+	WithTouchBar(touchBar *TouchBar) *Stepper
 	MinValue() float64
 	SetMinValue(minValue float64)
 	MaxValue() float64

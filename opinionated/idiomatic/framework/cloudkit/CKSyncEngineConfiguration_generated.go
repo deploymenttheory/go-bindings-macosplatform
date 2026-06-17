@@ -39,14 +39,14 @@ func NewSyncEngineConfigurationWithDatabaseStateSerializationDelegate(database *
 }
 
 // WithDatabase sets the database property and returns the receiver for chaining.
-func (x *SyncEngineConfiguration) WithDatabase(database *raw.CKDatabase) *SyncEngineConfiguration {
-	x.inner.SetDatabase(database)
+func (x *SyncEngineConfiguration) WithDatabase(database *Database) *SyncEngineConfiguration {
+	x.inner.SetDatabase(database.Unwrap())
 	return x
 }
 
 // WithStateSerialization sets the stateSerialization property and returns the receiver for chaining.
-func (x *SyncEngineConfiguration) WithStateSerialization(stateSerialization *raw.CKSyncEngineStateSerialization) *SyncEngineConfiguration {
-	x.inner.SetStateSerialization(stateSerialization)
+func (x *SyncEngineConfiguration) WithStateSerialization(stateSerialization *SyncEngineStateSerialization) *SyncEngineConfiguration {
+	x.inner.SetStateSerialization(stateSerialization.Unwrap())
 	return x
 }
 
@@ -133,8 +133,8 @@ func (x *SyncEngineConfiguration) SetSubscriptionID(subscriptionID *foundation.N
 // SyncEngineConfigurationable is the interface implemented by [SyncEngineConfiguration], for mocking and DI.
 type SyncEngineConfigurationable interface {
 	Unwrap() *raw.CKSyncEngineConfiguration
-	WithDatabase(database *raw.CKDatabase) *SyncEngineConfiguration
-	WithStateSerialization(stateSerialization *raw.CKSyncEngineStateSerialization) *SyncEngineConfiguration
+	WithDatabase(database *Database) *SyncEngineConfiguration
+	WithStateSerialization(stateSerialization *SyncEngineStateSerialization) *SyncEngineConfiguration
 	WithDelegate(delegate raw.CKSyncEngineDelegate) *SyncEngineConfiguration
 	WithAutomaticallySync(automaticallySync bool) *SyncEngineConfiguration
 	WithSubscriptionID(subscriptionID *foundation.NSString) *SyncEngineConfiguration

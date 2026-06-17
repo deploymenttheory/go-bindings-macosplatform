@@ -135,13 +135,13 @@ func (x *Operation) IsReady() bool {
 }
 
 // Dependencies returns the collection as a Go slice.
-func (x *Operation) Dependencies() []*raw.NSOperation {
+func (x *Operation) Dependencies() []*Operation {
 	arr := x.inner.Dependencies()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSOperation {
-		return raw.NSOperationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Operation {
+		return &Operation{inner: raw.NSOperationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -233,7 +233,7 @@ type Operationable interface {
 	IsConcurrent() bool
 	IsAsynchronous() bool
 	IsReady() bool
-	Dependencies() []*raw.NSOperation
+	Dependencies() []*Operation
 	QueuePriority() raw.NSOperationQueuePriority
 	SetQueuePriority(queuePriority raw.NSOperationQueuePriority)
 	CompletionBlock() objc.Block

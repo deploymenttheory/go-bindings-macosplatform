@@ -50,8 +50,8 @@ func (x *PaymentAuthorizationResult) WithStatus(status raw.PKPaymentAuthorizatio
 }
 
 // WithOrderDetails sets the orderDetails property and returns the receiver for chaining.
-func (x *PaymentAuthorizationResult) WithOrderDetails(orderDetails *raw.PKPaymentOrderDetails) *PaymentAuthorizationResult {
-	x.inner.SetOrderDetails(orderDetails)
+func (x *PaymentAuthorizationResult) WithOrderDetails(orderDetails *PaymentOrderDetails) *PaymentAuthorizationResult {
+	x.inner.SetOrderDetails(orderDetails.Unwrap())
 	return x
 }
 
@@ -93,7 +93,7 @@ func (x *PaymentAuthorizationResult) SetOrderDetails(orderDetails *raw.PKPayment
 type PaymentAuthorizationResultable interface {
 	Unwrap() *raw.PKPaymentAuthorizationResult
 	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentAuthorizationResult
-	WithOrderDetails(orderDetails *raw.PKPaymentOrderDetails) *PaymentAuthorizationResult
+	WithOrderDetails(orderDetails *PaymentOrderDetails) *PaymentAuthorizationResult
 	Status() raw.PKPaymentAuthorizationStatus
 	SetStatus(status raw.PKPaymentAuthorizationStatus)
 	Errors() *foundation.NSArray[objc.ID]

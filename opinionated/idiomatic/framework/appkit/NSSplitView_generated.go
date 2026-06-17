@@ -252,8 +252,8 @@ func (x *SplitView) WithContentFilters(items ...*coreimage.CIFilter) *SplitView 
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *SplitView) WithShadow(shadow *raw.NSShadow) *SplitView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *SplitView) WithShadow(shadow *Shadow) *SplitView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -334,8 +334,8 @@ func (x *SplitView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *SplitView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *SplitView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *SplitView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SplitView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -376,8 +376,8 @@ func (x *SplitView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *SplitView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *SplitView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *SplitView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SplitView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -388,8 +388,8 @@ func (x *SplitView) WithNextResponder(nextResponder ResponderProvider) *SplitVie
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SplitView) WithMenu(menu *raw.NSMenu) *SplitView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *SplitView) WithMenu(menu *Menu) *SplitView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -400,8 +400,8 @@ func (x *SplitView) WithUserActivity(userActivity *foundation.NSUserActivity) *S
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *SplitView) WithTouchBar(touchBar *raw.NSTouchBar) *SplitView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *SplitView) WithTouchBar(touchBar *TouchBar) *SplitView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -529,13 +529,13 @@ func (x *SplitView) SetArrangesAllSubviews(arrangesAllSubviews bool) {
 }
 
 // ArrangedSubviews returns the collection as a Go slice.
-func (x *SplitView) ArrangedSubviews() []*raw.NSView {
+func (x *SplitView) ArrangedSubviews() []*View {
 	arr := x.inner.ArrangedSubviews()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
-		return raw.NSViewFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
+		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
 	})
 }
 
@@ -586,7 +586,7 @@ type SplitViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *SplitView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *SplitView
 	WithContentFilters(items ...*coreimage.CIFilter) *SplitView
-	WithShadow(shadow *raw.NSShadow) *SplitView
+	WithShadow(shadow *Shadow) *SplitView
 	WithClipsToBounds(clipsToBounds bool) *SplitView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SplitView
 	WithToolTip(toolTip string) *SplitView
@@ -598,18 +598,18 @@ type SplitViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SplitView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SplitView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SplitView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *SplitView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SplitView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SplitView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SplitView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SplitView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SplitView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SplitView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SplitView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *SplitView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SplitView
 	WithNextResponder(nextResponder ResponderProvider) *SplitView
-	WithMenu(menu *raw.NSMenu) *SplitView
+	WithMenu(menu *Menu) *SplitView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *SplitView
-	WithTouchBar(touchBar *raw.NSTouchBar) *SplitView
+	WithTouchBar(touchBar *TouchBar) *SplitView
 	DrawDividerInRect(rect corefoundation.CGRect)
 	AdjustSubviews()
 	IsSubviewCollapsed(subview *raw.NSView) bool
@@ -633,7 +633,7 @@ type SplitViewable interface {
 	RemoveArrangedSubview(view *raw.NSView)
 	ArrangesAllSubviews() bool
 	SetArrangesAllSubviews(arrangesAllSubviews bool)
-	ArrangedSubviews() []*raw.NSView
+	ArrangedSubviews() []*View
 	SetIsPaneSplitter(flag bool)
 	IsPaneSplitter() bool
 }

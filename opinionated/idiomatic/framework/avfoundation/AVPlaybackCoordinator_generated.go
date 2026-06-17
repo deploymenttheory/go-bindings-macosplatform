@@ -76,13 +76,13 @@ func (x *PlaybackCoordinator) ExpectedItemTimeAtHostTime(hostClockTime coremedia
 }
 
 // OtherParticipants returns the collection as a Go slice.
-func (x *PlaybackCoordinator) OtherParticipants() []*raw.AVCoordinatedPlaybackParticipant {
+func (x *PlaybackCoordinator) OtherParticipants() []*CoordinatedPlaybackParticipant {
 	arr := x.inner.OtherParticipants()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCoordinatedPlaybackParticipant {
-		return raw.AVCoordinatedPlaybackParticipantFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CoordinatedPlaybackParticipant {
+		return &CoordinatedPlaybackParticipant{inner: raw.AVCoordinatedPlaybackParticipantFromID(purego.Retain(_id))}
 	})
 }
 
@@ -142,7 +142,7 @@ type PlaybackCoordinatorable interface {
 	WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlaybackCoordinator
 	BeginSuspensionForReason(suspensionReason *foundation.NSString) *CoordinatedPlaybackSuspension
 	ExpectedItemTimeAtHostTime(hostClockTime coremedia.CMTime) coremedia.CMTime
-	OtherParticipants() []*raw.AVCoordinatedPlaybackParticipant
+	OtherParticipants() []*CoordinatedPlaybackParticipant
 	SuspensionReasons() []*foundation.NSString
 	SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit int, reason *foundation.NSString)
 	ParticipantLimitForWaitingOutSuspensionsWithReason(reason *foundation.NSString) int

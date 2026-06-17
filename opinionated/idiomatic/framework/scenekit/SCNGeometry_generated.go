@@ -61,8 +61,8 @@ func (x *Geometry) WithMaterials(items ...*raw.SCNMaterial) *Geometry {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Geometry) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Geometry {
-	x.inner.SetFirstMaterial(firstMaterial)
+func (x *Geometry) WithFirstMaterial(firstMaterial *Material) *Geometry {
+	x.inner.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -83,8 +83,8 @@ func (x *Geometry) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Geometry 
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Geometry) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Geometry {
-	x.inner.SetTessellator(tessellator)
+func (x *Geometry) WithTessellator(tessellator *GeometryTessellator) *Geometry {
+	x.inner.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -101,14 +101,14 @@ func (x *Geometry) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Geometry) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Geometry {
-	x.inner.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Geometry) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Geometry {
+	x.inner.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Geometry) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Geometry {
-	x.inner.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Geometry) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Geometry {
+	x.inner.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -165,13 +165,13 @@ func (x *Geometry) SetName(name string) {
 }
 
 // Materials returns the collection as a Go slice.
-func (x *Geometry) Materials() []*raw.SCNMaterial {
+func (x *Geometry) Materials() []*Material {
 	arr := x.inner.Materials()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNMaterial {
-		return raw.SCNMaterialFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Material {
+		return &Material{inner: raw.SCNMaterialFromID(purego.Retain(_id))}
 	})
 }
 
@@ -195,24 +195,24 @@ func (x *Geometry) SetFirstMaterial(firstMaterial *raw.SCNMaterial) {
 }
 
 // GeometrySources returns the collection as a Go slice.
-func (x *Geometry) GeometrySources() []*raw.SCNGeometrySource {
+func (x *Geometry) GeometrySources() []*GeometrySource {
 	arr := x.inner.GeometrySources()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNGeometrySource {
-		return raw.SCNGeometrySourceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GeometrySource {
+		return &GeometrySource{inner: raw.SCNGeometrySourceFromID(purego.Retain(_id))}
 	})
 }
 
 // GeometryElements returns the collection as a Go slice.
-func (x *Geometry) GeometryElements() []*raw.SCNGeometryElement {
+func (x *Geometry) GeometryElements() []*GeometryElement {
 	arr := x.inner.GeometryElements()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNGeometryElement {
-		return raw.SCNGeometryElementFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GeometryElement {
+		return &GeometryElement{inner: raw.SCNGeometryElementFromID(purego.Retain(_id))}
 	})
 }
 
@@ -233,13 +233,13 @@ func (x *Geometry) GeometrySourceChannels() []*foundation.NSNumber {
 }
 
 // LevelsOfDetail returns the collection as a Go slice.
-func (x *Geometry) LevelsOfDetail() []*raw.SCNLevelOfDetail {
+func (x *Geometry) LevelsOfDetail() []*LevelOfDetail {
 	arr := x.inner.LevelsOfDetail()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNLevelOfDetail {
-		return raw.SCNLevelOfDetailFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LevelOfDetail {
+		return &LevelOfDetail{inner: raw.SCNLevelOfDetailFromID(purego.Retain(_id))}
 	})
 }
 
@@ -317,13 +317,13 @@ type Geometryable interface {
 	Unwrap() *raw.SCNGeometry
 	WithName(name string) *Geometry
 	WithMaterials(items ...*raw.SCNMaterial) *Geometry
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Geometry
+	WithFirstMaterial(firstMaterial *Material) *Geometry
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Geometry
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Geometry
+	WithTessellator(tessellator *GeometryTessellator) *Geometry
 	WithSubdivisionLevel(subdivisionLevel uint) *Geometry
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Geometry
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Geometry
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Geometry
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Geometry
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Geometry
 	InsertMaterialAtIndex(material *raw.SCNMaterial, index uint)
 	RemoveMaterialAtIndex(index uint)
 	ReplaceMaterialAtIndexWithMaterial(index uint, material *raw.SCNMaterial)
@@ -332,15 +332,15 @@ type Geometryable interface {
 	GeometryElementAtIndex(elementIndex int) *GeometryElement
 	Name() string
 	SetName(name string)
-	Materials() []*raw.SCNMaterial
+	Materials() []*Material
 	SetMaterials(materials *foundation.NSArray[*raw.SCNMaterial])
 	FirstMaterial() *Material
 	SetFirstMaterial(firstMaterial *raw.SCNMaterial)
-	GeometrySources() []*raw.SCNGeometrySource
-	GeometryElements() []*raw.SCNGeometryElement
+	GeometrySources() []*GeometrySource
+	GeometryElements() []*GeometryElement
 	GeometryElementCount() int
 	GeometrySourceChannels() []*foundation.NSNumber
-	LevelsOfDetail() []*raw.SCNLevelOfDetail
+	LevelsOfDetail() []*LevelOfDetail
 	SetLevelsOfDetail(levelsOfDetail *foundation.NSArray[*raw.SCNLevelOfDetail])
 	Tessellator() *GeometryTessellator
 	SetTessellator(tessellator *raw.SCNGeometryTessellator)

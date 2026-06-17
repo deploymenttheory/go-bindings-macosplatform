@@ -51,8 +51,8 @@ func (x *Alert) WithInformativeText(informativeText string) *Alert {
 }
 
 // WithIcon sets the icon property and returns the receiver for chaining.
-func (x *Alert) WithIcon(icon *raw.NSImage) *Alert {
-	x.inner.SetIcon(icon)
+func (x *Alert) WithIcon(icon *Image) *Alert {
+	x.inner.SetIcon(icon.Unwrap())
 	return x
 }
 
@@ -159,13 +159,13 @@ func (x *Alert) SetIcon(icon *raw.NSImage) {
 }
 
 // Buttons returns the collection as a Go slice.
-func (x *Alert) Buttons() []*raw.NSButton {
+func (x *Alert) Buttons() []*Button {
 	arr := x.inner.Buttons()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSButton {
-		return raw.NSButtonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Button {
+		return &Button{inner: raw.NSButtonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -265,7 +265,7 @@ type Alertable interface {
 	Unwrap() *raw.NSAlert
 	WithMessageText(messageText string) *Alert
 	WithInformativeText(informativeText string) *Alert
-	WithIcon(icon *raw.NSImage) *Alert
+	WithIcon(icon *Image) *Alert
 	WithAlertStyle(alertStyle raw.NSAlertStyle) *Alert
 	WithShowsHelp(showsHelp bool) *Alert
 	WithHelpAnchor(helpAnchor *foundation.NSString) *Alert
@@ -282,7 +282,7 @@ type Alertable interface {
 	SetInformativeText(informativeText string)
 	Icon() *Image
 	SetIcon(icon *raw.NSImage)
-	Buttons() []*raw.NSButton
+	Buttons() []*Button
 	AlertStyle() raw.NSAlertStyle
 	SetAlertStyle(alertStyle raw.NSAlertStyle)
 	ShowsHelp() bool

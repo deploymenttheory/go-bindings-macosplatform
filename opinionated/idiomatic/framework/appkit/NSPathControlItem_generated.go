@@ -50,8 +50,8 @@ func (x *PathControlItem) WithAttributedTitle(attributedTitle *foundation.NSAttr
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *PathControlItem) WithImage(image *raw.NSImage) *PathControlItem {
-	x.inner.SetImage(image)
+func (x *PathControlItem) WithImage(image *Image) *PathControlItem {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -103,7 +103,7 @@ type PathControlItemable interface {
 	Unwrap() *raw.NSPathControlItem
 	WithTitle(title string) *PathControlItem
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *PathControlItem
-	WithImage(image *raw.NSImage) *PathControlItem
+	WithImage(image *Image) *PathControlItem
 	Title() string
 	SetTitle(title string)
 	AttributedTitle() *foundation.NSAttributedString

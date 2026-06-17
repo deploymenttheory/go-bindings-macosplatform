@@ -52,13 +52,13 @@ func (x *TermOfAddress) LanguageIdentifier() *String {
 }
 
 // Pronouns returns the collection as a Go slice.
-func (x *TermOfAddress) Pronouns() []*raw.NSMorphologyPronoun {
+func (x *TermOfAddress) Pronouns() []*MorphologyPronoun {
 	arr := x.inner.Pronouns()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMorphologyPronoun {
-		return raw.NSMorphologyPronounFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MorphologyPronoun {
+		return &MorphologyPronoun{inner: raw.NSMorphologyPronounFromID(purego.Retain(_id))}
 	})
 }
 
@@ -69,7 +69,7 @@ type TermOfAddressable interface {
 	Unwrap() *raw.NSTermOfAddress
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TermOfAddress
 	LanguageIdentifier() *String
-	Pronouns() []*raw.NSMorphologyPronoun
+	Pronouns() []*MorphologyPronoun
 }
 
 var _ TermOfAddressable = (*TermOfAddress)(nil)

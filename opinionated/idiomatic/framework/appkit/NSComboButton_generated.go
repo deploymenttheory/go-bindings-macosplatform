@@ -48,8 +48,8 @@ func (x *ComboButton) WithTitle(title string) *ComboButton {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *ComboButton) WithImage(image *raw.NSImage) *ComboButton {
-	x.inner.SetImage(image)
+func (x *ComboButton) WithImage(image *Image) *ComboButton {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -168,8 +168,8 @@ func (x *ComboButton) WithDoubleValue(doubleValue float64) *ComboButton {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *ComboButton) WithFont(font *raw.NSFont) *ComboButton {
-	x.inner.NSControl.SetFont(font)
+func (x *ComboButton) WithFont(font *Font) *ComboButton {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -390,8 +390,8 @@ func (x *ComboButton) WithContentFilters(items ...*coreimage.CIFilter) *ComboBut
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ComboButton) WithShadow(shadow *raw.NSShadow) *ComboButton {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *ComboButton) WithShadow(shadow *Shadow) *ComboButton {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -472,8 +472,8 @@ func (x *ComboButton) WithPrefersCompactControlSizeMetrics(prefersCompactControl
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ComboButton) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ComboButton {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *ComboButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboButton {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -514,8 +514,8 @@ func (x *ComboButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDy
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ComboButton) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ComboButton {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *ComboButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboButton {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -526,8 +526,8 @@ func (x *ComboButton) WithNextResponder(nextResponder ResponderProvider) *ComboB
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ComboButton) WithMenu(menu *raw.NSMenu) *ComboButton {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *ComboButton) WithMenu(menu *Menu) *ComboButton {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -538,8 +538,8 @@ func (x *ComboButton) WithUserActivity(userActivity *foundation.NSUserActivity) 
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ComboButton) WithTouchBar(touchBar *raw.NSTouchBar) *ComboButton {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *ComboButton) WithTouchBar(touchBar *TouchBar) *ComboButton {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -601,7 +601,7 @@ func (x *ComboButton) asResponder() *raw.NSResponder { return &x.inner.NSControl
 type ComboButtonable interface {
 	Unwrap() *raw.NSComboButton
 	WithTitle(title string) *ComboButton
-	WithImage(image *raw.NSImage) *ComboButton
+	WithImage(image *Image) *ComboButton
 	WithImageScaling(imageScaling raw.NSImageScaling) *ComboButton
 	WithStyle(style raw.NSComboButtonStyle) *ComboButton
 	WithTarget(target objc.ID) *ComboButton
@@ -621,7 +621,7 @@ type ComboButtonable interface {
 	WithIntegerValue(integerValue int) *ComboButton
 	WithFloatValue(floatValue float32) *ComboButton
 	WithDoubleValue(doubleValue float64) *ComboButton
-	WithFont(font *raw.NSFont) *ComboButton
+	WithFont(font *Font) *ComboButton
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ComboButton
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ComboButton
 	WithAlignment(alignment raw.NSTextAlignment) *ComboButton
@@ -653,7 +653,7 @@ type ComboButtonable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *ComboButton
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ComboButton
 	WithContentFilters(items ...*coreimage.CIFilter) *ComboButton
-	WithShadow(shadow *raw.NSShadow) *ComboButton
+	WithShadow(shadow *Shadow) *ComboButton
 	WithClipsToBounds(clipsToBounds bool) *ComboButton
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboButton
 	WithToolTip(toolTip string) *ComboButton
@@ -665,18 +665,18 @@ type ComboButtonable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ComboButton
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboButton
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboButton
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ComboButton
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboButton
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ComboButton
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ComboButton
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ComboButton
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboButton
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ComboButton
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ComboButton
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ComboButton
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboButton
 	WithNextResponder(nextResponder ResponderProvider) *ComboButton
-	WithMenu(menu *raw.NSMenu) *ComboButton
+	WithMenu(menu *Menu) *ComboButton
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ComboButton
-	WithTouchBar(touchBar *raw.NSTouchBar) *ComboButton
+	WithTouchBar(touchBar *TouchBar) *ComboButton
 	Title() string
 	SetTitle(title string)
 	Image() *Image

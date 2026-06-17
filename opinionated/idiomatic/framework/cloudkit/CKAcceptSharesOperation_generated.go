@@ -75,14 +75,14 @@ func (x *AcceptSharesOperation) WithAcceptSharesCompletionBlock(acceptSharesComp
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *AcceptSharesOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *AcceptSharesOperation {
-	x.inner.CKOperation.SetConfiguration(configuration)
+func (x *AcceptSharesOperation) WithConfiguration(configuration *OperationConfiguration) *AcceptSharesOperation {
+	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *AcceptSharesOperation) WithGroup(group *raw.CKOperationGroup) *AcceptSharesOperation {
-	x.inner.CKOperation.SetGroup(group)
+func (x *AcceptSharesOperation) WithGroup(group *OperationGroup) *AcceptSharesOperation {
+	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -93,8 +93,8 @@ func (x *AcceptSharesOperation) WithLongLivedOperationWasPersistedBlock(longLive
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *AcceptSharesOperation) WithContainer(container *raw.CKContainer) *AcceptSharesOperation {
-	x.inner.CKOperation.SetContainer(container)
+func (x *AcceptSharesOperation) WithContainer(container *Container) *AcceptSharesOperation {
+	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -123,13 +123,13 @@ func (x *AcceptSharesOperation) WithTimeoutIntervalForResource(timeoutIntervalFo
 }
 
 // ShareMetadatas returns the collection as a Go slice.
-func (x *AcceptSharesOperation) ShareMetadatas() []*raw.CKShareMetadata {
+func (x *AcceptSharesOperation) ShareMetadatas() []*ShareMetadata {
 	arr := x.inner.ShareMetadatas()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKShareMetadata {
-		return raw.CKShareMetadataFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShareMetadata {
+		return &ShareMetadata{inner: raw.CKShareMetadataFromID(purego.Retain(_id))}
 	})
 }
 
@@ -179,15 +179,15 @@ type AcceptSharesOperationable interface {
 	WithShareMetadatas(items ...*raw.CKShareMetadata) *AcceptSharesOperation
 	WithPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer)) *AcceptSharesOperation
 	WithAcceptSharesCompletionBlock(acceptSharesCompletionBlock func(unsafe.Pointer)) *AcceptSharesOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *AcceptSharesOperation
-	WithGroup(group *raw.CKOperationGroup) *AcceptSharesOperation
+	WithConfiguration(configuration *OperationConfiguration) *AcceptSharesOperation
+	WithGroup(group *OperationGroup) *AcceptSharesOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *AcceptSharesOperation
-	WithContainer(container *raw.CKContainer) *AcceptSharesOperation
+	WithContainer(container *Container) *AcceptSharesOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *AcceptSharesOperation
 	WithLongLived(longLived bool) *AcceptSharesOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *AcceptSharesOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *AcceptSharesOperation
-	ShareMetadatas() []*raw.CKShareMetadata
+	ShareMetadatas() []*ShareMetadata
 	SetShareMetadatas(shareMetadatas *foundation.NSArray[*raw.CKShareMetadata])
 	PerShareCompletionBlock() objc.Block
 	SetPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer))

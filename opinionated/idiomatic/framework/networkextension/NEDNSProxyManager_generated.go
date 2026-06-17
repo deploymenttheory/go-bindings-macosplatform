@@ -46,8 +46,8 @@ func (x *NEDNSProxyManager) WithLocalizedDescription(localizedDescription string
 }
 
 // WithProviderProtocol sets the providerProtocol property and returns the receiver for chaining.
-func (x *NEDNSProxyManager) WithProviderProtocol(providerProtocol *raw.NEDNSProxyProviderProtocol) *NEDNSProxyManager {
-	x.inner.SetProviderProtocol(providerProtocol)
+func (x *NEDNSProxyManager) WithProviderProtocol(providerProtocol *NEDNSProxyProviderProtocol) *NEDNSProxyManager {
+	x.inner.SetProviderProtocol(providerProtocol.Unwrap())
 	return x
 }
 
@@ -153,7 +153,7 @@ func (x *NEDNSProxyManager) SetEnabled(enabled bool) {
 type NEDNSProxyManagerable interface {
 	Unwrap() *raw.NEDNSProxyManager
 	WithLocalizedDescription(localizedDescription string) *NEDNSProxyManager
-	WithProviderProtocol(providerProtocol *raw.NEDNSProxyProviderProtocol) *NEDNSProxyManager
+	WithProviderProtocol(providerProtocol *NEDNSProxyProviderProtocol) *NEDNSProxyManager
 	WithEnabled(enabled bool) *NEDNSProxyManager
 	LoadFromPreferences(ctx context.Context) error
 	RemoveFromPreferences(ctx context.Context) error

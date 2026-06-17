@@ -67,13 +67,13 @@ func (x *TokenKeychainContents) CertificateForObjectIDError(objectID objc.ID) (*
 }
 
 // Items returns the collection as a Go slice.
-func (x *TokenKeychainContents) Items() []*raw.TKTokenKeychainItem {
+func (x *TokenKeychainContents) Items() []*TokenKeychainItem {
 	arr := x.inner.Items()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.TKTokenKeychainItem {
-		return raw.TKTokenKeychainItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TokenKeychainItem {
+		return &TokenKeychainItem{inner: raw.TKTokenKeychainItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -83,7 +83,7 @@ type TokenKeychainContentsable interface {
 	FillWithItems(items *foundation.NSArray[*raw.TKTokenKeychainItem])
 	KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error)
 	CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error)
-	Items() []*raw.TKTokenKeychainItem
+	Items() []*TokenKeychainItem
 }
 
 var _ TokenKeychainContentsable = (*TokenKeychainContents)(nil)

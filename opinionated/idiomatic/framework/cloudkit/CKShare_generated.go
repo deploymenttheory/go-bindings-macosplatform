@@ -72,8 +72,8 @@ func (x *Share) WithAllowsAccessRequests(allowsAccessRequests bool) *Share {
 }
 
 // WithParent sets the parent property and returns the receiver for chaining.
-func (x *Share) WithParent(parent *raw.CKReference) *Share {
-	x.inner.CKRecord.SetParent(parent)
+func (x *Share) WithParent(parent *Reference) *Share {
+	x.inner.CKRecord.SetParent(parent.Unwrap())
 	return x
 }
 
@@ -123,13 +123,13 @@ func (x *Share) URL() *foundation.NSURL {
 }
 
 // Participants returns the collection as a Go slice.
-func (x *Share) Participants() []*raw.CKShareParticipant {
+func (x *Share) Participants() []*ShareParticipant {
 	arr := x.inner.Participants()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKShareParticipant {
-		return raw.CKShareParticipantFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShareParticipant {
+		return &ShareParticipant{inner: raw.CKShareParticipantFromID(purego.Retain(_id))}
 	})
 }
 
@@ -152,24 +152,24 @@ func (x *Share) CurrentUserParticipant() *ShareParticipant {
 }
 
 // Requesters returns the collection as a Go slice.
-func (x *Share) Requesters() []*raw.CKShareAccessRequester {
+func (x *Share) Requesters() []*ShareAccessRequester {
 	arr := x.inner.Requesters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKShareAccessRequester {
-		return raw.CKShareAccessRequesterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShareAccessRequester {
+		return &ShareAccessRequester{inner: raw.CKShareAccessRequesterFromID(purego.Retain(_id))}
 	})
 }
 
 // BlockedIdentities returns the collection as a Go slice.
-func (x *Share) BlockedIdentities() []*raw.CKShareBlockedIdentity {
+func (x *Share) BlockedIdentities() []*ShareBlockedIdentity {
 	arr := x.inner.BlockedIdentities()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKShareBlockedIdentity {
-		return raw.CKShareBlockedIdentityFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShareBlockedIdentity {
+		return &ShareBlockedIdentity{inner: raw.CKShareBlockedIdentityFromID(purego.Retain(_id))}
 	})
 }
 
@@ -190,7 +190,7 @@ type Shareable interface {
 	Unwrap() *raw.CKShare
 	WithPublicPermission(publicPermission raw.CKShareParticipantPermission) *Share
 	WithAllowsAccessRequests(allowsAccessRequests bool) *Share
-	WithParent(parent *raw.CKReference) *Share
+	WithParent(parent *Reference) *Share
 	AddParticipant(participant *raw.CKShareParticipant)
 	RemoveParticipant(participant *raw.CKShareParticipant)
 	OneTimeURLForParticipantID(participantID string) *foundation.NSURL
@@ -200,11 +200,11 @@ type Shareable interface {
 	PublicPermission() raw.CKShareParticipantPermission
 	SetPublicPermission(publicPermission raw.CKShareParticipantPermission)
 	URL() *foundation.NSURL
-	Participants() []*raw.CKShareParticipant
+	Participants() []*ShareParticipant
 	Owner() *ShareParticipant
 	CurrentUserParticipant() *ShareParticipant
-	Requesters() []*raw.CKShareAccessRequester
-	BlockedIdentities() []*raw.CKShareBlockedIdentity
+	Requesters() []*ShareAccessRequester
+	BlockedIdentities() []*ShareBlockedIdentity
 	AllowsAccessRequests() bool
 	SetAllowsAccessRequests(allowsAccessRequests bool)
 }

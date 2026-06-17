@@ -46,24 +46,24 @@ func (x *UpdateCollaborationParticipantsAction) CollaborationMetadata() *Collabo
 }
 
 // AddedIdentities returns the collection as a Go slice.
-func (x *UpdateCollaborationParticipantsAction) AddedIdentities() []*raw.SWPersonIdentity {
+func (x *UpdateCollaborationParticipantsAction) AddedIdentities() []*PersonIdentity {
 	arr := x.inner.AddedIdentities()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SWPersonIdentity {
-		return raw.SWPersonIdentityFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersonIdentity {
+		return &PersonIdentity{inner: raw.SWPersonIdentityFromID(purego.Retain(_id))}
 	})
 }
 
 // RemovedIdentities returns the collection as a Go slice.
-func (x *UpdateCollaborationParticipantsAction) RemovedIdentities() []*raw.SWPersonIdentity {
+func (x *UpdateCollaborationParticipantsAction) RemovedIdentities() []*PersonIdentity {
 	arr := x.inner.RemovedIdentities()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SWPersonIdentity {
-		return raw.SWPersonIdentityFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersonIdentity {
+		return &PersonIdentity{inner: raw.SWPersonIdentityFromID(purego.Retain(_id))}
 	})
 }
 
@@ -73,8 +73,8 @@ func (x *UpdateCollaborationParticipantsAction) asAction() *raw.SWAction { retur
 type UpdateCollaborationParticipantsActionable interface {
 	Unwrap() *raw.SWUpdateCollaborationParticipantsAction
 	CollaborationMetadata() *CollaborationMetadata
-	AddedIdentities() []*raw.SWPersonIdentity
-	RemovedIdentities() []*raw.SWPersonIdentity
+	AddedIdentities() []*PersonIdentity
+	RemovedIdentities() []*PersonIdentity
 }
 
 var _ UpdateCollaborationParticipantsActionable = (*UpdateCollaborationParticipantsAction)(nil)

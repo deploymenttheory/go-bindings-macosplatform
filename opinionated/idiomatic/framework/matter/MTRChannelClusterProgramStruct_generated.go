@@ -98,8 +98,8 @@ func (x *MTRChannelClusterProgramStruct) WithRecordingFlag(recordingFlag *founda
 }
 
 // WithSeriesInfo sets the seriesInfo property and returns the receiver for chaining.
-func (x *MTRChannelClusterProgramStruct) WithSeriesInfo(seriesInfo *raw.MTRChannelClusterSeriesInfoStruct) *MTRChannelClusterProgramStruct {
-	x.inner.SetSeriesInfo(seriesInfo)
+func (x *MTRChannelClusterProgramStruct) WithSeriesInfo(seriesInfo *MTRChannelClusterSeriesInfoStruct) *MTRChannelClusterProgramStruct {
+	x.inner.SetSeriesInfo(seriesInfo.Unwrap())
 	return x
 }
 
@@ -298,7 +298,7 @@ type MTRChannelClusterProgramStructable interface {
 	WithReleaseDate(releaseDate string) *MTRChannelClusterProgramStruct
 	WithParentalGuidanceText(parentalGuidanceText string) *MTRChannelClusterProgramStruct
 	WithRecordingFlag(recordingFlag *foundation.NSNumber) *MTRChannelClusterProgramStruct
-	WithSeriesInfo(seriesInfo *raw.MTRChannelClusterSeriesInfoStruct) *MTRChannelClusterProgramStruct
+	WithSeriesInfo(seriesInfo *MTRChannelClusterSeriesInfoStruct) *MTRChannelClusterProgramStruct
 	Identifier() string
 	SetIdentifier(identifier string)
 	Channel() *MTRChannelClusterChannelInfoStruct

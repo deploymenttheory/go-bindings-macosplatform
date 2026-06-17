@@ -145,13 +145,13 @@ func (x *NEVPNManager) SetAuthorization(authorization unsafe.Pointer) {
 }
 
 // OnDemandRules returns the collection as a Go slice.
-func (x *NEVPNManager) OnDemandRules() []*raw.NEOnDemandRule {
+func (x *NEVPNManager) OnDemandRules() []*NEOnDemandRule {
 	arr := x.inner.OnDemandRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEOnDemandRule {
-		return raw.NEOnDemandRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEOnDemandRule {
+		return &NEOnDemandRule{inner: raw.NEOnDemandRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -246,7 +246,7 @@ type NEVPNManagerable interface {
 	RemoveFromPreferences(ctx context.Context) error
 	SaveToPreferences(ctx context.Context) error
 	SetAuthorization(authorization unsafe.Pointer)
-	OnDemandRules() []*raw.NEOnDemandRule
+	OnDemandRules() []*NEOnDemandRule
 	SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule])
 	IsOnDemandEnabled() bool
 	SetOnDemandEnabled(onDemandEnabled bool)

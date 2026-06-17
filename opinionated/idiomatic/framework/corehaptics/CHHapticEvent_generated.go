@@ -81,13 +81,13 @@ func (x *HapticEvent) Type() string {
 }
 
 // EventParameters returns the collection as a Go slice.
-func (x *HapticEvent) EventParameters() []*raw.CHHapticEventParameter {
+func (x *HapticEvent) EventParameters() []*HapticEventParameter {
 	arr := x.inner.EventParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CHHapticEventParameter {
-		return raw.CHHapticEventParameterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *HapticEventParameter {
+		return &HapticEventParameter{inner: raw.CHHapticEventParameterFromID(purego.Retain(_id))}
 	})
 }
 
@@ -117,7 +117,7 @@ type HapticEventable interface {
 	WithRelativeTime(relativeTime float64) *HapticEvent
 	WithDuration(duration float64) *HapticEvent
 	Type() string
-	EventParameters() []*raw.CHHapticEventParameter
+	EventParameters() []*HapticEventParameter
 	RelativeTime() float64
 	SetRelativeTime(relativeTime float64)
 	Duration() float64

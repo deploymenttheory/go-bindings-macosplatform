@@ -51,24 +51,24 @@ func (x *CIProfileState) MidiChannel() uint8 {
 }
 
 // EnabledProfiles returns the collection as a Go slice.
-func (x *CIProfileState) EnabledProfiles() []*raw.MIDICIProfile {
+func (x *CIProfileState) EnabledProfiles() []*CIProfile {
 	arr := x.inner.EnabledProfiles()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDICIProfile {
-		return raw.MIDICIProfileFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CIProfile {
+		return &CIProfile{inner: raw.MIDICIProfileFromID(purego.Retain(_id))}
 	})
 }
 
 // DisabledProfiles returns the collection as a Go slice.
-func (x *CIProfileState) DisabledProfiles() []*raw.MIDICIProfile {
+func (x *CIProfileState) DisabledProfiles() []*CIProfile {
 	arr := x.inner.DisabledProfiles()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDICIProfile {
-		return raw.MIDICIProfileFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CIProfile {
+		return &CIProfile{inner: raw.MIDICIProfileFromID(purego.Retain(_id))}
 	})
 }
 
@@ -76,8 +76,8 @@ func (x *CIProfileState) DisabledProfiles() []*raw.MIDICIProfile {
 type CIProfileStateable interface {
 	Unwrap() *raw.MIDICIProfileState
 	MidiChannel() uint8
-	EnabledProfiles() []*raw.MIDICIProfile
-	DisabledProfiles() []*raw.MIDICIProfile
+	EnabledProfiles() []*CIProfile
+	DisabledProfiles() []*CIProfile
 }
 
 var _ CIProfileStateable = (*CIProfileState)(nil)

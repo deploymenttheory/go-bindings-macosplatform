@@ -148,24 +148,24 @@ func (x *Tensor) Device() *Device {
 }
 
 // OptimizerData returns the collection as a Go slice.
-func (x *Tensor) OptimizerData() []*raw.MLCTensorData {
+func (x *Tensor) OptimizerData() []*TensorData {
 	arr := x.inner.OptimizerData()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorData {
-		return raw.MLCTensorDataFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorData {
+		return &TensorData{inner: raw.MLCTensorDataFromID(purego.Retain(_id))}
 	})
 }
 
 // OptimizerDeviceData returns the collection as a Go slice.
-func (x *Tensor) OptimizerDeviceData() []*raw.MLCTensorOptimizerDeviceData {
+func (x *Tensor) OptimizerDeviceData() []*TensorOptimizerDeviceData {
 	arr := x.inner.OptimizerDeviceData()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorOptimizerDeviceData {
-		return raw.MLCTensorOptimizerDeviceDataFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorOptimizerDeviceData {
+		return &TensorOptimizerDeviceData{inner: raw.MLCTensorOptimizerDeviceDataFromID(purego.Retain(_id))}
 	})
 }
 
@@ -193,8 +193,8 @@ type Tensorable interface {
 	Label() string
 	SetLabel(label string)
 	Device() *Device
-	OptimizerData() []*raw.MLCTensorData
-	OptimizerDeviceData() []*raw.MLCTensorOptimizerDeviceData
+	OptimizerData() []*TensorData
+	OptimizerDeviceData() []*TensorOptimizerDeviceData
 	HasValidNumerics() bool
 }
 

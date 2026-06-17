@@ -39,13 +39,13 @@ func NewMathExpressionFencedWithExpressionsOpenStringCloseString(expressions *fo
 }
 
 // Expressions returns the collection as a Go slice.
-func (x *MathExpressionFenced) Expressions() []*raw.AXMathExpression {
+func (x *MathExpressionFenced) Expressions() []*MathExpression {
 	arr := x.inner.Expressions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
-		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
+		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -72,7 +72,7 @@ func (x *MathExpressionFenced) asMathExpression() *raw.AXMathExpression { return
 // MathExpressionFencedable is the interface implemented by [MathExpressionFenced], for mocking and DI.
 type MathExpressionFencedable interface {
 	Unwrap() *raw.AXMathExpressionFenced
-	Expressions() []*raw.AXMathExpression
+	Expressions() []*MathExpression
 	OpenString() string
 	CloseString() string
 }

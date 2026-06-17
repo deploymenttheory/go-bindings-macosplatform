@@ -91,13 +91,13 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithUsage(usage raw.MTLAc
 }
 
 // GeometryDescriptors returns the collection as a Go slice.
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*raw.MTL4AccelerationStructureGeometryDescriptor {
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*MTL4AccelerationStructureGeometryDescriptor {
 	arr := x.inner.GeometryDescriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTL4AccelerationStructureGeometryDescriptor {
-		return raw.MTL4AccelerationStructureGeometryDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTL4AccelerationStructureGeometryDescriptor {
+		return &MTL4AccelerationStructureGeometryDescriptor{inner: raw.MTL4AccelerationStructureGeometryDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -170,7 +170,7 @@ type MTL4PrimitiveAccelerationStructureDescriptorable interface {
 	WithMotionEndTime(motionEndTime float32) *MTL4PrimitiveAccelerationStructureDescriptor
 	WithMotionKeyframeCount(motionKeyframeCount uint) *MTL4PrimitiveAccelerationStructureDescriptor
 	WithUsage(usage raw.MTLAccelerationStructureUsage) *MTL4PrimitiveAccelerationStructureDescriptor
-	GeometryDescriptors() []*raw.MTL4AccelerationStructureGeometryDescriptor
+	GeometryDescriptors() []*MTL4AccelerationStructureGeometryDescriptor
 	SetGeometryDescriptors(geometryDescriptors *foundation.NSArray[*raw.MTL4AccelerationStructureGeometryDescriptor])
 	MotionStartBorderMode() raw.MTLMotionBorderMode
 	SetMotionStartBorderMode(motionStartBorderMode raw.MTLMotionBorderMode)

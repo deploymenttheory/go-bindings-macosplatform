@@ -1311,13 +1311,13 @@ func UnemphasizedSelectedContentBackgroundColor() *Color {
 }
 
 // AlternatingContentBackgroundColors returns the collection as a Go slice.
-func AlternatingContentBackgroundColors() []*raw.NSColor {
+func AlternatingContentBackgroundColors() []*Color {
 	arr := raw.NSColorAlternatingContentBackgroundColors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSColor {
-		return raw.NSColorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Color {
+		return &Color{inner: raw.NSColorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1784,13 +1784,13 @@ func ColorListNamed(name *foundation.NSString) *ColorList {
 }
 
 // AvailableColorLists returns the collection as a Go slice.
-func AvailableColorLists() []*raw.NSColorList {
+func AvailableColorLists() []*ColorList {
 	arr := raw.NSColorListAvailableColorLists()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSColorList {
-		return raw.NSColorListFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ColorList {
+		return &ColorList{inner: raw.NSColorListFromID(purego.Retain(_id))}
 	})
 }
 
@@ -3633,13 +3633,13 @@ func SetUsesUserKeyEquivalents(usesUserKeyEquivalents bool) {
 }
 
 // WritingToolsItems returns the collection as a Go slice.
-func WritingToolsItems() []*raw.NSMenuItem {
+func WritingToolsItems() []*MenuItem {
 	arr := raw.NSMenuItemWritingToolsItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMenuItem {
-		return raw.NSMenuItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MenuItem {
+		return &MenuItem{inner: raw.NSMenuItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -4156,13 +4156,13 @@ func NSSavePanelSavePanel() *SavePanel {
 }
 
 // Screens returns the collection as a Go slice.
-func Screens() []*raw.NSScreen {
+func Screens() []*Screen {
 	arr := raw.NSScreenScreens()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSScreen {
-		return raw.NSScreenFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Screen {
+		return &Screen{inner: raw.NSScreenFromID(purego.Retain(_id))}
 	})
 }
 

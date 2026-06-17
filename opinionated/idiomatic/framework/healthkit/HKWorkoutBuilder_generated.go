@@ -146,24 +146,24 @@ func (x *WorkoutBuilder) Metadata() *foundation.NSDictionary[*foundation.NSStrin
 }
 
 // WorkoutEvents returns the collection as a Go slice.
-func (x *WorkoutBuilder) WorkoutEvents() []*raw.HKWorkoutEvent {
+func (x *WorkoutBuilder) WorkoutEvents() []*WorkoutEvent {
 	arr := x.inner.WorkoutEvents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKWorkoutEvent {
-		return raw.HKWorkoutEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WorkoutEvent {
+		return &WorkoutEvent{inner: raw.HKWorkoutEventFromID(purego.Retain(_id))}
 	})
 }
 
 // WorkoutActivities returns the collection as a Go slice.
-func (x *WorkoutBuilder) WorkoutActivities() []*raw.HKWorkoutActivity {
+func (x *WorkoutBuilder) WorkoutActivities() []*WorkoutActivity {
 	arr := x.inner.WorkoutActivities()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKWorkoutActivity {
-		return raw.HKWorkoutActivityFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WorkoutActivity {
+		return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(purego.Retain(_id))}
 	})
 }
 
@@ -195,8 +195,8 @@ type WorkoutBuilderable interface {
 	EndDate() *foundation.NSDate
 	WorkoutConfiguration() *WorkoutConfiguration
 	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WorkoutEvents() []*raw.HKWorkoutEvent
-	WorkoutActivities() []*raw.HKWorkoutActivity
+	WorkoutEvents() []*WorkoutEvent
+	WorkoutActivities() []*WorkoutActivity
 	AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics]
 }
 

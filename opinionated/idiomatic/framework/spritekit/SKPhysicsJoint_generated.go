@@ -37,14 +37,14 @@ func NewPhysicsJoint() *PhysicsJoint {
 }
 
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
-func (x *PhysicsJoint) WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJoint {
-	x.inner.SetBodyA(bodyA)
+func (x *PhysicsJoint) WithBodyA(bodyA *PhysicsBody) *PhysicsJoint {
+	x.inner.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
-func (x *PhysicsJoint) WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJoint {
-	x.inner.SetBodyB(bodyB)
+func (x *PhysicsJoint) WithBodyB(bodyB *PhysicsBody) *PhysicsJoint {
+	x.inner.SetBodyB(bodyB.Unwrap())
 	return x
 }
 
@@ -91,8 +91,8 @@ func (x *PhysicsJoint) asPhysicsJoint() *raw.SKPhysicsJoint { return x.inner }
 // PhysicsJointable is the interface implemented by [PhysicsJoint], for mocking and DI.
 type PhysicsJointable interface {
 	Unwrap() *raw.SKPhysicsJoint
-	WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJoint
-	WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJoint
+	WithBodyA(bodyA *PhysicsBody) *PhysicsJoint
+	WithBodyB(bodyB *PhysicsBody) *PhysicsJoint
 	BodyA() *PhysicsBody
 	SetBodyA(bodyA *raw.SKPhysicsBody)
 	BodyB() *PhysicsBody

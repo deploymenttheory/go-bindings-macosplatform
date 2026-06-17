@@ -74,13 +74,13 @@ func (x *PredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(predica
 }
 
 // TemplateViews returns the collection as a Go slice.
-func (x *PredicateEditorRowTemplate) TemplateViews() []*raw.NSView {
+func (x *PredicateEditorRowTemplate) TemplateViews() []*View {
 	arr := x.inner.TemplateViews()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
-		return raw.NSViewFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
+		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
 	})
 }
 
@@ -150,7 +150,7 @@ type PredicateEditorRowTemplateable interface {
 	SetPredicate(predicate *foundation.NSPredicate)
 	PredicateWithSubpredicates(subpredicates *foundation.NSArray[*foundation.NSPredicate]) *foundation.NSPredicate
 	DisplayableSubpredicatesOfPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*foundation.NSPredicate]
-	TemplateViews() []*raw.NSView
+	TemplateViews() []*View
 	LeftExpressions() []*foundation.NSExpression
 	RightExpressions() []*foundation.NSExpression
 	RightExpressionAttributeType() coredata.NSAttributeType

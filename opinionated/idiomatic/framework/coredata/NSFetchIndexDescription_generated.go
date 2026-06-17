@@ -82,13 +82,13 @@ func (x *FetchIndexDescription) SetName(name string) {
 }
 
 // Elements returns the collection as a Go slice.
-func (x *FetchIndexDescription) Elements() []*raw.NSFetchIndexElementDescription {
+func (x *FetchIndexDescription) Elements() []*FetchIndexElementDescription {
 	arr := x.inner.Elements()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFetchIndexElementDescription {
-		return raw.NSFetchIndexElementDescriptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FetchIndexElementDescription {
+		return &FetchIndexElementDescription{inner: raw.NSFetchIndexElementDescriptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -124,7 +124,7 @@ type FetchIndexDescriptionable interface {
 	WithPartialIndexPredicate(partialIndexPredicate *foundation.NSPredicate) *FetchIndexDescription
 	Name() string
 	SetName(name string)
-	Elements() []*raw.NSFetchIndexElementDescription
+	Elements() []*FetchIndexElementDescription
 	SetElements(elements *foundation.NSArray[*raw.NSFetchIndexElementDescription])
 	Entity() *EntityDescription
 	PartialIndexPredicate() *foundation.NSPredicate

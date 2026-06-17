@@ -44,8 +44,8 @@ func (x *MapSnapshotOptions) WithPreferredConfiguration(preferredConfiguration M
 }
 
 // WithCamera sets the camera property and returns the receiver for chaining.
-func (x *MapSnapshotOptions) WithCamera(camera *raw.MKMapCamera) *MapSnapshotOptions {
-	x.inner.SetCamera(camera)
+func (x *MapSnapshotOptions) WithCamera(camera *MapCamera) *MapSnapshotOptions {
+	x.inner.SetCamera(camera.Unwrap())
 	return x
 }
 
@@ -68,8 +68,8 @@ func (x *MapSnapshotOptions) WithMapType(mapType raw.MKMapType) *MapSnapshotOpti
 }
 
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
-func (x *MapSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *MapSnapshotOptions {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *MapSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapSnapshotOptions {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
@@ -213,11 +213,11 @@ func (x *MapSnapshotOptions) SetAppearance(appearance *appkit.NSAppearance) {
 type MapSnapshotOptionsable interface {
 	Unwrap() *raw.MKMapSnapshotOptions
 	WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapSnapshotOptions
-	WithCamera(camera *raw.MKMapCamera) *MapSnapshotOptions
+	WithCamera(camera *MapCamera) *MapSnapshotOptions
 	WithMapRect(mapRect raw.MKMapRect) *MapSnapshotOptions
 	WithRegion(region raw.MKCoordinateRegion) *MapSnapshotOptions
 	WithMapType(mapType raw.MKMapType) *MapSnapshotOptions
-	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *MapSnapshotOptions
+	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapSnapshotOptions
 	WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapSnapshotOptions
 	WithShowsBuildings(showsBuildings bool) *MapSnapshotOptions
 	WithSize(size corefoundation.CGSize) *MapSnapshotOptions

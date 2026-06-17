@@ -101,8 +101,8 @@ func (x *ShapeNode) WithFillTexture(fillTexture TextureProvider) *ShapeNode {
 }
 
 // WithFillShader sets the fillShader property and returns the receiver for chaining.
-func (x *ShapeNode) WithFillShader(fillShader *raw.SKShader) *ShapeNode {
-	x.inner.SetFillShader(fillShader)
+func (x *ShapeNode) WithFillShader(fillShader *Shader) *ShapeNode {
+	x.inner.SetFillShader(fillShader.Unwrap())
 	return x
 }
 
@@ -113,8 +113,8 @@ func (x *ShapeNode) WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode 
 }
 
 // WithStrokeShader sets the strokeShader property and returns the receiver for chaining.
-func (x *ShapeNode) WithStrokeShader(strokeShader *raw.SKShader) *ShapeNode {
-	x.inner.SetStrokeShader(strokeShader)
+func (x *ShapeNode) WithStrokeShader(strokeShader *Shader) *ShapeNode {
+	x.inner.SetStrokeShader(strokeShader.Unwrap())
 	return x
 }
 
@@ -185,8 +185,8 @@ func (x *ShapeNode) WithName(name string) *ShapeNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *ShapeNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *ShapeNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *ShapeNode) WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -197,8 +197,8 @@ func (x *ShapeNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *ShapeNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *ShapeNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *ShapeNode) WithReachConstraints(reachConstraints *ReachConstraints) *ShapeNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -454,9 +454,9 @@ type ShapeNodeable interface {
 	WithLineJoin(lineJoin coregraphics.CGLineJoin) *ShapeNode
 	WithMiterLimit(miterLimit float64) *ShapeNode
 	WithFillTexture(fillTexture TextureProvider) *ShapeNode
-	WithFillShader(fillShader *raw.SKShader) *ShapeNode
+	WithFillShader(fillShader *Shader) *ShapeNode
 	WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode
-	WithStrokeShader(strokeShader *raw.SKShader) *ShapeNode
+	WithStrokeShader(strokeShader *Shader) *ShapeNode
 	WithPosition(position corefoundation.CGPoint) *ShapeNode
 	WithZPosition(zPosition float64) *ShapeNode
 	WithZRotation(zRotation float64) *ShapeNode
@@ -468,9 +468,9 @@ type ShapeNodeable interface {
 	WithHidden(hidden bool) *ShapeNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *ShapeNode
 	WithName(name string) *ShapeNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *ShapeNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *ShapeNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *ShapeNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *ShapeNode
 	WithConstraints(items ...*raw.SKConstraint) *ShapeNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *ShapeNode
 	WithAccessibilityElement(accessibilityElement bool) *ShapeNode

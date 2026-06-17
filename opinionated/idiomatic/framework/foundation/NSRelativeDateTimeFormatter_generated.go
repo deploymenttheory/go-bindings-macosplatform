@@ -54,14 +54,14 @@ func (x *RelativeDateTimeFormatter) WithFormattingContext(formattingContext raw.
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *RelativeDateTimeFormatter) WithCalendar(calendar *raw.NSCalendar) *RelativeDateTimeFormatter {
-	x.inner.SetCalendar(calendar)
+func (x *RelativeDateTimeFormatter) WithCalendar(calendar *Calendar) *RelativeDateTimeFormatter {
+	x.inner.SetCalendar(calendar.Unwrap())
 	return x
 }
 
 // WithLocale sets the locale property and returns the receiver for chaining.
-func (x *RelativeDateTimeFormatter) WithLocale(locale *raw.NSLocale) *RelativeDateTimeFormatter {
-	x.inner.SetLocale(locale)
+func (x *RelativeDateTimeFormatter) WithLocale(locale *Locale) *RelativeDateTimeFormatter {
+	x.inner.SetLocale(locale.Unwrap())
 	return x
 }
 
@@ -166,8 +166,8 @@ type RelativeDateTimeFormatterable interface {
 	WithDateTimeStyle(dateTimeStyle raw.NSRelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter
 	WithUnitsStyle(unitsStyle raw.NSRelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter
 	WithFormattingContext(formattingContext raw.NSFormattingContext) *RelativeDateTimeFormatter
-	WithCalendar(calendar *raw.NSCalendar) *RelativeDateTimeFormatter
-	WithLocale(locale *raw.NSLocale) *RelativeDateTimeFormatter
+	WithCalendar(calendar *Calendar) *RelativeDateTimeFormatter
+	WithLocale(locale *Locale) *RelativeDateTimeFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeDateTimeFormatter
 	LocalizedStringFromDateComponents(dateComponents *raw.NSDateComponents) *String
 	LocalizedStringFromTimeInterval(timeInterval float64) *String

@@ -56,8 +56,8 @@ func (x *RenderPipelineDescriptor) WithFragmentFunction(fragmentFunction raw.MTL
 }
 
 // WithVertexDescriptor sets the vertexDescriptor property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithVertexDescriptor(vertexDescriptor *raw.MTLVertexDescriptor) *RenderPipelineDescriptor {
-	x.inner.SetVertexDescriptor(vertexDescriptor)
+func (x *RenderPipelineDescriptor) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *RenderPipelineDescriptor {
+	x.inner.SetVertexDescriptor(vertexDescriptor.Unwrap())
 	return x
 }
 
@@ -164,14 +164,14 @@ func (x *RenderPipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndi
 }
 
 // WithVertexLinkedFunctions sets the vertexLinkedFunctions property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithVertexLinkedFunctions(vertexLinkedFunctions *raw.MTLLinkedFunctions) *RenderPipelineDescriptor {
-	x.inner.SetVertexLinkedFunctions(vertexLinkedFunctions)
+func (x *RenderPipelineDescriptor) WithVertexLinkedFunctions(vertexLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor {
+	x.inner.SetVertexLinkedFunctions(vertexLinkedFunctions.Unwrap())
 	return x
 }
 
 // WithFragmentLinkedFunctions sets the fragmentLinkedFunctions property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions) *RenderPipelineDescriptor {
-	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions)
+func (x *RenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor {
+	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions.Unwrap())
 	return x
 }
 
@@ -569,7 +569,7 @@ type RenderPipelineDescriptorable interface {
 	WithLabel(label string) *RenderPipelineDescriptor
 	WithVertexFunction(vertexFunction raw.MTLFunction) *RenderPipelineDescriptor
 	WithFragmentFunction(fragmentFunction raw.MTLFunction) *RenderPipelineDescriptor
-	WithVertexDescriptor(vertexDescriptor *raw.MTLVertexDescriptor) *RenderPipelineDescriptor
+	WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *RenderPipelineDescriptor
 	WithSampleCount(sampleCount uint) *RenderPipelineDescriptor
 	WithRasterSampleCount(rasterSampleCount uint) *RenderPipelineDescriptor
 	WithAlphaToCoverageEnabled(alphaToCoverageEnabled bool) *RenderPipelineDescriptor
@@ -587,8 +587,8 @@ type RenderPipelineDescriptorable interface {
 	WithTessellationFactorStepFunction(tessellationFactorStepFunction raw.MTLTessellationFactorStepFunction) *RenderPipelineDescriptor
 	WithTessellationOutputWindingOrder(tessellationOutputWindingOrder raw.MTLWinding) *RenderPipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *RenderPipelineDescriptor
-	WithVertexLinkedFunctions(vertexLinkedFunctions *raw.MTLLinkedFunctions) *RenderPipelineDescriptor
-	WithFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions) *RenderPipelineDescriptor
+	WithVertexLinkedFunctions(vertexLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor
+	WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor
 	WithSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions bool) *RenderPipelineDescriptor
 	WithSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions bool) *RenderPipelineDescriptor
 	WithMaxVertexCallStackDepth(maxVertexCallStackDepth uint) *RenderPipelineDescriptor

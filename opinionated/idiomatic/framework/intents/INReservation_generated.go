@@ -75,13 +75,13 @@ func (x *Reservation) ReservationHolderName() string {
 }
 
 // Actions returns the collection as a Go slice.
-func (x *Reservation) Actions() []*raw.INReservationAction {
+func (x *Reservation) Actions() []*ReservationAction {
 	arr := x.inner.Actions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INReservationAction {
-		return raw.INReservationActionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ReservationAction {
+		return &ReservationAction{inner: raw.INReservationActionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -100,7 +100,7 @@ type Reservationable interface {
 	BookingTime() *foundation.NSDate
 	ReservationStatus() raw.INReservationStatus
 	ReservationHolderName() string
-	Actions() []*raw.INReservationAction
+	Actions() []*ReservationAction
 	URL() *foundation.NSURL
 }
 

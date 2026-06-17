@@ -98,14 +98,14 @@ func (x *Scrubber) WithFloatsSelectionViews(floatsSelectionViews bool) *Scrubber
 }
 
 // WithSelectionBackgroundStyle sets the selectionBackgroundStyle property and returns the receiver for chaining.
-func (x *Scrubber) WithSelectionBackgroundStyle(selectionBackgroundStyle *raw.NSScrubberSelectionStyle) *Scrubber {
-	x.inner.SetSelectionBackgroundStyle(selectionBackgroundStyle)
+func (x *Scrubber) WithSelectionBackgroundStyle(selectionBackgroundStyle *ScrubberSelectionStyle) *Scrubber {
+	x.inner.SetSelectionBackgroundStyle(selectionBackgroundStyle.Unwrap())
 	return x
 }
 
 // WithSelectionOverlayStyle sets the selectionOverlayStyle property and returns the receiver for chaining.
-func (x *Scrubber) WithSelectionOverlayStyle(selectionOverlayStyle *raw.NSScrubberSelectionStyle) *Scrubber {
-	x.inner.SetSelectionOverlayStyle(selectionOverlayStyle)
+func (x *Scrubber) WithSelectionOverlayStyle(selectionOverlayStyle *ScrubberSelectionStyle) *Scrubber {
+	x.inner.SetSelectionOverlayStyle(selectionOverlayStyle.Unwrap())
 	return x
 }
 
@@ -122,8 +122,8 @@ func (x *Scrubber) WithShowsAdditionalContentIndicators(showsAdditionalContentIn
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *Scrubber) WithBackgroundColor(backgroundColor *raw.NSColor) *Scrubber {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *Scrubber) WithBackgroundColor(backgroundColor *Color) *Scrubber {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -314,8 +314,8 @@ func (x *Scrubber) WithContentFilters(items ...*coreimage.CIFilter) *Scrubber {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Scrubber) WithShadow(shadow *raw.NSShadow) *Scrubber {
-	x.inner.NSView.SetShadow(shadow)
+func (x *Scrubber) WithShadow(shadow *Shadow) *Scrubber {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -396,8 +396,8 @@ func (x *Scrubber) WithPrefersCompactControlSizeMetrics(prefersCompactControlSiz
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Scrubber) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Scrubber {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Scrubber) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scrubber {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -438,8 +438,8 @@ func (x *Scrubber) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynam
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Scrubber) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Scrubber {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Scrubber) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scrubber {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -450,8 +450,8 @@ func (x *Scrubber) WithNextResponder(nextResponder ResponderProvider) *Scrubber 
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Scrubber) WithMenu(menu *raw.NSMenu) *Scrubber {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *Scrubber) WithMenu(menu *Menu) *Scrubber {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -462,8 +462,8 @@ func (x *Scrubber) WithUserActivity(userActivity *foundation.NSUserActivity) *Sc
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Scrubber) WithTouchBar(touchBar *raw.NSTouchBar) *Scrubber {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Scrubber) WithTouchBar(touchBar *TouchBar) *Scrubber {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -724,11 +724,11 @@ type Scrubberable interface {
 	WithItemAlignment(itemAlignment raw.NSScrubberAlignment) *Scrubber
 	WithContinuous(continuous bool) *Scrubber
 	WithFloatsSelectionViews(floatsSelectionViews bool) *Scrubber
-	WithSelectionBackgroundStyle(selectionBackgroundStyle *raw.NSScrubberSelectionStyle) *Scrubber
-	WithSelectionOverlayStyle(selectionOverlayStyle *raw.NSScrubberSelectionStyle) *Scrubber
+	WithSelectionBackgroundStyle(selectionBackgroundStyle *ScrubberSelectionStyle) *Scrubber
+	WithSelectionOverlayStyle(selectionOverlayStyle *ScrubberSelectionStyle) *Scrubber
 	WithShowsArrowButtons(showsArrowButtons bool) *Scrubber
 	WithShowsAdditionalContentIndicators(showsAdditionalContentIndicators bool) *Scrubber
-	WithBackgroundColor(backgroundColor *raw.NSColor) *Scrubber
+	WithBackgroundColor(backgroundColor *Color) *Scrubber
 	WithBackgroundView(backgroundView ViewProvider) *Scrubber
 	WithSubviews(items ...ViewProvider) *Scrubber
 	WithHidden(hidden bool) *Scrubber
@@ -755,7 +755,7 @@ type Scrubberable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Scrubber
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Scrubber
 	WithContentFilters(items ...*coreimage.CIFilter) *Scrubber
-	WithShadow(shadow *raw.NSShadow) *Scrubber
+	WithShadow(shadow *Shadow) *Scrubber
 	WithClipsToBounds(clipsToBounds bool) *Scrubber
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scrubber
 	WithToolTip(toolTip string) *Scrubber
@@ -767,18 +767,18 @@ type Scrubberable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Scrubber
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scrubber
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scrubber
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Scrubber
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scrubber
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scrubber
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scrubber
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scrubber
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scrubber
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scrubber
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scrubber
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Scrubber
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scrubber
 	WithNextResponder(nextResponder ResponderProvider) *Scrubber
-	WithMenu(menu *raw.NSMenu) *Scrubber
+	WithMenu(menu *Menu) *Scrubber
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Scrubber
-	WithTouchBar(touchBar *raw.NSTouchBar) *Scrubber
+	WithTouchBar(touchBar *TouchBar) *Scrubber
 	ReloadData()
 	PerformSequentialBatchUpdates(ctx context.Context) error
 	InsertItemsAtIndexes(indexes *foundation.NSIndexSet)

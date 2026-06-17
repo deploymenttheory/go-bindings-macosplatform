@@ -109,13 +109,13 @@ func (x *ManagedObjectModel) EntitiesByName() *foundation.NSDictionary[*foundati
 }
 
 // Entities returns the collection as a Go slice.
-func (x *ManagedObjectModel) Entities() []*raw.NSEntityDescription {
+func (x *ManagedObjectModel) Entities() []*EntityDescription {
 	arr := x.inner.Entities()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSEntityDescription {
-		return raw.NSEntityDescriptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EntityDescription {
+		return &EntityDescription{inner: raw.NSEntityDescriptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -187,7 +187,7 @@ type ManagedObjectModelable interface {
 	FetchRequestFromTemplateWithNameSubstitutionVariables(name string, variables *foundation.NSDictionary[*foundation.NSString, objc.ID]) *raw.NSFetchRequest[objc.ID]
 	IsConfigurationCompatibleWithStoreMetadata(configuration string, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
 	EntitiesByName() *foundation.NSDictionary[*foundation.NSString, *raw.NSEntityDescription]
-	Entities() []*raw.NSEntityDescription
+	Entities() []*EntityDescription
 	SetEntities(entities *foundation.NSArray[*raw.NSEntityDescription])
 	Configurations() []string
 	LocalizationDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]

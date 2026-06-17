@@ -192,13 +192,13 @@ func (x *AssetTrack) LoadSamplePresentationTimeForTrackTimeCompletionHandler(tra
 }
 
 // Segments returns the collection as a Go slice.
-func (x *AssetTrack) Segments() []*raw.AVAssetTrackSegment {
+func (x *AssetTrack) Segments() []*AssetTrackSegment {
 	arr := x.inner.Segments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetTrackSegment {
-		return raw.AVAssetTrackSegmentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetTrackSegment {
+		return &AssetTrackSegment{inner: raw.AVAssetTrackSegmentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -232,24 +232,24 @@ func (x *AssetTrack) LoadMetadataForFormat(ctx context.Context, format *foundati
 }
 
 // CommonMetadata returns the collection as a Go slice.
-func (x *AssetTrack) CommonMetadata() []*raw.AVMetadataItem {
+func (x *AssetTrack) CommonMetadata() []*MetadataItem {
 	arr := x.inner.CommonMetadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
 // Metadata returns the collection as a Go slice.
-func (x *AssetTrack) Metadata() []*raw.AVMetadataItem {
+func (x *AssetTrack) Metadata() []*MetadataItem {
 	arr := x.inner.Metadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -367,11 +367,11 @@ type AssetTrackable interface {
 	LoadSegmentForTrackTimeCompletionHandler(trackTime coremedia.CMTime, completionHandler func(unsafe.Pointer, unsafe.Pointer))
 	SamplePresentationTimeForTrackTime(trackTime coremedia.CMTime) coremedia.CMTime
 	LoadSamplePresentationTimeForTrackTimeCompletionHandler(trackTime coremedia.CMTime, completionHandler objc.Block)
-	Segments() []*raw.AVAssetTrackSegment
+	Segments() []*AssetTrackSegment
 	MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*raw.AVMetadataItem]
 	LoadMetadataForFormat(ctx context.Context, format *foundation.NSString) (*foundation.NSArray[*raw.AVMetadataItem], error)
-	CommonMetadata() []*raw.AVMetadataItem
-	Metadata() []*raw.AVMetadataItem
+	CommonMetadata() []*MetadataItem
+	Metadata() []*MetadataItem
 	AvailableMetadataFormats() []*foundation.NSString
 	AssociatedTracksOfType(trackAssociationType *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack]
 	LoadAssociatedTracksOfType(ctx context.Context, trackAssociationType *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error)

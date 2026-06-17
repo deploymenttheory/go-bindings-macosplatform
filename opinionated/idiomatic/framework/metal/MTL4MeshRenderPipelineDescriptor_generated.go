@@ -133,20 +133,20 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVe
 }
 
 // WithObjectStaticLinkingDescriptor sets the objectStaticLinkingDescriptor property and returns the receiver for chaining.
-func (x *MTL4MeshRenderPipelineDescriptor) WithObjectStaticLinkingDescriptor(objectStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor {
-	x.inner.SetObjectStaticLinkingDescriptor(objectStaticLinkingDescriptor)
+func (x *MTL4MeshRenderPipelineDescriptor) WithObjectStaticLinkingDescriptor(objectStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor {
+	x.inner.SetObjectStaticLinkingDescriptor(objectStaticLinkingDescriptor.Unwrap())
 	return x
 }
 
 // WithMeshStaticLinkingDescriptor sets the meshStaticLinkingDescriptor property and returns the receiver for chaining.
-func (x *MTL4MeshRenderPipelineDescriptor) WithMeshStaticLinkingDescriptor(meshStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor {
-	x.inner.SetMeshStaticLinkingDescriptor(meshStaticLinkingDescriptor)
+func (x *MTL4MeshRenderPipelineDescriptor) WithMeshStaticLinkingDescriptor(meshStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor {
+	x.inner.SetMeshStaticLinkingDescriptor(meshStaticLinkingDescriptor.Unwrap())
 	return x
 }
 
 // WithFragmentStaticLinkingDescriptor sets the fragmentStaticLinkingDescriptor property and returns the receiver for chaining.
-func (x *MTL4MeshRenderPipelineDescriptor) WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor {
-	x.inner.SetFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor)
+func (x *MTL4MeshRenderPipelineDescriptor) WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor {
+	x.inner.SetFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor.Unwrap())
 	return x
 }
 
@@ -187,8 +187,8 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithLabel(label string) *MTL4MeshRend
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *MTL4MeshRenderPipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *MTL4MeshRenderPipelineDescriptor {
-	x.inner.MTL4PipelineDescriptor.SetOptions(options)
+func (x *MTL4MeshRenderPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4MeshRenderPipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetOptions(options.Unwrap())
 	return x
 }
 
@@ -491,16 +491,16 @@ type MTL4MeshRenderPipelineDescriptorable interface {
 	WithAlphaToOneState(alphaToOneState raw.MTL4AlphaToOneState) *MTL4MeshRenderPipelineDescriptor
 	WithRasterizationEnabled(rasterizationEnabled bool) *MTL4MeshRenderPipelineDescriptor
 	WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *MTL4MeshRenderPipelineDescriptor
-	WithObjectStaticLinkingDescriptor(objectStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor
-	WithMeshStaticLinkingDescriptor(meshStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor
-	WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor
+	WithObjectStaticLinkingDescriptor(objectStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor
+	WithMeshStaticLinkingDescriptor(meshStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor
+	WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor
 	WithSupportObjectBinaryLinking(supportObjectBinaryLinking bool) *MTL4MeshRenderPipelineDescriptor
 	WithSupportMeshBinaryLinking(supportMeshBinaryLinking bool) *MTL4MeshRenderPipelineDescriptor
 	WithSupportFragmentBinaryLinking(supportFragmentBinaryLinking bool) *MTL4MeshRenderPipelineDescriptor
 	WithColorAttachmentMappingState(colorAttachmentMappingState raw.MTL4LogicalToPhysicalColorAttachmentMappingState) *MTL4MeshRenderPipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4MeshRenderPipelineDescriptor
 	WithLabel(label string) *MTL4MeshRenderPipelineDescriptor
-	WithOptions(options *raw.MTL4PipelineOptions) *MTL4MeshRenderPipelineDescriptor
+	WithOptions(options *MTL4PipelineOptions) *MTL4MeshRenderPipelineDescriptor
 	Reset()
 	ObjectFunctionDescriptor() *MTL4FunctionDescriptor
 	SetObjectFunctionDescriptor(objectFunctionDescriptor *raw.MTL4FunctionDescriptor)

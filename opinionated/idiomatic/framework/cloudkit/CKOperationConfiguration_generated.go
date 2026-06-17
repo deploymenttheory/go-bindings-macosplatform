@@ -37,8 +37,8 @@ func NewOperationConfiguration() *OperationConfiguration {
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *OperationConfiguration) WithContainer(container *raw.CKContainer) *OperationConfiguration {
-	x.inner.SetContainer(container)
+func (x *OperationConfiguration) WithContainer(container *Container) *OperationConfiguration {
+	x.inner.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -139,7 +139,7 @@ func (x *OperationConfiguration) SetTimeoutIntervalForResource(timeoutIntervalFo
 // OperationConfigurationable is the interface implemented by [OperationConfiguration], for mocking and DI.
 type OperationConfigurationable interface {
 	Unwrap() *raw.CKOperationConfiguration
-	WithContainer(container *raw.CKContainer) *OperationConfiguration
+	WithContainer(container *Container) *OperationConfiguration
 	WithQualityOfService(qualityOfService foundation.NSQualityOfService) *OperationConfiguration
 	WithAllowsCellularAccess(allowsCellularAccess bool) *OperationConfiguration
 	WithLongLived(longLived bool) *OperationConfiguration

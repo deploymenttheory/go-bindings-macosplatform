@@ -196,8 +196,8 @@ func (x *Browser) WithAllowsTypeSelect(allowsTypeSelect bool) *Browser {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *Browser) WithBackgroundColor(backgroundColor *raw.NSColor) *Browser {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *Browser) WithBackgroundColor(backgroundColor *Color) *Browser {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -304,8 +304,8 @@ func (x *Browser) WithDoubleValue(doubleValue float64) *Browser {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Browser) WithFont(font *raw.NSFont) *Browser {
-	x.inner.NSControl.SetFont(font)
+func (x *Browser) WithFont(font *Font) *Browser {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -526,8 +526,8 @@ func (x *Browser) WithContentFilters(items ...*coreimage.CIFilter) *Browser {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Browser) WithShadow(shadow *raw.NSShadow) *Browser {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *Browser) WithShadow(shadow *Shadow) *Browser {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -608,8 +608,8 @@ func (x *Browser) WithPrefersCompactControlSizeMetrics(prefersCompactControlSize
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Browser) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Browser {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Browser) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Browser {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -650,8 +650,8 @@ func (x *Browser) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynami
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Browser) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Browser {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Browser) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Browser {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -662,8 +662,8 @@ func (x *Browser) WithNextResponder(nextResponder ResponderProvider) *Browser {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Browser) WithMenu(menu *raw.NSMenu) *Browser {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *Browser) WithMenu(menu *Menu) *Browser {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -674,8 +674,8 @@ func (x *Browser) WithUserActivity(userActivity *foundation.NSUserActivity) *Bro
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Browser) WithTouchBar(touchBar *raw.NSTouchBar) *Browser {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Browser) WithTouchBar(touchBar *TouchBar) *Browser {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -1115,13 +1115,13 @@ func (x *Browser) SelectedColumn() int {
 }
 
 // SelectedCells returns the collection as a Go slice.
-func (x *Browser) SelectedCells() []*raw.NSCell {
+func (x *Browser) SelectedCells() []*Cell {
 	arr := x.inner.SelectedCells()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCell {
-		return raw.NSCellFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Cell {
+		return &Cell{inner: raw.NSCellFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1336,7 +1336,7 @@ type Browserable interface {
 	WithRowHeight(rowHeight float64) *Browser
 	WithColumnsAutosaveName(columnsAutosaveName *foundation.NSString) *Browser
 	WithAllowsTypeSelect(allowsTypeSelect bool) *Browser
-	WithBackgroundColor(backgroundColor *raw.NSColor) *Browser
+	WithBackgroundColor(backgroundColor *Color) *Browser
 	WithTarget(target objc.ID) *Browser
 	WithAction(action objc.SEL) *Browser
 	WithTag(tag int) *Browser
@@ -1354,7 +1354,7 @@ type Browserable interface {
 	WithIntegerValue(integerValue int) *Browser
 	WithFloatValue(floatValue float32) *Browser
 	WithDoubleValue(doubleValue float64) *Browser
-	WithFont(font *raw.NSFont) *Browser
+	WithFont(font *Font) *Browser
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Browser
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Browser
 	WithAlignment(alignment raw.NSTextAlignment) *Browser
@@ -1386,7 +1386,7 @@ type Browserable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Browser
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Browser
 	WithContentFilters(items ...*coreimage.CIFilter) *Browser
-	WithShadow(shadow *raw.NSShadow) *Browser
+	WithShadow(shadow *Shadow) *Browser
 	WithClipsToBounds(clipsToBounds bool) *Browser
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Browser
 	WithToolTip(toolTip string) *Browser
@@ -1398,18 +1398,18 @@ type Browserable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Browser
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Browser
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Browser
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Browser
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Browser
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Browser
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Browser
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Browser
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Browser
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Browser
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Browser
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Browser
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Browser
 	WithNextResponder(nextResponder ResponderProvider) *Browser
-	WithMenu(menu *raw.NSMenu) *Browser
+	WithMenu(menu *Menu) *Browser
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Browser
-	WithTouchBar(touchBar *raw.NSTouchBar) *Browser
+	WithTouchBar(touchBar *TouchBar) *Browser
 	LoadColumnZero()
 	ItemAtIndexPath(indexPath *foundation.NSIndexPath) objc.ID
 	ItemAtRowInColumn(row int, column int) objc.ID
@@ -1493,7 +1493,7 @@ type Browserable interface {
 	ClickedColumn() int
 	ClickedRow() int
 	SelectedColumn() int
-	SelectedCells() []*raw.NSCell
+	SelectedCells() []*Cell
 	SelectionIndexPath() *foundation.NSIndexPath
 	SetSelectionIndexPath(selectionIndexPath *foundation.NSIndexPath)
 	SelectionIndexPaths() []*foundation.NSIndexPath

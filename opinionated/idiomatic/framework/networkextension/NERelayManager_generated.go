@@ -263,13 +263,13 @@ func (x *NERelayManager) SetAllowDNSFailover(allowDNSFailover bool) {
 }
 
 // Relays returns the collection as a Go slice.
-func (x *NERelayManager) Relays() []*raw.NERelay {
+func (x *NERelayManager) Relays() []*NERelay {
 	arr := x.inner.Relays()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NERelay {
-		return raw.NERelayFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NERelay {
+		return &NERelay{inner: raw.NERelayFromID(purego.Retain(_id))}
 	})
 }
 
@@ -343,13 +343,13 @@ func (x *NERelayManager) SetExcludedFQDNs(excludedFQDNs *foundation.NSArray[*fou
 }
 
 // OnDemandRules returns the collection as a Go slice.
-func (x *NERelayManager) OnDemandRules() []*raw.NEOnDemandRule {
+func (x *NERelayManager) OnDemandRules() []*NEOnDemandRule {
 	arr := x.inner.OnDemandRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEOnDemandRule {
-		return raw.NEOnDemandRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEOnDemandRule {
+		return &NEOnDemandRule{inner: raw.NEOnDemandRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -383,7 +383,7 @@ type NERelayManagerable interface {
 	SetUIToggleEnabled(uIToggleEnabled bool)
 	IsDNSFailoverAllowed() bool
 	SetAllowDNSFailover(allowDNSFailover bool)
-	Relays() []*raw.NERelay
+	Relays() []*NERelay
 	SetRelays(relays *foundation.NSArray[*raw.NERelay])
 	MatchDomains() []string
 	SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString])
@@ -393,7 +393,7 @@ type NERelayManagerable interface {
 	SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString])
 	ExcludedFQDNs() []string
 	SetExcludedFQDNs(excludedFQDNs *foundation.NSArray[*foundation.NSString])
-	OnDemandRules() []*raw.NEOnDemandRule
+	OnDemandRules() []*NEOnDemandRule
 	SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule])
 }
 

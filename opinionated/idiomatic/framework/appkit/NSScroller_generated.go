@@ -173,8 +173,8 @@ func (x *Scroller) WithDoubleValue(doubleValue float64) *Scroller {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Scroller) WithFont(font *raw.NSFont) *Scroller {
-	x.inner.NSControl.SetFont(font)
+func (x *Scroller) WithFont(font *Font) *Scroller {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -395,8 +395,8 @@ func (x *Scroller) WithContentFilters(items ...*coreimage.CIFilter) *Scroller {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Scroller) WithShadow(shadow *raw.NSShadow) *Scroller {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *Scroller) WithShadow(shadow *Shadow) *Scroller {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -477,8 +477,8 @@ func (x *Scroller) WithPrefersCompactControlSizeMetrics(prefersCompactControlSiz
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Scroller) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Scroller {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Scroller) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scroller {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -519,8 +519,8 @@ func (x *Scroller) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynam
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Scroller) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Scroller {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Scroller) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scroller {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -531,8 +531,8 @@ func (x *Scroller) WithNextResponder(nextResponder ResponderProvider) *Scroller 
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Scroller) WithMenu(menu *raw.NSMenu) *Scroller {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *Scroller) WithMenu(menu *Menu) *Scroller {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -543,8 +543,8 @@ func (x *Scroller) WithUserActivity(userActivity *foundation.NSUserActivity) *Sc
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Scroller) WithTouchBar(touchBar *raw.NSTouchBar) *Scroller {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Scroller) WithTouchBar(touchBar *TouchBar) *Scroller {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -694,7 +694,7 @@ type Scrollerable interface {
 	WithIntegerValue(integerValue int) *Scroller
 	WithFloatValue(floatValue float32) *Scroller
 	WithDoubleValue(doubleValue float64) *Scroller
-	WithFont(font *raw.NSFont) *Scroller
+	WithFont(font *Font) *Scroller
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Scroller
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Scroller
 	WithAlignment(alignment raw.NSTextAlignment) *Scroller
@@ -726,7 +726,7 @@ type Scrollerable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Scroller
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Scroller
 	WithContentFilters(items ...*coreimage.CIFilter) *Scroller
-	WithShadow(shadow *raw.NSShadow) *Scroller
+	WithShadow(shadow *Shadow) *Scroller
 	WithClipsToBounds(clipsToBounds bool) *Scroller
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scroller
 	WithToolTip(toolTip string) *Scroller
@@ -738,18 +738,18 @@ type Scrollerable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Scroller
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scroller
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scroller
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Scroller
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scroller
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scroller
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scroller
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scroller
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scroller
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scroller
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scroller
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Scroller
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scroller
 	WithNextResponder(nextResponder ResponderProvider) *Scroller
-	WithMenu(menu *raw.NSMenu) *Scroller
+	WithMenu(menu *Menu) *Scroller
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Scroller
-	WithTouchBar(touchBar *raw.NSTouchBar) *Scroller
+	WithTouchBar(touchBar *TouchBar) *Scroller
 	RectForPart(partCode raw.NSScrollerPart) corefoundation.CGRect
 	CheckSpaceForParts()
 	DrawKnob()

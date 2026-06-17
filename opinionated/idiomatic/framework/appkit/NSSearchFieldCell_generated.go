@@ -60,8 +60,8 @@ func (x *SearchFieldCell) WithCancelButtonCell(cancelButtonCell ButtonCellProvid
 }
 
 // WithSearchMenuTemplate sets the searchMenuTemplate property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithSearchMenuTemplate(searchMenuTemplate *raw.NSMenu) *SearchFieldCell {
-	x.inner.SetSearchMenuTemplate(searchMenuTemplate)
+func (x *SearchFieldCell) WithSearchMenuTemplate(searchMenuTemplate *Menu) *SearchFieldCell {
+	x.inner.SetSearchMenuTemplate(searchMenuTemplate.Unwrap())
 	return x
 }
 
@@ -106,8 +106,8 @@ func (x *SearchFieldCell) WithSendsSearchStringImmediately(sendsSearchStringImme
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithBackgroundColor(backgroundColor *raw.NSColor) *SearchFieldCell {
-	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor)
+func (x *SearchFieldCell) WithBackgroundColor(backgroundColor *Color) *SearchFieldCell {
+	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -118,8 +118,8 @@ func (x *SearchFieldCell) WithDrawsBackground(drawsBackground bool) *SearchField
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithTextColor(textColor *raw.NSColor) *SearchFieldCell {
-	x.inner.NSTextFieldCell.SetTextColor(textColor)
+func (x *SearchFieldCell) WithTextColor(textColor *Color) *SearchFieldCell {
+	x.inner.NSTextFieldCell.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -260,8 +260,8 @@ func (x *SearchFieldCell) WithWraps(wraps bool) *SearchFieldCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithFont(font *raw.NSFont) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font)
+func (x *SearchFieldCell) WithFont(font *Font) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -308,8 +308,8 @@ func (x *SearchFieldCell) WithIntegerValue(integerValue int) *SearchFieldCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithImage(image *raw.NSImage) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image)
+func (x *SearchFieldCell) WithImage(image *Image) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -326,8 +326,8 @@ func (x *SearchFieldCell) WithRepresentedObject(representedObject objc.ID) *Sear
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithMenu(menu *raw.NSMenu) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu)
+func (x *SearchFieldCell) WithMenu(menu *Menu) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -565,15 +565,15 @@ type SearchFieldCellable interface {
 	Unwrap() *raw.NSSearchFieldCell
 	WithSearchButtonCell(searchButtonCell ButtonCellProvider) *SearchFieldCell
 	WithCancelButtonCell(cancelButtonCell ButtonCellProvider) *SearchFieldCell
-	WithSearchMenuTemplate(searchMenuTemplate *raw.NSMenu) *SearchFieldCell
+	WithSearchMenuTemplate(searchMenuTemplate *Menu) *SearchFieldCell
 	WithSendsWholeSearchString(sendsWholeSearchString bool) *SearchFieldCell
 	WithMaximumRecents(maximumRecents int) *SearchFieldCell
 	WithRecentSearches(items ...*foundation.NSString) *SearchFieldCell
 	WithRecentsAutosaveName(recentsAutosaveName *foundation.NSString) *SearchFieldCell
 	WithSendsSearchStringImmediately(sendsSearchStringImmediately bool) *SearchFieldCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *SearchFieldCell
+	WithBackgroundColor(backgroundColor *Color) *SearchFieldCell
 	WithDrawsBackground(drawsBackground bool) *SearchFieldCell
-	WithTextColor(textColor *raw.NSColor) *SearchFieldCell
+	WithTextColor(textColor *Color) *SearchFieldCell
 	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SearchFieldCell
 	WithPlaceholderString(placeholderString string) *SearchFieldCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SearchFieldCell
@@ -595,7 +595,7 @@ type SearchFieldCellable interface {
 	WithHighlighted(highlighted bool) *SearchFieldCell
 	WithAlignment(alignment raw.NSTextAlignment) *SearchFieldCell
 	WithWraps(wraps bool) *SearchFieldCell
-	WithFont(font *raw.NSFont) *SearchFieldCell
+	WithFont(font *Font) *SearchFieldCell
 	WithFormatter(formatter *foundation.NSFormatter) *SearchFieldCell
 	WithObjectValue(objectValue objc.ID) *SearchFieldCell
 	WithStringValue(stringValue string) *SearchFieldCell
@@ -603,10 +603,10 @@ type SearchFieldCellable interface {
 	WithFloatValue(floatValue float32) *SearchFieldCell
 	WithDoubleValue(doubleValue float64) *SearchFieldCell
 	WithIntegerValue(integerValue int) *SearchFieldCell
-	WithImage(image *raw.NSImage) *SearchFieldCell
+	WithImage(image *Image) *SearchFieldCell
 	WithControlSize(controlSize raw.NSControlSize) *SearchFieldCell
 	WithRepresentedObject(representedObject objc.ID) *SearchFieldCell
-	WithMenu(menu *raw.NSMenu) *SearchFieldCell
+	WithMenu(menu *Menu) *SearchFieldCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SearchFieldCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SearchFieldCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SearchFieldCell

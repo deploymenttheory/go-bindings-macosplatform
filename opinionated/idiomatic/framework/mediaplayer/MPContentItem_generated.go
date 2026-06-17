@@ -51,8 +51,8 @@ func (x *ContentItem) WithSubtitle(subtitle string) *ContentItem {
 }
 
 // WithArtwork sets the artwork property and returns the receiver for chaining.
-func (x *ContentItem) WithArtwork(artwork *raw.MPMediaItemArtwork) *ContentItem {
-	x.inner.SetArtwork(artwork)
+func (x *ContentItem) WithArtwork(artwork *MediaItemArtwork) *ContentItem {
+	x.inner.SetArtwork(artwork.Unwrap())
 	return x
 }
 
@@ -192,7 +192,7 @@ type ContentItemable interface {
 	Unwrap() *raw.MPContentItem
 	WithTitle(title string) *ContentItem
 	WithSubtitle(subtitle string) *ContentItem
-	WithArtwork(artwork *raw.MPMediaItemArtwork) *ContentItem
+	WithArtwork(artwork *MediaItemArtwork) *ContentItem
 	WithPlaybackProgress(playbackProgress float32) *ContentItem
 	WithStreamingContent(streamingContent bool) *ContentItem
 	WithExplicitContent(explicitContent bool) *ContentItem

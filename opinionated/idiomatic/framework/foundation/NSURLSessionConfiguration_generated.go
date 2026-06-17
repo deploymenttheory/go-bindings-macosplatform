@@ -176,20 +176,20 @@ func (x *URLSessionConfiguration) WithHTTPMaximumConnectionsPerHost(hTTPMaximumC
 }
 
 // WithHTTPCookieStorage sets the hTTPCookieStorage property and returns the receiver for chaining.
-func (x *URLSessionConfiguration) WithHTTPCookieStorage(hTTPCookieStorage *raw.NSHTTPCookieStorage) *URLSessionConfiguration {
-	x.inner.SetHTTPCookieStorage(hTTPCookieStorage)
+func (x *URLSessionConfiguration) WithHTTPCookieStorage(hTTPCookieStorage *HTTPCookieStorage) *URLSessionConfiguration {
+	x.inner.SetHTTPCookieStorage(hTTPCookieStorage.Unwrap())
 	return x
 }
 
 // WithURLCredentialStorage sets the uRLCredentialStorage property and returns the receiver for chaining.
-func (x *URLSessionConfiguration) WithURLCredentialStorage(uRLCredentialStorage *raw.NSURLCredentialStorage) *URLSessionConfiguration {
-	x.inner.SetURLCredentialStorage(uRLCredentialStorage)
+func (x *URLSessionConfiguration) WithURLCredentialStorage(uRLCredentialStorage *URLCredentialStorage) *URLSessionConfiguration {
+	x.inner.SetURLCredentialStorage(uRLCredentialStorage.Unwrap())
 	return x
 }
 
 // WithURLCache sets the uRLCache property and returns the receiver for chaining.
-func (x *URLSessionConfiguration) WithURLCache(uRLCache *raw.NSURLCache) *URLSessionConfiguration {
-	x.inner.SetURLCache(uRLCache)
+func (x *URLSessionConfiguration) WithURLCache(uRLCache *URLCache) *URLSessionConfiguration {
+	x.inner.SetURLCache(uRLCache.Unwrap())
 	return x
 }
 
@@ -570,9 +570,9 @@ type URLSessionConfigurationable interface {
 	WithHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy) *URLSessionConfiguration
 	WithHTTPAdditionalHeaders(hTTPAdditionalHeaders *raw.NSDictionary[objc.ID, objc.ID]) *URLSessionConfiguration
 	WithHTTPMaximumConnectionsPerHost(hTTPMaximumConnectionsPerHost int) *URLSessionConfiguration
-	WithHTTPCookieStorage(hTTPCookieStorage *raw.NSHTTPCookieStorage) *URLSessionConfiguration
-	WithURLCredentialStorage(uRLCredentialStorage *raw.NSURLCredentialStorage) *URLSessionConfiguration
-	WithURLCache(uRLCache *raw.NSURLCache) *URLSessionConfiguration
+	WithHTTPCookieStorage(hTTPCookieStorage *HTTPCookieStorage) *URLSessionConfiguration
+	WithURLCredentialStorage(uRLCredentialStorage *URLCredentialStorage) *URLSessionConfiguration
+	WithURLCache(uRLCache *URLCache) *URLSessionConfiguration
 	WithShouldUseExtendedBackgroundIdleMode(shouldUseExtendedBackgroundIdleMode bool) *URLSessionConfiguration
 	WithUsesClassicLoadingMode(usesClassicLoadingMode bool) *URLSessionConfiguration
 	WithEnablesEarlyData(enablesEarlyData bool) *URLSessionConfiguration

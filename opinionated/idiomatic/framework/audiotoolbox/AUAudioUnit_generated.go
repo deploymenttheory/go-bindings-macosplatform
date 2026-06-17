@@ -69,8 +69,8 @@ func (x *AudioUnit) WithMaximumFramesToRender(maximumFramesToRender uint32) *Aud
 }
 
 // WithParameterTree sets the parameterTree property and returns the receiver for chaining.
-func (x *AudioUnit) WithParameterTree(parameterTree *raw.AUParameterTree) *AudioUnit {
-	x.inner.SetParameterTree(parameterTree)
+func (x *AudioUnit) WithParameterTree(parameterTree *ParameterTree) *AudioUnit {
+	x.inner.SetParameterTree(parameterTree.Unwrap())
 	return x
 }
 
@@ -105,8 +105,8 @@ func (x *AudioUnit) WithFullStateForDocument(fullStateForDocument *foundation.NS
 }
 
 // WithCurrentPreset sets the currentPreset property and returns the receiver for chaining.
-func (x *AudioUnit) WithCurrentPreset(currentPreset *raw.AUAudioUnitPreset) *AudioUnit {
-	x.inner.SetCurrentPreset(currentPreset)
+func (x *AudioUnit) WithCurrentPreset(currentPreset *AudioUnitPreset) *AudioUnit {
+	x.inner.SetCurrentPreset(currentPreset.Unwrap())
 	return x
 }
 
@@ -463,24 +463,24 @@ func (x *AudioUnit) SetFullStateForDocument(fullStateForDocument *foundation.NSD
 }
 
 // FactoryPresets returns the collection as a Go slice.
-func (x *AudioUnit) FactoryPresets() []*raw.AUAudioUnitPreset {
+func (x *AudioUnit) FactoryPresets() []*AudioUnitPreset {
 	arr := x.inner.FactoryPresets()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AUAudioUnitPreset {
-		return raw.AUAudioUnitPresetFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudioUnitPreset {
+		return &AudioUnitPreset{inner: raw.AUAudioUnitPresetFromID(purego.Retain(_id))}
 	})
 }
 
 // UserPresets returns the collection as a Go slice.
-func (x *AudioUnit) UserPresets() []*raw.AUAudioUnitPreset {
+func (x *AudioUnit) UserPresets() []*AudioUnitPreset {
 	arr := x.inner.UserPresets()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AUAudioUnitPreset {
-		return raw.AUAudioUnitPresetFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudioUnitPreset {
+		return &AudioUnitPreset{inner: raw.AUAudioUnitPresetFromID(purego.Retain(_id))}
 	})
 }
 
@@ -772,13 +772,13 @@ type AudioUnitable interface {
 	Unwrap() *raw.AUAudioUnit
 	WithRenderResourcesAllocated(renderResourcesAllocated bool) *AudioUnit
 	WithMaximumFramesToRender(maximumFramesToRender uint32) *AudioUnit
-	WithParameterTree(parameterTree *raw.AUParameterTree) *AudioUnit
+	WithParameterTree(parameterTree *ParameterTree) *AudioUnit
 	WithMIDIOutputEventBlock(mIDIOutputEventBlock func(int64, uint8, int, unsafe.Pointer) int) *AudioUnit
 	WithMIDIOutputEventListBlock(mIDIOutputEventListBlock func(int64, uint8, unsafe.Pointer) int) *AudioUnit
 	WithHostMIDIProtocol(hostMIDIProtocol objc.ID) *AudioUnit
 	WithFullState(fullState *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnit
 	WithFullStateForDocument(fullStateForDocument *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnit
-	WithCurrentPreset(currentPreset *raw.AUAudioUnitPreset) *AudioUnit
+	WithCurrentPreset(currentPreset *AudioUnitPreset) *AudioUnit
 	WithRenderQuality(renderQuality int) *AudioUnit
 	WithShouldBypassEffect(shouldBypassEffect bool) *AudioUnit
 	WithRenderingOffline(renderingOffline bool) *AudioUnit
@@ -838,8 +838,8 @@ type AudioUnitable interface {
 	SetFullState(fullState *foundation.NSDictionary[*foundation.NSString, objc.ID])
 	FullStateForDocument() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetFullStateForDocument(fullStateForDocument *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	FactoryPresets() []*raw.AUAudioUnitPreset
-	UserPresets() []*raw.AUAudioUnitPreset
+	FactoryPresets() []*AudioUnitPreset
+	UserPresets() []*AudioUnitPreset
 	SupportsUserPresets() bool
 	IsLoadedInProcess() bool
 	CurrentPreset() *AudioUnitPreset

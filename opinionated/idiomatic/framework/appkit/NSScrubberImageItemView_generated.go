@@ -41,8 +41,8 @@ func NewScrubberImageItemView() *ScrubberImageItemView {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithImage(image *raw.NSImage) *ScrubberImageItemView {
-	x.inner.SetImage(image)
+func (x *ScrubberImageItemView) WithImage(image *Image) *ScrubberImageItemView {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -245,8 +245,8 @@ func (x *ScrubberImageItemView) WithContentFilters(items ...*coreimage.CIFilter)
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithShadow(shadow *raw.NSShadow) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetShadow(shadow)
+func (x *ScrubberImageItemView) WithShadow(shadow *Shadow) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -327,8 +327,8 @@ func (x *ScrubberImageItemView) WithPrefersCompactControlSizeMetrics(prefersComp
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *ScrubberImageItemView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -369,8 +369,8 @@ func (x *ScrubberImageItemView) WithWantsExtendedDynamicRangeOpenGLSurface(wants
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *ScrubberImageItemView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -381,8 +381,8 @@ func (x *ScrubberImageItemView) WithNextResponder(nextResponder ResponderProvide
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithMenu(menu *raw.NSMenu) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetMenu(menu)
+func (x *ScrubberImageItemView) WithMenu(menu *Menu) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -393,8 +393,8 @@ func (x *ScrubberImageItemView) WithUserActivity(userActivity *foundation.NSUser
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithTouchBar(touchBar *raw.NSTouchBar) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *ScrubberImageItemView) WithTouchBar(touchBar *TouchBar) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -442,7 +442,7 @@ func (x *ScrubberImageItemView) asResponder() *raw.NSResponder { return &x.inner
 // ScrubberImageItemViewable is the interface implemented by [ScrubberImageItemView], for mocking and DI.
 type ScrubberImageItemViewable interface {
 	Unwrap() *raw.NSScrubberImageItemView
-	WithImage(image *raw.NSImage) *ScrubberImageItemView
+	WithImage(image *Image) *ScrubberImageItemView
 	WithImageAlignment(imageAlignment raw.NSImageAlignment) *ScrubberImageItemView
 	WithSelected(selected bool) *ScrubberImageItemView
 	WithHighlighted(highlighted bool) *ScrubberImageItemView
@@ -471,7 +471,7 @@ type ScrubberImageItemViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrubberImageItemView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrubberImageItemView
 	WithContentFilters(items ...*coreimage.CIFilter) *ScrubberImageItemView
-	WithShadow(shadow *raw.NSShadow) *ScrubberImageItemView
+	WithShadow(shadow *Shadow) *ScrubberImageItemView
 	WithClipsToBounds(clipsToBounds bool) *ScrubberImageItemView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberImageItemView
 	WithToolTip(toolTip string) *ScrubberImageItemView
@@ -483,18 +483,18 @@ type ScrubberImageItemViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberImageItemView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberImageItemView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberImageItemView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrubberImageItemView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberImageItemView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberImageItemView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberImageItemView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberImageItemView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberImageItemView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberImageItemView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberImageItemView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrubberImageItemView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberImageItemView
 	WithNextResponder(nextResponder ResponderProvider) *ScrubberImageItemView
-	WithMenu(menu *raw.NSMenu) *ScrubberImageItemView
+	WithMenu(menu *Menu) *ScrubberImageItemView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ScrubberImageItemView
-	WithTouchBar(touchBar *raw.NSTouchBar) *ScrubberImageItemView
+	WithTouchBar(touchBar *TouchBar) *ScrubberImageItemView
 	ImageView() *ImageView
 	Image() *Image
 	SetImage(image *raw.NSImage)

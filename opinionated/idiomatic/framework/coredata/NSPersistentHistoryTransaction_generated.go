@@ -48,13 +48,13 @@ func (x *PersistentHistoryTransaction) Timestamp() *foundation.NSDate {
 }
 
 // Changes returns the collection as a Go slice.
-func (x *PersistentHistoryTransaction) Changes() []*raw.NSPersistentHistoryChange {
+func (x *PersistentHistoryTransaction) Changes() []*PersistentHistoryChange {
 	arr := x.inner.Changes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPersistentHistoryChange {
-		return raw.NSPersistentHistoryChangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersistentHistoryChange {
+		return &PersistentHistoryChange{inner: raw.NSPersistentHistoryChangeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -122,7 +122,7 @@ type PersistentHistoryTransactionable interface {
 	Unwrap() *raw.NSPersistentHistoryTransaction
 	ObjectIDNotification() *foundation.NSNotification
 	Timestamp() *foundation.NSDate
-	Changes() []*raw.NSPersistentHistoryChange
+	Changes() []*PersistentHistoryChange
 	TransactionNumber() int64
 	StoreID() string
 	BundleID() string

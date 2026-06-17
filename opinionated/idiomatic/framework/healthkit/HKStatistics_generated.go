@@ -175,13 +175,13 @@ func (x *Statistics) EndDate() *foundation.NSDate {
 }
 
 // Sources returns the collection as a Go slice.
-func (x *Statistics) Sources() []*raw.HKSource {
+func (x *Statistics) Sources() []*Source {
 	arr := x.inner.Sources()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKSource {
-		return raw.HKSourceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Source {
+		return &Source{inner: raw.HKSourceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -205,7 +205,7 @@ type Statisticsable interface {
 	QuantityType() *QuantityType
 	StartDate() *foundation.NSDate
 	EndDate() *foundation.NSDate
-	Sources() []*raw.HKSource
+	Sources() []*Source
 }
 
 var _ Statisticsable = (*Statistics)(nil)

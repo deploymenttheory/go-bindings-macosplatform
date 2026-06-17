@@ -98,13 +98,13 @@ func (x *WKUserContentController) RemoveAllContentRuleLists() {
 }
 
 // UserScripts returns the collection as a Go slice.
-func (x *WKUserContentController) UserScripts() []*raw.WKUserScript {
+func (x *WKUserContentController) UserScripts() []*WKUserScript {
 	arr := x.inner.UserScripts()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.WKUserScript {
-		return raw.WKUserScriptFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WKUserScript {
+		return &WKUserScript{inner: raw.WKUserScriptFromID(purego.Retain(_id))}
 	})
 }
 
@@ -123,7 +123,7 @@ type WKUserContentControllerable interface {
 	AddContentRuleList(contentRuleList *raw.WKContentRuleList)
 	RemoveContentRuleList(contentRuleList *raw.WKContentRuleList)
 	RemoveAllContentRuleLists()
-	UserScripts() []*raw.WKUserScript
+	UserScripts() []*WKUserScript
 }
 
 var _ WKUserContentControllerable = (*WKUserContentController)(nil)

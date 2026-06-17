@@ -98,13 +98,13 @@ func (x *MediaGroup) Attributes() *foundation.NSDictionary[*foundation.NSString,
 }
 
 // ChildGroups returns the collection as a Go slice.
-func (x *MediaGroup) ChildGroups() []*raw.MLMediaGroup {
+func (x *MediaGroup) ChildGroups() []*MediaGroup {
 	arr := x.inner.ChildGroups()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLMediaGroup {
-		return raw.MLMediaGroupFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaGroup {
+		return &MediaGroup{inner: raw.MLMediaGroupFromID(purego.Retain(_id))}
 	})
 }
 
@@ -124,13 +124,13 @@ func (x *MediaGroup) IconImage() *appkit.NSImage {
 }
 
 // MediaObjects returns the collection as a Go slice.
-func (x *MediaGroup) MediaObjects() []*raw.MLMediaObject {
+func (x *MediaGroup) MediaObjects() []*MediaObject {
 	arr := x.inner.MediaObjects()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLMediaObject {
-		return raw.MLMediaObjectFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaObject {
+		return &MediaObject{inner: raw.MLMediaObjectFromID(purego.Retain(_id))}
 	})
 }
 
@@ -144,11 +144,11 @@ type MediaGroupable interface {
 	Identifier() string
 	TypeIdentifier() string
 	Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ChildGroups() []*raw.MLMediaGroup
+	ChildGroups() []*MediaGroup
 	URL() *foundation.NSURL
 	ModificationDate() *foundation.NSDate
 	IconImage() *appkit.NSImage
-	MediaObjects() []*raw.MLMediaObject
+	MediaObjects() []*MediaObject
 }
 
 var _ MediaGroupable = (*MediaGroup)(nil)

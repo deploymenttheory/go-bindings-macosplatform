@@ -108,8 +108,8 @@ func NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptions
 }
 
 // WithLanguage sets the language property and returns the receiver for chaining.
-func (x *Script) WithLanguage(language *raw.OSALanguage) *Script {
-	x.inner.SetLanguage(language)
+func (x *Script) WithLanguage(language *Language) *Script {
+	x.inner.SetLanguage(language.Unwrap())
 	return x
 }
 
@@ -209,7 +209,7 @@ func (x *Script) RichTextSource() *foundation.NSAttributedString {
 // Scriptable is the interface implemented by [Script], for mocking and DI.
 type Scriptable interface {
 	Unwrap() *raw.OSAScript
-	WithLanguage(language *raw.OSALanguage) *Script
+	WithLanguage(language *Language) *Script
 	CompileAndReturnError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
 	ExecuteAndReturnError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor
 	ExecuteAppleEventError(event *foundation.NSAppleEventDescriptor, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor

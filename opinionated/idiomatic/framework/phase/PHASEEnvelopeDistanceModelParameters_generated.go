@@ -37,8 +37,8 @@ func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *raw.PHASEEnvelope)
 }
 
 // WithFadeOutParameters sets the fadeOutParameters property and returns the receiver for chaining.
-func (x *EnvelopeDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *raw.PHASEDistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters {
-	x.inner.PHASEDistanceModelParameters.SetFadeOutParameters(fadeOutParameters)
+func (x *EnvelopeDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters {
+	x.inner.PHASEDistanceModelParameters.SetFadeOutParameters(fadeOutParameters.Unwrap())
 	return x
 }
 
@@ -56,7 +56,7 @@ func (x *EnvelopeDistanceModelParameters) asDistanceModelParameters() *raw.PHASE
 // EnvelopeDistanceModelParametersable is the interface implemented by [EnvelopeDistanceModelParameters], for mocking and DI.
 type EnvelopeDistanceModelParametersable interface {
 	Unwrap() *raw.PHASEEnvelopeDistanceModelParameters
-	WithFadeOutParameters(fadeOutParameters *raw.PHASEDistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters
+	WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters
 	Envelope() *Envelope
 }
 

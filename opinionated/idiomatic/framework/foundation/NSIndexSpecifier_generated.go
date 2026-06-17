@@ -74,8 +74,8 @@ func (x *IndexSpecifier) WithKey(key string) *IndexSpecifier {
 }
 
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
-func (x *IndexSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *IndexSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+func (x *IndexSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *IndexSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
@@ -114,7 +114,7 @@ type IndexSpecifierable interface {
 	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *IndexSpecifier
 	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *IndexSpecifier
 	WithKey(key string) *IndexSpecifier
-	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *IndexSpecifier
+	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *IndexSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *IndexSpecifier
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *IndexSpecifier
 	Index() int

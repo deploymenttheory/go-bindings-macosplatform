@@ -155,13 +155,13 @@ func (x *HighlightCenter) SetDelegate(delegate raw.SWHighlightCenterDelegate) {
 }
 
 // Highlights returns the collection as a Go slice.
-func (x *HighlightCenter) Highlights() []*raw.SWHighlight {
+func (x *HighlightCenter) Highlights() []*Highlight {
 	arr := x.inner.Highlights()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SWHighlight {
-		return raw.SWHighlightFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Highlight {
+		return &Highlight{inner: raw.SWHighlightFromID(purego.Retain(_id))}
 	})
 }
 
@@ -177,7 +177,7 @@ type HighlightCenterable interface {
 	GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *raw.SWCollaborationHighlight, data *foundation.NSData) (*sharedwithyoucore.SWSignedPersonIdentityProof, error)
 	Delegate() raw.SWHighlightCenterDelegate
 	SetDelegate(delegate raw.SWHighlightCenterDelegate)
-	Highlights() []*raw.SWHighlight
+	Highlights() []*Highlight
 }
 
 var _ HighlightCenterable = (*HighlightCenter)(nil)

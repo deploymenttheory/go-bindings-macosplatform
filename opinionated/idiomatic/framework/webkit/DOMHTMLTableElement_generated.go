@@ -38,20 +38,20 @@ func NewDOMHTMLTableElement() *DOMHTMLTableElement {
 }
 
 // WithCaption sets the caption property and returns the receiver for chaining.
-func (x *DOMHTMLTableElement) WithCaption(caption *raw.DOMHTMLTableCaptionElement) *DOMHTMLTableElement {
-	x.inner.SetCaption(caption)
+func (x *DOMHTMLTableElement) WithCaption(caption *DOMHTMLTableCaptionElement) *DOMHTMLTableElement {
+	x.inner.SetCaption(caption.Unwrap())
 	return x
 }
 
 // WithTHead sets the tHead property and returns the receiver for chaining.
-func (x *DOMHTMLTableElement) WithTHead(tHead *raw.DOMHTMLTableSectionElement) *DOMHTMLTableElement {
-	x.inner.SetTHead(tHead)
+func (x *DOMHTMLTableElement) WithTHead(tHead *DOMHTMLTableSectionElement) *DOMHTMLTableElement {
+	x.inner.SetTHead(tHead.Unwrap())
 	return x
 }
 
 // WithTFoot sets the tFoot property and returns the receiver for chaining.
-func (x *DOMHTMLTableElement) WithTFoot(tFoot *raw.DOMHTMLTableSectionElement) *DOMHTMLTableElement {
-	x.inner.SetTFoot(tFoot)
+func (x *DOMHTMLTableElement) WithTFoot(tFoot *DOMHTMLTableSectionElement) *DOMHTMLTableElement {
+	x.inner.SetTFoot(tFoot.Unwrap())
 	return x
 }
 
@@ -466,9 +466,9 @@ func (x *DOMHTMLTableElement) asWebScriptObject() *raw.WebScriptObject { return 
 // DOMHTMLTableElementable is the interface implemented by [DOMHTMLTableElement], for mocking and DI.
 type DOMHTMLTableElementable interface {
 	Unwrap() *raw.DOMHTMLTableElement
-	WithCaption(caption *raw.DOMHTMLTableCaptionElement) *DOMHTMLTableElement
-	WithTHead(tHead *raw.DOMHTMLTableSectionElement) *DOMHTMLTableElement
-	WithTFoot(tFoot *raw.DOMHTMLTableSectionElement) *DOMHTMLTableElement
+	WithCaption(caption *DOMHTMLTableCaptionElement) *DOMHTMLTableElement
+	WithTHead(tHead *DOMHTMLTableSectionElement) *DOMHTMLTableElement
+	WithTFoot(tFoot *DOMHTMLTableSectionElement) *DOMHTMLTableElement
 	WithAlign(align string) *DOMHTMLTableElement
 	WithBgColor(bgColor string) *DOMHTMLTableElement
 	WithBorder(border string) *DOMHTMLTableElement

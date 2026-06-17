@@ -64,13 +64,13 @@ func (x *FragmentedAssetMinder) SetMindingInterval(mindingInterval float64) {
 }
 
 // Assets returns the collection as a Go slice.
-func (x *FragmentedAssetMinder) Assets() []*raw.AVAsset {
+func (x *FragmentedAssetMinder) Assets() []*Asset {
 	arr := x.inner.Assets()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAsset {
-		return raw.AVAssetFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Asset {
+		return &Asset{inner: raw.AVAssetFromID(purego.Retain(_id))}
 	})
 }
 
@@ -84,7 +84,7 @@ type FragmentedAssetMinderable interface {
 	RemoveFragmentedAsset(asset *raw.AVAsset)
 	MindingInterval() float64
 	SetMindingInterval(mindingInterval float64)
-	Assets() []*raw.AVAsset
+	Assets() []*Asset
 }
 
 var _ FragmentedAssetMinderable = (*FragmentedAssetMinder)(nil)

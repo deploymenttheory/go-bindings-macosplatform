@@ -47,24 +47,24 @@ func (x *MetricManager) RemoveSubscriber(subscriber raw.MXMetricManagerSubscribe
 }
 
 // PastPayloads returns the collection as a Go slice.
-func (x *MetricManager) PastPayloads() []*raw.MXMetricPayload {
+func (x *MetricManager) PastPayloads() []*MetricPayload {
 	arr := x.inner.PastPayloads()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXMetricPayload {
-		return raw.MXMetricPayloadFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetricPayload {
+		return &MetricPayload{inner: raw.MXMetricPayloadFromID(purego.Retain(_id))}
 	})
 }
 
 // PastDiagnosticPayloads returns the collection as a Go slice.
-func (x *MetricManager) PastDiagnosticPayloads() []*raw.MXDiagnosticPayload {
+func (x *MetricManager) PastDiagnosticPayloads() []*DiagnosticPayload {
 	arr := x.inner.PastDiagnosticPayloads()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXDiagnosticPayload {
-		return raw.MXDiagnosticPayloadFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DiagnosticPayload {
+		return &DiagnosticPayload{inner: raw.MXDiagnosticPayloadFromID(purego.Retain(_id))}
 	})
 }
 
@@ -73,8 +73,8 @@ type MetricManagerable interface {
 	Unwrap() *raw.MXMetricManager
 	AddSubscriber(subscriber raw.MXMetricManagerSubscriber)
 	RemoveSubscriber(subscriber raw.MXMetricManagerSubscriber)
-	PastPayloads() []*raw.MXMetricPayload
-	PastDiagnosticPayloads() []*raw.MXDiagnosticPayload
+	PastPayloads() []*MetricPayload
+	PastDiagnosticPayloads() []*DiagnosticPayload
 }
 
 var _ MetricManagerable = (*MetricManager)(nil)

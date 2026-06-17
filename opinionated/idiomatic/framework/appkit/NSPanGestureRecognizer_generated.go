@@ -80,8 +80,8 @@ func (x *PanGestureRecognizer) WithEnabled(enabled bool) *PanGestureRecognizer {
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *PanGestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PanGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration)
+func (x *PanGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -180,7 +180,7 @@ type PanGestureRecognizerable interface {
 	WithState(state raw.NSGestureRecognizerState) *PanGestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *PanGestureRecognizer
 	WithEnabled(enabled bool) *PanGestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PanGestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PanGestureRecognizer
 	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PanGestureRecognizer
 	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PanGestureRecognizer
 	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PanGestureRecognizer

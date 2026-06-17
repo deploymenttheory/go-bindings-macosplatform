@@ -73,8 +73,8 @@ func (x *PersonNameComponents) WithNickname(nickname string) *PersonNameComponen
 }
 
 // WithPhoneticRepresentation sets the phoneticRepresentation property and returns the receiver for chaining.
-func (x *PersonNameComponents) WithPhoneticRepresentation(phoneticRepresentation *raw.NSPersonNameComponents) *PersonNameComponents {
-	x.inner.SetPhoneticRepresentation(phoneticRepresentation)
+func (x *PersonNameComponents) WithPhoneticRepresentation(phoneticRepresentation *PersonNameComponents) *PersonNameComponents {
+	x.inner.SetPhoneticRepresentation(phoneticRepresentation.Unwrap())
 	return x
 }
 
@@ -193,7 +193,7 @@ type PersonNameComponentsable interface {
 	WithFamilyName(familyName string) *PersonNameComponents
 	WithNameSuffix(nameSuffix string) *PersonNameComponents
 	WithNickname(nickname string) *PersonNameComponents
-	WithPhoneticRepresentation(phoneticRepresentation *raw.NSPersonNameComponents) *PersonNameComponents
+	WithPhoneticRepresentation(phoneticRepresentation *PersonNameComponents) *PersonNameComponents
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponents
 	NamePrefix() *String
 	SetNamePrefix(namePrefix string)

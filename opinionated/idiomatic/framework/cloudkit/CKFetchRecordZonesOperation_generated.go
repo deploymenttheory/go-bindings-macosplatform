@@ -74,20 +74,20 @@ func (x *FetchRecordZonesOperation) WithFetchRecordZonesCompletionBlock(fetchRec
 }
 
 // WithDatabase sets the database property and returns the receiver for chaining.
-func (x *FetchRecordZonesOperation) WithDatabase(database *raw.CKDatabase) *FetchRecordZonesOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database)
+func (x *FetchRecordZonesOperation) WithDatabase(database *Database) *FetchRecordZonesOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *FetchRecordZonesOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+func (x *FetchRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *FetchRecordZonesOperation) WithGroup(group *raw.CKOperationGroup) *FetchRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+func (x *FetchRecordZonesOperation) WithGroup(group *OperationGroup) *FetchRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -98,8 +98,8 @@ func (x *FetchRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(long
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *FetchRecordZonesOperation) WithContainer(container *raw.CKContainer) *FetchRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+func (x *FetchRecordZonesOperation) WithContainer(container *Container) *FetchRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -128,13 +128,13 @@ func (x *FetchRecordZonesOperation) WithTimeoutIntervalForResource(timeoutInterv
 }
 
 // RecordZoneIDs returns the collection as a Go slice.
-func (x *FetchRecordZonesOperation) RecordZoneIDs() []*raw.CKRecordZoneID {
+func (x *FetchRecordZonesOperation) RecordZoneIDs() []*RecordZoneID {
 	arr := x.inner.RecordZoneIDs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZoneID {
-		return raw.CKRecordZoneIDFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZoneID {
+		return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(purego.Retain(_id))}
 	})
 }
 
@@ -173,16 +173,16 @@ type FetchRecordZonesOperationable interface {
 	WithRecordZoneIDs(items ...*raw.CKRecordZoneID) *FetchRecordZonesOperation
 	WithPerRecordZoneCompletionBlock(perRecordZoneCompletionBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) *FetchRecordZonesOperation
 	WithFetchRecordZonesCompletionBlock(fetchRecordZonesCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKRecordZone], unsafe.Pointer)) *FetchRecordZonesOperation
-	WithDatabase(database *raw.CKDatabase) *FetchRecordZonesOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchRecordZonesOperation
-	WithGroup(group *raw.CKOperationGroup) *FetchRecordZonesOperation
+	WithDatabase(database *Database) *FetchRecordZonesOperation
+	WithConfiguration(configuration *OperationConfiguration) *FetchRecordZonesOperation
+	WithGroup(group *OperationGroup) *FetchRecordZonesOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZonesOperation
-	WithContainer(container *raw.CKContainer) *FetchRecordZonesOperation
+	WithContainer(container *Container) *FetchRecordZonesOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordZonesOperation
 	WithLongLived(longLived bool) *FetchRecordZonesOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZonesOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZonesOperation
-	RecordZoneIDs() []*raw.CKRecordZoneID
+	RecordZoneIDs() []*RecordZoneID
 	SetRecordZoneIDs(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID])
 	PerRecordZoneCompletionBlock() objc.Block
 	SetPerRecordZoneCompletionBlock(perRecordZoneCompletionBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer))

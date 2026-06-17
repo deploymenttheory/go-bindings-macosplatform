@@ -37,8 +37,8 @@ func NewLookAroundSnapshotOptions() *LookAroundSnapshotOptions {
 }
 
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
-func (x *LookAroundSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LookAroundSnapshotOptions {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *LookAroundSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundSnapshotOptions {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
@@ -75,7 +75,7 @@ func (x *LookAroundSnapshotOptions) SetSize(size corefoundation.CGSize) {
 // LookAroundSnapshotOptionsable is the interface implemented by [LookAroundSnapshotOptions], for mocking and DI.
 type LookAroundSnapshotOptionsable interface {
 	Unwrap() *raw.MKLookAroundSnapshotOptions
-	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LookAroundSnapshotOptions
+	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundSnapshotOptions
 	WithSize(size corefoundation.CGSize) *LookAroundSnapshotOptions
 	PointOfInterestFilter() *PointOfInterestFilter
 	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
