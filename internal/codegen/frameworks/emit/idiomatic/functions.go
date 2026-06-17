@@ -376,6 +376,181 @@ func isFreeFuncName(name string, takenNames, handFuncs map[string]bool) bool {
 	return name != "" && !takenNames[name] && !handFuncs[name]
 }
 
+// CF parameter classification for emitCFFunctionWrappers.
+const (
+	cfNone      = iota // not a CoreFoundation reference
+	cfInputRef         // a CF…Ref / CFTypeRef value passed in
+	cfOutputRef        // a CF…Ref * / CFTypeRef * out-parameter
+)
+
+// isOSStatusType reports whether an ObjC return type is a plain OSStatus result
+// code (not a pointer to one).
+func isOSStatusType(objcType string) bool {
+	return strings.Contains(objcType, "OSStatus") && !strings.Contains(objcType, "*")
+}
+
+// cfParamKind classifies a parameter's ObjC type for CF bridging: an input CF
+// reference value, a CF reference out-parameter (pointer), or neither.
+func cfParamKind(objcType string) int {
+	hasCFRef := false
+	for _, tok := range strings.Fields(objcType) {
+		if strings.HasPrefix(tok, "CF") && strings.HasSuffix(tok, "Ref") && len(tok) > 4 {
+			hasCFRef = true
+		}
+	}
+	if !hasCFRef {
+		return cfNone
+	}
+	if strings.Contains(objcType, "*") {
+		return cfOutputRef
+	}
+	return cfInputRef
+}
+
+// emitCFFunctionWrappers writes <pkgname>_cffunctions_generated.go: idiomatic
+// wrappers for OSStatus-returning C functions that take or return CoreFoundation
+// references. A CFTypeRef and an objc.ID are the same pointer, so CFDictionaryRef
+// / CF…Ref inputs become objc.ID (passed through purego.CFRef), CFTypeRef * out-
+// parameters become objc.ID returns, and the OSStatus result becomes a Go error
+// (purego.OSStatus.Err, which carries the code so callers can tell e.g.
+// errSecItemNotFound from a real failure):
+//
+//	func SecItemCopyMatching(query objc.ID) (objc.ID, error)
+//	func SecItemDelete(query objc.ID) error
+//
+// This is what lets the keychain be written with no raw FFI. Functions claimed
+// here are reserved in takenNames so the generic C-function pass skips them.
+func emitCFFunctionWrappers(
+	outDir, pkgName, rawPkgAlias, rawPkgPath string,
+	fw *meta.FrameworkMeta,
+	m *typemap.Mapper,
+	takenNames map[string]bool,
+) error {
+	ctx := typemap.Context{Framework: fw.Framework}
+	var body bytes.Buffer
+
+	for _, fn := range emit.EmittableFunctions(fw, nil) {
+		if !isOSStatusType(fn.Return.ObjCType) {
+			continue
+		}
+		goName := naming.ExportedFunctionName(fn.Name)
+		if goName == "" || takenNames[goName] {
+			continue
+		}
+
+		var sigParams, callArgs, preLines, outTypes, outReturns, zeros []string
+		usedNames := map[string]int{}
+		outIdx := 0
+		ok := true
+		for _, p := range fn.Params {
+			pName := naming.ParamName(p.Name)
+			if pName == "" {
+				pName = fmt.Sprintf("arg%d", len(callArgs))
+			}
+			usedNames[pName]++
+			if usedNames[pName] > 1 {
+				pName = fmt.Sprintf("%s%d", pName, usedNames[pName])
+			}
+			switch cfParamKind(p.ObjCType) {
+			case cfInputRef:
+				sigParams = append(sigParams, pName+" objc.ID")
+				callArgs = append(callArgs, "purego.CFRef("+pName+")")
+			case cfOutputRef:
+				outVar := fmt.Sprintf("_out%d", outIdx)
+				outIdx++
+				preLines = append(preLines, "\tvar "+outVar+" uintptr")
+				callArgs = append(callArgs, "unsafe.Pointer(&"+outVar+")")
+				outTypes = append(outTypes, "objc.ID")
+				outReturns = append(outReturns, "objc.ID("+outVar+")")
+				zeros = append(zeros, "0")
+			default:
+				// Non-CF parameter: keep the raw mapped type. Bail (leave the whole
+				// function to the generic pass) if it degrades to a pointer/block we
+				// would not improve on.
+				impSet := make(typemap.ImportSet)
+				goType := qualifyRaw(rawParamGoType(p.ObjCType, ctx, m, impSet), fw, rawPkgAlias, nil)
+				if goType == "" || strings.HasPrefix(goType, "func(") || strings.Contains(goType, "unsafe.Pointer") {
+					ok = false
+				} else {
+					sigParams = append(sigParams, pName+" "+goType)
+					callArgs = append(callArgs, pName)
+				}
+			}
+			if !ok {
+				break
+			}
+		}
+		if !ok {
+			continue
+		}
+
+		takenNames[goName] = true
+
+		rawCall := fmt.Sprintf("%s.%s(%s)", rawPkgAlias, goName, strings.Join(callArgs, ", "))
+		retSig := "error"
+		if len(outTypes) > 0 {
+			retSig = "(" + strings.Join(append(append([]string{}, outTypes...), "error"), ", ") + ")"
+		}
+
+		fmt.Fprintf(&body, "// %s wraps [%s.%s], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.\n", goName, rawPkgAlias, goName)
+		fmt.Fprintf(&body, "func %s(%s) %s {\n", goName, strings.Join(sigParams, ", "), retSig)
+		for _, pl := range preLines {
+			fmt.Fprintln(&body, pl)
+		}
+		fmt.Fprintf(&body, "\tif _err := purego.NewOSStatus(%s).Err(); _err != nil {\n", rawCall)
+		if len(outReturns) > 0 {
+			fmt.Fprintf(&body, "\t\treturn %s, _err\n", strings.Join(zeros, ", "))
+		} else {
+			fmt.Fprintf(&body, "\t\treturn _err\n")
+		}
+		fmt.Fprintf(&body, "\t}\n")
+		if len(outReturns) > 0 {
+			fmt.Fprintf(&body, "\treturn %s, nil\n", strings.Join(outReturns, ", "))
+		} else {
+			fmt.Fprintf(&body, "\treturn nil\n")
+		}
+		fmt.Fprintf(&body, "}\n\n")
+	}
+
+	if body.Len() == 0 {
+		return nil
+	}
+
+	// Render-then-scan imports, mirroring emitGenericFunctionWrappers so non-CF
+	// parameter/return types that reference other framework packages (e.g.
+	// coreaudiotypes, corefoundation) are imported too.
+	bodyStr := body.String()
+	imports := map[string]string{
+		rawPkgAlias: rawPkgPath,
+		"purego":    pureobjcImportPath,
+	}
+	if strings.Contains(bodyStr, "unsafe.") {
+		imports["unsafe"] = "unsafe"
+	}
+	if referencesPackage(bodyStr, "objc") {
+		imports["objc"] = objcImportPath
+	}
+	if referencesPackage(bodyStr, "foundation") {
+		imports["foundation"] = foundationImportPath
+	}
+	for _, crossPkg := range collectCrossPackageRefs(bodyStr, rawPkgAlias) {
+		imports[crossPkg] = strings.TrimSuffix(rawPkgPath, naming.PackageName(fw.Framework)) + crossPkg
+	}
+
+	var buf bytes.Buffer
+	fmt.Fprint(&buf, generatedHeader+"\n")
+	fmt.Fprint(&buf, buildTag+"\n")
+	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
+	writeImportBlock(&buf, imports)
+	buf.Write(body.Bytes())
+
+	fname := pkgName + "_cffunctions_generated.go"
+	if err := os.WriteFile(filepath.Join(outDir, fname), buf.Bytes(), 0o600); err != nil {
+		return fmt.Errorf("write %s: %w", fname, err)
+	}
+	return nil
+}
+
 // cFunctionNameFor recovers the original C symbol for an exported Go function
 // name by scanning the framework's function list. Used only for doc comments.
 func cFunctionNameFor(rawGoName string, fw *meta.FrameworkMeta) string {

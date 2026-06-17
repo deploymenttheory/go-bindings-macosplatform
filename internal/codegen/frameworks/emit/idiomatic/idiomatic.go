@@ -69,6 +69,14 @@ func EmitFrameworkWrappers(
 		return fmt.Errorf("scan hand-authored files: %w", err)
 	}
 
+	// Clear previously generated files so a regeneration never leaves stale
+	// output behind — e.g. when a function moves from one emitted file to
+	// another (the generic C-function pass stops emitting a function this CF
+	// pass now claims) or a class leaves the metadata.
+	if err := removeGeneratedFiles(outDir); err != nil {
+		return fmt.Errorf("clean generated files: %w", err)
+	}
+
 	for _, className := range sortedKeys(fw.Classes) {
 		cls := fw.Classes[className]
 		if cls.Availability.IsUnavailable {
@@ -118,6 +126,16 @@ func EmitFrameworkWrappers(
 		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, trialNames, handFuncs, takenNames,
 	); err != nil {
 		return fmt.Errorf("emit class method functions: %w", err)
+	}
+	if err := emitConstants(
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, handFuncs, takenNames,
+	); err != nil {
+		return fmt.Errorf("emit constants: %w", err)
+	}
+	if err := emitCFFunctionWrappers(
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, takenNames,
+	); err != nil {
+		return fmt.Errorf("emit CF function wrappers: %w", err)
 	}
 	if err := emitGenericFunctionWrappers(
 		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, takenNames,
@@ -321,6 +339,29 @@ func scanHandAuthored(outDir string) (map[string]map[string]bool, map[string]boo
 	return methods, funcs, nil
 }
 
+// removeGeneratedFiles deletes the package's previously generated *_generated.go
+// files so a regeneration never leaves stale output behind. Hand-authored files
+// (which never carry the _generated.go suffix) and doc.go are kept; doc.go is
+// rewritten in place by the emitter.
+func removeGeneratedFiles(outDir string) error {
+	entries, err := os.ReadDir(outDir)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return nil
+		}
+		return err
+	}
+	for _, e := range entries {
+		if e.IsDir() || !strings.HasSuffix(e.Name(), "_generated.go") {
+			continue
+		}
+		if err := os.Remove(filepath.Join(outDir, e.Name())); err != nil && !os.IsNotExist(err) {
+			return err
+		}
+	}
+	return nil
+}
+
 func receiverTypeName(recv *ast.FieldList) string {
 	if recv == nil || len(recv.List) == 0 {
 		return ""
@@ -414,6 +455,29 @@ func emitClassFile(
 	fmt.Fprintf(&body, "// Unwrap returns the underlying [%s.%s].\n", rawPkgAlias, className)
 	fmt.Fprintf(&body, "func (x *%s) Unwrap() *%s { return x.inner }\n\n", goTypeName, rawType)
 
+	// ID exposes the underlying Objective-C object pointer so the wrapper can be
+	// passed to C APIs that take an object or CFTypeRef pointer (e.g. the Security
+	// keychain functions) without importing the raw bindings. Skipped when a
+	// generated method already claims the name.
+	if !methodNameClaimed("ID", withMethods, methods, handMethods) {
+		fmt.Fprintf(&body, "// ID returns the underlying Objective-C object pointer (objc.ID), for\n")
+		fmt.Fprintf(&body, "// passing to C APIs that take an object or CFTypeRef pointer.\n")
+		fmt.Fprintf(&body, "func (x *%s) ID() objc.ID { return x.inner.Ptr() }\n\n", goTypeName)
+	}
+
+	// <Type>FromID adopts an existing Objective-C object pointer (e.g. an objc.ID
+	// reinterpreted from a CFTypeRef a C API returned) as a wrapper. It mirrors
+	// the raw FromID — which installs a releasing finalizer but does not retain —
+	// so it is correct for +1-owned results such as CF_RETURNS_RETAINED returns.
+	if !handFuncs[goTypeName+"FromID"] {
+		genericArgs := genericInstantiation(len(cls.GenericParams))
+		fmt.Fprintf(&body, "// %sFromID adopts an existing object pointer as a %s (nil for 0).\n", goTypeName, goTypeName)
+		fmt.Fprintf(&body, "func %sFromID(id objc.ID) *%s {\n", goTypeName, goTypeName)
+		fmt.Fprintf(&body, "\tif id == 0 {\n\t\treturn nil\n\t}\n")
+		fmt.Fprintf(&body, "\treturn &%s{inner: %s.%sFromID%s(id)}\n", goTypeName, rawPkgAlias, className, genericArgs)
+		fmt.Fprintf(&body, "}\n\n")
+	}
+
 	for _, c := range ctors {
 		writeConstructor(
 			&body,
@@ -440,6 +504,8 @@ func emitClassFile(
 			pm.bodyExpr,
 		)
 	}
+
+	emitDictionaryAugment(&body, className, goTypeName, rawPkgAlias, genericInstantiation(len(cls.GenericParams)))
 
 	// Mockable interface: lists Unwrap plus every generated exported method so
 	// callers can accept the interface and supply test doubles. The compile-time
@@ -730,6 +796,44 @@ func genericInstantiation(n int) string {
 		args[i] = "objc.ID"
 	}
 	return "[" + strings.Join(args, ", ") + "]"
+}
+
+// methodNameClaimed reports whether a generated With-setter, method, or
+// hand-authored method already uses name on this wrapper type (so the emitter
+// does not add a colliding helper such as ID).
+func methodNameClaimed(name string, withMethods []withEntry, methods []methodEntry, handMethods map[string]bool) bool {
+	if handMethods[name] {
+		return true
+	}
+	for _, we := range withMethods {
+		if we.goName == name {
+			return true
+		}
+	}
+	for _, me := range methods {
+		if me.goName == name {
+			return true
+		}
+	}
+	return false
+}
+
+// emitDictionaryAugment adds an object-pointer builder to the generated
+// NSMutableDictionary wrapper. The generated setObject:forKey: types the key as
+// the NSCopying interface, which a bare objc.ID (e.g. the CFStringRef constant
+// security.KSecClass()) does not satisfy, so building such a dictionary
+// otherwise still needs a manual message send. Set takes objc.ID key and value
+// directly. (Reading a dictionary result back is covered by the generic
+// <Type>FromID constructor plus ObjectForKey.)
+func emitDictionaryAugment(w io.Writer, className, goTypeName, _, _ string) {
+	if className != "NSMutableDictionary" {
+		return
+	}
+	fmt.Fprintf(w, "// Set inserts value for key (both object pointers, e.g. the CFStringRef\n")
+	fmt.Fprintf(w, "// constant security.KSecClass()) and returns the receiver for chaining.\n")
+	fmt.Fprintf(w, "func (x *%s) Set(key, value objc.ID) *%s {\n", goTypeName, goTypeName)
+	fmt.Fprintf(w, "\tobjc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName(\"setObject:forKey:\"), value, key)\n")
+	fmt.Fprintf(w, "\treturn x\n}\n\n")
 }
 
 // ── Constructor generation ─────────────────────────────────────────────────────
@@ -2398,7 +2502,7 @@ func isCFErrorOutParam(objcType string) bool {
 // in fw whose last parameter is a CFErrorRef * out-parameter. Each wrapper:
 //   - Omits the error out-parameter from its Go signature
 //   - Passes unsafe.Pointer(&_cfErr) internally to the raw function
-//   - Returns error on failure, converting the CFErrorRef via toll-free bridge
+//   - Returns error on failure, reading the CFErrorRef as an NSError
 //
 // bool-returning functions become func(...) error.
 // Pointer-returning functions become func(...) (unsafe.Pointer, error).
@@ -2560,11 +2664,15 @@ func emitFunctionWrappers(
 	)
 	fmt.Fprint(
 		&buf,
-		"// description, failure reason). CFError is toll-free bridged with NSError so\n",
+		"// description, failure reason). A CFErrorRef is an NSError, so it is read\n",
 	)
 	fmt.Fprint(
 		&buf,
-		"// no CGo is required. Falls back to a plain message if no error was populated.\n",
+		"// through the NSError path with no CGo. Falls back to a plain message if no\n",
+	)
+	fmt.Fprint(
+		&buf,
+		"// error was populated.\n",
 	)
 	fmt.Fprint(&buf, "func _cfErrOrMsg(ptr unsafe.Pointer, fn string) error {\n")
 	fmt.Fprint(&buf, "\tif ptr != nil {\n")
