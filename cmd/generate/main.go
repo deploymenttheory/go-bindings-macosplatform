@@ -95,7 +95,7 @@ func runIdiomatic(args []string) {
 	fs := flag.NewFlagSet("idiomatic", flag.ExitOnError)
 	framework := fs.String("framework", "", `Framework(s) to emit: name, comma-separated list, or "all" (default: all)`)
 	metaDir   := fs.String("metadata-dir", "./metadata", "Directory containing .gometa.json files")
-	out       := fs.String("out", "./opinionated/idiomatic", "Output directory for idiomatic packages")
+	out       := fs.String("out", "./opinionated/idiomatic/framework", "Output directory for idiomatic ObjC-framework packages")
 	verbose   := fs.Bool("v", false, "Verbose output")
 	_ = fs.Parse(args)
 

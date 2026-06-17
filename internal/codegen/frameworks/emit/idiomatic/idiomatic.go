@@ -69,6 +69,14 @@ func EmitFrameworkWrappers(
 		return fmt.Errorf("scan hand-authored files: %w", err)
 	}
 
+	// Clear previously generated files so a regeneration never leaves stale
+	// output behind — e.g. when a function moves from one emitted file to
+	// another (the generic C-function pass stops emitting a function this CF
+	// pass now claims) or a class leaves the metadata.
+	if err := removeGeneratedFiles(outDir); err != nil {
+		return fmt.Errorf("clean generated files: %w", err)
+	}
+
 	for _, className := range sortedKeys(fw.Classes) {
 		cls := fw.Classes[className]
 		if cls.Availability.IsUnavailable {
@@ -118,6 +126,16 @@ func EmitFrameworkWrappers(
 		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, trialNames, handFuncs, takenNames,
 	); err != nil {
 		return fmt.Errorf("emit class method functions: %w", err)
+	}
+	if err := emitConstants(
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, handFuncs, takenNames,
+	); err != nil {
+		return fmt.Errorf("emit constants: %w", err)
+	}
+	if err := emitCFFunctionWrappers(
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, takenNames,
+	); err != nil {
+		return fmt.Errorf("emit CF function wrappers: %w", err)
 	}
 	if err := emitGenericFunctionWrappers(
 		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, takenNames,
@@ -321,6 +339,29 @@ func scanHandAuthored(outDir string) (map[string]map[string]bool, map[string]boo
 	return methods, funcs, nil
 }
 
+// removeGeneratedFiles deletes the package's previously generated *_generated.go
+// files so a regeneration never leaves stale output behind. Hand-authored files
+// (which never carry the _generated.go suffix) and doc.go are kept; doc.go is
+// rewritten in place by the emitter.
+func removeGeneratedFiles(outDir string) error {
+	entries, err := os.ReadDir(outDir)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return nil
+		}
+		return err
+	}
+	for _, e := range entries {
+		if e.IsDir() || !strings.HasSuffix(e.Name(), "_generated.go") {
+			continue
+		}
+		if err := os.Remove(filepath.Join(outDir, e.Name())); err != nil && !os.IsNotExist(err) {
+			return err
+		}
+	}
+	return nil
+}
+
 func receiverTypeName(recv *ast.FieldList) string {
 	if recv == nil || len(recv.List) == 0 {
 		return ""
@@ -414,6 +455,29 @@ func emitClassFile(
 	fmt.Fprintf(&body, "// Unwrap returns the underlying [%s.%s].\n", rawPkgAlias, className)
 	fmt.Fprintf(&body, "func (x *%s) Unwrap() *%s { return x.inner }\n\n", goTypeName, rawType)
 
+	// ID exposes the underlying object as a toll-free-bridged objc.ID, so the
+	// wrapper can be handed to CoreFoundation/C APIs (e.g. the Security keychain
+	// functions) without dropping to the raw bindings. Skipped when a generated
+	// method already claims the name.
+	if !methodNameClaimed("ID", withMethods, methods, handMethods) {
+		fmt.Fprintf(&body, "// ID returns the underlying object as a toll-free-bridged objc.ID,\n")
+		fmt.Fprintf(&body, "// for passing to CoreFoundation and other C APIs.\n")
+		fmt.Fprintf(&body, "func (x *%s) ID() objc.ID { return x.inner.Ptr() }\n\n", goTypeName)
+	}
+
+	// <Type>FromID adopts an existing toll-free-bridged object id (e.g. a
+	// CFTypeRef returned by a C API) as a wrapper. It mirrors the raw FromID
+	// (which installs a releasing finalizer but does not retain), so it is
+	// correct for +1-owned results such as CF_RETURNS_RETAINED returns.
+	if !handFuncs[goTypeName+"FromID"] {
+		genericArgs := genericInstantiation(len(cls.GenericParams))
+		fmt.Fprintf(&body, "// %sFromID adopts an existing toll-free-bridged object id as a %s (nil for 0).\n", goTypeName, goTypeName)
+		fmt.Fprintf(&body, "func %sFromID(id objc.ID) *%s {\n", goTypeName, goTypeName)
+		fmt.Fprintf(&body, "\tif id == 0 {\n\t\treturn nil\n\t}\n")
+		fmt.Fprintf(&body, "\treturn &%s{inner: %s.%sFromID%s(id)}\n", goTypeName, rawPkgAlias, className, genericArgs)
+		fmt.Fprintf(&body, "}\n\n")
+	}
+
 	for _, c := range ctors {
 		writeConstructor(
 			&body,
@@ -440,6 +504,8 @@ func emitClassFile(
 			pm.bodyExpr,
 		)
 	}
+
+	emitDictionaryAugment(&body, className, goTypeName, rawPkgAlias, genericInstantiation(len(cls.GenericParams)))
 
 	// Mockable interface: lists Unwrap plus every generated exported method so
 	// callers can accept the interface and supply test doubles. The compile-time
@@ -730,6 +796,44 @@ func genericInstantiation(n int) string {
 		args[i] = "objc.ID"
 	}
 	return "[" + strings.Join(args, ", ") + "]"
+}
+
+// methodNameClaimed reports whether a generated With-setter, method, or
+// hand-authored method already uses name on this wrapper type (so the emitter
+// does not add a colliding helper such as ID).
+func methodNameClaimed(name string, withMethods []withEntry, methods []methodEntry, handMethods map[string]bool) bool {
+	if handMethods[name] {
+		return true
+	}
+	for _, we := range withMethods {
+		if we.goName == name {
+			return true
+		}
+	}
+	for _, me := range methods {
+		if me.goName == name {
+			return true
+		}
+	}
+	return false
+}
+
+// emitDictionaryAugment adds a toll-free-bridging builder to the generated
+// NSMutableDictionary wrapper. The generated setObject:forKey: takes the key as
+// the NSCopying interface, which a CoreFoundation constant (an objc.ID, e.g.
+// security.KSecClass()) cannot satisfy, so building a CF query dictionary
+// otherwise still needs raw message sends. Set takes objc.ID key and value
+// directly. (Reading a CFDictionaryRef result back is covered by the generic
+// <Type>FromID constructor plus ObjectForKey.)
+func emitDictionaryAugment(w io.Writer, className, goTypeName, _, _ string) {
+	if className != "NSMutableDictionary" {
+		return
+	}
+	fmt.Fprintf(w, "// Set inserts value for key — both toll-free-bridged ids, e.g. CoreFoundation\n")
+	fmt.Fprintf(w, "// constants such as security.KSecClass() — and returns the receiver for chaining.\n")
+	fmt.Fprintf(w, "func (x *%s) Set(key, value objc.ID) *%s {\n", goTypeName, goTypeName)
+	fmt.Fprintf(w, "\tobjc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName(\"setObject:forKey:\"), value, key)\n")
+	fmt.Fprintf(w, "\treturn x\n}\n\n")
 }
 
 // ── Constructor generation ─────────────────────────────────────────────────────
